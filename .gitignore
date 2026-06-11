@@ -1,0 +1,20 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Lean / Lake build artifacts (mathlib cache is large; rebuild with `lake build`)
+lean/.lake/
+
+# TeX intermediates (the compiled nogo.pdf IS tracked)
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.synctex.gz
+
+# OS noise
+.DS_Store
+
+# local editor/agent state
+.claude/

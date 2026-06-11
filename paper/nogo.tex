@@ -1,0 +1,992 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Ztwo}{\Z_2}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\jodd}[2]{j_{#1}(#2)}
+
+% Lean-statement display: monospace with math symbols spliced in
+\newenvironment{leanblock}
+  {\begin{quote}\ttfamily\small\setlength{\parindent}{0pt}}
+  {\end{quote}}
+
+\title{The Collatz Conjecture at the Critical Line:\\
+       Machine-Verified No-Go, Density, and Cycle Theorems}
+\author{M.~Sharpe\thanks{\texttt{msharpe@irendi.com}. The mathematics,
+  formalization, and text of this paper were produced in collaboration
+  with Claude (Anthropic). All formal proofs are verified by the Lean~4
+  kernel; see Section~\ref{sec:formal} for the audit.}}
+\date{June 10, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present a machine-verified account of where the Collatz conjecture
+is provably hard and where it is provably almost true. On the negative
+side, no \emph{finite-memory descent certificate} exists: there is no
+potential $V(n)=n\,W(n)$ with $W$ bounded above and below away from
+zero, no window $B$ and contraction factor $\rho<1$, such that every
+large $n$ satisfies $V(T^t(n))\le\rho V(n)$ for some $t\le B$; the
+obstruction is the $2$-adic fixed point $-1$, shadowed by the integers
+$2^L-1$. On the positive side we formalize, in elementary integer
+arithmetic throughout: two-sided \emph{master inequalities}
+$3^j(n+1)-2^j \le 2^T\,T^T(n) \le 3^j(n+2^{T-j})-2^T$ for the Terras
+map with $j$ odd steps among $T$, sharp on the shadowing orbit; the
+\emph{density dichotomy} --- an orbit segment avoiding descent either
+runs supercritical odd density $2^T<2\cdot 3^j$ or has exhausted the
+$\log_2 n$-bit information budget of its start --- together with its
+exact converse, so that non-descent profiles are pinned to an
+$O(1/B)$-wide strip above the critical density $\log 2/\log 3$,
+inhabited at every scale; the reduction of the full conjecture to
+universal descent; Terras' parity-vector bijection and the binomial law
+$\#\{r<2^k : j_k(r)=j\}=\binom{k}{j}$; Terras' theorem in finite form
+--- the integers in $[2^k,2^{k+1})$ not descending within $k$ steps
+number at most $3^k/2^{\lfloor 17(k-1)/27\rfloor}\approx 2^{0.955k}$
+--- with no real analysis anywhere; and Diophantine cycle bounds
+excluding, conditionally on the computational verification below
+$2^{71}$, any nontrivial cycle with at most $183$ halvings, the finite
+check performed by the Lean kernel itself. We further report a
+systematic experimental program on certificates \emph{beyond} the no-go
+theorem's hypotheses --- weighted automata reading all binary digits of
+$n$ --- identifying the complete spectrum of positive-drift rational
+cycles as adversaries and three mechanisms (injection, global rewrite,
+shift re-alignment) that empirically refute every $1$- and $2$-state
+digit certificate. All formal results are verified in Lean~4 over
+\textsf{mathlib} with no \code{sorry} and no axioms beyond standard
+foundations. The conjecture remains open; these results fence, with
+sharp constants, exactly where it lives.
+\end{abstract}
+
+\section{Introduction}
+
+The Collatz function $C(n) = n/2$ for even $n$ and $C(n) = 3n+1$ for
+odd $n$ is conjectured to drive every positive integer to $1$. The
+conjecture has been verified by exhaustive computation for all
+$n \le 2^{68}$ in the published record \cite{barina}, with the
+distributed effort since extending beyond $2^{71}$, and is the subject
+of an extensive literature surveyed by Lagarias \cite{lagarias-survey,
+lagarias-book}.
+
+Because the conjecture is so easily verified on any finite range, a
+perennially attractive proof strategy --- attempted in countless
+preprints, and, as we discuss in Section~\ref{sec:casestudy}, in an
+earlier version of this very repository --- runs as follows:
+\begin{enumerate}
+\item partition the integers into finitely many classes (typically
+  residues modulo $2^k$);
+\item show by finite computation that every class guarantees a decrease
+  in some bounded number of steps, perhaps as measured by a weighted
+  potential;
+\item conclude that every large $n$ descends below itself, and finish by
+  strong induction into the computationally verified range.
+\end{enumerate}
+Step 3 is sound, and step 2 \emph{feels} like a finite computation. The
+first contribution of this paper is a precise and machine-verified
+proof that step 2 is impossible --- not merely unproven, but false for
+every choice of class structure, potential, and window
+(Theorem~\ref{thm:nogo}, \code{no\_finite\_certificate}).
+
+The second contribution is the positive complement: a formalization of
+exactly how close the impossible computation comes to being possible.
+We prove two-sided, division-free \emph{master inequalities} for the
+Terras map (Section~\ref{sec:corridor}), from which follow: the
+\emph{density dichotomy} --- avoiding descent over a window of length
+$T$ forces odd-step density above the critical value
+$\log 2/\log 3 \approx 0.6309$, as long as the orbit is inside the
+$\log_2 n$-bit information budget of its starting point --- and its
+exact converse (Section~\ref{sec:critical}): integers exist, at every
+scale and arbitrarily large, that avoid descent at densities within
+$O(1/B)$ of critical. The non-descent profiles achievable over any
+finite window thus form a strip of width $O(1/B)$ hugging the critical
+line from above, \emph{inhabited at every scale}. Since the conjecture
+is equivalent to universal descent
+(Theorem~\ref{thm:reduction}, \code{collatz\_iff\_descent}), it is
+exactly the assertion that no single integer tracks this vanishing
+strip at every scale simultaneously --- an assertion the no-go theorem
+shows no bounded-memory argument can decide.
+
+The third contribution quantifies how rare the strip's inhabitants are.
+We formalize Terras' parity-vector bijection --- the first $k$
+parities of an orbit are determined by, and determine, $n \bmod 2^k$
+--- with its corollaries that \emph{every} parity pattern is realized
+and that exactly $\binom{k}{j}$ residues modulo $2^k$ take $j$ odd
+steps (Section~\ref{sec:parity}). Combining the binomial law with the
+dichotomy yields Terras' theorem \cite{terras} in finite form
+(Section~\ref{sec:terras}): the integers in the dyadic window
+$[2^k, 2^{k+1})$ that fail to descend within $k$ steps number at most
+$3^k / 2^{\lfloor 17(k-1)/27 \rfloor} \approx 2^{0.955k}$, an
+exponentially vanishing fraction $\approx 2^{-0.045k}$. The proof is
+elementary throughout --- the tail estimate is the weighted binomial
+theorem $2^m \sum_{j \ge m} \binom{k}{j} \le (1+2)^k$ in plain
+integers, and the threshold $17/27$ comes from the single inequality
+$3^{17} \le 2^{27}$ --- so the formalization involves no measure
+theory and no real analysis. We believe this is the first
+machine-verified density result for the Collatz map.
+
+Fourth, cycles (Section~\ref{sec:cycles}). The two master inequalities
+pinch on a cycle, giving the classical Diophantine constraint
+$n(2^T - 3^j) < 3^j 2^{T-j}$ on every cycle element, fully formal; a
+kernel-verified integer computation (plain \code{decide}; the lemma
+depends on the axiom \code{propext} alone) then shows that,
+conditional on the computational verification below $2^{71}$ ---
+stated as an explicit hypothesis, since that computation is not
+formalized --- no nontrivial cycle has $183$ or fewer halvings.
+
+Finally, Section~\ref{sec:search} reports the experimental program
+that books-ends the formal results. The linear-programming search over
+joint $2$-adic/$3$-adic residue classes, whose systematic failure
+motivated the no-go theorem, is complemented by two new instruments:
+an enumeration of the \emph{positive-drift rational cycles} of the
+Terras map --- the complete spectrum of shadowing adversaries, of
+which the no-go theorem's $-1$ is only the extreme point --- and a
+counterexample-guided (CEGIS) search over weighted automata that read
+\emph{all} binary digits of $n$. Such automata evade the no-go
+theorem's hypotheses, and one candidate found by the search is
+genuinely instructive: a two-state automaton that tracks
+$\nu_2(n+1)$ and thereby \emph{pre-pays} for every Mersenne rising
+stretch. It and all its siblings nonetheless die to three identified
+mechanisms --- injection, global rewrite, and shift re-alignment ---
+that we conjecture kill every finite-state digit certificate.
+
+The Collatz conjecture remains open, and nothing in this paper proves
+otherwise. Section~\ref{sec:discussion} states exactly what the
+results do \emph{not} rule out and where the residual difficulty
+lives.
+
+\section{Preliminaries}
+
+For $n \in \N_{>0}$, the \emph{Collatz map} is
+\[
+C(n) = \begin{cases} n/2 & n \text{ even},\\ 3n+1 & n \text{ odd},\end{cases}
+\qquad\text{and the \emph{Terras map} is}\qquad
+T(n) = \begin{cases} n/2 & n \text{ even},\\ (3n+1)/2 & n \text{ odd}.\end{cases}
+\]
+The two generate the same orbits up to bookkeeping: one Terras step on
+an odd $n$ equals two Collatz steps, since $3n+1$ is even. We work with
+$T$ because every step performs exactly one halving, which makes size
+estimates uniform; the formalization proves the translation
+(\code{collatz\_two\_eq\_terras}) and states results for both maps.
+
+For $T, n \in \N$ write
+\[
+\jodd{T}{n} \;=\; \#\bigl\{\, t < T : T^t(n) \text{ odd} \,\bigr\}
+\]
+for the number of odd steps among the first $T$ Terras steps
+(\code{oddSteps}). The \emph{stopping time} of $n$ is the least $t$
+with $T^t(n) < n$, if it exists. The conjecture is equivalent to:
+every $n \ge 2$ has finite stopping time and the orbit of every $n$
+reaches $1$; the first equivalence is made formal in
+Theorem~\ref{thm:reduction}.
+
+On the $2$-adic integers $\Ztwo$, the odd branch $n \mapsto (3n+1)/2$
+extends continuously, and
+\[
+\frac{3 \cdot (-1) + 1}{2} = -1,
+\]
+so $-1$ is a fixed point of the odd branch, with multiplier $3/2 > 1$ in
+archimedean size. No positive integer equals $-1$, but positive integers
+approximate it $2$-adically to any precision: $2^L - 1 \equiv -1
+\pmod{2^L}$. More generally every rational $a/q$ with $q$ odd lies in
+$\Ztwo$ and is approximated by integers to any $2$-adic precision; this
+becomes important in Section~\ref{sec:search}. The next section makes
+the resulting shadowing exact for $-1$.
+
+\section{The shadowing orbit}\label{sec:shadow}
+
+\begin{lemma}[\code{terras\_mersenne}]\label{lem:shadow}
+For all $L$ and all $j \le L$,
+\[
+T^j\!\left(2^L - 1\right) = 3^j\, 2^{L-j} - 1 .
+\]
+\end{lemma}
+
+\begin{proof}
+Induction on $j$. For $j = 0$ both sides equal $2^L - 1$. For the step,
+let $m = 3^j 2^{L-j} - 1$ with $j < L$. Then $m = 2A - 1$ with
+$A = 3^j 2^{L-j-1} \ge 1$, so $m$ is odd and
+\[
+T(m) = \frac{3(2A - 1) + 1}{2} = 3A - 1 = 3^{j+1} 2^{L-(j+1)} - 1.
+\qedhere
+\]
+\end{proof}
+
+In particular $T^j(2^L-1) \ge 2^L - 1$ for all $j \le L$
+(\code{terras\_mersenne\_ge}), since $3^j 2^{L-j} \ge 2^L$; the orbit
+rises strictly at every step until step $L$. Two immediate corollaries:
+
+\begin{corollary}[\code{no\_uniform\_descent\_bound}]\label{cor:unbounded}
+For every window $B$ and cutoff $N_0$ there exists $n \ge N_0$ with
+$T^t(n) \ge n$ for all $t \le B$. (Take $n = 2^{B + N_0 + 1} - 1$.)
+Equivalently, stopping times are unbounded.
+\end{corollary}
+
+\begin{corollary}[\code{old\_descent\_axiom\_false}]\label{cor:axiom}
+The statement ``every $n > 300$ satisfies $C^t(n) < n$ for some
+$t \le 53$'' is false: $n = 2^{28} - 1$ rises for its first $56$ Collatz
+steps.
+\end{corollary}
+
+Corollary~\ref{cor:axiom} is stated in this specific form because it is,
+verbatim, the negation of an axiom assumed by an earlier formalization
+in this repository (Section~\ref{sec:casestudy}). Empirically the
+smallest violator is $n = 447 = 110111111_2$, whose six trailing ones
+already exhibit the shadowing mechanism in miniature; there are $1{,}933$
+violators below $2 \times 10^5$.
+
+\section{The no-go theorem}\label{sec:nogo}
+
+\begin{definition}\label{def:cert}
+A \emph{finite-memory descent certificate} for $T$ is a tuple
+$(W, \lambda, \Lambda, B, N_0, \rho)$ with $W \colon \N \to \Q$,
+$0 < \lambda \le W(n) \le \Lambda$ for all $n$, $B, N_0 \in \N$, and
+$0 \le \rho < 1$, such that
+\[
+\forall\, n \ge N_0\;\; \exists\, t \in [1, B]:\quad
+T^t(n)\; W\!\left(T^t(n)\right) \;\le\; \rho\; n\, W(n).
+\]
+\end{definition}
+
+The definition is calibrated so that a certificate would prove the
+conjecture:
+
+\begin{proposition}\label{prop:motivation}
+If a finite-memory descent certificate exists with $N_0$ at most the
+computationally verified bound, the Collatz conjecture holds.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Set $V(n) = n\,W(n)$. Chaining certificate windows from any $n \ge N_0$
+while the orbit remains $\ge N_0$ gives iterates $n_i$ with $V(n_i) \le
+\rho^i V(n)$, hence $n_i \le (\Lambda/\lambda)\, \rho^i\, n \to 0$; so
+the orbit must drop below $N_0$, where verified convergence to $1$
+finishes the proof.
+\end{proof}
+
+The point of the multiplicative form is that it captures additive
+log-potentials with bounded correction terms. If $S \colon \N \to Q$ is
+\emph{any} assignment of states in a finite set $Q$ --- a residue
+$n \bmod m$ for any modulus $m$ (in particular joint $2$-adic/$3$-adic
+classes $m = 2^a 3^b$), the state of any finite automaton fed by the
+orbit of $n$, any bounded window of past parities --- and
+$\varphi \colon Q \to \mathbb{R}$ any weights, then
+$V(n) = \log n + \varphi(S(n))$ with guaranteed decrease $\varepsilon >
+0$ per window is the case $W = \exp \varphi \circ S$, $\rho =
+e^{-\varepsilon}$, $\lambda = e^{\min \varphi}$, $\Lambda = e^{\max
+\varphi}$ of Definition~\ref{def:cert}. The unweighted descent
+arguments of Section~\ref{sec:casestudy} are the case $W \equiv 1$.
+
+\begin{theorem}[\code{no\_finite\_certificate}]\label{thm:nogo}
+No finite-memory descent certificate for $T$ exists.
+\end{theorem}
+
+\begin{proof}
+Suppose $(W, \lambda, \Lambda, B, N_0, \rho)$ were one. From the bounds,
+$0 < \lambda \le \Lambda$. Choose $k$ with $\Lambda \rho^k < \lambda$,
+possible since $\rho < 1$. Let $L = kB + N_0 + 1$ and $n_0 = 2^L - 1
+\ge N_0$.
+
+We chain $k$ certificate windows inside the rising stretch of
+Lemma~\ref{lem:shadow}. Inductively construct times $0 = \tau_0 <
+\tau_1 < \dots < \tau_k$ with $\tau_i \le iB$ and
+\begin{equation}\label{eq:chain}
+T^{\tau_i}(n_0)\; W\!\left(T^{\tau_i}(n_0)\right) \;\le\; \rho^i\,
+n_0\, W(n_0).
+\end{equation}
+For the step: $\tau_i \le iB \le kB < L$, so by
+Lemma~\ref{lem:shadow} the current iterate $m_i = T^{\tau_i}(n_0)$
+equals $3^{\tau_i} 2^{L - \tau_i} - 1 \ge n_0 \ge N_0$, and the
+certificate applies to $m_i$, yielding $t \in [1,B]$ with
+$T^{t}(m_i)\,W(T^t(m_i)) \le \rho\, m_i W(m_i)$; set $\tau_{i+1} =
+\tau_i + t$ and combine with \eqref{eq:chain}.
+
+At $i = k$: since $\tau_k \le kB < L$, the iterate $m_k =
+T^{\tau_k}(n_0)$ still satisfies $m_k \ge n_0$, whence
+\[
+n_0\, \lambda \;\le\; m_k\, W(m_k) \;\le\; \rho^k\, n_0\, W(n_0)
+\;\le\; n_0\, \Lambda\, \rho^k \;<\; n_0\, \lambda,
+\]
+a contradiction. (Note that the certificate hypothesis was used only on
+integers of the single family $3^j 2^{L-j} - 1$; the theorem is thus
+really a statement about the orbit of $-1 \in \Ztwo$.)
+\end{proof}
+
+\begin{corollary}[\code{no\_finite\_state\_certificate}]\label{cor:fsm}
+For every finite type $Q$, every $S \colon \N \to Q$, and every
+$w \colon Q \to \Q_{>0}$, there is no $(B, N_0, \rho)$ with $\rho < 1$
+such that all $n \ge N_0$ admit $t \in [1,B]$ with $T^t(n)\,
+w(S(T^t(n))) \le \rho\, n\, w(S(n))$.
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:nogo} with $W = w \circ S$, $\lambda = \min_Q w$,
+$\Lambda = \max_Q w$.
+\end{proof}
+
+\begin{remark}\label{rem:unbounded}
+The boundedness of $W$ cannot be dropped: it is exactly what makes
+contraction of $V$ assert something about descent of $n$
+(Proposition~\ref{prop:motivation} uses both bounds). With unbounded
+$W$ the quantity $V$ can contract while $n$ grows --- already
+$W(n) = n^{-1-\varepsilon}$ gives a $V$ that contracts along every
+rising stretch --- so ``certificates'' in that generality must carry a
+validity floor $V \ge n^{\delta}$ to certify anything. Certificates
+with unbounded $W$ satisfying such a floor are \emph{not} excluded by
+Theorem~\ref{thm:nogo}; Section~\ref{sec:search} investigates them
+experimentally. Likewise, if the window $B$ is allowed to depend on
+$n$, the unweighted statement becomes the finiteness of stopping
+times, i.e.\ the open descent half of the conjecture itself.
+\end{remark}
+
+\section{The master inequalities and the density corridor}
+\label{sec:corridor}
+
+Everything in this and the next four sections is elementary, exact, and
+division-free; the formal proofs run in $\N$ with no truncated
+subtraction. The engine is a pair of one-step identities: for odd $x$,
+$2\,(T(x)+1) = 3(x+1)$ exactly, and for even $x$, $2\,(T(x)+1) = x+2$.
+Induction along the orbit gives:
+
+\begin{theorem}[master inequalities;
+\code{terras\_growth\_bound}, \code{terras\_lower\_bound}]
+\label{thm:master}
+For all $T, n$, with $j = \jodd{T}{n}$,
+\[
+3^j (n+1) - 2^j \;\le\; 2^T\, T^T(n) \;\le\; 3^j\,(n + 2^{T-j}) - 2^T .
+\]
+\end{theorem}
+
+Both bounds are achieved with equality on the shadowing orbit
+$n = 2^L-1$, $T = L$ (\code{terras\_growth\_bound\_sharp}), where both
+sides reduce to Lemma~\ref{lem:shadow}; neither can be improved.
+The upper bound has the following striking consequence. Call density
+$j/T$ \emph{supercritical} when $3^j > 2^{T-1}$, i.e.\ essentially
+$j/T > \log 2/\log 3 \approx 0.6309$.
+
+\begin{theorem}[density dichotomy; \code{no\_descent\_dichotomy}]
+\label{thm:dichotomy}
+If $n \le T^T(n)$ then, with $j = \jodd{T}{n}$, either
+\[
+2^T < 2 \cdot 3^{j}
+\qquad\text{or}\qquad
+n < 2^{\,T - j}.
+\]
+\end{theorem}
+
+In words: an orbit segment that avoids descent either runs
+supercritical odd density, or has already spent more than $\log_2 n$
+halvings. Since each halving consumes one bit of $n$ --- a heuristic
+made precise by the parity bijection of Section~\ref{sec:parity} ---
+the second branch says the segment has exhausted the information
+content of its starting point. In particular
+(\code{early\_no\_descent\_forces\_density}), within the first
+$\log_2 n$ worth of halvings, survival \emph{forces} supercritical
+density.
+
+Finally, the corridor matters because descent is the whole conjecture:
+
+\begin{theorem}[descent reduction; \code{collatz\_iff\_descent}]
+\label{thm:reduction}
+The Collatz conjecture holds if and only if every $n \ge 2$ satisfies
+$T^t(n) < n$ for some $t$.
+\end{theorem}
+
+The forward direction tracks the Terras orbit inside the Collatz orbit;
+the converse is strong induction, descending through the first
+$t$ with $T^t(n) < n$. Both directions are formal, so any future
+descent theorem converts mechanically into the full conjecture.
+
+\section{The critical line is sharp}\label{sec:critical}
+
+Theorem~\ref{thm:dichotomy} forbids sub-critical survival inside the
+information budget. The lower master inequality provides the exact
+converse: supercritical \emph{prefixes} force survival.
+
+\begin{theorem}[\code{no\_descent\_of\_supercritical\_prefix}]
+\label{thm:prefix}
+If $2^t \le 3^{\jodd{t}{n}}$ for all $t \le T$, then
+$n \le T^t(n)$ for all $t \le T$.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:master} (lower bound) and $2^{j} \le 2^t \le 3^j$:
+$2^t\,T^t(n) \ge 3^j(n+1) - 2^j \ge 2^t n + (3^j - 2^j) \ge 2^t n$.
+\end{proof}
+
+Which prefixes occur? By the realization theorem of
+Section~\ref{sec:parity} (\code{parity\_pattern\_realized}), \emph{all}
+of them: in particular the extremal word $1^j 0^s$ ($j$ odd steps, then
+$s$ even ones), whose every prefix is supercritical as long as
+$2^{j+s} \le 3^j$. This yields adversaries at every supercritical
+density --- the Mersenne family of Corollary~\ref{cor:unbounded} is the
+case $s = 0$, density $1$ --- and, choosing $j$ minimal, adversaries
+hugging the critical line:
+
+\begin{theorem}[\code{critical\_adversary}, \code{critical\_line\_sharp}]
+\label{thm:sharp}
+\emph{(i)} For all $j, s, N_0$ with $2^{j+s} \le 3^j$ there exists
+$n \ge N_0$ with $\jodd{j+s}{n} = j$ and $n \le T^t(n)$ for all
+$t \le j+s$.
+\emph{(ii)} For every window $B$ and every $N_0$ there exists
+$n \ge N_0$ with $n \le T^t(n)$ for all $t \le B$ and
+\[
+2^B \;\le\; 3^{\,\jodd{B}{n}} \;\le\; 3 \cdot 2^B .
+\]
+\end{theorem}
+
+Part (ii) pins the odd density of an actual non-descending integer
+within $O(1/B)$ of $\log 2/\log 3$ from above, for every $B$; part (i)
+of Theorem~\ref{thm:dichotomy} forbids anything below. The
+\emph{non-descent profiles achievable over a window $B$ are exactly a
+strip of width $O(1/B)$ above the critical line, inhabited at every
+scale by arbitrarily large integers}. By Theorem~\ref{thm:reduction},
+the conjecture is the assertion that no single integer inhabits the
+strip at every scale simultaneously. (Numerically, the construction at
+$j = 100$ produces integers of density $0.6329$, against the critical
+$0.6309$, with no descent through all $158$ steps.)
+
+\section{The parity bijection and the binomial law}\label{sec:parity}
+
+The constructions above rest on Terras' structural theorem
+\cite{terras}, which we formalize in both directions. Congruence is
+$\bmod\ 2^k$ throughout.
+
+\begin{theorem}[\code{parity\_of\_modEq}, \code{modEq\_of\_parity}]
+\label{thm:bijection}
+For all $k$: $n \equiv m \pmod{2^k}$ if and only if
+$T^t(n) \equiv T^t(m) \pmod 2$ for all $t < k$. Consequently the map
+sending $r < 2^k$ to its parity vector
+$\bigl(T^t(r) \bmod 2\bigr)_{t<k}$ is a bijection onto $\{0,1\}^k$.
+\end{theorem}
+
+The proof in both directions rides on the doubling identities of
+Section~\ref{sec:corridor}: doubling carries congruence modulo $2^k$
+to congruence modulo $2^{k+1}$ and back, and $3$ is invertible modulo
+every power of $2$. Three corollaries do real work:
+
+\begin{corollary}\label{cor:parity-consequences}
+\emph{(i)} (\code{oddSteps\_modEq}) $\jodd{k}{\cdot}$ is a function of
+$n \bmod 2^k$.
+\emph{(ii)} (\code{parity\_pattern\_realized}) Every subset of
+$\{0, \dots, k-1\}$ is the odd-step set of exactly one $r < 2^k$ ---
+every finite behavior occurs.
+\emph{(iii)} (\code{card\_oddSteps}, the binomial law)
+\[
+\#\bigl\{\, r < 2^k : \jodd{k}{r} = j \,\bigr\} = \binom{k}{j}.
+\]
+\end{corollary}
+
+Item (ii) explains the failure of worst-case certificates
+structurally: the adversarial pattern (all ones) is always present,
+exactly once, at every scale --- and item (iii) says it and its
+supercritical neighbours are binomially rare, which is the engine of
+the next section.
+
+\section{Almost every integer descends: Terras' theorem, finite form}
+\label{sec:terras}
+
+Fix $k$ and consider the dyadic window $[2^k, 2^{k+1})$, which
+contains exactly one integer from each residue class modulo $2^k$. If
+$n$ in the window does not descend within $k$ steps, the dichotomy
+(with the window position supplying $n \ge 2^k \ge 2^{k-j}$) forces
+supercritical density $2^k < 2\cdot 3^{\jodd{k}{n}}$; by
+Corollary~\ref{cor:parity-consequences}(i) and (iii) the eligible
+residues number $\sum_{j \,:\, 2^k < 2\cdot 3^j} \binom{k}{j}$. Two
+elementary integer facts finish:
+\[
+2^m \sum_{\substack{j \le k \\ j \ge m}} \binom{k}{j}
+\;\le\; \sum_{j \le k} \binom{k}{j}\, 2^j \;=\; (1+2)^k = 3^k
+\qquad\text{(\code{choose\_tail\_bound})},
+\]
+and $2^k < 2 \cdot 3^j$ implies $j \ge \lfloor 17(k-1)/27 \rfloor$,
+because $3^{17} \le 2^{27}$ (\code{tail\_exponent}; note
+$17/27 = 0.6296\ldots$ approximates $\log 2/\log 3 = 0.6309\ldots$
+from below).
+
+\begin{theorem}[Terras' theorem, finite form;
+\code{no\_descent\_window\_bound}]\label{thm:terras}
+For every $k$,
+\[
+2^{\lfloor 17(k-1)/27 \rfloor} \cdot
+\#\bigl\{\, n \in [2^k, 2^{k+1}) : n \le T^t(n) \text{ for all } t \le k
+\,\bigr\} \;\le\; 3^k .
+\]
+\end{theorem}
+
+The count is therefore at most $3^k/2^{\lfloor 17(k-1)/27\rfloor}
+\approx 2^{0.955k}$: a fraction $\approx 2^{-0.045 k}$ of the window,
+vanishing exponentially. The same bound holds for integers whose orbit
+\emph{never} descends (\code{divergent\_window\_bound}): almost every
+integer has finite stopping time. The formal proof uses no real
+numbers, no measure theory, and no entropy estimates --- only the
+weighted binomial theorem and one numeric inequality --- which we
+found necessary as well as pleasant: the natural analytic route
+through the popcount of $3^j$ runs into a genuinely open problem
+(Section~\ref{sec:discussion}). Numerically the truth tracks the bound
+comfortably: the actual fraction of non-descenders falls $0.50, 0.19,
+0.063, 0.029$ at $k = 1, 4, 10, 18$.
+
+Together with Section~\ref{sec:critical}: the strip above the critical
+line is inhabited at every scale (Theorem~\ref{thm:sharp}), but its
+population is an exponentially vanishing minority
+(Theorem~\ref{thm:terras}). ``Almost all'' is now formal; ``all'' is
+the conjecture.
+
+\section{Cycle bounds}\label{sec:cycles}
+
+On a cycle the two master inequalities pinch against each other.
+Suppose $T^T(n) = n$ with $T \ge 1$, $n \ge 1$, and write
+$j = \jodd{T}{n}$.
+
+\begin{theorem}[\code{cycle\_has\_odd\_step},
+\code{cycle\_three\_pow\_lt}, \code{cycle\_min\_bound}]
+\label{thm:cycles}
+$j \ge 1$; moreover $3^j < 2^T$ strictly, and
+\[
+n \cdot 2^T \;<\; n \cdot 3^j + 3^j\, 2^{\,T-j},
+\qquad\text{i.e.}\qquad
+n \;<\; \frac{3^j\, 2^{T-j}}{2^T - 3^j}.
+\]
+\end{theorem}
+
+Every cycle element is thus bounded by how well $3^j$ approximates
+$2^T$ from below --- the classical constraint
+\cite{eliahou, simons-deweger}, now fully formal. The bound has teeth
+at small $T$ because good rational approximations to $\log_2 3$ are
+sparse. A finite computation --- performed by the Lean kernel itself
+via plain \code{decide}, with no \code{native\_decide} and no trusted
+code; the resulting lemma \code{cycle\_check\_183} depends on the
+axiom \code{propext} alone --- verifies that for every $T \le 183$ and
+every admissible $j$,
+\[
+3^j\, 2^{T-j} \;\le\; (2^T - 3^j)\cdot 2^{71},
+\]
+so every element of such a cycle is below $2^{71}$.
+
+\begin{theorem}[\code{no\_small\_terras\_cycle}]\label{thm:nocycles}
+Assume every $0 < m < 2^{71}$ reaches $1$ under the Collatz map (the
+computational verification \cite{barina}, stated as a hypothesis).
+Then every $n \ge 1$ with $T^T(n) = n$ for some $1 \le T \le 183$
+reaches $1$; equivalently, no nontrivial cycle has $183$ or fewer
+halvings.
+\end{theorem}
+
+The constant is sharp for this method at this verification bound: at
+$(T, j) = (184, 116)$ the element bound first clears the verified
+range ($3^{116} 2^{68}/(2^{184} - 3^{116}) \approx 2^{71.25}$), the
+shadow of the approximation $116 \cdot \log_2 3 \approx 183.86$.
+Pushing further requires a larger verified range or convergent-by-%
+convergent Diophantine input \cite{eliahou}, not new ideas --- which
+is itself consistent with Theorem~\ref{thm:nogo}: cycle exclusion is
+finite-information reasoning, and provably cannot close the
+conjecture.
+
+\section{Certificate searches: from residue classes to digit automata}
+\label{sec:search}
+
+\subsection{The residue-class search}
+
+Theorem~\ref{thm:nogo} was found by attempting its negation. For state
+spaces $Q = \Z/2^a \times \Z/3^b$ one can search for additive
+certificates $\varphi \colon Q \to \mathbb{R}$ mechanically. Model the
+dynamics as a finite graph on $Q$: from a state $(r_2, r_3)$, the next
+$T$-iterate's class is determined except for one bit --- each halving
+consumes one bit of $2$-adic information --- so each state carries two
+out-edges (the $3$-adic part is exact, $2$ being invertible modulo
+$3^b$), with weight $-\log 2$ on even states and $+\log\frac32$ on odd
+states. A certificate exists if and only if the associated linear
+program is feasible, equivalently (by LP duality) if and only if every
+cycle of this graph has negative mean weight, which Karp's algorithm
+\cite{karp} decides exactly.
+
+The graph over-approximates the true dynamics (both lifts of the lost
+bit are kept), which is sound for worst-case certificates; and the
+blocking cycle found below is realized by genuine integers, so no slack
+is lost. The results:
+
+\begin{center}
+\begin{tabular}{cccl}
+\toprule
+$(a, b)$ & states & max mean cycle weight & verdict\\
+\midrule
+$(4, 0)$ & $16$  & $+0.405465$ & infeasible\\
+$(6, 1)$ & $192$ & $+0.405465$ & infeasible\\
+$(6, 2)$ & $576$ & $+0.405465$ & infeasible\\
+$(5, 3)$ & $864$ & $+0.405465$ & infeasible\\
+$(8, 1)$ & $768$ & $+0.405465$ & infeasible\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The maximum mean cycle weight equals $\log\frac32 = 0.405465\ldots$
+exactly, at every modulus, and the optimal cycle is always the same: the
+self-loop at $n \equiv -1 \pmod{2^a}$. This is the $2$-adic fixed point
+of Section~\ref{sec:shadow} seen at finite resolution, and tracing it
+back to the integers $2^L - 1$ converts the failed search into
+Theorem~\ref{thm:nogo}. The search tool
+(\code{analysis/certificate\_search.py}) remains useful as a mechanical
+refuter: any future claimed finite-modulus certificate must, by the
+theorem, contain an error that the tool will locate as a positive-mean
+cycle.
+
+\subsection{The adversary spectrum: positive-drift rational cycles}
+\label{sec:spectrum}
+
+The Terras map preserves odd denominators: $T(a/q)$ is $(a/2)/q$ or
+$((3a+q)/2)/q$. Every rational $a/q \in \Ztwo$ is shadowed by integers
+$n \equiv a q^{-1} \pmod{2^L}$ for $\sim L$ steps, so every $T$-cycle
+of rationals with \emph{positive drift} ($3^j > 2^P$ over the cycle)
+is an adversary family in the sense of Section~\ref{sec:nogo}.
+Enumerating all cycles with $q \le 99$ odd and starting numerators
+$|a| \le 6q$ (\code{analysis/rational\_cycles.py}) finds $16$
+positive-drift cycles in that range, all on negative rationals; the
+strongest:
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+cycle through & period $P$ & odd steps $j$ & density & drift ($\log_2$/step)\\
+\midrule
+$-1$      & $1$  & $1$ & $1.000$ & $+0.585$\\
+$-65/49$  & $5$  & $4$ & $0.800$ & $+0.268$\\
+$-19/11$  & $4$  & $3$ & $0.750$ & $+0.189$\\
+$-5$      & $3$  & $2$ & $0.667$ & $+0.057$\\
+$-17$     & $11$ & $7$ & $0.636$ & $+0.009$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The no-go theorem's $-1$ is the extreme point of a structured
+spectrum whose densities descend toward the critical line --- the
+dynamical counterpart of Theorem~\ref{thm:sharp}.
+
+\subsection{Beyond bounded memory: digit automata and three killers}
+\label{sec:automata}
+
+By Remark~\ref{rem:unbounded}, certificates with \emph{unbounded} $W$
+are not excluded, provided they carry a validity floor
+$V(n) \ge n^{\delta}$. The natural such family: weighted automata
+reading all binary digits of $n$ (least-significant first), $\log_2
+V(n) = \log_2 n + \sum_i g(q_i, b_i)$, which can vary over
+$n^{\Theta(1)}$ scales. We searched this family systematically
+(\code{analysis/automaton\_potentials.py},
+\code{analysis/transducer\_search.py}); since $\log V$ is linear in
+the weight vector $g$, fitting $g$ against an adversary pool is a
+piecewise-linear min--max problem, and we run full
+counterexample-guided synthesis: fit, attack (Mersenne family,
+rational-cycle shadows, exact minimal-weight strings by dynamic
+programming, shift injections, hill-climbing over bit flips), add the
+violator to the pool, repeat.
+
+\emph{One-state results.} The popcount potential
+$V(n) = n \cdot c^{\mathrm{ones}(n)}$ contracts along the Mersenne
+orbit precisely when $c > 9/4$ --- the measured boundary
+$\log_2 c = 1.17$ matches the prediction from
+$\mathrm{ones}(3^j 2^{L-j}-1) \approx L - j/2$ --- so it kills the
+no-go adversary. It dies elsewhere: the full two-parameter family
+$V(n) = n\, 2^{\,g_1 \mathrm{ones}(n) + g_0 \mathrm{zeros}(n)}$ is
+refuted across the entire $(g_0, g_1)$ plane.
+
+\emph{Two-state results.} All $16$ two-state transition structures,
+with the validity floor enforced as linear constraints (every cycle of
+the weight graph must have mean $\ge -(1-\delta)$; without it the
+optimizer returns inverted potentials $V \sim n^{-\gamma}$ that
+certify nothing), are refuted by the CEGIS loop. The most instructive
+candidate is the \emph{trailing-run automaton}, whose state records
+whether the read head is still inside the initial run of ones --- so
+it computes $\nu_2(n+1)$, the exact predictor of Mersenne rising
+stretches --- with fitted potential $V(n) \approx n^{1.79} \cdot
+4.6^{\,\nu_2(n+1)}$. It \emph{pre-pays} for every rise and genuinely
+contracts along the entire Mersenne family. It dies in one step: for
+$n = 2(2^{40}-1)$, the first halving re-aligns the read head with the
+giant run of ones and releases the stored weight at once (measured
+$+86.8$ in $\log_2 V$; the $30$-step window minimum stays at
+$+52.9$).
+
+Three refutation mechanisms, each with constructive adversaries,
+emerged:
+\begin{enumerate}
+\item \textbf{Injection}: strings of extreme low weight (computable
+exactly by dynamic programming on the automaton) whose statistics the
+dynamics refills --- the orbit may even \emph{descend} while the
+potential explodes (a measured case: $\Delta\log_2 n = -8.3$ over $40$
+steps while $\Delta \log_2 V = +56$, the ones-density recovering from
+$0.025$ toward typical).
+\item \textbf{Global rewrite}: the odd step multiplies the entire
+remaining bit string by $3$; digit statistics are not locally
+controlled, and even positive-drift cycle shadows pump popcount-style
+weights.
+\item \textbf{Shift re-alignment}: halvings shift the tape, so any
+LSB-anchored state has its stored potential released by a single even
+step, as above.
+\end{enumerate}
+Mechanism 3 is evaded exactly by \emph{shift-coherent} weights ---
+sliding $k$-gram statistics --- whose $k = 1, 2$ cases are killed by
+mechanisms 1--2. We record the resulting conjecture:
+
+\begin{conjecture}\label{conj:kgram}
+No $k$-gram digit potential (for any $k$) with validity floor
+$V \ge n^{\delta}$, window $B$, and factor $\rho < 1$ is a descent
+certificate for $T$.
+\end{conjecture}
+
+Base-$2$ statistics die on $\times 3$; base-$3$ statistics die,
+symmetrically, on halving. A weight statistic compatible with both
+must live on the joint $2$-adic/$3$-adic structure --- the
+$\times 2,\times 3$ rigidity landscape of Furstenberg's times-two,
+times-three problem --- which we take as quantitative evidence that
+the difficulty of the conjecture is located exactly where the folklore
+places it. These are experimental refutations: every kill is an
+explicit, checkable violator, but ``no certificate exists in this
+family'' remains conjecture pending a proof of mechanism 1 or 3 in the
+style of Section~\ref{sec:critical} (prescribed parity words rather
+than explicit bit strings; see Section~\ref{sec:discussion}).
+
+\section{Case study: how the false axiom looked plausible}
+\label{sec:casestudy}
+
+An earlier version of this repository claimed a conditional proof of the
+conjecture from two axioms: verified convergence below $2^{71}$, and the
+descent statement refuted in Corollary~\ref{cor:axiom}. The descent
+statement was ``verified'' by tracking, for each odd residue class
+modulo $2^{14}$, an affine form $c \cdot n + d$ along the orbit, with
+worst-case handling of one boundary case. The flaw: the class of $n$
+modulo $2^{14}$ determines the orbit's parity decisions only until the
+cumulative number of halvings reaches $14$ --- each halving spends one
+bit, exactly as in Theorem~\ref{thm:bijection} --- while the tracker
+ran for up to $53$ steps. Beyond the budget, the tracked trajectory
+silently followed the class representative rather than the class. For
+the class of $n = 10087$, the tracker first diverges from reality at
+step $12$ (cumulative halvings $15$), then certifies a descent that
+$n = 10087$ itself violates: its actual stopping time is $66$ Terras
+steps.
+
+We record this not to dwell on an error but because it is the
+\emph{typical} error of the genre, and because
+Theorem~\ref{thm:nogo} explains its inevitability: had the precision
+accounting been done correctly at modulus $2^{14}$, the verification
+would have failed on the classes near $-1$; enlarging the modulus
+relocates but never removes them. By the binomial law
+(Corollary~\ref{cor:parity-consequences}) the classes with no
+guaranteed early descent number $\sum_{j > 0.63k}\binom{k}{j} \sim
+2^{0.95k}$ at modulus $2^k$: their density tends to $0$ --- that is
+Theorem~\ref{thm:terras} --- but their count grows exponentially,
+which is why ``almost every'' is where this method provably stops.
+
+\section{The formalization}\label{sec:formal}
+
+All theorems of Sections \ref{sec:shadow}--\ref{sec:cycles} are
+formalized in Lean~4 over \textsf{mathlib} \cite{mathlib}, about
+$2{,}100$ lines across seven files:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+file & contents & headline results\\
+\midrule
+\code{Basic.lean}    & maps, $2$-adic valuation & \code{CollatzConjecture}\\
+\code{NoGo.lean}     & \S\ref{sec:shadow}--\ref{sec:nogo} & \code{no\_finite\_certificate}\\
+\code{Density.lean}  & \S\ref{sec:corridor} & \code{no\_descent\_dichotomy}, \code{collatz\_iff\_descent}\\
+\code{Cycles.lean}   & \S\ref{sec:cycles} & \code{cycle\_min\_bound}, \code{no\_small\_terras\_cycle}\\
+\code{Parity.lean}   & \S\ref{sec:parity} & \code{card\_oddSteps}, \code{parity\_pattern\_realized}\\
+\code{Terras.lean}   & \S\ref{sec:terras} & \code{no\_descent\_window\_bound}\\
+\code{Critical.lean} & \S\ref{sec:critical} & \code{critical\_line\_sharp}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The no-go statement, as type-checked:
+
+\begin{leanblock}
+theorem no\_finite\_certificate\\
+\hspace*{1.5em}(W : $\N$ $\to$ $\Q$) (lo hi : $\Q$) (hlo : 0 < lo)\\
+\hspace*{1.5em}(hW : $\forall$ n, lo $\le$ W n $\wedge$ W n $\le$ hi)\\
+\hspace*{1.5em}(B N$_0$ : $\N$) ($\rho$ : $\Q$) (h$\rho_0$ : 0 $\le$ $\rho$) (h$\rho$ : $\rho$ < 1)\\
+\hspace*{1.5em}(hcert : $\forall$ n, N$_0$ $\le$ n $\to$ $\exists$ t, 1 $\le$ t $\wedge$ t $\le$ B $\wedge$\\
+\hspace*{3em}(terras\_iter t n : $\Q$) * W (terras\_iter t n)\\
+\hspace*{4.5em}$\le$ (n : $\Q$) * W n * $\rho$) :\\
+\hspace*{1.5em}False
+\end{leanblock}
+
+\noindent and Terras' theorem in finite form:
+
+\begin{leanblock}
+theorem no\_descent\_window\_bound (k : $\N$) :\\
+\hspace*{1.5em}2 \^{} (17 * (k - 1) / 27) *\\
+\hspace*{3em}((Finset.Ico (2 \^{} k) (2 \^{} (k + 1))).filter\\
+\hspace*{4.5em}(fun n => $\forall$ t, t $\le$ k $\to$ n $\le$ terras\_iter t n)).card\\
+\hspace*{3em}$\le$ 3 \^{} k
+\end{leanblock}
+
+\paragraph{Audit.} Beyond a successful clean build, we verified:
+(i) \code{\#print axioms} on the $24$ headline theorems reports only
+\code{propext}, \code{Classical.choice}, and \code{Quot.sound} ---
+Lean's standard foundations; the kernel computation
+\code{cycle\_check\_183} depends on \code{propext} alone;
+(ii) the sources contain no \code{sorry}, no \code{axiom}
+declarations, no \code{unsafe} or \code{partial} definitions, no
+\code{@[implemented\_by]} and no \code{native\_decide}, so no result
+depends on compiled code or escape hatches; (iii) every quantitative
+statement was cross-checked against independent Python
+implementations: the master inequalities on $20{,}000$ random
+$(n, T)$, the dichotomy on all non-descending cases among them, the
+binomial law exhaustively for $k \le 12$, the window bound and actual
+survivor counts for $k \le 18$, the critical adversaries to $j = 100$,
+the sharpness identity at $L \in \{5, 10, 20, 28\}$, and the
+$528{,}958{,}107{,}647 = T^{17}(2^{29}-1)$ spot check of
+Lemma~\ref{lem:shadow}; and (iv) the only hypothesis anywhere that is
+not formally proved is the explicitly displayed verification
+hypothesis of Theorem~\ref{thm:nocycles}.
+
+We are aware of formalizations of Collatz \emph{computations} and of
+the conjecture's statement in several proof assistants; we are not
+aware of a prior machine-verified impossibility theorem for a class of
+Collatz proof strategies, nor of a prior machine-verified density
+result for the map (Theorem~\ref{thm:terras}), though we would welcome
+correction.
+
+\section{What remains}\label{sec:discussion}
+
+The formal results fence off worst-case bounded-memory arguments
+(Theorem~\ref{thm:nogo}), and the experiments of
+Section~\ref{sec:automata} push the fence, so far without exception,
+through the unbounded digit-automaton families. What remains
+available:
+
+\begin{enumerate}
+\item \textbf{Density and averaging arguments.} These carry unbounded
+information and are untouched; indeed Section~\ref{sec:terras} is one,
+now formal, and Tao's result that almost all orbits attain almost
+bounded values \cite{tao} is their modern summit. But they prove
+``almost all,'' and Theorem~\ref{thm:sharp} shows the exceptional
+strip they permit is genuinely inhabited at every finite scale.
+\item \textbf{Cycle exclusions} (Section~\ref{sec:cycles}): real
+theorems, conditional only on verified ranges, but provably
+finite-information --- they bound cycle lengths, never settle
+divergence.
+\item \textbf{Joint $2$-adic/$3$-adic structure.} The three killers of
+Section~\ref{sec:automata} leave exactly one road into certificate
+land: statistics quasi-invariant under both $\times 3$-with-carry and
+halving, i.e.\ living on $\Ztwo \times \Z_3$. This is the
+times-two/times-three rigidity landscape, and we read the experiments
+as quantitative evidence that the conjecture's difficulty is exactly
+the difficulty of that landscape.
+\item \textbf{Genuinely new ideas} exploiting the specific arithmetic
+of $2$ and $3$. Some constraint of this kind is mandatory: the
+generalized Collatz problem is undecidable \cite{conway, kurtz-simon},
+so no argument indifferent to the particular map can succeed.
+\end{enumerate}
+
+Two concrete formal targets suggest themselves. First,
+Conjecture~\ref{conj:kgram}: the injection mechanism is constructive,
+and the realization machinery of Section~\ref{sec:parity} can
+prescribe parity words without controlling explicit bit strings --- a
+route that matters because the naive analysis of even the popcount
+potential on the Mersenne orbit needs the popcount of $3^j$, on which
+nothing beyond Stewart-type logarithmic bounds is known
+\cite{stewart}; any proof must go around that open problem, and our
+finite-form Terras proof shows such detours exist. Second, the
+quantitative no-go: certificates with window $B(n) = o(\log n)$ should
+be excludable by the chaining of Theorem~\ref{thm:nogo} run inside
+Theorem~\ref{thm:sharp}'s adversaries.
+
+The conjecture (descent part) is equivalent, with sharp constants on
+both sides now formal, to the assertion that no orbit tracks the
+critical strip $2^T \le 3^{\,\jodd{T}{n}} \le 3 \cdot 2^T$ at every
+scale $T$. Random parities give density $\frac12$, far below critical;
+the binomial law makes the strip exponentially thin; the realization
+theorem keeps it nonempty at every scale; and undecidability of the
+generalized problem warns that only the specific arithmetic of $2$ and
+$3$ can finish. We see this paper as a fence around the parts of the
+search space that are provably or demonstrably empty --- with the
+gate, the critical line, now surveyed exactly --- and as a case study
+in letting failed proof attempts fail \emph{informatively}.
+
+\subsection*{Acknowledgments}
+The formalization, the searches, and this text were produced in
+collaboration with Claude (Anthropic), including the discovery and
+refutation of the repository's earlier incorrect proof. The Lean
+community's \textsf{mathlib} made the formalization routine.
+
+\subsection*{Reproducibility}
+All Lean sources, the analysis scripts (deterministic seeds), and
+build instructions are in the repository accompanying this paper.
+\code{lake build} checks every theorem; \code{\#print axioms}
+reproduces the audit; each script regenerates the corresponding table
+or experiment of Sections \ref{sec:search} in minutes on commodity
+hardware.
+
+\begin{thebibliography}{10}
+
+\bibitem{barina} D.~Barina, Convergence verification of the Collatz
+problem, \emph{The Journal of Supercomputing} \textbf{77} (2021),
+2681--2688.
+
+\bibitem{conway} J.~H.~Conway, Unpredictable iterations, in
+\emph{Proceedings of the 1972 Number Theory Conference}, University of
+Colorado, Boulder, 1972, pp.~49--52.
+
+\bibitem{eliahou} S.~Eliahou, The $3x+1$ problem: new lower bounds on
+nontrivial cycle lengths, \emph{Discrete Mathematics} \textbf{118}
+(1993), 45--56.
+
+\bibitem{karp} R.~M.~Karp, A characterization of the minimum cycle mean
+in a digraph, \emph{Discrete Mathematics} \textbf{23} (1978), 309--311.
+
+\bibitem{krasikov-lagarias} I.~Krasikov and J.~C.~Lagarias, Bounds for
+the 3x+1 problem using difference inequalities, \emph{Acta Arithmetica}
+\textbf{109} (2003), 237--258.
+
+\bibitem{kurtz-simon} S.~A.~Kurtz and J.~Simon, The undecidability of
+the generalized Collatz problem, in \emph{Theory and Applications of
+Models of Computation (TAMC 2007)}, Lecture Notes in Computer Science
+4484, Springer, 2007, pp.~542--553.
+
+\bibitem{lagarias-survey} J.~C.~Lagarias, The $3x+1$ problem and its
+generalizations, \emph{American Mathematical Monthly} \textbf{92}
+(1985), 3--23.
+
+\bibitem{lagarias-book} J.~C.~Lagarias (ed.), \emph{The Ultimate
+Challenge: The $3x+1$ Problem}, American Mathematical Society, 2010.
+
+\bibitem{mathlib} The mathlib Community, The Lean mathematical library,
+in \emph{Proceedings of the 9th ACM SIGPLAN International Conference on
+Certified Programs and Proofs (CPP 2020)}, ACM, 2020, pp.~367--381.
+
+\bibitem{simons-deweger} J.~Simons and B.~de~Weger, Theoretical and
+computational bounds for $m$-cycles of the $3n+1$ problem, \emph{Acta
+Arithmetica} \textbf{117} (2005), 51--70.
+
+\bibitem{stewart} C.~L.~Stewart, On the representation of an integer
+in two different bases, \emph{Journal f\"ur die reine und angewandte
+Mathematik} \textbf{319} (1980), 63--72.
+
+\bibitem{tao} T.~Tao, Almost all orbits of the Collatz map attain
+almost bounded values, \emph{Forum of Mathematics, Pi} \textbf{10}
+(2022), e12.
+
+\bibitem{terras} R.~Terras, A stopping time problem on the positive
+integers, \emph{Acta Arithmetica} \textbf{30} (1976), 241--252.
+
+\end{thebibliography}
+
+\end{document}
