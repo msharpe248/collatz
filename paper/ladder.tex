@@ -1,0 +1,665 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Ztwo}{\Z_2}
+\newcommand{\Qtwo}{\Q_2}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\title{The Word-Complexity Ladder for Collatz Divergence:\\
+  a Machine-Verified Rung Zero and a Mahler-Value\\
+  Reduction of the Automatic Rung}
+\author{M.~Sharpe\thanks{\texttt{msharpe@irendi.com}. The mathematics,
+  the Lean formalization, and this text were produced in collaboration
+  with Claude (Anthropic). The Collatz conjecture remains open, and
+  nothing in this paper claims otherwise.}}
+\date{June 12, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Order potential divergent orbits of the Terras map ($T(n) = n/2$ for
+even $n$, $(3n+1)/2$ for odd $n$) by the complexity of their parity
+itineraries. We prove the floor of this ladder formally: a divergent
+orbit's itinerary is never eventually periodic (machine-verified in
+Lean~4, axiom-free). We then reduce the next rung to a single
+arithmetical statement. For the fixed point $w$ of the substitution
+$1 \mapsto 110$, $0 \mapsto 011$ --- an aperiodic automatic word of
+parity density $2/3$, inside the supercritical band where divergent
+orbits must live --- the generating function $F(z) = \sum w_i z^i$
+satisfies the Mahler functional equation
+$F(z) = (z+z^2)/(1-z^3) + (1-z^2)\,F(z^3)$, and the unique $2$-adic
+integer whose itinerary is $w$ equals $-10 + \tfrac{5}{9} F_2(8/9)$,
+where $F_2$ denotes $2$-adic evaluation. Consequently, if the $2$-adic
+Mahler value $F_2(8/9)$ is irrational, no integer has itinerary $w$.
+The archimedean value $F(8/9) \in \R$ is transcendental by Mahler's
+classical method; the $2$-adic value is the open case, and we prove
+that it is genuinely beyond naive methods: the truncation
+approximations to $F_2(8/9)$ have irrationality exponent exactly
+$(3\log 2)/(2\log 3) = 0.9464 < 1$, so no Liouville-style argument
+can decide the question --- and the deficiency constant is, once
+again, the critical density of the $3x+1$ problem. The same reduction
+applies uniformly to every constant-length substitution with constant
+block weight in the supercritical band, where double (real and
+$2$-adic) convergence of the relevant series is automatic.
+\end{abstract}
+
+\section{Introduction}
+
+The Collatz conjecture asserts that iterating the Terras map
+\[
+T(n) \;=\;
+\begin{cases}
+n/2 & n \text{ even},\\
+(3n+1)/2 & n \text{ odd},
+\end{cases}
+\]
+from any positive integer eventually reaches $1$
+\cite{lagarias-overview}. Its negation has two faces: a nontrivial
+cycle, or a divergent orbit. This paper concerns the divergent face,
+through the lens of symbolic dynamics. The \emph{itinerary} of $n$ is
+the infinite binary word
+\[
+w(n) \;=\; \bigl(T^{i}(n) \bmod 2\bigr)_{i \ge 0},
+\]
+the diary of parity choices the orbit makes. Two facts, both formal in
+the companion repository \cite{companion}, frame everything below.
+First, the itinerary determines the integer completely: distinct
+positive integers have distinct (in fact everywhere eventually
+differing) itineraries --- the infinite-precision form of Terras'
+parity bijection \cite{terras}. Second, a divergent orbit cannot have
+an arbitrary itinerary: its odd-step density is pinned, in the liminf,
+to at least the critical value
+\[
+\delta_c \;=\; \frac{\log 2}{\log 3} \;=\; 0.630929\ldots
+\]
+(the density floor of \cite{companion}; intuitively, fewer odd steps
+than that and the halvings win).
+
+\textbf{The ladder.} Order itineraries by word-theoretic complexity:
+eventually periodic words; automatic words (fixed points of
+constant-length substitutions and their codings); morphic and Sturmian
+words; and beyond. Excluding each class from the divergent repertoire
+is a theorem target. The conjecture --- on its divergence side --- is
+the top of the ladder; each rung is finite, honest work. This paper
+establishes the floor and gives the second rung a precise,
+classical shape.
+
+\textbf{Results.}
+\begin{enumerate}
+\item \emph{Rung zero, machine-verified}
+(Section~\ref{sec:rungzero}). A divergent orbit's itinerary is not
+eventually periodic. Formalized in Lean~4
+(\code{divergent\_itinerary\_aperiodic}, file \code{Ladder.lean}
+of \cite{companion}), depending only on Lean's standard foundations;
+no axioms, no \code{sorry}.
+\item \emph{The automatic rung is one Mahler value}
+(Sections~\ref{sec:mahler}--\ref{sec:reduction}). For the fixed point
+$w$ of $\sigma: 1 \mapsto 110,\ 0 \mapsto 011$, the unique $2$-adic
+integer with itinerary $w$ is $x(w) = -10 + \tfrac59 F_2(8/9)$, where
+$F(z) = \sum_i w_i z^i$ satisfies
+$F(z) = (z+z^2)/(1-z^3) + (1-z^2)F(z^3)$. Hence if $F_2(8/9) \notin
+\Q$, no integer realizes $w$. The word $w$ is aperiodic
+(Lemma~\ref{lem:aperiodic}), $F$ is transcendental over $\Q(z)$
+(Lemma~\ref{lem:fatou}), the real value $F(8/9)$ is transcendental by
+Mahler's classical theorem (Theorem~\ref{thm:arch}), and the statement
+generalizes uniformly to all constant-length, constant-block-weight
+substitutions in the supercritical band
+(Proposition~\ref{prop:class}).
+\item \emph{The cheap route is provably insufficient}
+(Section~\ref{sec:gap}). The truncations of the defining series give
+rational approximations to $F_2(8/9)$ with irrationality exponent
+exactly $(3\log 2)/(2\log 3) < 1$; rational numbers admit
+approximations of exponent $1$. No argument that uses only the
+convergence speed of the series can decide irrationality. The
+deficiency ratio is $\delta_c$ again, in disguise, and it caps the
+naive exponent below $1$ throughout the supercritical band ---
+the same coincidence that makes the density theory critical makes the
+transcendence question non-trivial.
+\end{enumerate}
+
+We emphasize the modesty of the target: the automatic rung is a
+countable, measure-zero family of itineraries, and closing it would
+leave the conjecture wide open (the companion no-go theorem
+\cite{companion} shows no bounded-memory argument reaches the top of
+the ladder). Its interest is structural --- it is the first rung where
+the divergence problem meets a developed branch of transcendence
+theory through an exact interface, with every reduction step proved
+and most of them machine-checked.
+
+\section{Itineraries, the correction term, and realizations}
+\label{sec:realization}
+
+Write $T^{i}$ for the $i$-th iterate, $j_T(n)$ for the number of odd
+values among $n, T(n), \ldots, T^{T-1}(n)$ (the odd-step count), and
+abbreviate the itinerary prefix $w_{<T} = (w_0, \ldots, w_{T-1})$,
+$w_i = T^i(n) \bmod 2$. The dynamics admits an exact linear form
+(\code{terras\_exact\_form} in \cite{companion}): for all $n, T$,
+\begin{equation}\label{eq:exact}
+2^T \, T^{T}(n) \;=\; 3^{j_T} n \;+\; d(w_{<T}),
+\end{equation}
+where the correction term $d$ depends only on the parity word, via
+the closed form (\code{dcoef\_closed})
+\begin{equation}\label{eq:closed}
+d(w_{<T}) \;=\; \sum_{\substack{i < T \\ w_i = 1}}
+  2^{i}\, 3^{\#\{i' > i \,:\, i' < T,\ w_{i'} = 1\}}.
+\end{equation}
+Both are theorems of the formal development; we use them as given.
+
+Now let $w$ be an \emph{infinite} binary word. Since $3$ is invertible
+in $\Ztwo$, \eqref{eq:exact} reads $n \equiv -3^{-j_T} d(w_{<T})
+\pmod{2^T}$, and from \eqref{eq:closed},
+\[
+3^{-j_T}\, d(w_{<T}) \;=\; \sum_{\substack{i < T \\ w_i = 1}}
+2^{i}\, 3^{-(1 + \nu_i)}, \qquad
+\nu_i := \#\{i' < i : w_{i'} = 1\},
+\]
+\emph{exactly} (the exponent in \eqref{eq:closed} is
+$j_T - \nu_i - 1$). The right-hand side is a partial sum of a series
+whose $i$-th term has $2$-adic absolute value $2^{-i}$; it therefore
+converges in $\Ztwo$.
+
+\begin{definition}\label{def:realization}
+The \emph{realization} of an infinite word $w$ is
+\[
+x(w) \;:=\; -\sum_{i \,:\, w_i = 1} 2^{i}\, 3^{-(1+\nu_i)}
+\;\in\; \Ztwo .
+\]
+\end{definition}
+
+\begin{proposition}\label{prop:realization}
+A positive integer $n$ has itinerary $w$ if and only if $x(w) = n$
+in $\Ztwo$. In particular at most one integer realizes any given word.
+\end{proposition}
+
+\begin{proof}
+If $n$ has itinerary $w$ then $n \equiv -3^{-j_T}d(w_{<T}) \pmod{2^T}$
+for every $T$ by \eqref{eq:exact}, and the right-hand sides converge
+to $x(w)$; hence $n = x(w)$. Conversely if $x(w) = n$ then $n$ agrees
+with $-3^{-j_T} d(w_{<T})$ modulo $2^T$ for every $T$; by the parity
+bijection (the first $T$ parities of an orbit are determined by the
+starting point mod $2^T$, \code{parity\_of\_modEq} in
+\cite{companion}, after \cite{terras}) and an induction on $T$, the
+itinerary of $n$ is $w$.
+\end{proof}
+
+Excluding a word $w$ from the divergent repertoire therefore means
+proving $x(w) \notin \Z_{\ge 1}$ --- a statement about one $2$-adic
+number per word.
+
+\section{Rung zero}\label{sec:rungzero}
+
+\begin{theorem}[machine-verified]\label{thm:rungzero}
+Let $n$ have unbounded orbit: for every $B$ there is $t$ with
+$T^{t}(n) > B$. Then the itinerary of $n$ is not eventually periodic.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+If the itinerary satisfies $w_{s+t} = w_{s+P+t}$ for all $t \ge 0$,
+then the two tail points $u = T^{s}(n)$ and $v = T^{s+P}(n)$ have
+identical itineraries at every time; by the infinite-precision parity
+bijection (two integers with everywhere-equal itineraries agree modulo
+$2^k$ for every $k$, hence are equal --- \code{eq\_of\_itinerary\_eq})
+we get $u = v$. The orbit is then eventually periodic, so it is
+bounded by the maximum of its first $s + P + 1$ values, contradicting
+unboundedness. The full proof is
+\code{divergent\_itinerary\_aperiodic} in \code{Ladder.lean} of
+\cite{companion}; it depends only on \code{propext},
+\code{Classical.choice}, \code{Quot.sound}.
+\end{proof}
+
+Rung zero is elementary, but it sets the pattern: a complexity class
+of words is excluded by showing its realizations are never positive
+integers (here, eventually periodic words realize the rational
+$2$-adic points of the dynamics --- e.g.\ $x((110)^\infty) = -5$ ---
+and the positive-integer ones among them are the bounded orbits).
+
+\section{The automatic rung: one functional equation}
+\label{sec:mahler}
+
+From here on, $w$ is the fixed point of
+\[
+\sigma:\quad 1 \mapsto 110, \qquad 0 \mapsto 011,
+\]
+starting from $w_0 = 1$:
+$w = 110\,110\,011\,110\,110\,011\,011\,110\,110\cdots$. Both images
+have length $3$ and contain exactly two $1$s, so $w$ has parity
+density exactly $2/3 > \delta_c$: a word in the supercritical band,
+admissible (as far as the density theory knows) as the itinerary of a
+divergent orbit. The substitution structure is equivalent to the
+\emph{kernel relations}
+\begin{equation}\label{eq:kernel}
+w_{3i} = w_i, \qquad w_{3i+1} = 1, \qquad w_{3i+2} = 1 - w_i
+\qquad (i \ge 0),
+\end{equation}
+read off from $\sigma(1) = 110$, $\sigma(0) = 011$.
+
+\begin{lemma}\label{lem:aperiodic}
+$w$ is not eventually periodic.
+\end{lemma}
+
+\begin{proof}
+Suppose $w_{i+P} = w_i$ for all $i \ge N$, with $P \ge 1$ minimal
+admissible. If $3 \mid P$, write $P = 3Q$: for $i \ge N$,
+\eqref{eq:kernel} gives $w_{i+Q}$ $= w_{3(i+Q)} = w_{3i + P} = w_{3i}
+= w_i$ for all $i \ge N$, so $Q < P$ is also an eventual period;
+hence we may assume $3 \nmid P$. Consider positions
+$i \equiv 1 \pmod 3$, $i \ge N$; there $w_i = 1$ by
+\eqref{eq:kernel}. If $P \equiv 1 \pmod 3$ then $i + P \equiv 2
+\pmod 3$, so $1 = w_{i+P} = 1 - w_{(i+P-2)/3}$, i.e.\
+$w_{t + (P-1)/3} = 0$ for every $t \ge (N-1)/3$ (writing $i = 3t+1$).
+Then $w$ is eventually all $0$s, contradicting $w_{3i+1} = 1$. If
+$P \equiv 2 \pmod 3$ then $i + P \equiv 0 \pmod 3$, so
+$1 = w_{i+P} = w_{(i+P)/3}$, i.e.\ $w_{t + (P+1)/3} = 1$ for all large
+$t$: $w$ is eventually all $1$s, contradicting
+$w_{3i+2} = 1 - w_i = 0$ at the infinitely many $i$ with $w_i = 1$.
+\end{proof}
+
+\begin{proposition}[the functional equation]\label{prop:feq}
+The generating function $F(z) = \sum_{i \ge 0} w_i z^i \in \Z[[z]]$
+satisfies
+\[
+F(z) \;=\; \frac{z + z^2}{1 - z^3} \;+\; (1 - z^2)\, F(z^3).
+\]
+\end{proposition}
+
+\begin{proof}
+Group the sum in blocks of three and apply \eqref{eq:kernel}:
+\[
+F(z) = \sum_{i \ge 0} z^{3i}\bigl(w_i + z + (1 - w_i)z^2\bigr)
+     = (z + z^2)\sum_{i\ge0} z^{3i} + (1 - z^2)\sum_{i\ge0} w_i z^{3i}.
+\qedhere
+\]
+\end{proof}
+
+This is the classical Mahler setup \cite{mahler, nishioka}: degree
+$d = 3$, coefficients in $\Q(z)$, iteration $z \mapsto z^3$. (It is
+also verified coefficient-wise to degree $900$ by the scripts of
+\cite{companion}, as are all identities below; see
+Section~\ref{sec:repro}.)
+
+\begin{lemma}\label{lem:fatou}
+$F$ is transcendental over $\Q(z)$.
+\end{lemma}
+
+\begin{proof}
+The coefficients of $F$ lie in $\{0,1\}$. If $F$ were rational, its
+coefficients would eventually satisfy a fixed linear recurrence with
+constant coefficients; the sequence of state windows (the $D$ most
+recent coefficients, for $D$ the recurrence depth) takes values in
+the finite set $\{0,1\}^D$, so some window repeats, and forward
+determinism makes the coefficient sequence eventually periodic ---
+contradicting Lemma~\ref{lem:aperiodic}. So $F$ is irrational; by
+Fatou's theorem \cite{fatou} (a power series with integer
+coefficients and radius of convergence $1$ is either rational or
+transcendental over $\Q(z)$; see also \cite[Ch.~6]{as}),
+$F$ is transcendental over $\Q(z)$.
+\end{proof}
+
+\begin{theorem}[the evaluation identity]\label{thm:eval}
+In $\Qtwo$ (where $|8/9|_2 = 1/8 < 1$ makes all series below
+converge),
+\[
+x(w) \;=\; -10 \;+\; \tfrac{5}{9}\, F_2(8/9),
+\]
+where $F_2(8/9) := \sum_{i \ge 0} w_i (8/9)^i \in \Ztwo$ denotes the
+$2$-adic evaluation.
+\end{theorem}
+
+\begin{proof}
+Each block of three letters contains exactly two $1$s, so
+$\nu_{3t+r}$ (the number of $1$s before position $3t + r$) equals
+$2t$ plus the count inside the current block. By \eqref{eq:kernel},
+if $w_t = 1$ the block is $(1,1,0)$, with $1$s at $r = 0$
+($\nu = 2t$) and $r = 1$ ($\nu = 2t + 1$); if $w_t = 0$ the block is
+$(0,1,1)$, with $1$s at $r = 1$ ($\nu = 2t$) and $r = 2$
+($\nu = 2t + 1$). The block contributions to
+$\sum_{w_i = 1} 2^i 3^{-(1+\nu_i)}$ are therefore
+\[
+w_t = 1:\;\; 2^{3t} 3^{-(2t+1)} + 2^{3t+1} 3^{-(2t+2)}
+  = \Bigl(\tfrac{8}{9}\Bigr)^{t} \cdot \tfrac{5}{9}, \qquad
+w_t = 0:\;\; 2^{3t+1} 3^{-(2t+1)} + 2^{3t+2} 3^{-(2t+2)}
+  = \Bigl(\tfrac{8}{9}\Bigr)^{t} \cdot \tfrac{10}{9}.
+\]
+Grouping consecutive terms of a convergent series in a complete
+ultrametric field is harmless, so
+\[
+x(w) = -\sum_{t \ge 0} \Bigl(\tfrac{8}{9}\Bigr)^{t}
+  \Bigl(\tfrac{10}{9} - \tfrac{5}{9} w_t\Bigr)
+  = -\tfrac{10}{9} \cdot \frac{1}{1 - \tfrac89}
+    + \tfrac{5}{9} \sum_{t\ge0} w_t \Bigl(\tfrac{8}{9}\Bigr)^{t}
+  = -10 + \tfrac59\, F_2(8/9). \qedhere
+\]
+\end{proof}
+
+\begin{remark}
+Iterating Proposition~\ref{prop:feq} at $z = 8/9$ unrolls
+Theorem~\ref{thm:eval} into a tower: with
+$u_k := \beta_k^{-1} F_2(\alpha_k/\beta_k)$,
+$(\alpha_k, \beta_k) = (8^{3^k}\!, 9^{3^k})$,
+\[
+u_k \;=\; \frac{\alpha_k(\alpha_k + \beta_k)}{\beta_k^3 - \alpha_k^3}
+\;+\; (\beta_k^2 - \alpha_k^2)\, u_{k+1},
+\qquad\text{e.g.}\quad u_0 = \tfrac{136}{217} + 17\, u_1,
+\]
+with constants of height $\approx 9^{3^{k+1}}$. The tower view makes
+the height growth of the method visible; the single-equation view is
+the one the classical theory consumes.
+\end{remark}
+
+\section{The reduction}\label{sec:reduction}
+
+\begin{corollary}[rung 1 for $w$, reduced]\label{cor:reduction}
+If $F_2(8/9) \notin \Q$, then no positive integer has itinerary $w$.
+\end{corollary}
+
+\begin{proof}
+If $n \in \Z_{\ge1}$ had itinerary $w$, Proposition
+\ref{prop:realization} and Theorem~\ref{thm:eval} give
+$F_2(8/9) = \tfrac95(n + 10) \in \Q$.
+\end{proof}
+
+The same reduction holds across the natural class.
+
+\begin{proposition}\label{prop:class}
+Let $\sigma$ be a substitution on $\{0,1\}$ of constant length $L$
+whose two image blocks each contain exactly $a$ ones, with
+$2^L < 3^a$ (equivalently: the fixed-point density $a/L$ exceeds
+$\delta_c$), and let $w$ be a fixed point with generating function
+$F$. Then $F(z) = A_\sigma(z) + B_\sigma(z) F(z^L)$ with
+$A_\sigma, B_\sigma \in \Q(z)$ explicitly computable from the two
+blocks, and there are rationals $A, B$ (computable from the blocks;
+$B \neq 0$ unless the two blocks contribute identically, in which case
+$x(w) \in \Q$ and the question is decidable directly) with
+\[
+x(w) \;=\; A + B \cdot F_2\!\left(\frac{2^L}{3^a}\right),
+\]
+the series converging both $2$-adically
+($|2^L/3^a|_2 = 2^{-L}$) and in $\R$ ($0 < 2^L/3^a < 1$, by
+supercriticality). Hence irrationality of the single $2$-adic Mahler
+value $F_2(2^L/3^a)$ excludes all integers from realizing $w$.
+\end{proposition}
+
+\begin{proof}
+Identical to Proposition~\ref{prop:feq} and Theorem~\ref{thm:eval}:
+blockwise grouping. Each block of $L$ letters contains exactly $a$
+ones, so $\nu_{Lt + r} = at + (\text{count inside the block})$, the
+type-$b$ block ($b \in \{0,1\}$) contributes
+$z^t C_b$ with $z = 2^L/3^a$ and
+$C_b = \sum_{r:\, \sigma(b)_r = 1} 2^r 3^{-(1 + \#\{r' < r:\,
+\sigma(b)_{r'} = 1\})}$, and
+$x(w) = -\sum_t z^t (C_0 + (C_1 - C_0) w_t)
+= -C_0/(1 - z) - (C_1 - C_0) F_2(z)$.
+For the functional equation, group $F$ in $L$-blocks as before. The
+double convergence is the displayed absolute-value computation;
+$3^a > 2^L$ is exactly $z < 1$ in $\R$.
+\end{proof}
+
+The supercritical band --- the only band where divergent orbits can
+live --- is thus exactly the band where the Mahler series converges at
+\emph{both} places. We do not currently use the archimedean
+convergence, but the classical method does (Section~\ref{sec:route}),
+and the coincidence deserves to be on the record.
+
+\section{The gap: truncation provably cannot decide}\label{sec:gap}
+
+Why is this not finished? The series defining $F_2(8/9)$ converges
+fast, and fast rational approximation is the standard engine of
+irrationality proofs. The following proposition shows the engine
+stalls --- by a precisely measurable margin.
+
+\begin{proposition}\label{prop:gap}
+For $N \ge 1$ let $P_N/Q_N$ with
+$P_N = \sum_{i<N} w_i\, 8^i\, 9^{N-1-i} \in \Z$, $Q_N = 9^N$, be the
+$N$-term truncation of $F_2(8/9)$. Then:
+\begin{enumerate}
+\item (quality) $\bigl|F_2(8/9) - P_N/Q_N\bigr|_2 = 2^{-3 i_0(N)}$
+where $i_0(N) \in \{N, N+1, N+2\}$ is the first index $\ge N$ with
+$w_{i_0} = 1$; in particular the error is never $0$ and
+\[
+\bigl|F_2(8/9) - P_N/Q_N\bigr|_2
+\;=\; Q_N^{-\kappa_N}, \qquad
+\kappa_N \;\to\; \frac{3\log 2}{2 \log 3} \;=\; 0.946394\ldots
+\]
+\item (insufficiency) For every rational $\xi = a/b$ and every
+rational $P/Q \neq \xi$ with $Q$ odd and $|P| \le Q$,
+\[
+\bigl|\xi - P/Q\bigr|_2 \;\ge\; \frac{1}{(|a| + |b|)\, Q}.
+\]
+Consequently the approximations of part (1) are consistent with
+$F_2(8/9) \in \Q$: any family of rational approximations can certify
+irrationality only with exponent $> 1$, and the truncations achieve
+$0.9464$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) The error is $\sum_{i \ge N} w_i (8/9)^i$; its terms have
+strictly increasing $2$-adic valuations $3i$, so the sum is nonzero
+with absolute value that of its first nonzero term, $2^{-3 i_0}$. The
+word $w$ contains no three consecutive zeros (every block has a $1$ in
+the middle position, by \eqref{eq:kernel}), so $i_0(N) \le N + 2$.
+Then $\kappa_N = 3 i_0(N) \log 2 / (2N \log 3) \to (3\log2)/(2\log3)$.
+(2) $\xi - P/Q = (aQ - bP)/(bQ)$; the numerator is a nonzero integer,
+so $|aQ - bP|_2 \ge |aQ - bP|^{-1} \ge ((|a|+|b|)Q)^{-1}$, while
+$|bQ|_2 \le 1$.
+\end{proof}
+
+So the question is genuinely beyond the convergence speed of its own
+defining series: the gap between $0.9464$ and $1$ must be crossed by
+structure, not by speed. Note where the constant comes from. For a
+general admissible pair $(L, a)$ (Proposition~\ref{prop:class}), the
+$N$-term truncation gains $LN \log 2$ bits of $2$-adic smallness
+against a denominator of $aN \log 3$ bits, so the exponent is
+\[
+\kappa \;=\; \frac{L \log 2}{a \log 3}
+\;=\; \frac{\delta_c}{\,a/L\,},
+\]
+the critical density divided by the word's density --- and the
+supercriticality condition $a/L > \delta_c$ is \emph{exactly} the
+statement $\kappa < 1$, with equality on the critical line. The
+constant that creates the divergence problem also protects this
+corner of it: throughout the band where divergent orbits could live,
+truncation falls short of irrationality by construction.
+
+\section{The route: Mahler's method, and one open question}
+\label{sec:route}
+
+Mahler's method \cite{mahler, nishioka} was invented for precisely
+the situation of Section~\ref{sec:gap}: values of functions
+satisfying $F(z) = A(z) + B(z) F(z^d)$ at algebraic points, where
+naive approximation falls short. Its auxiliary-polynomial
+construction converts the functional equation into approximation
+families whose exponent grows with the auxiliary degree --- crossing
+any fixed Liouville threshold --- and its hypotheses are, for our
+instance, verified above: $F$ transcendental over $\Q(z)$
+(Lemma~\ref{lem:fatou}), the point $8/9$ algebraic with orbit
+$(8/9)^{3^k}$ avoiding the singularities of the coefficients (the
+poles of $(z+z^2)/(1-z^3)$ at cube roots of unity and the zeros of
+$1 - z^2$ at $\pm 1$).
+
+At the archimedean place the classical theorem applies as stated:
+
+\begin{theorem}\label{thm:arch}
+The real number $F(8/9) = \sum_i w_i (8/9)^i \in \R$ is
+transcendental.
+\end{theorem}
+
+\begin{proof}
+Mahler's theorem (\cite{mahler}; in the form
+\cite[Ch.~1]{nishioka}): if $F \in \Q[[z]]$ converges in
+$|z| < 1$, satisfies a functional equation of the class above, and is
+transcendental over $\Q(z)$, then $F(\alpha)$ is transcendental for
+every algebraic $\alpha$, $0 < |\alpha| < 1$, whose orbit
+$\alpha^{d^k}$ avoids the finitely many excluded points (poles and
+zeros of the coefficient functions). Lemma~\ref{lem:fatou} and the
+singularity check above verify every hypothesis at $\alpha = 8/9$.
+\end{proof}
+
+The number rung 1 needs is the \emph{same} function at the
+\emph{same} rational point, evaluated at the other place where the
+series converges:
+
+\begin{question}\label{q:main}
+Is $F_2(8/9) \in \Qtwo$ irrational? More generally: does Mahler's
+method, transposed to $\Qtwo$ --- auxiliary polynomials, the
+non-archimedean Schwarz lemma in place of the maximum principle,
+heights as before --- yield irrationality (or transcendence) of
+$F_p(\alpha)$ for Mahler functions $F \in \Q[[z]]$ at rational
+$\alpha$ with $0 < |\alpha|_p < 1$ under the hypotheses of
+Theorem~\ref{thm:arch}?
+\end{question}
+
+We are not aware of a published theorem in exactly this form, though
+$p$-adic and function-field variants of Mahler's method exist in
+several settings (see \cite{nishioka} and its references;
+\cite{fernandes} develops the method over function fields in positive
+characteristic, and \cite{af} raises the structural theory at the
+archimedean place to a complete description of algebraic relations).
+Locating the statement, or transposing the archimedean proof --- the
+ingredients are place-generic, and non-archimedean analysis is, if
+anything, kinder to the relevant lemmas --- is the concrete work item
+this paper isolates. We record what is at stake: a positive answer to
+Question~\ref{q:main} excludes, by Corollary~\ref{cor:reduction} and
+Proposition~\ref{prop:class} (plus a finite-system extension to
+shifted fixed points, standard in the Mahler literature \cite{af}),
+the entire uniform-substitution stratum of the automatic rung.
+
+Two further remarks on the interface. First, the celebrated
+transcendence results for automatic \emph{numbers}
+\cite{ab} do not apply here: $x(w)$ is not an automatic number ---
+its binary digits are not generated by an automaton; only the
+\emph{series coefficients} are automatic, and the base mixes powers
+of $2$ against powers of $3$. The functional equation is the correct
+interface, not the digit expansion. Second, the obstruction is not
+the word combinatorics: all of Sections
+\ref{sec:realization}--\ref{sec:gap} are exact and verified; the
+single missing ingredient is non-archimedean.
+
+\section{Calibration: the $5x+1$ test}\label{sec:calibration}
+
+Any principle that would exclude divergence must fail to ``prove''
+the same for the $5x+1$ map, where orbits (conjecturally, and
+overwhelmingly in experiment, e.g.\ from $n = 7$) really do diverge.
+The present method passes this filter in the correct way. For $5x+1$,
+the identical computation realizes the same word $w$ at
+$x_5(w) = A' + B' F_2(2^L/5^a)$ --- the same generating function at a
+different rational point ($8/25$ for our $\sigma$) --- and a $2$-adic
+Mahler argument would conclude the same way: \emph{no integer has
+that exact automatic itinerary under $5x+1$}. This is consistent with
+(indeed expected alongside) real divergence: the observed $5x+1$
+escapees have generic-looking itineraries of density near $0.49$,
+nowhere near a substitution fixed point. The method excludes specific
+symbolic classes; it cannot manufacture global convergence --- which
+is precisely why it can be sound. The $3x+1$-specific content remains
+where the companion papers put it: in the density floor that pins
+divergent orbits into the narrow band where the ordered words live.
+
+\section{Scope, and the ladder above}\label{sec:scope}
+
+What would closing rung 1 actually buy? Directly: no divergent orbit
+has an itinerary that is a (shifted) fixed point of a uniform
+substitution --- a countable family, measure zero in every sense.
+The conjecture would remain open at every higher rung: morphic words,
+Sturmian words (where the companion shadow paper locates the
+slowest-escape candidates), and the unstructured majority, which the
+no-go theorem of \cite{companion} places beyond all bounded-memory
+arguments. The honest value of the rung is the bridge it builds: an
+exact, mostly machine-verified chain from the Collatz dynamics to a
+single value of a classical Mahler function, with the remaining gap
+isolated as one well-posed question (Question~\ref{q:main}) in a
+mature theory --- and a quantified certificate
+(Proposition~\ref{prop:gap}) that the question sits genuinely beyond
+elementary methods, for the problem's own critical reason.
+
+\subsection*{Reproducibility}\label{sec:repro}
+
+The formal results (\code{eq\_of\_itinerary\_eq},
+\code{divergent\_itinerary\_aperiodic}, \code{dcoef\_closed},
+\code{terras\_exact\_form}, the parity bijection) are in
+\code{lean/Collatz/Ladder.lean}, \code{Shadow.lean}, and
+\code{Parity.lean} of \cite{companion} (Lean~4 + mathlib; no axioms
+beyond the standard three, no \code{sorry}). The numerical
+verifications --- the functional equation to degree $900$, the
+evaluation identity to $600$ bits of $2$-adic precision, the exact
+finite-level tower identities, the block law on $200$ random words,
+the realization digit-tail statistics, and the shadow clustering of
+automatic words --- are
+\code{analysis/mahler\_experiments.py} (experiments 1--4),
+deterministic, run time under a minute. The attack plan in extended
+form, including the failed routes, is
+\code{analysis/RUNG1\_ATTACK.md}.
+
+\subsection*{Acknowledgments}
+
+The mathematics, the formalization, and this text were produced in
+collaboration with Claude (Anthropic). The reduction owes its shape
+to the exact-form and cocycle infrastructure of the companion
+formalization; the question it isolates belongs to a theory built by
+Mahler and rebuilt by many hands since.
+
+\begin{thebibliography}{10}
+
+\bibitem{ab} B.~Adamczewski and Y.~Bugeaud, On the complexity of
+algebraic numbers I. Expansions in integer bases, \emph{Ann. of
+Math.} \textbf{165} (2007), 547--565.
+
+\bibitem{af} B.~Adamczewski and C.~Faverjon, M\'ethode de Mahler:
+relations lin\'eaires, transcendance et applications aux nombres
+automatiques, \emph{Proc. Lond. Math. Soc.} \textbf{115} (2017),
+55--90.
+
+\bibitem{as} J.-P.~Allouche and J.~Shallit, \emph{Automatic
+Sequences: Theory, Applications, Generalizations}, Cambridge
+University Press, 2003.
+
+\bibitem{fatou} P.~Fatou, S\'eries trigonom\'etriques et s\'eries de
+Taylor, \emph{Acta Math.} \textbf{30} (1906), 335--400.
+
+\bibitem{fernandes} G.~Fernandes, M\'ethode de Mahler en
+caract\'eristique non nulle, \emph{Ann. Inst. Fourier} \textbf{68}
+(2018).
+
+\bibitem{lagarias-overview} J.~C.~Lagarias, The $3x+1$ problem: an
+overview, arXiv:2111.02635 (2021).
+
+\bibitem{lvdp} J.~H.~Loxton and A.~J.~van der Poorten, Arithmetic
+properties of the solutions of a class of functional equations,
+\emph{J. Reine Angew. Math.} \textbf{330} (1982), 159--172.
+
+\bibitem{mahler} K.~Mahler, Arithmetische Eigenschaften der
+L\"osungen einer Klasse von Funktionalgleichungen, \emph{Math. Ann.}
+\textbf{101} (1929), 342--366.
+
+\bibitem{nishioka} Ku.~Nishioka, \emph{Mahler Functions and
+Transcendence}, Lecture Notes in Mathematics 1631, Springer, 1996.
+
+\bibitem{companion} M.~Sharpe, The Collatz conjecture at the critical
+line: machine-verified no-go, density, and cycle theorems, companion
+papers and repository, 2026.
+
+\bibitem{terras} R.~Terras, A stopping time problem on the positive
+integers, \emph{Acta Arith.} \textbf{30} (1976), 241--252.
+
+\end{thebibliography}
+
+\end{document}

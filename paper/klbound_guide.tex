@@ -202,12 +202,39 @@ kernel, and the resulting bound
 \[
 \pi_1(x) \;\geq\; \text{const} \cdot x^{0.4543},
 \]
-with literally every logical step machine-checked. That exponent is
-deliberately modest --- the simplification trades strength for
-formalizability --- but it already exceeds every bound published before
-1995, and it is, to our knowledge, the first machine-verified density
-bound for this problem in history. Scaling the formalization up toward
-$0.895$ is bookkeeping rather than new ideas.
+with literally every logical step machine-checked. That was the first
+machine-verified density bound for this problem in history; it has
+since been overtaken in its own repository.
+
+The simplification that made $0.4543$ formalizable was a coarse grid:
+the tree was only examined at whole doublings, and each examination
+point cost growth. The second-generation formalization slices each
+doubling into \textbf{fifty} geometric steps, arranged so that the
+growth rate per step is the exact fraction $1261/1250$ --- keeping
+every check a whole-number comparison a kernel can do --- and pays for
+the finer grid with a bigger certificate: $2{,}187$ classes, plus, for
+each class, an explicit small ``witness'' number whose journey to 1 the
+kernel replays move by move (at most 146 moves each). The result, again
+with every step machine-checked:
+\[
+\pi_1(x) \;\geq\; \text{const} \cdot x^{0.63201}.
+\]
+
+\begin{keyidea}
+\textbf{Why $0.63201$ is a milestone.} The number that rules this whole
+subject is $\log 2/\log 3 = 0.63093\ldots$ --- the critical odd-step
+share that a number would have to sustain forever to escape to
+infinity, the constant in the cycle bounds, the line all the companion
+papers orbit around. The machine-verified exponent now sits
+\emph{above} that constant. The two quantities measure different things
+(one counts successes, the other paces escapees), so this is a
+numerical milestone rather than a theorem about divergence --- but
+there is something satisfying about the formally certified part of the
+subject overtaking its own critical constant.
+\end{keyidea}
+
+Scaling the formalization up toward $0.895$ is bookkeeping rather than
+new ideas.
 
 \section{What it would take to finish}
 
@@ -235,8 +262,8 @@ programming and no floating point in the final claim. Pushing from
 59 thousand to 43 million classes lifts the twenty-three-year-old
 record from $x^{0.84}$ to $x^{0.895}$, checked by two independent
 verifiers and reproducing the historical table exactly. A simplified
-fragment is additionally machine-verified end to end in Lean --- the
-first formally verified density bound for the problem --- at
-$x^{0.4543}$.
+fragment is additionally machine-verified end to end in Lean --- first
+at $x^{0.4543}$, now at $x^{0.63201}$, above the problem's critical
+constant $\log 2/\log 3 = 0.63093$.
 
 \end{document}

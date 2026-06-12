@@ -25,7 +25,7 @@
   the certification scheme, and this text were produced in collaboration
   with Claude (Anthropic). All final verifications are exact integer
   computations; see Section~\ref{sec:cert}.}}
-\date{June 11, 2026}
+\date{June 12, 2026}
 
 \begin{document}
 \maketitle
@@ -57,7 +57,12 @@ lower bounds certified via integer power comparisons. The method
 reproduces the complete published table of Krasikov--Lagarias
 ($2 \le k \le 11$) to all seven printed decimals, and yields certified
 exponents $0.853, 0.863, 0.8724, 0.8812, 0.888, 0.895$ at
-$k = 12, \dots, 17$.
+$k = 12, \dots, 17$. Separately, a Lean~4 formalization of an
+integer-grid weakening of the method now carries machine verification
+past the problem's critical constant: a kernel-checked proof that
+$\pi_1(x) = \Omega(x^{\gamma})$ with
+$\gamma = 50\log_2(1261/1250) = 0.632009\ldots > \log 2/\log 3$
+(Section~\ref{sec:disc}).
 \end{abstract}
 
 \section{Introduction}
@@ -379,16 +384,55 @@ a hundred lines) and is itself a candidate for formalization: the
 certificate check is a finite integer computation of precisely the
 kind proof assistants discharge by reflection, and formalizing
 Theorem~\ref{thm:kl} --- an induction over difference inequalities ---
-would make the exponent the first machine-verified density bound for
-the $3x+1$ problem. A first step exists: the companion repository
-\cite{companion} contains a complete Lean~4 formalization of the
-integer-grid weakening of the difference-inequality method --- the
-backward-tree combinatorics, Krasikov's inequalities, and a
-kernel-verified $81$-class certificate --- yielding the machine-checked
-bound $\pi_1(x) = \Omega(x^{0.4543})$ (theorem
-\code{density\_lower\_bound}), already above every published bound
-prior to 1995. Scaling that pipeline to the present certificates is
-mechanical in principle.
+would make the exponent fully machine-verified.
+
+\subsection*{Machine-verified exponents, and the critical constant}
+
+That program is underway in the companion repository \cite{companion},
+which contains complete Lean~4 formalizations of integer-grid
+weakenings of the difference-inequality method at two strengths, both
+proved from the dynamics upward (backward-tree combinatorics,
+Krasikov's inequalities, kernel-checked certificates; axioms: Lean's
+standard \code{propext}, \code{Classical.choice}, \code{Quot.sound}
+only --- no \code{sorry}, no extra axioms).
+
+\begin{enumerate}
+\item \textbf{Unit grid} (file \code{Krasikov.lean}): caps $2^y \cdot a$,
+an $81$-class certificate at modulus $3^5$ with rational rate
+$137/100$, giving the machine-checked bound
+$\pi_1(x) = \Omega(x^{0.4543})$ (theorem
+\code{density\_lower\_bound}).
+\item \textbf{$1/50$ grid} (file \code{Krasikov50.lean}): caps follow
+the interleaved-geometric sequence
+$\mathrm{cap}(t) = 2^{\lfloor t/50\rfloor}\, r[t \bmod 50]$ for a fixed
+$50$-entry integer table $r \approx 10^4 \cdot 2^{i/50}$, so that the
+per-step rate is the \emph{rational} $\mu = 1261/1250$ and every
+certificate condition is a pure integer inequality. The two odd-branch
+terms of the difference inequalities retard by only $21/50$
+resp.\ $1/50$ of a doubling (the kernel-checked table conditions; the
+margin is $2^{21/50} = 1.3382\ldots > 4/3$). A $2187$-class certificate
+at modulus $3^8$, decided by the kernel in chunks, together with
+per-class witness roots $a = m + 6561q$ ($q \in \{0,1\}$) whose Terras
+orbits reach $8$ in at most $146$ kernel-evaluated steps, yields
+(theorem \code{K8.density\_bound}):
+\[
+\pi_1(x) \;=\; \Omega\!\left(x^{\gamma}\right), \qquad
+\gamma \;=\; 50 \log_2\!\frac{1261}{1250} \;=\; 0.632009\ldots
+\]
+\end{enumerate}
+
+The second exponent crosses a meaningful line: it exceeds
+$\log 2/\log 3 = 0.630929\ldots$, the critical odd-step density against
+which every quantity of this problem is measured (it is the density a
+divergent orbit would have to sustain forever, and the constant
+governing the cycle Diophantine bounds). The comparison of the two
+numbers is numerical rather than structural --- they measure different
+things --- but as a milestone it is sharp: the machine-verified count
+of integers reaching $1$ now provably grows faster than
+$x^{\log 2/\log 3}$. The exponent $0.632$ exceeds every bound published
+before Applegate--Lagarias \cite{applegate-lagarias}; scaling the
+formal pipeline onward toward the present paper's $0.895$ certificates
+is mechanical in principle.
 
 \subsection*{Reproducibility}
 The search engine, the one-shot driver, both exact verifiers, the

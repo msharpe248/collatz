@@ -15,9 +15,13 @@ It also contains a new unconditional result: **π_a(x) ≥ x^0.895** — the
 number of integers below x whose 3x+1 orbit contains a (any a ≢ 0
 mod 3), improving the x^0.84 record of Krasikov–Lagarias (2003) by
 scaling their own program to 43 million congruence classes with exact
-integer certificates. See [paper/klbound.pdf](paper/klbound.pdf) (guide:
-[paper/klbound_guide.pdf](paper/klbound_guide.pdf)) and
-[analysis/KL_RECORD.md](analysis/KL_RECORD.md).
+integer certificates — and, machine-verified end to end,
+**π₁(x) = Ω(x^0.63201)**, a kernel-checked density exponent above the
+problem's critical constant log 2/log 3 = 0.63093. See
+[paper/klbound.pdf](paper/klbound.pdf) (guide:
+[paper/klbound_guide.pdf](paper/klbound_guide.pdf)),
+[analysis/KL_RECORD.md](analysis/KL_RECORD.md), and
+[lean/Collatz/Krasikov50.lean](lean/Collatz/Krasikov50.lean).
 
 A third paper develops the reduction layer: **the 3-adic shadow** — a
 divergent Collatz orbit is exactly an integer that compresses its own
@@ -27,6 +31,19 @@ theorems machine-verified, plus the experimental discoveries
 [paper/shadow.pdf](paper/shadow.pdf) (guide:
 [paper/shadow_guide.pdf](paper/shadow_guide.pdf)) and
 [lean/Collatz/Shadow.lean](lean/Collatz/Shadow.lean).
+
+A fourth paper opens **the word-complexity ladder**: order potential
+divergent orbits by the complexity of their parity itineraries and
+exclude class by class. Rung zero is machine-verified (divergent
+itineraries are never eventually periodic), and the automatic rung is
+reduced — exactly, with proofs — to the irrationality of a single
+2-adic Mahler value F₂(8/9), with the real value already
+transcendental by Mahler's classical method and the naive route
+provably insufficient (truncation exponent 0.946 < 1, the critical
+density again). See [paper/ladder.pdf](paper/ladder.pdf) (guide:
+[paper/ladder_guide.pdf](paper/ladder_guide.pdf)),
+[lean/Collatz/Ladder.lean](lean/Collatz/Ladder.lean), and
+[analysis/RUNG1_ATTACK.md](analysis/RUNG1_ATTACK.md).
 
 ## The conjecture
 
@@ -224,8 +241,11 @@ collatz/
 │   ├── transducer_search.py     # CEGIS refutation of 2-state digit certificates
 │   └── IDEAS.md                 # research directions and current findings
 └── paper/
-    ├── nogo.tex          # the paper (LaTeX source)
-    └── nogo.pdf          # compiled paper
+    ├── nogo.tex/.pdf           # paper I: no-go + the critical corridor
+    ├── klbound.tex/.pdf        # paper II: the x^0.895 record + formal x^0.632
+    ├── shadow.tex/.pdf         # paper III: the 3-adic shadow
+    ├── ladder.tex/.pdf         # paper IV: the word-complexity ladder
+    └── *_guide.tex/.pdf        # non-specialist guides to each paper
 ```
 
 ## Build / run
