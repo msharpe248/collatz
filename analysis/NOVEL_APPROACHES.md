@@ -52,12 +52,20 @@ steps consume 2-adic digits; odd steps produce 3-adic digits; the
 conjecture is the assertion that the production cannot run entropy-
 deficient forever.
 
-**Phase 1 (formalizable next, both new theorems):**
-- (a) 3-adic confinement, finite form — the exact mirror of
-  Terras.lean: #{reachable n_T mod 3^j over supercritical words}
-  ≤ binomial tail ≪ 3^j. Needs the dcoef identity in Lean (the
-  recursion is already designed) + Parity.lean realization.
-- (b) divergence ⇒ liminf density ≥ log2/log3 (threshold accounting).
+**Phase 1 — DONE (2026-06-12, lean/Collatz/Shadow.lean, axiom-free):**
+- terras_exact_form: 2^T·n_T = 3^j·n + dcoef (the identity the master
+  inequalities bound; propext+Quot.sound only).
+- dcoef_modEq + shadow_modEq: the correction and the 3-adic residue are
+  functions of the parity word alone (n ≡ m mod 2^T ⇒ n_T ≡ m_T mod 3^j).
+- dcoef_add: THE COCYCLE LAW d(w₁w₂) = 3^(j₂)d(w₁) + 2^(|w₁|)d(w₂) —
+  the ℤ₂×ℤ₃ skew product in integer form, fully formal.
+- density_floor: orbits with all values ≥ N surviving T steps satisfy
+  2^T·N^j ≤ (3N+1)^j — the finite form of "divergent ⇒ liminf density
+  ≥ critical" (NOT derivable from the master inequalities; new).
+- shadow_compression + surviving_shadow_mem: survivors' (j, residue)
+  pairs lie in a set with 2^(17(T-1)/27)·card ≤ 3^T while each fiber
+  has 3^j > 2^(T-1) classes — the 3-adic mirror of Terras.lean with
+  identical constants.
 
 **Phase 2:** the reduction statement, stated cleanly: Collatz
 divergence ⟺ an integer orbit whose 3-adic digit stream admits a
@@ -67,6 +75,24 @@ has fiber Lyapunov exponent −δ·log₂3 ≤ −1 vs base entropy H(δ) ≤ 0.
 limit measures of divergent orbits have 3-adic marginal of dimension
 ≤ 0.95. Missing rigidity statement R: integer-orbit limit measures
 must have full-dimensional 3-adic marginal. R ⟹ no divergence.
+
+**Phase 3 experiments (shadow_experiments.py, 2026-06-12):**
+- TRUE entropy below the bound: at critical-j slices the distinct
+  shadows grow at ~0.75-0.77 bits/step vs 0.80 for word counts (T ≤ 21;
+  both still rising) — the word→shadow map has persistent collisions:
+  the real compression exceeds the formalized H(δ) bound. (Caveat:
+  small-T rates not yet asymptotic.)
+- CROSS-SCALE RIGIDITY: at 2T=18, the joint (prefix-shadow, full-shadow)
+  distribution has 12,522 pairs vs 11,522 full values — the full shadow
+  almost DETERMINES the prefix shadow (1.09 prefixes/full on average;
+  0.5% of the product bound). Scale-consistency is a strong active
+  constraint, exactly what the cocycle law predicts; unexplored lever.
+- STRUCTURED WORDS CLUSTER: 400 near-critical Sturmian words produce
+  only 167 distinct shadows vs 400/400 for random matched-density words
+  — structured itineraries live in an even thinner 3-adic set,
+  connecting the forbidden-itineraries program (#1) to this one:
+  arithmetic exclusion of structured divergence should be attacked
+  through the shadow.
 
 **Phase 3 (attack fronts on the compression statement):**
 - structured words: eventually periodic = rational cycles (dead);

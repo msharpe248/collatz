@@ -115,6 +115,18 @@ The first machine-verified density lower bound for the 3x+1 problem:
 weakening end-to-end. Larger moduli and finer grids are mechanical
 extensions of the same pipeline.)
 
+### The 3-adic shadow ([lean/Collatz/Shadow.lean](lean/Collatz/Shadow.lean))
+
+The reduction layer: divergence as sustained 3-adic compression.
+
+| Theorem | Statement |
+|---|---|
+| `terras_exact_form` | The exact identity 2^T·T^T(n) = 3^j·n + d, d = `dcoef T n` |
+| `shadow_modEq` | **The shadow congruence**: n ≡ m (mod 2^T) ⇒ T^T(n) ≡ T^T(m) (mod 3^j) — the orbit's 3-adic residue is a function of its parity word alone |
+| `dcoef_add` | **The cocycle law** d(w₁w₂) = 3^(j₂)·d(w₁) + 2^(\|w₁\|)·d(w₂): the ℤ₂×ℤ₃ skew product in integer form |
+| `density_floor` | Orbits with values ≥ N survive only at density ≥ log 2/log((3N+1)/N) → log 2/log 3: divergent orbits are pinned to the critical density |
+| `shadow_compression` / `surviving_shadow_mem` | Survivors' 3-adic residues are confined to ≤ 3^T/2^(17(T−1)/27) ≈ 2^(0.955T) values inside fibers of > 2^(T−1) classes — a sustained ≈ 4.5% compression of the 3-adic digit stream, with the same constants as the 2-adic Terras theorem |
+
 ### The critical line ([lean/Collatz/Critical.lean](lean/Collatz/Critical.lean))
 
 The density dichotomy is **sharp**:
@@ -163,7 +175,8 @@ collatz/
 │       ├── Parity.lean   # Terras' parity bijection and the binomial law
 │       ├── Terras.lean   # Terras' theorem: almost all n descend (finite form)
 │       ├── Critical.lean # the density dichotomy is sharp at log2/log3
-│       └── Krasikov.lean # machine-verified density exponent x^0.4543
+│       ├── Krasikov.lean # machine-verified density exponent x^0.4543
+│       └── Shadow.lean   # the 3-adic shadow: divergence = compression
 ├── analysis/
 │   ├── certificate_search.py    # LP/max-mean-cycle search that motivated NoGo
 │   ├── automaton_potentials.py  # digit-automaton potentials (evade the no-go)
