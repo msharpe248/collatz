@@ -1,0 +1,522 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Ztwo}{\Z_2}
+\newcommand{\Zthree}{\Z_3}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\jodd}[2]{j_{#1}(#2)}
+
+\title{The 3-adic Shadow of a Collatz Orbit:\\
+       Divergence as Sustained Compression}
+\author{M.~Sharpe\thanks{\texttt{msharpe@irendi.com}. The mathematics,
+  formalization, and text of this paper were produced in collaboration
+  with Claude (Anthropic). All formal results are verified by the
+  Lean~4 kernel; see Section~\ref{sec:formal} for the audit.}}
+\date{June 12, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $T$ be the Terras form of the Collatz map and let $j = \jodd{T}{n}$
+count odd steps among the first $T$. The exact orbit identity
+$2^T\,T^T(n) = 3^{j} n + d$ has correction term $d$ depending only on
+the parity word of $n$; reducing modulo $3^j$ eliminates the $n$-term
+entirely, so \emph{the $3$-adic residue of an orbit is a function of
+its parity word alone}. We develop the consequences, all machine-verified
+in Lean~4: the correction obeys the cocycle law
+$d(w_1 w_2) = 3^{j_2} d(w_1) + 2^{|w_1|} d(w_2)$, exhibiting the
+integer dynamics as the $\Ztwo \times \Zthree$ skew product in
+elementary form; orbits whose values remain $\ge N$ survive without
+descent only at odd density $\ge \log 2 / \log\frac{3N+1}{N}$, so
+divergent orbits are pinned to the critical density
+$\log 2/\log 3$, at which the $3$-adic digit production rate
+$\delta \log_2 3$ equals exactly $1$ bit per step; and the residues
+attainable by surviving windows of length $T$ number at most
+$3^T / 2^{\lfloor 17(T-1)/27\rfloor} \approx 2^{0.955T}$ inside fibers
+of more than $2^{T-1}$ classes --- the precise $3$-adic mirror, with
+identical constants, of Terras' theorem in finite form. Together these
+give a quantitative reduction: a divergent Collatz orbit is exactly an
+integer that compresses its own $3$-adic digit stream by
+$\approx 4.5\%$, at every scale, forever. Experiments sharpen the
+picture: the true shadow entropy lies below the binomial bound; the
+full-window shadow nearly determines the half-window shadow (a strong
+cross-scale rigidity predicted by the cocycle); and Sturmian parity
+words --- forced on slowly divergent orbits --- occupy an even thinner
+shadow set. We state the finite and ergodic forms of the remaining
+problem and locate it within the $\times 2$/$\times 3$ rigidity
+landscape. The conjecture remains open.
+\end{abstract}
+
+\section{Introduction}
+
+The Collatz conjecture, in Terras form, concerns
+$T(n) = n/2$ ($n$ even), $T(n) = (3n+1)/2$ ($n$ odd), and asserts that
+every positive integer reaches $1$. Its two failure modes are
+nontrivial cycles --- excluded for all lengths up to $183$ halvings,
+conditionally on the verified range, in the companion paper
+\cite{companion} --- and \emph{divergent orbits}, which are the subject
+here.
+
+The companion paper establishes a corridor for divergence: an orbit
+segment avoiding descent must run odd-step density above the critical
+value $\log 2/\log 3 = 0.6309\ldots$ while within the $\log_2 n$-bit
+information budget of its start; densities just above critical are
+achieved by genuine integers at every scale; and no certificate
+carrying a bounded amount of information about $n$ can decide who
+survives. The present paper asks what survival costs on the
+\emph{other} side of the arithmetic --- in base $3$ --- and finds that
+the cost is precise, quantitative, and of a recognizable kind: a
+divergent orbit must \emph{compress its own $3$-adic digit stream},
+forever, by a fixed positive margin.
+
+The mechanism is an exact identity. Writing $\jodd{T}{n}$ for the
+number of odd steps among the first $T$ and abbreviating
+$j = \jodd{T}{n}$,
+\begin{equation}\label{eq:exact}
+2^T \, T^T(n) \;=\; 3^{j}\, n + d_T(n),
+\end{equation}
+where the correction $d_T(n)$ --- an explicit sum of products of
+powers of $2$ and $3$ along the orbit --- depends only on the
+\emph{parity word} $w$ of $n$ (the odd/even pattern of its first $T$
+steps), not on $n$ itself. Reducing \eqref{eq:exact} modulo $3^{j}$
+annihilates the term $3^j n$:
+\[
+T^T(n) \;\equiv\; 2^{-T} d(w) \pmod{3^{j}}.
+\]
+The $3$-adic residue of the endpoint is a function of the word alone.
+We call it the \emph{shadow} of the window.
+
+Counting shadows against words yields the reduction. By the corridor,
+a surviving window forces a supercritical word, and supercritical
+words of length $T$ number at most
+$\sum_{j \ge 0.631T}\binom{T}{j} \approx 2^{H(0.6309)T} =
+2^{0.950T}$. But the shadow lives modulo $3^{j}$, and --- by an
+identity that strikes us as the heart of the matter ---
+\[
+\delta \cdot \log_2 3 = 1 \quad\text{exactly at}\quad
+\delta = \frac{\log 2}{\log 3}:
+\]
+at the critical density the orbit \emph{mints exactly one bit of
+$3$-adic digit information per step}, while its word supplies at most
+$0.95$ bits per step. A divergent orbit must therefore emit $3$-adic
+digits carrying at least $5\%$ less information than their length ---
+sustained compression --- and this is forced at every scale
+simultaneously.
+
+\subsection*{Contributions}
+
+\begin{enumerate}
+\item \textbf{The shadow theorems} (Section~\ref{sec:shadow}),
+machine-verified: the exact form \eqref{eq:exact} with the recursion
+for $d$; word-determinacy of $d$; the shadow congruence; and the
+cocycle law
+\[
+d(w_1 w_2) = 3^{j_2}\, d(w_1) + 2^{|w_1|}\, d(w_2),
+\]
+which is the $\Ztwo \times \Zthree$ skew product written in integers
+and governs how shadows couple across scales.
+\item \textbf{The density floor} (Section~\ref{sec:floor}),
+machine-verified and to our knowledge not in the formal literature:
+if all values of an orbit stay $\ge N$ and the window does not descend,
+then $2^T N^{j} \le (3N+1)^{j}$ --- odd density at least
+$\log 2 / \log\frac{3N+1}{N}$, tending to critical as $N \to \infty$.
+This is the finite form of ``divergent orbits have liminf parity
+density $\ge \log 2/\log 3$,'' a statement deliberately \emph{not}
+delivered by the worst-case master inequalities of \cite{companion}.
+\item \textbf{The confinement count} (Section~\ref{sec:count}),
+machine-verified: the shadows of all supercritical windows of length
+$T$ form an explicit set of at most $3^T/2^{\lfloor 17(T-1)/27\rfloor}$
+elements, while every member's fiber holds more than $2^{T-1}$
+residues. The constants $17/27$ and $3^T$ are \emph{identical} to those
+in the $2$-adic Terras theorem of \cite{companion}: the two mirrors are
+one phenomenon.
+\item \textbf{The reduction} (Section~\ref{sec:reduction}): finite and
+ergodic statements of ``divergence $=$ sustained compression,''
+locating the remaining problem in the joint $\times 2$/$\times 3$
+rigidity landscape, with an explicit numeric gap.
+\item \textbf{Experiments} (Section~\ref{sec:experiments}): the true
+shadow entropy undercuts the binomial bound (the word-to-shadow map has
+persistent collisions); the full-window shadow nearly determines the
+half-window shadow ($1.09$ prefixes per full value at $2T = 18$) ---
+cross-scale rigidity, as the cocycle predicts; and Sturmian words at
+near-critical slope occupy an even thinner shadow set ($167$ distinct
+shadows from $400$ words, against $400$ of $400$ for unstructured words
+of matched density).
+\end{enumerate}
+
+Everything in Sections \ref{sec:shadow}--\ref{sec:count} is formalized
+in Lean~4 over \textsf{mathlib} \cite{mathlib} with no \code{sorry} and
+no axioms beyond standard foundations (Section~\ref{sec:formal}).
+
+\section{Preliminaries}
+
+Notation follows \cite{companion}. For $T, n \in \N$ the parity word of
+$n$ at length $T$ is $w = (T^t(n) \bmod 2)_{t < T} \in \{0,1\}^T$, and
+$\jodd{T}{n} = \sum_t w_t$. Two facts from \cite{companion} are used
+throughout: the \emph{parity bijection} (the word of length $T$ is
+determined by, and determines, $n \bmod 2^T$), and the \emph{binomial
+law} (exactly $\binom{T}{j}$ residues mod $2^T$ have $j$ odd steps).
+We also use the dichotomy of \cite{companion}: if $2^T \le n$ and
+$n \le T^t(n)$ for all $t \le T$, then $2^T < 2 \cdot 3^{\jodd{T}{n}}$
+(``survivors inside the information budget run supercritical'').
+
+\section{The shadow}\label{sec:shadow}
+
+\begin{definition}[\code{dcoef}]
+Set $d_0(n) = 0$ and
+\[
+d_{T+1}(n) \;=\;
+\begin{cases}
+3^{\jodd{T}{T(n)}} + 2\, d_T(T(n)) & n \text{ odd},\\[2pt]
+2\, d_T(T(n)) & n \text{ even}.
+\end{cases}
+\]
+\end{definition}
+
+\begin{theorem}[\code{terras\_exact\_form}]\label{thm:exact}
+$2^T\, T^T(n) = 3^{\jodd{T}{n}}\, n + d_T(n)$ for all $T, n$.
+\end{theorem}
+
+\begin{proof}
+Induction on $T$ via the exact doubling identities
+$2\,T(n) = n$ ($n$ even) and $2\,T(n) = 3n+1$ ($n$ odd).
+\end{proof}
+
+The master inequalities of \cite{companion} are the two-sided bounds
+$3^j - 2^j \le d_T(n) + (3^j - 2^T) \cdot 0 \le \ldots$ --- more
+usefully: Theorem~\ref{thm:exact} is the identity those inequalities
+sandwich, and it isolates all $n$-independence in $d$:
+
+\begin{theorem}[\code{dcoef\_modEq}]\label{thm:dword}
+If $n \equiv m \pmod{2^T}$ then $d_T(n) = d_T(m)$: the correction is a
+function of the parity word.
+\end{theorem}
+
+\begin{proof}
+Induction on $T$; congruence mod $2^{T+1}$ propagates through one
+Terras step to congruence mod $2^T$ (doubling identities again), and
+equal parities make the two branches of the recursion agree, using
+also the word-determinacy of $\jodd{T}{\cdot}$ from the parity
+bijection.
+\end{proof}
+
+\begin{theorem}[the shadow congruence; \code{shadow\_modEq}]
+\label{thm:shadow}
+If $n \equiv m \pmod{2^T}$ then
+\[
+T^T(n) \;\equiv\; T^T(m) \pmod{3^{\jodd{T}{n}}}.
+\]
+Equivalently: $T^T(n) \bmod 3^{j}$ depends only on $n \bmod 2^T$,
+namely $T^T(n) \equiv 2^{-T} d(w) \pmod {3^j}$.
+\end{theorem}
+
+\begin{proof}
+Two instances of Theorem~\ref{thm:exact} share $j$ and $d$
+(Theorem~\ref{thm:dword}); adding $3^j m$ to one and $3^j n$ to the
+other gives
+$2^T\,T^T(n) + 3^j m = 2^T\, T^T(m) + 3^j n$, whence
+$2^T T^T(n) \equiv 2^T T^T(m) \pmod{3^j}$, and $2^T$ is invertible
+modulo $3^j$.
+\end{proof}
+
+\begin{theorem}[the cocycle law; \code{dcoef\_add}]\label{thm:cocycle}
+For all $S, T, n$, writing $n' = T^S(n)$ and $j_2 = \jodd{T}{n'}$,
+\[
+d_{S+T}(n) \;=\; 3^{j_2}\, d_S(n) + 2^{S}\, d_T(n').
+\]
+\end{theorem}
+
+\begin{proof}
+Expand $2^{S+T}\,T^{S+T}(n)$ through the two windows by
+Theorem~\ref{thm:exact} and cancel, using additivity of $\jodd{}{}$
+over concatenated windows.
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:cocycle} is the $\Ztwo \times \Zthree$ skew product
+in integer clothing: the second window's $3$-adic weight $3^{j_2}$
+scales the first correction (a $3$-adic shift), the first window's
+$2$-adic length $2^S$ scales the second (a $2$-adic shift). It also
+explains why shadows at different scales are strongly coupled
+(Section~\ref{sec:experiments}): modulo $3^{j_1 + j_2}$, the
+full-window shadow contains the first-window correction with
+multiplier $3^{j_2}$.
+\end{remark}
+
+\section{The density floor}\label{sec:floor}
+
+The dichotomy of \cite{companion} pins survivors to supercritical
+density only while inside the $\log_2 n$-bit budget; beyond the
+budget, the worst-case inequalities go silent --- necessarily so, by
+the no-go theorem. For \emph{divergent} orbits a different,
+average-case mechanism takes over: once all values are large, the odd
+step multiplies by at most $\frac{3N+1}{2N} \approx \frac32$, and the
+accounting closes again.
+
+\begin{theorem}[\code{orbit\_upper\_refined}, \code{density\_floor}]
+\label{thm:floor}
+Let $N \ge 1$ and suppose $T^t(n) \ge N$ for all $t < T$. Then with
+$j = \jodd{T}{n}$,
+\[
+T^T(n) \cdot 2^T N^{j} \;\le\; n\,(3N+1)^{j};
+\]
+in particular, if also $n \le T^T(n)$ (no descent), then
+\[
+2^T N^{j} \le (3N+1)^{j},
+\qquad\text{i.e.}\qquad
+\frac{j}{T} \;\ge\; \frac{\log 2}{\log\frac{3N+1}{N}}
+\;\xrightarrow[N \to \infty]{}\; \frac{\log 2}{\log 3}.
+\]
+\end{theorem}
+
+\begin{proof}
+Induction; the odd step costs exactly the inequality
+$N(3n+1) \le n(3N+1)$, which is $N \le n$.
+\end{proof}
+
+\begin{corollary}\label{cor:liminf}
+A divergent orbit (one with $T^t(n) \to \infty$, hence never returning
+below any fixed $N$ after some time, and in particular never descending
+below suitable re-anchored starting points) has liminf parity density
+$\ge \log 2/\log 3$. At that density the orbit performs
+$\delta \log_2 3 \ge 1$ \emph{bit of $3$-adic digit production per
+step}, with equality exactly on the critical line.
+\end{corollary}
+
+\section{The confinement count}\label{sec:count}
+
+\begin{definition}[\code{shadowPair}, \code{shadowSet}]
+For a window length $T$ let
+$\sigma_T(n) = \bigl(\jodd{T}{n},\, T^T(n) \bmod 3^{\jodd{T}{n}}\bigr)$,
+and let $\Sigma_T$ be the set of values $\sigma_T(r)$ over the
+supercritical residues $r < 2^T$ (those with
+$2^T < 2\cdot 3^{\jodd{T}{r}}$).
+\end{definition}
+
+By Theorem~\ref{thm:shadow}, $\sigma_T(n) = \sigma_T(n \bmod 2^T)$ for
+every $n$.
+
+\begin{theorem}[\code{surviving\_shadow\_mem},
+\code{shadow\_compression}]\label{thm:confine}
+If $2^T \le n$ and $n \le T^t(n)$ for all $t \le T$, then
+$\sigma_T(n) \in \Sigma_T$ and $2 \cdot 3^{\jodd{T}{n}} > 2^T$.
+Moreover
+\[
+2^{\lfloor 17(T-1)/27 \rfloor} \cdot |\Sigma_T| \;\le\; 3^T .
+\]
+\end{theorem}
+
+Thus the shadow of every survivor lies in a set of at most
+$3^T / 2^{\lfloor 17(T-1)/27\rfloor} \approx 2^{0.9554\,T}$ elements,
+while its own fiber $\Z/3^{j}$ offers more than $2^{T-1}$ residues:
+an occupancy ratio $\approx 2^{-0.045\,T}$. The proof rides the
+binomial law, the image bound $|\Sigma_T| \le \#\{\text{supercritical
+residues}\}$, and the integer-only tail estimate
+$2^m \sum_{j \ge m}\binom{T}{j} \le 3^T$ of \cite{companion} --- the
+\emph{same} estimate, with the \emph{same} threshold $17/27$ from
+$3^{17} \le 2^{27}$, that bounds the $2$-adic count of non-descending
+integers. Terras' theorem and Theorem~\ref{thm:confine} are mirror
+images: one counts who can survive, the other counts where survivors
+may stand in base $3$.
+
+\section{The reduction}\label{sec:reduction}
+
+\subsection*{Finite form}
+
+Collatz divergence requires an integer $n$ whose orbit, for every
+window length $T$ along a sequence of re-anchored starting points,
+(i) runs parity density $\ge \log 2/\log 3 - o(1)$
+(Theorem~\ref{thm:floor}), hence mints $3$-adic residue information at
+$\ge 1 - o(1)$ bits per step; while (ii) the minted residues carry at
+most $\log_2 3 - \tfrac{17}{27} = 0.9554\ldots$ bits per step of
+information (Theorem~\ref{thm:confine}), since they are functions of a
+supercritical word. \emph{Divergence is a sustained $\approx 4.5\%$
+compression of the orbit's own $3$-adic digit stream} ($5.0\%$ at the
+entropy-optimal constants), enforced consistently across all scales by
+the cocycle law.
+
+\subsection*{Ergodic form}
+
+Embed the orbit diagonally in $\Ztwo \times \Zthree$ and pass to
+weak-$*$ limits of empirical measures. The limit is invariant for the
+skew product in which the base ($\Ztwo$, conjugate to the parity shift
+by the bijection of \cite{companion}) drives the fiber $\Zthree$ by
+maps that are $3$-adic isometries on even steps and contractions by
+$|3|_3 = \tfrac13$ on odd steps. For a divergent orbit the base
+entropy is at most $H(\delta) \le H(0.6309) = 0.950$ bits per step
+while the fiber contracts at $\delta \log_2 3 \ge 1$ bit per step, so
+the limit measure's $\Zthree$-marginal has (upper) dimension at most
+$H(\delta)/(\delta \log_2 3) \le 0.95 < 1$.
+
+\begin{question}[the missing rigidity]\label{q:R}
+Must the $\Zthree$-marginal of any weak-$*$ limit of empirical
+measures of a divergent \emph{integer} orbit have full dimension?
+\end{question}
+
+An affirmative answer excludes divergent orbits. The question sits
+squarely in the joint $\times 2$/$\times 3$ tradition of Furstenberg
+\cite{furstenberg} and Rudolph--Johnson \cite{rudolph}: the integers'
+base-$2$ and base-$3$ structures are expected to be ``independent,''
+and Question~\ref{q:R} asks for one quantitative consequence. We
+emphasize the calibration: nothing weaker than dimension
+$> 0.9554$ is needed, and the bound $0.95$ from the dynamics leaves a
+genuine, fixed gap. We also emphasize honesty about difficulty: even
+the much weaker assertion that the binary digits of $3^k$ are not
+eventually structured (e.g.\ popcount growth) is open
+\cite{senge-straus, stewart}; Question~\ref{q:R} is of that family.
+By the no-go theorem of \cite{companion}, no bounded-information
+argument resolves it; by \code{parity\_pattern\_realized}, the
+compressed shadow sets are inhabited at every finite scale, so no
+counting argument alone can either.
+
+\section{Experiments}\label{sec:experiments}
+
+Three measurements sharpen the picture beyond the theorems
+(script \code{analysis/shadow\_experiments.py}; deterministic seeds).
+
+\subsection*{True shadow entropy}
+
+Restricting to words of length $T$ with exactly
+$j = \lceil T \log 2/\log 3\rceil$ odd steps:
+
+\begin{center}
+\begin{tabular}{rrrrr}
+\toprule
+$T$ & $j$ & words $\binom{T}{j}$ & distinct shadows &
+$\tfrac{1}{T}\log_2(\text{shadows})$ \\
+\midrule
+12 & 8  & 495     & 325     & 0.695 \\
+15 & 10 & 3{,}003   & 1{,}915   & 0.727 \\
+18 & 12 & 18{,}564  & 11{,}522  & 0.750 \\
+21 & 14 & 116{,}280 & 70{,}489  & 0.767 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The word-to-shadow map has persistent collisions ($\sim 0.035$ bits
+per step below the word-count rate at these lengths): the true
+compression exceeds the formalized bound. (Caveat: these are small
+$T$; both rates are still rising toward their asymptotes, and we do
+not claim the gap survives the limit.)
+
+\subsection*{Cross-scale rigidity}
+
+At $2T = 18$, $j = 12$: the $18{,}564$ supercritical words yield
+$11{,}522$ distinct full-window shadows, $226$ distinct half-window
+(prefix) shadows --- and only $12{,}522$ distinct \emph{pairs}
+(prefix shadow, full shadow), i.e.\ $0.5\%$ of the product bound. The
+full shadow determines the prefix shadow up to $1.09$ candidates on
+average. As the cocycle law predicts, shadows at nested scales are
+nearly hierarchical; a divergent orbit must satisfy them all
+\emph{consistently}, a constraint that counting at a single scale does
+not see and which we believe is unexplored.
+
+\subsection*{Structured words cluster}
+
+Mechanical (Sturmian) words at slopes just above critical --- the
+itineraries forced on slowly divergent orbits by
+Theorem~\ref{thm:floor} together with the dichotomy --- produce $167$
+distinct shadows from $400$ samples at $T = 40$, against $400$ of
+$400$ for unstructured words of matched density. Structured
+itineraries inhabit a far thinner shadow set; arithmetic exclusion of
+structured divergence should be attacked through the shadow.
+
+\section{The formalization}\label{sec:formal}
+
+Theorems \ref{thm:exact}--\ref{thm:confine} are formalized in
+\code{Shadow.lean} ($\sim$430 lines) over the companion development
+\cite{companion} (parity bijection, dichotomy, binomial law, tail
+estimate). The audit: a clean build with no \code{sorry};
+\code{\#print axioms} reports only Lean's standard foundations for all
+seven named theorems, and only \code{propext} with \code{Quot.sound}
+--- not even choice --- for Theorems \ref{thm:exact} and
+\ref{thm:cocycle}. The numerical claims of
+Section~\ref{sec:experiments} are independent Python computations; the
+identity \eqref{eq:exact} and the word-determinacy of the shadow were
+additionally cross-checked on $2 \times 10^4$ random orbits.
+
+\section{Outlook}
+
+Three levers, in the order we would pull them. (1) \emph{Cross-scale
+consistency}: formalize and then exploit the near-hierarchy of shadows
+--- the cocycle law makes ``the orbit's shadows cohere at all scales''
+a concrete system of congruences whose joint solvability over a single
+integer has never been studied. (2) \emph{Structured words}: combine
+the clustering observation with the substitution structure of Sturmian
+words to attack ``no slowly divergent orbits'' --- the thinness of
+their shadow sets is exactly what a Mahler-style argument wants.
+(3) \emph{Question~\ref{q:R}}: the ergodic statement, for specialists
+in $\times 2 \times 3$ rigidity, now with explicit constants and a
+fixed dimension gap. The conjecture remains open; what this paper
+contributes is a precise statement of \emph{what kind} of miracle a
+counterexample would be: an integer that out-compresses the entropy of
+its own arithmetic, at every scale, forever.
+
+\subsection*{Acknowledgments}
+The formalization, the experiments, and this text were produced in
+collaboration with Claude (Anthropic). The Lean community's
+\textsf{mathlib} made the formalization routine.
+
+\subsection*{Reproducibility}
+\code{lake build} checks every theorem; \code{\#print axioms}
+reproduces the audit; \code{analysis/shadow\_experiments.py}
+regenerates Section~\ref{sec:experiments} in minutes on commodity
+hardware.
+
+\begin{thebibliography}{10}
+
+\bibitem{companion} M.~Sharpe, The Collatz conjecture at the critical
+line: machine-verified no-go, density, and cycle theorems, companion
+paper and repository, 2026.
+
+\bibitem{furstenberg} H.~Furstenberg, Disjointness in ergodic theory,
+minimal sets, and a problem in Diophantine approximation,
+\emph{Math. Systems Theory} \textbf{1} (1967), 1--49.
+
+\bibitem{lagarias-book} J.~C.~Lagarias (ed.), \emph{The Ultimate
+Challenge: The $3x+1$ Problem}, American Mathematical Society, 2010.
+
+\bibitem{mathlib} The mathlib Community, The Lean mathematical library,
+in \emph{CPP 2020}, ACM, 2020, pp.~367--381.
+
+\bibitem{rudolph} D.~J.~Rudolph, $\times 2$ and $\times 3$ invariant
+measures and entropy, \emph{Ergodic Theory Dynam. Systems}
+\textbf{10} (1990), 395--406.
+
+\bibitem{senge-straus} H.~G.~Senge and E.~G.~Straus, PV-numbers and
+sets of multiplicity, \emph{Period. Math. Hungar.} \textbf{3} (1973),
+93--100.
+
+\bibitem{stewart} C.~L.~Stewart, On the representation of an integer
+in two different bases, \emph{J. reine angew. Math.} \textbf{319}
+(1980), 63--72.
+
+\bibitem{tao} T.~Tao, Almost all orbits of the Collatz map attain
+almost bounded values, \emph{Forum of Mathematics, Pi} \textbf{10}
+(2022), e12.
+
+\bibitem{terras} R.~Terras, A stopping time problem on the positive
+integers, \emph{Acta Arithmetica} \textbf{30} (1976), 241--252.
+
+\end{thebibliography}
+
+\end{document}

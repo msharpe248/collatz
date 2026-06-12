@@ -19,6 +19,15 @@ integer certificates. See [paper/klbound.pdf](paper/klbound.pdf) (guide:
 [paper/klbound_guide.pdf](paper/klbound_guide.pdf)) and
 [analysis/KL_RECORD.md](analysis/KL_RECORD.md).
 
+A third paper develops the reduction layer: **the 3-adic shadow** — a
+divergent Collatz orbit is exactly an integer that compresses its own
+base-3 digit stream by ≈ 4.5%, at every scale, forever; all core
+theorems machine-verified, plus the experimental discoveries
+(cross-scale rigidity, Sturmian clustering). See
+[paper/shadow.pdf](paper/shadow.pdf) (guide:
+[paper/shadow_guide.pdf](paper/shadow_guide.pdf)) and
+[lean/Collatz/Shadow.lean](lean/Collatz/Shadow.lean).
+
 ## The conjecture
 
 For any positive integer n: halve it if even, replace it by 3n+1 if odd.

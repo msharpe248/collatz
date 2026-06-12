@@ -1,0 +1,201 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.2in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newmdenv[backgroundcolor=blue!4,linecolor=blue!40,linewidth=1pt,
+  skipabove=8pt,skipbelow=8pt]{keyidea}
+
+\title{The 3-adic Shadow of a Collatz Orbit:\\
+       \Large A Friendly Guide}
+\author{Companion notes to ``Divergence as Sustained
+Compression''\thanks{Written in collaboration with Claude (Anthropic).
+These notes explain the ideas; the paper and the Lean files contain the
+proofs. The Collatz conjecture remains open.}}
+\date{June 12, 2026}
+
+\begin{document}
+\maketitle
+
+\section{Where we left off}
+
+The first guide in this series ended with a picture. Playing the
+Collatz game (halve if even; triple-and-add-one if odd, then halve),
+a number can escape to infinity only by keeping the share of its
+``odd'' steps above the critical $63.09\%$ forever --- and we know,
+provably, that almost every number fails to do this almost
+immediately, while no argument that examines numbers through any
+bounded lens can ever decide who succeeds. The question this paper
+asks is simple to state:
+
+\begin{center}
+\emph{Suppose a number did keep it up forever. What else would have to
+be true about it?}
+\end{center}
+
+The answer turns out to be startlingly concrete, and it lives in an
+unexpected place: not in the number's binary digits (base 2), which
+the first paper exhausted, but in its \textbf{base-3 digits}.
+
+\section{A magic cancellation}
+
+Run a number $n$ through $T$ steps of the game, of which $j$ were odd
+steps, and call the result $n_T$. There is an exact bookkeeping
+identity --- every multiplication and every carry accounted for, no
+approximations:
+\[
+2^T \cdot n_T \;=\; 3^{j} \cdot n + d,
+\]
+where the leftover term $d$ is built up step by step along the way.
+Two facts about $d$ make everything happen.
+
+First: $d$ \textbf{does not depend on $n$}. It depends only on the
+\emph{pattern} of odd and even steps --- the word of choices the orbit
+made. Two starting numbers with the same first-$T$ pattern have
+exactly the same $d$. (Patterns and starting numbers are in
+one-to-one correspondence with remainders mod $2^T$ --- that was the
+parity bijection of the first paper.)
+
+Second, the magic: look at the identity \emph{modulo} $3^j$, i.e.\
+ask only for remainders upon division by $3^j$. The term
+$3^j \cdot n$ is divisible by $3^j$ --- it vanishes --- taking the
+only mention of $n$ with it:
+\[
+n_T \;\equiv\; (\text{something built from the pattern alone})
+\pmod{3^{j}}.
+\]
+
+\begin{keyidea}
+\textbf{The shadow.} After $T$ steps, the orbit's remainder modulo
+$3^j$ --- its ``base-3 shadow'' --- is completely determined by the
+odd/even pattern. The starting number has no say. (Verified
+mechanically across twenty thousand random starts: no exceptions, as
+the theorem demands.)
+\end{keyidea}
+
+\section{Minting coins with a small ledger}
+
+Now count, because the two sides of this equation are counted in
+different currencies.
+
+\emph{How many shadows could there be?} The shadow lives among the
+remainders modulo $3^j$, and there are $3^j$ of those. For a
+surviving orbit, $j$ is locked to about $63.09\%$ of $T$ by the
+critical-line results --- and here sits the coincidence that powers
+the whole paper. Measured in bits, $3^j$ amounts to
+$j \cdot \log_2 3 \approx 0.6309 \times 1.585 \times T$ bits, and
+\[
+0.6309\ldots \times 1.585\ldots = 1 \quad \text{exactly.}
+\]
+A surviving orbit mints \textbf{exactly one bit of base-3 information
+per step}. Not approximately --- the two famous constants of this
+problem multiply to precisely $1$.
+
+\emph{How many patterns could be doing the minting?} Patterns with
+$63\%$ odd steps are rare: coin-flip counting (Pascal's triangle
+again) says there are only about $2^{0.95\,T}$ of them ---
+$0.95$ bits per step of pattern.
+
+So the mint produces $1.00$ bits per step of base-3 currency, printed
+from a ledger containing only $0.95$ bits per step of instructions.
+The currency must be \emph{redundant}: out of the $3^j$ possible
+shadows, surviving orbits can only ever land on an exponentially tiny
+fraction --- about $2^{-0.045\,T}$ of them. At a window of just $18$
+steps this is already visible by brute force: surviving orbits hit
+only $2.17\%$ of the available remainders modulo $3^{12}$.
+
+\begin{keyidea}
+\textbf{The reduction.} A number that escapes to infinity must emit
+base-3 digits that are about $4.5\%$ compressible --- carrying
+provably less information than their length --- at every scale, by
+consistent amounts, forever. ``Divergence'' and ``a number that
+out-compresses its own arithmetic'' are the same thing.
+\end{keyidea}
+
+Both halves of this are now machine-verified theorems: the density
+floor (escapees are pinned to the critical $63.09\%$, where the mint
+runs at exactly $1$ bit per step) and the confinement count (the
+shadow set is small, with --- pleasingly --- the \emph{same} constants
+$17/27$ and $3^T$ that ran the ``almost all numbers fall'' theorem in
+the first paper; the base-2 and base-3 mirrors are one phenomenon).
+
+\section{The ledger has a grammar: scales talk to each other}
+
+The leftover term $d$ obeys a beautiful composition rule. If you run
+a window of length $S$ and then a window of length $T$, with patterns
+$w_1$ and $w_2$,
+\[
+d(w_1 w_2) \;=\; 3^{j_2}\, d(w_1) \;+\; 2^{S}\, d(w_2):
+\]
+the second window's base-3 weight scales the first ledger entry, the
+first window's base-2 length scales the second. (Readers who know some
+dynamics will recognize a skew product of the doubling and tripling
+worlds; everyone else can read it as: \emph{the books at different
+scales are not independent --- they're nested}.)
+
+The experiments confirm this with force. At a window of $18$ steps,
+knowing an orbit's full-window shadow pins down its half-window shadow
+almost uniquely (about $1.09$ candidates on average, out of hundreds
+possible). A diverging number wouldn't just need a compressible shadow
+at each scale separately --- it would need all its shadows, at all
+scales, to \emph{cohere} through this grammar. That consistency
+requirement is a constraint nobody has ever exploited, and it is the
+paper's first recommendation for future attack.
+
+One more experimental finding sharpens the hunt. The slowest possible
+escapees --- those hugging the critical line --- are forced into
+extremely regular patterns (so-called Sturmian words, the most orderly
+aperiodic sequences there are). Feeding such patterns through the
+shadow map, they cluster dramatically: $400$ of them produced only
+$167$ distinct shadows, where $400$ random patterns of the same
+density produced $400$. The most dangerous escape routes live in the
+\emph{thinnest} part of the base-3 world --- precisely where
+arithmetic has the most leverage to forbid them.
+
+\section{So is it solved?}
+
+No --- and the paper is explicit about what stands in the way. The
+remaining statement has a familiar shape: it asks, in essence, whether
+a whole number's base-2 behavior and base-3 behavior can conspire ---
+whether an integer can have such special joint structure in the two
+bases that it sustains the compression. Mathematics has a famous
+circle of problems about exactly this (``$\times 2$, $\times 3$''
+problems, after Furstenberg), and they are notoriously hard: even the
+innocent-sounding claim \emph{``the binary digits of $3^k$ look
+random''} is open. Two of our own earlier results explain why no
+shortcut exists: every finite behavior really occurs (so the
+compressed shadow sets are never empty --- counting alone cannot
+finish), and no bounded-memory argument can decide who inhabits them.
+
+What the paper contributes is the conversion. Before: ``prove no
+number escapes,'' a problem with no agreed-upon shape. After: a
+single quantitative statement --- \emph{no integer compresses its own
+base-3 digit stream by $4.5\%$ at every scale consistently forever}
+--- with machine-checked constants, a numeric gap between $0.95$ and
+$1.00$ that does not depend on any estimate being sharp, three
+identified levers (cross-scale consistency, structured-pattern
+exclusion, and the ergodic question for the rigidity specialists), and
+an honest map of which lever sits in known-hard territory.
+
+\section{Summary in four sentences}
+
+An exact identity makes an orbit's remainder modulo $3^j$ a function
+of its odd/even pattern alone --- the starting number cancels out.
+Escaping numbers are pinned to the critical density, where they mint
+exactly one bit of base-3 information per step from patterns worth
+only $0.95$ bits per step --- so their base-3 digits must be
+compressible by about $4.5\%$, at every scale, forever, and the
+shadows at different scales are locked together by an exact
+composition law. All of this is machine-verified; the experiments show
+the true compression is even stronger, the scales nearly determine
+each other, and the most regular escape patterns cluster in the
+thinnest shadow sets. The Collatz conjecture remains open --- but its
+divergence half now has a precise shape: it asks whether an integer
+can beat the entropy of its own arithmetic.
+
+\end{document}
