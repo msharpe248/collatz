@@ -236,3 +236,65 @@ just re-encode the difficulty. Worth one feasibility week, not more.
    almost verbatim.
 5. **#3 (rigidity reduction)** — the deep bet; do the literature pass
    first.
+
+## NEW CANDIDATES (2026-06-12, deep-think round 2)
+
+**The calibration filter (methodological, applied immediately):** any
+candidate Collatz-resolving principle MUST distinguish 3x+1 from 5x+1
+(divergence believed to EXIST; verified: orbit of 7 at 2^290 after
+2000 steps, density 0.49) and from 3x−1 (extra cycles exist). Applying
+it killed the naive form of Question R: a divergent 5x+1 orbit
+sustains ~16% 5-adic compression with sub-dimensional marginal
+(1/(0.5·log₂5) = 0.86), so "integer orbits force full-dim p-adic
+marginals" is conjecturally FALSE in general. The 3x+1-specific
+content: divergence there requires an ATYPICAL density (singular,
+entropy-deficient base measure); 5x+1 diverges at the generic
+full-entropy density. Question R restated in shadow.tex accordingly.
+Every future candidate gets this filter first.
+
+**N1. Word-complexity exclusion ladder (next theorem target).**
+Divergent parity words, by complexity class: eventually periodic =
+rational cycles (DEAD, formal). Next rung: AUTOMATIC words — via
+Christol/Mahler, the 2-adic realization of an automatic non-periodic
+word is a Mahler-type number; integrality of the orbit should be
+refutable. Then morphic/Sturmian (links to #1 and the shadow
+clustering). Each rung is a publishable theorem: "no divergent orbit
+has a k-automatic parity word." Passes the calibration filter: the
+5x+1 divergent words are (conjecturally) normal/maximal-complexity, so
+excluding LOW-complexity words is consistent with 5x+1 divergence.
+
+**N2. The budget-edge consistency equation.** For T > log₂ n the value
+n_T is FULLY determined by the word (n_T < 3^j makes the shadow exact,
+not just a residue); for T ≪ log₂ n the future is unconstrained
+(parity bijection). All action is at T ≈ log₂ n where partial value
+information exists. The self-referential equation: future word =
+ParityWord(reduce_2(reduce_3(2^(−T)d(past word)))) — the ×2×3 mixing
+point made explicit. Quantify "partial determination" at the edge;
+this is where cross-scale rigidity (measured: 1.09 prefixes/full)
+becomes an arithmetic constraint on a single orbit.
+
+**N3. Exponential sums on the explicit correction.** Closed form
+d(w) = Σ_{i: w_i=1} 2^i·3^(#ones after i) — a binary-ternary mixed
+sum. Study S(c) = Σ_w e(c·d(w)/3^j) over supercritical words (cocycle
+gives recursive structure). Would quantify true shadow entropy (the
+measured 0.75 vs 0.80 collision gap) and the cluster structure.
+Self-contained analytic-NT mini-program. Also: add the closed form to
+Shadow.lean.
+
+**N4. Thin-set absorption (conditional, with known obstruction).**
+Non-reachers = union of floor-restricted backward trees rooted at the
+never-descenders we count (divergent_window_bound: ≤ 2^0.955k per
+window). IF floor-restricted backward trees admitted an unconditional
+upper bound (x/m)^γ̄ with γ̄ < 1, then #non-reachers(x) ≤
+x^max(γ̄, 0.9554) — near-density-one counting, smashing x^0.895.
+OBSTRUCTION (worked out): no such unconditional γ̄ < 1 exists for
+general roots (tree(1) conjecturally has exponent 1); the bound would
+need to USE the root's never-descending property (shadow constraints
+propagate up the tree?). Parked as a conditional statement with a
+precisely-located missing lemma.
+
+**Engineering backlog:** k=18+ record (C kernel/GPU); full KL Thm 2.2
+formalization (advanced terms); 1/50-grid formalization (γ=0.64
+machine-verified); k-gram no-go; 3-state CEGIS; quantitative no-go;
+natural-density packaging; Eliahou-style formal cycle pushes; 3n−1/5n+1
+pipeline ports (now doubly motivated by the calibration filter).
