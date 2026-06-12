@@ -81,6 +81,33 @@ Runtimes on a laptop: seconds (k ≤ 11), ~1 min (k = 13), ~5 min
 Certificate vectors are regenerated deterministically; the exact
 verification pass is independent of how the vector was found.
 
+## Independent re-verification (2026-06-11, late)
+
+Every certificate was re-verified by a clean-room second implementation
+(`kl_verify_independent.py`): Python standard library only (no numpy,
+no shared code), constraint system re-derived from KL §2 displays
+(2.8)–(2.14) with the congruence bookkeeping asserted, coefficient
+lower bounds by a different scheme (denominator 10^21 + binary search,
+vs 2^64 + unit adjustment), plain per-class loop (no vectorization).
+Certificates travel as canonical artifacts (`kl_export_certificate.py`:
+raw little-endian int64 + sha256 sidecar). Results:
+
+| k  | artifact sha256 (prefix) | constraints | verdict |
+|----|--------------------------|------------:|---------|
+| 12 | 0ce746ca96d585a6 |    177,147 | PASS (C^max 146.80, matches) |
+| 13 | 99cba822ee295701 |    531,441 | PASS (223.52, matches) |
+| 14 | 735b0d0144e3e36e |  1,594,323 | PASS (339.08, matches) |
+| 15 | f6eee6dc2cf4bebb |  4,782,969 | PASS (516.05, matches) |
+| 16 | 5355e02fc12f2700 | 14,348,907 | PASS (781.90, matches) |
+| 17 | 423789e6b195019e | 43,046,721 | PASS (1185.68, matches) |
+
+Structural cross-checks: the three cases mod 9 each contain exactly
+3^(k-2) classes at every level (asserted exhaustive). Negative control:
+corrupting a single entry of the k=12 artifact (+5% at one class) is
+detected as exactly 1 violation, exit code 1 — the verifier has
+discriminating power. The k=12 sample artifact ships in
+`analysis/certs/`; larger ones regenerate deterministically.
+
 ## Paper
 
 Written up as `paper/klbound.tex` / `klbound.pdf`: "An Improved Lower

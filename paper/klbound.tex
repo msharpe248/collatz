@@ -362,28 +362,38 @@ $k \approx 20$ of a GPU implementation. The bottleneck is not the
 certification (linear scan) but the iteration count near the
 feasibility threshold, which warm starts mitigate.
 
-Two remarks on reliability. First, everything rests on
+Three remarks on reliability. First, everything rests on
 Theorem~\ref{thm:kl}, which is published and peer-reviewed; we add no
 asymptotic analysis of our own, and the new content of this paper is
 checkable by a referee in exact arithmetic from the certificate files.
-Second, the verification procedure is small (under a hundred lines,
-independent of the search code) and is itself a candidate for
-formalization: the certificate check is a finite integer computation
-of precisely the kind proof assistants discharge by reflection, and
-formalizing Theorem~\ref{thm:kl} --- an induction over difference
-inequalities --- would make the exponent the first machine-verified
-density bound for the $3x+1$ problem. The companion repository
-contains a Lean~4 formalization of related results (Terras' theorem in
-finite form among them) where the required infrastructure already
-exists \cite{companion}.
+Second, each certificate was checked by \emph{two independently
+written verifiers}: the original, and a clean-room re-implementation
+using only the language's standard library (no shared code, no
+numerical libraries), with the constraint system re-derived from
+\cite[\S2]{kl}, a different rational bounding scheme for the
+coefficients (denominator $10^{21}$ versus $2^{64}$, binary search
+versus unit adjustment), and explicit assertions of the congruence
+bookkeeping; both verifiers also detect a single corrupted entry
+(negative control). Third, the verification procedure is small (under
+a hundred lines) and is itself a candidate for formalization: the
+certificate check is a finite integer computation of precisely the
+kind proof assistants discharge by reflection, and formalizing
+Theorem~\ref{thm:kl} --- an induction over difference inequalities ---
+would make the exponent the first machine-verified density bound for
+the $3x+1$ problem. The companion repository contains a Lean~4
+formalization of related results (Terras' theorem in finite form among
+them) where the required infrastructure already exists
+\cite{companion}.
 
 \subsection*{Reproducibility}
-The search engine, the one-shot driver, the exact verifier, and
-instructions are in the repository accompanying this paper
-(\code{analysis/kl\_exponent.py}, \code{kl\_oneshot.py},
-\code{kl\_certificate.py}); all runs are deterministic. Finding the
-$k = 17$ certificate takes under an hour on a laptop; verifying it
-exactly takes minutes.
+The search engine, the one-shot driver, both exact verifiers, the
+certificate export format (raw little-endian integers with a hashed
+sidecar), and instructions are in the repository accompanying this
+paper (\code{analysis/kl\_exponent.py}, \code{kl\_oneshot.py},
+\code{kl\_certificate.py}, \code{kl\_export\_certificate.py},
+\code{kl\_verify\_independent.py}); all runs are deterministic.
+Finding the $k = 17$ certificate takes under an hour on a laptop;
+verifying it exactly takes minutes per verifier.
 
 \subsection*{Acknowledgments}
 The computations, the certification scheme, and this text were

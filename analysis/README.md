@@ -14,6 +14,8 @@ reproducible byte-for-byte.
 | `itinerary_inverse.py` | the inverse-itinerary telescope: computes the unique 2-adic realization of ANY prescribed parity word mod 2^k (the k→∞ parity bijection run backward); cross-checks the rational cycle spectrum and tests structured aperiodic itineraries for integer realizations | — |
 | `kl_exponent.py` | scales the Krasikov–Lagarias lower-bound program: power-iteration feasibility for their LP L_k^NT(λ) (monotone homogeneous fixed point — no LP solver), validated against their Table 2 to 7 decimals, then pushed k = 12..17 | KL_RECORD.md |
 | `kl_certificate.py` | exact rational certification: λ = 2^(p/q), coefficient lower bounds by integer power comparison, every constraint checked in exact integer arithmetic — turns a float certificate into a referee-checkable proof per KL Thm 2.2 | KL_RECORD.md |
+| `kl_export_certificate.py` | exports canonical certificate artifacts (raw little-endian int64 + sha256 sidecar); sample k=12 artifact ships in `certs/` | KL_RECORD.md |
+| `kl_verify_independent.py` | clean-room second verifier: stdlib only, constraint system re-derived from KL §2, different coefficient bounding (10^21 + binary search), congruences asserted; passes all six levels, detects single-entry corruption | KL_RECORD.md |
 | `IDEAS.md` | running research log: findings, the three killers, open directions | — |
 | `NOVEL_APPROACHES.md` | cross-field attack plans: forbidden itineraries (words + p-adic Mahler), Krasikov–Lagarias exponent record, ×2×3 rigidity reduction, proof-theoretic lower bounds, the 3n−1 control experiment | — |
 
