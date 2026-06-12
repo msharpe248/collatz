@@ -121,8 +121,29 @@ The first machine-verified density lower bound for the 3x+1 problem:
 
 (The full Krasikov–Lagarias program reaches x^0.895 informally — see
 [paper/klbound.pdf](paper/klbound.pdf); this formalizes its integer-grid
-weakening end-to-end. Larger moduli and finer grids are mechanical
-extensions of the same pipeline.)
+weakening end-to-end.)
+
+### A density exponent above the critical line ([lean/Collatz/Krasikov50.lean](lean/Collatz/Krasikov50.lean))
+
+The 1/50-grid refinement of the same pipeline, at modulus 3^8: a
+machine-verified exponent **above** the critical odd-step density
+log 2/log 3 = 0.63093…
+
+| Theorem | Statement |
+|---|---|
+| `cap_quad` / `cap_shift1` / `cap_shift21` | The interleaved-geometric cap sequence cap(t) = 2^(t/50)·r[t mod 50] doubles exactly every 50 grid steps, and grows fast enough that the difference-inequality branches retard by only 21/50 resp. 1/50 of a doubling (kernel-checked table conditions; the key margin is 2^(21/50) = 1.3382 > 4/3) |
+| `phi50_rec_two/five/eight` | Krasikov's difference inequalities on the 1/50 grid |
+| `K8.cert_ok` | A 2187-class integer certificate for modulus 3^8 at rational rate μ = 1261/1250 per grid step, kernel-verified by chunked `decide` |
+| `K8.wit_ok` | Every class m ≡ 2 (mod 3) of modulus 3^8 contains a small root a = m + 6561q (q ∈ {0,1}) whose Terras orbit reaches 8 in ≤ 146 steps — kernel-evaluated orbits, all 2187 of them |
+| `K8.density_bound` | **#{n ≤ 80000·2^y reaching 1} = Ω((1261/1250)^(50y)) = Ω(x^γ), γ = 50·log₂(1261/1250) = 0.63201… > 0.63093… = log 2/log 3** |
+
+The exponent crosses the critical line: the verified count of integers
+reaching 1 grows strictly faster than x^(log 2/log 3), the density at
+which the divergence question lives. (Krasikov 1989 proves x^0.43 on
+paper; this is the first kernel-checked bound, and it exceeds every
+published bound before Applegate–Lagarias 1995.) Every certificate
+condition is a pure integer inequality — no roots, no real numbers —
+decided over the 2187 residue classes in chunks of 243.
 
 ### The 3-adic shadow ([lean/Collatz/Shadow.lean](lean/Collatz/Shadow.lean))
 
@@ -192,7 +213,8 @@ collatz/
 │       ├── Parity.lean   # Terras' parity bijection and the binomial law
 │       ├── Terras.lean   # Terras' theorem: almost all n descend (finite form)
 │       ├── Critical.lean # the density dichotomy is sharp at log2/log3
-│       ├── Krasikov.lean # machine-verified density exponent x^0.4543
+│       ├── Krasikov.lean   # machine-verified density exponent x^0.4543
+│       ├── Krasikov50.lean # 1/50-grid: exponent x^0.63201, above critical
 │       ├── Shadow.lean   # the 3-adic shadow: divergence = compression
 │       └── Ladder.lean   # word-complexity ladder: rung zero + d(w) closed form
 ├── analysis/
