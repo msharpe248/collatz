@@ -21,6 +21,65 @@ orbits); only the converse is a theorem (eventually periodic ⟹ rational,
 by solving the affine fixed-point equation). Every classification of
 which structured words can realize rationals is therefore new territory.
 
+## 0. THE 3-ADIC SHADOW PROGRAM (2026-06-12 — the flagship)
+
+**The reduction, in one line:** a divergent Collatz orbit must compress
+its own base-3 digit stream by ~5%, forever — and that statement is
+quantitative, finite at every scale, and sits in recognized deep water
+(joint ×2/×3 rigidity) with an explicit numeric gap.
+
+**Mechanism (verified numerically, machinery already in Lean):**
+- The exact master identity 2^T·n_T = 3^j·n₀ + d(w) has d depending
+  only on the parity word w (the dcoef recursion). Reduce mod 3^j: the
+  n₀ term dies — **n_T mod 3^j is an explicit function of the word
+  alone** (verified: 20k random starts, no collisions).
+- A surviving/divergent window has supercritical words: at most
+  Σ_{j≥0.631T} C(T,j) ≈ 2^(0.95T) of them. But 3^j ≈ 2^(1.0003T)
+  classes exist (note δ·log₂3 = 1 EXACTLY at δ = critical — the gap
+  1 − H(0.6309) ≈ 0.05 is the entropy deficit).
+- So surviving orbits are confined to an exponentially thin explicit
+  subset of Z/3^j: measured 2.17% at T=18 (j=12), ratio ~2^(−0.05T).
+- Divergent orbits genuinely have liminf parity density ≥ log2/log3
+  (per-step multiplicative accounting once n_t are all large — NOT a
+  consequence of the master inequalities, a separate provable lemma).
+
+**Why this unifies everything we have:** the parity bijection supplies
+w ↦ 3-adic shadow; the dichotomy caps word entropy; NoGo explains why
+pointwise counting cannot finish (the thin sets are inhabited —
+critical_adversary lives there); the three killers said base-2-only and
+base-3-only statistics die — this is the genuinely joint object. Even
+steps consume 2-adic digits; odd steps produce 3-adic digits; the
+conjecture is the assertion that the production cannot run entropy-
+deficient forever.
+
+**Phase 1 (formalizable next, both new theorems):**
+- (a) 3-adic confinement, finite form — the exact mirror of
+  Terras.lean: #{reachable n_T mod 3^j over supercritical words}
+  ≤ binomial tail ≪ 3^j. Needs the dcoef identity in Lean (the
+  recursion is already designed) + Parity.lean realization.
+- (b) divergence ⇒ liminf density ≥ log2/log3 (threshold accounting).
+
+**Phase 2:** the reduction statement, stated cleanly: Collatz
+divergence ⟺ an integer orbit whose 3-adic digit stream admits a
+sustained ≥(1−H(0.631))≈5% compression. Ergodic form: the skew product
+on ℤ₂×ℤ₃ (base = parity shift, fiber contracted by |3|₃ on odd steps)
+has fiber Lyapunov exponent −δ·log₂3 ≤ −1 vs base entropy H(δ) ≤ 0.95:
+limit measures of divergent orbits have 3-adic marginal of dimension
+≤ 0.95. Missing rigidity statement R: integer-orbit limit measures
+must have full-dimensional 3-adic marginal. R ⟹ no divergence.
+
+**Phase 3 (attack fronts on the compression statement):**
+- structured words: eventually periodic = rational cycles (dead);
+  Sturmian/substitutive = the forbidden-itineraries program (#1 below)
+  attacks the SAME target from the word side;
+- counting/arithmetic: study the explicit map w ↦ 2^(−T)·d(w) mod 3^j
+  on supercritical words — equidistribution properties of d(w) would
+  quantify how the thin sets sit, and consistency-across-scales for a
+  single orbit is an unexplored constraint;
+- the known wall, honestly: full R is joint-normality-type
+  (Furstenberg-adjacent; cf. popcount(3^j) open). The contribution is
+  converting Collatz INTO that single statement with a numeric gap.
+
 ## 1. Forbidden itineraries (combinatorics on words + p-adic Mahler method)
 
 **Claim to attack:** no Sturmian word (any irrational slope) is the
