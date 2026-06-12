@@ -368,24 +368,38 @@ $H(\delta)/(\delta \log_2 3) \le 0.95 < 1$.
 
 \begin{question}[the missing rigidity]\label{q:R}
 Must the $\Zthree$-marginal of any weak-$*$ limit of empirical
-measures of a divergent \emph{integer} orbit have full dimension?
+measures of a divergent \emph{integer} orbit --- a limit whose
+\emph{base marginal is necessarily singular}, with parity density
+pinned to the supercritical value $\log 2/\log 3$ and entropy at most
+$0.95 < 1$ --- have full dimension?
 \end{question}
 
-An affirmative answer excludes divergent orbits. The question sits
-squarely in the joint $\times 2$/$\times 3$ tradition of Furstenberg
-\cite{furstenberg} and Rudolph--Johnson \cite{rudolph}: the integers'
-base-$2$ and base-$3$ structures are expected to be ``independent,''
-and Question~\ref{q:R} asks for one quantitative consequence. We
-emphasize the calibration: nothing weaker than dimension
-$> 0.9554$ is needed, and the bound $0.95$ from the dynamics leaves a
-genuine, fixed gap. We also emphasize honesty about difficulty: even
-the much weaker assertion that the binary digits of $3^k$ are not
-eventually structured (e.g.\ popcount growth) is open
-\cite{senge-straus, stewart}; Question~\ref{q:R} is of that family.
-By the no-go theorem of \cite{companion}, no bounded-information
-argument resolves it; by \code{parity\_pattern\_realized}, the
-compressed shadow sets are inhabited at every finite scale, so no
-counting argument alone can either.
+An affirmative answer excludes divergent orbits. We stress that the
+singular-base clause is not decoration but the entire content, as a
+calibration against the $5x+1$ map shows. For $5x+1$ the critical
+density is $\log 2/\log 5 = 0.4307$, \emph{below} the generic $0.5$;
+orbits are expected to diverge (the orbit of $7$ famously appears to,
+at measured density $\approx 0.49$), and the analogous shadow
+machinery applies verbatim: such an orbit sustains an indefinite
+$\approx 16\%$ ``compression'' of its $5$-adic stream, with a limit
+measure whose $5$-adic marginal has dimension
+$\le 1/(0.5 \log_2 5) = 0.86 < 1$. Sustained $p$-adic compression of
+an integer orbit is therefore \emph{not} impossible in general; the
+naive analogue of Question~\ref{q:R} for $5x+1$ is conjecturally
+false. The distinguishing feature of $3x+1$ is that its divergence
+requires an \emph{atypical} parity density --- a base measure of
+deficient entropy --- where $5x+1$ diverges at the generic,
+full-entropy density. Any principle that resolves Collatz must
+exploit this singularity of the base, and Question~\ref{q:R} is posed
+accordingly. The question sits in the joint $\times 2/\times 3$
+tradition of Furstenberg \cite{furstenberg} and Rudolph--Johnson
+\cite{rudolph}; we note honestly that even far weaker joint-structure
+assertions (the binary digits of $3^k$, say) are open
+\cite{senge-straus, stewart}. By the no-go theorem of
+\cite{companion}, no bounded-information argument resolves it; by
+\code{parity\_pattern\_realized}, the compressed shadow sets are
+inhabited at every finite scale, so no counting argument alone can
+either.
 
 \section{Experiments}\label{sec:experiments}
 
