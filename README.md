@@ -136,6 +136,14 @@ The reduction layer: divergence as sustained 3-adic compression.
 | `density_floor` | Orbits with values ≥ N survive only at density ≥ log 2/log((3N+1)/N) → log 2/log 3: divergent orbits are pinned to the critical density |
 | `shadow_compression` / `surviving_shadow_mem` | Survivors' 3-adic residues are confined to ≤ 3^T/2^(17(T−1)/27) ≈ 2^(0.955T) values inside fibers of > 2^(T−1) classes — a sustained ≈ 4.5% compression of the 3-adic digit stream, with the same constants as the 2-adic Terras theorem |
 
+### The word-complexity ladder ([lean/Collatz/Ladder.lean](lean/Collatz/Ladder.lean))
+
+| Theorem | Statement |
+|---|---|
+| `eq_of_itinerary_eq` | Integers with identical full parity itineraries are equal (the infinite-precision parity bijection) |
+| `divergent_itinerary_aperiodic` | **Rung zero**: a divergent orbit's itinerary is never eventually periodic — periodic itineraries belong only to bounded orbits |
+| `dcoef_closed` | The closed form d(w) = Σ_{w_i=1} 2^i·3^(#ones after i) — the engine of the Mahler-method attack on the automatic rung |
+
 ### The critical line ([lean/Collatz/Critical.lean](lean/Collatz/Critical.lean))
 
 The density dichotomy is **sharp**:
@@ -185,7 +193,8 @@ collatz/
 │       ├── Terras.lean   # Terras' theorem: almost all n descend (finite form)
 │       ├── Critical.lean # the density dichotomy is sharp at log2/log3
 │       ├── Krasikov.lean # machine-verified density exponent x^0.4543
-│       └── Shadow.lean   # the 3-adic shadow: divergence = compression
+│       ├── Shadow.lean   # the 3-adic shadow: divergence = compression
+│       └── Ladder.lean   # word-complexity ladder: rung zero + d(w) closed form
 ├── analysis/
 │   ├── certificate_search.py    # LP/max-mean-cycle search that motivated NoGo
 │   ├── automaton_potentials.py  # digit-automaton potentials (evade the no-go)

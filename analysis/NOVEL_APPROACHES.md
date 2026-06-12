@@ -252,16 +252,30 @@ entropy-deficient base measure); 5x+1 diverges at the generic
 full-entropy density. Question R restated in shadow.tex accordingly.
 Every future candidate gets this filter first.
 
-**N1. Word-complexity exclusion ladder (next theorem target).**
-Divergent parity words, by complexity class: eventually periodic =
-rational cycles (DEAD, formal). Next rung: AUTOMATIC words — via
-Christol/Mahler, the 2-adic realization of an automatic non-periodic
-word is a Mahler-type number; integrality of the orbit should be
-refutable. Then morphic/Sturmian (links to #1 and the shadow
-clustering). Each rung is a publishable theorem: "no divergent orbit
-has a k-automatic parity word." Passes the calibration filter: the
-5x+1 divergent words are (conjecturally) normal/maximal-complexity, so
-excluding LOW-complexity words is consistent with 5x+1 divergence.
+**N1. Word-complexity exclusion ladder — RUNG ZERO FORMAL (2026-06-12).**
+lean/Collatz/Ladder.lean (axiom-free):
+- eq_of_itinerary_eq: integers with identical full itineraries are
+  EQUAL (infinite-precision parity bijection);
+- orbit_eq_of_periodic_itinerary + bounded_of_orbit_periodic +
+  divergent_itinerary_aperiodic: a divergent orbit's itinerary is NOT
+  eventually periodic (rung zero — eventually periodic itineraries
+  belong only to bounded orbits);
+- dcoef_closed: d(w) = Σ_{w_i=1} 2^i·3^(#ones after i) — the closed
+  form behind the realization series x(w) = −Σ 2^i 3^(−(1+#ones<i)).
+
+AUTOMATIC RUNG machinery (mahler_experiments.py, verified exactly):
+for a constant-length-L substitution with a ones in every block
+(example σ: 1→110, 0→011: L=3, a=2, d(σ0)=10, d(σ1)=5),
+  d(σ(w)) = Σ_i (2^L)^i·(3^a)^(T−1−i)·d(σ(w_i))   [exact, 200 words]
+— so the realization of the fixed point satisfies a Mahler-type
+functional equation chaining the weight tower (2,3) → (2^L,3^a) →
+(2^{L²},3^{a²}) → …  THE REMAINING RESEARCH CORE: show the chained
+relations are incompatible with x ∈ ℕ (classical Mahler style: height/
+growth along the tower). Aperiodic automatic realizations look generic
+(random digit tails at K=600; periodic control recovers −5 exactly);
+automatic shadows cluster even harder than Sturmian (117/300 vs
+300/300 random at T=40). Passes the calibration filter (5x+1 divergent
+words are conjecturally maximal-complexity).
 
 **N2. The budget-edge consistency equation.** For T > log₂ n the value
 n_T is FULLY determined by the word (n_T < 3^j makes the shadow exact,
