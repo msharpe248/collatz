@@ -269,13 +269,27 @@ for a constant-length-L substitution with a ones in every block
   d(σ(w)) = Σ_i (2^L)^i·(3^a)^(T−1−i)·d(σ(w_i))   [exact, 200 words]
 — so the realization of the fixed point satisfies a Mahler-type
 functional equation chaining the weight tower (2,3) → (2^L,3^a) →
-(2^{L²},3^{a²}) → …  THE REMAINING RESEARCH CORE: show the chained
-relations are incompatible with x ∈ ℕ (classical Mahler style: height/
-growth along the tower). Aperiodic automatic realizations look generic
+(2^{L²},3^{a²}) → …  Aperiodic automatic realizations look generic
 (random digit tails at K=600; periodic control recovers −5 exactly);
 automatic shadows cluster even harder than Sturmian (117/300 vs
 300/300 random at T=40). Passes the calibration filter (5x+1 divergent
 words are conjecturally maximal-complexity).
+
+RUNG-1 ATTACK DOCUMENTED (2026-06-12, analysis/RUNG1_ATTACK.md). The
+tower collapses to ONE classical Mahler equation: F(z) = Σ w_i z^i
+satisfies F(z) = (z+z²)/(1−z³) + (1−z²)F(z³) (exact to deg 900), and
+x(w) = −10 + (5/9)·F₂(8/9) — the 2-adic evaluation at the rational
+point 8/9, |8/9|₂ = 1/8 (verified mod 2^600). So rung 1 for this word
+= IRRATIONALITY of one 2-adic Mahler value (not transcendence).
+Verified dead end: truncation approximations have Liouville exponent
+3log2/(2log3) = 0.9464 < 1 — the naive route provably cannot conclude;
+real and 2-adic sums are different numbers, so no product-formula
+shortcut. THE WORK ITEM: a 2-adic transposition of Mahler's
+auxiliary-polynomial method (Nishioka LNM 1631 Ch. 1–2) or a citable
+p-adic Mahler irrationality theorem (Bundschuh–Väänänen circle;
+Adamczewski–Faverjon p-adic analogue is the sharpest open form).
+Supercritical band ⟺ z = 2^L/3^a < 1 at BOTH places (double
+convergence automatic exactly for the dangerous densities).
 
 **N2. The budget-edge consistency equation.** For T > log₂ n the value
 n_T is FULLY determined by the word (n_T < 3^j makes the shadow exact,
@@ -308,7 +322,19 @@ propagate up the tree?). Parked as a conditional statement with a
 precisely-located missing lemma.
 
 **Engineering backlog:** k=18+ record (C kernel/GPU); full KL Thm 2.2
-formalization (advanced terms); 1/50-grid formalization (γ=0.64
-machine-verified); k-gram no-go; 3-state CEGIS; quantitative no-go;
-natural-density packaging; Eliahou-style formal cycle pushes; 3n−1/5n+1
-pipeline ports (now doubly motivated by the calibration filter).
+formalization (advanced terms); k-gram no-go; 3-state CEGIS;
+quantitative no-go; natural-density packaging; Eliahou-style formal
+cycle pushes; 3n−1/5n+1 pipeline ports (now doubly motivated by the
+calibration filter).
+
+**1/50-GRID FORMALIZATION — DONE (2026-06-12).**
+lean/Collatz/Krasikov50.lean: K8.density_bound, machine-verified
+#{n ≤ 80000·2^y reaching 1} = Ω(x^γ), γ = 50·log₂(1261/1250) =
+0.63201 > 0.63093 = log2/log3 — a kernel-checked density exponent
+ABOVE the critical line. Axioms: standard trio only. Engineering:
+interleaved-geometric caps cap(t) = 2^(t/50)·r[t%50] (cap_quad,
+cap_shift1, cap_shift21 with 2^(21/50) > 4/3); 2187-class certificate
+at rational rate μ = 1261/1250, decided in 27 chunks of 243; witness
+roots a = m + 6561q (q ≤ 1) reaching 8 in ≤ 146 Terras steps,
+kernel-evaluated (replaced 2^j primitive-root witnesses whose 2^4375
+kernel pow recursion aborted).

@@ -158,7 +158,66 @@ def exp3_shadow_clustering():
     print(f"  T={T}: {M} automatic shifts -> {len(shadows)} distinct "
           f"shadows; {M} random density-2/3 words -> {len(rnd)}")
 
+def exp4_mahler_equation_exact():
+    """The single functional equation behind the tower (RUNG1_ATTACK.md):
+
+        F(z) = (z + z^2)/(1 - z^3) + (1 - z^2) F(z^3),
+
+    for F(z) = sum w_i z^i, w the fixed point of sigma: 1->110, 0->011;
+    the 2-adic evaluation x(w) = -10 + (5/9) F_2(8/9); and the exact
+    rational tower u_k = c_k + e_k u_{k+1}."""
+    from fractions import Fraction as Q
+    print("\n== (4) the exact Mahler equation and its 2-adic evaluation ==")
+    sigma = {1: [1, 1, 0], 0: [0, 1, 1]}
+    N = 900
+    W = sub_fixed_point(sigma, 3 * N)
+
+    # (a) functional equation, coefficient-wise to degree N
+    rhs = [0] * N
+    for i in range(0, N, 3):                      # (z+z^2) * 1/(1-z^3)
+        if i + 1 < N: rhs[i + 1] += 1
+        if i + 2 < N: rhs[i + 2] += 1
+    for i in range(N // 3):                       # (1-z^2) F(z^3)
+        rhs[3 * i] += W[i]
+        if 3 * i + 2 < N: rhs[3 * i + 2] -= W[i]
+    print(f"  F(z) = (z+z^2)/(1-z^3) + (1-z^2)F(z^3) to degree {N}: "
+          f"{rhs == W[:N]}")
+
+    # (b) x(w) = -10 + (5/9) F_2(8/9), checked mod 2^600 against realize()
+    K = 600
+    M = 1 << K
+    x2 = realize(tuple(W[:K]))
+    u0 = 0
+    for i in range(K // 3 + 2):                   # term i has v_2 = 3i
+        u0 = (u0 + W[i] * pow(8, i, M) * pow(pow(9, i + 1, M), -1, M)) % M
+    ok = x2 == (-10 + 5 * u0) % M
+    print(f"  x(w) = -10 + 5*u0 in Z_2, u0 = (1/9)F_2(8/9), mod 2^{K}: {ok}")
+
+    # (c) the exact rational tower u_k = c_k + e_k u_{k+1},
+    #     (alpha,beta) = (8^(3^k), 9^(3^k)) — finite-level identities in Q
+    def u_trunc(k, terms):
+        a, b = Q(8) ** (3 ** k), Q(9) ** (3 ** k)
+        return sum(W[i] * a ** i / b ** (i + 1) for i in range(terms))
+    for k in range(2):
+        a, b = Q(8) ** (3 ** k), Q(9) ** (3 ** k)
+        n_terms = 27
+        h0 = a / b + a * a / (b * b)
+        S = sum((a ** 3 / b ** 3) ** i for i in range(n_terms))
+        exact = u_trunc(k, 3 * n_terms) == h0 * S / b + \
+            (b * b - a * a) * u_trunc(k + 1, n_terms)
+        print(f"  tower level {k} -> {k+1} finite identity exact in Q: "
+              f"{exact}")
+    c0 = Q(8) * (8 + 9) / (Q(9) ** 3 - Q(8) ** 3)
+    print(f"  c_0 = {c0} (= 136/217), e_0 = {81 - 64}")
+
+    # (d) the cheap Liouville exponent: truncation gives q_N = 9^N,
+    #     |err|_2 <= 2^(-3N) -> exponent 3 log2 / (2 log3) < 1
+    expo = 3 * math.log(2) / (2 * math.log(3))
+    print(f"  cheap approximation exponent 3log2/(2log3) = {expo:.6f} < 1: "
+          f"the naive route provably cannot conclude (see RUNG1_ATTACK.md)")
+
 if __name__ == "__main__":
     exp1_functional_equation()
     exp2_realizations()
     exp3_shadow_clustering()
+    exp4_mahler_equation_exact()
