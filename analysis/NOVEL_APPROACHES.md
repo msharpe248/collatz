@@ -49,24 +49,18 @@ bignum ops — millions of words/hour); (c) the Lean-able fragment:
 realization of (cycle word)^∞ is the cycle rational (finite version
 already in Parity.lean/Critical.lean).
 
-## 2. Krasikov–Lagarias exponent record (nonlinear programming at modern scale)
+## 2. Krasikov–Lagarias exponent record — **DONE (2026-06-11)**
 
-**The most concrete "result for the world" available.** The best known
-density lower bound for the Collatz conjecture is
-#{n ≤ x : n reaches 1} ≫ x^0.84 (Krasikov–Lagarias 2003), proved via
-difference inequalities for the backward tree indexed by residues mod
-3^k, solved as a small nonlinear program BY HAND-ERA COMPUTING (k ≤ 9).
-Modern exact LP/SDP with rational certificates can scale to mod 3^11+
-systems. Each increment of k provably tightens the exponent.
-
-**Deliverable:** a new record exponent (0.84 → ?) with machine-checkable
-rational certificates — publishable on its own, formalizable in Lean
-later (the certificate is a finite list of rationals satisfying finitely
-many inequalities: exactly the `decide`-style endgame Cycles.lean uses).
-
-**First steps:** reimplement the KL difference-inequality system at
-k = 5..9, reproduce 0.84, then scale; check whether anyone improved on
-0.84 since 2003 (literature check — I believe not, but verify).
+Pursued and landed: see `KL_RECORD.md`. The 2003 record x^0.84 (their
+k = 11 LP, 59k classes) is improved to **x^0.895** (k = 17, 43M
+classes), with exact rational certificates at every level
+(0.853, 0.863, 0.8724, 0.8812, 0.888, 0.895). The unlock: feasibility
+of their LP at fixed λ is a monotone-homogeneous-concave fixed point
+problem — certificates are vectors with F(c) ≥ c, found by power
+iteration (Collatz–Wielandt), no LP solver needed. Engine validated
+against all ten published table entries to seven decimals.
+Remaining upside: k = 18+ (compute-bound), and formalizing KL Thm 2.2
+in Lean to make it the first machine-verified density exponent.
 
 ## 3. Empirical-measure rigidity reduction (ergodic theory / ×2×3)
 
