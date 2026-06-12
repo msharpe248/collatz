@@ -380,10 +380,15 @@ certificate check is a finite integer computation of precisely the
 kind proof assistants discharge by reflection, and formalizing
 Theorem~\ref{thm:kl} --- an induction over difference inequalities ---
 would make the exponent the first machine-verified density bound for
-the $3x+1$ problem. The companion repository contains a Lean~4
-formalization of related results (Terras' theorem in finite form among
-them) where the required infrastructure already exists
-\cite{companion}.
+the $3x+1$ problem. A first step exists: the companion repository
+\cite{companion} contains a complete Lean~4 formalization of the
+integer-grid weakening of the difference-inequality method --- the
+backward-tree combinatorics, Krasikov's inequalities, and a
+kernel-verified $81$-class certificate --- yielding the machine-checked
+bound $\pi_1(x) = \Omega(x^{0.4543})$ (theorem
+\code{density\_lower\_bound}), already above every published bound
+prior to 1995. Scaling that pipeline to the present certificates is
+mechanical in principle.
 
 \subsection*{Reproducibility}
 The search engine, the one-shot driver, both exact verifiers, the

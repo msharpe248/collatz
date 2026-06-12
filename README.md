@@ -97,6 +97,22 @@ subject, formalized:
 | `no_descent_window_bound` | **Terras' theorem**: the integers in [2^k, 2^(k+1)) that don't drop below themselves within k steps number ≤ 3^k/2^(17(k−1)/27) ≈ 2^(0.955k) — a vanishing ≈ 2^(−0.045k) fraction of the window |
 | `divergent_window_bound` | Same bound for integers whose orbit *never* descends: almost every integer has finite stopping time |
 
+### The density exponent ([lean/Collatz/Krasikov.lean](lean/Collatz/Krasikov.lean))
+
+The first machine-verified density lower bound for the 3x+1 problem:
+
+| Theorem | Statement |
+|---|---|
+| `phi_rec_two/five/eight` | Krasikov's difference inequalities (integer-grid form), proved from the backward-tree combinatorics: subtree injections + disjointness via cycle-freeness above 8 |
+| `K5.cert_ok` | An 81-class integer certificate for modulus 3^5, growth rate λ = 137/100, kernel-verified by `decide` (propext only) |
+| `K5.growth` | The certificate induction: phi ≥ Δ·c_m·(137/100)^y in pure natural-number arithmetic |
+| `density_lower_bound` | **#{n ≤ 8·2^y reaching 1} ≥ 0.31·(1.37)^y** — i.e. π₁(x) = Ω(x^0.4543), exceeding every published bound before 1995 (Krasikov 1989: x^0.43) |
+
+(The full Krasikov–Lagarias program reaches x^0.895 informally — see
+[paper/klbound.pdf](paper/klbound.pdf); this formalizes its integer-grid
+weakening end-to-end. Larger moduli and finer grids are mechanical
+extensions of the same pipeline.)
+
 ### The critical line ([lean/Collatz/Critical.lean](lean/Collatz/Critical.lean))
 
 The density dichotomy is **sharp**:
@@ -144,7 +160,8 @@ collatz/
 │       ├── Cycles.lean   # Diophantine cycle bounds, no cycles ≤ 183 halvings
 │       ├── Parity.lean   # Terras' parity bijection and the binomial law
 │       ├── Terras.lean   # Terras' theorem: almost all n descend (finite form)
-│       └── Critical.lean # the density dichotomy is sharp at log2/log3
+│       ├── Critical.lean # the density dichotomy is sharp at log2/log3
+│       └── Krasikov.lean # machine-verified density exponent x^0.4543
 ├── analysis/
 │   ├── certificate_search.py    # LP/max-mean-cycle search that motivated NoGo
 │   ├── automaton_potentials.py  # digit-automaton potentials (evade the no-go)
