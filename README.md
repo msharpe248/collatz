@@ -8,13 +8,15 @@ conjecture to the critical
 odd-step density log 2/log 3, the first formalized Collatz density
 result (Terras' theorem, finite form), Diophantine cycle exclusions,
 and a systematic experimental program on what lies beyond. The full
-story is in the paper: [paper/nogo.pdf](paper/nogo.pdf).
+story is in the paper: [paper/nogo.pdf](paper/nogo.pdf), with a
+non-specialist guide at [paper/nogo_guide.pdf](paper/nogo_guide.pdf).
 
 It also contains a new unconditional result: **π_a(x) ≥ x^0.895** — the
 number of integers below x whose 3x+1 orbit contains a (any a ≢ 0
 mod 3), improving the x^0.84 record of Krasikov–Lagarias (2003) by
 scaling their own program to 43 million congruence classes with exact
-integer certificates. See [paper/klbound.pdf](paper/klbound.pdf) and
+integer certificates. See [paper/klbound.pdf](paper/klbound.pdf) (guide:
+[paper/klbound_guide.pdf](paper/klbound_guide.pdf)) and
 [analysis/KL_RECORD.md](analysis/KL_RECORD.md).
 
 ## The conjecture
