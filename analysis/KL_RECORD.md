@@ -81,6 +81,16 @@ Runtimes on a laptop: seconds (k ≤ 11), ~1 min (k = 13), ~5 min
 Certificate vectors are regenerated deterministically; the exact
 verification pass is independent of how the vector was found.
 
+## Paper
+
+Written up as `paper/klbound.tex` / `klbound.pdf`: "An Improved Lower
+Bound for the 3x+1 Problem: π_a(x) ≥ x^0.895" (June 11, 2026).
+Literature review performed before writing: KL 2003 record confirmed
+current by (i) Lagarias's 2021 overview (arXiv:2111.02635), (ii) the
+CCChallenge literature database (359 papers, June 2026), (iii) Liu's
+December 2025 preprint (arXiv:2512.13760) which states "the historical
+record is 0.84", and (iv) no citing work claiming better.
+
 ## Notes and next steps
 
 - λ_k → 2 (γ → 1) as k → ∞ is exactly the open "density one" statement

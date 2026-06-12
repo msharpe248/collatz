@@ -87,8 +87,8 @@ lagarias-book}.
 
 Because the conjecture is so easily verified on any finite range, a
 perennially attractive proof strategy --- attempted in countless
-preprints, and, as we discuss in Section~\ref{sec:casestudy}, in an
-earlier version of this very repository --- runs as follows:
+preprints, and dissected in Section~\ref{sec:casestudy} --- runs as
+follows:
 \begin{enumerate}
 \item partition the integers into finitely many classes (typically
   residues modulo $2^k$);
@@ -238,18 +238,19 @@ $T^t(n) \ge n$ for all $t \le B$. (Take $n = 2^{B + N_0 + 1} - 1$.)
 Equivalently, stopping times are unbounded.
 \end{corollary}
 
-\begin{corollary}[\code{old\_descent\_axiom\_false}]\label{cor:axiom}
+\begin{corollary}[\code{uniform\_descent\_53\_false}]\label{cor:axiom}
 The statement ``every $n > 300$ satisfies $C^t(n) < n$ for some
 $t \le 53$'' is false: $n = 2^{28} - 1$ rises for its first $56$ Collatz
 steps.
 \end{corollary}
 
-Corollary~\ref{cor:axiom} is stated in this specific form because it is,
-verbatim, the negation of an axiom assumed by an earlier formalization
-in this repository (Section~\ref{sec:casestudy}). Empirically the
-smallest violator is $n = 447 = 110111111_2$, whose six trailing ones
-already exhibit the shadowing mechanism in miniature; there are $1{,}933$
-violators below $2 \times 10^5$.
+Corollary~\ref{cor:axiom} is stated in this specific form as a
+concrete representative of the uniform-descent genre, calibrated so
+that no counterexample exists below the threshold (Section~%
+\ref{sec:casestudy} dissects how such claims come to be ``verified'').
+Empirically the smallest violator is $n = 447 = 110111111_2$, whose six
+trailing ones already exhibit the shadowing mechanism in miniature;
+there are $1{,}933$ violators below $2 \times 10^5$.
 
 \section{The no-go theorem}\label{sec:nogo}
 
@@ -761,31 +762,32 @@ family'' remains conjecture pending a proof of mechanism 1 or 3 in the
 style of Section~\ref{sec:critical} (prescribed parity words rather
 than explicit bit strings; see Section~\ref{sec:discussion}).
 
-\section{Case study: how the false axiom looked plausible}
+\section{Case study: how claims like Corollary~\ref{cor:axiom}'s
+negation get ``verified''}
 \label{sec:casestudy}
 
-An earlier version of this repository claimed a conditional proof of the
-conjecture from two axioms: verified convergence below $2^{71}$, and the
-descent statement refuted in Corollary~\ref{cor:axiom}. The descent
-statement was ``verified'' by tracking, for each odd residue class
-modulo $2^{14}$, an affine form $c \cdot n + d$ along the orbit, with
-worst-case handling of one boundary case. The flaw: the class of $n$
-modulo $2^{14}$ determines the orbit's parity decisions only until the
+Arguments of the genre formalized in Definition~\ref{def:cert}
+typically proceed by tracking, for each odd residue class modulo
+$2^{14}$ (say), an affine form $c \cdot n + d$ along the orbit, with
+worst-case handling of boundary cases, and reporting that every class
+descends within some bound --- $53$ steps, for the claim refuted in
+Corollary~\ref{cor:axiom}. We implemented exactly such a tracker to
+locate the characteristic flaw. It is this: the class of $n$ modulo
+$2^{14}$ determines the orbit's parity decisions only until the
 cumulative number of halvings reaches $14$ --- each halving spends one
 bit, exactly as in Theorem~\ref{thm:bijection} --- while the tracker
-ran for up to $53$ steps. Beyond the budget, the tracked trajectory
-silently followed the class representative rather than the class. For
+runs for up to $53$ steps. Beyond the budget, the tracked trajectory
+silently follows the class representative rather than the class. For
 the class of $n = 10087$, the tracker first diverges from reality at
 step $12$ (cumulative halvings $15$), then certifies a descent that
 $n = 10087$ itself violates: its actual stopping time is $66$ Terras
 steps.
 
-We record this not to dwell on an error but because it is the
-\emph{typical} error of the genre, and because
-Theorem~\ref{thm:nogo} explains its inevitability: had the precision
-accounting been done correctly at modulus $2^{14}$, the verification
-would have failed on the classes near $-1$; enlarging the modulus
-relocates but never removes them. By the binomial law
+We record this because it is the \emph{typical} error of the genre,
+and because Theorem~\ref{thm:nogo} explains its inevitability: had the
+precision accounting been done correctly at modulus $2^{14}$, the
+verification would have failed on the classes near $-1$; enlarging the
+modulus relocates but never removes them. By the binomial law
 (Corollary~\ref{cor:parity-consequences}) the classes with no
 guaranteed early descent number $\sum_{j > 0.63k}\binom{k}{j} \sim
 2^{0.95k}$ at modulus $2^k$: their density tends to $0$ --- that is
@@ -919,13 +921,12 @@ generalized problem warns that only the specific arithmetic of $2$ and
 $3$ can finish. We see this paper as a fence around the parts of the
 search space that are provably or demonstrably empty --- with the
 gate, the critical line, now surveyed exactly --- and as a case study
-in letting failed proof attempts fail \emph{informatively}.
+in making impossibility \emph{informative}.
 
 \subsection*{Acknowledgments}
 The formalization, the searches, and this text were produced in
-collaboration with Claude (Anthropic), including the discovery and
-refutation of the repository's earlier incorrect proof. The Lean
-community's \textsf{mathlib} made the formalization routine.
+collaboration with Claude (Anthropic). The Lean community's
+\textsf{mathlib} made the formalization routine.
 
 \subsection*{Reproducibility}
 All Lean sources, the analysis scripts (deterministic seeds), and

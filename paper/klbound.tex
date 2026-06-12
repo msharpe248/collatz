@@ -1,0 +1,436 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\classes}[1]{[3^{#1}]}
+
+\title{An Improved Lower Bound for the $3x+1$ Problem:\\
+       $\pi_a(x) \ge x^{0.895}$}
+\author{M.~Sharpe\thanks{\texttt{msharpe@irendi.com}. The computations,
+  the certification scheme, and this text were produced in collaboration
+  with Claude (Anthropic). All final verifications are exact integer
+  computations; see Section~\ref{sec:cert}.}}
+\date{June 11, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For $a \not\equiv 0 \pmod 3$ let $\pi_a(x)$ count the integers
+$n \le x$ whose forward orbit under the $3x+1$ function contains $a$.
+Krasikov and Lagarias (2003) proved $\pi_a(x) \ge x^{0.84}$ for all
+sufficiently large $x$, by exhibiting a feasible solution to an
+explicit linear program $L_k^{NT}(\lambda)$ over the
+$3^{k-1}$ congruence classes $m \equiv 2 \pmod 3$ of modulus $3^k$, at
+level $k = 11$; this has remained the best published exponent. We
+improve the bound to
+\[
+\pi_a(x) \;\ge\; x^{179/200} \;=\; x^{0.895}
+\qquad \text{for all sufficiently large } x,
+\]
+using their theorem verbatim and new feasible solutions at level
+$k = 17$ ($43{,}046{,}721$ classes). The computational unlock is
+structural: for fixed $\lambda$ the program is a feasibility question
+$c \le F_\lambda(c)$ for a monotone, homogeneous, concave map, so a
+feasible point is found by nonlinear power iteration
+(Collatz--Wielandt) rather than linear programming, in time linear in
+the number of classes per sweep. Soundness does not rest on floating
+point: for each claimed exponent $p/q$ we exhibit an integer vector
+and verify every inequality of $L_k^{NT}(2^{p/q})$ in exact integer
+arithmetic, with the transcendental coefficients replaced by rational
+lower bounds certified via integer power comparisons. The method
+reproduces the complete published table of Krasikov--Lagarias
+($2 \le k \le 11$) to all seven printed decimals, and yields certified
+exponents $0.853, 0.863, 0.8724, 0.8812, 0.888, 0.895$ at
+$k = 12, \dots, 17$.
+\end{abstract}
+
+\section{Introduction}
+
+The $3x+1$ function is
+$T(n) = n/2$ for even $n$ and $T(n) = (3n+1)/2$ for odd $n$; the
+$3x+1$ conjecture asserts that every $n \ge 1$ eventually reaches $1$
+under iteration \cite{lagarias-book, lagarias-overview}. For a positive
+integer $a \not\equiv 0 \pmod 3$, let
+\[
+\pi_a(x) \;:=\; \#\{\, 1 \le n \le x \;:\; T^{(j)}(n) = a
+\text{ for some } j \ge 0 \,\}.
+\]
+A sequence of results, beginning with Crandall \cite{crandall} in 1978,
+established lower bounds $\pi_1(x) > x^{\beta}$ for increasing
+exponents $\beta$: the difference-inequality method introduced by
+Krasikov \cite{krasikov} gave $x^{0.43}$, Wirsching \cite{wirsching}
+$x^{0.48}$, the nonlinear-programming approach of Applegate and
+Lagarias \cite{applegate-lagarias} $x^{0.81}$, and Krasikov--Lagarias
+\cite{kl} reached
+\[
+\pi_a(x) \;\ge\; x^{0.84}
+\qquad (a \not\equiv 0 \bmod 3,\; x \ge x_0(a)),
+\]
+by a computation, performed in 2002 at level $k = 11$, on a linear
+program family $L_k^{NT}(\lambda)$ recalled below. This exponent has
+remained the best published bound: the 2021 overview
+\cite{lagarias-overview} cites it as the state of the art, and we are
+not aware of any later improvement. (Tao's celebrated result that
+almost all orbits attain almost bounded values \cite{tao} concerns
+logarithmic density of a different event and neither implies nor is
+implied by pointwise bounds on $\pi_a$.)
+
+Our result is:
+
+\begin{theorem}\label{thm:main}
+For every positive integer $a \not\equiv 0 \pmod 3$ there is
+$x_0(a)$ such that
+\[
+\pi_a(x) \;\ge\; x^{179/200} \;=\; x^{0.895}
+\qquad \text{for all } x \ge x_0(a).
+\]
+\end{theorem}
+
+The theorem follows from the Krasikov--Lagarias framework
+\emph{verbatim} --- their Theorem~2.2 converts any feasible solution
+of $L_k^{NT}(\lambda)$ into the bound with exponent
+$\gamma = \log_2 \lambda$, and they prove feasibility lifts from $k$
+to $k+1$, so larger $k$ never hurts --- together with a new feasible
+solution at $k = 17$, over $43{,}046{,}721$ congruence classes, with
+$\lambda = 2^{179/200}$. The contribution of this paper is therefore
+computational, in two parts that we believe are of independent
+methodological interest:
+
+\begin{enumerate}
+\item \textbf{Feasibility without linear programming
+(Section~\ref{sec:method}).} For fixed $\lambda$ the program
+$L_k^{NT}(\lambda)$ asks for a positive bounded vector $c$ with
+$c \le F_\lambda(c)$, where $F_\lambda$ is monotone, positively
+homogeneous, and concave (each coordinate is a linear term plus a
+minimum of three coordinates, with positive coefficients). Any vector
+satisfying $\min_m F_\lambda(c)_m / c_m \ge 1$ is itself a feasible
+point --- this is the easy direction of the Collatz--Wielandt
+characterization for monotone homogeneous maps (the coincidence of
+names is pleasant but accidental: Lothar Collatz of the eigenvalue
+bound is Lothar Collatz of the conjecture). Normalized power iteration
+on $F_\lambda$ produces such vectors whenever $\lambda$ is below the
+feasibility supremum $\lambda_k$. Each sweep costs $O(3^k)$, which is
+what moves the frontier from $3^{10}$ classes (LP, 2002 hardware) to
+$3^{16}$ and beyond.
+\item \textbf{Exact certification (Section~\ref{sec:cert}).} Floating
+point is used only to \emph{find} candidate vectors. Each claimed
+exponent is a rational $p/q$; the three coefficients of
+$L_k^{NT}(2^{p/q})$ are bounded below by dyadic rationals whose
+correctness is an integer power comparison; and the candidate vector,
+scaled and floored to integers, is checked against every inequality in
+exact integer arithmetic --- all $43{,}046{,}721$ of them at $k = 17$.
+Since the coefficients enter the right-hand sides positively, rounding
+them down only strengthens the verified system; soundness is
+one-directional throughout.
+\end{enumerate}
+
+As validation, the same machinery reproduces every entry of the
+published Krasikov--Lagarias table ($2 \le k \le 11$) to all seven
+printed decimal places, including their record point
+$\lambda_{11} = 1.7922310$ (Section~\ref{sec:results}).
+
+\section{The Krasikov--Lagarias program}\label{sec:kl}
+
+We recall the objects of \cite{kl}, to which we refer for proofs.
+Throughout $\alpha := \log_2 3 = 1.58496\ldots$ and
+\[
+\classes{k} \;:=\; \{\, m \bmod 3^k \;:\; m \equiv 2 \!\!\pmod 3 \,\},
+\qquad |\classes{k}| = 3^{k-1}.
+\]
+For $m \in \classes{k}$ define
+$\phi_k^m(y) := \inf\{ \pi^*_a(2^y a) : a \equiv m \bmod 3^k,\,
+a \text{ not in a cycle}\}$, where $\pi^*_a$ is the variant of
+$\pi_a$ counting orbits that stay $\le x$ (see \cite[\S2]{kl}). These
+functions satisfy a system of difference inequalities
+$\mathcal{I}_k$ \cite[Prop.~2.1]{kl}, and Krasikov--Lagarias associate
+to it the linear program family
+\[
+L_k^{NT}(\lambda):\quad \text{minimize } C_k^{\max} \text{ subject to}
+\]
+\begin{align}
+&\text{(L0)}\quad 1 \le c_k^m \le C_k^{\max}
+&& m \in \classes{k}, \notag\\
+&\text{(L1)}\quad c_k^m \le c_k^{4m} \lambda^{-2}
+   + c_{k-1}^{(4m-2)/3} \lambda^{\alpha - 2}
+&& m \equiv 2 \!\!\pmod 9, \notag\\
+&\text{(L2)}\quad c_k^m \le c_k^{4m} \lambda^{-2}
+&& m \equiv 5 \!\!\pmod 9, \notag\\
+&\text{(L3)}\quad c_k^m \le c_k^{4m} \lambda^{-2}
+   + c_{k-1}^{(2m-1)/3} \lambda^{\alpha - 1}
+&& m \equiv 8 \!\!\pmod 9, \notag\\
+&\text{(L4)}\quad c_{k-1}^{u} \le c_k^{u},\;\;
+   c_{k-1}^{u} \le c_k^{u + 3^{k-1}},\;\;
+   c_{k-1}^{u} \le c_k^{u + 2\cdot 3^{k-1}}
+&& u \in \classes{k-1}, \notag
+\end{align}
+with indices taken modulo $3^k$ (note $4m$, $(4m-2)/3$ and $(2m-1)/3$
+remain $\equiv 2 \bmod 3$). Their main results, which we use as black
+boxes:
+
+\begin{theorem}[{\cite[Thm.~2.2 and \S6]{kl}}]\label{thm:kl}
+If $1 \le \lambda \le 2$ and $L_k^{NT}(\lambda)$ has a feasible
+solution with principal variables $\{c_k^m\}$, then
+$\phi_k^m(y) \ge \Delta_1\, c_k^m\, \lambda^y$ for all $y \ge 0$, with
+$\Delta_1 = (4 \max_m c_k^m)^{-1}$; consequently, for every
+$a \not\equiv 0 \pmod 3$,
+$\pi_a(x) \ge x^{\log_2 \lambda}$ for all sufficiently large $x$.
+\end{theorem}
+
+\begin{proposition}[{\cite[\S6]{kl}}]\label{prop:lift}
+If $L_k^{NT}(\lambda)$ is feasible, so is $L_{k+1}^{NT}(\lambda)$
+(set $c_{k+1}^{m + j\cdot 3^k} := c_k^m$ for $j = 0, 1, 2$). Hence
+$\lambda_k := \sup\{\lambda : L_k^{NT}(\lambda) \text{ feasible}\}$ is
+non-decreasing in $k$.
+\end{proposition}
+
+It is an open problem whether $\lambda_k \to 2$, which would give
+$\pi_a(x) \ge x^{1 - \epsilon}$ for every $\epsilon > 0$ \cite[\S6]{kl}.
+
+\section{Feasibility as a nonlinear eigenproblem}\label{sec:method}
+
+Fix $\lambda$ and eliminate the auxiliary variables: given any
+principal vector $c = (c_k^m)_{m \in \classes{k}}$, the optimal choice
+in (L4) is
+$\bar c_{k-1}^{u} := \min\{c_k^u,\, c_k^{u+3^{k-1}},\,
+c_k^{u+2\cdot 3^{k-1}}\}$ \cite[eq.~(2.15)]{kl}. Substituting into
+(L1)--(L3) defines the map $F_\lambda : \R_{>0}^{\classes{k}} \to
+\R_{>0}^{\classes{k}}$,
+\[
+F_\lambda(c)_m \;=\;
+\begin{cases}
+\lambda^{-2} c_{4m} + \lambda^{\alpha-2}\, \bar c_{(4m-2)/3}
+  & m \equiv 2 \pmod 9,\\[2pt]
+\lambda^{-2} c_{4m}
+  & m \equiv 5 \pmod 9,\\[2pt]
+\lambda^{-2} c_{4m} + \lambda^{\alpha-1}\, \bar c_{(2m-1)/3}
+  & m \equiv 8 \pmod 9,
+\end{cases}
+\]
+and $L_k^{NT}(\lambda)$ is feasible if and only if there is a vector
+$c$ with $1 \le c_m$, bounded, and $c \le F_\lambda(c)$ pointwise
+(then $C^{\max} := \max c$). The map $F_\lambda$ is monotone
+($c \le c' \Rightarrow F(c) \le F(c')$), positively homogeneous
+($F(tc) = tF(c)$ for $t > 0$), and concave; all coefficients are
+positive.
+
+\begin{lemma}\label{lem:cert}
+If $c > 0$ satisfies $\min_{m} F_\lambda(c)_m / c_m \ge 1$, then
+$c / \min_m c_m$ is a feasible solution of $L_k^{NT}(\lambda)$.
+\end{lemma}
+
+\begin{proof}
+$c \le F_\lambda(c)$ is the displayed condition; homogeneity preserves
+it under rescaling; the rescaled vector has $\min = 1$ and is finite,
+so (L0) holds with $C^{\max} = \max c / \min c$; (L1)--(L4) hold with
+$\bar c$ as auxiliaries by construction.
+\end{proof}
+
+This is the easy (verification) direction of the Collatz--Wielandt
+formula for monotone homogeneous maps \cite{gaubert-gunawardena}; the
+useful empirical fact, standard in nonlinear Perron--Frobenius theory,
+is that normalized power iteration $c \leftarrow F_\lambda(c) /
+\|F_\lambda(c)\|_\infty$ converges to vectors achieving
+$\min_m F(c)_m / c_m$ close to the spectral value, so that whenever
+$\lambda < \lambda_k$ the iteration eventually exhibits a certificate
+in the sense of Lemma~\ref{lem:cert}. We stress that no claim in this
+paper depends on convergence theory: the iteration is only a search
+heuristic, and Lemma~\ref{lem:cert} is checked directly on its output.
+
+Three practical devices matter at scale. (i) Each sweep is two gather
+operations and one three-way minimum over arrays of length $3^{k-1}$;
+$k = 17$ sweeps take under a second vectorized. (ii) Bisection on
+$\lambda$ re-uses the certificate of the last feasible $\lambda$ as a
+warm start. (iii) For the largest $k$ we skip bisection entirely: by
+Proposition~\ref{prop:lift} the certificate from level $k-1$ lifts to
+level $k$, and a single targeted run at a chosen $\lambda$ either
+certifies it or not --- any certificate is final, so nothing is lost
+by aiming directly at a target exponent.
+
+\section{Exact certification}\label{sec:cert}
+
+Let the claimed exponent be $\gamma = p/q \in \Q$ and
+$\lambda = 2^{p/q}$, so $\log_2 \lambda = p/q$ exactly. The three
+coefficients of $F_\lambda$ are then $q$-th roots of explicit
+rationals:
+\[
+\lambda^{-2} = \Bigl(\tfrac{1}{2^{2p}}\Bigr)^{1/q}, \qquad
+\lambda^{\alpha-2} = \Bigl(\tfrac{3^p}{2^{2p}}\Bigr)^{1/q}, \qquad
+\lambda^{\alpha-1} = \Bigl(\tfrac{3^p}{2^{p}}\Bigr)^{1/q}.
+\]
+
+\begin{lemma}\label{lem:round}
+Let $u/v \le (A/B)^{1/q}$ with $u, v, A, B$ positive integers, which
+is equivalent to the integer inequality $u^q B \le v^q A$. If the
+system obtained from $L_k^{NT}(2^{p/q})$ by replacing each coefficient
+with such a rational lower bound admits a solution, then so does
+$L_k^{NT}(2^{p/q})$ itself.
+\end{lemma}
+
+\begin{proof}
+All coefficients occur positively on right-hand sides of
+$\le$-constraints; decreasing them only shrinks the right-hand sides.
+\end{proof}
+
+The verifier therefore proceeds as follows. Rational lower bounds with
+$v = 2^{64}$ are computed for the three coefficients and certified by
+the integer comparison of Lemma~\ref{lem:round} (computed once; the
+integers involved have a few hundred thousand bits for our $q \le
+2500$). The floating-point vector $c$ found in
+Section~\ref{sec:method} is scaled by $2^{48}$, floored to an integer
+vector $C$, and clamped below at $2^{48}$ (so $c = C/2^{48} \ge 1$).
+Each constraint is then checked as a single integer inequality; for
+example (L3) becomes
+\[
+C_m \cdot v_2 v_C \;\le\; u_2 v_C \cdot C_{4m}
+ \;+\; u_C v_2 \cdot \min\bigl(C_{u}, C_{u + 3^{k-1}},
+ C_{u + 2\cdot 3^{k-1}}\bigr),
+\]
+with $(u_2, v_2)$ and $(u_C, v_C)$ the certified bounds for
+$\lambda^{-2}$ and $\lambda^{\alpha-1}$. A run that checks all
+$3^{k-1}$ constraints yields, by Lemmas \ref{lem:cert} and
+\ref{lem:round} and Theorem~\ref{thm:kl}, the bound
+$\pi_a(x) \ge x^{p/q}$. No floating-point number survives into the
+verified statement.
+
+\section{Results}\label{sec:results}
+
+\textbf{Validation.} Bisection with the iteration of
+Section~\ref{sec:method} reproduces the published table of
+\cite[Table~2]{kl} for $2 \le k \le 11$ at all seven printed decimals;
+in particular the record entry $\lambda_{11} = 1.7922310$ is matched
+exactly. \medskip
+
+\noindent\textbf{New levels.} Beyond $k = 11$:
+
+\begin{center}
+\begin{tabular}{rrlll}
+\toprule
+$k$ & classes $3^{k-1}$ & $\lambda$ certified & $\gamma = \log_2\lambda$
+& exact certificate $p/q$ \\
+\midrule
+12 & 177{,}147    & 1.8064235 & 0.8531361 & $853/1000 = 0.853$ \\
+13 & 531{,}441    & 1.8188238 & 0.8630058 & $863/1000 = 0.863$ \\
+14 & 1{,}594{,}323  & 1.8307723 & 0.8724524 & $2181/2500 = 0.8724$ \\
+15 & 4{,}782{,}969  & 1.8419683 & 0.8812483 & $2203/2500 = 0.8812$ \\
+16 & 14{,}348{,}907 & $\ge 1.8506089$ & $\ge 0.888$ & $111/125 = 0.888$ \\
+17 & 43{,}046{,}721 & $\ge 1.8596099$ & $\ge 0.895$ & $179/200 = 0.895$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+For $k \le 15$ the third column is the certified end of a bisection
+(the true $\lambda_k$ exceeds it by less than $2\times 10^{-7}$); for
+$k = 16, 17$ it is a single targeted certificate as described in
+Section~\ref{sec:method}, and the true $\lambda_k$ is somewhat larger.
+In every row the final column was verified by the exact integer
+procedure of Section~\ref{sec:cert}; at $k = 17$ this comprises
+$43{,}046{,}721$ verified inequalities.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The exact certificate at $k = 17$ exhibits a feasible solution of
+$L_{17}^{NT}(2^{179/200})$ by Lemmas \ref{lem:cert} and
+\ref{lem:round}. Apply Theorem~\ref{thm:kl}.
+\end{proof}
+
+\section{Discussion}\label{sec:disc}
+
+The marginal exponent gains per level,
+$+0.0114, +0.0099, +0.0094, +0.0088$ across $k = 11, \dots, 15$, decay
+slowly; whether $\lambda_k \to 2$ (equivalently $\pi_a(x) \ge
+x^{1-\epsilon}$ for all $\epsilon$) remains the fundamental open
+question about this method \cite[\S6]{kl}, and the data is consistent
+with it. Each additional level costs a factor of $3$ in memory and
+time; $k = 18$ ($129$M classes) is within reach of a workstation, and
+$k \approx 20$ of a GPU implementation. The bottleneck is not the
+certification (linear scan) but the iteration count near the
+feasibility threshold, which warm starts mitigate.
+
+Two remarks on reliability. First, everything rests on
+Theorem~\ref{thm:kl}, which is published and peer-reviewed; we add no
+asymptotic analysis of our own, and the new content of this paper is
+checkable by a referee in exact arithmetic from the certificate files.
+Second, the verification procedure is small (under a hundred lines,
+independent of the search code) and is itself a candidate for
+formalization: the certificate check is a finite integer computation
+of precisely the kind proof assistants discharge by reflection, and
+formalizing Theorem~\ref{thm:kl} --- an induction over difference
+inequalities --- would make the exponent the first machine-verified
+density bound for the $3x+1$ problem. The companion repository
+contains a Lean~4 formalization of related results (Terras' theorem in
+finite form among them) where the required infrastructure already
+exists \cite{companion}.
+
+\subsection*{Reproducibility}
+The search engine, the one-shot driver, the exact verifier, and
+instructions are in the repository accompanying this paper
+(\code{analysis/kl\_exponent.py}, \code{kl\_oneshot.py},
+\code{kl\_certificate.py}); all runs are deterministic. Finding the
+$k = 17$ certificate takes under an hour on a laptop; verifying it
+exactly takes minutes.
+
+\subsection*{Acknowledgments}
+The computations, the certification scheme, and this text were
+produced in collaboration with Claude (Anthropic). We thank the
+authors of \cite{kl} for a paper written so completely that improving
+its constant required no new mathematics --- only twenty-three years
+of Moore's law and one change of algorithm.
+
+\begin{thebibliography}{10}
+
+\bibitem{applegate-lagarias} D.~Applegate and J.~C.~Lagarias, Density
+bounds for the $3x+1$ problem. II. Krasikov inequalities, \emph{Math.
+Comp.} \textbf{64} (1995), 427--438.
+
+\bibitem{crandall} R.~E.~Crandall, On the ``$3x+1$'' problem,
+\emph{Math. Comp.} \textbf{32} (1978), 1281--1292.
+
+\bibitem{gaubert-gunawardena} S.~Gaubert and J.~Gunawardena, The
+Perron--Frobenius theorem for homogeneous, monotone functions,
+\emph{Trans. Amer. Math. Soc.} \textbf{356} (2004), 4931--4950.
+
+\bibitem{krasikov} I.~Krasikov, How many numbers satisfy the $3x+1$
+conjecture?, \emph{Internat. J. Math. Math. Sci.} \textbf{12} (1989),
+791--796.
+
+\bibitem{kl} I.~Krasikov and J.~C.~Lagarias, Bounds for the $3x+1$
+problem using difference inequalities, \emph{Acta Arithmetica}
+\textbf{109} (2003), 237--258.
+
+\bibitem{lagarias-book} J.~C.~Lagarias (ed.), \emph{The Ultimate
+Challenge: The $3x+1$ Problem}, American Mathematical Society, 2010.
+
+\bibitem{lagarias-overview} J.~C.~Lagarias, The $3x+1$ problem: an
+overview, arXiv:2111.02635 (2021).
+
+\bibitem{companion} M.~Sharpe, The Collatz conjecture at the critical
+line: machine-verified no-go, density, and cycle theorems, companion
+paper and repository, 2026.
+
+\bibitem{tao} T.~Tao, Almost all orbits of the Collatz map attain
+almost bounded values, \emph{Forum of Mathematics, Pi} \textbf{10}
+(2022), e12.
+
+\bibitem{wirsching} G.~J.~Wirsching, \emph{The Dynamical System
+Generated by the $3n+1$ Function}, Lecture Notes in Mathematics 1681,
+Springer, 1998.
+
+\end{thebibliography}
+
+\end{document}

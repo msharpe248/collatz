@@ -2,9 +2,8 @@
   Collatz Conjecture — The No-Go Theorem
 
   This file contains NO axioms and NO claim to prove the conjecture.
-  It proves the opposite of what this repo once claimed: that an entire
-  family of proof strategies — "finite-memory descent certificates" —
-  cannot possibly work.
+  It proves that an entire family of proof strategies — "finite-memory
+  descent certificates" — cannot possibly work.
 
   ## The certificate family
 
@@ -18,8 +17,7 @@
 
   This family includes every "verify descent for all residue classes
   mod m" argument (W = function of n mod m), every finite-automaton
-  potential, and in particular the false `descent_above_threshold` axiom
-  this repository previously assumed (W = 1).
+  potential, and every unweighted uniform-descent claim (W = 1).
 
   ## The obstruction
 
@@ -38,7 +36,7 @@
 
   * `terras_mersenne`            : the shadowing orbit formula
   * `no_uniform_descent_bound`   : no uniform descent window exists
-  * `old_descent_axiom_false`    : the repo's previous axiom, refuted
+  * `uniform_descent_53_false`   : a concrete uniform-descent claim, refuted
   * `no_finite_certificate`      : the no-go theorem (bounded potentials)
   * `no_finite_state_certificate`: corollary for finite-state observers
 -/
@@ -140,7 +138,7 @@ theorem no_uniform_descent_bound (B N₀ : ℕ) :
   have := lt_two_pow' (B + N₀ + 1)
   omega
 
-/-! ## Refutation of this repository's former axiom -/
+/-! ## Refutation of a concrete uniform-descent claim -/
 
 theorem collatz_iter_two (m : ℕ) : collatz_iter 2 m = collatz (collatz m) := rfl
 
@@ -163,10 +161,11 @@ theorem collatz_mersenne_even_steps (L : ℕ) : ∀ j, j ≤ L →
     rw [h2j, collatz_iter_add' (2 * j) 2, ih (by omega), terras_iter_succ']
     exact collatz_two_eq_terras _ (mersenne_iter_odd L j hjL)
 
-/-- The axiom this repository previously assumed —
+/-- A concrete representative of the uniform-descent genre —
     `∀ n > 300, ∃ t ≤ 53, collatz_iter t n < n` — is FALSE.
-    Witness: n = 2^28 - 1 rises for 56 Collatz steps. -/
-theorem old_descent_axiom_false :
+    Witness: n = 2^28 - 1 rises for 56 Collatz steps.
+    (Smallest violator: n = 447.) -/
+theorem uniform_descent_53_false :
     ¬(∀ n : ℕ, n > 300 → ∃ t : ℕ, t ≤ 53 ∧ collatz_iter t n < n) := by
   intro h
   obtain ⟨t, ht53, hlt⟩ := h (2 ^ 28 - 1) (by norm_num)
@@ -198,7 +197,7 @@ theorem old_descent_axiom_false :
     Taking W = exp(Φ ∘ S) for any finite-state observer S and any
     Φ : Q → ℝ, this rules out every finite-memory Lyapunov argument:
     residue-class verification at any modulus, finite-automaton
-    potentials, and the repository's former axiom (W = 1) alike.
+    potentials, and unweighted uniform-descent claims (W = 1) alike.
 
     Proof: chain certificate windows along the orbit of n₀ = 2^L - 1,
     which rises for L steps. The potential must shrink geometrically

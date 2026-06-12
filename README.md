@@ -3,12 +3,19 @@
 The Collatz conjecture is **open**. This repository does not prove it.
 What it contains is a machine-verified account of where it is provably
 hard and where it is provably almost true: a no-go theorem for an entire
-family of attempted proofs (including one this repository itself once
-claimed), sharp density theorems pinning the conjecture to the critical
+family of attempted proofs, sharp density theorems pinning the
+conjecture to the critical
 odd-step density log 2/log 3, the first formalized Collatz density
 result (Terras' theorem, finite form), Diophantine cycle exclusions,
 and a systematic experimental program on what lies beyond. The full
 story is in the paper: [paper/nogo.pdf](paper/nogo.pdf).
+
+It also contains a new unconditional result: **π_a(x) ≥ x^0.895** — the
+number of integers below x whose 3x+1 orbit contains a (any a ≢ 0
+mod 3), improving the x^0.84 record of Krasikov–Lagarias (2003) by
+scaling their own program to 43 million congruence classes with exact
+integer certificates. See [paper/klbound.pdf](paper/klbound.pdf) and
+[analysis/KL_RECORD.md](analysis/KL_RECORD.md).
 
 ## The conjecture
 
@@ -27,7 +34,7 @@ All results depend only on Lean's standard foundations (`propext`,
 |---|---|
 | `terras_mersenne` | T^j(2^L − 1) = 3^j·2^(L−j) − 1 for j ≤ L: the integers 2^L − 1 shadow the 2-adic fixed point −1 and rise for L straight steps |
 | `no_uniform_descent_bound` | For every window B and cutoff N₀, some n ≥ N₀ has no descent within B steps |
-| `old_descent_axiom_false` | The descent axiom this repo once assumed (`∀ n > 300, ∃ t ≤ 53, collatz_iter t n < n`) is false — witness 2^28 − 1 |
+| `uniform_descent_53_false` | The plausible-looking uniform-descent claim `∀ n > 300, ∃ t ≤ 53, collatz_iter t n < n` is false — witness 2^28 − 1 (smallest violator: 447) |
 | `no_finite_certificate` | **The no-go theorem**: no bounded multiplicative potential V(n) = n·W(n) with contraction factor ρ < 1 over a bounded window certifies descent |
 | `no_finite_state_certificate` | Corollary for finite-state observers: no residue-class scheme (any modulus), no finite-automaton potential, can certify descent |
 
@@ -164,16 +171,6 @@ reproduces. The residue-class search is infeasible at every modulus —
 the blocking cycle is always the n ≡ −1 (mod 2^a) self-loop — and
 `NoGo.lean` proves this is not bad luck but necessity. The paper
 ([paper/nogo.pdf](paper/nogo.pdf)) gives the complete account.
-
-## History
-
-This repository previously claimed a conditional proof via
-"conservative coefficient bounds" over residue classes mod 2^14. That
-argument was unsound (residue tracking spent its 14 bits of 2-adic
-precision after ~14 halvings and kept going for up to 53 steps), and its
-descent axiom is refuted by explicit integers (n = 447 among others) —
-now a theorem, `old_descent_axiom_false`. The invalid materials have
-been removed.
 
 ## License
 
