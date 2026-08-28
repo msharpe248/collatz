@@ -338,3 +338,37 @@ at rational rate μ = 1261/1250, decided in 27 chunks of 243; witness
 roots a = m + 6561q (q ≤ 1) reaching 8 in ≤ 146 Terras steps,
 kernel-evaluated (replaced 2^j primitive-root witnesses whose 2^4375
 kernel pow recursion aborted).
+
+**N5. Geometric-ideal tracking — FORMAL (2026-08-28, lean/Collatz/Ideal.lean, axiom-free).**
+Real partial ideal constant c_T(n) = d_T/3^{j_T} ≥ 0, increasing
+(`idealC_mono`), real cocycle law (`idealC_add`). When bounded
+(`Supercritical` — automatic in the band 2^L < 3^a where divergent
+orbits live) it converges to c_∞(n) and the TRACKING IDENTITY holds
+for every T (`tracking`):
+    n_T = (n + c_∞(n))·3^{j_T}/2^T − c_∞(n_T).
+Consequences: n_T ≤ θ·3^{j_T}/2^T always (`orbit_le_ideal`); under a
+uniform tail bound B the orbit IS its geometric ideal up to error in
+[0,B] (`orbit_ideal_error`); mod 1 (`fract_ideal`):
+    frac(θ·3^{j_T}/2^T) = frac(c_∞(n_T)),  θ = n + c_∞(n).
+So a supercritical orbit is a ×3/×½ walk of ONE real number θ whose
+fractional parts are prescribed by the itinerary's tails. This puts the
+REAL place next to the 2-adic Mahler value of RUNG1_ATTACK.md: x(w)∈ℤ₂
+fixes n, θ∈ℝ fixes the growth, and integrality of every n_T couples
+them. Rung-1 target in this language: for an automatic word the tails
+c_∞(n_T) lie in a kernel-controlled set; show the θ-walk cannot honour
+it. Calibration filter: identity is multiplier-generic (holds for 5x+1),
+so it is a tool; 3x+1 content must enter through the itinerary class.
+Next step: compute c_∞ and the tail set for σ: 1→110, 0→011 numerically
+(mahler_experiments.py) and test whether frac(θ·3^j/2^T) can match.
+Numerics (ideal_experiments.py, 2026-08-28): tracking_finite exact on
+400 orbits × 3 horizons (0 mismatches). Rung-1 word: c_∞(w) = 6.570145
+(the real Mahler value of RUNG1_ATTACK §3, as it must be); tails
+c_∞(σ^T w) ∈ [3.31, 14.15] for T<3000 — so UniformSupercritical holds
+with B ≈ 14.2 and `orbit_ideal_error` applies. Kernel control is
+visible: within-class spread of tail values falls 5.67 → 3.74 → 2.48
+for T mod 3, 9, 27. The mod-1 test alone excludes n exactly one step
+after the parity bijection does (failure T = first mismatch + 1 for all
+n ≤ 2000) — expected, since (*) at time T only sees w_{<T}. The content
+of (*) is therefore in the LIMIT: the single real θ = n + c_∞ must
+carry the whole tail set, which is what an irrationality/Diophantine
+argument would attack.
