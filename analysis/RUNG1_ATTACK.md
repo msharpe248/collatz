@@ -1,9 +1,35 @@
 # The Rung-1 Attack: Automatic Itineraries via Mahler's Method
 
-**Status: open problem with a concrete, classical-shaped attack plan.
-Nothing in this document claims to prove the Collatz conjecture or even
-rung 1. It records the exact functional equation, the verified failure
-of the cheap route, and what the genuine route requires.**
+**Status (2026-08-28): CLOSED for the running example, machine-verified.**
+`lean/Collatz/Rung1.lean` proves `no_shifted_sigWord_itinerary`: no
+natural number's Terras itinerary is the fixed point w of σ (1→110,
+0→011) or any shift of it, equivalently F₂(8/9) is irrational (`core`).
+Axioms: `propext, Classical.choice, Quot.sound` only. The rest of this
+document is the attack plan as it stood before the proof; §4(b)'s
+0.946 barrier is real for *truncation* but is beaten by a degree-one
+Padé form iterated along z → z³ — see `analysis/pade_rung1.py` for the
+certificate and the ledger, and the header of `Rung1.lean` for the
+argument. The proof uses only integrality of the coefficients,
+constant-length substitution with uniform block weight, and |8/9|₂ < 1,
+so it is the template for the whole rung (item 5 of §5). Nothing here
+claims to prove the Collatz conjecture.
+
+**How it closes, in one paragraph.** Let E = p₀ + p₁F with
+p₀ = 1+z³−z⁴, p₁ = −1+z−z²+z³ (found by linear algebra on ten letters);
+then E = −z⁹ + z¹⁰ + z¹² + …, so along α_k = (8/9)^{3^k} the 2-adic
+size of E(α_k) is exactly 2^{−9·3^{k+1}} — the ultrametric analytic
+lemma is trivial, and nonvanishing is free (no zero estimate, no
+transcendence of F over ℚ(z) needed). If F₂(8/9) = u₀/D₀ were rational,
+running the functional equation backwards makes each F₂(α_k) a rational
+u_k/D_k with |u_k|, |D_k| ≤ 3^k·9^{3·3^k}·max(|D₀|,|u₀|), so
+b_k^{…}·D_k·E(α_k) is a nonzero integer Z_k with 2^{27·3^k} | Z_k and
+|Z_k| ≤ 7·3^k·9^{7·3^k}·max(|D₀|,|u₀|). Since 2^27 = 134217728 >
+28·9^7 = 133923132, this fails for k ≥ max(|D₀|,|u₀|). The
+truncation route failed because its height 9^L per 2-adic gain 2^{3L}
+gives 0.946; the Padé pair pays 9^{4·3^k} in height for 2^{9·3^{k+1}}
+of 2-adic gain, ratio 1.89 — the classical Mahler squaring.
+
+---
 
 All numerical claims below are verified by
 `analysis/mahler_experiments.py` (experiments 1–4). The formal

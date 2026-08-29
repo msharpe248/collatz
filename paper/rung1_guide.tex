@@ -1,0 +1,257 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.2in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newmdenv[backgroundcolor=blue!4,linecolor=blue!40,linewidth=1pt,
+  skipabove=8pt,skipbelow=8pt]{keyidea}
+
+\title{Rung One:\\
+       \Large A Friendly Guide}
+\author{Companion notes to ``A Machine-Verified Exclusion of an
+Automatic Collatz Itinerary by Mahler's Method in Degree
+One''\thanks{Written in collaboration with Claude (Anthropic). These
+notes explain the ideas; the paper and the Lean file contain the
+proofs. The Collatz conjecture remains open.}}
+\date{August 28, 2026}
+
+\begin{document}
+\maketitle
+
+\section{Where we were}
+
+The Collatz game: take a whole number; if it is even, halve it; if it
+is odd, triple it, add one, and halve. The conjecture says you always
+reach $1$. Nobody can prove it.
+
+Earlier papers in this series set up a \emph{diary} for each orbit:
+write $1$ every time the number is odd and $0$ every time it is even.
+Two things are known about diaries. First, the diary determines the
+starting number completely --- no two starting numbers write the same
+diary. Second, if an orbit is going to run off to infinity (the thing
+the conjecture forbids), its diary has to contain a lot of ones:
+more than about $63\%$ of the entries, forever. Fewer ones means more
+halvings, and the number shrinks.
+
+So one way to attack the conjecture is to go through the possible
+diaries, from simplest to most complicated, and rule them out one
+class at a time. This is the \emph{ladder}. The bottom rung was
+already proved: a diary that eventually repeats itself belongs to an
+orbit that eventually repeats itself, which is bounded, so it cannot
+be a runaway.
+
+The next rung up is the simplest kind of diary that never repeats.
+Take the rule
+\[
+1 \to 1\,1\,0, \qquad 0 \to 0\,1\,1,
+\]
+start from a single $1$, and apply the rule over and over:
+\[
+1 \ \to\ 110 \ \to\ 110\,110\,011 \ \to\ 110\,110\,011\,110\,110\,011\,011\,110\,011 \ \to\ \cdots
+\]
+The limit is an infinite word $w$ that never repeats but is completely
+structured: every third letter is a $1$, and every block of three
+contains exactly two ones. Two-thirds ones is more than $63\%$, so
+nothing we knew forbade a runaway orbit from keeping exactly this
+diary. The earlier paper boiled the question down to one number.
+
+\begin{keyidea}
+\textbf{The one number.} Think of $w$ as the coefficients of a power
+series $F(z) = w_0 + w_1 z + w_2 z^2 + \cdots$. There is a unique
+``number'' whose diary is $w$ --- but it is a number in the
+\emph{$2$-adic} sense, a kind of infinite binary expansion running off
+to the left. It equals $-10 + \tfrac59 F_2(8/9)$, where $F_2(8/9)$
+means: plug $z = 8/9$ into the series and add it up $2$-adically
+(where $8/9$ is small because $8$ is divisible by a high power of $2$).
+An ordinary whole number has a binary expansion that stops. So the
+question ``does any whole number have diary $w$?'' is the same as the
+question ``is $F_2(8/9)$ a fraction?''
+\end{keyidea}
+
+The earlier paper also showed the obvious attack fails. If you cut the
+series off after $N$ terms you get a fraction with denominator $9^N$
+that agrees with $F_2(8/9)$ to about $3N$ binary digits. To prove a
+number is not a fraction by approximation, the agreement has to grow
+faster than the denominator, and $2^{3N}$ versus $9^N$ is a losing
+race --- the ratio is $0.946$, just under $1$. (And $0.946$ is, once
+again, the $63\%$ threshold in disguise.)
+
+\section{What is new}
+
+We prove $F_2(8/9)$ is not a fraction. Therefore no whole number has
+diary $w$, and none has a diary that is $w$ with the first few entries
+torn off either. No Collatz orbit ever falls into this pattern. This
+is the first time a non-repeating diary has been ruled out, and every
+step of the proof has been checked by the Lean proof assistant.
+
+The trick that does it is old --- it goes back to Kurt Mahler in 1929
+--- and the honest summary is that the earlier paper overestimated
+how much of Mahler's machinery would be needed. Here is the idea.
+
+\section{The idea in three moves}
+
+\subsection*{Move 1: a better approximation}
+
+Instead of cutting the series off, find two small polynomials $p_0$
+and $p_1$ so that $p_0(z) + p_1(z)F(z)$ starts with a very high power
+of $z$. This is a linear-algebra problem: $p_0 = 1 + z^3 - z^4$ and
+$p_1 = -1 + z - z^2 + z^3$ have ten coefficients between them, and we
+can ask for nine conditions --- the coefficients of $z^0$ through
+$z^8$ in $p_0 + p_1 F$ all vanish. They do, and the coefficient of
+$z^9$ turns out to be $-1$:
+\[
+p_0(z) + p_1(z) F(z) = -z^9 + z^{10} + z^{12} + \cdots
+\]
+This depends only on the first ten letters of $w$, and a computer
+checks it in a blink.
+
+Now plug in $z = 8/9$ $2$-adically. Because $8/9$ is $2$-adically tiny
+and all the coefficients are whole numbers, the right-hand side is
+\emph{exactly} as small as its first term: it is divisible by
+$2^{27}$ (that is $8^9$) and not by $2^{28}$. There is no estimating
+and no error term; it is exact. This is the point where the $2$-adic
+world is kinder than the ordinary one. In Mahler's original setting
+one has to work hard to bound this quantity and then work harder to
+show it is not accidentally zero. Here both come for free.
+
+\subsection*{Move 2: the functional equation, and the tower}
+
+The rule $1 \to 110$, $0 \to 011$ that builds $w$ translates into an
+equation for $F$:
+\[
+F(z) = \frac{z + z^2}{1 - z^3} + (1 - z^2)\, F(z^3).
+\]
+It says that $F$ at $z$ is determined by $F$ at $z^3$, and vice versa.
+So if $F_2(8/9)$ were a fraction, then $F_2((8/9)^3)$ would be a
+fraction, and $F_2((8/9)^9)$, and so on up a tower of points
+$(8/9)^{3^k}$ that get $2$-adically smaller and smaller --- and at each
+level the fraction gets more complicated. We can keep exact track of
+how complicated: at level $k$ the numerator and denominator are at
+most about $9^{(5/2)\cdot 3^k}$.
+
+\subsection*{Move 3: the collision}
+
+Now run Move 1 at level $k$ instead of level $0$. The Pad\'e expression
+$p_0 + p_1 F$ evaluated at $(8/9)^{3^k}$ is divisible by $2^{27 \cdot
+3^k}$ exactly. But if $F_2$ at that point were a fraction $u/D$, the
+same expression would be a fraction whose numerator we can bound:
+the polynomials contribute at most $9^{4 \cdot 3^k}$ and the tower
+contributes at most $9^{3 \cdot 3^k}$ or so, for a total of roughly
+$9^{7 \cdot 3^k}$ times a constant. A nonzero whole number divisible
+by $2^{27 \cdot 3^k}$ is at least $2^{27 \cdot 3^k}$. So we need
+\[
+2^{27 \cdot 3^k} \ \le\ (\text{constant}) \cdot 9^{7 \cdot 3^k},
+\]
+and since $2^{27} = 134{,}217{,}728$ is bigger than $9^7 = 4{,}782{,}969$
+by a factor of $28$, the left side wins by a factor of $28^{3^k}$,
+which beats any constant once $k$ is large. Contradiction. So
+$F_2(8/9)$ is not a fraction.
+
+\begin{keyidea}
+\textbf{Why this beats the $0.946$ barrier.} Cutting off the series
+costs a factor of $9$ in the denominator for every factor of $8$ in
+$2$-adic smallness: ratio $0.946$. The Pad\'e trick costs a factor of
+$9^4$ (the degree of the polynomials) for a factor of $8^9$ (the order
+of vanishing): ratio $1.89$. Using the functional equation to move up
+the tower multiplies both sides by $3$ at each step, so the ratio is
+preserved while a fixed overhead is left behind. That squaring of the
+approximation quality is exactly what Mahler's method is for; the
+earlier paper knew this, but assumed the full transcendence machinery
+would be needed. Only the smallest piece of it is.
+\end{keyidea}
+
+\section{What was checked, and how}
+
+The Lean file \texttt{Collatz/Rung1.lean} contains no $2$-adic
+numbers at all. Every statement above about ``$2$-adically small''
+became a statement ``divisible by $2^{\text{something}}$'' about
+ordinary integers, and every statement about the series became a
+statement about its first $L$ terms, with $L$ arbitrary. The chain is:
+\begin{enumerate}
+\item The word $w$ is defined by its rule, and its first ten letters
+  are computed.
+\item The functional equation is proved as an exact identity between
+  finite sums (no limits).
+\item A whole number with diary $w$ --- or $w$ with $s$ letters torn
+  off --- forces a divisibility condition for every prefix length
+  (this uses the exact orbit identity from the earlier papers).
+\item The divisibility condition climbs the tower.
+\item The Pad\'e certificate is checked, and its exact $2$-adic size
+  is extracted as a divisibility-plus-oddness statement.
+\item The sizes are bounded, and $2^{27} > 28 \cdot 9^7$ does the
+  rest.
+\end{enumerate}
+Lean's kernel accepts the proof using only its three standard
+foundational axioms. There is no numerical computation to trust, no
+external tool, and no \texttt{sorry}.
+
+\section{What this does and does not say}
+
+It does not say anything about the Collatz conjecture in general.
+It rules out one family of diaries --- one infinite word and all its
+tails --- out of uncountably many. The value of the result is that it
+is the first rung where the diary was genuinely non-repeating, and
+that the proof pattern is a template: any word built by a fixed-length
+substitution rule in which every block has the same number of ones
+gives the same shape of functional equation and the same shape of
+certificate, so the same proof should run.
+
+It also does not claim a new theorem in number theory. That $p$-adic
+values of Mahler functions at small rational points are irrational is
+a known kind of fact; experts would not be surprised by
+$F_2(8/9) \notin \mathbb{Q}$. What is new is the connection to
+Collatz, the fact that the smallest version of the method suffices,
+and the machine-checked proof.
+
+\section{Rung two, begun: the ``don't repeat yourself'' rule}
+
+There is a second result in the paper, of a completely different
+flavour, and it needs no power series at all.
+
+\begin{keyidea}
+\textbf{The prefix-power rule.} Suppose an orbit's diary starts by
+repeating a block of $\ell$ letters over and over --- say $e$ times.
+Then the starting number and the number $\ell$ steps later have the
+same diary for $(e-1)\ell$ steps, so they agree in their last
+$(e-1)\ell$ binary digits. Two different whole numbers that agree in
+that many digits differ by at least $2^{(e-1)\ell}$; but $\ell$ steps
+of the game can only change a number by a factor of about
+$3^{o}/2^{\ell}$, where $o$ counts the odd steps in the block. So
+\[
+(e-1)\,\ell \;\lesssim\; o \log_2 3 + \log_2 n .
+\]
+A diary cannot start with a long high power of a short block unless
+the starting number is enormous. This is a three-line theorem in Lean.
+\end{keyidea}
+
+Now, the threshold: if the block has ones-density $\delta$, the rule
+bites when $e > 1 + \delta \log_2 3$. At the $63\%$ line that is
+exactly $e = 2$. Above the line one needs a bit more than a square.
+
+Enter the \emph{Sturmian} diaries: the most orderly non-repeating
+words there are, the ones you get by writing $1$ each time a point
+moving around a circle by a fixed irrational angle crosses a mark.
+They have a famous property: they almost repeat with period $q_k$ for
+every denominator $q_k$ of the continued fraction of the angle, and the
+almost-repetition lasts for about $q_k + q_{k+1}$ letters --- a power
+with exponent $2.6$ or more, comfortably above the threshold. Feeding
+that into the rule, with careful bookkeeping of how the orbit grows
+before the repetition starts, gives the paper's second theorem: no
+orbit has a Sturmian diary whose angle has partial quotients $\ge 2$
+infinitely often (for angles up to $0.789$; larger partial quotients
+handle larger angles). The bookkeeping is machine-checked; the two
+facts about circle rotations it relies on are classical
+(Lagrange, 1770s; S\'os, 1958) and are stated as hypotheses rather
+than proved in Lean. Numerically the rule works for the remaining
+``golden'' angles too, up to about $0.9$.
+
+It keeps happening that the $63\%$ line shows up as the exact
+threshold of every mechanism we try. That is probably not a
+coincidence.
+
+\end{document}

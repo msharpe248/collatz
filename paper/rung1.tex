@@ -1,0 +1,799 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Ztwo}{\Z_2}
+\newcommand{\Qtwo}{\Q_2}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\ord}{\operatorname{ord}}
+
+\title{Rung One of the Word-Complexity Ladder:\\
+  a Machine-Verified Exclusion of an Automatic\\
+  Collatz Itinerary by Mahler's Method in Degree One}
+\author{M.~Sharpe\thanks{\texttt{msharpe@irendi.com}. The mathematics,
+  the Lean formalization, and this text were produced in collaboration
+  with Claude (Anthropic). The Collatz conjecture remains open, and
+  nothing in this paper claims otherwise.}}
+\date{August 28, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Let $w = 110\,110\,011\,011\,110\,011\ldots$ be the fixed point of the
+substitution $\sigma\colon 1 \mapsto 110$, $0 \mapsto 011$. Its density
+of ones is $2/3 > \log 2/\log 3$, so it lies inside the band where a
+divergent orbit of the Terras map $T$ is allowed to live. We prove
+that no positive integer has Terras parity itinerary $w$, or any shift
+of $w$. Equivalently, the $2$-adic Mahler value $F_2(8/9)$, where
+$F(z) = \sum_i w_i z^i$ satisfies
+$F(z) = (z+z^2)/(1-z^3) + (1-z^2)F(z^3)$, is irrational. The proof is
+Mahler's method with a degree-one auxiliary form, carried out entirely
+in the language of integer divisibility: a Pad\'e pair
+$(p_0, p_1) = (1+z^3-z^4,\ -1+z-z^2+z^3)$ found on the first ten
+letters of $w$, the functional equation iterated along
+$\alpha_k = (8/9)^{3^k}$, and a height ledger that closes because
+$2^{27} > 28\cdot 9^7$. Every step is machine-verified in Lean~4
+(\code{Collatz/Rung1.lean}, axiom-free). The earlier reduction paper
+recorded the truncation approach to $F_2(8/9)$ as provably
+insufficient (irrationality exponent $0.946 < 1$) and the $2$-adic
+transposition of Mahler's method as the open work item; we show the
+transposition is short --- in the ultrametric setting the analytic
+lemma is trivial and non-vanishing is free, so neither a zero estimate
+nor the transcendence of $F$ over $\Q(z)$ is needed. This is the first
+exclusion of a genuinely aperiodic itinerary class for the $3x+1$
+problem, and, to our knowledge, the first formalization of a
+Mahler-method argument in a proof assistant. We are explicit about
+what is classical: the irrationality of $p$-adic Mahler values at
+rational points inside the unit disc is a known type of result.
+Finally we begin rung two: an elementary prefix-power criterion
+(the Diophantine content of the parity bijection, machine-verified)
+excludes every Sturmian itinerary whose slope has partial quotients
+$\ge 2$ infinitely often, for slopes up to $0.789$ --- conditional on
+two classical facts, Lagrange's best-approximation property and the
+three-distance theorem, which are isolated as hypotheses of a
+machine-verified level theorem.
+\end{abstract}
+
+\section{Introduction}
+
+The word-complexity ladder \cite{ladder} orders potential divergent
+orbits of the Terras map
+\[
+T(n) = \begin{cases} n/2 & n \text{ even},\\ (3n+1)/2 & n \text{ odd}\end{cases}
+\]
+by the complexity of their parity itineraries $w_t = T^t(n) \bmod 2$.
+Rung zero --- a divergent orbit's itinerary is never eventually
+periodic --- is formal. The next rung consists of \emph{automatic}
+itineraries, fixed points of constant-length substitutions, and
+\cite{ladder} reduced the running example exactly to one arithmetic
+statement: for $w = \sigma^\infty(1)$ with $\sigma(1) = 110$,
+$\sigma(0) = 011$,
+\begin{equation}\label{eq:reduction}
+\text{some integer has itinerary } w
+\iff F_2(8/9) \in \Q,
+\end{equation}
+where $F(z) = \sum_{i \ge 0} w_i z^i \in \Z[[z]]$ and $F_2$ is
+evaluation in $\Q_2$ (convergent since $|8/9|_2 = 1/8$). The
+reduction paper also proved that the obvious approach fails: the
+partial sums of $F_2(8/9)$ have denominators $9^N$ and $2$-adic error
+$2^{-3N}$, an irrationality exponent of $(3\log 2)/(2 \log 3) = 0.946
+< 1$, so no Liouville-type argument from truncation can decide
+\eqref{eq:reduction}. It identified Mahler's method as the route and
+its $2$-adic transposition as ``bounded, classical work, but real
+work.''
+
+This paper does that work, and finds it shorter than expected.
+
+\begin{theorem}[Rung one, running example]\label{thm:main}
+For every $n \in \N$ and every $s \in \N$, the Terras itinerary of $n$
+is not the $s$-shift of $w$: it is false that $T^t(n) \bmod 2 =
+w_{s+t}$ for all $t$. In particular no Collatz orbit has itinerary
+$w$, and no orbit ever synchronises with $w$.
+\end{theorem}
+
+\begin{theorem}[Irrationality]\label{thm:irr}
+$F_2(8/9) \notin \Q$.
+\end{theorem}
+
+Both are formalized: \code{no\_shifted\_sigWord\_itinerary} and
+\code{core} in \code{lean/Collatz/Rung1.lean}, depending only on
+\code{propext}, \code{Classical.choice}, \code{Quot.sound}, with no
+\code{sorry}.
+
+\paragraph{What is new, and what is not.} We want to be precise.
+\begin{itemize}
+\item \emph{New as a Collatz statement.} Theorem~\ref{thm:main} is the
+first exclusion of an aperiodic itinerary class: rung zero excluded
+periodic words, and Theorem~\ref{thm:main} excludes an automatic word of
+supercritical density together with all its tails. The density
+corridor \cite{companion} permits such an orbit; the arithmetic of
+$F$ forbids it.
+\item \emph{New as a formalization.} To our knowledge no Mahler-method
+argument (transcendence or irrationality of values of Mahler
+functions) has previously been checked by a proof assistant. The
+formalization is possible because the whole argument is stated with
+integers and divisibility by powers of $2$; no $p$-adic analysis and
+no Mathlib theory of $\Z_2$ is used.
+\item \emph{Not new as number theory.} That values of Mahler functions
+at rational (or algebraic) points inside the $p$-adic unit disc are
+irrational or transcendental is a classical theme: Mahler
+\cite{mahler}, Loxton and van der Poorten \cite{lvdp}, Bundschuh and
+V\"a\"an\"anen \cite{bv} and others. Our Section~\ref{sec:classical}
+places the proof in that context. What we add is the observation, of
+some independent interest, that for \emph{irrationality} at a point
+with $|\alpha|_p < 1$ the method needs only a degree-one auxiliary
+form, and that the two ingredients which make the archimedean method
+delicate --- the analytic lemma and the non-vanishing of the auxiliary
+function along the orbit --- are both trivial ultrametrically.
+\item \emph{The real content of the $0.946$ barrier.} The truncation
+route trades height $9^L$ for $2$-adic gain $2^{3L}$. A degree-one
+Pad\'e form trades height $9^{4 \cdot 3^k}$ (plus a sunk cost
+$9^{(5/2)3^k}$ independent of the degree) for gain $2^{9 \cdot
+3^{k+1}}$: per unit of degree the ratio is $6 \log 2/\log 9 = 1.89 >
+1$. This is the classical ``squaring'' that Mahler's iteration buys;
+the barrier was a fact about truncation, not about the number.
+\end{itemize}
+
+\paragraph{Organisation.} Section~\ref{sec:setup} fixes notation and
+proves the exact finite form of the functional equation and of the
+block structure of the correction term. Section~\ref{sec:tower} sets
+up the tower of forced rationals. Section~\ref{sec:pade} gives the
+certificate and the exact $2$-adic size. Section~\ref{sec:ledger}
+does the height accounting and proves the theorems.
+Section~\ref{sec:classical} discusses the relation to Mahler's method
+and the extent of generality. Section~\ref{sec:next} records the next
+rung. Throughout, lemma names in \code{typewriter} refer to the Lean
+file.
+
+\section{Setup: the word, prefix sums, and the exact identities}
+\label{sec:setup}
+
+\subsection{The word}
+
+Define $w\colon \N \to \{0,1\}$ by $w_0 = 1$ and, for $q \ge 0$,
+\begin{equation}\label{eq:word}
+w_{3q} = w_q, \qquad w_{3q+1} = 1, \qquad w_{3q+2} = 1 - w_q
+\end{equation}
+(\code{sigWord}, \code{sigWord\_three}, \code{sigWord\_three\_one},
+\code{sigWord\_three\_two}). This is the fixed point $\sigma^\infty(1)$:
+the block $w_{3q}w_{3q+1}w_{3q+2}$ is $\sigma(w_q)$. The first ten
+letters are $1,1,0,1,1,0,0,1,1,1$ (\code{sigWord\_first\_ten}); every
+block has exactly two ones.
+
+\subsection{Homogenised prefix sums}
+
+For $a, b \in \Z$ and $L \in \N$ put
+\[
+S_L(a,b) = \sum_{q < L} w_q\, a^q\, b^{L-1-q}, \qquad
+G_L(a,b) = \sum_{q < L} a^q\, b^{L-1-q},
+\]
+so that $S_L(a,b) = b^{L-1} P_L(a/b)$ where $P_L(z) = \sum_{q<L} w_q
+z^q$ is the degree-$<L$ prefix of $F$, and $G_L$ is the same for the
+all-ones word. Both are defined by the back-recursions $S_0 = 0$,
+$S_{L+1} = b\,S_L + w_L a^L$ and $G_0 = 0$, $G_{L+1} = b\,G_L + a^L$
+(\code{preS}, \code{geomS}). The geometric identity
+\begin{equation}\label{eq:geom}
+(b-a)\,G_L(a,b) = b^L - a^L
+\end{equation}
+is immediate by induction (\code{geomS\_mul}).
+
+\begin{lemma}[Functional equation, finite form; \code{preS\_three}]
+\label{lem:fe}
+For all $a, b \in \Z$ and $L \in \N$,
+\[
+S_{3L}(a,b) = (ab + a^2)\, G_L(a^3, b^3) + (b^2 - a^2)\, S_L(a^3, b^3).
+\]
+\end{lemma}
+
+\begin{proof}
+Induction on $L$. Unrolling the recursion three times,
+$S_{3L+3} = b^3 S_{3L} + w_{3L} a^{3L} b^2 + w_{3L+1} a^{3L+1} b +
+w_{3L+2} a^{3L+2}$, and by \eqref{eq:word} the three new terms are
+$a^{3L}\big(w_L b^2 + ab + (1-w_L)a^2\big) = a^{3L}\big(ab + a^2 +
+w_L(b^2-a^2)\big)$. On the right, $G_{L+1}(a^3,b^3) = b^3 G_L + a^{3L}$
+and $S_{L+1}(a^3,b^3) = b^3 S_L + w_L a^{3L}$, and the two sides agree
+by the induction hypothesis and a ring identity.
+\end{proof}
+
+Dividing by $b^{3L-1}$ and letting $L \to \infty$ formally, this is
+$F(z) = (z+z^2)/(1-z^3) + (1-z^2)F(z^3)$ at $z = a/b$; but we never
+pass to the limit. Every statement below is about finite $L$.
+
+\subsection{The correction term of a word, and the block formula}
+
+For an arbitrary word $u\colon \N \to \{0,1\}$ define
+\[
+d_u(0) = 0, \qquad d_u(T+1) = 3^{u_T}\, d_u(T) + 2^T u_T, \qquad
+j_u(T) = \sum_{t<T} u_t
+\]
+(\code{wordD}, \code{wordJ}). If the itinerary of $n$ agrees with $u$
+on $t < T$, then $d_u(T)$ is the correction term $d(T,n)$ of the exact
+orbit identity $2^T\,T^T(n) = 3^{j}\,n + d$ of \cite{companion}, and
+$j_u(T)$ is its odd-step count $j$ (\code{dcoef\_eq\_wordD}; this is
+the cocycle law of \cite{companion} at $T = 1$). The word-level
+cocycle law is
+\begin{equation}\label{eq:cocycle}
+d_u(s+T) = 3^{j_{u'}(T)}\, d_u(s) + 2^s\, d_{u'}(T), \qquad
+j_u(s+T) = j_u(s) + j_{u'}(T), \qquad u' = u(s + \cdot)
+\end{equation}
+(\code{wordD\_add}).
+
+\begin{lemma}[Block formula; \code{wordD\_sigWord\_three}]
+\label{lem:block}
+For all $L$, $j_w(3L) = 2L$ and
+\[
+d_w(3L) = 10\,(9^L - 8^L) - 5\, S_L(8,9).
+\]
+\end{lemma}
+
+\begin{proof}
+Induction on $L$: appending the block $\sigma(w_L)$ to a prefix of
+length $3L$ with correction $d$ gives $9d + 5\cdot 8^L$ if $w_L = 1$
+(append $1,1,0$) and $9d + 10 \cdot 8^L$ if $w_L = 0$ (append $0,1,1$),
+i.e.\ $d_w(3L+3) = 9\,d_w(3L) + (10 - 5w_L)8^L$, which matches the
+recursion $S_{L+1}(8,9) = 9 S_L(8,9) + w_L 8^L$.
+\end{proof}
+
+\subsection{From an itinerary to a congruence for every prefix}
+
+\begin{proposition}[The link; \code{link}]\label{prop:link}
+Suppose the itinerary of $n$ is the $s$-shift of $w$. Put
+\[
+q = 3^{j_w(s)}, \qquad p = 2^s n - d_w(s), \qquad
+D_0 = 5q, \qquad u_0 = 9\,(p + 10q).
+\]
+Then for every $L$ with $3L \ge s$,
+\begin{equation}\label{eq:link}
+2^{3L} \ \Big|\ 9^L (p + 10 q) - 5 q\, S_L(8,9).
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Write $3L = s + T$. By \eqref{eq:cocycle} with $u = w$, the
+identification $d_{w'}(T) = d(T,n)$, $j_{w'}(T) = j$ for the orbit of
+$n$, and the exact orbit identity $2^T\,T^T(n) = 3^j n + d(T,n)$,
+\[
+3^{j_w(s)}\, d_w(3L) = 3^{j_w(s) + j}\,\big(d_w(s) - 2^s n\big) +
+2^{s+T}\, 3^{j_w(s)}\, T^T(n),
+\]
+and $j_w(s) + j = j_w(3L) = 2L$. Substituting the block formula for
+$d_w(3L)$ and using $2^{3L} \mid 10 \cdot 8^L q$ gives \eqref{eq:link}.
+\end{proof}
+
+In $2$-adic language, \eqref{eq:link} for all $L$ says exactly that
+$F_2(8/9) = u_0/(9 D_0) \cdot 9 = (p + 10q)/q \cdot 9/5$, i.e.\ that
+$x(w) = p/q$ is the rational with odd denominator $3^{j_w(s)}$ obtained
+by pulling $n$ back $s$ steps through the $2$-adic Terras map. Shifts
+therefore cost nothing: they only change the odd denominator. For
+$s = 0$, $q = 1$ and $p = n$.
+
+\section{The tower}\label{sec:tower}
+
+Put $a_k = 8^{3^k} = 2^{3^{k+1}}$ and $b_k = 9^{3^k}$
+(\code{lvA}, \code{lvB}), so $\alpha_k = a_k/b_k = (8/9)^{3^k}$,
+$a_{k+1} = a_k^3$, $b_{k+1} = b_k^3$, $|\alpha_k|_2 = 2^{-3^{k+1}}$.
+Given $D_0, u_0 \in \Z$ define (\code{lvD}, \code{lvU})
+\begin{align*}
+D_{k+1} &= D_k\,(b_k^2 - a_k^2)(b_k^3 - a_k^3),\\
+u_{k+1} &= b_k^2\Big((b_k^3 - a_k^3)\,u_k - D_k\, a_k (a_k + b_k)\, b_k\Big).
+\end{align*}
+These are the numerator and denominator obtained by running the
+functional equation backwards: if $F_2(\alpha_k) = u_k/D_k$ then
+$F_2(\alpha_{k+1}) = (F_2(\alpha_k) - A(\alpha_k))/B(\alpha_k) =
+u_{k+1}/D_{k+1}$ with $A(z) = (z+z^2)/(1-z^3)$, $B(z) = 1 - z^2$. We
+never use this interpretation; the finite statement is the following.
+
+\begin{definition}[\code{Hyp}]
+$\mathrm{Hyp}_k(L_0)$ is the statement: for all $L \ge L_0$,
+\[
+2^{3^{k+1}(L+1)} \ \Big|\ u_k\, b_k^{L} - D_k\, S_{L+1}(a_k, b_k).
+\]
+\end{definition}
+
+For $k = 0$ and $D_0 = 5q$, $u_0 = 9(p+10q)$ this is \eqref{eq:link}
+with $L+1$ in place of $L$, so Proposition~\ref{prop:link} gives
+$\mathrm{Hyp}_0(s)$ (the first few $L$ are discarded harmlessly; only
+large $L$ matter).
+
+\begin{proposition}[Transport; \code{Hyp\_succ}]\label{prop:transport}
+$\mathrm{Hyp}_k(L_0) \Rightarrow \mathrm{Hyp}_{k+1}(L_0)$.
+\end{proposition}
+
+\begin{proof}
+Fix $L \ge L_0$ and apply $\mathrm{Hyp}_k$ at prefix length $3(L+1)$:
+$u_k b_k^{3L+2} - D_k S_{3(L+1)}(a_k,b_k) = 2^{3^{k+1}\cdot 3(L+1)}c$
+for some $c \in \Z$. Write $a = a_k$, $b = b_k$. Multiplying by
+$b^3 - a^3$ and using Lemma~\ref{lem:fe} and \eqref{eq:geom} (with
+$(a^3,b^3)$ and $L+1$),
+\[
+(b^3 - a^3)\big(u_k b^{3L+2} - D_k S_{3(L+1)}(a,b)\big)
+= u_{k+1}\, b_{k+1}^{L} - D_{k+1}\, S_{L+1}(a_{k+1}, b_{k+1})
++ D_k (ab + a^2)\, a^{3(L+1)}.
+\]
+Both the left side and $a^{3(L+1)} = 2^{3^{k+2}(L+1)}$ are divisible
+by $2^{3^{k+2}(L+1)}$, hence so is the middle term.
+\end{proof}
+
+Note that $b^3 - a^3$ is odd, so nothing is lost by multiplying
+through: the divisibility is of the product, and that is all we need
+downstream. By induction, $\mathrm{Hyp}_0(L_0)$ implies
+$\mathrm{Hyp}_k(L_0)$ for all $k$ (\code{Hyp\_all}).
+
+\section{The Pad\'e certificate and the exact $2$-adic size}
+\label{sec:pade}
+
+Let $p_0(z) = 1 + z^3 - z^4$ and $p_1(z) = -1 + z - z^2 + z^3$, and
+their degree-$4$ homogenisations
+\[
+P_0(a,b) = b^4 + a^3 b - a^4, \qquad
+P_1(a,b) = -b^4 + a b^3 - a^2 b^2 + a^3 b
+\]
+(\code{P0}, \code{P1}). The pair was found by solving the $9$
+homogeneous linear conditions ``coefficients of $z^0, \ldots, z^8$ in
+$p_0 + p_1 F$ vanish'' in the $10$ unknown coefficients; the solution
+is unique up to scale and has integer entries.
+
+\begin{lemma}[The certificate; \code{pade\_base}]\label{lem:pade}
+As an identity in $\Z[a,b]$,
+\[
+b^9 P_0(a,b) + P_1(a,b)\, S_{10}(a,b) = a^9\big(-b^4 + a(b^3 + a^2 b)\big).
+\]
+\end{lemma}
+
+\begin{proof}
+Expand $S_{10}$ with the first ten letters of $w$ and compare
+coefficients; this is a finite computation, done in Lean by
+\code{simp} and \code{ring}.
+\end{proof}
+
+In words: $E(z) = p_0(z) + p_1(z) F(z) = -z^9 + z^{10} + z^{12} +
+\cdots$ has order exactly $9$ at $z = 0$ with leading coefficient
+$-1$. The lemma is the homogeneous form of this restricted to the
+prefix of length $10$; longer prefixes only add terms divisible by
+$a^{10}$:
+
+\begin{lemma}[\code{pade\_gen}]\label{lem:padegen}
+For every $M \ge 0$ there is $R \in \Z[a,b]$ with
+\[
+b^{9+M} P_0(a,b) + P_1(a,b)\, S_{10+M}(a,b) = a^9\big(-b^{4+M} + aR\big).
+\]
+\end{lemma}
+
+\begin{proof}
+Induction on $M$ from Lemma~\ref{lem:pade}, using $S_{L+1} = b S_L +
+w_L a^L$: the new term $P_1 w_{L} a^{L}$ with $L = 10 + M \ge 10$ is
+divisible by $a^{10}$.
+\end{proof}
+
+\begin{lemma}[Exact $2$-adic size; \code{level\_dvd}]\label{lem:size}
+Let $v \ge 1$, $a = 2^v$, $b$ odd, $D$ odd, $M \ge 0$, and suppose
+\[
+2^{v(10+M)} \ \Big|\ u\, b^{9+M} - D\, S_{10+M}(a,b).
+\]
+Then $Z := P_0(a,b)\, D + P_1(a,b)\, u$ is a nonzero integer divisible
+by $2^{9v}$.
+\end{lemma}
+
+\begin{proof}
+Write $u b^{9+M} - D S_{10+M} = 2^{v(10+M)} t$ and take $R$ from
+Lemma~\ref{lem:padegen}. Then
+\[
+b^{9+M} Z = D\big(b^{9+M}P_0 + P_1 S_{10+M}\big) + P_1\big(u b^{9+M} -
+D S_{10+M}\big) = 2^{9v}\, O, \qquad
+O = D\big(-b^{4+M} + 2^v R\big) + P_1\, 2^{v(1+M)}\, t .
+\]
+$O$ is odd: $D b^{4+M}$ is odd and the other two terms are even. Hence
+$Z \ne 0$ (else $O = 0$), and $2^{9v} \mid b^{9+M} Z$ with $b^{9+M}$
+odd gives $2^{9v} \mid Z$.
+\end{proof}
+
+This lemma is the whole of ``Mahler's analytic lemma'' and ``the zero
+estimate'' in our setting. Archimedeanly one bounds $|E(\alpha_k)|$
+from above by a Schwarz-lemma argument and must separately show
+$E(\alpha_k) \ne 0$ for infinitely many $k$, which is where the
+transcendence of $F$ over $\Q(z)$ enters. Ultrametrically the size
+of $E(\alpha_k)$ is \emph{exactly} $|\alpha_k|_2^{\,9}$ as soon as
+$|\alpha_k|_2 < |c|_2 = 1$ where $c = -1$ is the leading coefficient,
+because all higher coefficients are integers. Nothing else is needed.
+
+\section{The height ledger and the proofs}\label{sec:ledger}
+
+\begin{lemma}[Size of $Z$; \code{abs\_Z\_le}]\label{lem:absZ}
+If $0 \le a \le b$ and $|D|, |u| \le m$ then $|P_0(a,b) D + P_1(a,b) u|
+\le 7 b^4 m$.
+\end{lemma}
+
+\begin{proof}
+$|P_0| \le 3b^4$ and $|P_1| \le 4 b^4$ termwise.
+\end{proof}
+
+\begin{lemma}[Tower heights; \code{lv\_bounds}]\label{lem:heights}
+Let $m_0 = \max(|D_0|, |u_0|)$ and $E_k = 3^k\, 9^{3 \cdot 3^k}\, m_0$.
+Then $|D_k|, |u_k| \le E_k$ for all $k$.
+\end{lemma}
+
+\begin{proof}
+$E_0 = 729\, m_0 \ge m_0$. With $0 \le a_k \le b_k$: $|D_{k+1}| \le
+E_k b_k^5$ and $|u_{k+1}| \le b_k^2\big(b_k^3 E_k + E_k \cdot 2 b_k^3\big)
+= 3 b_k^5 E_k$, while $E_{k+1} = 3 b_k^6 E_k$ (\code{lvE\_succ}).
+\end{proof}
+
+Also $D_k$ is odd for all $k$ if $D_0$ is (\code{lvD\_odd}): $b_k$ is
+odd and $a_k$ even.
+
+\begin{lemma}[The numeric inequality; \code{final\_ineq}]\label{lem:num}
+If $0 \le m_0 \le k$ then $7\, b_k^4\, E_k < 2^{9 \cdot 3^{k+1}}$.
+\end{lemma}
+
+\begin{proof}
+The left side is $7 \cdot 3^k \cdot 9^{7 \cdot 3^k} m_0 \le 7 \cdot 3^k
+\cdot 9^{7\cdot 3^k} k$. Since $k + 1 \le 3^k$ and $k < 9^k$,
+\[
+7 \cdot 3^k k < 28 \cdot 3^k 9^k = 28 \cdot 27^k \le 28^{k+1} \le 28^{3^k},
+\]
+so the left side is $< 28^{3^k}\, 9^{7 \cdot 3^k} = (28 \cdot 9^7)^{3^k}
+\le (2^{27})^{3^k} = 2^{27 \cdot 3^k}$, using $28 \cdot 9^7 = 133\,923\,132
+\le 134\,217\,728 = 2^{27}$.
+\end{proof}
+
+The margin is $0.22\%$ per tower level, which is why the degree-$4$
+pair (order $9$) is used rather than the degree-$2$ pair (order $5$):
+the ledger for general $m$ is $3(2m+1)\log 2$ against $(m + 5/2)\log
+9$, positive for every $m \ge 2$, but the crude constants of
+Lemmas~\ref{lem:absZ} and~\ref{lem:heights} eat the $m = 2$ margin.
+
+\begin{theorem}[\code{core}]\label{thm:core}
+Let $D_0$ be odd, $u_0 \in \Z$, and $L_0 \in \N$. Then
+$\mathrm{Hyp}_0(L_0)$ is false.
+\end{theorem}
+
+\begin{proof}
+Suppose $\mathrm{Hyp}_0(L_0)$. Let $m_0 = \max(|D_0|,|u_0|)$ and $k =
+m_0$. By Proposition~\ref{prop:transport}, $\mathrm{Hyp}_k(L_0)$ holds;
+apply it at prefix length $10 + M$ where $9 + M = \max(L_0, 9)$. With
+$v = 3^{k+1}$, $a_k = 2^v$, $b_k$ odd and $D_k$ odd,
+Lemma~\ref{lem:size} gives $2^{9 \cdot 3^{k+1}} \le |Z_k|$ for $Z_k =
+P_0(a_k,b_k) D_k + P_1(a_k,b_k) u_k$. Lemmas~\ref{lem:absZ}
+and~\ref{lem:heights} give $|Z_k| \le 7 b_k^4 E_k$, and
+Lemma~\ref{lem:num} gives $7 b_k^4 E_k < 2^{9 \cdot 3^{k+1}}$.
+Contradiction.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+If the itinerary of $n$ were the $s$-shift of $w$,
+Proposition~\ref{prop:link} would give $\mathrm{Hyp}_0(s)$ with $D_0 =
+5 \cdot 3^{j_w(s)}$ odd, contradicting Theorem~\ref{thm:core}.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:irr}]
+$F_2(8/9) \in \Z_2$, so if it were rational it would be $u_0/D_0$ with
+$D_0$ odd, and then $\mathrm{Hyp}_0(0)$ would hold (the partial sums
+$S_{L+1}(8,9)/9^L$ converge to $F_2(8/9)$ with error $O(2^{-3(L+1)})$).
+Theorem~\ref{thm:core} forbids it. (The Lean file proves
+Theorem~\ref{thm:core} as its central statement and derives
+Theorem~\ref{thm:main}; the two-line passage from $F_2(8/9) \in \Q$ to
+$\mathrm{Hyp}_0(0)$ is not formalized, since $F_2$ itself is not
+defined in the file.)
+\end{proof}
+
+\section{Relation to Mahler's method; scope of the argument}
+\label{sec:classical}
+
+\paragraph{The classical shape.} Mahler's method \cite{mahler,
+nishioka} proves transcendence of $F(\alpha)$ for $F$ satisfying
+$F(z) = A(z) + B(z)F(z^d)$ by constructing an auxiliary polynomial
+$P(z, F(z))$ of degree $m$ in $F$ with high vanishing order $N \sim
+m^2$ at $0$ (Siegel's lemma), evaluating along $\alpha^{d^k}$, and
+comparing the analytic upper bound $|P(\alpha_k, F(\alpha_k))| \ll
+|\alpha_k|^N$ with a Liouville lower bound from the algebraic height,
+which grows like $d^k \cdot m$. The two delicate points are a zero
+estimate guaranteeing $P(\alpha_k, F(\alpha_k)) \ne 0$ for infinitely
+many $k$ (this uses that $F$ is transcendental over $\Q(z)$), and the
+Schwarz-type analytic lemma.
+
+\paragraph{What changes $2$-adically, and why degree one suffices.}
+For irrationality one takes $m = 1$: $E = p_0 + p_1 F$ with $\deg p_i
+\le m'$, $N = 2m' + 1$. Archimedeanly $m = 1$ is hopeless (it recovers
+only Liouville-grade approximations). Ultrametrically it is enough
+because the height grows like $d^k \cdot m'$ while the gain grows like
+$d^k \cdot N \cdot v_2(\alpha)$, and for $\alpha = 8/9$, $d = 3$:
+$3(2m'+1)\log 2 > (m' + 5/2)\log 9$ for all $m' \ge 2$. The $5/2$ is
+the cost of transporting the rational value down the tower; it is
+independent of $m'$, which is exactly why the truncation approach
+(which pays the analogous cost at every step) sees exponent $0.946$
+while the Pad\'e form sees $1.89$ per unit degree. And, as
+Lemma~\ref{lem:size} shows, both delicate points disappear: with
+integer coefficients and $|\alpha_k|_2 \to 0$, the value of $E$ has
+\emph{exactly} the $2$-adic size of its leading term, so non-vanishing
+is automatic and the transcendence of $F$ over $\Q(z)$ is never used.
+(It is true --- $w$ is aperiodic --- but the certificate $c = -1 \ne 0$
+is the only fact about the leading behaviour of $E$ that the proof
+consumes.)
+
+\paragraph{Where this sits in the literature.} Irrationality and
+transcendence of $p$-adic values of Mahler functions at points inside
+the unit disc, and irrationality measures for them, are classical:
+see Loxton--van der Poorten \cite{lvdp}, Bundschuh and V\"a\"an\"anen
+\cite{bv}, and the function-field development by Fernandes
+\cite{fernandes}. We have not located a statement that covers
+$F_2(8/9)$ for this specific $F$ verbatim, but we would be surprised
+if the general form --- $F \in \Z[[z]]$ Mahler of degree $d$ over
+$\Q(z)$, not rational, $\alpha \in \Q$ with $0 < |\alpha|_p < 1$,
+$\Rightarrow F_p(\alpha) \notin \Q$ --- were not known to experts,
+and we make no priority claim for it. What we claim is the Collatz
+consequence, the explicit finite certificate, and the formalization.
+
+\paragraph{The whole rung.} The argument uses only: (i) $w$ is the
+fixed point of a constant-length substitution of length $\ell$ with
+every block containing the same number $a$ of ones, which gives the
+block formula with $(2^\ell, 3^a)$ in place of $(8, 9)$ and a
+functional equation of degree $\ell$ with polynomial coefficients;
+(ii) $|2^\ell/3^a|_2 = 2^{-\ell} < 1$; (iii) a Pad\'e certificate,
+found by linear algebra on the first $2m'+2$ letters, with odd leading
+coefficient (or leading coefficient of known $2$-adic size). The
+supercritical condition $2^\ell < 3^a$ is what makes the real value
+also converge, but it plays no role in the $2$-adic proof: the
+argument excludes \emph{sub}critical uniform-weight automatic words as
+itineraries too, which is consistent, since those are already excluded
+by the density corridor. A parametric Lean theorem with the
+certificate as an explicit input is the natural next formalization,
+and would turn rung one from one word into the class.
+
+\section{The next rung: Sturmian itineraries}\label{sec:next}
+
+Rung two consists of morphic and Sturmian itineraries. The Mahler route
+continues to non-uniform block weights via Hermite--Pad\'e forms for
+vector Mahler systems, with the same trivial ultrametric analytic
+lemma. But for Sturmian words there is an elementary route with no
+functional equation at all, whose threshold lands exactly on the
+critical line; it is machine-verified up to two classical facts of
+Diophantine approximation, which we isolate as hypotheses.
+
+\subsection{The prefix-power criterion}
+
+\begin{proposition}[\code{prefix\_power}, \code{prefix\_power\_bound}]
+\label{prop:pp}
+Let $\ell \le M$. If the itinerary of $n$ is $\ell$-periodic on its
+first $M$ letters, i.e.\ $T^t(n) \equiv T^{t+\ell}(n) \pmod 2$ for all
+$t + \ell < M$, then either $T^\ell(n) = n$, or
+\[
+2^{M-\ell} \le \max\big(n, T^\ell(n)\big), \qquad\text{hence}\qquad
+2^M \le 2^\ell n + 3^{o}\,(n + 2^\ell),
+\]
+where $o$ is the number of odd steps among the first $\ell$.
+\end{proposition}
+
+\begin{proof}
+$n$ and $T^\ell(n)$ have the same first $M - \ell$ parities, so they
+are congruent modulo $2^{M-\ell}$ by the parity bijection
+\cite{companion}; two distinct naturals congruent modulo $2^{M-\ell}$
+differ by at least $2^{M-\ell}$. The second form uses the master
+inequality $2^\ell (T^\ell(n) + 1) \le 3^o (n + 2^{\ell - o})$.
+\end{proof}
+
+In logarithmic form: if the itinerary begins with an $e$-th power (not
+necessarily integral) of a word of length $\ell$ and ones-density
+$\delta$, then $(e - 1)\ell \le \delta \ell \log_2 3 + \log_2(n+1) +
+O(1)$. The threshold exponent $1 + \delta \log_2 3$ equals $2$
+precisely at $\delta = \log 2/\log 3$. Below the critical line squares
+are impossible for large $\ell$; above it one needs $e > 2$. This is
+the Diophantine content of the parity bijection: the $2$-adic
+realizations of periodic words are rationals $d(u)/(2^\ell - 3^o)$,
+and an integer cannot lie $2$-adically within $2^{-M}$ of one unless
+it is as large as the approximation is good.
+
+We note in passing what this criterion is \emph{not}: for a rational
+(here, integer) target, Roth-, Ridout- and Subspace-theorem
+improvements of Liouville's inequality have no content, since the
+lower bound $|Nq - p| \ge 1$ is already exact. The lever is the word
+exponent, not the Diophantine exponent.
+
+\subsection{Sturmian words and their long periodic stretches}
+
+Fix $\alpha \in (0,1)$ irrational and $\rho \in \R$, and let
+$w_n = \lfloor (n+1)\alpha + \rho\rfloor - \lfloor n\alpha + \rho\rfloor
+\in \{0,1\}$ be the mechanical word; every Sturmian word is of this
+form, its ones-density is $\alpha$, and every shift of it is again
+mechanical with the same slope. Let $p_k/q_k$ be the convergents of
+$\alpha$, with partial quotients $a_k$, and $\delta_k = |q_k\alpha -
+p_k|$; the sign of $q_k\alpha - p_k$ alternates, and we call $k$
+\emph{positive} when it is $> 0$.
+
+Fix a positive $k$, write $q = q_k$, $\delta = \delta_k$, $Q =
+q_{k+1}$, and call $n$ a \emph{visit} if $\{n\alpha + \rho\} \ge 1 -
+\delta$. Two elementary facts (\code{floor\_shift}, \code{mech\_shift},
+\code{visit\_sep}):
+\begin{enumerate}
+\item[(i)] $\lfloor (n+q)\alpha + \rho \rfloor = \lfloor n\alpha +
+\rho\rfloor + p + [n \text{ is a visit}]$, hence $w_{n+q} = w_n$
+unless $n$ or $n+1$ is a visit.
+\item[(ii)] If $\|m\alpha\| \ge \delta$ for all $0 < m < Q$, two
+visits are at least $Q$ apart: their fractional parts lie in a
+half-open interval of length $\delta$, so their difference $n' - n$
+satisfies $\|(n'-n)\alpha\| < \delta$.
+\end{enumerate}
+The hypothesis of (ii) is Lagrange's best-approximation property of
+convergents: $q_{k+1}$ is the least $m > 0$ with $\|m\alpha\| <
+\|q_k\alpha\|$. The second classical input is the three-distance
+theorem \cite{sos}: among any $q_k + q_{k+1}$ consecutive points
+$\{n\alpha + \rho\}$, every gap is at most $\|q_k\alpha\|$, so every
+window of length $G = q_k + q_{k+1}$ contains a visit.
+
+Consequently, if $n_0$ is the first visit, $n_0 < G$, and the word is
+$q$-periodic on the run $[n_0 + 1,\, n_0 + Q - 1)$: a run of length
+$Q - 2$ starting at $s = n_0 + 1 \le G$.
+
+\subsection{The size of a tail}
+
+Suppose $N$ has itinerary $w$ with $\alpha$ above the critical line,
+i.e.\ $2 \le 3^\alpha$. The exact orbit identity gives $2^s T^s(N) =
+3^{j_s} N + d_s$ with $j_s = \lfloor s\alpha + \rho\rfloor - \lfloor
+\rho\rfloor \le s\alpha + 1$ and, by the closed form of
+$d_s = \sum_{i<s} w_i 2^i 3^{\#\{\text{ones in } (i, s)\}}$
+\cite{ladder}, each term at most $2^i \cdot 3^{(s-i-1)\alpha + 1} \le
+3^{i\alpha} 3^{(s-i-1)\alpha+1} \le 3 \cdot 3^{s\alpha}$ --- the step
+$2^i \le 3^{i\alpha}$ is exactly supercriticality. So
+(\code{dcoef\_le\_of\_itin}, \code{tail\_le\_of\_itin})
+\[
+d_s \le 3s\cdot 3^{s\alpha}, \qquad
+2^s\, T^s(N) \le 3^{s\alpha}\,(3N + 3s).
+\]
+
+\subsection{The level theorem}
+
+\begin{theorem}[\code{sturmian\_level}]\label{thm:level}
+Let $2 \le 3^\alpha$, $q\alpha = p + \delta$ with $0 < \delta < 1$,
+$Q \ge 3$, and suppose
+\begin{itemize}
+\item[(L)] $\|m\alpha\| \ge \delta$ for all $0 < m < Q$;
+\item[(T)] every window of $G$ consecutive integers contains a visit;
+\item[(S)] for every $s \le G$: $\ 2^{Q - 3 + s} > 3^{(q+s)\alpha + 1}\,(3N + 3s + 1)$.
+\end{itemize}
+Then $N$ does not have itinerary $w$.
+\end{theorem}
+
+\begin{proof}
+Let $n_0 < G$ be the first visit, $s = n_0 + 1$, $m = T^s(N)$. By (i)
+and (ii) the itinerary of $m$ is $q$-periodic on its first $q + Q - 2$
+letters. The orbit of $m$ is not $q$-periodic: otherwise $w$ would be
+$q$-periodic from $s$ on, so by (i) the visit indicator would be
+constant from $s$ on, contradicting (T) (there is a visit) together
+with (ii) (two adjacent visits are impossible as $Q \ge 3$).
+Proposition~\ref{prop:pp} gives $2^{q+Q-2} \le 2^q m + 3^o(m + 2^q)$
+with $o \le q\alpha + 1$, hence $2^{q+Q-2} \le 2^{q+1} 3^{q\alpha+1}
+(m+1)$. Multiplying by $2^s$ and using the tail bound together with
+$2^s \le 3^{s\alpha}$,
+\[
+2^{q+1} 2^{Q-3+s} \le 2^{q+1} 3^{q\alpha + 1} 3^{s\alpha} (3N + 3s + 1),
+\]
+contradicting (S).
+\end{proof}
+
+\begin{corollary}[Sturmian rung, conditional on Lagrange and three-distance]
+\label{cor:sturmian}
+Let $\alpha \in (\log 2/\log 3, 1)$ be irrational, $\eta = \alpha
+\log_2 3 - 1 \in (0, 0.585)$, and suppose that for infinitely many
+positive $k$
+\[
+a_{k+1} \;>\; \frac{1 + 2\eta}{1 - \eta}.
+\]
+Then no natural number has a Sturmian itinerary of slope $\alpha$,
+with any intercept.
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:level} at such a level with $q = q_k$, $Q =
+q_{k+1}$, $G = q_k + q_{k+1}$; (L) is Lagrange's property, (T) is the
+three-distance theorem. For (S), take logarithms: since the coefficient
+$\alpha \log_2 3 = 1 + \eta$ of $s$ on the right exceeds $1$, the
+worst case is $s = G$, and
+\[
+(Q - 3 + s) - \big((q+s)\alpha + 1\big)\log_2 3 - \log_2(3N + 3s + 1)
+\;\ge\; q_{k+1}(1 - \eta) - q_k(1 + 2\eta) - \log_2\!\big(3N + 3(q_k + q_{k+1}) + 1\big) - 5,
+\]
+which, as $q_{k+1} \ge a_{k+1} q_k$, is at least $q_k\big(a_{k+1}(1 -
+\eta) - (1 + 2\eta)\big) - O(\log q_k + \log N)$ and tends to
+$+\infty$ along the chosen levels.
+\end{proof}
+
+Concretely, partial quotients $\ge 2$ infinitely often suffice for
+$\alpha < 0.789$, $\ge 3$ for $\alpha < 0.883$, $\ge 4$ for $\alpha <
+0.946$, and $\ge 6$ for every $\alpha < 1$ --- a set of slopes of full
+Lebesgue measure in each range. Only the sign restriction (the level
+must be positive) and the golden-type slopes, whose partial quotients
+are eventually $1$, are outside the corollary. Numerically
+(\code{analysis/sturmian\_prefix\_power.py}) the golden-type slopes are
+excluded just as well up to $\alpha \approx 0.9$: the returns to the
+visit interval take the two values $q_{k+1}$ and $q_{k+1} + q_k$, the
+long return gives a run of length $\ge q_{k+1} + q_k - 2$, and the
+margin per $q_k$ is then $\approx (a_{k+1} + 1)(1 - \eta) - (1 +
+2\eta) - \eta\,(\text{position of the first long return})/q_k$,
+which stays positive for $\eta$ up to about $0.4$. Proving that a long
+return occurs early enough is a refinement of the three-distance
+theorem that we have not carried out.
+
+\subsection{Scope and honesty}
+
+Theorem~\ref{thm:level} is machine-verified with (L), (T), (S) as
+hypotheses. Everything about orbits, itineraries and sizes is inside
+Lean; the two Diophantine inputs and the asymptotic passage from (S)
+to a condition on partial quotients are not. Both inputs are
+nineteenth- and mid-twentieth-century classics with elementary
+proofs, and formalizing them (Lagrange's property is close to
+Mathlib's existing continued-fraction library; the three-distance
+theorem is not in Mathlib) is the natural next formalization target.
+With them, Corollary~\ref{cor:sturmian} becomes a theorem of the
+repository, and the Sturmian part of rung two closes for the stated
+slopes. The morphic, non-Sturmian words of rung two remain for the
+Mahler route.
+
+\section*{Reproducibility}
+
+\code{lean/Collatz/Rung1.lean} builds against the repository's pinned
+Mathlib with \code{lake build Collatz.Rung1}; \code{\#print axioms}
+reports \code{propext}, \code{Classical.choice}, \code{Quot.sound} for
+the theorems \code{no\_shifted\_sigWord\_itinerary},
+\code{no\_sigWord\_itinerary} and \code{core}. \code{lean/Collatz/PrefixPower.lean} and \code{lean/Collatz/Sturmian.lean}
+build the same way and report the same axioms.
+\code{analysis/pade\_rung1.py} recomputes the Pad\'e
+certificates for degrees $2, 3, 4, 6$, checks the predicted $2$-adic
+valuations of $E(\alpha_k)$ against the series to $1053$ bits, and
+prints the height ledger.
+
+\begin{thebibliography}{10}
+
+\bibitem{bv} P.~Bundschuh and K.~V\"a\"an\"anen, Arithmetical
+properties of the solutions of certain functional equations, and
+related papers on $p$-adic Mahler values, 1990s--2010s.
+
+\bibitem{fernandes} G.~Fernandes, M\'ethode de Mahler en
+caract\'eristique non nulle, \emph{Ann. Inst. Fourier} \textbf{68}
+(2018).
+
+\bibitem{ladder} M.~Sharpe, The word-complexity ladder for Collatz
+divergence: a machine-verified rung zero and a Mahler-value reduction
+of the automatic rung, companion paper and repository, 2026.
+
+\bibitem{lvdp} J.~H.~Loxton and A.~J.~van der Poorten, Arithmetic
+properties of the solutions of a class of functional equations,
+\emph{J. Reine Angew. Math.} \textbf{330} (1982), 159--172.
+
+\bibitem{mahler} K.~Mahler, Arithmetische Eigenschaften der
+L\"osungen einer Klasse von Funktionalgleichungen, \emph{Math. Ann.}
+\textbf{101} (1929), 342--366.
+
+\bibitem{nishioka} Ku.~Nishioka, \emph{Mahler Functions and
+Transcendence}, Lecture Notes in Mathematics 1631, Springer, 1996.
+
+\bibitem{sos} V.~T.~S\'os, On the distribution mod 1 of the sequence
+$n\alpha$, \emph{Ann. Univ. Sci. Budapest. E\"otv\"os Sect. Math.}
+\textbf{1} (1958), 127--134; see also N.~B.~Slater, Gaps and steps
+for the sequence $n\theta \bmod 1$, \emph{Proc. Cambridge Philos.
+Soc.} \textbf{63} (1967), 1115--1123.
+
+\bibitem{companion} M.~Sharpe, The Collatz conjecture at the critical
+line: machine-verified no-go, density, and cycle theorems; the
+$3$-adic shadow, companion papers and repository, 2026.
+
+\end{thebibliography}
+
+\end{document}

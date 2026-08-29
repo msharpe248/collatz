@@ -25,7 +25,7 @@
   the certification scheme, and this text were produced in collaboration
   with Claude (Anthropic). All final verifications are exact integer
   computations; see Section~\ref{sec:cert}.}}
-\date{June 12, 2026}
+\date{June 12, 2026; revised August 29, 2026}
 
 \begin{document}
 \maketitle
@@ -57,12 +57,17 @@ lower bounds certified via integer power comparisons. The method
 reproduces the complete published table of Krasikov--Lagarias
 ($2 \le k \le 11$) to all seven printed decimals, and yields certified
 exponents $0.853, 0.863, 0.8724, 0.8812, 0.888, 0.895$ at
-$k = 12, \dots, 17$. Separately, a Lean~4 formalization of an
-integer-grid weakening of the method now carries machine verification
-past the problem's critical constant: a kernel-checked proof that
+$k = 12, \dots, 17$. Separately, the record itself is now MACHINE-VERIFIED: a Lean~4
+formalization of the Krasikov--Lagarias inequality system --- including
+its ``advanced'' term, which their proof handles by an elimination
+argument and which we handle by a strong induction over roots on the
+measure $10t + \lfloor \log_2 a^{498}\rfloor$ --- together with a
+$177{,}147$-class certificate decided by the Lean kernel, gives
 $\pi_1(x) = \Omega(x^{\gamma})$ with
-$\gamma = 50\log_2(1261/1250) = 0.632009\ldots > \log 2/\log 3$
-(Section~\ref{sec:disc}).
+$\gamma = 50\log_2(101182/100000) = 0.8476\ldots > 0.84$ at level
+$k = 12$ and $\gamma = 0.8569\ldots$ at $k = 13$, the first
+kernel-checked improvements of the 2003 bound
+(Section~\ref{sec:formal}).
 \end{abstract}
 
 \section{Introduction}
@@ -354,6 +359,178 @@ $L_{17}^{NT}(2^{179/200})$ by Lemmas \ref{lem:cert} and
 \ref{lem:round}. Apply Theorem~\ref{thm:kl}.
 \end{proof}
 
+\section{Machine verification of the record}\label{sec:formal}
+
+The exponent $0.895$ of Section~\ref{sec:results} rests on
+Theorem~2.2 of \cite{kl} and an exact integer check of the certificate
+in Python. This section reports a fully machine-verified exponent
+above the 2003 record: everything from the dynamics of $T$ to the
+final inequality is a Lean~4 proof, with the certificate checked by
+the Lean kernel itself.
+
+\subsection*{The obstacle: the advanced term}
+
+Krasikov's difference inequalities for the class infima
+$\phi^m_k(y) = \inf\{\pi^*_a(2^y a) : a \equiv m \ (3^k)\}$ read
+(\cite{kl}, Prop.~2.1; $\alpha = \log_2 3$)
+\begin{align*}
+m \equiv 2\ (9):&\quad \phi^m(y) \ge \phi^{4m}(y-2) + \bar\phi^{(4m-2)/3}(y+\alpha-2),\\
+m \equiv 5\ (9):&\quad \phi^m(y) \ge \phi^{4m}(y-2),\\
+m \equiv 8\ (9):&\quad \phi^m(y) \ge \phi^{4m}(y-2) + \bar\phi^{(2m-1)/3}(y+\alpha-1),
+\end{align*}
+where $\bar\phi$ is the minimum over the three lifts of a class of
+modulus $3^{k-1}$. The last term is \emph{advanced}: the child
+$(2a-1)/3$ is smaller than $a$, so its tree is counted at a larger
+relative scale $y + \alpha - 1$. A feasible solution $c$ of the linear
+program with coefficients $\lambda^{-2}, \lambda^{\alpha-2},
+\lambda^{\alpha-1}$ yields $\phi^m(y) \ge \Delta c_m \lambda^y$
+(their Theorem~2.2), but a straightforward induction on $y$ cannot
+invoke the hypothesis at $y + \alpha - 1 > y$. Krasikov and Lagarias
+prove Theorem~2.2 through a back-substitution procedure that
+eliminates advanced terms (their \S3--5), with a deletion rule
+justified by monotonicity and termination proved via K\H{o}nig's
+lemma; the derived system has nested minimizations of depth $> 226$
+already at $k = 5$. Truncating the advanced term instead, i.e.\ using
+monotonicity to retard it below $y$, is what Applegate--Lagarias did
+in 1995 and what the earlier formalization \code{Krasikov50.lean}
+does; we computed that the truncated system's exponent saturates near
+$0.66$ at every level, while the exact system reaches $0.849$ at
+$k = 12$: the advanced term is worth about $0.19$ in the exponent, and
+cannot be dispensed with.
+
+\subsection*{A root induction instead of elimination}
+
+We work on the $1/50$ grid of \code{Krasikov50.lean}: caps
+$\mathrm{cap}(t) = 2^{\lfloor t/50\rfloor} r[t \bmod 50]$ with a fixed
+integer table $r \approx 10^4 \cdot 2^{i/50}$, rate $\mu = p/q$ per
+grid step, so that $\lambda = \mu^{50}$ and every certificate
+condition is an integer inequality. The three inequalities become,
+with offsets in grid steps,
+\[
+\phi(m, t+100) \;\ge\; \phi(4m, t) \;+\;
+\begin{cases}
+\bar\phi\big(\tfrac{4m-2}{3}, t + 79\big) & m \equiv 2\ (9),\\[2pt]
+0 & m \equiv 5\ (9),\\[2pt]
+\bar\phi\big(\tfrac{2m-1}{3}, t + 129\big) & m \equiv 8\ (9),
+\end{cases}
+\]
+the offsets $79 = 100 - 21$ and $129 = 100 + 29$ being the grid
+roundings of $2 + (\alpha - 2)$ and $2 + (\alpha - 1)$ (kernel-checked
+table conditions $4\,\mathrm{cap}(t) \le 3\,\mathrm{cap}(t+21)$ and
+$2\,\mathrm{cap}(t+29) \le 3\,\mathrm{cap}(t)$; the earlier file used
+$99$ in place of $129$, which is the truncation).
+
+The key observation is that the advanced term can be handled by a
+plain strong induction provided one inducts over \emph{roots} $a$
+rather than classes, because root size is a second well-founded
+quantity that decreases exactly where the scale increases. Define
+\[
+M(t, a) \;=\; 10\,t + \lfloor \log_2 a^{498} \rfloor .
+\]
+Along the three branches, with $b = (2a-1)/3$:
+\begin{align*}
+(4a,\ t-100):&\quad 10t - 1000 + \lfloor\log_2 (4a)^{498}\rfloor
+  = 10t + \lfloor\log_2 a^{498}\rfloor + 996 - 1000,\\
+(2b,\ t-21):&\quad \lfloor\log_2 (2b)^{498}\rfloor \le
+  \lfloor\log_2 a^{498}\rfloor + 207 \ (\text{as } 3\cdot 2b \le 4a),
+  \quad -210 + 207,\\
+(b,\ t+29):&\quad \lfloor\log_2 b^{498}\rfloor \le
+  \lfloor\log_2 a^{498}\rfloor - 291 \ (\text{as } 3b \le 2a),
+  \quad +290 - 291,
+\end{align*}
+so $M$ drops by $4$, $3$ and $1$ respectively; the two inequalities on
+logarithms both reduce to the single numeric fact $3^{498} > 2^{789}$
+($498 \log_2 3 = 789.3$). The induction then goes through verbatim:
+the certificate inequality at the class of $a$, the three per-root
+difference inequalities (which are the internals of the class
+inequalities, with the child's class now known exactly, so the minimum
+over lifts is replaced by the certificate value at that class), and
+the induction hypothesis at the three children. Two features of the
+grid are essential. The exact advanced shift $\alpha - 1 =
+\log_2(3/2)$ would make the measure degenerate --- the conditions on
+the exponent $N$ in $\lfloor \log_2 a^N\rfloor$ become $2N < 100\beta$
+and $N \log_2(3/2) > 29.248\,\beta$, i.e.\ $N < 50\beta$ and $N >
+50\beta$ --- which is precisely why Krasikov--Lagarias needed
+elimination; the grid offset $29 < 50\log_2(3/2) = 29.248$ opens the
+window $49.58\beta < N < 50\beta$ (we use $\beta = 10$, $N = 498$), at
+a cost of $1/50$ of a doubling on that branch. And inducting over
+roots removes the minimum over lifts from the induction and the need
+for nonemptiness witnesses for the $3^{k-1}$ classes.
+
+\begin{theorem}[\code{G50.growth\_root}]
+Let $k \ge 2$, $1 \le q \le p$, and $c : \N \to \N$ with
+$1 \le c_m \le C_{\max}$ on the classes $m \equiv 2\ (3)$ of modulus
+$3^k$, satisfying
+\begin{align*}
+m \equiv 5\ (9):&\quad c_m p^{100} \le c_{4m} q^{100},\\
+m \equiv 2\ (9):&\quad c_m p^{100} \le c_{4m} q^{100} + \bar c_{(4m-2)/3}\, p^{79} q^{21},\\
+m \equiv 8\ (9):&\quad c_m p^{100} q^{29} \le c_{4m} q^{129} + \bar c_{(2m-1)/3}\, p^{129}.
+\end{align*}
+Then for every root $a \ge 3$, $a \equiv 2\ (3)$, whose orbit reaches
+$8$, and every $t$,
+\[
+c_{a \bmod 3^k}\; p^t q^{100} \;\le\; \pi^*_a\big(\mathrm{cap}(t)\, a\big)\cdot
+\big(C_{\max}\, q^t p^{100}\big).
+\]
+\end{theorem}
+
+\subsection*{The certificate and the kernel check}
+
+At $k = 12$ ($177{,}147$ classes) the grid system admits
+$\mu = 101182/100000$, i.e.\ $\lambda = \mu^{50} = 1.7995$ and
+$\gamma = 50 \log_2 \mu = 0.8476$, with an integer certificate of
+$32$-bit entries found by power iteration on the monotone map of
+Section~\ref{sec:method} (exponents $-100, -21, +29$ in place of
+$-2, \alpha-2, \alpha-1$) and checked exactly in Python. In Lean the
+certificate is $81$ packed natural-number literals of $2187$ entries
+each, read by kernel-accelerated shift and mask; the per-class
+condition is a Boolean function built from \code{Nat.ble}, evaluated
+over each shard by a divide-and-conquer range checker of logarithmic
+depth with a once-proved soundness lemma, and discharged by
+\code{decide +kernel} --- the kernel's own reduction, no
+\code{native\_decide}, no trusted compiler --- in about fifteen minutes
+and $18$~GB. The final theorem:
+
+\begin{theorem}[\code{K12.density\_bound}]
+For every $y \ge 0$,
+\begin{multline*}
+554204 \cdot 101182^{50y} \cdot 100000^{100} \\
+\le\; \#\{n \le 80000\cdot 2^y : \text{the orbit of } n \text{ reaches } 1\}
+\cdot \big(16777216 \cdot 100000^{50y}\cdot 101182^{100}\big),
+\end{multline*}
+i.e.\ $\pi_1(x) = \Omega(x^{\gamma})$ with $\gamma = 50\log_2(101182/100000)
+= 0.84763\ldots$.
+\end{theorem}
+
+Axioms: \code{propext}, \code{Classical.choice}, \code{Quot.sound}
+only; no \code{sorry}. This is the first machine-verified exponent
+above $0.84$ --- the published record since 2003 --- and, we believe,
+the first machine verification of any result in the
+Krasikov--Lagarias program at full strength. The grid rounding costs
+$0.0055$ against the exact linear program ($0.8531$ at $k = 12$); a
+finer grid recovers it. The same files instantiate at any level: the
+kernel time grows a little faster than linearly in the number of
+classes, so $k = 13$ ($0.8569$) is about an hour and $k = 14$ ($0.870$)
+a few hours; the informal $0.895$ at $k = 17$ is the same system at a level
+the kernel has not yet been asked to check. The $k = 13$ instance has
+also been run: \code{K13.density\_bound} (files \code{KL13Data},
+\code{KL13Check0--2}, \code{KL13}; $531{,}441$ classes in $243$ shards,
+$2$\,h\,$15$\,min of kernel time) gives $\gamma = 50\log_2(101195/100000)
+= 0.8569\ldots$, with the analogous displayed inequality
+($387326 \cdot 101195^{50y}\cdot 100000^{100} \le \#\{\cdots\}\cdot
+(16777216 \cdot 100000^{50y} \cdot 101195^{100})$).
+
+\subsection*{Trust base, stated precisely}
+
+What is verified: the definitions of $T$, the capped backward tree and
+its count, the three difference inequalities for every root, the
+growth theorem, the certificate conditions for all $177{,}147$
+classes, and the final density inequality. What is not verified and
+need not be: how the certificate was found (power iteration in
+floating point, then rounded). What is imported: nothing beyond
+Lean's kernel and Mathlib. What is claimed: exactly the displayed
+inequality, for every $y$, with no ``sufficiently large''.
+
 \section{Discussion}\label{sec:disc}
 
 The marginal exponent gains per level,
@@ -430,9 +607,8 @@ numbers is numerical rather than structural --- they measure different
 things --- but as a milestone it is sharp: the machine-verified count
 of integers reaching $1$ now provably grows faster than
 $x^{\log 2/\log 3}$. The exponent $0.632$ exceeds every bound published
-before Applegate--Lagarias \cite{applegate-lagarias}; scaling the
-formal pipeline onward toward the present paper's $0.895$ certificates
-is mechanical in principle.
+before Applegate--Lagarias \cite{applegate-lagarias}; the formal pipeline has since been
+scaled past the 2003 record itself (Section~\ref{sec:formal}).
 
 \subsection*{Reproducibility}
 The search engine, the one-shot driver, both exact verifiers, the

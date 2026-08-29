@@ -1,5 +1,19 @@
 # A new lower-bound exponent for the 3x+1 problem (2026-06-11)
 
+**Update 2026-08-29 — MACHINE-VERIFIED: γ = 0.8569 (k=13, `KL13.lean`) and 0.8476 (k=12, `KL12.lean`), both > 0.84.**
+`lean/Collatz/KL12.lean` (`Collatz.K12.density_bound`) kernel-checks a
+k = 12 certificate of the *grid* form of the KL system (exponents
+100/79/129 in 1/50-doubling units, `analysis/kl_grid_certificate.py`)
+with μ = 101182/100000, λ = μ^50 = 1.7995, γ = 0.8476. The generic growth
+theorem (`lean/Collatz/KLGrid.lean`, `G50.growth_root`) handles KL's
+advanced term by a strong induction over roots on the measure
+10t + ⌊log₂(a^498)⌋ instead of their §3–5 elimination. Axioms:
+propext, Classical.choice, Quot.sound; no native_decide. The truncated
+system (offset 99, `Krasikov50.lean`) caps at γ ≈ 0.66 at every k; the
+grid system gives 0.800 (k=8), 0.813, 0.826, 0.838, 0.849 (k=12), 0.859
+(k=13) — about 0.005 below the exact LP column below.
+
+
 **Result.** For every a ≢ 0 (mod 3), the counting function
 π_a(x) = #{n ≤ x : the 3x+1 orbit of n contains a} satisfies
 

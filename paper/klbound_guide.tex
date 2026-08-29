@@ -266,4 +266,33 @@ fragment is additionally machine-verified end to end in Lean --- first
 at $x^{0.4543}$, now at $x^{0.63201}$, above the problem's critical
 constant $\log 2/\log 3 = 0.63093$.
 
+\section*{Postscript (August 2026): the record, checked by machine}
+
+The $0.895$ above rests on Krasikov and Lagarias's theorem plus an
+exact computer check. As of August 2026 a weaker but fully
+machine-verified version exists: the Lean proof assistant has checked,
+from the definition of the $3x+1$ map upward, that at least
+$x^{0.8569}$ of the integers below $x$ reach $1$ --- above the
+twenty-year-old published record $x^{0.84}$ (a first run at a smaller
+level gave $x^{0.8476}$).
+
+The obstacle was a single term in the Krasikov--Lagarias inequalities
+that looks ``forward in time'': one of the children in the tree of
+preimages is \emph{smaller} than its parent, so its tree is measured
+at a larger scale. Induction wants to look backward. Krasikov and
+Lagarias got around this with an elimination procedure whose
+termination needs K\H{o}nig's lemma. The formal proof gets around it
+differently: instead of inducting on scale alone, it inducts on the
+pair (scale, size of the root) combined into one number,
+$10t + \lfloor 498 \log_2 a\rfloor$, chosen so that every step of the
+recursion makes it strictly smaller --- the forward-looking child is
+smaller by a factor $3/2$, and $498 \log_2(3/2) = 291.3$ just beats the
+$290$ that the scale gains. That ``just'' is not luck: on the exact
+scale the two effects cancel precisely, and it is the deliberate
+$1/50$-step rounding of the scale that opens the gap.
+
+The certificate --- $531{,}441$ integers, one per congruence class mod
+$3^{13}$ --- is stored inside the proof as $243$ very large numbers and
+checked, class by class, by Lean's kernel in a little over two hours. Nothing is trusted from outside.
+
 \end{document}

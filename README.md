@@ -15,13 +15,21 @@ It also contains a new unconditional result: **π_a(x) ≥ x^0.895** — the
 number of integers below x whose 3x+1 orbit contains a (any a ≢ 0
 mod 3), improving the x^0.84 record of Krasikov–Lagarias (2003) by
 scaling their own program to 43 million congruence classes with exact
-integer certificates — and, machine-verified end to end,
-**π₁(x) = Ω(x^0.63201)**, a kernel-checked density exponent above the
-problem's critical constant log 2/log 3 = 0.63093. See
+integer certificates — and, **machine-verified end to end,
+π₁(x) = Ω(x^0.8569)**, the first kernel-checked exponent above the
+twenty-year-old published record x^0.84
+([lean/Collatz/KL13.lean](lean/Collatz/KL13.lean), 531,441 classes; and
+[lean/Collatz/KL12.lean](lean/Collatz/KL12.lean), x^0.8476: the Krasikov–Lagarias
+difference inequalities *with their advanced term*, proved by a root
+induction that sidesteps their elimination argument
+([lean/Collatz/KLGrid.lean](lean/Collatz/KLGrid.lean)), plus a
+177,147-class certificate decided by the Lean kernel — no
+`native_decide`, no floating point). The earlier verified exponent
+x^0.63201 ([lean/Collatz/Krasikov50.lean](lean/Collatz/Krasikov50.lean))
+was the first above the critical constant log 2/log 3 = 0.63093. See
 [paper/klbound.pdf](paper/klbound.pdf) (guide:
-[paper/klbound_guide.pdf](paper/klbound_guide.pdf)),
-[analysis/KL_RECORD.md](analysis/KL_RECORD.md), and
-[lean/Collatz/Krasikov50.lean](lean/Collatz/Krasikov50.lean).
+[paper/klbound_guide.pdf](paper/klbound_guide.pdf)) and
+[analysis/KL_RECORD.md](analysis/KL_RECORD.md).
 
 A third paper develops the reduction layer: **the 3-adic shadow** — a
 divergent Collatz orbit is exactly an integer that compresses its own
@@ -35,12 +43,19 @@ theorems machine-verified, plus the experimental discoveries
 A fourth paper opens **the word-complexity ladder**: order potential
 divergent orbits by the complexity of their parity itineraries and
 exclude class by class. Rung zero is machine-verified (divergent
-itineraries are never eventually periodic), and the automatic rung is
-reduced — exactly, with proofs — to the irrationality of a single
-2-adic Mahler value F₂(8/9), with the real value already
-transcendental by Mahler's classical method and the naive route
-provably insufficient (truncation exponent 0.946 < 1, the critical
-density again). See [paper/ladder.pdf](paper/ladder.pdf) (guide:
+itineraries are never eventually periodic), and **rung one is now
+closed for the running example, machine-verified**: no orbit's
+itinerary is the fixed point of σ: 1→110, 0→011 (density 2/3, above
+the critical line) or any shift of it. The reduction to the
+irrationality of the 2-adic Mahler value F₂(8/9) is discharged by
+Mahler's method in degree one — a Padé certificate on ten letters, the
+functional equation, and a height ledger that closes because
+2^27 > 28·9^7 — in purely integer form, no p-adic analysis
+([lean/Collatz/Rung1.lean](lean/Collatz/Rung1.lean),
+numerics in [analysis/pade_rung1.py](analysis/pade_rung1.py)). See
+[paper/rung1.pdf](paper/rung1.pdf) (guide:
+[paper/rung1_guide.pdf](paper/rung1_guide.pdf)) for rung one, and
+[paper/ladder.pdf](paper/ladder.pdf) (guide:
 [paper/ladder_guide.pdf](paper/ladder_guide.pdf)),
 [lean/Collatz/Ladder.lean](lean/Collatz/Ladder.lean), and
 [analysis/RUNG1_ATTACK.md](analysis/RUNG1_ATTACK.md).
@@ -125,6 +140,20 @@ subject, formalized:
 | `no_descent_window_bound` | **Terras' theorem**: the integers in [2^k, 2^(k+1)) that don't drop below themselves within k steps number ≤ 3^k/2^(17(k−1)/27) ≈ 2^(0.955k) — a vanishing ≈ 2^(−0.045k) fraction of the window |
 | `divergent_window_bound` | Same bound for integers whose orbit *never* descends: almost every integer has finite stopping time |
 
+### Beating the 2003 record, machine-verified ([lean/Collatz/KLGrid.lean](lean/Collatz/KLGrid.lean), [lean/Collatz/KL12.lean](lean/Collatz/KL12.lean))
+
+Krasikov–Lagarias' inequality (D3) for classes m ≡ 8 (mod 9) contains an *advanced* term — the child (2a−1)/3 is smaller than a, so its tree is counted at a larger relative scale — and a plain induction on scale cannot use it; KL prove their Theorem 2.2 by a back-substitution/elimination procedure whose termination uses Kőnig's lemma. Truncating the term instead (Applegate–Lagarias 1995; `Krasikov50.lean`) caps the exponent near 0.66. The advanced term is worth ≈ 0.19 in the exponent.
+
+| Theorem | Statement |
+|---|---|
+| `G50.cap_shift29` | 2·cap(t+29) ≤ 3·cap(t): the exact grid offset for the advanced branch (2^(29/50) = 1.4946 < 3/2) |
+| `G50.cnt_rec_two`, `cnt_rec_five`, `cnt_rec_eight` | The three KL difference inequalities per root, the last with the exact offset t+129 |
+| `G50.growth_root` | **The growth theorem with the advanced term**: for any level k ≥ 2, rate p/q and certificate satisfying `CertOK`, every root a ≡ 2 (3) reaching 8 has cnt(a, cap(t)·a) ≥ c_a·(p/q)^t/Cmax. Proved by strong induction over roots on the measure M(t,a) = 10t + ⌊log₂(a^498)⌋, which drops by 4, 3, 1 along the three branches because 3^498 > 2^789 — no elimination, no Kőnig; the 1/50-grid rounding (29 < 50·log₂(3/2) = 29.25) is exactly the slack that makes the measure well-founded |
+| `K13.density_bound` | **The record**: #{n ≤ 80000·2^y reaching 1} ≥ (387326/16777216)·(101195/100000)^(50y)·const, i.e. π₁(x) = Ω(x^0.8569), γ = 50·log₂(101195/100000) > 0.8418 (KL 2003). Certificate: 531,441 classes mod 3^13 as 243 packed shards in three files (`KL13Data`, `KL13Check0–2`), each class decided by `decide +kernel` (≈2¼ hours, ≈23 GB) |
+| `K12.density_bound` | The same at k = 12: #{n ≤ 80000·2^y reaching 1} ≥ (554204/16777216)·(101182/100000)^(50y)·const, i.e. π₁(x) = Ω(x^0.8476), γ = 50·log₂(101182/100000) > 0.8418 (KL 2003, k = 11). Certificate: 177,147 classes mod 3^12 as 81 packed 32-bit shards; every class condition decided by `decide +kernel` (≈15 min, ≈18 GB) |
+
+The truncated system's ceiling (γ ≈ 0.66 at every k) and the exact-offset system's values (0.800 at k=8 … 0.849 at k=12, 0.859 at k=13) are tabulated by `analysis/kl_grid_certificate.py` and the scratch bisection; the informal record 0.895 (k = 17, 43 million classes) is the same system at a level the kernel has not yet been asked to check.
+
 ### The density exponent ([lean/Collatz/Krasikov.lean](lean/Collatz/Krasikov.lean))
 
 The first machine-verified density lower bound for the 3x+1 problem:
@@ -182,6 +211,42 @@ The reduction layer: divergence as sustained 3-adic compression.
 | `divergent_itinerary_aperiodic` | **Rung zero**: a divergent orbit's itinerary is never eventually periodic — periodic itineraries belong only to bounded orbits |
 | `dcoef_closed` | The closed form d(w) = Σ_{w_i=1} 2^i·3^(#ones after i) — the engine of the Mahler-method attack on the automatic rung |
 
+### Rung one ([lean/Collatz/Rung1.lean](lean/Collatz/Rung1.lean))
+
+| Theorem | Statement |
+|---|---|
+| `preS_three` | The Mahler functional equation F(z) = (z+z²)/(1−z³) + (1−z²)F(z³) as an exact identity between homogenised prefix sums |
+| `link` | An orbit whose itinerary is the s-shift of w forces x(w) = (2^s n − d_s)/3^{j_s}: a rational with odd denominator, in congruence form for every prefix length |
+| `Hyp_succ` | The tower transport: the functional equation carries the rational-value hypothesis from α_k = (8/9)^{3^k} to α_{k+1} |
+| `pade_base` | The certificate: p₀ + p₁·F with p₀ = 1+z³−z⁴, p₁ = −1+z−z²+z³ vanishes to order exactly 9 at 0 with leading coefficient −1 |
+| `level_dvd` | At level k the Padé value Z_k is a nonzero multiple of 2^{9·3^{k+1}} — the exact 2-adic size |
+| `lv_bounds`, `final_ineq` | The height ledger: \|Z_k\| ≤ 7·3^k·9^{7·3^k}·max(\|D₀\|,\|u₀\|), and 2^{27·3^k} beats it once k ≥ that maximum |
+| `core` | **F₂(8/9) is irrational** (no rational with odd denominator satisfies the prefix congruences) |
+| `no_shifted_sigWord_itinerary` | **Rung one, running example**: no natural number's Terras itinerary is w or any shift of w |
+
+### The prefix-power criterion ([lean/Collatz/PrefixPower.lean](lean/Collatz/PrefixPower.lean))
+
+| Theorem | Statement |
+|---|---|
+| `prefix_power` | If the itinerary of n is ℓ-periodic on its first M letters (begins with a possibly fractional power of a word of length ℓ), then T^ℓ(n) = n or 2^(M−ℓ) ≤ max(n, T^ℓ(n)) — n and T^ℓ(n) share M−ℓ parities, so they are congruent mod 2^(M−ℓ) |
+| `prefix_power_bound` | Size form: 2^M ≤ 2^ℓ·n + 3^o·(n + 2^ℓ), i.e. (e−1)ℓ ≤ o·log₂3 + log₂(n+1) + O(1) for an initial e-th power with o ones per period; the threshold exponent 1 + δ·log₂3 is exactly 2 on the critical line |
+| `prefix_power_divergent` | On a divergent orbit the bound holds at every tail position (a periodic tail would bound the orbit) |
+
+Sturmian words of slope α are q_k-periodic over stretches of length ≈ q_k + q_{k+1} (three-distance structure), an initial exponent ≥ 2.6, so numerically ([analysis/sturmian_prefix_power.py](analysis/sturmian_prefix_power.py)) the criterion's margin grows linearly with prefix length for every tested slope above the critical line and every intercept.
+
+### Sturmian itineraries: the level theorem ([lean/Collatz/Sturmian.lean](lean/Collatz/Sturmian.lean))
+
+For the mechanical word w_n = ⌊(n+1)α+ρ⌋ − ⌊nα+ρ⌋ with 2 ≤ 3^α (above the critical line), an approximation qα = p + δ (0 < δ < 1), and "visits" {nα+ρ} ≥ 1−δ:
+
+| Theorem | Statement |
+|---|---|
+| `mech_shift` | w_{n+q} = w_n unless n or n+1 is a visit |
+| `visit_sep` | Two visits are ≥ Q apart if ‖mα‖ ≥ δ for 0 < m < Q (Lagrange's best-approximation property for convergents, taken as a hypothesis) |
+| `dcoef_le_of_itin` | On such an itinerary the correction term satisfies d_s ≤ 3s·3^{sα} — because 2 ≤ 3^α |
+| `sturmian_level` | **The level theorem**: if in addition every window of length G contains a visit (three-distance theorem, G = q_k + q_{k+1}, taken as a hypothesis) and 2^(Q−3+s) > 3^((q+s)α+1)(3N+3s+1) for all s ≤ G, then N does not have itinerary w |
+
+The size condition holds at level k whenever the partial quotient a_{k+1} exceeds (1+2η)/(1−η), η = α·log₂3 − 1; so, given the two classical Diophantine facts, every Sturmian itinerary whose slope has infinitely many partial quotients ≥ 2 (for α < 0.789), ≥ 3 (α < 0.883), ≥ 4 (α < 0.946) or ≥ 6 (any α < 1) is excluded, at every intercept. Golden-tail slopes (partial quotients eventually 1) are excluded numerically up to α ≈ 0.9 but need the long returns q_k + q_{k+1}, not proved here. The two Diophantine facts are not formalized.
+
 ### The critical line ([lean/Collatz/Critical.lean](lean/Collatz/Critical.lean))
 
 The density dichotomy is **sharp**:
@@ -231,9 +296,15 @@ collatz/
 │       ├── Terras.lean   # Terras' theorem: almost all n descend (finite form)
 │       ├── Critical.lean # the density dichotomy is sharp at log2/log3
 │       ├── Krasikov.lean   # machine-verified density exponent x^0.4543
+│       ├── KLGrid.lean    # KL inequalities WITH the advanced term: root induction, generic in k and p/q
+│       ├── KL12.lean      # verified γ = 0.8476 > 0.84, 81 kernel-checked shards
+│       ├── KL13*.lean     # verified γ = 0.8569: data + 3 check files (243 shards) + theorem
 │       ├── Krasikov50.lean # 1/50-grid: exponent x^0.63201, above critical
 │       ├── Shadow.lean   # the 3-adic shadow: divergence = compression
-│       └── Ladder.lean   # word-complexity ladder: rung zero + d(w) closed form
+│       ├── Ladder.lean   # word-complexity ladder: rung zero + d(w) closed form
+│       ├── Rung1.lean    # rung one: 2-adic Mahler method in degree one, integer form
+│       ├── PrefixPower.lean # prefix-power criterion: initial powers vs 2-adic congruence
+│       └── Sturmian.lean # Sturmian itineraries: the level theorem (Lagrange + three-distance as hypotheses)
 ├── analysis/
 │   ├── certificate_search.py    # LP/max-mean-cycle search that motivated NoGo
 │   ├── automaton_potentials.py  # digit-automaton potentials (evade the no-go)
