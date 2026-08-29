@@ -16,8 +16,10 @@ number of integers below x whose 3x+1 orbit contains a (any a ≢ 0
 mod 3), improving the x^0.84 record of Krasikov–Lagarias (2003) by
 scaling their own program to 43 million congruence classes with exact
 integer certificates — and, **machine-verified end to end,
-π₁(x) = Ω(x^0.8569)**, the first kernel-checked exponent above the
-twenty-year-old published record x^0.84
+π₁(x) = Ω(x^0.8569)**, the first kernel-checked exponents *exceeding* the
+twenty-year-old published record x^0.84 (the record itself, γ = 0.8418,
+was first formalized by [Menta2357/collatz-classical](https://github.com/Menta2357/collatz-classical),
+July 2026, via KL's own elimination argument)
 ([lean/Collatz/KL13.lean](lean/Collatz/KL13.lean), 531,441 classes; and
 [lean/Collatz/KL12.lean](lean/Collatz/KL12.lean), x^0.8476: the Krasikov–Lagarias
 difference inequalities *with their advanced term*, proved by a root

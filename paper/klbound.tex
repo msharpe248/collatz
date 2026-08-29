@@ -528,7 +528,11 @@ growth theorem, the certificate conditions for all $177{,}147$
 classes, and the final density inequality. What is not verified and
 need not be: how the certificate was found (power iteration in
 floating point, then rounded). What is imported: nothing beyond
-Lean's kernel and Mathlib. What is claimed: exactly the displayed
+Lean's kernel and Mathlib. The $k = 12$ modules were additionally
+replayed through an independent instance of the kernel by
+\code{lean4checker} (built for the same toolchain), which re-evaluates
+every shard proof from the stored declarations and reports no
+discrepancy. What is claimed: exactly the displayed
 inequality, for every $y$, with no ``sufficiently large''.
 
 \section{Discussion}\label{sec:disc}
