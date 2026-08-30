@@ -16,6 +16,12 @@ reproducible byte-for-byte.
 | `kl_certificate.py` | exact rational certification: λ = 2^(p/q), coefficient lower bounds by integer power comparison, every constraint checked in exact integer arithmetic — turns a float certificate into a referee-checkable proof per KL Thm 2.2 | KL_RECORD.md |
 | `kl_export_certificate.py` | exports canonical certificate artifacts (raw little-endian int64 + sha256 sidecar); sample k=12 artifact ships in `certs/` | KL_RECORD.md |
 | `kl_verify_independent.py` | clean-room second verifier: stdlib only, constraint system re-derived from KL §2, different coefficient bounding (10^21 + binary search), congruences asserted; passes all six levels, detects single-entry corruption | KL_RECORD.md |
+| `kl_grid_certificate.py` | the GRID form of the KL system (exponents 100/79/129 in 1/50-doubling units, i.e. with the advanced term) — power iteration, exact integer check, packed shards for Lean | `KL_RECORD.md`, `lean/Collatz/KLGrid.lean` |
+| `kl_lean_instance.py` | emits the Lean instantiation (`KL{k}Data`, `KL{k}Check*`, `KL{k}.lean`) of `G50.growth_root` from a grid certificate JSON | `lean/Collatz/KL13.lean`, `KL14.lean` |
+| `pade_rung1.py` | the degree-one Padé/Mahler ledger for F₂(8/9): certificate, predicted 2-adic valuations, height accounting — the numerics behind `Rung1.lean` | `RUNG1_ATTACK.md`, `paper/rung1.tex` |
+| `mahler_experiments.py` | the earlier rung-1 experiments: functional equation, realizations, shadow clustering, truncation exponent 0.946 | `RUNG1_ATTACK.md` |
+| `sturmian_prefix_power.py` | prefix-power margins of Sturmian itineraries by slope and intercept — the numerics behind `Sturmian.lean` | `paper/rung1.tex` §7 |
+| `ideal_experiments.py`, `shadow_experiments.py` | numerics for `Ideal.lean` and `Shadow.lean` | — |
 | `IDEAS.md` | running research log: findings, the three killers, open directions | — |
 | `NOVEL_APPROACHES.md` | cross-field attack plans: forbidden itineraries (words + p-adic Mahler), Krasikov–Lagarias exponent record, ×2×3 rigidity reduction, proof-theoretic lower bounds, the 3n−1 control experiment | — |
 

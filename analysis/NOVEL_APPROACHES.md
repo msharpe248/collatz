@@ -1,3 +1,5 @@
+> **Status (2026-08-29).** Historical planning document (June 2026). The Mahler-value rung (§1 below) is closed — see `RUNG1_ATTACK.md` and `lean/Collatz/Rung1.lean`; the KL exponent record is now machine-verified (`lean/Collatz/KLGrid.lean`, `KL13.lean`). `Ideal.lean` (geometric-ideal tracking, §0 remarks) is an unpursued side note.
+
 # Novel approaches from other areas (2026-06-10, late)
 
 Out-of-the-box directions, each grounded in what the six pillars + three

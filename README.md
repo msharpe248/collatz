@@ -297,10 +297,12 @@ collatz/
 │       ├── Parity.lean   # Terras' parity bijection and the binomial law
 │       ├── Terras.lean   # Terras' theorem: almost all n descend (finite form)
 │       ├── Critical.lean # the density dichotomy is sharp at log2/log3
+│       ├── Ideal.lean    # geometric-ideal tracking (side note, unpursued)
 │       ├── Krasikov.lean   # machine-verified density exponent x^0.4543
 │       ├── KLGrid.lean    # KL inequalities WITH the advanced term: root induction, generic in k and p/q
 │       ├── KL12.lean      # verified γ = 0.8476 > 0.84, 81 kernel-checked shards
 │       ├── KL13*.lean     # verified γ = 0.8569: data + 3 check files (243 shards) + theorem
+│       ├── KL14*.lean     # γ = 0.8676: data + 9 check files (729 shards) + theorem (build in progress)
 │       ├── Krasikov50.lean # 1/50-grid: exponent x^0.63201, above critical
 │       ├── Shadow.lean   # the 3-adic shadow: divergence = compression
 │       ├── Ladder.lean   # word-complexity ladder: rung zero + d(w) closed form
@@ -312,12 +314,15 @@ collatz/
 │   ├── automaton_potentials.py  # digit-automaton potentials (evade the no-go)
 │   ├── rational_cycles.py       # the positive-drift adversary spectrum
 │   ├── transducer_search.py     # CEGIS refutation of 2-state digit certificates
+│   ├── kl_*.py                  # Krasikov–Lagarias program: search, exact checks, grid certificates, Lean emitters
+│   ├── pade_rung1.py, sturmian_prefix_power.py  # numerics behind Rung1.lean / Sturmian.lean
 │   └── IDEAS.md                 # research directions and current findings
 └── paper/
     ├── nogo.tex/.pdf           # paper I: no-go + the critical corridor
     ├── klbound.tex/.pdf        # paper II: the x^0.895 record + formal x^0.632
     ├── shadow.tex/.pdf         # paper III: the 3-adic shadow
-    ├── ladder.tex/.pdf         # paper IV: the word-complexity ladder
+    ├── ladder.tex/.pdf         # paper IV: the word-complexity ladder (rung 1 since closed, see rung1)
+    ├── rung1.tex/.pdf          # paper V: rung one closed; prefix-power criterion; Sturmian level theorem
     └── *_guide.tex/.pdf        # non-specialist guides to each paper
 ```
 

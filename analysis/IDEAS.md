@@ -1,3 +1,5 @@
+> **Status (2026-08-29).** Historical research log (June 2026). Since then: rung 1 closed (`Rung1.lean`), prefix-power/Sturmian theorems (`PrefixPower.lean`, `Sturmian.lean`), and the Krasikov–Lagarias exponent machine-verified past the 2003 record (`KLGrid.lean`, `KL13.lean`). Items below marked open may no longer be.
+
 # Research directions (status: 2026-06-10, evening update)
 
 The repo has five formal pillars: no-go (`NoGo.lean`), density corridor
