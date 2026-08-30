@@ -173,7 +173,7 @@ weakening end-to-end.)
 
 ### The 1/50 cap grid ([lean/Collatz/Grid50.lean](lean/Collatz/Grid50.lean))
 
-The definitional core of the record: caps cap(t) = 2^(t/50)·r[t mod 50] with a fixed 50-entry integer table, so that a rational rate μ per grid step makes every certificate condition an integer inequality; `cap_quad`, `cap_shift21`, and the class infima `phi50` with Krasikov's difference inequalities on the grid. Its original k = 8 instance (`K8.density_bound`, x^0.63201 — the first verified exponent above the critical constant log 2/log 3, June 2026) has been retired from the tree now that KL13 surpasses it; it lives in the git history (`Krasikov50.lean` before commit "retire K8").
+The definitional core of the record: caps cap(t) = 2^(t/50)·r[t mod 50] with a fixed 50-entry integer table, so that a rational rate μ per grid step makes every certificate condition an integer inequality; `cap_quad`, `cap_shift21`, and the class infima `phi50` with Krasikov's difference inequalities on the grid. Its original k = 8 instance (`K8.density_bound`, x^0.63201 — the first verified exponent above the critical constant log 2/log 3, June 2026) is superseded by KL13; the K8 namespace is kept in `Krasikov50.lean` for now (removing it would force a multi-day rebuild of the KL13/KL14 dependents) and will be dropped at the next full rebuild.
 
 ### The 3-adic shadow ([lean/Collatz/Shadow.lean](lean/Collatz/Shadow.lean))
 
