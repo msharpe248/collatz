@@ -16,12 +16,12 @@ number of integers below x whose 3x+1 orbit contains a (any a ≢ 0
 mod 3), improving the x^0.84 record of Krasikov–Lagarias (2003) by
 scaling their own program to 43 million congruence classes with exact
 integer certificates — and, **machine-verified end to end,
-π₁(x) = Ω(x^0.8569)**, the first kernel-checked exponents *exceeding* the
+π₁(x) = Ω(x^0.8676)**, the first kernel-checked exponents *exceeding* the
 twenty-year-old published record x^0.84 (the record itself, γ = 0.8418,
 was first formalized by [Menta2357/collatz-classical](https://github.com/Menta2357/collatz-classical),
 July 2026, via KL's own elimination argument)
-([lean/Collatz/KL13.lean](lean/Collatz/KL13.lean), 531,441 classes; and
-[lean/Collatz/KL12.lean](lean/Collatz/KL12.lean), x^0.8476: the Krasikov–Lagarias
+([lean/Collatz/KL14.lean](lean/Collatz/KL14.lean), 1,594,323 classes;
+also x^0.8569 at k = 13: the Krasikov–Lagarias
 difference inequalities *with their advanced term*, proved by a root
 induction that sidesteps their elimination argument
 ([lean/Collatz/KLGrid.lean](lean/Collatz/KLGrid.lean)), plus a
@@ -151,7 +151,8 @@ Krasikov–Lagarias' inequality (D3) for classes m ≡ 8 (mod 9) contains an *ad
 | `G50.cap_shift29` | 2·cap(t+29) ≤ 3·cap(t): the exact grid offset for the advanced branch (2^(29/50) = 1.4946 < 3/2) |
 | `G50.cnt_rec_two`, `cnt_rec_five`, `cnt_rec_eight` | The three KL difference inequalities per root, the last with the exact offset t+129 |
 | `G50.growth_root` | **The growth theorem with the advanced term**: for any level k ≥ 2, rate p/q and certificate satisfying `CertOK`, every root a ≡ 2 (3) reaching 8 has cnt(a, cap(t)·a) ≥ c_a·(p/q)^t/Cmax. Proved by strong induction over roots on the measure M(t,a) = 10t + ⌊log₂(a^498)⌋, which drops by 4, 3, 1 along the three branches because 3^498 > 2^789 — no elimination, no Kőnig; the 1/50-grid rounding (29 < 50·log₂(3/2) = 29.25) is exactly the slack that makes the measure well-founded |
-| `K13.density_bound` | **The record**: #{n ≤ 80000·2^y reaching 1} ≥ (387326/16777216)·(101195/100000)^(50y)·const, i.e. π₁(x) = Ω(x^0.8569), γ = 50·log₂(101195/100000) > 0.8418 (KL 2003). Certificate: 531,441 classes mod 3^13 as 243 packed shards in three files (`KL13Data`, `KL13Check0–2`), each class decided by `decide +kernel` (≈2¼ hours, ≈23 GB) |
+| `K14.density_bound` | **The record**: #{n ≤ 80000·2^y reaching 1} ≥ (270437/16777216)·(101210/100000)^(50y)·const, i.e. π₁(x) = Ω(x^0.8676), γ = 50·log₂(101210/100000). Certificate: 1,594,323 classes mod 3^14 as 729 packed shards in ten files, each class decided by `decide +kernel` (≈29 h total, ≤37 GB); the k=13 modules additionally replayed by an independent lean4checker kernel |
+| `K13.density_bound` | The same at k = 13 (γ = 0.8569): #{n ≤ 80000·2^y reaching 1} ≥ (387326/16777216)·(101195/100000)^(50y)·const, i.e. π₁(x) = Ω(x^0.8569), γ = 50·log₂(101195/100000) > 0.8418 (KL 2003). Certificate: 531,441 classes mod 3^13 as 243 packed shards in three files (`KL13Data`, `KL13Check0–2`), each class decided by `decide +kernel` (≈2¼ hours, ≈23 GB) |
 | `K12.density_bound` | The same at k = 12: #{n ≤ 80000·2^y reaching 1} ≥ (554204/16777216)·(101182/100000)^(50y)·const, i.e. π₁(x) = Ω(x^0.8476), γ = 50·log₂(101182/100000) > 0.8418 (KL 2003, k = 11). Certificate: 177,147 classes mod 3^12 as 81 packed 32-bit shards; every class condition decided by `decide +kernel` (≈15 min, ≈18 GB) |
 
 The truncated system's ceiling (γ ≈ 0.66 at every k) and the exact-offset system's values (0.800 at k=8 … 0.849 at k=12, 0.859 at k=13) are tabulated by `analysis/kl_grid_certificate.py` and the scratch bisection; the informal record 0.895 (k = 17, 43 million classes) is the same system at a level the kernel has not yet been asked to check.
@@ -283,7 +284,7 @@ collatz/
 │       ├── Krasikov.lean   # machine-verified density exponent x^0.4543
 │       ├── KLGrid.lean    # KL inequalities WITH the advanced term: root induction, generic in k and p/q
 │       ├── KL13*.lean     # verified γ = 0.8569: data + 3 check files (243 shards) + theorem
-│       ├── KL14*.lean     # γ = 0.8676: data + 9 check files (729 shards) + theorem (build in progress)
+│       ├── KL14*.lean     # the record: γ = 0.8676, data + 9 check files (729 shards) + theorem
 │       ├── Grid50.lean   # the 1/50 cap grid and Krasikov's inequalities on it (core of the record)
 │       ├── Shadow.lean   # the 3-adic shadow: divergence = compression
 │       ├── Ladder.lean   # word-complexity ladder: rung zero + d(w) closed form

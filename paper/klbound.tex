@@ -64,8 +64,9 @@ argument and which we handle by a strong induction over roots on the
 measure $10t + \lfloor \log_2 a^{498}\rfloor$ --- together with a
 $177{,}147$-class certificate decided by the Lean kernel, gives
 $\pi_1(x) = \Omega(x^{\gamma})$ with
-$\gamma = 50\log_2(101182/100000) = 0.8476\ldots > 0.84$ at level
-$k = 12$ and $\gamma = 0.8569\ldots$ at $k = 13$, the first
+$\gamma = 0.8476\ldots > 0.84$ at level $k = 12$, $\gamma =
+0.8569\ldots$ at $k = 13$ and $\gamma = 50\log_2(101210/100000) =
+0.8676\ldots$ at $k = 14$ ($1{,}594{,}323$ classes), the first
 kernel-checked improvements of the 2003 bound
 (Section~\ref{sec:formal}).
 \end{abstract}
@@ -512,13 +513,19 @@ finer grid recovers it. The same files instantiate at any level: the
 kernel time grows a little faster than linearly in the number of
 classes, so $k = 13$ ($0.8569$) is about an hour and $k = 14$ ($0.870$)
 a few hours; the informal $0.895$ at $k = 17$ is the same system at a level
-the kernel has not yet been asked to check. The $k = 13$ instance has
-also been run: \code{K13.density\_bound} (files \code{KL13Data},
+the kernel has not yet been asked to check. The $k = 13$ and $k = 14$ instances have also been run: \code{K13.density\_bound} (files \code{KL13Data},
 \code{KL13Check0--2}, \code{KL13}; $531{,}441$ classes in $243$ shards,
 $2$\,h\,$15$\,min of kernel time) gives $\gamma = 50\log_2(101195/100000)
-= 0.8569\ldots$, with the analogous displayed inequality
-($387326 \cdot 101195^{50y}\cdot 100000^{100} \le \#\{\cdots\}\cdot
-(16777216 \cdot 100000^{50y} \cdot 101195^{100})$).
+= 0.8569\ldots$, and \code{K14.density\_bound} ($1{,}594{,}323$ classes
+in $729$ shards across ten files, $\approx 29$\,h of kernel time, peak
+$37$\,GB) gives
+\[
+270437 \cdot 101210^{50y} \cdot 100000^{100} \le \#\{n \le 80000\cdot 2^y
+: \text{reaches } 1\}\cdot\big(16777216 \cdot 100000^{50y}\cdot
+101210^{100}\big),
+\]
+i.e.\ $\gamma = 50\log_2(101210/100000) = 0.8676\ldots$, the current
+machine-verified record.
 
 \subsection*{Trust base, stated precisely}
 
@@ -528,11 +535,10 @@ growth theorem, the certificate conditions for all $177{,}147$
 classes, and the final density inequality. What is not verified and
 need not be: how the certificate was found (power iteration in
 floating point, then rounded). What is imported: nothing beyond
-Lean's kernel and Mathlib. The $k = 12$ modules were additionally
-replayed through an independent instance of the kernel by
-\code{lean4checker} (built for the same toolchain), which re-evaluates
-every shard proof from the stored declarations and reports no
-discrepancy. What is claimed: exactly the displayed
+Lean's kernel and Mathlib. The $k = 12$ and $k = 13$ modules were additionally replayed through an
+independent instance of the kernel by \code{lean4checker} (built for
+the same toolchain), which re-evaluates every shard proof from the
+stored declarations and reports no discrepancy. What is claimed: exactly the displayed
 inequality, for every $y$, with no ``sufficiently large''.
 
 \section{Discussion}\label{sec:disc}

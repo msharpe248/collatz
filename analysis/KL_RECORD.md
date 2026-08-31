@@ -1,6 +1,6 @@
 # A new lower-bound exponent for the 3x+1 problem (2026-06-11)
 
-**Update 2026-08-29 — MACHINE-VERIFIED: γ = 0.8569 (k=13, `KL13.lean`) and 0.8476 (k=12, `KL12.lean`), both > 0.84.**
+**Update 2026-08-30 — MACHINE-VERIFIED: γ = 0.8676 (k=14, `KL14.lean`, 29 h kernel), 0.8569 (k=13, lean4checker-replayed) and 0.8476 (k=12, retired), all > 0.84.**
 `lean/Collatz/KL12.lean` (`Collatz.K12.density_bound`) kernel-checks a
 k = 12 certificate of the *grid* form of the KL system (exponents
 100/79/129 in 1/50-doubling units, `analysis/kl_grid_certificate.py`)

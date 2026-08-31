@@ -272,9 +272,9 @@ The $0.895$ above rests on Krasikov and Lagarias's theorem plus an
 exact computer check. As of August 2026 a weaker but fully
 machine-verified version exists: the Lean proof assistant has checked,
 from the definition of the $3x+1$ map upward, that at least
-$x^{0.8569}$ of the integers below $x$ reach $1$ --- above the
-twenty-year-old published record $x^{0.84}$ (a first run at a smaller
-level gave $x^{0.8476}$).
+$x^{0.8676}$ of the integers below $x$ reach $1$ --- above the
+twenty-year-old published record $x^{0.84}$ (earlier runs at smaller
+levels gave $x^{0.8476}$ and $x^{0.8569}$).
 
 The obstacle was a single term in the Krasikov--Lagarias inequalities
 that looks ``forward in time'': one of the children in the tree of
@@ -291,9 +291,10 @@ $290$ that the scale gains. That ``just'' is not luck: on the exact
 scale the two effects cancel precisely, and it is the deliberate
 $1/50$-step rounding of the scale that opens the gap.
 
-The certificate --- $531{,}441$ integers, one per congruence class mod
-$3^{13}$ --- is stored inside the proof as $243$ very large numbers and
-checked, class by class, by Lean's kernel in a little over two hours. Nothing is trusted from outside.
+The record certificate --- $1{,}594{,}323$ integers, one per congruence
+class mod $3^{14}$ --- is stored inside the proof as $729$ very large
+numbers and checked, class by class, by Lean's kernel in about
+twenty-nine hours. Nothing is trusted from outside.
 
 Credit where due: a separate project (\texttt{Menta2357/collatz-classical},
 July 2026) had already formalized Krasikov and Lagarias's own argument
