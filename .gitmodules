@@ -1,0 +1,30 @@
+[submodule "library/repos/rwst__Collatz-Map-Basics"]
+	path = library/repos/rwst__Collatz-Map-Basics
+	url = https://github.com/rwst/Collatz-Map-Basics
+[submodule "library/repos/tangentstorm__eliahou-collatz-bounds"]
+	path = library/repos/tangentstorm__eliahou-collatz-bounds
+	url = https://github.com/tangentstorm/eliahou-collatz-bounds
+[submodule "library/repos/Menta2357__collatz-classical"]
+	path = library/repos/Menta2357__collatz-classical
+	url = https://github.com/Menta2357/collatz-classical
+[submodule "library/repos/PhilNorfleet__Hercher2023_lean"]
+	path = library/repos/PhilNorfleet__Hercher2023_lean
+	url = https://github.com/PhilNorfleet/Hercher2023_lean
+[submodule "library/repos/gotrevor__tao-collatz"]
+	path = library/repos/gotrevor__tao-collatz
+	url = https://github.com/gotrevor/tao-collatz
+[submodule "library/repos/lechmazur__terras_density_one"]
+	path = library/repos/lechmazur__terras_density_one
+	url = https://github.com/lechmazur/terras_density_one
+[submodule "library/repos/rwst__lean-code"]
+	path = library/repos/rwst__lean-code
+	url = https://github.com/rwst/lean-code
+[submodule "library/repos/tcosmo__BohmSontacchi1978_lean"]
+	path = library/repos/tcosmo__BohmSontacchi1978_lean
+	url = https://github.com/tcosmo/BohmSontacchi1978_lean
+[submodule "library/repos/tcosmo__Knight2026_lean"]
+	path = library/repos/tcosmo__Knight2026_lean
+	url = https://github.com/tcosmo/Knight2026_lean
+[submodule "library/repos/tcosmo__Monks2006_lean"]
+	path = library/repos/tcosmo__Monks2006_lean
+	url = https://github.com/tcosmo/Monks2006_lean

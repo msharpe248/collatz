@@ -62,6 +62,17 @@ numerics in [analysis/pade_rung1.py](analysis/pade_rung1.py)). See
 [lean/Collatz/Ladder.lean](lean/Collatz/Ladder.lean), and
 [analysis/RUNG1_ATTACK.md](analysis/RUNG1_ATTACK.md).
 
+## The library ([library/](library/))
+
+Every formalization of a Collatz-literature paper known to
+[ccchallenge.org](https://ccchallenge.org) — ten repositories by six
+contributors, covering Terras 1976, Böhm–Sontacchi 1978, Eliahou 1993,
+Bernstein–Lagarias 1996, Monks 2006, Krasikov–Lagarias 2003, Tao 2022,
+Hercher 2023, Rozier–Terracol 2025, Knight 2026 — vendored as git
+submodules and indexed by paper, proof assistant and status. See
+[library/README.md](library/README.md); clone with
+`--recurse-submodules`.
+
 ## The conjecture
 
 For any positive integer n: halve it if even, replace it by 3n+1 if odd.
