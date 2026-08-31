@@ -16,7 +16,10 @@
    "formalisation_status": "waiting_to_be_audited",
    "contributor": "drdisentangle",
    "created_at": "2026-07-02T15:08:30.440789",
-   "local": "library/repos/rwst__lean-code/BL"
+   "local": "library/repos/rwst__lean-code/BL",
+   "approach": [
+    "2-adic-conjugacy"
+   ]
   },
   {
    "bibtex_key": "BohmSontacchi1978",
@@ -31,7 +34,10 @@
    "formalisation_status": "audited",
    "contributor": "cosmo",
    "created_at": "2026-02-23T21:51:56.621543",
-   "local": "library/repos/tcosmo__BohmSontacchi1978_lean"
+   "local": "library/repos/tcosmo__BohmSontacchi1978_lean",
+   "approach": [
+    "cycles-diophantine"
+   ]
   },
   {
    "bibtex_key": "Eliahou1993",
@@ -46,7 +52,10 @@
    "formalisation_status": "waiting_to_be_audited",
    "contributor": "tangentstorm",
    "created_at": "2026-04-10T04:23:03.574880",
-   "local": "library/repos/tangentstorm__eliahou-collatz-bounds"
+   "local": "library/repos/tangentstorm__eliahou-collatz-bounds",
+   "approach": [
+    "cycles-diophantine"
+   ]
   },
   {
    "bibtex_key": "EliahouVergerGaugry2025",
@@ -61,7 +70,10 @@
    "formalisation_status": "waiting_to_be_audited",
    "contributor": "rwst",
    "created_at": "2026-03-31T13:32:20.795517",
-   "local": "library/repos/rwst__Collatz-Map-Basics"
+   "local": "library/repos/rwst__Collatz-Map-Basics",
+   "approach": [
+    "foundations-and-maps"
+   ]
   },
   {
    "bibtex_key": "Hercher2023",
@@ -76,7 +88,10 @@
    "formalisation_status": "waiting_to_be_audited",
    "contributor": "PhilNorfleet",
    "created_at": "2026-08-05T02:34:22.650378",
-   "local": "library/repos/PhilNorfleet__Hercher2023_lean"
+   "local": "library/repos/PhilNorfleet__Hercher2023_lean",
+   "approach": [
+    "cycles-diophantine"
+   ]
   },
   {
    "bibtex_key": "Knight2026",
@@ -91,7 +106,10 @@
    "formalisation_status": "formalising",
    "contributor": "cosmo",
    "created_at": "2026-03-06T21:07:22.911471",
-   "local": "library/repos/tcosmo__Knight2026_lean"
+   "local": "library/repos/tcosmo__Knight2026_lean",
+   "approach": [
+    "cycles-diophantine"
+   ]
   },
   {
    "bibtex_key": "KrasikovLagarias2003",
@@ -106,7 +124,10 @@
    "formalisation_status": "formalising",
    "contributor": "Menta2357",
    "created_at": "2026-07-06T22:48:55.468828",
-   "local": "library/repos/Menta2357__collatz-classical"
+   "local": "library/repos/Menta2357__collatz-classical",
+   "approach": [
+    "density-lower-bounds"
+   ]
   },
   {
    "bibtex_key": "Monks2006",
@@ -121,7 +142,10 @@
    "formalisation_status": "formalising",
    "contributor": "cosmo",
    "created_at": "2026-03-06T19:39:23.531655",
-   "local": "library/repos/tcosmo__Monks2006_lean"
+   "local": "library/repos/tcosmo__Monks2006_lean",
+   "approach": [
+    "sufficient-sets"
+   ]
   },
   {
    "bibtex_key": "RozierTerracol2025",
@@ -136,7 +160,10 @@
    "formalisation_status": "waiting_to_be_audited",
    "contributor": "drdisentangle",
    "created_at": "2026-07-02T15:06:36.539799",
-   "local": "library/repos/rwst__lean-code/RT"
+   "local": "library/repos/rwst__lean-code/RT",
+   "approach": [
+    "foundations-and-maps"
+   ]
   },
   {
    "bibtex_key": "RozierTerracol2025",
@@ -151,7 +178,10 @@
    "formalisation_status": "formalising",
    "contributor": "cosmo",
    "created_at": "2026-03-08T16:43:25.525204",
-   "local": "library/repos/rwst__Collatz-Map-Basics"
+   "local": "library/repos/rwst__Collatz-Map-Basics",
+   "approach": [
+    "foundations-and-maps"
+   ]
   },
   {
    "bibtex_key": "Tao2022",
@@ -167,7 +197,10 @@
    "contributor": "lechmazur",
    "created_at": "2026-07-21T18:26:47.643023",
    "local": null,
-   "note": "web-only (ProofAtlas, pinned commit d53c8de0, Lean 4, 397 files / 124k lines; download as ZIP from the URL)"
+   "note": "web-only (ProofAtlas, pinned commit d53c8de0, Lean 4, 397 files / 124k lines; download as ZIP from the URL)",
+   "approach": [
+    "probabilistic-ergodic"
+   ]
   },
   {
    "bibtex_key": "Tao2022",
@@ -182,7 +215,10 @@
    "formalisation_status": "waiting_to_be_audited",
    "contributor": "gotrevor",
    "created_at": "2026-07-16T02:18:57.548714",
-   "local": "library/repos/gotrevor__tao-collatz"
+   "local": "library/repos/gotrevor__tao-collatz",
+   "approach": [
+    "probabilistic-ergodic"
+   ]
   },
   {
    "bibtex_key": "Terras1976",
@@ -197,7 +233,10 @@
    "formalisation_status": "formalising",
    "contributor": "lechmazur",
    "created_at": "2026-07-05T05:47:46.102137",
-   "local": "library/repos/lechmazur__terras_density_one"
+   "local": "library/repos/lechmazur__terras_density_one",
+   "approach": [
+    "density-and-stopping-times"
+   ]
   }
  ],
  "this_repository": [
@@ -209,7 +248,10 @@
    "local": "lean/Collatz",
    "contributor": "msharpe248 (this repository)",
    "formalisation_status": "formalising",
-   "note": "KLGrid.lean/KL13.lean/KL14.lean: gamma = 0.8676 > 0.84 via an elimination-free growth theorem; Grid50.lean core"
+   "note": "KLGrid.lean/KL13.lean/KL14.lean: gamma = 0.8676 > 0.84 via an elimination-free growth theorem; Grid50.lean core",
+   "approach": [
+    "density-lower-bounds"
+   ]
   },
   {
    "bibtex_key": "Terras1976",
@@ -219,7 +261,10 @@
    "local": "lean/Collatz",
    "contributor": "msharpe248 (this repository)",
    "formalisation_status": "formalising",
-   "note": "Terras.lean (finite form), Parity.lean (parity bijection, binomial law)"
+   "note": "Terras.lean (finite form), Parity.lean (parity bijection, binomial law)",
+   "approach": [
+    "density-and-stopping-times"
+   ]
   }
  ],
  "how_to_clone": "git clone --recurse-submodules https://github.com/msharpe248/collatz (or: git submodule update --init --depth 1)"

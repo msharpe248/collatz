@@ -69,7 +69,8 @@ Every formalization of a Collatz-literature paper known to
 contributors, covering Terras 1976, Böhm–Sontacchi 1978, Eliahou 1993,
 Bernstein–Lagarias 1996, Monks 2006, Krasikov–Lagarias 2003, Tao 2022,
 Hercher 2023, Rozier–Terracol 2025, Knight 2026 — vendored as git
-submodules and indexed by paper, proof assistant and status. See
+submodules and indexed by paper, proof assistant, status and
+mathematical approach. See
 [library/README.md](library/README.md); clone with
 `--recurse-submodules`.
 

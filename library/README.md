@@ -15,6 +15,7 @@ ways by symlinks.
 | `by-paper/<bibtex_key>/` | symlinks to every formalization of that paper (keys as on ccchallenge.org) |
 | `by-assistant/<lean4\|...>/` | by proof assistant |
 | `by-status/<formalising\|...>/` | by ccchallenge status |
+| `by-approach/<...>/` | by mathematical approach: `density-lower-bounds`, `density-and-stopping-times`, `cycles-diophantine`, `probabilistic-ergodic`, `2-adic-conjugacy`, `sufficient-sets`, `foundations-and-maps` |
 | `manifest.json` | full metadata: paper, contributor, AI assistance, status, local path |
 | `refresh.py` | re-harvests ccchallenge.org and reports entries missing here |
 
