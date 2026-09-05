@@ -65,6 +65,11 @@ TARGETS = [
     ("Collatz.Reciprocal", "Collatz.idealC_exp_reciprocal_bound", "Finite exponential correction bound for every positive seed"),
     ("Collatz.Reciprocal", "Collatz.supercritical_iff_summable_reciprocal", "Exact characterization of bounded ideal correction, not universal divergent-orbit coverage"),
     ("Collatz.Reciprocal", "Collatz.supercritical_orbit_tendsto_atTop", "Bounded correction forces eventual escape from every finite bound"),
+    ("Collatz.CorrectionGrowth", "Collatz.reciprocal_product_le_card", "Finite product bound for distinct positive integers"),
+    ("Collatz.CorrectionGrowth", "Collatz.idealC_sixth_bound_of_prefix", "Finite prefix with no repeated values and no visit to one"),
+    ("Collatz.CorrectionGrowth", "Collatz.unbounded_idealC_sixth_bound", "Every unbounded positive orbit; no summability or density gap assumption"),
+    ("Collatz.CorrectionGrowth", "Collatz.unbounded_sixth_drift_bound", "Exact integer drift restriction for every unbounded positive orbit"),
+    ("Collatz.CorrectionGrowth", "Collatz.unbounded_nondescent_drift", "Seed-independent drift restriction at a non-descent time of an unbounded orbit"),
 ]
 
 

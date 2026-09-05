@@ -25,6 +25,8 @@ belong to an excluded family.
 | Critical-boundary discipline | `supercritical_of_geometric` | Explicit summable inverse-drift hypothesis, not universal divergence |
 | Exact correction characterization | `supercritical_iff_summable_reciprocal` | For every positive seed, bounded ideal correction iff the reciprocal orbit series converges; no density hypothesis |
 | Escape consequence | `supercritical_orbit_tendsto_atTop` | Bounded correction forces eventual escape from every finite bound; converse not established |
+| Polynomial correction control | `idealC_sixth_bound_of_prefix`, `unbounded_idealC_sixth_bound` | (N+c_T)^6 ≤ N^6(j_T+1); every unbounded positive orbit, without summability or density assumptions |
+| Finite drift restriction | `unbounded_nondescent_drift` | 2^(6T) ≤ 3^(6j_T)(j_T+1) at every non-descent time of an unbounded positive orbit |
 | Dependency audit | `audit_theorems.py`, `theorem_audit.json` | Selected declarations, printed types and axioms, pinned library provenance |
 
 See [STURMIAN_SILVER.md](STURMIAN_SILVER.md) for the new theorem's proof.
@@ -43,8 +45,12 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 48 declarations using only standard
+The selected theorem audit now covers 53 declarations using only standard
 foundational axioms.
+The subsequent correction-growth result is in
+[CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
+[paper](../paper/correction_growth.pdf) and
+[guide](../paper/correction_growth_guide.pdf).
 
 ## Experiments and controls
 
@@ -94,7 +100,9 @@ checks swap identities, and replays the finite Mahler candidates.
 4. **Critical-boundary orbits.** Bounded ideal correction is not known for
    every hypothetical divergent orbit. It is now proved equivalent to
    summability of reciprocal orbit values. An escaping orbit with divergent
-   reciprocal sum is the precise remaining coverage case. Even a proof of
+   reciprocal sum is the precise remaining coverage case. The new
+   sixth-root correction bound constrains that case without assuming
+   summability, but does not make correction bounded. Even a proof of
    coverage would not itself exclude bounded-correction orbits.
 5. **Survivor exhaustion.** Exact interval computation is not a termination
    proof. Universal finite-height exhaustion is equivalent to universal

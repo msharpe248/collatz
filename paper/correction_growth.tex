@@ -1,0 +1,160 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\setlength{\emergencystretch}{2em}
+\title{A Sixth-Root Bound on Collatz Correction\\from Distinct Orbit Values}
+\author{Collatz proof project\thanks{Prepared with Codex (OpenAI). The central results are formalized in Lean. No claim of literature priority is made.}}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a positive shortcut Collatz orbit with distinct values and no visit to one in a finite prefix, the normalized affine correction satisfies $(N+c_L)^6\le N^6(j_L+1)$, where $j_L$ counts odd steps. The proof bounds a product over distinct odd orbit values by a telescoping comparison product. Every unbounded positive orbit satisfies the hypotheses at every time, without any assumption of reciprocal summability or a strict density gap. The result gives a division-free integer drift restriction and, at non-descent times, a seed-independent near-critical inequality. It bounds possible correction growth but does not prove correction bounded or exclude unbounded orbits.
+\end{abstract}
+
+\section{Definitions and statement}
+Use the shortcut map
+\[
+T(x)=\begin{cases}x/2&x\text{ even},\\(3x+1)/2&x\text{ odd},\end{cases}
+\qquad n_t=T^t(N),\quad N>0.
+\]
+Let $j_L$ count odd values among $n_0,\ldots,n_{L-1}$. Define $d_L$ and the real normalized correction $c_L$ by
+\[
+2^L n_L=3^{j_L}N+d_L,\qquad c_L=d_L/3^{j_L}.
+\]
+Thus $c_0=0$, $c_L\ge0$, and $n_L=(N+c_L)3^{j_L}/2^L$.
+
+\begin{theorem}\label{thm:finite}
+Suppose the values $n_0,\ldots,n_{L-1}$ are pairwise distinct and none equals one. Then
+\begin{equation}\label{eq:main}
+(N+c_L)^6\le N^6(j_L+1).
+\end{equation}
+Equivalently, $c_L\le N((j_L+1)^{1/6}-1)$.
+\end{theorem}
+The sixth-power inequality is the formal Lean statement. The root form is its elementary real-arithmetic interpretation. There is no hypothesis on values after the prefix; $n_L$ itself need not be distinct from the earlier values.
+
+\newpage
+\section{Two finite product lemmas}
+\begin{lemma}\label{lem:product}
+For a finite set $S$ of distinct positive integers,
+\[
+\prod_{k\in S}\frac{k+1}{k}\le |S|+1.
+\]
+\end{lemma}
+\begin{proof}
+Induct on $|S|$. The empty product equals one. Otherwise let $m$ be the largest member and write $q=|S|$. Positivity and distinctness give $S\subseteq\{1,\ldots,m\}$, so $q\le m$. Removing $m$ and applying induction gives
+\[
+\prod_{k\in S}\frac{k+1}{k}
+\le q\frac{m+1}{m}=q+\frac qm\le q+1.
+\]
+\end{proof}
+
+\begin{lemma}\label{lem:local}
+For every real $x>1$,
+\[
+\left(1+\frac1{3x}\right)^6\le\frac{x+1}{x-1}.
+\]
+\end{lemma}
+\begin{proof}
+Clear the positive denominators. The difference between the right and left cross-products is
+\begin{align*}
+(3x)^6(x+1)-(3x+1)^6(x-1)
+&=243x^5+675x^4+405x^3\\
+&\quad+117x^2+17x+1\ge0.
+\end{align*}
+\end{proof}
+The ratio on the right is chosen to telescope when $x$ ranges over successive odd numbers. The exponent six matches the first-order term $2/x$ in that ratio. Optimality among other comparison methods is not claimed.
+
+\section{The exact correction product}
+The existing affine cocycle gives
+\[
+N+c_{t+1}=
+\begin{cases}
+N+c_t&n_t\text{ even},\\
+(N+c_t)(1+1/(3n_t))&n_t\text{ odd}.
+\end{cases}
+\]
+Consequently, if $O_L=\{t<L:n_t\text{ odd}\}$,
+\begin{equation}\label{eq:product}
+N+c_L=N\prod_{t\in O_L}\left(1+\frac1{3n_t}\right).
+\end{equation}
+This identity holds for every positive seed; distinctness is needed only for the following estimate.
+
+\newpage
+\section{Proof of the correction bound}
+\begin{proof}[Proof of Theorem~\ref{thm:finite}]
+Every odd value in the prefix is at least three. Set
+\[
+k_t=\frac{n_t-1}{2}\in\{1,2,3,\ldots\},\qquad t\in O_L.
+\]
+Distinct orbit values give distinct $k_t$. Lemma~\ref{lem:local} gives
+\[
+\left(1+\frac1{3n_t}\right)^6
+\le\frac{n_t+1}{n_t-1}=\frac{k_t+1}{k_t}.
+\]
+Raise equation~\eqref{eq:product} to the sixth power, multiply these nonnegative inequalities, and apply Lemma~\ref{lem:product} to the image set of the $k_t$:
+\[
+(N+c_L)^6
+\le N^6\prod_{t\in O_L}\frac{k_t+1}{k_t}
+\le N^6(|O_L|+1)=N^6(j_L+1).
+\]
+\end{proof}
+
+\begin{corollary}\label{cor:unbounded}
+If the positive orbit is unbounded, equation~\eqref{eq:main} holds for every $L$.
+\end{corollary}
+\begin{proof}
+A repeated value in a deterministic orbit forces the future to repeat periodically. The finite prefix and periodic tail together are bounded. Thus an unbounded orbit has no repeated values. If it reaches one, two more shortcut steps return to one, again contradicting distinctness. Apply Theorem~\ref{thm:finite}.
+\end{proof}
+Here unbounded means $\forall B\in\mathbb N\;\exists t\; B<n_t$. No convergence-to-infinity or reciprocal-summability assumption is used in the Lean application.
+
+\begin{corollary}\label{cor:drift}
+For every unbounded positive orbit and every $L$,
+\begin{equation}\label{eq:drift}
+(2^L n_L)^6\le(3^{j_L}N)^6(j_L+1).
+\end{equation}
+If also $n_L\ge N$, then
+\begin{equation}\label{eq:nondescent}
+2^{6L}\le3^{6j_L}(j_L+1).
+\end{equation}
+\end{corollary}
+\begin{proof}
+Substitute $2^Ln_L=3^{j_L}(N+c_L)$ into Corollary~\ref{cor:unbounded} to obtain~\eqref{eq:drift}. Under non-descent, replace $n_L$ by its lower bound $N$ and cancel $N^6>0$.
+\end{proof}
+Both conclusions are formalized as natural-number inequalities, so they require no floating-point logarithm evaluation.
+
+\newpage
+\section{Consequences and the remaining gap}
+Taking logarithms in~\eqref{eq:nondescent} gives the explanatory form
+\[
+j_L\ge\frac{\log2}{\log3}L-\frac{\log(j_L+1)}{6\log3}.
+\]
+Since $j_L\le L$, replacing the final logarithm by $\log(L+1)$ gives a weaker, time-only correction. These logarithmic restatements are not separate declarations in the module; the exact integer inequalities are the formal results.
+
+The preceding paper, \emph{Bounded Collatz Correction and Reciprocal Orbit Sums}, proved that bounded correction is equivalent to convergence of $\sum_t1/n_t$. The present estimate applies even when that series diverges: an unbounded orbit can accumulate correction no faster than the sixth-root envelope in~\eqref{eq:main}. This gives a necessary quantitative restriction on the complementary case, rather than assuming it away.
+
+A bound growing like $L^{1/6}$ is not a constant bound. It therefore does not prove reciprocal summability. Nor do the displayed drift inequalities contradict growth near or above the critical odd-step density. The next unresolved task is to combine this correction control with additional arithmetic restrictions that force descent or otherwise exclude the remaining itineraries. Nontrivial cycles are outside the unbounded-orbit application and remain a separate problem.
+
+\section{Lean implementation and validation}
+Source: \texttt{lean/Collatz/CorrectionGrowth.lean}. Its principal declarations in namespace \texttt{Collatz} are:
+\begin{center}\small
+\begin{tabular}{lp{9.2cm}}
+\toprule
+Result&Declaration\\
+\midrule
+Lemma~\ref{lem:product}&\texttt{reciprocal\_product\_le\_card}\\
+Lemma~\ref{lem:local}&\texttt{odd\_correction\_sixth\_le}\\
+Equation~\eqref{eq:product}&\texttt{idealC\_odd\_product}\\
+Theorem~\ref{thm:finite}&\texttt{idealC\_sixth\_bound\_of\_prefix}\\
+Corollary~\ref{cor:unbounded}&\texttt{unbounded\_idealC\_sixth\_bound}\\
+Equation~\eqref{eq:drift}&\texttt{unbounded\_sixth\_drift\_bound}\\
+Equation~\eqref{eq:nondescent}&\texttt{unbounded\_nondescent\_drift}\\
+\bottomrule
+\end{tabular}\end{center}
+Rebuild from \texttt{lean/} with \texttt{lake build Collatz.CorrectionGrowth}. From the repository root, run \texttt{python3 analysis/audit\_theorems.py --build}. The selected audit now covers 53 declarations, including five main results from this module, and reports only standard foundational axioms. No \texttt{sorry}, new axiom, or \texttt{native\_decide} is used here. This is selective compilation and Lean-reported axiom inspection, not independent kernel replay or a full nested-library rebuild.
+
+The cocycle and reciprocal identity come from the existing project modules \texttt{Ideal} and \texttt{Reciprocal}; the return-implies-boundedness theorem is in \texttt{ParityDefects}. Finite-set and ordered-field facts come from pinned mathlib. All additional mathematical arguments are displayed above. No external literature-priority claim is made.
+\end{document}

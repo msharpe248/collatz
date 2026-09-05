@@ -1,0 +1,61 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,microtype,xcolor,mdframed}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\newmdenv[backgroundcolor=blue!4,linecolor=blue!35,linewidth=0.8pt,
+  skipabove=9pt,skipbelow=9pt,innerleftmargin=10pt,innerrightmargin=10pt]{keyidea}
+\setlength{\emergencystretch}{2em}
+\title{Distinct Values Limit Collatz Correction:\\
+\Large A Friendly Guide to the Sixth-Root Bound}
+\author{Companion to ``A Sixth-Root Bound on Collatz Correction''\thanks{Written with Codex (OpenAI). The technical paper and Lean source give the exact assumptions and proofs. No claim of literature priority is made.}}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\section{An escaping orbit cannot reuse small numbers}
+Use the shortcut Collatz rule: halve an even number; triple an odd number, add one, and halve it. If the sequence ever visits the same number twice, its future repeats. The whole orbit is then bounded.
+
+That means an unbounded orbit must keep visiting distinct numbers. In particular, it cannot repeatedly use the same small odd numbers to collect the effect of the $+1$ in the rule. This simple observation gives a quantitative bound.
+
+Write $N$ for the starting number, $j$ for the number of odd steps taken so far, and $c$ for the normalized affine correction used in the preceding reciprocal-sum paper. The normalization removes the powers of three and two from the accumulated additions.
+\begin{keyidea}
+\textbf{The new Lean result.} Every unbounded positive orbit obeys
+\[
+(N+c)^6\le N^6(j+1),
+\]
+so $c/N$ is at most $(j+1)^{1/6}-1$. No assumption that the reciprocal sum converges is needed.
+\end{keyidea}
+For illustration, the bound allows $c/N\le1$ after $63$ odd steps, $c/N\le2$ after $728$ odd steps, and $c/N\le9$ after $999{,}999$ odd steps. These are evaluations of the formula, not examples of unbounded Collatz orbits.
+
+The theorem also works on a finite stretch beginning at the seed: if its visited values are distinct and avoid one, the bound holds through the end of that stretch. No assertion about its infinite future is required.
+
+\newpage
+\section{Why a sixth root appears}
+At an odd value $x$, the quantity $N+c$ is multiplied by
+\[
+1+\frac1{3x}.
+\]
+At an even value it is unchanged. For every $x>1$, Lean checks the polynomial inequality
+\[
+\left(1+\frac1{3x}\right)^6\le\frac{x+1}{x-1}.
+\]
+For an odd value $x=2k+1$ greater than one, the right side becomes $(k+1)/k$. The odd values are distinct, so the positive integers $k$ are distinct too.
+
+The largest product of $j$ factors of the form $(k+1)/k$ comes from the smallest possible distinct positive $k$ values. Those factors cancel:
+\[
+\frac21\cdot\frac32\cdot\frac43\cdots\frac{j+1}{j}=j+1.
+\]
+This bounds the sixth power of the total correction factor by $j+1$. Taking a sixth root gives the announced estimate. The proof uses distinctness and exact arithmetic, not a random-parity model.
+
+\section{What it contributes to the larger proof}
+The earlier result said that bounded correction is equivalent to a finite reciprocal orbit sum. It left open the possibility of an escaping orbit whose reciprocal sum diverges. The new theorem applies to that case as well: even if its correction is unbounded, the correction must grow within this slow envelope.
+
+There is also a constraint on odd steps. After $L$ steps, if an unbounded orbit has not dropped below its starting value, then
+\[
+2^{6L}\le3^{6j}(j+1).
+\]
+This places the odd-step count close to or above the familiar critical line, allowing only a logarithmic deficit. Lean proves the displayed integer inequality directly.
+\begin{keyidea}
+\textbf{What is still missing.} Slow growth is still growth. The sixth-root bound does not make correction bounded, and it does not force descent. We still need an arithmetic argument that excludes the itineraries allowed by these estimates. Nontrivial cycles remain a separate question.
+\end{keyidea}
+The implementation is \texttt{lean/Collatz/CorrectionGrowth.lean}. The technical paper contains the complete proof and rebuild instructions. The expanded audit covers 53 selected declarations with only standard foundational axioms. Collatz has not been proved.
+\end{document}
