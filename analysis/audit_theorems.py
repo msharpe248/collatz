@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.RelativeCorrection", "Collatz.relative_shifted_idealLimit", "Exact relative shifted correction identity for positive seeds with bounded correction"),
+    ("Collatz.RelativeCorrection", "Collatz.unbounded_relative_correction_tendsto_zero", "Relative shifted correction tends to zero on every unbounded positive orbit; no absolute error bound"),
     ("Collatz.OrbitPacking", "Collatz.packing_bound", "Finite power-saving bound for equal-time injective sets below 32^m"),
     ("Collatz.OrbitPacking", "Collatz.unbounded_orbit_packing", "All unbounded natural orbits obey the finite packing bound at every scale"),
     ("Collatz.OrbitSummability", "Collatz.unbounded_orbit_reciprocal_summable", "Every unbounded positive natural orbit has summable reciprocals; unconditional coverage"),

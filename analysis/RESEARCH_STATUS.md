@@ -53,7 +53,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 113 declarations using only standard
+The selected theorem audit now covers 115 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -375,3 +375,17 @@ an independent explicit origin-based packing specialization and imports no
 external density axiom. No mathematical novelty claim.
 Six declarations bring the audit to 113; three exact controls pass.
 Paper and guide: paper/orbit_summability.pdf and paper/orbit_summability_guide.pdf.
+
+## Relative tail correction (2026-09-05)
+
+`RelativeCorrection.lean` adds a direct corollary of universal summability:
+for every unbounded positive orbit, the ratio of the shifted limiting
+correction to the current orbit value tends to zero. The exact identity is
+`c_infinity(n_t)/n_t = (c_infinity(N)-c_t(N))/(N+c_t(N))`.
+The numerator tends to zero and the denominator has a positive limit.
+Both declarations are included in the selected theorem audit.
+
+This is a routine consequence, not a new exclusion theorem. It does not
+imply bounded absolute correction or rounding of the ideal to the orbit:
+`IdealBarrier.one_lt_idealLimit` still puts the absolute correction above
+one at every shift. An arithmetic contradiction requires additional input.
