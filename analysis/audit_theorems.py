@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.WordCongruence", "Collatz.WordAffine.realizes_iff_dvd", "Exact parity realization iff affine numerator is divisible by the full power of two"),
+    ("Collatz.WordCongruence", "Collatz.WordAffine.realizes_paradoxical_iff", "Joint congruence and correction criterion; all natural seeds and finite words"),
     ("Collatz.Density", "Collatz.collatz_iff_descent", "Universal descent equivalence"),
     ("Collatz.NoGo", "Collatz.no_finite_certificate", "Bounded positive multiplier; fixed window and contraction"),
     ("Collatz.Rung1", "Collatz.no_shifted_sigWord_itinerary", "One substitution, every natural start and shift"),

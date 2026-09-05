@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 66 declarations using only standard
+The selected theorem audit now covers 68 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -154,3 +154,11 @@ it constructs no realizable orbit. The next arithmetic target is the joint
 constraint on suffix correction and its realizing seed residue. The theorem
 and finite-family consequence are included in the 66-declaration audit and
 documented in `paper/paradoxical_cylinders*`.
+
+The subsequent `Collatz.WordCongruence` bridge proves that affine endpoint
+integrality is equivalent to realizing the complete parity word, and combines
+it with the correction inequality into an exact paradoxical-word criterion.
+These two declarations bring the current audit to 68. This preserves the
+arithmetic omitted by the envelope but does not yet bound it uniformly.
+See `analysis/PARADOXICAL_CYLINDERS.md` for the statement and a false-candidate
+example eliminated by the congruence.

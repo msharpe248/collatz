@@ -56,7 +56,7 @@ direct iteration; interval membership and adjacent endpoints through length
 eight are compared with direct seeds; known and truncation-boundary controls
 are checked. Every emitted census segment is replayed directly as well.
 
-The selected module builds and expanded 66-declaration audit pass with standard
+The selected module builds and expanded 68-declaration audit pass with standard
 foundational axioms only. The expanded six-page formal note and three-page guide
 in `paper/paradoxical_cylinders*` compile without warnings; all nine pages were
 visually checked.
@@ -82,7 +82,7 @@ For each prefix, m is the smallest seed at least three in its residue class.
 
 `paradoxical_pruned.py` performs depth-first residue lifting and applies this
 rule. It asserts the affine identity at every visited node and directly
-replays each emitted segment. Seven unit tests cover the old interval method,
+replays each emitted segment. Eight unit tests cover the old interval method,
 every short suffix bound through length eight, exhaustive comparison through
 length fourteen, and correct reporting of an interrupted work-limited search.
 
@@ -123,3 +123,35 @@ Do not duplicate the nested finiteness implication or treat fixed-length
 censuses as an all-length proof. Any proposed rule must preserve the five
 known length-eight examples and distinguish endpoint non-descent from absence
 of earlier descent.
+
+## Exact arithmetic compatibility bridge
+
+`Collatz.WordCongruence` now proves, for every natural seed n and Boolean word w,
+with L=length(w), A=3^ones(w), D=correction(w):
+
+    Realizes n w ↔ 2^L divides A*n+D.
+
+Endpoint integrality forces every parity, not just the last step. Induction
+recovers the first parity modulo two and cancels its factor of two before
+applying the same argument to the tail. Combining this with the affine identity
+gives the exact joint criterion:
+
+    Realizes n w and IsParadoxical L n
+      ↔ 0<n and A<2^L and 2^L divides A*n+D and (2^L-A)*n≤D.
+
+Both declarations pass the selected axiom audit. An independent direct-orbit
+control compares both equivalences on every word through length eight and
+seeds in two complete residue periods, including zero and the empty word.
+This is proof infrastructure, not a new all-length exclusion theorem.
+
+For example, w=00011111 has A=243, D=1688 and modulus 256. Its correction
+inequality allows 3≤n≤129, but the congruence forces n≡248 (mod 256), so
+none of those seeds realizes it. The actual length-eight example from n=7
+has D=347 and does meet both conditions. Discarding residue compatibility
+therefore loses essential information even with the exact correction.
+
+The existing paper and guide describe the preceding 66-declaration snapshot.
+This arithmetic bridge brings the current audit to 68; no mathematical novelty
+or uniform finiteness is claimed for it. The next substantive task remains a
+uniform bound on the interaction of correction and realizing residue, rather
+than merely enumerating the exact criterion at additional fixed lengths.

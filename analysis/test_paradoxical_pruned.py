@@ -1,7 +1,7 @@
 import itertools
 import unittest
 from paradoxical_pruned import search, completion_possible
-from paradoxical_cylinders import census, layers
+from paradoxical_cylinders import census, layers, orbit
 
 
 def correction(word):
@@ -12,6 +12,22 @@ def correction(word):
 
 
 class PruningControls(unittest.TestCase):
+    def test_joint_congruence_against_direct_orbits(self):
+        for length in range(9):
+            modulus = 1 << length
+            trajectories = [orbit(n, length) for n in range(2*modulus)]
+            for word in itertools.product((0, 1), repeat=length):
+                coefficient, corr = 3**sum(word), correction(word)
+                for n, values in enumerate(trajectories):
+                    realizes = tuple(x % 2 for x in values[:-1]) == word
+                    compatible = (coefficient*n+corr) % modulus == 0
+                    self.assertEqual(compatible, realizes)
+                    joint = (n > 0 and coefficient < modulus and compatible
+                             and (modulus-coefficient)*n <= corr)
+                    direct = (realizes and n > 0 and values[-1] >= n
+                              and coefficient < modulus)
+                    self.assertEqual(joint, direct)
+
     def test_all_short_suffix_envelopes(self):
         for length in range(9):
             for word in itertools.product((0, 1), repeat=length):
