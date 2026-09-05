@@ -1,0 +1,210 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,tabularx}
+\usepackage{microtype,xcolor,mdframed}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\newmdenv[backgroundcolor=blue!4,linecolor=blue!35,linewidth=0.8pt,
+  skipabove=9pt,skipbelow=9pt,innerleftmargin=10pt,innerrightmargin=10pt]{keyidea}
+\newcommand{\code}[1]{{\small\ttfamily #1}}
+\setlength{\emergencystretch}{1.5em}
+\title{Infinitely Many Collatz Diaries Ruled Out:\\
+\Large A Friendly Guide to Short Rotation Windows}
+\author{Companion to ``Short Rotation Windows and an Infinite Family\\of Collatz Itinerary Exclusions''\thanks{Written with Codex (OpenAI). The companion technical paper and Lean sources give the exact statements and proofs. No claim of literature priority is made.}}
+\date{September 4, 2026}
+\begin{document}
+\maketitle
+
+\section{What has been proved}
+Start with a whole number. Halve it when it is even; when it is odd,
+triple it, add one, and halve the result. Record a $1$ at each odd number
+and a $0$ at each even number. This infinite binary diary describes its
+shortcut Collatz orbit.
+
+There is another way to make a binary diary. Walk along the number line
+in steps of a fixed length $\alpha$ between zero and one. Write $1$ when
+the step crosses into the next unit interval and $0$ otherwise. The
+starting position $\rho$ can be any real number. These are
+\emph{mechanical words}; irrational step lengths give Sturmian words.
+
+The previous result ruled out every starting position for one step length,
+$1/\sqrt2$. We have now proved an infinite family. For each integer
+$m\ge6$, set
+\[
+t_m=\frac{\sqrt{m^2+4}-m}{2},\qquad \alpha_m=\frac1{1+t_m}.
+\]
+\begin{keyidea}
+\textbf{The new theorem.} No whole-number Collatz orbit has a mechanical
+diary of step length $\alpha_m$, for any $m\ge6$ or starting position
+$\rho$. An orbit cannot acquire such a diary after a finite beginning,
+either. Lean has checked the theorem for all these parameters at once.
+\end{keyidea}
+Some step lengths, rounded for illustration, are
+\begin{center}
+\begin{tabular}{rrrrrr}
+\toprule
+$m$&6&7&8&10&100\\
+$\alpha_m$&0.860380&0.877151&0.890388&0.909902&0.990100\\
+\bottomrule
+\end{tabular}
+\end{center}
+Lean also proves that they are distinct, irrational, and get arbitrarily
+close to one. This is a family of exclusions, not a proof that every
+Collatz orbit reaches one.
+
+\newpage
+\section{The short-window trick}
+Imagine keeping only the fractional position of each point on the number
+line. The positions now lie around a circle of circumference one.
+Certain repeated diary blocks are located by visits to a short interval
+just before position one:
+\[
+[1-\delta,\,1).
+\]
+The proof needs to know that a visit happens soon enough, whatever the
+starting position. Earlier work used a longer rational grid to guarantee
+this. A simpler argument now gives the shorter window $q+Q$.
+
+Choose two approximate returns of the rotation. After $q$ steps, the
+position moves forward by a small amount $\delta$ modulo whole turns.
+After $Q$ steps, it moves backward by $\varepsilon$, where
+$0<\varepsilon\le\delta$.
+
+Look at the first $q+Q$ positions. Suppose that none is in the target
+interval. Pick the largest fractional position among them, and let its
+time index be $n$. There are two possibilities:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Index of the largest point&Replacement index&Forward movement\\
+\midrule
+$n<Q$&$n+q$&$\delta$\\
+$n\ge Q$&$n-Q$&$\varepsilon$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Both replacement indices are still among the first $q+Q$ indices.
+Since the chosen point is below $1-\delta$, neither movement reaches one
+or wraps around the circle. Both produce a larger fractional position.
+That contradicts the choice of the largest one.
+
+\begin{keyidea}
+\textbf{The conclusion.} Every block of $q+Q$ consecutive rotation
+positions contains a target visit. The proof works for every starting
+position and handles the interval endpoints exactly.
+\end{keyidea}
+This is all the rotation coverage the Collatz argument needs. We do not
+need to classify every possible gap on the circle or assume a
+three-distance theorem. A separate integer identity guarantees that
+successive visits cannot be too close together. Together the two facts
+locate long repeated diary stretches early enough to be useful.
+
+\newpage
+\section{Why one recurrence gives infinitely many cases}
+For a fixed integer $m\ge6$, begin with four integers
+$(q,Q,p,P)=(1,1,0,1)$. Repeat the rules
+\[
+\begin{aligned}
+q'&=q+mQ,&p'&=p+mP,\\
+Q'&=mq'+Q,&P'&=mp'+P.
+\end{aligned}
+\]
+They supply the two approximate returns used on the previous page.
+The crucial small identity is
+\[
+t_m^2+mt_m=1.
+\]
+It says that the next lower error is $t_m^2$ times the previous lower
+error; the upper error is always $t_m$ times the lower one. Thus both
+errors stay positive, become smaller, and have the required ordering.
+The recurrence also preserves the exact integer identity $Pq-pQ=1$,
+which provides separation between visits.
+
+For $m=6$, the first useful levels are
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+Level&Lower return $q$&Separation $Q$&Window $q+Q$\\
+\midrule
+1&7&43&50\\
+2&265&1633&1898\\
+3&10063&62011&72074\\
+\bottomrule
+\end{tabular}
+\end{center}
+The table is an illustration. Lean proves the recurrence properties at
+every level and for every integer parameter $m\ge6$.
+
+\section{The numerical margin is exact}
+Matching long parity diaries forces an integer divisibility condition:
+two distinct starts sharing their first $L$ parity letters differ by a
+nonzero multiple of $2^L$. Their difference is therefore at least $2^L$.
+Long repetitions inside one orbit turn this into a lower bound on orbit
+size. The exact Collatz formula, including the added-one corrections,
+gives an upper bound for the same values.
+
+The short window makes these bounds incompatible at a sufficiently
+large recurrence level. One exact comparison does most of the work:
+\[
+3^8=6561<8192=2^{13}.
+\]
+After the other factors are bounded, the required estimate is
+\[
+24\bigl(3N+3(m+2)q+1\bigr)
+\left(\frac{6561}{8192}\right)^q<1.
+\]
+For each fixed starting number $N$ and parameter $m$, the factor outside
+the power grows only linearly in $q$. The power shrinks geometrically.
+Since the recurrence produces arbitrarily large $q$, the estimate must
+eventually hold. There is no finite search limit in this argument.
+
+\newpage
+\section{What Lean checked}
+The formal proof covers the short-window argument, the determinant
+identity, the integer recurrence, the errors and denominator ratios,
+the orbit-size comparison, and the final limiting argument. It quantifies
+over every starting number, real intercept, finite orbit prefix, and
+integer parameter in the stated range.
+
+Lean also checks that the slopes are irrational and strictly increasing,
+with the explicit bound
+\[
+0<1-\alpha_m<\frac1{m+1}.
+\]
+For example, taking larger and larger $m$ makes the limiting proportion
+of odd letters approach $100\%$. Even these highly odd-biased diaries
+cannot occur when they have this exact mechanical structure.
+
+The expanded theorem audit checks 26 selected declarations. Their axiom
+dependencies are within Lean's standard foundations. This check is not
+an independent replay by another kernel or a fresh rebuild of every
+external library. The result uses no unproved mathematical axiom and no
+unfinished proof placeholder.
+
+\section{What still separates this from Collatz}
+\begin{keyidea}
+\textbf{The remaining gap.} We can now cross infinitely many slopes,
+each with every starting position, off the list of possible diaries.
+We have not shown that every hypothetical counterexample must use a
+diary on that list.
+\end{keyidea}
+An infinite set of excluded slopes is not an excluded interval. Getting
+arbitrarily close to slope one does not rule out neighboring slopes by
+continuity. The theorem does not say that every sufficiently odd-biased
+diary is impossible. Nonmechanical diaries, critical-boundary divergence,
+and the general nontrivial-cycle problem still need separate arguments.
+
+The next research target is to allow controlled errors in repeated diary
+blocks. Earlier work already gives an exact weighted cost for swapping
+adjacent letters. A useful theorem must control those weights, not just
+count the swaps. It must eventually connect to an independently proved
+restriction on the diary of an actual integer counterexample.
+
+\subsection*{Where to read the proof}
+The technical companion is \code{paper/metallic.pdf}, with editable
+source \code{paper/metallic.tex}. The principal theorem is
+\code{Collatz.Metallic.no\_\allowbreak{}itinerary}, in
+\code{lean/Collatz/SturmianMetallic.lean}. The supporting arguments are in
+\code{SturmianWindow.lean} and
+\code{SturmianFamily.lean}. The ongoing research ledger is
+\code{analysis/RESEARCH\_\allowbreak{}STATUS.md}.
+\end{document}

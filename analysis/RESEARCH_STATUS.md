@@ -1,6 +1,6 @@
 # Active proof program
 
-Updated 2026-09-04. The Collatz conjecture remains open. This ledger separates
+Updated 2026-09-05. The Collatz conjecture remains open. This ledger separates
 proved family exclusions from the unproved claim that all counterexamples
 belong to an excluded family.
 
@@ -9,6 +9,13 @@ belong to an excluded family.
 | Direction | Checked result | Scope |
 |---|---|---|
 | Sturmian itineraries | `Silver.no_itinerary`, `Silver.no_eventual_itinerary` | Slope √2/2, every intercept and natural seed; unconditional |
+| Infinite Sturmian family | `Metallic.no_itinerary`, `Metallic.no_eventual_itinerary` | Every integer m≥6, slope 1/(1+(√(m²+4)−m)/2), every intercept and natural seed; unconditional |
+| Short rotation windows | `rotation_window_of_neighbors` | Every window of length q+Q from positive bracketing errors ε≤δ; no three-distance theorem |
+| General family criterion | `no_itinerary_of_unbounded_neighbors` | Explicit unbounded levels with 6q≤Q≤Cq and fixed C |
+| Family geometry | `Metallic.alpha_irrational`, `alpha_strictMono`, `alpha_close_to_one` | Distinct irrational slopes, with 0<1−α_m<1/(m+1) |
+| Finite defect certificates | `ParityDefects.few_defects_force_return` | At most D shift disagreements over (2^(D+1)−1)(q+K) comparisons force a q-step return; N+1≤2^K |
+| Edited periodic templates | `ParityDefects.near_power_force_return`, `near_power_bound_orbit` | At most e edits, arbitrary positions, explicit exponential horizon; positive period bounds the orbit |
+| Period-two convergence | `ParityDefects.few_defects_two_reaches_one`, `near_two_power_reaches_one` | Positive seed plus the finite period-two certificate implies reaching 1 |
 | Rotation arithmetic | `sturmian_separation_of_neighbors`, `rotation_window_of_grid` | General certified approximation inputs; no cited axioms |
 | Size control | `sturmian_size_at_endpoint` | One endpoint replaces all earlier size tests |
 | Block comparisons | `WordAffine.adjacent_swap`, `compare`, `compare_dvd`, `compare_bound` | Exact identities and conditional height obstructions |
@@ -21,6 +28,12 @@ See [STURMIAN_SILVER.md](STURMIAN_SILVER.md) for the new theorem's proof.
 The [paper](../paper/silver.pdf) and [friendly guide](../paper/silver_guide.pdf)
 provide the publication versions. Significant future results should also
 receive a paper and guide in `paper/`, following its README.
+The subsequent infinite-family result is in
+[STURMIAN_METALLIC.md](STURMIAN_METALLIC.md), with its
+[paper](../paper/metallic.pdf) and [guide](../paper/metallic_guide.pdf).
+The finite near-periodicity extension is in
+[PARITY_DEFECTS.md](PARITY_DEFECTS.md), with its
+[paper](../paper/defects.pdf) and [guide](../paper/defects_guide.pdf).
 The main source modules were rebuilt selectively. This does not mean the
 large KL certificates or all nested libraries were rebuilt or independently
 kernel-replayed during this pass.
@@ -56,12 +69,16 @@ checks swap identities, and replays the finite Mahler candidates.
 
 ## Missing mathematical bridges
 
-1. **Other Sturmian slopes.** Reuse the determinant/grid method on another
-   explicit recurrence, or prove quantitative conditions for a family. The
-   √2/2 theorem alone does not imply exclusion of every Sturmian slope.
-2. **Useful defect bounds.** The swap identity is proved; a small number of
-   swaps need not have a small weighted cost. Find a class with controlled
-   weighted defects and prove an exclusion theorem for that class.
+1. **Other Sturmian slopes.** The short-window argument and an explicit
+   recurrence now exclude an infinite family accumulating at slope 1.
+   This is not all slopes or an interval of slopes. The conservative
+   sixfold criterion leaves parameters 3–5 and broader continued-fraction
+   families outside the new theorem.
+2. **Useful defect bounds.** A finite near-periodicity class is now excluded
+   from unbounded orbits, using disjoint windows instead of raw swap costs.
+   The sufficient horizon is exponential in the disagreement or edit
+   count. No universal sparsity bound is proved; improving the horizon or
+   proving independent restrictions on defect counts remains open.
 3. **Ordinary integer coverage.** Prove an independently meaningful
    restriction forcing every counterexample into an excluded class. No
    complexity-versus-defect dichotomy has been established.
@@ -78,6 +95,7 @@ checks swap identities, and replays the finite Mahler candidates.
    unfinished axioms. Port and audit precise declarations before using them
    in an unconditional theorem; preserve map-convention bridges.
 
-KL exponent improvements remain a separate density-results track. The next
-proof-focused priority is extending the now-proved rotation-grid method,
-followed by a genuine defect-controlled itinerary family.
+KL exponent improvements remain a separate density-results track. The
+rotation-family and finite defect extensions are now proved. The next
+proof-focused priority is an independent restriction on possible integer
+counterexample itineraries, or sharper height-dependent defect windows.

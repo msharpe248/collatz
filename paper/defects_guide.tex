@@ -1,0 +1,151 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage{microtype,xcolor,mdframed}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\newmdenv[backgroundcolor=blue!4,linecolor=blue!35,linewidth=0.8pt,
+  skipabove=9pt,skipbelow=9pt,innerleftmargin=10pt,innerrightmargin=10pt]{keyidea}
+\newcommand{\code}[1]{{\small\ttfamily #1}}
+\setlength{\emergencystretch}{1.5em}
+\title{How Nearly Repeating Parity Forces a Return:\\
+\Large A Friendly Guide to Finite Collatz Defects}
+\author{Companion to ``Finite Parity Defects Force Collatz Returns''\thanks{Written with Codex (OpenAI). The technical paper and Lean source give the exact statements and proofs. No claim of literature priority is made.}}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+
+\section{The result in ordinary language}
+Use the shortcut Collatz rule: halve an even number; triple an odd
+number, add one, and halve it. Record a $1$ at each odd number and a
+$0$ at each even number. Now compare this parity diary with a copy
+shifted forward by $q$ places.
+
+If the two copies disagree only a few times over a sufficiently long
+finite stretch, the orbit must actually return to an earlier number.
+The theorem gives both the required stretch length and a short list
+of checkpoints where the return must occur.
+
+Let $K$ satisfy $N+1\le2^K$ for the starting number $N$. For instance,
+$N=3$ allows $K=2$. If there are at most $D$ disagreements, the
+sufficient number of comparisons is
+\[
+L=(2^{D+1}-1)(q+K).
+\]
+Those comparisons use $L+q$ parity letters. The possible return
+checkpoints are
+\[
+s_k=(2^k-1)(q+K),\qquad k=0,1,\ldots,D.
+\]
+\begin{keyidea}
+\textbf{What Lean proves.} At one of these checkpoints, the orbit
+value equals the value $q$ steps later. For $q>0$, the future repeats
+and the orbit is bounded. For $q=2$ and a positive starting number,
+the theorem goes further: the orbit reaches one.
+\end{keyidea}
+The result allows disagreements anywhere in the checked interval.
+It does not assume a particular Sturmian slope or a favorable density
+of even steps. The cost is that the sufficient length grows
+exponentially with the allowed number of disagreements.
+
+This is a new proved criterion in the repository. We have not proved
+that every positive starting number satisfies it.
+
+\newpage
+\section{Why an exact interval matters}
+Two distinct starting numbers sharing their first $r$ parity letters
+differ by a nonzero multiple of $2^r$. Their difference is therefore
+at least $2^r$. This is the arithmetic fact behind the earlier exact
+repetition criterion.
+
+There is also a simple size bound. After $u$ shortcut steps,
+\[
+T^u(N)+1\le2^u(N+1)\le2^{u+K}.
+\]
+It is deliberately generous, but holds for every choice of parities.
+
+At a time $s$, compare the two orbit values $T^s(N)$ and
+$T^{s+q}(N)$. If their parity diaries agree for the next $s+q+K$
+letters, the divisibility lower bound is too large for these two
+values to be distinct. They must be equal.
+
+\begin{keyidea}
+\textbf{The local choice.} At every checkpoint $s$, either the orbit
+returns after $q$ steps, or there is a parity disagreement before
+time $2s+q+K$.
+\end{keyidea}
+Set $A=q+K$. Choose checkpoints $0,A,3A,7A,\ldots$ so that the
+search windows fit together without overlapping:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Checkpoint&Window in which a defect is forced&Next checkpoint\\
+\midrule
+$0$&$[0,A)$&$A$\\
+$A$&$[A,3A)$&$3A$\\
+$3A$&$[3A,7A)$&$7A$\\
+$7A$&$[7A,15A)$&$15A$\\
+\bottomrule
+\end{tabular}
+\end{center}
+If every one of $D+1$ checkpoints failed to return, these disjoint
+windows would contain $D+1$ different disagreements. That contradicts
+the allowed total of $D$.
+
+This replaces a direct attempt to bound swap costs. Moving one parity
+letter across a late adjacent position can have a very large weighted
+arithmetic cost. The window argument instead uses the exact stretches
+between disagreements.
+
+\newpage
+\section{Allowing edits to a repeating template}
+Suppose a finite parity diary differs in at most $e$ letters from a
+repeating template with period $q$. Each edited letter can affect at
+most two comparisons with the shifted copy: one in which it is the
+first letter, and one in which it is the second.
+
+Thus at most $e$ edited letters cause at most $2e$ shift disagreements.
+The sufficient comparison length becomes
+\[
+L=(2^{2e+1}-1)(q+K),
+\]
+and the template is checked for $L+q$ letters. The edit positions can
+be arbitrary. Lean checks this extension too.
+
+For a concrete example, start at $3$:
+\[
+3,5,8,4,2,1,2,1,\ldots.
+\]
+Its diary begins $11000101\ldots$. Compare it with its shift by two
+places. The only disagreements are at times $0,1,3$. With $D=3$,
+$q=2$, and $K=2$, the sufficient comparison length is $60$.
+The checkpoints are $0,4,12,28$. Already at time $4$, the value $2$
+equals the value two steps later.
+
+The same diary differs from the template $010101\ldots$ only at
+times $0$ and $3$. This gives $e=2$ edited letters, whose more
+conservative template bound is $L=124$. The distinction matters:
+edited letters and shift disagreements are different counts.
+
+\section{What remains between this and Collatz}
+\begin{keyidea}
+\textbf{The missing step.} We know what happens if a finite parity
+prefix is sufficiently close to periodic. We do not know that every
+hypothetical counterexample must have such a prefix.
+\end{keyidea}
+For a general positive period, the return could belong to a nontrivial
+cycle. For period two, Lean proves that the only positive return values
+are $1$ and $2$, so the certificate implies convergence to one.
+But its universal availability is still unproved. Every orbit reaching
+one eventually alternates; assuming that all orbits have the needed
+period-two certificate would simply rephrase the convergence problem.
+
+The next useful advance needs an independent restriction on the number
+of defects, or a sharper bound on the time available between defects.
+The expanded audit checks 35 selected declarations using only Lean's
+standard foundational axioms; it is not an independent kernel replay.
+
+The technical paper is \code{paper/defects.pdf}, with source
+\code{paper/defects.tex}. The formal development is
+\code{lean/Collatz/ParityDefects.lean}; the research note is
+\code{analysis/PARITY\_\allowbreak{}DEFECTS.md}.
+\end{document}

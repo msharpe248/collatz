@@ -14,6 +14,8 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 | Word-complexity ladder | [ladder.pdf](ladder.pdf) | [ladder_guide.pdf](ladder_guide.pdf) |
 | Automatic itinerary exclusion | [rung1.pdf](rung1.pdf) | [rung1_guide.pdf](rung1_guide.pdf) |
 | Unconditional Sturmian exclusion at slope 1/√2, and supporting arithmetic | [silver.pdf](silver.pdf) | [silver_guide.pdf](silver_guide.pdf) |
+| Short rotation windows and an infinite family of Sturmian exclusions | [metallic.pdf](metallic.pdf) | [metallic_guide.pdf](metallic_guide.pdf) |
+| Finite parity defects and approximate-periodicity certificates | [defects.pdf](defects.pdf) | [defects_guide.pdf](defects_guide.pdf) |
 
 The matching `.tex` files are the editable sources. The newest formal status
 and remaining proof gaps are in [RESEARCH_STATUS.md](../analysis/RESEARCH_STATUS.md).
@@ -23,8 +25,8 @@ papers have completed.
 To rebuild the latest pair with Tectonic:
 
 ```sh
-tectonic paper/silver.tex
-tectonic paper/silver_guide.tex
+tectonic paper/defects.tex
+tectonic paper/defects_guide.tex
 ```
 
 After editing, check the compiler log, cross-references, and rendered pages.

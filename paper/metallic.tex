@@ -1,0 +1,396 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,tabularx,array}
+\usepackage{microtype,xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\fr}[1]{\{#1\}}
+\newcommand{\code}[1]{{\small\ttfamily #1}}
+\setlength{\emergencystretch}{1.5em}
+\title{Short Rotation Windows and an Infinite Family\\of Collatz Itinerary Exclusions}
+\author{M.~Sharpe\thanks{Developed with Codex (OpenAI), building on the author's existing Collatz formalization. The Collatz conjecture remains open. No claim of priority in the mathematical literature is made.}}
+\date{September 4, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every integer $m\ge6$, set
+$t_m=(\sqrt{m^2+4}-m)/2$ and $\alpha_m=1/(1+t_m)$.
+We prove that no natural-number orbit of the shortcut Collatz map has
+the mechanical parity itinerary of slope $\alpha_m$, for any real
+intercept, even after an arbitrary finite orbit prefix.
+These are distinct irrational slopes approaching one. The proof uses
+an elementary short-window lemma: two positive bracketing errors
+$0<\varepsilon\le\delta$ force a visit to $[1-\delta,1)$ among the first
+$q+Q$ rotation points. Maximizing a fractional part proves this directly,
+without a three-distance theorem. We combine this with determinant-one
+separation, a uniform exponential size margin, and explicit integer
+recurrences supplying every approximation certificate. The family theorem,
+irrationality, strict monotonicity, and an explicit bound on the distance
+to one are checked in Lean~4 using only standard foundational axioms.
+This extends the repository's previous single-slope result; it does not
+provide universal coverage of possible Collatz counterexamples.
+\end{abstract}
+
+\section{The family theorem}
+Use the shortcut map
+\[
+T(n)=\begin{cases}n/2,&n\equiv0\pmod2,\\(3n+1)/2,&n\equiv1\pmod2,\end{cases}
+\qquad n\in\N=\{0,1,2,\ldots\}.
+\]
+For real $\alpha,\rho$, its candidate mechanical itinerary is
+\begin{equation}\label{eq:word}
+w_{\alpha,\rho}(j)=\lfloor(j+1)\alpha+\rho\rfloor-\lfloor j\alpha+\rho\rfloor.
+\end{equation}
+For $0<\alpha<1$ these are binary letters; their limiting density of ones
+is $\alpha$, by telescoping the floor differences.
+
+\begin{theorem}\label{thm:main}
+Let $m\in\N$, $m\ge6$, and define
+\begin{equation}\label{eq:alpha}
+t_m=\frac{\sqrt{m^2+4}-m}{2},\qquad
+\alpha_m=\frac1{1+t_m}.
+\end{equation}
+For every $N,s\in\N$ and $\rho\in\R$, there exists $j\in\N$ such that
+\[
+T^{s+j}(N)\bmod2\ne w_{\alpha_m,\rho}(j).
+\]
+\end{theorem}
+The formal statements are \code{Metallic.no\_\allowbreak{}itinerary}
+and \code{Metallic.no\_\allowbreak{}eventual\_\allowbreak{}itinerary}.
+The second follows by applying the first to $T^s(N)$; neither requires a
+divergence hypothesis. Below we prove every approximation and size
+obligation needed for this exclusion. For orientation only, rounded
+values are
+\[
+\begin{array}{c|rrrrrr}
+m&6&7&8&10&20&100\\\hline
+\alpha_m&0.860380&0.877151&0.890388&0.909902&0.952494&0.990100
+\end{array}
+\]
+The proof uses exact algebraic values. It covers the indicated slopes,
+not all slopes between them.
+
+\section{Short windows from a maximal fractional part}
+Write $\fr{x}=x-\lfloor x\rfloor$. A \emph{visit} at time $n$ means
+\[
+1-\delta\le\fr{n\alpha+\rho}<1.
+\]
+The upper inequality holds automatically for a fractional part.
+
+\begin{lemma}[Short-window coverage]\label{lem:window}
+Suppose $q,Q$ are positive integers, $p,P\in\Z$, and
+\begin{equation}\label{eq:bracket}
+q\alpha=p+\delta,\qquad Q\alpha=P-\varepsilon,
+\qquad 0<\varepsilon\le\delta.
+\end{equation}
+For every real $\rho$ there is a visit at some $0\le n<q+Q$.
+Consequently, every integer window $[a,a+q+Q)$ contains a visit.
+\end{lemma}
+\begin{proof}
+Suppose there is no visit among these finitely many indices. Choose $n$
+maximizing $f(n)=\fr{n\alpha+\rho}$. Then $f(n)<1-\delta$.
+
+If $n<Q$, the index $n+q$ is still below $q+Q$ and
+$f(n+q)=f(n)+\delta$: adding $q\alpha=p+\delta$ changes the fractional
+part by $\delta$, with no wrap since $f(n)+\delta<1$.
+If $n\ge Q$, the index $n-Q$ is nonnegative and still in range, and
+$f(n-Q)=f(n)+\varepsilon$, again with no wrap since
+$f(n)+\varepsilon\le f(n)+\delta<1$.
+Both cases strictly increase the maximal value, a contradiction.
+Replace $\rho$ by $a\alpha+\rho$ for the shifted-window assertion.
+\end{proof}
+This argument requires neither coprimality nor a determinant condition.
+It also respects the closed lower and open upper endpoints of the visit
+interval. It proves exactly the coverage needed here, rather than a full
+classification of rotation gaps. In Lean the two forms are
+\code{rotation\_\allowbreak{}visit\_\allowbreak{}of\_\allowbreak{}neighbors}
+and \code{rotation\_\allowbreak{}window\_\allowbreak{}of\_\allowbreak{}neighbors}.
+
+\section{Separation and the Collatz level criterion}
+For completeness, we recall the two previously formalized inputs used
+with the new short window.
+
+\begin{lemma}[Determinant-one separation]\label{lem:sep}
+Under \eqref{eq:bracket}, suppose $Pq-pQ=1$. If $0<h<Q$ and $r\in\Z$,
+then $|h\alpha-r|\ge\delta$.
+\end{lemma}
+\begin{proof}
+Put $A=Ph-Qr$ and $B=qr-ph$. The determinant gives
+\[
+h=Aq+BQ,\qquad r=Ap+BP,\qquad h\alpha-r=A\delta-B\varepsilon.
+\]
+If $A\le0$, positivity of $h$ forces $B\ge1$, and $h<Q$ rules out
+$A=0$. Thus $A\le-1$, so the error is at most $-\delta$.
+If $A>0$, then $A\ge1$ and $h<Q$ forces $B\le0$, so the error is
+at least $\delta$.
+\end{proof}
+
+\begin{proposition}[Existing endpoint criterion]\label{prop:level}
+Let $\alpha\ge0$, $2\le3^\alpha$, $0<\delta<1$ and $Q\ge3$.
+Suppose $q\alpha=p+\delta$, the separation conclusion of
+Lemma~\ref{lem:sep} holds, and every window of length $G$ contains a
+visit. If
+\begin{equation}\label{eq:size}
+3^{(q+G)\alpha+1}(3N+3G+1)<2^{Q-3+G},
+\end{equation}
+then $N$ does not have itinerary \eqref{eq:word}.
+\end{proposition}
+This is \code{sturmian\_\allowbreak{}level\_\allowbreak{}endpoint}, proved in
+the earlier development \cite{silver,rung1}. Its proof combines the
+exact affine iterate formula, including its positive correction, with
+the divisibility forced by a repeated parity prefix.
+Here is the mechanism needed to interpret its hypotheses. A visit
+followed by a gap of at least $Q$ produces a $q$-periodic block of
+$q+Q-2$ letters. Distinct orbit values with matching parity prefixes
+must be far apart in ordinary integer size. The mechanical-word density
+bound supplies an upper estimate for those same orbit values. The
+endpoint reduction, valid when $2\le3^\alpha$, lets one check only the
+largest possible starting time $G$. Equation~\eqref{eq:size} makes the
+two estimates incompatible. No unproved coverage assumption will remain
+when we apply this proposition.
+
+\section{A uniform family criterion}
+Call the data in \eqref{eq:bracket} a \emph{certified level} when
+$q,Q>0$, $0<\varepsilon\le\delta<1$, and $Pq-pQ=1$.
+These are the fields of \code{SturmianNeighborLevel}.
+
+\begin{theorem}\label{thm:criterion}
+Suppose $0\le\alpha\le1$ and $2\le3^\alpha$. Assume there is a fixed
+$C\in\N$ such that, for arbitrarily large lower denominators $q$,
+there are certified levels satisfying
+\begin{equation}\label{eq:ratio}
+6q\le Q\le Cq.
+\end{equation}
+Then no natural number has mechanical itinerary of slope $\alpha$,
+for any real intercept.
+\end{theorem}
+\begin{proof}
+Write $a=3^\alpha$, so $2\le a\le3$, and use the short window $G=q+Q$.
+Put $d=Q-6q\ge0$. Then
+\begin{equation}\label{eq:exponents}
+q+G=8q+d,\qquad Q+G=13q+2d,\qquad G\le(C+1)q.
+\end{equation}
+Since $q>0$, we also have $Q\ge6$, so the subtraction in
+\eqref{eq:size} is ordinary integer subtraction. Multiplying that
+inequality by eight shows that it is equivalent to
+\begin{equation}\label{eq:size24}
+24(3N+3G+1)a^{q+G}<2^{Q+G}.
+\end{equation}
+The constants
+\[
+a^8\le3^8=6561<8192=2^{13},\qquad a\le4
+\]
+give
+\begin{align*}
+24(3N+3G+1)a^{q+G}
+&\le24(3N+3(C+1)q+1)6561^q4^d,\\
+2^{Q+G}&=8192^q4^d.
+\end{align*}
+Thus it suffices that
+\begin{equation}\label{eq:scalar}
+24(3N+3(C+1)q+1)\left(\frac{6561}{8192}\right)^q<1.
+\end{equation}
+For fixed $N,C$ the left side tends to zero: a geometric sequence with
+base strictly below one dominates a linear factor. Choose a certified
+level beyond this threshold. Lemmas~\ref{lem:window} and \ref{lem:sep}
+then supply the coverage and separation hypotheses of
+Proposition~\ref{prop:level}, and \eqref{eq:scalar} supplies its size bound.
+All these choices are independent of the intercept.
+\end{proof}
+The constants are conservative. This theorem is an explicit sufficient
+criterion, not a claim that arbitrary slopes have such levels. Its Lean
+name is \code{no\_\allowbreak{}itinerary\_\allowbreak{}of\_\allowbreak{}unbounded\_\allowbreak{}neighbors}.
+
+\section{The integer recurrence discharges every certificate}
+Fix $m\ge6$, and abbreviate $t=t_m$, $\alpha=\alpha_m$. Direct algebra gives
+\begin{equation}\label{eq:root}
+t>0,\qquad t^2+mt=1,\qquad 0<t\le\tfrac12,
+\qquad (1+t)\alpha=1.
+\end{equation}
+Hence $2/3\le\alpha<1$. In particular $3^\alpha\ge2$, since
+$3^{3\alpha}\ge9>8$.
+
+Starting from $(q_0,Q_0,p_0,P_0)=(1,1,0,1)$, define
+\begin{equation}\label{eq:recurrence}
+\begin{aligned}
+q_{k+1}&=q_k+mQ_k,&p_{k+1}&=p_k+mP_k,\\
+Q_{k+1}&=mq_{k+1}+Q_k,&P_{k+1}&=mp_{k+1}+P_k.
+\end{aligned}
+\end{equation}
+Define the errors $\delta_k=(t^2)^k\alpha$ and
+$\varepsilon_k=t\delta_k$.
+
+\begin{lemma}\label{lem:recurrence}
+For every $k\ge0$,
+\begin{align}
+q_k\alpha&=p_k+\delta_k,&
+Q_k\alpha&=P_k-\varepsilon_k,\label{eq:errors}\\
+P_kq_k-p_kQ_k&=1,&
+0<\varepsilon_k&\le\delta_k<1.\label{eq:invariants}
+\end{align}
+Also $k+1\le q_k$, $Q_k\ge1$, and
+\begin{equation}\label{eq:ratios}
+Q_k\le(m+1)q_k\quad(k\ge0),\qquad
+mq_k\le Q_k\quad(k\ge1).
+\end{equation}
+\end{lemma}
+\begin{proof}
+At level zero the error identities say $\alpha=\alpha$ and
+$\alpha=1-t\alpha$, the latter being \eqref{eq:root}. Under one
+recurrence step the lower error changes from $\delta$ to
+\[
+\delta-m\varepsilon=(1-mt)\delta=t^2\delta,
+\]
+and the upper error changes from $\varepsilon$ to
+\[
+\varepsilon-m(t^2\delta)=t(1-mt)\delta=t^3\delta.
+\]
+These are exactly the errors at the next level. Expanding
+$P'q'-p'Q'$ in \eqref{eq:recurrence} gives $Pq-pQ$, preserving the
+initial determinant one. Since $0<t<1$ and $0<\alpha<1$, the error
+bounds follow.
+
+The denominators stay positive and $q_{k+1}\ge q_k+1$, giving
+$k+1\le q_k$. The identity $Q_{k+1}=mq_{k+1}+Q_k$ gives the lower ratio
+bound. For the upper one, $m\ge1$ implies
+$Q_k\le q_k+mQ_k=q_{k+1}$, and hence
+$Q_{k+1}\le(m+1)q_{k+1}$; level zero is immediate.
+\end{proof}
+
+For $m=6$ the first levels are shown below. Level zero initializes the
+recurrence; the sixfold ratio condition is used from level one onward.
+\begin{center}
+\begin{tabular}{rrrrrr}
+\toprule
+$k$&$q_k$&$p_k$&$Q_k$&$P_k$&$G_k=q_k+Q_k$\\
+\midrule
+0&1&0&1&1&2\\
+1&7&6&43&37&50\\
+2&265&228&1633&1405&1898\\
+3&10063&8658&62011&53353&72074\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+For the fixed parameter $m$, choose $C=m+1$. Lemma~\ref{lem:recurrence}
+provides certified levels with unbounded $q_k$ and
+$6q_k\le mq_k\le Q_k\le Cq_k$ for every $k\ge1$.
+Theorem~\ref{thm:criterion} excludes the itinerary from every natural seed
+and every intercept. Applying it to $T^s(N)$ excludes all finite-prefix
+shifts as well.
+\end{proof}
+No continued-fraction theorem is needed to construct or validate these
+levels. The induction and the positive-root equation are the complete
+approximation certificates.
+
+\section{Distinct irrational slopes approaching one}
+\begin{proposition}\label{prop:geometry}
+For $m\ge2$, $\alpha_m$ is irrational. The sequence $(\alpha_m)_{m\ge0}$
+is strictly increasing, and for every $m\ge0$,
+\begin{equation}\label{eq:close}
+0<1-\alpha_m<\frac1{m+1}.
+\end{equation}
+In particular, the excluded slopes form an infinite set with limit one.
+\end{proposition}
+\begin{proof}
+For $m\ge2$ the integer $m^2+4$ lies strictly between $m^2$ and
+$(m+1)^2$, so it is not a square. The square root of a nonsquare
+nonnegative integer is irrational; subtracting $m$, dividing by two,
+adding one, and taking the reciprocal preserve irrationality here.
+This uses mathlib's proved nonsquare criterion, not an asserted axiom.
+
+If $m<n$ and $t_m\le t_n$, positivity gives
+$t_m^2+mt_m<t_n^2+nt_n$, contradicting that both sides equal one.
+Thus $t_n<t_m$ and $\alpha_n>\alpha_m$.
+
+Finally $mt_m=1-t_m^2<1$, while
+$1-\alpha_m=t_m\alpha_m>0$. Therefore
+\[
+(m+1)(1-\alpha_m)=(m+1)t_m\alpha_m
+<(1+t_m)\alpha_m=1,
+\]
+which proves \eqref{eq:close}. The same bound, with an arbitrarily large
+natural parameter, puts an excluded slope within every positive distance
+of one.
+\end{proof}
+
+\section{Formal verification and scope}
+The three new source modules are:
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Module under \code{lean/Collatz/}&Role\\
+\midrule
+\code{SturmianWindow.lean}&Short-window coverage for every intercept.\\
+\code{SturmianFamily.lean}&Certified-level interface and uniform size criterion.\\
+\code{SturmianMetallic.lean}&Recurrence certificates, family exclusion, and slope geometry.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+The principal quantified type is
+\begin{quote}\small\ttfamily
+Collatz.Metallic.no\_\allowbreak{}itinerary (m : $\N$) (hm : 6 $\le$ m)\par
+\quad (N : $\N$) ($\rho$ : $\R$) : $\neg$ Collatz.HasItin (Collatz.Metallic.alpha m) $\rho$ N.
+\end{quote}
+\code{HasItin} asserts equality of the parity and mechanical letters
+at every natural time. The only assumptions in this type are the
+parameter range and the quantified seed and intercept; there is no
+remaining approximation, coverage, or asymptotic hypothesis.
+
+The selected modules build with Lean \code{v4.27.0-rc1}.
+The reproducible command
+\code{python3 analysis/audit\_\allowbreak{}theorems.py --build}
+checks the selected modules and prints exact types and transitive axiom
+dependencies. The expanded audit contains 26 declarations, including the
+new coverage, family, and geometry results. All inspected dependencies
+are within \code{propext}, \code{Classical.choice}, and \code{Quot.sound}.
+The new modules contain no \code{sorry}, \code{native\_\allowbreak{}decide},
+or added mathematical axiom. This is ordinary Lean checking and axiom
+inspection; it is not independent kernel replay, a fresh build of every
+dependency, or a rebuild of every nested repository and large KL certificate.
+
+\section{What this leaves open}
+The maximal-fractional-part lemma removes a specific rotation-coverage
+dependency, and the recurrence extends a single excluded slope to an
+infinite explicit family. The family does not cover an interval of slopes.
+Its accumulation at one gives no continuity principle that would exclude
+neighboring slopes. Parameters $3,4,5$ lie outside the conservative
+sixfold criterion; the earlier silver result treats the slope associated
+with $m=2$ separately.
+
+More fundamentally, no result here forces every positive-integer
+counterexample to have a mechanical itinerary. General nonmechanical
+itineraries, divergence at the critical boundary, and all nontrivial
+cycles remain outside this family exclusion. The next proof target is a
+useful extension from exact repetition to controlled weighted defects,
+together with an independent restriction on possible integer
+counterexample itineraries. Further exclusions alone do not supply that
+coverage bridge.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{silver} M.~Sharpe, \emph{An Unconditional Sturmian Exclusion for
+the Collatz Map at Slope $1/\sqrt2$}, September 2026.
+Repository file \code{paper/silver.tex}; formal sources
+\code{SturmianApprox.lean}, \code{SturmianEndpoint.lean}, and
+\code{SturmianSilver.lean}.
+\bibitem{rung1} M.~Sharpe, \emph{Rung One of the Word-Complexity Ladder:
+a Machine-Verified Exclusion of an Automatic Collatz Itinerary by
+Mahler's Method in Degree One}, August 2026.
+Repository file \code{paper/rung1.tex}; formal sources
+\code{Rung1.lean} and \code{Sturmian.lean}.
+\bibitem{source} M.~Sharpe, \emph{Collatz at the Critical Line}, source
+repository, \url{https://github.com/msharpe248/collatz}.
+Current research ledger: \code{analysis/RESEARCH\_\allowbreak{}STATUS.md}.
+Verification metadata: \code{analysis/theorem\_\allowbreak{}audit.json}.
+\end{thebibliography}
+\end{document}

@@ -1,0 +1,302 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,tabularx,array}
+\usepackage{microtype,xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\N}{\mathbb N}
+\newcommand{\code}[1]{{\small\ttfamily #1}}
+\setlength{\emergencystretch}{1.5em}
+\title{Finite Parity Defects Force Collatz Returns:\\
+An Explicit Near-Periodicity Certificate in Lean}
+\author{M.~Sharpe\thanks{Developed with Codex (OpenAI), building on the author's existing Collatz formalization. No claim of priority in the mathematical literature is made. The Collatz conjecture remains open.}}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Write $T$ for the shortcut Collatz map and suppose $N+1\le2^K$.
+We prove that at most $D$ disagreements between the parity itinerary of
+$N$ and its $q$-step shift, over at least
+$(2^{D+1}-1)(q+K)$ comparisons, force an exact $q$-step orbit return.
+The return occurs at one of the explicit times
+$(2^k-1)(q+K)$, $0\le k\le D$.
+A parity prefix within $e$ letter edits of a periodic template has at
+most $2e$ shift disagreements, giving a robust finite extension of the
+exact prefix-power criterion. The proof combines a simple orbit-height
+bound with parity congruence and disjoint geometric windows; it imposes
+no restrictions on edit positions or odd-step density.
+For positive $q$ the certificate bounds the entire orbit. For $q=2$
+and a positive seed it proves that the orbit reaches one. The general
+return, template, boundedness, and period-two results are checked in
+Lean~4 using only standard foundational axioms. Universal availability
+of these finite certificates is not established.
+\end{abstract}
+
+\section{Definitions and the finite return theorem}
+Use the shortcut map
+\[
+T(n)=\begin{cases}n/2,&n\equiv0\pmod2,\\(3n+1)/2,&n\equiv1\pmod2,\end{cases}
+\qquad n\in\N=\{0,1,2,\ldots\},
+\]
+and write $b_t=T^t(N)\bmod2$. For a lag $q\ge1$ define the shift-defect set
+\begin{equation}\label{eq:defects}
+\mathcal D_{N,q}(L)=\{t\in\N: t<L,\ b_t\ne b_{t+q}\},\qquad
+d_{N,q}(L)=|\mathcal D_{N,q}(L)|.
+\end{equation}
+Thus $L$ comparisons require the parity prefix of length $L+q$.
+Choose $K\in\N$ with $N+1\le2^K$; the smallest such $K$ is
+$\lceil\log_2(N+1)\rceil$. Define
+\begin{equation}\label{eq:checkpoints}
+A=q+K,\qquad s_0=0,\qquad s_{k+1}=2s_k+A.
+\end{equation}
+Induction gives $s_k=(2^k-1)A$.
+
+\newpage
+\begin{theorem}[Finite defect certificate]\label{thm:main}
+Suppose $N+1\le2^K$, $q\ge1$, and
+\begin{equation}\label{eq:threshold}
+L\ge(2^{D+1}-1)(q+K),\qquad d_{N,q}(L)\le D.
+\end{equation}
+Then some $k\le D$ satisfies
+\begin{equation}\label{eq:return}
+T^{s_k+q}(N)=T^{s_k}(N).
+\end{equation}
+Consequently the tail from $s_k$ is periodic with period dividing $q$,
+and the entire orbit is bounded.
+\end{theorem}
+The formal return theorem is
+\code{ParityDefects.few\_\allowbreak{}defects\_\allowbreak{}force\_\allowbreak{}return}.
+Its return conclusion is also valid for $q=0$; we assume $q\ge1$ in
+the paper to obtain a nonzero period and boundedness. A return does not
+by itself identify the cycle as the trivial Collatz cycle.
+
+\section{A return or a nearby disagreement}
+\begin{lemma}[Elementary height bound]\label{lem:height}
+For every $N,u\in\N$,
+\begin{equation}\label{eq:height}
+T^u(N)+1\le2^u(N+1).
+\end{equation}
+In particular, if $N+1\le2^K$, then $T^u(N)<2^{u+K}$.
+\end{lemma}
+\begin{proof}
+Both branches satisfy $T(n)+1\le2(n+1)$. Iterate this inequality and
+use integrality for the strict upper bound.
+\end{proof}
+This deliberately coarse bound retains the effect of the added one.
+It makes no assumption about which parity branch is taken.
+
+\begin{lemma}[Local alternative]\label{lem:local}
+Suppose $N+1\le2^K$. At every time $s$, either
+$T^{s+q}(N)=T^s(N)$, or there is a shift disagreement at some
+\begin{equation}\label{eq:local}
+s\le t<2s+q+K.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Suppose no disagreement occurs in that interval. Put $r=s+q+K$,
+$x=T^s(N)$, and $y=T^{s+q}(N)$. The first $r$ parity letters of
+$x$ and $y$ agree. The previously formalized parity congruence theorem
+therefore gives $x\equiv y\pmod{2^r}$.
+If $x\ne y$, their difference is a nonzero multiple of $2^r$, so
+$2^r\le\max(x,y)$. But Lemma~\ref{lem:height} gives
+\[
+x<2^{s+K}\le2^r,\qquad y<2^{s+q+K}=2^r,
+\]
+a contradiction. Thus $x=y$.
+\end{proof}
+In Lean this uses \code{prefix\_\allowbreak{}power} from the existing
+prefix-power development \cite{rung1}. That theorem packages the same
+parity congruence argument for the $q$-periodic block of length $q+r$.
+The new local alternative is \code{return\_\allowbreak{}or\_\allowbreak{}parity\_\allowbreak{}defect}.
+
+\section{Disjoint windows count the defects}
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Suppose all $D+1$ checkpoints $s_0,\ldots,s_D$ fail to return.
+Lemma~\ref{lem:local} supplies a disagreement in each interval
+\[
+[s_k,2s_k+q+K)=[s_k,s_{k+1}),\qquad 0\le k\le D.
+\]
+These intervals are disjoint and contained in $[0,s_{D+1})\subseteq[0,L)$.
+Hence there are at least $D+1$ distinct disagreements, contrary to
+$d_{N,q}(L)\le D$.
+
+An exact return at time $s$ gives
+$T^{s+q+j}(N)=T^{s+j}(N)$ for every $j\ge0$, by determinism of the map.
+Every later orbit value is therefore among the first $s+q$ values.
+Their finite maximum bounds the whole orbit, including the initial
+segment before the return.
+\end{proof}
+The formal counting lemma is
+\code{ParityDefects.count\_\allowbreak{}ge\_\allowbreak{}of\_\allowbreak{}no\_\allowbreak{}checkpoint\_\allowbreak{}return}.
+It proves the cardinality bound by inserting one new defect at each
+step. Boundedness is supplied by \code{return\_\allowbreak{}bounds\_\allowbreak{}orbit},
+which uses strong induction to reduce any time beyond $s+q$ by $q$.
+
+\begin{corollary}[Necessary defect growth]\label{cor:unbounded}
+If the orbit of $N$ is unbounded, then for every $q\ge1$, $D\ge0$,
+and $K$ with $N+1\le2^K$,
+\begin{equation}\label{eq:many}
+d_{N,q}\bigl((2^{D+1}-1)(q+K)\bigr)>D.
+\end{equation}
+\end{corollary}
+\begin{proof}
+Otherwise Theorem~\ref{thm:main} bounds the orbit.
+\end{proof}
+For fixed $N,q,K$ this is a logarithmic necessary growth condition in
+the observation horizon. It is not a positive-density assertion about
+the disagreements. An orbit can fail this finite certificate while
+having a very sparse defect set.
+
+\section{Letter edits from a periodic template}
+Let $w_t\in\{0,1\}$ be a template satisfying
+$w_{t+q}=w_t$ for $0\le t<L$. Let
+\begin{equation}\label{eq:errors}
+E=\{t<L+q:b_t\ne w_t\}.
+\end{equation}
+Only this finite template segment is relevant.
+
+\begin{lemma}\label{lem:edits}
+$d_{N,q}(L)\le2|E|$.
+\end{lemma}
+\begin{proof}
+If $b_t\ne b_{t+q}$ while $w_t=w_{t+q}$, at least one of $t$ and
+$t+q$ is in $E$. Thus
+\[
+\mathcal D_{N,q}(L)\subseteq E\cup\{i-q:i\in E,\ i\ge q\}.
+\]
+Both sets on the right have cardinality at most $|E|$.
+The Lean proof uses the image of all of $E$ under natural subtraction
+by $q$; possible extra zero indices do not affect the upper bound.
+\end{proof}
+
+\begin{theorem}[Near-power certificate]\label{thm:template}
+Suppose $N+1\le2^K$, $q\ge1$, the template is $q$-periodic on the
+specified segment, and $|E|\le e$. If
+\begin{equation}\label{eq:editbound}
+L\ge(2^{2e+1}-1)(q+K),
+\end{equation}
+then $T^{s_k+q}(N)=T^{s_k}(N)$ at some $k\le2e$. In particular the
+orbit is bounded.
+\end{theorem}
+\begin{proof}
+Use Lemma~\ref{lem:edits} and Theorem~\ref{thm:main} with $D=2e$.
+\end{proof}
+The edit locations are unrestricted. There is no assumption of a
+Sturmian slope, positive density gap, or bounded ideal correction.
+The tradeoff is explicit: the sufficient horizon grows exponentially
+with the number of edited letters.
+
+\subsection*{Why the direct swap-cost argument was insufficient}
+The earlier affine-word identity \cite{silver} says that swapping
+adjacent $01$ and $10$, after prefix $u$ and before suffix $v$, changes
+the correction by
+\[
+2^{|u|}3^{\operatorname{ones}(v)}.
+\]
+Taking $u$ to be $i$ zero letters and $v$ empty gives a single swap
+with correction change $2^i$. A count of swaps alone cannot furnish a
+uniform small correction bound. The new proof instead uses the exact
+intervals between disagreements and does not estimate an accumulated
+weighted correction. It therefore establishes a different, explicit
+sufficient condition for approximate repetition.
+
+\section{Period two and a worked certificate}
+\begin{lemma}\label{lem:two}
+If $n>0$ and $T^2(n)=n$, then $n=1$ or $n=2$.
+\end{lemma}
+\begin{proof}
+Split by the parities of $n$ and $T(n)$. The even--even branch gives
+$n/4=n$, hence $n=0$, excluded. The even--odd branch gives
+$(3n+2)/4=n$, hence $n=2$. The odd--even branch gives
+$(3n+1)/4=n$, hence $n=1$. The odd--odd branch gives
+$(9n+5)/4=n$, which has no positive solution.
+\end{proof}
+
+\begin{corollary}\label{cor:one}
+For a positive seed, either certificate with $q=2$ implies that the
+orbit reaches one.
+\end{corollary}
+\begin{proof}
+Positivity is preserved by $T$. Apply Lemma~\ref{lem:two} at the
+certified return. If that value is two, the next value is one.
+\end{proof}
+
+For example, $N=3$, $K=2$, $q=2$ gives $A=4$. Its orbit begins
+\[
+3,5,8,4,2,1,2,1,\ldots,\qquad
+b_0b_1b_2\cdots=11000101\cdots.
+\]
+The shift disagreements are at $t=0,1,3$. With $D=3$ the sufficient
+comparison horizon is $L=(2^4-1)4=60$, and the checkpoints are
+$0,4,12,28$. The first positive checkpoint already returns:
+$T^4(3)=T^6(3)=2$.
+The template $w_t=t\bmod2$ differs only at times $0$ and $3$.
+For this template $e=2$, so \eqref{eq:editbound} gives $L=124$ and
+uses $126$ parity letters. This illustrates the distinction between
+shift disagreements and edited letters. These counts and thresholds
+were also checked using Lean's kernel-checked \code{decide}.
+
+\section{Formalization and remaining coverage}
+All new general results are in \code{lean/Collatz/ParityDefects.lean}.
+The main interfaces, in namespace \code{Collatz.ParityDefects}, are:
+\begin{center}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Declaration&Conclusion\\
+\midrule
+\code{few\_\allowbreak{}defects\_\allowbreak{}force\_\allowbreak{}return}&An explicit checkpoint has a $q$-step return.\\
+\code{near\_\allowbreak{}power\_\allowbreak{}force\_\allowbreak{}return}&The same from finitely many template edits.\\
+\code{near\_\allowbreak{}power\_\allowbreak{}bound\_\allowbreak{}orbit}&A positive-period certificate bounds the orbit.\\
+\code{unbounded\_\allowbreak{}forces\_\allowbreak{}defects}&The necessary defect bound \eqref{eq:many}.\\
+\code{few\_\allowbreak{}defects\_\allowbreak{}two\_\allowbreak{}reaches\_\allowbreak{}one}&A positive seed with the period-two certificate reaches one.\\
+\code{near\_\allowbreak{}two\_\allowbreak{}power\_\allowbreak{}reaches\_\allowbreak{}one}&The period-two template-edit version.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+The module builds with Lean \code{v4.27.0-rc1}. The expanded command
+\code{python3 analysis/audit\_\allowbreak{}theorems.py --build}
+audits 35 selected declarations. All inspected transitive dependencies
+are within \code{propext}, \code{Classical.choice}, and \code{Quot.sound}.
+The new general module contains no \code{sorry},
+\code{native\_\allowbreak{}decide}, or added mathematical axiom.
+The finite worked controls used ordinary \code{decide} in a temporary
+Lean file. This verification is not independent kernel replay or a
+fresh rebuild of every external dependency and large certificate.
+
+The theorem excludes a concrete family of approximate repetitions from
+unbounded trajectories, extending exact repetition without restricting
+the placement of defects. Its horizon is conservative and exponential;
+directly checking a long certificate is not proposed as a faster
+algorithm than observing the orbit return itself.
+For arbitrary $q$, boundedness still leaves nontrivial cycles open.
+For $q=2$ the cycle is trivial, but no theorem supplies a certificate
+for every positive seed.
+
+Indeed, every orbit that reaches one eventually alternates, so its
+period-two shift has only finitely many disagreements. Taking a long
+enough horizon then meets the certificate. Merely assuming universal
+availability would rephrase the convergence problem. Further progress
+requires independent restrictions on defect counts, or sharper local
+height estimates that make the certificate applicable to a separately
+justified class. The general Collatz coverage argument remains missing.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{rung1} M.~Sharpe, \emph{Rung One of the Word-Complexity Ladder:
+a Machine-Verified Exclusion of an Automatic Collatz Itinerary by
+Mahler's Method in Degree One}, August 2026.
+Repository file \code{paper/rung1.tex}; formal prefix-power development
+\code{lean/Collatz/PrefixPower.lean}.
+\bibitem{silver} M.~Sharpe, \emph{An Unconditional Sturmian Exclusion for
+the Collatz Map at Slope $1/\sqrt2$}, September 2026.
+Repository file \code{paper/silver.tex}; affine-word development
+\code{lean/Collatz/WordAffine.lean}.
+\bibitem{source} M.~Sharpe, \emph{Collatz at the Critical Line}, source
+repository, \url{https://github.com/msharpe248/collatz}.
+Research ledger: \code{analysis/RESEARCH\_\allowbreak{}STATUS.md}.
+Verification metadata: \code{analysis/theorem\_\allowbreak{}audit.json}.
+\end{thebibliography}
+\end{document}

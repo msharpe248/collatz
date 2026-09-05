@@ -70,6 +70,26 @@ grid, without assuming the three-distance theorem. See the
 [paper](paper/silver.pdf), [friendly guide](paper/silver_guide.pdf), and
 [SturmianSilver.lean](lean/Collatz/SturmianSilver.lean).
 
+**The exclusion now extends to an infinite explicit family.** For every
+integer m≥6, no natural orbit has the mechanical itinerary of slope
+`α_m = 1/(1+(√(m²+4)−m)/2)`, for any intercept or finite orbit prefix.
+Lean proves that the slopes are distinct, irrational, and approach 1.
+A maximal-fractional-part argument supplies the shorter rotation window
+q+Q without a three-distance theorem. See the [paper](paper/metallic.pdf),
+[guide](paper/metallic_guide.pdf), and
+[SturmianMetallic.lean](lean/Collatz/SturmianMetallic.lean).
+This covers a family of slopes, not every counterexample itinerary.
+
+**September 5: finite near-periodicity now forces an exact return.**
+If N+1≤2^K, at most D disagreements with a q-step parity shift over
+(2^(D+1)−1)(q+K) comparisons force a q-step return at an explicit
+checkpoint. A prefix with at most e edits from a periodic template
+is covered by D=2e. Positive-period certificates imply boundedness;
+period-two certificates for positive seeds imply reaching 1.
+Universal availability of such certificates remains unproved.
+See the [paper](paper/defects.pdf), [guide](paper/defects_guide.pdf), and
+[ParityDefects.lean](lean/Collatz/ParityDefects.lean).
+
 ## The library ([library/](library/))
 
 Every formalization of a Collatz-literature paper known to
@@ -264,6 +284,9 @@ uses exact finite-height bounds; it does not prove an all-slopes theorem.
 | Theorem | Statement |
 |---|---|
 | `Silver.no_itinerary`, `Silver.no_eventual_itinerary` | No natural-number orbit has, or eventually acquires, the mechanical itinerary of slope √2/2, for any real intercept |
+| `Metallic.no_itinerary`, `Metallic.no_eventual_itinerary` | The same unconditional exclusion for every integer parameter m≥6 in the explicit family α_m above |
+| `rotation_window_of_neighbors` | Every q+Q window contains a visit when the two bracketing errors satisfy 0<ε≤δ |
+| `no_itinerary_of_unbounded_neighbors` | General exclusion from arbitrarily large certified levels with 6q≤Q≤Cq, for fixed C |
 | `sturmian_size_at_endpoint` | Above the critical line, the size inequality at s = G implies every earlier one |
 | `sturmian_separation_of_neighbors` | A determinant-one bracketing pair gives the level theorem's separation hypothesis |
 | `rotation_window_of_grid` | Bezout and an explicit approximation-width inequality give a visit in every window |

@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-09-05T03:40:07.717460+00:00",
-  "main_commit": "e84ab424b263d3fdce9953f02edbeca60b5da209",
-  "main_worktree_status": " M README.md\n M analysis/NOVEL_APPROACHES.md\n M analysis/sturmian_prefix_power.py\n M lean/Collatz/Ideal.lean\n?? analysis/REVIEW_2026_09_04.md\n?? analysis/audit_theorems.py\n?? analysis/mahler_candidates.json\n?? analysis/mahler_certificate_search.py\n?? analysis/survivor_cylinders.py\n?? analysis/test_research_certificates.py\n?? analysis/theorem_audit.json\n?? lean/Collatz/Cylinder.lean\n?? lean/Collatz/IdealBounds.lean\n?? lean/Collatz/PrefixCertificate.lean\n?? lean/Collatz/SturmianApprox.lean\n?? lean/Collatz/SturmianEndpoint.lean\n?? lean/Collatz/SturmianSilver.lean\n?? lean/Collatz/WordAffine.lean\n",
+  "generated_utc": "2026-09-05T05:12:35.568351+00:00",
+  "main_commit": "c152e336414e9f202a3bea9047dfdfc18d869d29",
+  "main_worktree_status": " M README.md\n M analysis/RESEARCH_STATUS.md\n M analysis/audit_theorems.py\n M analysis/theorem_audit.json\n M paper/README.md\n?? analysis/STURMIAN_METALLIC.md\n?? lean/Collatz/ParityDefects.lean\n?? lean/Collatz/SturmianFamily.lean\n?? lean/Collatz/SturmianMetallic.lean\n?? lean/Collatz/SturmianWindow.lean\n?? paper/metallic.pdf\n?? paper/metallic.tex\n?? paper/metallic_guide.pdf\n?? paper/metallic_guide.tex\n",
   "toolchain": "leanprover/lean4:v4.27.0-rc1",
   "selected_modules_built": true,
   "verification_scope": "Lean axiom inspection; no independent kernel replay or clean rebuild",
@@ -108,6 +108,222 @@
       "source": "lean/Collatz/SturmianSilver.lean",
       "line": 243,
       "scope": "Unconditional exclusion after every finite orbit prefix",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.rotation_visit_of_neighbors",
+      "source": "lean/Collatz/SturmianWindow.lean",
+      "line": 11,
+      "scope": "Short q+Q window from two positive bracketing errors, epsilon at most delta",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.rotation_window_of_neighbors",
+      "source": "lean/Collatz/SturmianWindow.lean",
+      "line": 53,
+      "scope": "Every shifted q+Q window and every intercept",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.no_itinerary_of_unbounded_neighbors",
+      "source": "lean/Collatz/SturmianFamily.lean",
+      "line": 113,
+      "scope": "Explicit unbounded bracketing-level hypothesis, sixfold separation and bounded ratios",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Metallic.no_itinerary",
+      "source": "lean/Collatz/SturmianMetallic.lean",
+      "line": 231,
+      "scope": "Unconditional for every integer m >= 6, every intercept and natural seed",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Metallic.no_eventual_itinerary",
+      "source": "lean/Collatz/SturmianMetallic.lean",
+      "line": 235,
+      "scope": "Unconditional metallic-family exclusion after every finite orbit prefix",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Metallic.alpha_irrational",
+      "source": "lean/Collatz/SturmianMetallic.lean",
+      "line": 166,
+      "scope": "Every integer parameter m >= 2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Metallic.alpha_strictMono",
+      "source": "lean/Collatz/SturmianMetallic.lean",
+      "line": 178,
+      "scope": "Distinct slopes: strict monotonicity in every natural parameter",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Metallic.alpha_close_to_one",
+      "source": "lean/Collatz/SturmianMetallic.lean",
+      "line": 202,
+      "scope": "Explicit error 0 < 1-alpha_m < 1/(m+1)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Metallic.excluded_slopes_arbitrarily_close_to_one",
+      "source": "lean/Collatz/SturmianMetallic.lean",
+      "line": 217,
+      "scope": "A parameter m >= 6 within every positive distance of one",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.return_or_parity_defect",
+      "source": "lean/Collatz/ParityDefects.lean",
+      "line": 23,
+      "scope": "Every checkpoint either returns after q steps or has a nearby shift disagreement",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.ParityDefects.checkpoint_formula",
+      "source": "lean/Collatz/ParityDefects.lean",
+      "line": 85,
+      "scope": "Exact geometric checkpoint horizon",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.ParityDefects.few_defects_force_return",
+      "source": "lean/Collatz/ParityDefects.lean",
+      "line": 140,
+      "scope": "Finite defect-count certificate of an exact q-step return",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.ParityDefects.count_le_twice_template_errors",
+      "source": "lean/Collatz/ParityDefects.lean",
+      "line": 164,
+      "scope": "At most two shift disagreements per edited template letter",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.ParityDefects.near_power_force_return",
+      "source": "lean/Collatz/ParityDefects.lean",
+      "line": 192,
+      "scope": "Finite approximate periodicity certificate; arbitrary edit positions",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.ParityDefects.near_power_bound_orbit",
+      "source": "lean/Collatz/ParityDefects.lean",
+      "line": 202,
+      "scope": "Positive period and near-power certificate imply bounded orbit, not necessarily trivial cycle",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.ParityDefects.unbounded_forces_defects",
+      "source": "lean/Collatz/ParityDefects.lean",
+      "line": 211,
+      "scope": "Unbounded trajectories exceed every prescribed defect count at an explicit horizon",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.ParityDefects.few_defects_two_reaches_one",
+      "source": "lean/Collatz/ParityDefects.lean",
+      "line": 228,
+      "scope": "Positive seed and period-two defect certificate imply reaching one",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.ParityDefects.near_two_power_reaches_one",
+      "source": "lean/Collatz/ParityDefects.lean",
+      "line": 242,
+      "scope": "Positive seed near a period-two template with explicit finite bounds implies reaching one",
       "axioms": [
         "propext",
         "Classical.choice",
@@ -273,5 +489,5 @@
       "audit_status": "not checked by this main-project audit"
     }
   ],
-  "lean_output": "Collatz.collatz_iff_descent : Collatz.CollatzConjecture \u2194 \u2200 (n : \u2115), 2 \u2264 n \u2192 \u2203 t, Collatz.terras_iter t n < n\n'Collatz.collatz_iff_descent' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.no_finite_certificate (W : \u2115 \u2192 \u211a) (lo hi : \u211a) (hlo : 0 < lo) (hW : \u2200 (n : \u2115), lo \u2264 W n \u2227 W n \u2264 hi) (B N\u2080 : \u2115)\n  (\u03c1 : \u211a) (h\u03c1\u2080 : 0 \u2264 \u03c1) (h\u03c1 : \u03c1 < 1)\n  (hcert :\n    \u2200 (n : \u2115), N\u2080 \u2264 n \u2192 \u2203 t, 1 \u2264 t \u2227 t \u2264 B \u2227 \u2191(Collatz.terras_iter t n) * W (Collatz.terras_iter t n) \u2264 \u2191n * W n * \u03c1) :\n  False\n'Collatz.no_finite_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.no_shifted_sigWord_itinerary (n s : \u2115) : \u00ac\u2200 (t : \u2115), Collatz.terras_iter t n % 2 = Collatz.sigWord (s + t)\n'Collatz.no_shifted_sigWord_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.sturmian_level {\u03b1 \u03c1 \u03b4 : \u211d} {q Q G : \u2115} {p : \u2124} (h\u03b10 : 0 \u2264 \u03b1) (hcrit : 2 \u2264 3 ^ \u03b1) (hq : \u2191q * \u03b1 = \u2191p + \u03b4)\n  (h\u03b40 : 0 < \u03b4) (h\u03b41 : \u03b4 < 1) (hQ : 3 \u2264 Q) (hL : \u2200 (m : \u2115), 0 < m \u2192 m < Q \u2192 \u2200 (r : \u2124), \u03b4 \u2264 |\u2191m * \u03b1 - \u2191r|)\n  (hT : \u2200 (a : \u2115), \u2203 n, a \u2264 n \u2227 n < a + G \u2227 Collatz.visit \u03b1 \u03c1 \u03b4 n) (N : \u2115)\n  (hS : \u2200 s \u2264 G, 3 ^ (\u2191(q + s) * \u03b1 + 1) * (3 * \u2191N + 3 * \u2191s + 1) < 2 ^ (Q - 3 + s)) : \u00acCollatz.HasItin \u03b1 \u03c1 N\n'Collatz.sturmian_level' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.sturmian_level_endpoint {\u03b1 \u03c1 \u03b4 : \u211d} {q Q G : \u2115} {p : \u2124} (h\u03b10 : 0 \u2264 \u03b1) (hcrit : 2 \u2264 3 ^ \u03b1) (hq : \u2191q * \u03b1 = \u2191p + \u03b4)\n  (h\u03b40 : 0 < \u03b4) (h\u03b41 : \u03b4 < 1) (hQ : 3 \u2264 Q) (hL : \u2200 (m : \u2115), 0 < m \u2192 m < Q \u2192 \u2200 (r : \u2124), \u03b4 \u2264 |\u2191m * \u03b1 - \u2191r|)\n  (hT : \u2200 (a : \u2115), \u2203 n, a \u2264 n \u2227 n < a + G \u2227 Collatz.visit \u03b1 \u03c1 \u03b4 n) (N : \u2115)\n  (hG : 3 ^ (\u2191(q + G) * \u03b1 + 1) * (3 * \u2191N + 3 * \u2191G + 1) < 2 ^ (Q - 3 + G)) : \u00acCollatz.HasItin \u03b1 \u03c1 N\n'Collatz.sturmian_level_endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.sturmian_separation_of_neighbors {\u03b1 \u03b4 \u03b5 : \u211d} {q Q : \u2115} {p P : \u2124} (hq : 0 < q) (hQ : 0 < Q) (h\u03b4 : 0 < \u03b4)\n  (h\u03b5 : 0 < \u03b5) (hlo : \u2191q * \u03b1 = \u2191p + \u03b4) (hhi : \u2191Q * \u03b1 = \u2191P - \u03b5) (hdet : P * \u2191q - p * \u2191Q = 1) (m : \u2115) :\n  0 < m \u2192 m < Q \u2192 \u2200 (r : \u2124), \u03b4 \u2264 |\u2191m * \u03b1 - \u2191r|\n'Collatz.sturmian_separation_of_neighbors' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.rotation_window_of_grid {\u03b1 \u03b4 \u03b5 : \u211d} {G : \u2115} {P U V : \u2124} (hG : 0 < G) (h\u03b4 : \u03b4 < 1) (h\u03b5 : 0 \u2264 \u03b5)\n  (hbez : U * P + V * \u2191G = 1) (happrox : \u2191G * \u03b1 = \u2191P + \u03b5) (hwidth : 1 + \u2191G * \u03b5 \u2264 \u2191G * \u03b4) (\u03c1 : \u211d) (a : \u2115) :\n  \u2203 n, a \u2264 n \u2227 n < a + G \u2227 Collatz.visit \u03b1 \u03c1 \u03b4 n\n'Collatz.rotation_window_of_grid' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Silver.no_itinerary (N : \u2115) (\u03c1 : \u211d) : \u00acCollatz.HasItin Collatz.Silver.alpha \u03c1 N\n'Collatz.Silver.no_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Silver.no_eventual_itinerary (N s : \u2115) (\u03c1 : \u211d) :\n  \u00ac\u2200 (t : \u2115), \u2191(Collatz.terras_iter (s + t) N) % 2 = Collatz.mech Collatz.Silver.alpha \u03c1 t\n'Collatz.Silver.no_eventual_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.WordAffine.adjacent_swap (u v : List Bool) :\n  Collatz.WordAffine.correction (u ++ false :: true :: v) =\n    Collatz.WordAffine.correction (u ++ true :: false :: v) + 2 ^ u.length * 3 ^ Collatz.WordAffine.ones v\n'Collatz.WordAffine.adjacent_swap' depends on axioms: [propext, Quot.sound]\nCollatz.WordAffine.compare_bound {x y : \u2115} {u v : List Bool} (hx : Collatz.WordAffine.Realizes x u)\n  (hy : Collatz.WordAffine.Realizes y v) (hlen : u.length = v.length)\n  (hones : Collatz.WordAffine.ones u = Collatz.WordAffine.ones v)\n  (hne : Collatz.terras_iter u.length y \u2260 Collatz.terras_iter u.length x) :\n  2 ^ u.length \u2264\n    |3 ^ Collatz.WordAffine.ones u * (\u2191y - \u2191x) + \u2191(Collatz.WordAffine.correction v) -\n        \u2191(Collatz.WordAffine.correction u)|\n'Collatz.WordAffine.compare_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Cylinder.prefix_transport (k r q i : \u2115) (hi : i \u2264 k) :\n  Collatz.terras_iter i (r + 2 ^ k * q) = Collatz.terras_iter i r + 3 ^ Collatz.oddSteps i r * 2 ^ (k - i) * q\n'Collatz.Cylinder.prefix_transport' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Cylinder.mem_parameters (k r H q : \u2115) :\n  q \u2208 Collatz.Cylinder.parameters k r H \u2194\n    1 \u2264 r + 2 ^ k * q \u2227 r + 2 ^ k * q \u2264 H \u2227 Collatz.Cylinder.Survives k (r + 2 ^ k * q)\n'Collatz.Cylinder.mem_parameters' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Cylinder.parameters_convex {k r H a b q : \u2115} (ha : a \u2208 Collatz.Cylinder.parameters k r H)\n  (hb : b \u2208 Collatz.Cylinder.parameters k r H) (haq : a \u2264 q) (hqb : q \u2264 b) : q \u2208 Collatz.Cylinder.parameters k r H\n'Collatz.Cylinder.parameters_convex' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.prefix_power_initial_bound (n : \u2115) (hdiv : \u2200 (B : \u2115), \u2203 t, B < Collatz.terras_iter t n) (s \u2113 M : \u2115) (h\u2113 : 1 \u2264 \u2113)\n  (hM : \u2113 \u2264 M)\n  (h : \u2200 (t : \u2115), t + \u2113 < M \u2192 Collatz.terras_iter (s + t) n % 2 = Collatz.terras_iter (s + (t + \u2113)) n % 2) :\n  2 ^ (M + s) \u2264\n    (2 ^ \u2113 + 3 ^ Collatz.oddSteps \u2113 (Collatz.terras_iter s n)) * (3 ^ Collatz.oddSteps s n * n + Collatz.dcoef s n) +\n      3 ^ Collatz.oddSteps \u2113 (Collatz.terras_iter s n) * 2 ^ (\u2113 + s)\n'Collatz.prefix_power_initial_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.fract_ideal {n : \u2115} (h : Collatz.Supercritical n) (T : \u2115) :\n  Int.fract ((\u2191n + Collatz.idealLimit n) * 3 ^ Collatz.oddSteps T n / 2 ^ T) =\n    Int.fract (Collatz.idealLimit (Collatz.terras_iter T n))\n'Collatz.fract_ideal' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.supercritical_of_geometric {n : \u2115} {C r : \u211d} (hC : 0 \u2264 C) (hr0 : 0 \u2264 r) (hr1 : r < 1)\n  (hgeom : \u2200 (t : \u2115), 2 ^ t \u2264 C * r ^ t * 3 ^ Collatz.oddSteps t n) : Collatz.Supercritical n\n'Collatz.supercritical_of_geometric' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+  "lean_output": "Collatz.collatz_iff_descent : Collatz.CollatzConjecture \u2194 \u2200 (n : \u2115), 2 \u2264 n \u2192 \u2203 t, Collatz.terras_iter t n < n\n'Collatz.collatz_iff_descent' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.no_finite_certificate (W : \u2115 \u2192 \u211a) (lo hi : \u211a) (hlo : 0 < lo) (hW : \u2200 (n : \u2115), lo \u2264 W n \u2227 W n \u2264 hi) (B N\u2080 : \u2115)\n  (\u03c1 : \u211a) (h\u03c1\u2080 : 0 \u2264 \u03c1) (h\u03c1 : \u03c1 < 1)\n  (hcert :\n    \u2200 (n : \u2115), N\u2080 \u2264 n \u2192 \u2203 t, 1 \u2264 t \u2227 t \u2264 B \u2227 \u2191(Collatz.terras_iter t n) * W (Collatz.terras_iter t n) \u2264 \u2191n * W n * \u03c1) :\n  False\n'Collatz.no_finite_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.no_shifted_sigWord_itinerary (n s : \u2115) : \u00ac\u2200 (t : \u2115), Collatz.terras_iter t n % 2 = Collatz.sigWord (s + t)\n'Collatz.no_shifted_sigWord_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.sturmian_level {\u03b1 \u03c1 \u03b4 : \u211d} {q Q G : \u2115} {p : \u2124} (h\u03b10 : 0 \u2264 \u03b1) (hcrit : 2 \u2264 3 ^ \u03b1) (hq : \u2191q * \u03b1 = \u2191p + \u03b4)\n  (h\u03b40 : 0 < \u03b4) (h\u03b41 : \u03b4 < 1) (hQ : 3 \u2264 Q) (hL : \u2200 (m : \u2115), 0 < m \u2192 m < Q \u2192 \u2200 (r : \u2124), \u03b4 \u2264 |\u2191m * \u03b1 - \u2191r|)\n  (hT : \u2200 (a : \u2115), \u2203 n, a \u2264 n \u2227 n < a + G \u2227 Collatz.visit \u03b1 \u03c1 \u03b4 n) (N : \u2115)\n  (hS : \u2200 s \u2264 G, 3 ^ (\u2191(q + s) * \u03b1 + 1) * (3 * \u2191N + 3 * \u2191s + 1) < 2 ^ (Q - 3 + s)) : \u00acCollatz.HasItin \u03b1 \u03c1 N\n'Collatz.sturmian_level' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.sturmian_level_endpoint {\u03b1 \u03c1 \u03b4 : \u211d} {q Q G : \u2115} {p : \u2124} (h\u03b10 : 0 \u2264 \u03b1) (hcrit : 2 \u2264 3 ^ \u03b1) (hq : \u2191q * \u03b1 = \u2191p + \u03b4)\n  (h\u03b40 : 0 < \u03b4) (h\u03b41 : \u03b4 < 1) (hQ : 3 \u2264 Q) (hL : \u2200 (m : \u2115), 0 < m \u2192 m < Q \u2192 \u2200 (r : \u2124), \u03b4 \u2264 |\u2191m * \u03b1 - \u2191r|)\n  (hT : \u2200 (a : \u2115), \u2203 n, a \u2264 n \u2227 n < a + G \u2227 Collatz.visit \u03b1 \u03c1 \u03b4 n) (N : \u2115)\n  (hG : 3 ^ (\u2191(q + G) * \u03b1 + 1) * (3 * \u2191N + 3 * \u2191G + 1) < 2 ^ (Q - 3 + G)) : \u00acCollatz.HasItin \u03b1 \u03c1 N\n'Collatz.sturmian_level_endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.sturmian_separation_of_neighbors {\u03b1 \u03b4 \u03b5 : \u211d} {q Q : \u2115} {p P : \u2124} (hq : 0 < q) (hQ : 0 < Q) (h\u03b4 : 0 < \u03b4)\n  (h\u03b5 : 0 < \u03b5) (hlo : \u2191q * \u03b1 = \u2191p + \u03b4) (hhi : \u2191Q * \u03b1 = \u2191P - \u03b5) (hdet : P * \u2191q - p * \u2191Q = 1) (m : \u2115) :\n  0 < m \u2192 m < Q \u2192 \u2200 (r : \u2124), \u03b4 \u2264 |\u2191m * \u03b1 - \u2191r|\n'Collatz.sturmian_separation_of_neighbors' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.rotation_window_of_grid {\u03b1 \u03b4 \u03b5 : \u211d} {G : \u2115} {P U V : \u2124} (hG : 0 < G) (h\u03b4 : \u03b4 < 1) (h\u03b5 : 0 \u2264 \u03b5)\n  (hbez : U * P + V * \u2191G = 1) (happrox : \u2191G * \u03b1 = \u2191P + \u03b5) (hwidth : 1 + \u2191G * \u03b5 \u2264 \u2191G * \u03b4) (\u03c1 : \u211d) (a : \u2115) :\n  \u2203 n, a \u2264 n \u2227 n < a + G \u2227 Collatz.visit \u03b1 \u03c1 \u03b4 n\n'Collatz.rotation_window_of_grid' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Silver.no_itinerary (N : \u2115) (\u03c1 : \u211d) : \u00acCollatz.HasItin Collatz.Silver.alpha \u03c1 N\n'Collatz.Silver.no_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Silver.no_eventual_itinerary (N s : \u2115) (\u03c1 : \u211d) :\n  \u00ac\u2200 (t : \u2115), \u2191(Collatz.terras_iter (s + t) N) % 2 = Collatz.mech Collatz.Silver.alpha \u03c1 t\n'Collatz.Silver.no_eventual_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.rotation_visit_of_neighbors {\u03b1 \u03b4 \u03b5 : \u211d} {q Q : \u2115} {p P : \u2124} (hq : 0 < q) (hQ : 0 < Q) (h\u03b4 : 0 < \u03b4) (h\u03b5 : 0 < \u03b5)\n  (h\u03b5\u03b4 : \u03b5 \u2264 \u03b4) (hlo : \u2191q * \u03b1 = \u2191p + \u03b4) (hhi : \u2191Q * \u03b1 = \u2191P - \u03b5) (\u03c1 : \u211d) : \u2203 n < q + Q, Collatz.visit \u03b1 \u03c1 \u03b4 n\n'Collatz.rotation_visit_of_neighbors' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.rotation_window_of_neighbors {\u03b1 \u03b4 \u03b5 : \u211d} {q Q : \u2115} {p P : \u2124} (hq : 0 < q) (hQ : 0 < Q) (h\u03b4 : 0 < \u03b4) (h\u03b5 : 0 < \u03b5)\n  (h\u03b5\u03b4 : \u03b5 \u2264 \u03b4) (hlo : \u2191q * \u03b1 = \u2191p + \u03b4) (hhi : \u2191Q * \u03b1 = \u2191P - \u03b5) (\u03c1 : \u211d) (a : \u2115) :\n  \u2203 n, a \u2264 n \u2227 n < a + (q + Q) \u2227 Collatz.visit \u03b1 \u03c1 \u03b4 n\n'Collatz.rotation_window_of_neighbors' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.no_itinerary_of_unbounded_neighbors {\u03b1 : \u211d} (h\u03b10 : 0 \u2264 \u03b1) (h\u03b11 : \u03b1 \u2264 1) (hcrit : 2 \u2264 3 ^ \u03b1) (C : \u2115)\n  (hlevels : \u2200 (K : \u2115), \u2203 L, K \u2264 L.q \u2227 6 * L.q \u2264 L.Q \u2227 L.Q \u2264 C * L.q) (N : \u2115) (\u03c1 : \u211d) : \u00acCollatz.HasItin \u03b1 \u03c1 N\n'Collatz.no_itinerary_of_unbounded_neighbors' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Metallic.no_itinerary (m : \u2115) (hm : 6 \u2264 m) (N : \u2115) (\u03c1 : \u211d) : \u00acCollatz.HasItin (Collatz.Metallic.alpha m) \u03c1 N\n'Collatz.Metallic.no_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Metallic.no_eventual_itinerary (m : \u2115) (hm : 6 \u2264 m) (N s : \u2115) (\u03c1 : \u211d) :\n  \u00ac\u2200 (t : \u2115), \u2191(Collatz.terras_iter (s + t) N) % 2 = Collatz.mech (Collatz.Metallic.alpha m) \u03c1 t\n'Collatz.Metallic.no_eventual_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Metallic.alpha_irrational (m : \u2115) (hm : 2 \u2264 m) : Irrational (Collatz.Metallic.alpha m)\n'Collatz.Metallic.alpha_irrational' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Metallic.alpha_strictMono : StrictMono Collatz.Metallic.alpha\n'Collatz.Metallic.alpha_strictMono' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Metallic.alpha_close_to_one (m : \u2115) :\n  0 < 1 - Collatz.Metallic.alpha m \u2227 1 - Collatz.Metallic.alpha m < 1 / (\u2191m + 1)\n'Collatz.Metallic.alpha_close_to_one' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Metallic.excluded_slopes_arbitrarily_close_to_one {\u03b7 : \u211d} (h\u03b7 : 0 < \u03b7) :\n  \u2203 m, 6 \u2264 m \u2227 1 - \u03b7 < Collatz.Metallic.alpha m \u2227 Collatz.Metallic.alpha m < 1\n'Collatz.Metallic.excluded_slopes_arbitrarily_close_to_one' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.return_or_parity_defect (N s q K : \u2115) (hN : N + 1 \u2264 2 ^ K) :\n  Collatz.terras_iter (s + q) N = Collatz.terras_iter s N \u2228\n    \u2203 t, s \u2264 t \u2227 t < 2 * s + (q + K) \u2227 Collatz.terras_iter t N % 2 \u2260 Collatz.terras_iter (t + q) N % 2\n'Collatz.return_or_parity_defect' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.ParityDefects.checkpoint_formula (A k : \u2115) : Collatz.ParityDefects.checkpoint A k + A = 2 ^ k * A\n'Collatz.ParityDefects.checkpoint_formula' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.ParityDefects.few_defects_force_return (N q K D L : \u2115) (hN : N + 1 \u2264 2 ^ K)\n  (hL : Collatz.ParityDefects.checkpoint (q + K) (D + 1) \u2264 L) (hD : Collatz.ParityDefects.count N q L \u2264 D) :\n  \u2203 k \u2264 D,\n    Collatz.terras_iter (Collatz.ParityDefects.checkpoint (q + K) k + q) N =\n      Collatz.terras_iter (Collatz.ParityDefects.checkpoint (q + K) k) N\n'Collatz.ParityDefects.few_defects_force_return' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.ParityDefects.count_le_twice_template_errors (N q L : \u2115) (w : \u2115 \u2192 \u2115) (hper : \u2200 t < L, w (t + q) = w t) :\n  Collatz.ParityDefects.count N q L \u2264 2 * (Collatz.ParityDefects.templateErrors N w (L + q)).card\n'Collatz.ParityDefects.count_le_twice_template_errors' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.ParityDefects.near_power_force_return (N q K e L : \u2115) (w : \u2115 \u2192 \u2115) (hN : N + 1 \u2264 2 ^ K)\n  (hL : Collatz.ParityDefects.checkpoint (q + K) (2 * e + 1) \u2264 L) (hper : \u2200 t < L, w (t + q) = w t)\n  (herr : (Collatz.ParityDefects.templateErrors N w (L + q)).card \u2264 e) :\n  \u2203 k \u2264 2 * e,\n    Collatz.terras_iter (Collatz.ParityDefects.checkpoint (q + K) k + q) N =\n      Collatz.terras_iter (Collatz.ParityDefects.checkpoint (q + K) k) N\n'Collatz.ParityDefects.near_power_force_return' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.ParityDefects.near_power_bound_orbit (N q K e L : \u2115) (w : \u2115 \u2192 \u2115) (hq : 0 < q) (hN : N + 1 \u2264 2 ^ K)\n  (hL : Collatz.ParityDefects.checkpoint (q + K) (2 * e + 1) \u2264 L) (hper : \u2200 t < L, w (t + q) = w t)\n  (herr : (Collatz.ParityDefects.templateErrors N w (L + q)).card \u2264 e) : \u2203 B, \u2200 (t : \u2115), Collatz.terras_iter t N \u2264 B\n'Collatz.ParityDefects.near_power_bound_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.ParityDefects.unbounded_forces_defects (N q K D : \u2115) (hq : 0 < q) (hN : N + 1 \u2264 2 ^ K)\n  (hunb : \u2200 (B : \u2115), \u2203 t, B < Collatz.terras_iter t N) :\n  D < Collatz.ParityDefects.count N q (Collatz.ParityDefects.checkpoint (q + K) (D + 1))\n'Collatz.ParityDefects.unbounded_forces_defects' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.ParityDefects.few_defects_two_reaches_one (N K D L : \u2115) (hpos : 0 < N) (hN : N + 1 \u2264 2 ^ K)\n  (hL : Collatz.ParityDefects.checkpoint (2 + K) (D + 1) \u2264 L) (hD : Collatz.ParityDefects.count N 2 L \u2264 D) :\n  \u2203 t, Collatz.terras_iter t N = 1\n'Collatz.ParityDefects.few_defects_two_reaches_one' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.ParityDefects.near_two_power_reaches_one (N K e L : \u2115) (w : \u2115 \u2192 \u2115) (hpos : 0 < N) (hN : N + 1 \u2264 2 ^ K)\n  (hL : Collatz.ParityDefects.checkpoint (2 + K) (2 * e + 1) \u2264 L) (hper : \u2200 t < L, w (t + 2) = w t)\n  (herr : (Collatz.ParityDefects.templateErrors N w (L + 2)).card \u2264 e) : \u2203 t, Collatz.terras_iter t N = 1\n'Collatz.ParityDefects.near_two_power_reaches_one' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.WordAffine.adjacent_swap (u v : List Bool) :\n  Collatz.WordAffine.correction (u ++ false :: true :: v) =\n    Collatz.WordAffine.correction (u ++ true :: false :: v) + 2 ^ u.length * 3 ^ Collatz.WordAffine.ones v\n'Collatz.WordAffine.adjacent_swap' depends on axioms: [propext, Quot.sound]\nCollatz.WordAffine.compare_bound {x y : \u2115} {u v : List Bool} (hx : Collatz.WordAffine.Realizes x u)\n  (hy : Collatz.WordAffine.Realizes y v) (hlen : u.length = v.length)\n  (hones : Collatz.WordAffine.ones u = Collatz.WordAffine.ones v)\n  (hne : Collatz.terras_iter u.length y \u2260 Collatz.terras_iter u.length x) :\n  2 ^ u.length \u2264\n    |3 ^ Collatz.WordAffine.ones u * (\u2191y - \u2191x) + \u2191(Collatz.WordAffine.correction v) -\n        \u2191(Collatz.WordAffine.correction u)|\n'Collatz.WordAffine.compare_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Cylinder.prefix_transport (k r q i : \u2115) (hi : i \u2264 k) :\n  Collatz.terras_iter i (r + 2 ^ k * q) = Collatz.terras_iter i r + 3 ^ Collatz.oddSteps i r * 2 ^ (k - i) * q\n'Collatz.Cylinder.prefix_transport' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Cylinder.mem_parameters (k r H q : \u2115) :\n  q \u2208 Collatz.Cylinder.parameters k r H \u2194\n    1 \u2264 r + 2 ^ k * q \u2227 r + 2 ^ k * q \u2264 H \u2227 Collatz.Cylinder.Survives k (r + 2 ^ k * q)\n'Collatz.Cylinder.mem_parameters' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Cylinder.parameters_convex {k r H a b q : \u2115} (ha : a \u2208 Collatz.Cylinder.parameters k r H)\n  (hb : b \u2208 Collatz.Cylinder.parameters k r H) (haq : a \u2264 q) (hqb : q \u2264 b) : q \u2208 Collatz.Cylinder.parameters k r H\n'Collatz.Cylinder.parameters_convex' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.prefix_power_initial_bound (n : \u2115) (hdiv : \u2200 (B : \u2115), \u2203 t, B < Collatz.terras_iter t n) (s \u2113 M : \u2115) (h\u2113 : 1 \u2264 \u2113)\n  (hM : \u2113 \u2264 M)\n  (h : \u2200 (t : \u2115), t + \u2113 < M \u2192 Collatz.terras_iter (s + t) n % 2 = Collatz.terras_iter (s + (t + \u2113)) n % 2) :\n  2 ^ (M + s) \u2264\n    (2 ^ \u2113 + 3 ^ Collatz.oddSteps \u2113 (Collatz.terras_iter s n)) * (3 ^ Collatz.oddSteps s n * n + Collatz.dcoef s n) +\n      3 ^ Collatz.oddSteps \u2113 (Collatz.terras_iter s n) * 2 ^ (\u2113 + s)\n'Collatz.prefix_power_initial_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.fract_ideal {n : \u2115} (h : Collatz.Supercritical n) (T : \u2115) :\n  Int.fract ((\u2191n + Collatz.idealLimit n) * 3 ^ Collatz.oddSteps T n / 2 ^ T) =\n    Int.fract (Collatz.idealLimit (Collatz.terras_iter T n))\n'Collatz.fract_ideal' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.supercritical_of_geometric {n : \u2115} {C r : \u211d} (hC : 0 \u2264 C) (hr0 : 0 \u2264 r) (hr1 : r < 1)\n  (hgeom : \u2200 (t : \u2115), 2 ^ t \u2264 C * r ^ t * 3 ^ Collatz.oddSteps t n) : Collatz.Supercritical n\n'Collatz.supercritical_of_geometric' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
 }
