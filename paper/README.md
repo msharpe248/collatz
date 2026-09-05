@@ -16,6 +16,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 | Unconditional Sturmian exclusion at slope 1/√2, and supporting arithmetic | [silver.pdf](silver.pdf) | [silver_guide.pdf](silver_guide.pdf) |
 | Short rotation windows and an infinite family of Sturmian exclusions | [metallic.pdf](metallic.pdf) | [metallic_guide.pdf](metallic_guide.pdf) |
 | Finite parity defects and approximate-periodicity certificates | [defects.pdf](defects.pdf) | [defects_guide.pdf](defects_guide.pdf) |
+| Bounded correction exactly equals reciprocal-orbit summability | [reciprocal.pdf](reciprocal.pdf) | [reciprocal_guide.pdf](reciprocal_guide.pdf) |
 
 The matching `.tex` files are the editable sources. The newest formal status
 and remaining proof gaps are in [RESEARCH_STATUS.md](../analysis/RESEARCH_STATUS.md).
@@ -25,8 +26,8 @@ papers have completed.
 To rebuild the latest pair with Tectonic:
 
 ```sh
-tectonic paper/defects.tex
-tectonic paper/defects_guide.tex
+tectonic paper/reciprocal.tex
+tectonic paper/reciprocal_guide.tex
 ```
 
 After editing, check the compiler log, cross-references, and rendered pages.

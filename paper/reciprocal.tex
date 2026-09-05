@@ -1,0 +1,161 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype,xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\R}{\mathbb R}
+\newcommand{\N}{\mathbb N}
+\setlength{\emergencystretch}{2em}
+\title{Bounded Collatz Correction and Reciprocal Orbit Sums}
+\author{Collatz proof project\thanks{Prepared with Codex (OpenAI). All central statements are formalized in Lean. No claim of literature priority is made.}}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For a positive integer shortcut Collatz orbit, boundedness of the normalized affine correction is equivalent to convergence of the sum of reciprocal orbit values. Two finite inequalities prove the equivalence: a telescoping estimate that charges reciprocal mass to correction increments, and an exponential upper bound on correction in terms of accumulated reciprocal mass. No strict odd-step density gap is assumed. Bounded correction consequently forces escape from every finite set. The equivalence characterizes a class of hypothetical counterexamples; it neither excludes that class nor shows that every escaping orbit belongs to it.
+\end{abstract}
+
+\section{Definitions and exact characterization}
+Let $N\in\N$ be positive and define
+\[
+T(x)=\begin{cases}x/2&x\text{ even},\\(3x+1)/2&x\text{ odd},\end{cases}
+\qquad n_t=T^t(N).
+\]
+All $n_t$ are positive integers. Write $j_t$ for the number of odd terms among $n_0,\ldots,n_{t-1}$, and let $d_t$ be the integer affine correction determined by
+\[
+2^t n_t=3^{j_t}N+d_t.
+\]
+Set
+\[
+c_t=\frac{d_t}{3^{j_t}},\qquad r_t=\frac1{n_t},\qquad
+S_L=\sum_{t=0}^{L-1}r_t.
+\]
+Thus $c_0=0$, $c_t\ge0$, and $c_t$ is nondecreasing. The existing Lean predicate \texttt{Supercritical N} means precisely $\sup_t c_t<\infty$. Its name does not add any density assumption.
+
+\begin{theorem}\label{thm:main}
+For every positive integer $N$,
+\[
+\sup_t c_t<\infty\quad\Longleftrightarrow\quad
+\sum_{t=0}^{\infty}\frac1{n_t}<\infty.
+\]
+\end{theorem}
+The proof below uses finite estimates valid for every positive seed. In particular, neither direction assumes that the orbit diverges, has a limiting odd-step density, or satisfies a uniform density gap.
+
+\newpage
+\section{Finite inequalities}
+The affine identity gives
+\begin{equation}\label{eq:inverse}
+\frac{2^t}{3^{j_t}}=(N+c_t)r_t.
+\end{equation}
+The correction cocycle gives
+\begin{equation}\label{eq:increment}
+c_{t+1}-c_t=
+\begin{cases}
+0&n_t\text{ even},\\
+(N+c_t)r_t/3&n_t\text{ odd}.
+\end{cases}
+\end{equation}
+These identities hold in $\R$; the divisions are legitimate because $n_t>0$.
+
+\begin{lemma}\label{lem:ledger}
+For every $L\in\N$,
+\begin{equation}\label{eq:ledger}
+N S_L\le6c_L+N(r_L-r_0).
+\end{equation}
+\end{lemma}
+\begin{proof}
+We prove the one-step estimate
+\[
+Nr_t\le6(c_{t+1}-c_t)+N(r_{t+1}-r_t).
+\]
+If $n_t$ is even, then $r_{t+1}=2r_t$ and the correction increment vanishes, so equality holds. If $n_t$ is odd, equation~\eqref{eq:increment} and $c_t\ge0$ give
+\[
+6(c_{t+1}-c_t)\ge2Nr_t.
+\]
+Adding $N(r_{t+1}-r_t)$ gives at least $Nr_t$, because $r_{t+1}\ge0$. Sum over $0\le t<L$ and telescope, using $c_0=0$.
+\end{proof}
+The constant six is a convenient uniform choice; optimality is not asserted.
+
+\begin{lemma}\label{lem:exp}
+For every $L\in\N$,
+\begin{equation}\label{eq:exp}
+N+c_L\le N\exp(S_L).
+\end{equation}
+\end{lemma}
+\begin{proof}
+In both parity cases equation~\eqref{eq:increment} implies
+\[
+N+c_{t+1}\le(N+c_t)(1+r_t)\le(N+c_t)e^{r_t}.
+\]
+All factors are nonnegative. Induction from $c_0=0$, using $e^{a+b}=e^a e^b$, proves the claim. The Lean proof uses the existing one-step bound $\texttt{idealC}\ 1\ n_t\le1$ and the cocycle; the sharper odd-step constant $1/3$ is unnecessary here.
+\end{proof}
+
+\newpage
+\section{Infinite sums and escape}
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Suppose first that $c_t\le B$ for every $t$. Positivity and integrality give $0\le r_t\le1$. Lemma~\ref{lem:ledger} therefore implies
+\[
+S_L\le\frac{6B}{N}+1\qquad\text{for every }L.
+\]
+The nonnegative partial sums are bounded, so the series converges. Lean uses mathlib's \texttt{summable\_of\_sum\_range\_le}.
+
+Conversely, suppose $S=\sum_{t\ge0}r_t<\infty$. Nonnegativity gives $S_L\le S$. Lemma~\ref{lem:exp} yields
+\[
+N+c_L\le Ne^S\qquad\text{for every }L,
+\]
+which bounds $c_L$. The formal proof uses the upper bound $Ne^S$ for $c_L$; the displayed estimate also gives $c_L\le N(e^S-1)$.
+\end{proof}
+
+\begin{corollary}\label{cor:escape}
+If $N>0$ and $\sup_t c_t<\infty$, then $n_t\to+\infty$. More precisely, for every $B\in\N$ there is a time after which $n_t\ge B$ always holds.
+\end{corollary}
+\begin{proof}
+The terms of a convergent series tend to zero, so $r_t\to0$. Eventually $r_t<1/(B+1)$, which forces $n_t>B$. The Lean conclusion uses the equivalent non-strict at-top formulation.
+\end{proof}
+In particular, a positive orbit that is eventually periodic cannot have bounded correction. This last sentence follows immediately from Corollary~\ref{cor:escape}; it is not a separately named declaration in the new module.
+
+\section{What this changes in the proof program}
+The earlier geometric inverse-drift bound remains a sufficient condition for bounded correction. Theorem~\ref{thm:main} supplies an exact orbit-value condition instead, and does not require exponential growth. For example, an independently proved envelope $n_t\ge A(t+1)^2$ with $A>0$ would suffice by comparison with a convergent square reciprocal series. This comparison is an explanatory consequence, not a separate formal theorem in this module, and no such envelope is claimed for any natural Collatz seed.
+
+The main unresolved question is now visible in orbit terms: can an escaping positive integer Collatz orbit have $\sum_t1/n_t=\infty$? Mere escape does not imply reciprocal summability for general positive sequences. Even settling this coverage question would leave the task of excluding bounded-correction orbits, as well as the separate nontrivial-cycle problem. Thus the present result is a characterization, not a proof of Collatz or an exclusion theorem.
+
+\newpage
+\section{Lean declarations and reproducibility}
+The implementation is \texttt{lean/Collatz/Reciprocal.lean}. It imports the project's ideal-correction bounds and mathlib's real exponential and nonnegative-series facts. The primary theorem is:
+\begin{quote}\small\ttfamily
+supercritical\_iff\_summable\_reciprocal\par
+\normalfont For $N>0$, \texttt{Supercritical N} if and only if\par
+\texttt{Summable (orbitReciprocal N)}.
+\end{quote}
+Here \texttt{orbitReciprocal N t} is $1/(T^t(N):\R)$.
+
+\begin{center}
+\small
+\begin{tabular}{lp{9.4cm}}
+\toprule
+Result&Declaration in namespace \texttt{Collatz}\\
+\midrule
+Equation~\eqref{eq:inverse}&\texttt{inverse\_drift\_eq\_reciprocal}\\
+Lemma~\ref{lem:ledger}&\texttt{reciprocal\_sum\_ledger}\\
+Lemma~\ref{lem:exp}&\texttt{idealC\_exp\_reciprocal\_bound}\\
+Theorem~\ref{thm:main}&\texttt{supercritical\_iff\_summable\_reciprocal}\\
+Corollary~\ref{cor:escape}&\texttt{supercritical\_orbit\_tendsto\_atTop}\\
+\bottomrule
+\end{tabular}
+\end{center}
+The module also contains each implication separately and the local one-step ledger. No \texttt{sorry}, new axiom, or \texttt{native\_decide} is used.
+
+From the repository root, rebuild and audit with:
+\begin{verbatim}
+cd lean
+lake build Collatz.Reciprocal
+cd ..
+python3 analysis/audit_theorems.py --build
+\end{verbatim}
+The pinned Lean toolchain is \texttt{leanprover/lean4:v4.27.0-rc1}. The selected audit now contains 48 declarations, including the two finite estimates, the equivalence, and the escape corollary. Their reported dependencies use only \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}. The JSON audit records exact printed types and repository provenance. It checks selected modules and their Lean-reported dependencies; it is not an independent kernel replay or a rebuild of every nested library.
+
+\section{Sources and scope of attribution}
+The definitions and affine cocycle are in the existing project module \texttt{Collatz.Ideal}; the previously established geometric criterion is in \texttt{Collatz.IdealBounds}. Nonnegative-series and exponential lemmas are supplied by the pinned mathlib checkout. All new mathematical arguments used here are displayed above and implemented in \texttt{Collatz.Reciprocal}. No external literature-priority claim is made.
+\end{document}

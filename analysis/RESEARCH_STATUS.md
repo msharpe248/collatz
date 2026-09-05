@@ -23,6 +23,8 @@ belong to an excluded family.
 | Survivor geometry | `Cylinder.prefix_transport`, `mem_parameters`, `parameters_convex` | Exact finite-height quotient intervals |
 | Correct experimental bound | `prefix_power_initial_bound` | Retains the affine correction after shifting an orbit |
 | Critical-boundary discipline | `supercritical_of_geometric` | Explicit summable inverse-drift hypothesis, not universal divergence |
+| Exact correction characterization | `supercritical_iff_summable_reciprocal` | For every positive seed, bounded ideal correction iff the reciprocal orbit series converges; no density hypothesis |
+| Escape consequence | `supercritical_orbit_tendsto_atTop` | Bounded correction forces eventual escape from every finite bound; converse not established |
 | Dependency audit | `audit_theorems.py`, `theorem_audit.json` | Selected declarations, printed types and axioms, pinned library provenance |
 
 See [STURMIAN_SILVER.md](STURMIAN_SILVER.md) for the new theorem's proof.
@@ -38,6 +40,11 @@ The finite near-periodicity extension is in
 The main source modules were rebuilt selectively. This does not mean the
 large KL certificates or all nested libraries were rebuilt or independently
 kernel-replayed during this pass.
+
+The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
+its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
+The selected theorem audit now covers 48 declarations using only standard
+foundational axioms.
 
 ## Experiments and controls
 
@@ -85,8 +92,10 @@ checks swap identities, and replays the finite Mahler candidates.
    restriction forcing every counterexample into an excluded class. No
    complexity-versus-defect dichotomy has been established.
 4. **Critical-boundary orbits.** Bounded ideal correction is not known for
-   every hypothetical divergent orbit. The geometric sufficient condition
-   does not dispose of the complementary case.
+   every hypothetical divergent orbit. It is now proved equivalent to
+   summability of reciprocal orbit values. An escaping orbit with divergent
+   reciprocal sum is the precise remaining coverage case. Even a proof of
+   coverage would not itself exclude bounded-correction orbits.
 5. **Survivor exhaustion.** Exact interval computation is not a termination
    proof. Universal finite-height exhaustion is equivalent to universal
    descent; using it as a completeness assumption would be circular.

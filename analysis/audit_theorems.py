@@ -61,6 +61,10 @@ TARGETS = [
     ("Collatz.PrefixCertificate", "Collatz.prefix_power_initial_bound", "Unbounded orbit and a repeated parity block"),
     ("Collatz.Ideal", "Collatz.fract_ideal", "Bounded correction (Supercritical), not inferred from divergence"),
     ("Collatz.IdealBounds", "Collatz.supercritical_of_geometric", "Explicit summable inverse-drift bound; not asserted for every divergent orbit"),
+    ("Collatz.Reciprocal", "Collatz.reciprocal_sum_ledger", "Finite telescoping reciprocal bound for every positive seed"),
+    ("Collatz.Reciprocal", "Collatz.idealC_exp_reciprocal_bound", "Finite exponential correction bound for every positive seed"),
+    ("Collatz.Reciprocal", "Collatz.supercritical_iff_summable_reciprocal", "Exact characterization of bounded ideal correction, not universal divergent-orbit coverage"),
+    ("Collatz.Reciprocal", "Collatz.supercritical_orbit_tendsto_atTop", "Bounded correction forces eventual escape from every finite bound"),
 ]
 
 
