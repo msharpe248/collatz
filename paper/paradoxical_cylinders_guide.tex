@@ -1,0 +1,31 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,microtype}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+\title{Searching Every Seed at a Fixed Length:\\A Guide to Paradoxical Cylinders}
+\author{Collatz proof project\thanks{Prepared with Codex (OpenAI). Companion to the formal search note; no claim of a new mathematical discovery or a Collatz proof.}}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\section{What we are looking for}
+Sometimes the powers of three and two suggest a Collatz segment should shrink, yet its endpoint is at least its starting value. The added ones make up the difference. Following Rozier and Terracol, we call this a paradoxical segment. Earlier values are allowed to fall below the seed.
+
+Their paper proves that if only finitely many such segments start above two, Collatz follows. That makes this a useful research target, but its finiteness remains unproved. See \url{https://arxiv.org/html/2502.00948v3}.
+\section{How a finite search can cover arbitrarily large seeds}
+Fix a length $L$. Seeds with the same remainder $r$ on division by $2^L$ have the same first $L$ parities. Write each as $r+2^Lq$. Their endpoints then have the form $u+Aq$, for known integers $u$ and $A$.
+
+When $A<2^L$, the condition that the endpoint is at least the seed becomes
+\[
+r+(2^L-A)q\le u.
+\]
+This gives a finite interval of possible $q$ values. Checking all remainders and their intervals therefore covers every seed at this length, with no arbitrary seed-size ceiling. Lean proves the interval formula and the coverage identity.
+\section{What has been checked}
+Lean proves that the only seeds above two producing a paradoxical segment of length eight are
+\[
+7,\ 9,\ 18,\ 19,\ 25.
+\]
+Each of these had already descended before the endpoint. A separate tested Python search through length twenty finds the same five segments and no others. The full twenty-length computation is not a Lean proof; the length-eight classification is.
+
+This reproduces a small known case and provides a checked search tool. The number of remainders doubles with every extra step, so simply searching longer will not settle finiteness across all lengths. The next task is to find and prove a restriction that rules out arbitrarily long surviving words.
+\end{document}

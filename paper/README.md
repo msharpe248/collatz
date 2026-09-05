@@ -18,6 +18,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 | Finite parity defects and approximate-periodicity certificates | [defects.pdf](defects.pdf) | [defects_guide.pdf](defects_guide.pdf) |
 | Bounded correction exactly equals reciprocal-orbit summability | [reciprocal.pdf](reciprocal.pdf) | [reciprocal_guide.pdf](reciprocal_guide.pdf) |
 | Sixth-root correction, polynomial drift exclusion, and finite boundedness certificates | [correction_growth.pdf](correction_growth.pdf) | [correction_growth_guide.pdf](correction_growth_guide.pdf) |
+| Exact paradoxical cylinders and a reproduced small classification | [paradoxical_cylinders.pdf](paradoxical_cylinders.pdf) | [paradoxical_cylinders_guide.pdf](paradoxical_cylinders_guide.pdf) |
 
 The matching `.tex` files are the editable sources. The newest formal status
 and remaining proof gaps are in [RESEARCH_STATUS.md](../analysis/RESEARCH_STATUS.md).
@@ -27,8 +28,8 @@ papers have completed.
 To rebuild the latest pair with Tectonic:
 
 ```sh
-tectonic paper/correction_growth.tex
-tectonic paper/correction_growth_guide.tex
+tectonic paper/paradoxical_cylinders.tex
+tectonic paper/paradoxical_cylinders_guide.tex
 ```
 
 After editing, check the compiler log, cross-references, and rendered pages.

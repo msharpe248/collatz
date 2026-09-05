@@ -1,0 +1,232 @@
+{
+  "method": "exact contracting residue cylinders; all seeds >= 3 at each checked length",
+  "max_length": 20,
+  "seed_height_cutoff": null,
+  "verification": "Python enumeration with direct orbit replay; underlying cylinder equivalence proved in Lean",
+  "scope": "finite lengths only; no proof of global paradoxical finiteness or Collatz",
+  "total_segments": 5,
+  "lengths": [
+    {
+      "length": 1,
+      "residues_exhausted": 2,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 2,
+      "residues_exhausted": 4,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 3,
+      "residues_exhausted": 8,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 4,
+      "residues_exhausted": 16,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 5,
+      "residues_exhausted": 32,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 6,
+      "residues_exhausted": 64,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 7,
+      "residues_exhausted": 128,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 8,
+      "residues_exhausted": 256,
+      "nonempty_cylinders": 5,
+      "segments": 5,
+      "max_seed": 25,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 9,
+      "residues_exhausted": 512,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 10,
+      "residues_exhausted": 1024,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 11,
+      "residues_exhausted": 2048,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 12,
+      "residues_exhausted": 4096,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 13,
+      "residues_exhausted": 8192,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 14,
+      "residues_exhausted": 16384,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 15,
+      "residues_exhausted": 32768,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 16,
+      "residues_exhausted": 65536,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 17,
+      "residues_exhausted": 131072,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 18,
+      "residues_exhausted": 262144,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 19,
+      "residues_exhausted": 524288,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    },
+    {
+      "length": 20,
+      "residues_exhausted": 1048576,
+      "nonempty_cylinders": 0,
+      "segments": 0,
+      "max_seed": null,
+      "max_quotient": 0,
+      "no_prior_descent": 0
+    }
+  ],
+  "segments": [
+    {
+      "length": 8,
+      "seed": 7,
+      "endpoint": 8,
+      "odd_steps": 5,
+      "quotient": 0,
+      "first_descent_within_segment": 7
+    },
+    {
+      "length": 8,
+      "seed": 9,
+      "endpoint": 10,
+      "odd_steps": 5,
+      "quotient": 0,
+      "first_descent_within_segment": 2
+    },
+    {
+      "length": 8,
+      "seed": 18,
+      "endpoint": 20,
+      "odd_steps": 5,
+      "quotient": 0,
+      "first_descent_within_segment": 1
+    },
+    {
+      "length": 8,
+      "seed": 19,
+      "endpoint": 20,
+      "odd_steps": 5,
+      "quotient": 0,
+      "first_descent_within_segment": 4
+    },
+    {
+      "length": 8,
+      "seed": 25,
+      "endpoint": 26,
+      "odd_steps": 5,
+      "quotient": 0,
+      "first_descent_within_segment": 2
+    }
+  ]
+}

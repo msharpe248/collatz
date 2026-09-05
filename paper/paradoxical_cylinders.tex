@@ -1,0 +1,76 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.05in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\setlength{\emergencystretch}{2em}
+\title{Exact Paradoxical Collatz Cylinders:\\A Formal Search Note}
+\author{Collatz proof project\thanks{Prepared with Codex (OpenAI). This is a formalization and small-case reproduction, not a literature-priority claim.}}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We formalize an exact quotient-interval characterization of paradoxical shortcut Collatz segments. It permits exhaustive enumeration at each fixed length without a seed-height cutoff. Lean proves the complete length-eight classification above seed two. A separate exact-integer Python enumeration through length twenty reproduces the same five segments. This note supplies a checked research instrument; it does not prove finiteness over all lengths or the Collatz conjecture.
+\end{abstract}
+\section{Definition and quotient interval}
+Let $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$. Let $j_L(n)$ count odd steps before time $L$. Following Rozier and Terracol~\cite{RT}, a segment is paradoxical when
+\[
+n>0,\qquad T^L(n)\ge n,\qquad 3^{j_L(n)}<2^L.
+\]
+Intermediate descent is allowed. For a fixed residue $0\le r<2^L$, set $u=T^L(r)$ and $A=3^{j_L(r)}$. The affine transport identity is
+\[
+T^L(r+2^Lq)=u+Aq,
+\]
+and the odd-step count is constant on this residue class.
+\begin{theorem}
+Assume $A<2^L$. For every natural $q$, the seed $r+2^Lq$ is paradoxical exactly when
+\[
+0<r+2^Lq,\quad r\le u,\quad
+q\le\left\lfloor\frac{u-r}{2^L-A}\right\rfloor.
+\]
+\end{theorem}
+\begin{proof}
+Non-descent is equivalent to $r+2^Lq\le u+Aq$, or $r+(2^L-A)q\le u$. Since the coefficient is positive, this is precisely the stated interval and $r\le u$. Positivity excludes the zero seed. In Lean, retaining $r\le u$ is essential because natural subtraction truncates at zero.
+\end{proof}
+To enumerate seeds at least three, impose also
+$q\ge\max(0,\lceil(3-r)/2^L\rceil)$. Noncontracting residues contribute none. The unique decomposition $n=(n\bmod2^L)+2^L\lfloor n/2^L\rfloor$ proves coverage of all seeds at the selected length.
+
+\newpage
+\section{Checked small case and experiment}
+\begin{theorem}
+For every $n>2$, the length-eight segment is paradoxical if and only if
+\[
+n\in\{7,9,18,19,25\}.
+\]
+\end{theorem}
+\begin{proof}
+A kernel-decided table checks all 256 residues. Every contracting residue with $u\ge r$ satisfies $u-r<256-A$, so its admissible quotient is zero. The possible residues are $0,1,2,7,9,18,19,25$; the first three are excluded by $n>2$. The five remaining trajectories directly satisfy the definition.
+\end{proof}
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+Seed&Endpoint at eight&Odd steps&First descent time\\
+\midrule
+7&8&5&7\\9&10&5&2\\18&20&5&1\\19&20&5&4\\25&26&5&2\\
+\bottomrule
+\end{tabular}
+\end{center}
+The Python census exhausts lengths one through twenty, using all $2^L$ residues at each length and the full quotient interval. It finds only these five pairs. Each reported segment is replayed directly. Unit tests independently check every residue through length ten and interval membership and boundaries through length eight. The length-twenty census is a tested Python computation, not a Lean-extracted or kernel-certified enumeration. Only the displayed length-eight classification has been proved in Lean.
+
+\newpage
+\section{Research role and reproducibility}
+Rozier and Terracol prove that finiteness of paradoxical segments above seed two would imply Collatz~\cite{RT}. Their reduction is already represented in the nested source \path{rwst__lean-code/RT/CRozLemma32.lean}. Its local toolchain differs from the main project's; that nested headline theorem was source-inspected, not rebuilt or axiom-audited in this pass. It is not imported by the new module. Other nearby library results use cited computational assumptions, which must not be silently imported as proofs.
+
+The new main module is \texttt{lean/Collatz/Paradoxical.lean}. Its principal declarations are
+\begin{quote}\small\ttfamily
+paradoxical\_quotient\_interval\\
+paradoxical\_residue\_iff\\
+paradoxical\_eight\_iff
+\end{quote}
+These are included in the expanded 60-declaration audit, with only standard foundational axioms. No new axiom, \texttt{sorry}, or \texttt{native\_decide} is used. The table uses ordinary kernel-checked \texttt{decide}.
+
+Build with \texttt{lake build Collatz.Paradoxical} from \texttt{lean/}. From the repository root, run {\small\texttt{python3 analysis/paradoxical\_cylinders.py}}; the JSON output records the exact finite scope. Brute-force residue enumeration costs exponentially many states and is not an all-length method. The missing task is an independently proved restriction on the contracting words that could support arbitrarily long paradoxical segments. Finite experimental absence does not supply that restriction.
+\begin{thebibliography}{1}
+\bibitem{RT} O. Rozier and C. Terracol, \emph{Paradoxical behavior in Collatz sequences}, arXiv:2502.00948v3 (2025), Definition 1.1 and Section 3. \url{https://arxiv.org/html/2502.00948v3}.
+\end{thebibliography}
+\end{document}

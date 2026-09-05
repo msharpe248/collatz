@@ -30,6 +30,8 @@ belong to an excluded family.
 | Drift escape | `unbounded_prefix_drift_escape` | On every prefix, some drift 3^j_t/2^t is at least (T+1)^(5/6)/N; a running-maximum statement |
 | Slow-drift exclusion | `bounded_orbit_of_subcritical_polynomial_drift` | Global rational polynomial drift exponent below 5/6 forces boundedness, not necessarily reaching one |
 | Finite drift certificate | `finite_drift_certificate_bounds_orbit` | A finite envelope through T with C*N^(6a)<T+1 and b<5a forces a bounded orbit |
+| Paradoxical cylinders | `paradoxical_quotient_interval`, `paradoxical_residue_iff` | Exact fixed-length quotient intervals, no seed cutoff; global finiteness remains open |
+| Checked small classification | `paradoxical_eight_iff` | All seeds above two at length eight: exactly 7,9,18,19,25; reproduction, not a new discovery |
 | Dependency audit | `audit_theorems.py`, `theorem_audit.json` | Selected declarations, printed types and axioms, pinned library provenance |
 
 See [STURMIAN_SILVER.md](STURMIAN_SILVER.md) for the new theorem's proof.
@@ -48,7 +50,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 57 declarations using only standard
+The selected theorem audit now covers 60 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -56,6 +58,15 @@ The subsequent correction-growth result is in
 [guide](../paper/correction_growth_guide.pdf).
 
 ## Experiments and controls
+
+The paradoxical route and library reuse findings are in
+[PARADOXICAL_CYLINDERS.md](PARADOXICAL_CYLINDERS.md). The exact Python census
+through length 20 has no seed cutoff and finds only the five length-eight
+segments. All have earlier descent. Only the length-eight classification is
+kernel-proved; the broader census is tested Python. This does not establish
+finiteness across all lengths. The source theorem reducing global finiteness
+to Collatz is already present in the nested RT project and was not re-audited
+in this pass.
 
 `sturmian_prefix_power.py` now produces exact integer excluded-height
 certificates, using the correction term in `prefix_power_initial_bound`.

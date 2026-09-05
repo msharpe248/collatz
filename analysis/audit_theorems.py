@@ -74,6 +74,9 @@ TARGETS = [
     ("Collatz.DriftEscape", "Collatz.finite_drift_certificate_bounds_orbit", "Finite polynomial drift envelope and explicit horizon force boundedness, not necessarily reaching one"),
     ("Collatz.DriftEscape", "Collatz.bounded_orbit_of_subcritical_polynomial_drift", "Any global rational polynomial drift exponent strictly below 5/6 forces boundedness"),
     ("Collatz.DriftEscape", "Collatz.bounded_orbit_of_bounded_drift", "Uniformly bounded multiplicative drift forces a bounded positive orbit"),
+    ("Collatz.Paradoxical", "Collatz.paradoxical_quotient_interval", "Exact finite-length contracting cylinder interval without a seed cutoff"),
+    ("Collatz.Paradoxical", "Collatz.paradoxical_residue_iff", "Complete decomposition of arbitrary positive seeds into residue cylinders"),
+    ("Collatz.Paradoxical", "Collatz.paradoxical_eight_iff", "All seeds above two at length eight: exactly 7, 9, 18, 19, 25; kernel-decided residue table"),
 ]
 
 
