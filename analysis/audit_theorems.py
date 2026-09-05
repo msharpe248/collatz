@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.ResidueCorrection", "Collatz.idealC_ninth_bound_of_prefix", "Distinct prefix avoiding one, positive seed not divisible by three; ninth-power correction bound"),
+    ("Collatz.ResidueCorrection", "Collatz.unbounded_eventual_ninth_bound", "Every unbounded positive orbit has a tail with ninth-power correction control at every length"),
+    ("Collatz.ResidueCorrection", "Collatz.unbounded_eventual_ninth_escape", "Every unbounded positive orbit has a tail with drift excursions at exponent 8/9"),
+    ("Collatz.ResidueCorrection", "Collatz.finite_ninth_drift_certificate", "Finite rational polynomial drift certificate below 8/9 forces boundedness outside multiples of three"),
+    ("Collatz.ResidueCorrection", "Collatz.bounded_orbit_of_ninth_polynomial_drift", "Global rational polynomial drift envelope below 8/9, seed not divisible by three; boundedness, not convergence"),
     ("Collatz.CorrectionDecode", "Collatz.WordAffine.decodeCorrection_correct", "Deterministic reconstruction recovers every finite Boolean word"),
     ("Collatz.CorrectionDecode", "Collatz.WordAffine.correctionAttainable_iff", "Exact correction acceptance iff a word with the specified length, count and correction exists"),
     ("Collatz.CorrectionDecode", "Collatz.WordAffine.attainable_paradoxical_iff", "Attainability plus numerical criterion is equivalent to an actual paradoxical word; no uniform exclusion"),

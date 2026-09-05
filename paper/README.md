@@ -39,3 +39,8 @@ The current theorem audit is [theorem_audit.json](../analysis/theorem_audit.json
   [guide](correction_attainability_guide.md): Lean-proved limitation of combining
   a relaxed suffix correction interval with exact endpoint congruence. Markdown
   sources; no claim of an actual cycle or uniform Collatz proof.
+
+- [Ninth-power correction bound](residue_correction.md) and
+  [guide](residue_correction_guide.md): residue exclusion strengthens the
+  eventual correction exponent to 1/9 and the drift excursion exponent to
+  8/9, with finite and global conditional boundedness theorems in Lean.

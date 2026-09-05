@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 72 declarations using only standard
+The selected theorem audit now covers 77 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -122,10 +122,11 @@ checks swap identities, and replays the finite Mahler candidates.
 4. **Critical-boundary orbits.** Bounded ideal correction is not known for
    every hypothetical divergent orbit. It is now proved equivalent to
    summability of reciprocal orbit values. An escaping orbit with divergent
-   reciprocal sum is the precise remaining coverage case. The new
-   sixth-root correction bound now excludes global polynomial drift
-   envelopes below exponent 5/6, with a finite-certificate version. This
-   does not exclude faster drift or all critical-density orbits, and does
+   reciprocal sum is the precise remaining coverage case. The residue-based
+   ninth-root bound improves the tail drift threshold to 8/9, with finite
+   and global conditional boundedness theorems for seeds not divisible by
+   three. Every positive orbit eventually satisfies that residue restriction.
+   This does not exclude faster drift or all critical-density orbits, and does
    not make correction bounded in the remaining case. Even a proof of
    coverage would not itself exclude bounded-correction orbits.
 5. **Survivor exhaustion.** Exact interval computation is not a termination
@@ -182,3 +183,20 @@ paradoxical criterion. Kernel controls reject the artificial (16,6,194421)
 correction and accept the genuine (8,5,347) correction. The current selected
 audit has 72 declarations. This is infrastructure; no new uniform exclusion
 is established. The companion paper and guide were updated accordingly.
+
+## Residue-based ninth-power correction bound
+
+`Collatz.ResidueCorrection` uses eventual avoidance of multiples of three to
+rank the distinct odd values of an escaping orbit more tightly. The finite
+prefix theorem assumes a positive seed not divisible by three, no repetition,
+and avoidance of one, and gives (N+c_T)^9 ≤ N^9(2j_T+1). Every unbounded positive
+orbit has a tail obeying this at all lengths; no density or summability
+assumption is needed for that necessary condition.
+
+The resulting tail drift excursion exponent improves from 5/6 to 8/9.
+A finite rational polynomial drift certificate below 8/9 forces boundedness
+for a seed not divisible by three, with threshold 2^a*C*(N^9)^a < T+1.
+The global-envelope corollary is also proved. No such envelope is asserted
+for all orbits, and boundedness still leaves the nontrivial-cycle question.
+Five new audit targets bring the selected total to 77. The paper and guide
+are `paper/residue_correction.md` and `paper/residue_correction_guide.md`.
