@@ -1,0 +1,135 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.95in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype,xcolor}
+\usepackage[colorlinks=true,urlcolor=blue!50!black]{hyperref}
+\newtheorem{theorem}{Theorem}
+\setlength{\emergencystretch}{3em}
+\title{Classification of Positive Natural Collatz Seeds\\with Mechanical Parity Itineraries}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We complete the repository's mechanical-word branch. For arbitrary real
+slope and intercept, a positive natural seed with a globally mechanical
+shortcut Collatz parity itinerary must be 1 or 2, and its slope must be
+$1/2$. Every positive orbit with a mechanical tail therefore reaches 1.
+The proof combines a factor-complexity bound, exact rational phase coding,
+and the endpoint-swap cycle obstruction. All real intercepts and
+nonprimitive rational presentations are handled. No universal assertion
+that Collatz itineraries become mechanical is proved. This is a
+formalization and integration of classical ingredients, not a proof of
+Collatz or a claim of mathematical novelty.
+\end{abstract}
+
+\section{Statements}
+Let $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$. The predicate
+$\operatorname{HasItin}(\alpha,\rho,N)$ means that, at every natural time $t$,
+\[
+ T^t(N)\bmod2
+ =\lfloor(t+1)\alpha+\rho\rfloor-\lfloor t\alpha+\rho\rfloor.
+\]
+\begin{theorem}
+For all $\alpha,\rho\in\mathbb R$ and $N\in\mathbb N$ with $N>0$,
+$\operatorname{HasItin}(\alpha,\rho,N)$ implies
+$\alpha=1/2$ and $N\in\{1,2\}$.
+\end{theorem}
+\begin{theorem}
+If $N>0$ and $\operatorname{HasItin}(\alpha,\rho,T^s(N))$ for some
+natural $s$ and real $\alpha,\rho$, then $T^t(N)=1$ for some natural $t$.
+\end{theorem}
+The positivity condition is essential: zero has the all-zero itinerary.
+The first theorem restricts seeds and slope; it does not assert that every
+intercept realizes both seeds.
+
+\section{Periods and rotations are actual returns}
+If $q\alpha$ is an integer, translating the two floors by this integer
+shows that the mechanical word is $q$-periodic. Naturals with identical
+infinite parity itineraries are equal, by congruence modulo $2^L$ for
+every $L$. Hence $T^q(N)=N$ for any natural seed with this itinerary.
+In particular, a rational denominator is a return period from the initial
+seed, without a boundedness assumption.
+
+A realized return word rotated by $s$ is realized by $T^s(N)$.
+This is proved by reducing indices modulo the period and pumping the
+return. The endpoint-swap theorem therefore applies to rotations: if a
+return word has both $1u0$ and $0u1$ as rotations, then $u$ is empty and
+the corresponding shifted seeds are 1 and 2.
+
+\section{A uniform finite rational grid}
+For $0<p<q$ and $\gcd(p,q)=1$, define the carry bit
+\[
+ b_r(t)=\mathbf1\{(tp+r)\bmod q+p\ge q\}.
+\]
+Multiplication by $p$ permutes residues modulo $q$. Thus, from any phase
+$r$, some shifts reach phase 0 and phase $q-1$.
+For $0<i<q$, the residue $ip\bmod q$ is nonzero. This gives the following
+structure for the two extreme length-$q$ words:
+\[
+ (b_{q-1}(0),\ldots,b_{q-1}(q-1))=1u0,\qquad
+ (b_0(0),\ldots,b_0(q-1))=0u1.
+\]
+Indeed, the first letters are 1 and 0 and the last letters are 0 and 1.
+At interior positions, replacing the residue by one less cannot change
+the carry: equality at the threshold would make $(i+1)p$ divisible by $q$.
+The grid is periodic, so both shifted words are actual return words.
+Endpoint cancellation now forces a visit to 1.
+
+\section{All real intercepts and all rational presentations}
+Normalize $\rho$ to $\beta=\{\rho\}$ and put $r=\lfloor q\beta\rfloor$.
+The inequalities $r\le q\beta<r+1$, together with quotient and remainder
+arithmetic, prove for every natural $t$ that
+\[
+ \left\lfloor t\frac pq+\beta\right\rfloor
+ =\left\lfloor\frac{tp+r}{q}\right\rfloor.
+\]
+Successive differences are exactly $b_r(t)$. This is an equality of
+infinite words, including negative original intercepts and threshold
+boundary cases, not a finite or floating-point approximation.
+Consequently every reduced rational mechanical itinerary in $(0,1)$
+reaches 1.
+
+For an arbitrary real slope, the earlier mechanical complexity bound
+$p_N(L)\le L+1$ forces boundedness. Repeated states give a positive return
+period $q$ on a tail. Mechanical telescoping over $k$ repeats gives
+$-1<k(q\alpha-p)<1$, where $p$ is the odd-step count. Hence $q\alpha=p$.
+Positive-cycle inequalities give $0<p<q$. Dividing $p,q$ by their gcd
+produces a reduced rational slope, so the grid theorem applies to this tail
+and the original seed reaches 1. No rational presentation is assumed
+primitive in this step.
+
+Finally shift to the visit to 1. Its two-step return and telescoping force
+$2\alpha=1$. This integral slope increment gives a two-step return at the
+original seed. The checked two-step-return classification gives $N=1$ or 2.
+
+\section{Formal artifact and validation}
+The new modules are \texttt{MechanicalPeriod.lean},
+\texttt{RationalGrid.lean}, and \texttt{RationalMechanical.lean} under
+\texttt{lean/Collatz/}. The principal declarations are
+\texttt{mechanical\_reaches\_one}, \texttt{mechanical\_classification}, and
+\texttt{eventual\_mechanical\_reaches\_one} in namespace \texttt{Collatz}.
+The modular phase, endpoint structure, real-intercept transport, and period
+transport are separately proved and reusable.
+
+The Lean build and selected axiom audit pass: 107 audited declarations
+use only the standard foundations. Four exact computational controls pass,
+including negative and boundary intercepts and the two permitted seeds.
+These tests are regression checks; the universal classification is a Lean
+proof. The audit is dependency inspection, not independent kernel replay.
+
+\section{Context and the remaining Collatz gap}
+The complexity ingredient is related to Dubickas,
+\emph{On integer sequences generated by linear maps} (2009), Theorem 5,
+\href{https://doi.org/10.1017/S0017089508004655}{doi:10.1017/S0017089508004655}.
+The cycle cancellation follows Knight's high-cycle argument,
+\emph{Collatz high cycles do not exist} (2026),
+\href{https://doi.org/10.1016/j.disc.2025.114812}{doi:10.1016/j.disc.2025.114812},
+also inspected in the nested Knight formalization. No nested module or
+custom mathematical axiom is imported.
+
+The previously documented rational rotation and intercept bridges are now
+closed. General Collatz counterexamples need not have mechanical tails.
+Proving that every positive orbit eventually has such a tail would itself
+settle the conjecture and cannot be assumed as a coverage shortcut.
+General escape and nontrivial cycles remain unresolved outside this class.
+\end{document}

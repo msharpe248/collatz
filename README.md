@@ -11,6 +11,14 @@ and a systematic experimental program on what lies beyond. The full
 story is in the paper: [paper/nogo.pdf](paper/nogo.pdf), with a
 non-specialist guide at [paper/nogo_guide.pdf](paper/nogo_guide.pdf).
 
+The mechanical itinerary branch is now complete: a positive natural seed
+with a globally mechanical parity itinerary must be 1 or 2, with slope 1/2.
+Any mechanical tail forces reaching 1. The proof covers all real slopes and
+intercepts, but supplies no mechanical-tail coverage for arbitrary orbits.
+See the [classification paper](paper/mechanical_classification.pdf),
+[guide](paper/mechanical_classification_guide.pdf), and
+[Lean theorem](lean/Collatz/RationalMechanical.lean).
+
 It also contains a new unconditional result: **π_a(x) ≥ x^0.895** — the
 number of integers below x whose 3x+1 orbit contains a (any a ≢ 0
 mod 3), improving the x^0.84 record of Krasikov–Lagarias (2003) by

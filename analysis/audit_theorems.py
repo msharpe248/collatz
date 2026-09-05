@@ -17,6 +17,16 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.MechanicalPeriod", "Collatz.mechanical_period_return", "Integral slope increment forces an actual natural return at the initial seed"),
+    ("Collatz.MechanicalPeriod", "Collatz.WordAffine.endpoint_rotations_trivial", "Endpoint-swapped rotations of an actual return word force the trivial cycle"),
+    ("Collatz.RationalGrid", "Collatz.RationalGrid.extreme_words", "Uniform endpoint-swapped structure of the extreme phases of every reduced rational grid"),
+    ("Collatz.RationalGrid", "Collatz.RationalGrid.grid_reaches_one", "Every reduced rational grid itinerary reaches one; all integer phases"),
+    ("Collatz.RationalMechanical", "Collatz.rational_itinerary_grid", "Exact infinite coding of arbitrary real intercepts by a finite rational phase"),
+    ("Collatz.RationalMechanical", "Collatz.reduced_rational_mechanical_reaches_one", "All reduced rational slopes strictly between zero and one, all real intercepts"),
+    ("Collatz.RationalMechanical", "Collatz.mechanical_reaches_one", "All real slopes and intercepts, positive natural seed with mechanical itinerary reaches one"),
+    ("Collatz.RationalMechanical", "Collatz.mechanical_classification", "Positive natural seed with global mechanical itinerary has slope one half and seed one or two"),
+    ("Collatz.RationalMechanical", "Collatz.eventual_mechanical_reaches_one", "Any positive natural orbit with any mechanical tail reaches one"),
+
     ("Collatz.EndpointCycles", "Collatz.WordAffine.endpoint_cancellation", "Exact endpoint-swap correction identity for every finite middle word"),
     ("Collatz.EndpointCycles", "Collatz.WordAffine.endpoint_returns_trivial", "Two actual natural returns with words 1u0 and 0u1 force empty u and seeds 1 and 2"),
     ("Collatz.EndpointCycles", "Collatz.WordAffine.endpoint_cycle_shift_trivial", "Endpoint-swapped return words within one orbit force the trivial cycle"),

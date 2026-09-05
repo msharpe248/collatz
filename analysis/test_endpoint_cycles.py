@@ -1,7 +1,9 @@
 """Exact finite controls for the endpoint cancellation and its coverage gap.
 The universal arithmetic obstruction is proved in Lean. Rational mechanical
-rotation coverage is tested here, not claimed as a Lean theorem.
+rotation coverage now has a uniform Lean proof in RationalGrid; these are
+independent finite regression controls.
 """
+from fractions import Fraction
 from itertools import product
 from math import gcd
 import unittest
@@ -51,6 +53,29 @@ class EndpointCycleControls(unittest.TestCase):
                 self.assertIsNotNone(endpoint_witness(word), (p, q))
                 checked += 1
         self.assertGreater(checked, 1900)
+
+    def test_real_intercept_grid_translation(self):
+        def floor(x):
+            return x.numerator // x.denominator
+
+        for q in range(2, 31):
+            phases = (Fraction(-7, 3), Fraction(-1), Fraction(0),
+                      Fraction(1, 2*q), Fraction(q-1, q),
+                      Fraction(2*q-1, 2*q), Fraction(3, 2))
+            for p in range(1, q):
+                for rho in phases:
+                    beta = rho - floor(rho)
+                    r = floor(q*beta)
+                    for t in range(2*q+1):
+                        mechanical = floor((t+1)*Fraction(p, q)+rho) - floor(t*Fraction(p, q)+rho)
+                        grid = int((t*p+r) % q + p >= q)
+                        self.assertEqual(mechanical, grid, (p, q, rho, t))
+        for seed, rho in ((1, Fraction(1, 2)), (2, Fraction(0))):
+            value = seed
+            for t in range(100):
+                mechanical = floor(Fraction(t+1, 2)+rho) - floor(Fraction(t, 2)+rho)
+                self.assertEqual(value % 2, mechanical)
+                value = (3*value+1)//2 if value % 2 else value//2
 
     def test_rotation_witness_is_not_universal(self):
         # This is a rational cycle candidate (19/5), not an integer counterexample.

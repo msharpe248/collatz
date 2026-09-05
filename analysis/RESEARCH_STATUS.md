@@ -8,6 +8,7 @@ belong to an excluded family.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Full mechanical classification | `mechanical_classification`, `eventual_mechanical_reaches_one` | All real slopes and intercepts; positive global seed is 1 or 2 with slope 1/2; any mechanical tail forces reaching one |
 | Sturmian itineraries | `Silver.no_itinerary`, `Silver.no_eventual_itinerary` | Slope √2/2, every intercept and natural seed; unconditional |
 | Infinite Sturmian family | `Metallic.no_itinerary`, `Metallic.no_eventual_itinerary` | Every integer m≥6, slope 1/(1+(√(m²+4)−m)/2), every intercept and natural seed; unconditional |
 | Short rotation windows | `rotation_window_of_neighbors` | Every window of length q+Q from positive bracketing errors ε≤δ; no three-distance theorem |
@@ -51,7 +52,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 98 declarations using only standard
+The selected theorem audit now covers 107 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -105,11 +106,11 @@ checks swap identities, and replays the finite Mahler candidates.
 
 ## Missing mathematical bridges
 
-1. **Other Sturmian slopes.** The short-window argument and an explicit
-   recurrence now exclude an infinite family accumulating at slope 1.
-   This is not all slopes or an interval of slopes. The conservative
-   sixfold criterion leaves parameters 3–5 and broader continued-fraction
-   families outside the new theorem.
+1. **Mechanical branch completed.** `mechanical_classification` now proves
+   that a positive natural seed with any globally mechanical itinerary has
+   slope 1/2 and seed 1 or 2. Any mechanical tail forces reaching one.
+   Irrational, rational, arbitrary-intercept, and nonprimitive cases are
+   covered. Further slope-specific exclusions are not a coverage priority.
 2. **Useful defect bounds.** A finite near-periodicity class is now excluded
    from unbounded orbits, using disjoint windows instead of raw swap costs.
    The sufficient horizon is exponential in the disagreement or edit
@@ -320,3 +321,26 @@ custom axiom imported. The publisher gives Knight's article as 114812,
 DOI 10.1016/j.disc.2025.114812; the nested summary's article 114425 and
 HAL-04206985v3 are incorrect (challenge catalog links HAL-04261183).
 Paper and guide: paper/endpoint_cycles.pdf and paper/endpoint_cycles_guide.pdf.
+
+
+## Mechanical branch completed (2026-09-05)
+
+`MechanicalPeriod` transports rational periods to actual returns and arbitrary
+word rotations to shifted orbit states. `RationalGrid` proves coprime phase
+surjectivity and the endpoint-swapped extreme words uniformly for every
+0<p<q. `RationalMechanical` identifies every real intercept with its exact
+finite grid phase. Gcd reduction handles nonprimitive rational presentations.
+
+`mechanical_reaches_one`: positive natural seed plus HasItin, with arbitrary
+real slope/intercept, reaches one. `mechanical_classification` strengthens
+this to alpha=1/2 and N=1 or N=2. `eventual_mechanical_reaches_one` lifts the
+result from any tail. The rotation/intercept gaps recorded in the preceding
+historical entries are now closed. No universal mechanical-tail hypothesis
+is proved or assumed for arbitrary positive seeds. Such coverage would itself
+settle Collatz; do not replace the requested conjecture with this class result.
+
+Nine declarations bring the selected audit to 107; main Lean build and four
+exact regression controls pass. Paper and guide: mechanical_classification.pdf
+and mechanical_classification_guide.pdf under paper/, with LaTeX sources.
+Next research priority: independent restrictions on general counterexamples,
+or a general descent/cycle argument outside the completed mechanical class.
