@@ -27,6 +27,9 @@ belong to an excluded family.
 | Escape consequence | `supercritical_orbit_tendsto_atTop` | Bounded correction forces eventual escape from every finite bound; converse not established |
 | Polynomial correction control | `idealC_sixth_bound_of_prefix`, `unbounded_idealC_sixth_bound` | (N+c_T)^6 ≤ N^6(j_T+1); every unbounded positive orbit, without summability or density assumptions |
 | Finite drift restriction | `unbounded_nondescent_drift` | 2^(6T) ≤ 3^(6j_T)(j_T+1) at every non-descent time of an unbounded positive orbit |
+| Drift escape | `unbounded_prefix_drift_escape` | On every prefix, some drift 3^j_t/2^t is at least (T+1)^(5/6)/N; a running-maximum statement |
+| Slow-drift exclusion | `bounded_orbit_of_subcritical_polynomial_drift` | Global rational polynomial drift exponent below 5/6 forces boundedness, not necessarily reaching one |
+| Finite drift certificate | `finite_drift_certificate_bounds_orbit` | A finite envelope through T with C*N^(6a)<T+1 and b<5a forces a bounded orbit |
 | Dependency audit | `audit_theorems.py`, `theorem_audit.json` | Selected declarations, printed types and axioms, pinned library provenance |
 
 See [STURMIAN_SILVER.md](STURMIAN_SILVER.md) for the new theorem's proof.
@@ -45,7 +48,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 53 declarations using only standard
+The selected theorem audit now covers 57 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -101,8 +104,10 @@ checks swap identities, and replays the finite Mahler candidates.
    every hypothetical divergent orbit. It is now proved equivalent to
    summability of reciprocal orbit values. An escaping orbit with divergent
    reciprocal sum is the precise remaining coverage case. The new
-   sixth-root correction bound constrains that case without assuming
-   summability, but does not make correction bounded. Even a proof of
+   sixth-root correction bound now excludes global polynomial drift
+   envelopes below exponent 5/6, with a finite-certificate version. This
+   does not exclude faster drift or all critical-density orbits, and does
+   not make correction bounded in the remaining case. Even a proof of
    coverage would not itself exclude bounded-correction orbits.
 5. **Survivor exhaustion.** Exact interval computation is not a termination
    proof. Universal finite-height exhaustion is equivalent to universal

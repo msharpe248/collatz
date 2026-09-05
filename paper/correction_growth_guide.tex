@@ -55,7 +55,35 @@ There is also a constraint on odd steps. After $L$ steps, if an unbounded orbit 
 \]
 This places the odd-step count close to or above the familiar critical line, allowing only a logarithmic deficit. Lean proves the displayed integer inequality directly.
 \begin{keyidea}
-\textbf{What is still missing.} Slow growth is still growth. The sixth-root bound does not make correction bounded, and it does not force descent. We still need an arithmetic argument that excludes the itineraries allowed by these estimates. Nontrivial cycles remain a separate question.
+\textbf{What is still missing.} Slow growth is still growth. The sixth-root bound does not make correction bounded, and it does not force descent. The next page uses this estimate to exclude slow multiplicative drift. We still need to exclude the remaining itineraries. Nontrivial cycles remain a separate question.
 \end{keyidea}
-The implementation is \texttt{lean/Collatz/CorrectionGrowth.lean}. The technical paper contains the complete proof and rebuild instructions. The expanded audit covers 53 selected declarations with only standard foundational axioms. Collatz has not been proved.
+The implementation is \texttt{lean/Collatz/CorrectionGrowth.lean}. The technical paper contains the complete proof and rebuild instructions. The expanded audit covers 57 selected declarations with only standard foundational axioms. Collatz has not been proved.
+
+\newpage
+\section{A consequence: slow drift cannot escape}
+The correction estimate now gives an exclusion theorem. Let
+\[
+M_t=\frac{3^{j_t}}{2^t},
+\]
+where $j_t$ counts odd steps before time $t$. This ratio measures the multiplicative part of the orbit rule; it leaves out the additions tracked by $c_t$.
+
+Among the first $L+1$ values of an unbounded orbit, at least one must be at least $L+1$. Otherwise there would not be enough distinct positive integers to fill the list. Combining that fact with the sixth-root correction estimate shows that at some time $t\le L$,
+\[
+M_t\ge\frac{(L+1)^{5/6}}{N}.
+\]
+This holds somewhere in each prefix. It does not say that the ratio is this large at every time.
+\begin{keyidea}
+\textbf{New exclusion.} If the multiplicative ratio stays below a polynomial bound with rational exponent strictly less than $5/6$, the orbit is bounded. In particular, a uniformly bounded multiplicative ratio cannot drive an unbounded orbit.
+\end{keyidea}
+For example, a bound $M_t\le A(t+1)^{2/3}$, for a fixed $A>0$ and every time $t$, is too slow to support an unbounded orbit. Such a bound is an explicit hypothesis, not something proved for arbitrary Collatz seeds.
+
+\subsection*{Only a finite stretch needs checking}
+There is also an exact integer version. Choose nonnegative integers $a,b,C$ with $b<5a$. If
+\[
+M_t^{6a}\le C(t+1)^b
+\]
+holds at every time through $L=C N^{6a}$, the orbit is bounded. Powers of two and three can replace the fractions, so the test requires no floating-point arithmetic. The sufficient horizon can be very large.
+
+\subsection*{The remaining question}
+An unbounded orbit would have to exceed every such slow envelope. The theorem does not exclude faster drift, and a bounded orbit has not thereby been proved to reach one. Those are still mathematical gaps, not verification tasks. The new source is \texttt{lean/Collatz/DriftEscape.lean}; its four main results are included in the 57-declaration audit.
 \end{document}

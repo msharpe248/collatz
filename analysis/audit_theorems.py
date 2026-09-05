@@ -70,6 +70,10 @@ TARGETS = [
     ("Collatz.CorrectionGrowth", "Collatz.unbounded_idealC_sixth_bound", "Every unbounded positive orbit; no summability or density gap assumption"),
     ("Collatz.CorrectionGrowth", "Collatz.unbounded_sixth_drift_bound", "Exact integer drift restriction for every unbounded positive orbit"),
     ("Collatz.CorrectionGrowth", "Collatz.unbounded_nondescent_drift", "Seed-independent drift restriction at a non-descent time of an unbounded orbit"),
+    ("Collatz.DriftEscape", "Collatz.unbounded_prefix_drift_escape", "Running maximum drift must exceed a power-law threshold on every prefix"),
+    ("Collatz.DriftEscape", "Collatz.finite_drift_certificate_bounds_orbit", "Finite polynomial drift envelope and explicit horizon force boundedness, not necessarily reaching one"),
+    ("Collatz.DriftEscape", "Collatz.bounded_orbit_of_subcritical_polynomial_drift", "Any global rational polynomial drift exponent strictly below 5/6 forces boundedness"),
+    ("Collatz.DriftEscape", "Collatz.bounded_orbit_of_bounded_drift", "Uniformly bounded multiplicative drift forces a bounded positive orbit"),
 ]
 
 

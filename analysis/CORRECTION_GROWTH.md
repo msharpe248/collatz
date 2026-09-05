@@ -64,19 +64,49 @@ even in that case. But an O(T^(1/6)) upper bound is not a constant bound;
 it does not prove reciprocal summability or exclude unbounded orbits.
 Nontrivial cycles remain outside this application.
 
-Next target: combine the polynomial correction bound with independent
-arithmetic itinerary restrictions that force descent. Merely restating its
-drift inequality as a completeness assumption would not make progress.
+The drift-escape extension below converts this bound into an exclusion of
+slow polynomial drift. Further arithmetic itinerary restrictions are still
+needed to force descent in the remaining case. Merely restating a certificate
+as a universal completeness assumption would not make progress.
+
+## Drift escape and finite boundedness certificates
+
+New source: `lean/Collatz/DriftEscape.lean`. Write M_t=3^j_t/2^t.
+On an unbounded orbit, the first T+1 values are distinct positive integers,
+so one n_t with t≤T is at least T+1. The sixth-power drift inequality gives
+
+    (2^t)^6*(T+1)^5 ≤ (3^j_t*N)^6.
+
+Thus the running maximum of M_t is at least (T+1)^(5/6)/N. This is not a
+pointwise lower bound on each M_t.
+
+If natural parameters a,b,C satisfy b<5a and M_t^(6a)≤C*(t+1)^b globally,
+the orbit is bounded. Indeed the selected time above would give
+(T+1)^(5a)≤C*N^(6a)*(T+1)^b, hence T+1≤C*N^(6a), a contradiction for
+T=C*N^(6a). This excludes every rational polynomial drift exponent below
+5/6, including uniformly bounded drift. The Lean statements use only
+integer powers and inequalities; no numerical logarithm is evaluated.
+
+The same proof needs the envelope only through a specified horizon T with
+C*N^(6a)<T+1. `finite_drift_certificate_bounds_orbit` formalizes this finite
+certificate. Its conclusion is boundedness, not reaching one. The sufficient
+horizon may be very large. No computational record or universal coverage is
+claimed.
+
+In particular, this does not eliminate every critical-density itinerary:
+logarithmically growing odd-step excess can already yield polynomial drift.
+Faster drift and nontrivial cycles remain open tracks.
 
 ## Validation and artifacts
 
-Selective `lake build Collatz.CorrectionGrowth` and the expanded
-`analysis/audit_theorems.py --build` succeed. The 53 selected declarations
-use only standard foundational axioms; five new primary results are
-included. The new module has no `sorry`, new axiom, or `native_decide`.
+Selective builds of `Collatz.CorrectionGrowth` and `Collatz.DriftEscape`, and
+the expanded `analysis/audit_theorems.py --build`, succeed. The 57 selected
+declarations use only standard foundational axioms; five correction-growth
+and four drift-escape results are included. The new modules have no `sorry`,
+new axiom, or `native_decide`.
 This is not independent kernel replay or a full nested-library build.
 No literature-priority claim is made.
 
 The technical paper is `paper/correction_growth.tex` and `.pdf`; the guide
 is `paper/correction_growth_guide.tex` and `.pdf`. Both compile without
-warnings, and all six rendered pages were visually inspected.
+warnings, and all nine rendered pages of the expanded pair were visually inspected.

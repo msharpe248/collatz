@@ -12,7 +12,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-For a positive shortcut Collatz orbit with distinct values and no visit to one in a finite prefix, the normalized affine correction satisfies $(N+c_L)^6\le N^6(j_L+1)$, where $j_L$ counts odd steps. The proof bounds a product over distinct odd orbit values by a telescoping comparison product. Every unbounded positive orbit satisfies the hypotheses at every time, without any assumption of reciprocal summability or a strict density gap. The result gives a division-free integer drift restriction and, at non-descent times, a seed-independent near-critical inequality. It bounds possible correction growth but does not prove correction bounded or exclude unbounded orbits.
+For a positive shortcut Collatz orbit with distinct values and no visit to one in a finite prefix, the normalized affine correction satisfies $(N+c_L)^6\le N^6(j_L+1)$, where $j_L$ counts odd steps. The proof bounds a product over distinct odd orbit values by a telescoping comparison product. Every unbounded positive orbit satisfies the hypotheses at every time, without any assumption of reciprocal summability or a strict density gap. The result gives a division-free integer drift restriction and, at non-descent times, a seed-independent near-critical inequality. A subsequent counting argument forces the running maximum multiplicative drift to grow at least as a power $L^{5/6}$. Thus polynomial drift envelopes with exponent below $5/6$ force bounded orbits, with a finite certificate version. These results do not exclude all unbounded orbits.
 \end{abstract}
 
 \section{Definitions and statement}
@@ -136,7 +136,7 @@ Since $j_L\le L$, replacing the final logarithm by $\log(L+1)$ gives a weaker, t
 
 The preceding paper, \emph{Bounded Collatz Correction and Reciprocal Orbit Sums}, proved that bounded correction is equivalent to convergence of $\sum_t1/n_t$. The present estimate applies even when that series diverges: an unbounded orbit can accumulate correction no faster than the sixth-root envelope in~\eqref{eq:main}. This gives a necessary quantitative restriction on the complementary case, rather than assuming it away.
 
-A bound growing like $L^{1/6}$ is not a constant bound. It therefore does not prove reciprocal summability. Nor do the displayed drift inequalities contradict growth near or above the critical odd-step density. The next unresolved task is to combine this correction control with additional arithmetic restrictions that force descent or otherwise exclude the remaining itineraries. Nontrivial cycles are outside the unbounded-orbit application and remain a separate problem.
+A bound growing like $L^{1/6}$ is not a constant bound. It therefore does not prove reciprocal summability. Nor do the displayed drift inequalities contradict growth near or above the critical odd-step density. Sections~\ref{sec:escape}--\ref{sec:certificate} below derive an exclusion of slow polynomial drift from this correction control. The next unresolved task is to exclude the remaining itineraries or force descent. Nontrivial cycles are outside the unbounded-orbit application and remain a separate problem.
 
 \section{Lean implementation and validation}
 Source: \texttt{lean/Collatz/CorrectionGrowth.lean}. Its principal declarations in namespace \texttt{Collatz} are:
@@ -154,7 +154,79 @@ Equation~\eqref{eq:drift}&\texttt{unbounded\_sixth\_drift\_bound}\\
 Equation~\eqref{eq:nondescent}&\texttt{unbounded\_nondescent\_drift}\\
 \bottomrule
 \end{tabular}\end{center}
-Rebuild from \texttt{lean/} with \texttt{lake build Collatz.CorrectionGrowth}. From the repository root, run \texttt{python3 analysis/audit\_theorems.py --build}. The selected audit now covers 53 declarations, including five main results from this module, and reports only standard foundational axioms. No \texttt{sorry}, new axiom, or \texttt{native\_decide} is used here. This is selective compilation and Lean-reported axiom inspection, not independent kernel replay or a full nested-library rebuild.
+Rebuild from \texttt{lean/} with \texttt{lake build Collatz.CorrectionGrowth}. From the repository root, run \texttt{python3 analysis/audit\_theorems.py --build}. The selected audit now covers 57 declarations, including five main results from this module, and reports only standard foundational axioms. No \texttt{sorry}, new axiom, or \texttt{native\_decide} is used here. This is selective compilation and Lean-reported axiom inspection, not independent kernel replay or a full nested-library rebuild.
 
 The cocycle and reciprocal identity come from the existing project modules \texttt{Ideal} and \texttt{Reciprocal}; the return-implies-boundedness theorem is in \texttt{ParityDefects}. Finite-set and ordered-field facts come from pinned mathlib. All additional mathematical arguments are displayed above. No external literature-priority claim is made.
+
+\newpage
+\section{Running maximum drift must escape}\label{sec:escape}
+Define the multiplicative drift $M_t=3^{j_t}/2^t$. This is a ratio of powers, not the orbit value itself.
+\begin{theorem}\label{thm:escape}
+For every unbounded positive orbit and every $L\in\mathbb N$, some $t\le L$ satisfies
+\begin{equation}\label{eq:escape}
+(2^t)^6(L+1)^5\le(3^{j_t}N)^6.
+\end{equation}
+In real terms, $\max_{0\le t\le L}M_t\ge(L+1)^{5/6}/N$.
+\end{theorem}
+\begin{proof}
+The $L+1$ values $n_0,\ldots,n_L$ are distinct positive integers. At least one, say $n_t$, is at least $L+1$, since only $L$ positive integers lie below $L+1$. Apply~\eqref{eq:drift} at this $t$ and use $j_t\le t\le L$:
+\[
+(2^t)^6(L+1)^6\le(3^{j_t}N)^6(j_t+1)
+\le(3^{j_t}N)^6(L+1).
+\]
+Cancel $L+1>0$. Notice that $t$ can depend on $L$: this is a bound on a running maximum, not a pointwise lower bound for every $M_t$.
+\end{proof}
+
+\begin{corollary}\label{cor:poly}
+Let $a,b,C\in\mathbb N$ with $b<5a$. If a positive orbit satisfies
+\begin{equation}\label{eq:envelope}
+M_t^{6a}\le C(t+1)^b\qquad\text{for every }t,
+\end{equation}
+then the orbit is bounded.
+\end{corollary}
+The condition $b<5a$ implies $a>0$, so the permitted rational drift exponent $b/(6a)$ is strictly below $5/6$. In particular, uniformly bounded $M_t$ forces a bounded orbit. For example, $M_t^6\le C(t+1)^4$ is covered. No such envelope is asserted for all positive seeds.
+
+\begin{proof}
+Suppose the orbit is unbounded. Theorem~\ref{thm:escape} and~\eqref{eq:envelope}, at the selected $t\le L$, imply
+\[
+(L+1)^{5a}\le N^{6a}M_t^{6a}
+\le C N^{6a}(L+1)^b.
+\]
+Since $5a\ge b+1$, cancellation gives $L+1\le C N^{6a}$. Choosing $L=C N^{6a}$ is a contradiction.
+\end{proof}
+The conclusion is boundedness, not convergence to one: a nontrivial cycle, if one exists and meets the hypotheses, has not been excluded by this argument.
+
+\newpage
+\section{A finite certificate and its precise scope}\label{sec:certificate}
+The proof of Corollary~\ref{cor:poly} uses the envelope only at times $t\le L$. Thus it yields the following finite theorem.
+\begin{theorem}\label{thm:finitecert}
+Let $N>0$ and $a,b,C,L\in\mathbb N$ satisfy $b<5a$ and $C N^{6a}<L+1$. If
+\[
+(3^{j_t})^{6a}\le C(t+1)^b(2^t)^{6a}
+\qquad\text{for every }0\le t\le L,
+\]
+then the orbit of $N$ is bounded.
+\end{theorem}
+\begin{proof}
+Assume unboundedness. Repeat the proof of Corollary~\ref{cor:poly} at the specified $L$. It forces $L+1\le C N^{6a}$, contrary to the horizon hypothesis.
+\end{proof}
+This is a finite exact-arithmetic certificate, though the sufficient horizon can be very large. It does not establish that every seed has a certificate. It does not identify the eventual cycle or prove that it is the trivial one. No runtime or computational verification-record claim is made.
+
+\subsection*{Additional formal declarations}
+The extension is in \texttt{lean/Collatz/DriftEscape.lean}. The exact sixth-power forms use only natural-number arithmetic after importing the earlier correction result.
+\begin{center}\small
+\begin{tabular}{lp{9.6cm}}
+\toprule
+Result&Declaration in namespace \texttt{Collatz}\\
+\midrule
+Theorem~\ref{thm:escape}&\texttt{unbounded\_prefix\_drift\_escape}\\
+Theorem~\ref{thm:finitecert}&\texttt{finite\_drift\_certificate\_bounds\_orbit}\\
+Corollary~\ref{cor:poly}&\texttt{bounded\_orbit\_of\_subcritical\_polynomial\_drift}\\
+Bounded $M_t$&\texttt{bounded\_orbit\_of\_bounded\_drift}\\
+\bottomrule
+\end{tabular}\end{center}
+Rebuild with \texttt{lake build Collatz.DriftEscape} from \texttt{lean/}. The expanded 57-declaration audit includes these four results and reports only standard foundational axioms. The added module contains no \texttt{sorry}, new axiom, or \texttt{native\_decide}. As before, this is selective compilation and axiom inspection, not independent kernel replay.
+
+\subsection*{What remains toward Collatz}
+This extension turns the sixth-root estimate into an actual exclusion of a class of unbounded orbits. It still permits multiplicative drift whose running maximum grows as fast as or faster than the threshold. In particular, excluding bounded drift is not the same as excluding all critical-density orbits: a logarithmically growing excess in odd-step count can already produce polynomial drift. The reciprocal-divergent case is therefore constrained further but not eliminated. A proof of universal descent and the nontrivial-cycle exclusion remain missing.
 \end{document}
