@@ -1,0 +1,208 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,tabularx}
+\usepackage{microtype,xcolor,mdframed}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\newmdenv[backgroundcolor=blue!4,linecolor=blue!35,linewidth=0.8pt,
+  skipabove=9pt,skipbelow=9pt,innerleftmargin=10pt,innerrightmargin=10pt]{keyidea}
+\newcommand{\code}[1]{{\small\ttfamily #1}}
+\setlength{\emergencystretch}{1.5em}
+\title{A Collatz Diary That Cannot Happen:\\
+\Large A Friendly Guide to the $1/\sqrt2$ Sturmian Exclusion}
+\author{Companion to ``An Unconditional Sturmian Exclusion\\for the Collatz Map at Slope $1/\sqrt2$''\thanks{Written with Codex (OpenAI). The guide explains the proved result; the companion paper and Lean source give the precise statements and proofs.}}
+\date{September 4, 2026}
+\begin{document}
+\maketitle
+
+\section{The result in ordinary language}
+Take a positive whole number. If it is even, halve it. If it is odd,
+triple it, add one, and halve the result. This combines two steps of the
+usual Collatz rule whenever the number is odd. For example,
+\[
+3\longrightarrow5\longrightarrow8\longrightarrow4
+\longrightarrow2\longrightarrow1\longrightarrow2\longrightarrow1\longrightarrow\cdots.
+\]
+Keep a diary: write $1$ when the current number is odd and $0$ when it is
+even. The diary above begins $11000101\ldots$.
+
+Our new result rules out a different family of infinite diaries. Imagine
+walking along a number line in steps of length
+\[
+\alpha=\frac1{\sqrt2}\approx0.70710678.
+\]
+Choose any starting position $\rho$. At each step, write $1$ if you cross
+into the next unit interval and $0$ if you remain in the same one. Since
+the step is between zero and one, you never cross more than one boundary.
+Starting at zero, this diary begins
+\[
+\underbrace{0\ 1\ 1\ 0\ 1\ 1\ 0\ 1\ 1\ 1\ 0\ 1\ 1\ 0\ 1\ 1\ 1\ 0\ 1\ 1}_{\text{first twenty letters}}\ \cdots.
+\]
+These are called \emph{mechanical words}; at an irrational step length
+they are examples of Sturmian words. The starting position $\rho$ is the
+\emph{intercept}. It changes the diary, but not the step length.
+
+\begin{keyidea}
+\textbf{What has been proved.} No whole-number Collatz orbit has any of
+these infinite diaries, whatever intercept you choose. An orbit cannot
+acquire one after an arbitrary finite beginning either. Lean has checked
+the proof, including the approximation and size estimates.
+\end{keyidea}
+This excludes a particular structured family. It does not prove that
+every Collatz orbit reaches $1$.
+
+\newpage
+\section{Why this family was worth attacking}
+The fraction of ones in these diaries approaches $1/\sqrt2$, or about
+$70.7\%$. In a rough multiplication-only picture, an odd shortcut step
+contributes a factor of $3/2$ and an even step a factor of $1/2$. Over
+$t$ steps containing $j$ ones, the multiplier is $3^j/2^t$. It changes
+from shrinking to growing around $j/t=\log2/\log3\approx63.1\%$.
+
+Our family is above that threshold. The usual shrinking intuition does
+not rule it out. The proof must use the order of the zeros and ones,
+and it must also keep the positive correction caused by adding one.
+We do not assume that every possible runaway orbit has a fixed density
+gap above the threshold.
+
+\section{Matching diary pages force arithmetic agreement}
+There is an exact fact behind the argument: two whole numbers with the
+same first $m$ diary entries differ by a multiple of $2^m$.
+For instance,
+\begin{center}
+\begin{tabular}{c@{\qquad}cccc}
+\toprule
+Start & Step 0 & Step 1 & Step 2 & Step 3\\
+\midrule
+$5$ & $5$ & $8$ & $4$ & $2$\\
+$13$ & $13$ & $20$ & $10$ & $5$\\
+\midrule
+First three parities & $1$ & $0$ & $0$ & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+The first three diary entries agree, and $13-5=8=2^3$.
+For distinct starts, agreement on a very long diary prefix requires a
+very large difference between the starts.
+
+Now apply this fact to two places in \emph{one} orbit. If the diary
+repeats a block of length $q$ for a long stretch, the number at the start
+of the stretch and the number $q$ steps later have many matching diary
+entries. Either those two numbers are equal, making the future orbit
+periodic, or the matching stretch forces a large arithmetic difference.
+
+\begin{keyidea}
+\textbf{The mechanism.} Find a long repeated stretch, make sure it appears
+early enough, and compare two bounds: how large the matching diary says
+the orbit must be, and how large the Collatz rule allows it to be.
+\end{keyidea}
+The words here never settle into a repeating pattern: their limiting
+fraction of ones is irrational, whereas an eventually repeating diary
+would have a rational limiting fraction. They nevertheless contain
+long finite repetitions. The location of those repetitions matters:
+a repetition found much later in the diary may give the orbit too much
+time to grow. That is why the proof needs quantitative approximation.
+
+\newpage
+\section{A simple recurrence locates the repetitions}
+The fractions
+\[
+\frac23,\quad\frac{12}{17},\quad\frac{70}{99},\quad
+\frac{408}{577},\quad\ldots
+\]
+approach $1/\sqrt2$ from below. Their numerators $p$ and denominators $q$
+come from the integer rule
+\[
+(q,p)\longmapsto(3q+4p,\ 2q+3p),\qquad(q,p)=(3,2)\text{ initially}.
+\]
+Every pair satisfies $q^2-2p^2=1$. Thus $q$ steps of the number-line walk
+almost equal the whole number $p$, with a small positive leftover
+$\delta=q/\sqrt2-p$.
+
+Looking only at fractional parts turns the number line into a circle.
+Shifting the diary by $q$ steps moves the fractional position by
+$\delta$. Most positions retain the same letter. Changes occur only
+near the boundary, in a short interval of length $\delta$. We call
+arrivals in that interval \emph{visits}.
+
+The proof establishes two complementary facts: visits cannot occur too
+close together, and one cannot wait too long for the next visit.
+Together they locate a long stretch between visits, which produces the
+repeated diary block.
+
+\begin{center}
+\begin{tabular}{rrrr}
+\toprule
+Period $q$ & Numerator $p$ & Separation $Q$ & Window $G$\\
+\midrule
+3 & 2 & 7 & 17\\
+17 & 12 & 41 & 99\\
+99 & 70 & 239 & 577\\
+577 & 408 & 1393 & 3363\\
+\bottomrule
+\end{tabular}
+\end{center}
+Here visits are at least $Q$ steps apart, and every window of $G$ steps
+contains a visit. These statements hold for \emph{every} intercept.
+The table shows the first few levels; Lean proves the recurrence and
+its consequences for all levels.
+
+\subsection*{The useful simplification}
+The earlier plan called for the full three-distance theorem about
+rotations. We found that a slightly larger rational grid is enough.
+An elementary integer identity says the grid reaches every grid position.
+A bound on the approximation error then guarantees a visit to the short
+interval. The larger window costs something in the size estimate, but
+there is still enough room for the contradiction. This removes a major
+formalization dependency from this particular case.
+
+\newpage
+\section{Why the two bounds eventually clash}
+Fix any proposed starting number $N$, however large. The repetition
+argument forces a minimum size for certain orbit values. The exact
+Collatz formula gives an upper bound for the same values. Combining
+these estimates, the proof needs to choose a sufficiently large
+recurrence denominator $q$ so that
+\[
+24(3N+21q+1)\left(\frac{a^6}{128}\right)^q<1,
+\qquad a=3^{1/\sqrt2}.
+\]
+The constants are conservative bounds, not numerical guesses. The
+important fact is $a<20/9$, and consequently $a^6<128$. So the fraction
+inside the parentheses is strictly less than one.
+
+The factor $3N+21q+1$ grows only linearly with $q$. The powered fraction
+shrinks geometrically. For each fixed $N$, the shrinking factor eventually
+wins. The recurrence supplies arbitrarily large $q$, so a suitable level
+always exists. At that level the two orbit-size bounds contradict each
+other. No candidate $N$ can keep the proposed infinite diary.
+
+\section{What Lean checked, and what it did not claim}
+Lean checked the integer recurrence, its approximation properties, the
+visit argument for every intercept, the orbit estimates, and the final
+limit argument. The theorem does not assume that the three-distance
+theorem has been formalized, that a finite search has covered all starts,
+or that an unproved statement about Collatz is available as an axiom.
+Its dependencies are Lean's three standard foundational axioms.
+
+\begin{keyidea}
+\textbf{The remaining gap.} We have crossed one whole family off the list
+of possible diaries. We have not shown that every hypothetical
+counterexample must keep a diary in that family. Other Sturmian slopes,
+less structured itineraries, and the general nontrivial-cycle problem
+remain open.
+\end{keyidea}
+Related work from the same pass gives exact formulas for swapping nearby
+diary entries and for organizing finite survivor sets. The paper records
+these as tools, not as a claim that every orbit is now covered. It also
+corrects an experimental size estimate that had omitted the positive
+correction from Collatz's ``add one'' step.
+
+\subsection*{Where to read the proof}
+The technical companion is \code{paper/silver.pdf}; its editable source is
+\code{paper/silver.tex}. The headline Lean theorem is
+\code{Collatz.Silver.no\_\allowbreak{}itinerary}, in
+\code{lean/Collatz/SturmianSilver.lean}. The ongoing research ledger is
+\code{analysis/RESEARCH\_\allowbreak{}STATUS.md}. The new result is proved in the
+repository; no claim that it is the first such result in the literature
+is made here.
+\end{document}

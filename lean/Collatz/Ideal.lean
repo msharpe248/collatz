@@ -11,9 +11,10 @@
 
       c_T(n) := d_T / 3^{j_T}   ∈ ℝ,   c_T ≥ 0,  c_T increasing in T.
 
-  In the supercritical band (odd density above log 2/log 3 — exactly
-  where divergent orbits must live, `density_floor`) the sequence c_T
-  is BOUNDED, hence converges to c_∞(n).  Passing to the limit in the
+  Under the explicit hypothesis that the sequence c_T is BOUNDED,
+  it converges to c_∞(n). A strict uniform asymptotic density gap above
+  log 2/log 3 suffices for boundedness; `density_floor` does not supply
+  that gap for every divergent orbit. Passing to the limit in the
   cocycle law gives the TRACKING IDENTITY
 
       n_T = (n + c_∞(n)) · 3^{j_T} / 2^T  −  c_∞(n_T)          (∗)
@@ -25,7 +26,7 @@
   WHY THIS IS A NEW HANDLE. (∗) is an identity between an integer
   (n_T) and a real number; reading it mod 1,
 
-      frac( θ · 3^{j_T} / 2^T ) = frac( −c_∞(n_T) ).
+      frac( θ · 3^{j_T} / 2^T ) = frac( c_∞(n_T) ).
 
   The left side is a ×3 / ×½ walk of ONE real number driven by the
   itinerary; the right side is a functional of the itinerary's tail.
@@ -126,9 +127,8 @@ theorem tracking_finite (T S n : ℕ) :
 /-! ## The limit: supercritical orbits -/
 
 /-- An orbit is *supercritical* (in the sense used here) when its partial
-    ideal constants are bounded. In the supercritical density band
-    (2^L < 3^a along blocks) this holds automatically; it is exactly the
-    band where divergent orbits live (`density_floor`). -/
+    ideal constants are bounded. This is an additional summability
+    hypothesis, not a consequence of the critical density floor alone. -/
 def Supercritical (n : ℕ) : Prop :=
   BddAbove (Set.range fun T => idealC T n)
 

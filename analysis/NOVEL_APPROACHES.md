@@ -344,8 +344,9 @@ kernel pow recursion aborted).
 **N5. Geometric-ideal tracking — FORMAL (2026-08-28, lean/Collatz/Ideal.lean, axiom-free).**
 Real partial ideal constant c_T(n) = d_T/3^{j_T} ≥ 0, increasing
 (`idealC_mono`), real cocycle law (`idealC_add`). When bounded
-(`Supercritical` — automatic in the band 2^L < 3^a where divergent
-orbits live) it converges to c_∞(n) and the TRACKING IDENTITY holds
+(`Supercritical` — an additional boundedness hypothesis; a uniform strict
+density gap suffices, but the divergent-orbit density floor does not)
+it converges to c_∞(n) and the TRACKING IDENTITY holds
 for every T (`tracking`):
     n_T = (n + c_∞(n))·3^{j_T}/2^T − c_∞(n_T).
 Consequences: n_T ≤ θ·3^{j_T}/2^T always (`orbit_le_ideal`); under a

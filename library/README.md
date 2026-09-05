@@ -18,6 +18,7 @@ ways by symlinks.
 | `by-approach/<...>/` | by mathematical approach: `density-lower-bounds`, `density-and-stopping-times`, `cycles-diophantine`, `probabilistic-ergodic`, `2-adic-conjugacy`, `sufficient-sets`, `foundations-and-maps` |
 | `manifest.json` | full metadata: paper, contributor, AI assistance, status, local path |
 | `refresh.py` | re-harvests ccchallenge.org and reports entries missing here |
+| `THEOREM_AUDIT.md` | theorem-level trust boundaries and links to reproducible axiom/provenance output |
 
 Notes: submodules pin the commit that was current when added — `git submodule
 update --remote` advances them. One formalization (Tao 2022 on

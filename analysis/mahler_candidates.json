@@ -1,0 +1,134 @@
+[
+  {
+    "zero_image": [
+      0,
+      1,
+      1
+    ],
+    "one_image": [
+      1,
+      0,
+      1
+    ],
+    "length": 3,
+    "weight": 2,
+    "A_coefficients": [
+      0,
+      1,
+      1
+    ],
+    "B_coefficients": [
+      1,
+      -1,
+      0
+    ],
+    "correction_zero": 10,
+    "correction_one": 7,
+    "coefficients_checked": 512,
+    "status": "finite exact search; infinite Lean certificate not yet supplied",
+    "pade_candidates": [
+      {
+        "degree": 2,
+        "p0": [
+          1,
+          0,
+          0
+        ],
+        "p1": [
+          -1,
+          0,
+          1
+        ],
+        "observed_order": 5,
+        "leading_coefficient": -1,
+        "growth_left": 1073741824,
+        "growth_right": 43046721
+      },
+      {
+        "degree": 3,
+        "p0": [
+          1,
+          0,
+          0,
+          -1
+        ],
+        "p1": [
+          -1,
+          0,
+          1,
+          1
+        ],
+        "observed_order": 7,
+        "leading_coefficient": 2,
+        "growth_left": 4398046511104,
+        "growth_right": 3486784401
+      }
+    ]
+  },
+  {
+    "zero_image": [
+      0,
+      1,
+      1
+    ],
+    "one_image": [
+      1,
+      1,
+      0
+    ],
+    "length": 3,
+    "weight": 2,
+    "A_coefficients": [
+      0,
+      1,
+      1
+    ],
+    "B_coefficients": [
+      1,
+      0,
+      -1
+    ],
+    "correction_zero": 10,
+    "correction_one": 5,
+    "coefficients_checked": 512,
+    "status": "finite exact search; infinite Lean certificate not yet supplied",
+    "pade_candidates": [
+      {
+        "degree": 2,
+        "p0": [
+          1,
+          0,
+          -2
+        ],
+        "p1": [
+          -1,
+          1,
+          1
+        ],
+        "observed_order": 5,
+        "leading_coefficient": 2,
+        "growth_left": 1073741824,
+        "growth_right": 387420489
+      },
+      {
+        "degree": 3,
+        "p0": [
+          2,
+          1,
+          0,
+          2
+        ],
+        "p1": [
+          -2,
+          1,
+          -1,
+          1
+        ],
+        "observed_order": 7,
+        "leading_coefficient": -1,
+        "growth_left": 4398046511104,
+        "growth_right": 31381059609
+      }
+    ]
+  }
+]

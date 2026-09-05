@@ -1,0 +1,476 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs,tabularx,array}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\fr}[1]{\{#1\}}
+\newcommand{\code}[1]{{\small\ttfamily #1}}
+\setlength{\emergencystretch}{1.5em}
+\title{An Unconditional Sturmian Exclusion\\for the Collatz Map at Slope $1/\sqrt2$}
+\author{M.~Sharpe\thanks{The mathematics, Lean formalization, and exposition were developed with Codex (OpenAI), building on the author's existing Collatz repository. The Collatz conjecture remains open. No claim of priority in the mathematical literature is made.}}
+\date{September 4, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Let $T(n)=n/2$ for even $n$ and $T(n)=(3n+1)/2$ for odd $n$.
+We prove that no natural number has the mechanical parity itinerary
+$\lfloor(t+1)\alpha+\rho\rfloor-\lfloor t\alpha+\rho\rfloor$ with
+$\alpha=1/\sqrt2$, for any real intercept $\rho$. The same exclusion
+holds after every finite orbit prefix. This is an unconditional instance
+of the repository's previously conditional Sturmian level theorem.
+A Pell recurrence supplies determinant-one bracketing pairs; an elementary
+rational-grid argument supplies uniform visits to the relevant rotation
+interval, using a slightly larger grid than the one suggested by the
+three-distance theorem. The remaining size comparison reduces to a linear
+factor times a geometric sequence tending to zero. All approximation,
+coverage, and size hypotheses are discharged in Lean~4. The proof depends
+only on Lean's standard foundational axioms and contains no \code{sorry},
+\code{native\_\allowbreak{}decide}, or cited mathematical axiom. We also record the
+finite-word and survivor-cylinder identities formalized alongside this
+result, distinguishing these tools from any unproved universal coverage
+principle.
+\end{abstract}
+
+\section{Statement and scope}
+We use the shortcut, or Terras, map
+\[
+T(n)=\begin{cases}n/2,&n\equiv0\pmod2,\\(3n+1)/2,&n\equiv1\pmod2,\end{cases}
+\qquad n\in\N=\{0,1,2,\ldots\}.
+\]
+For positive starts it compresses the mandatory halving after an odd step
+of the ordinary Collatz map. Write $n_t=T^t(n)$ and $w_t(n)=n_t\bmod2$.
+For real $\alpha,\rho$, define the lower mechanical word
+\begin{equation}\label{eq:mechanical}
+w_{\alpha,\rho}(t)=\lfloor(t+1)\alpha+\rho\rfloor-\lfloor t\alpha+\rho\rfloor.
+\end{equation}
+When $0<\alpha<1$, its letters are zero or one. Telescoping gives
+$\sum_{t<s}w_{\alpha,\rho}(t)=\lfloor s\alpha+\rho\rfloor-\lfloor\rho\rfloor$;
+in particular its limiting density of ones is $\alpha$.
+
+\begin{theorem}\label{thm:main}
+Set $\alpha=\sqrt2/2$. For every $N\in\N$ and $\rho\in\R$, there exists
+$t\in\N$ such that $T^t(N)\bmod2\ne w_{\alpha,\rho}(t)$.
+\end{theorem}
+\begin{corollary}\label{cor:tails}
+For every $N,s\in\N$ and $\rho\in\R$, the equality
+$T^{s+t}(N)\bmod2=w_{\alpha,\rho}(t)$ cannot hold for all $t\in\N$.
+\end{corollary}
+\begin{proof}
+Apply Theorem~\ref{thm:main} to the natural number $T^s(N)$.
+\end{proof}
+The theorem is \code{Collatz.Silver.no\_\allowbreak{}itinerary}; the corollary is
+\code{Collatz.Silver.no\_\allowbreak{}eventual\_\allowbreak{}itinerary}. The formal slope is
+\code{Real.sqrt 2 / 2}. No assumption of divergence is needed in either
+statement. The inequality $\alpha>2/3>\log 2/\log 3$ puts this family above
+the critical density, so the result is not a subcritical drift argument.
+
+The previous work \cite{rung1} supplied a conditional Sturmian level
+theorem and a proposed continued-fraction route to its hypotheses.
+Here we prove a specific unconditional case and two reusable arithmetic
+inputs. We do not exclude every Sturmian slope, classify every possible
+counterexample itinerary, or eliminate all nontrivial cycles.
+
+\section{The orbit-theoretic reduction}
+We recall the formal ingredients used below, including the correction
+term that must be retained when estimating a shifted orbit.
+Let $j_s(n)=\sum_{t<s}w_t(n)$. There is a nonnegative integer $d_s(n)$ with
+\begin{equation}\label{eq:affine}
+2^sT^s(n)=3^{j_s(n)}n+d_s(n),\qquad
+ d_s(n)=\sum_{i<s}w_i(n)\,2^i3^{j_s(n)-j_{i+1}(n)}.
+\end{equation}
+These are \code{terras\_\allowbreak{}exact\_\allowbreak{}form} and \code{dcoef\_\allowbreak{}closed}
+\cite{shadow,ladder}. The parity-vector bijection states that two starts
+have the same first $m$ parities if and only if they are congruent modulo
+$2^m$. Its two directions follow inductively from the doubling identities
+for $T$ and the invertibility of $3$ modulo powers of $2$.
+
+\begin{lemma}[Prefix-power bound]\label{lem:power}
+Suppose the first $M$ parity letters of $n$ are $\ell$-periodic, where
+$M\ge\ell$. If $T^\ell(n)\ne n$, then
+\begin{equation}\label{eq:power}
+2^M\le 2^\ell n+3^o(n+2^\ell),\qquad o=j_\ell(n).
+\end{equation}
+\end{lemma}
+\begin{proof}
+The starts $n$ and $T^\ell(n)$ share their first $M-\ell$ parities.
+Their nonzero difference is divisible by $2^{M-\ell}$, so
+$2^{M-\ell}\le\max(n,T^\ell(n))$. The established integer growth bound
+$2^\ell T^\ell(n)\le3^o(n+2^\ell)$, together with
+$\max(n,T^\ell(n))\le n+T^\ell(n)$, gives \eqref{eq:power}.
+This is \code{prefix\_\allowbreak{}power\_\allowbreak{}bound} in \cite{rung1}.
+\end{proof}
+
+\begin{lemma}[Mechanical-word tail bound]\label{lem:tail}
+Suppose $N$ has itinerary \eqref{eq:mechanical}, with $0\le\alpha$ and
+$2\le3^\alpha$. Then
+\begin{equation}\label{eq:tail}
+2^sT^s(N)\le3^{s\alpha}(3N+3s)\qquad(s\in\N).
+\end{equation}
+\end{lemma}
+\begin{proof}
+Every window of length $r$ contains at most $r\alpha+1$ ones. Thus
+$3^{j_s(N)}\le3\cdot3^{s\alpha}$. In the sum in
+\eqref{eq:affine}, each term is at most $3\cdot3^{s\alpha}$: use
+$2^i\le3^{i\alpha}$ and the window bound on ones following position $i$.
+Hence $d_s(N)\le3s\cdot3^{s\alpha}$, proving \eqref{eq:tail}.
+The formal declaration is \code{tail\_\allowbreak{}le\_\allowbreak{}of\_\allowbreak{}itin}.
+\end{proof}
+
+For an approximation $q\alpha=p+\delta$, where $q\in\N$, $p\in\Z$,
+and $0<\delta<1$, call $n$ a \emph{visit} if
+\[
+\fr{n\alpha+\rho}\ge1-\delta.
+\]
+Here $\fr{x}=x-\lfloor x\rfloor$ is the fractional part. If $V(n)$ is the
+indicator of a visit, subtraction of the two floor identities gives
+\begin{equation}\label{eq:shift}
+w_{\alpha,\rho}(n+q)-w_{\alpha,\rho}(n)=V(n+1)-V(n).
+\end{equation}
+
+\begin{proposition}[Level theorem with an endpoint test]\label{prop:level}
+Suppose $0\le\alpha$, $2\le3^\alpha$, $q\alpha=p+\delta$ with
+$0<\delta<1$, and $Q\ge3$. Assume
+\begin{align}
+&|m\alpha-r|\ge\delta
+ &&(0<m<Q,\ r\in\Z),\label{eq:sep}\\
+&\text{every window }[a,a+G)\text{ contains a visit},\label{eq:vis}\\
+&3^{(q+G)\alpha+1}(3N+3G+1)<2^{Q-3+G}.\label{eq:endpoint}
+\end{align}
+Then $N$ does not have itinerary $w_{\alpha,\rho}$.
+\end{proposition}
+\begin{proof}
+Two visits are at least $Q$ apart: otherwise their fractional parts,
+both in the half-open interval $[1-\delta,1)$, differ by less than
+$\delta$, contradicting \eqref{eq:sep}. Let $n_0<G$ be the first visit
+and put $s=n_0+1\le G$. There are no visits strictly between $n_0$ and
+$n_0+Q$. Equation~\eqref{eq:shift} therefore makes the tail beginning at
+$s$ periodic with period $q$ on its first $q+Q-2$ letters.
+
+This tail is not a $q$-periodic orbit. If it were, \eqref{eq:shift} would
+make $V(n)$ constant for $n\ge s$. Coverage forces that constant to be
+one; then adjacent visits contradict separation. Apply
+Lemma~\ref{lem:power} to $m=T^s(N)$, using $o\le q\alpha+1$ and
+$2^q\le3^{q\alpha}$. A convenient weakening is
+\[
+2^{q+Q-2}\le2^{q+1}3^{q\alpha+1}(m+1).
+\]
+After multiplying by $2^s$ and applying Lemma~\ref{lem:tail} and
+$2^s\le3^{s\alpha}$, cancellation gives
+\begin{equation}\label{eq:forced}
+2^{Q-3+s}\le3^{(q+s)\alpha+1}(3N+3s+1).
+\end{equation}
+However the ratio of the right side to the left side in
+\eqref{eq:forced} is nondecreasing in $s$: up to a positive constant it
+is $(3^\alpha/2)^s(3N+3s+1)$. Thus \eqref{eq:endpoint} implies that this
+ratio is less than one for every $s\le G$, a contradiction.
+\end{proof}
+The last monotonicity step is \code{sturmian\_\allowbreak{}size\_\allowbreak{}at\_\allowbreak{}endpoint}.
+The proposition is \code{sturmian\_\allowbreak{}level\_\allowbreak{}endpoint}, built on the
+existing \code{sturmian\_\allowbreak{}level}.
+
+\section{Two elementary approximation lemmas}
+The following inputs replace the general continued-fraction machinery for
+our chosen recurrence. They are proved independently of the Collatz map.
+
+\begin{lemma}[Separation from a bracketing pair]\label{lem:neighbors}
+Let $q,Q>0$ be integers and $p,P\in\Z$. Suppose
+\[
+q\alpha=p+\delta,\qquad Q\alpha=P-\varepsilon,\qquad
+\delta,\varepsilon>0,\qquad Pq-pQ=1.
+\]
+Then \eqref{eq:sep} holds.
+\end{lemma}
+\begin{proof}
+Given $0<m<Q$ and $r\in\Z$, set
+$A=Pm-Qr$ and $B=qr-pm$. The determinant identity gives
+\[
+m=Aq+BQ,\qquad r=Ap+BP,\qquad m\alpha-r=A\delta-B\varepsilon.
+\]
+If $A\le0$, positivity of $m$ forces $B\ge1$. Moreover $A=0$ would give
+$m=BQ\ge Q$, so $A\le-1$ and the error is at most $-\delta$.
+If $A>0$, then $A\ge1$, while $m<Q$ forces $B\le0$; the error is at
+least $\delta$. These cases prove the assertion.
+\end{proof}
+
+\begin{lemma}[Visits from a rational grid]\label{lem:grid}
+Let $G>0$ be an integer and $R,U,V\in\Z$. Suppose
+\begin{equation}\label{eq:griddata}
+UR+VG=1,\qquad G\alpha=R+e,\qquad e\ge0,
+\qquad 0<\delta<1,\qquad 1+Ge\le G\delta.
+\end{equation}
+Then for every real $\rho$, each window $[a,a+G)$ contains a visit.
+\end{lemma}
+\begin{proof}
+First take $a=0$ and let $z=\lceil G(1-\delta-\rho)\rceil$.
+Bezout's identity gives an integer $0\le n<G$ and $h\in\Z$ with
+$nR=z+hG$: for example, choose $n\equiv zU\pmod G$.
+Set $y=n\alpha+\rho-h$. Then
+\[
+Gy=z+G\rho+ne.
+\]
+The ceiling bounds and $0\le ne\le Ge$ imply
+\[
+G(1-\delta)\le Gy<G(1-\delta)+1+Ge\le G.
+\]
+Consequently $1-\delta\le y<1$, so $y=\fr{n\alpha+\rho}$ is a visit.
+For general $a$, apply this argument with intercept $a\alpha+\rho$ and
+then translate the index by $a$.
+\end{proof}
+The formal declarations are \code{sturmian\_\allowbreak{}separation\_\allowbreak{}of\_\allowbreak{}neighbors}
+and \code{rotation\_\allowbreak{}window\_\allowbreak{}of\_\allowbreak{}grid}. The grid lemma handles all real
+intercepts and the half-open interval endpoints directly. A larger $G$
+can make the width condition easier to prove, at the expense of the size
+condition in Proposition~\ref{prop:level}.
+
+\section{Pell certificates for $\alpha=\sqrt2/2$}
+Define natural-number pairs by
+\begin{equation}\label{eq:pellrec}
+(q_0,p_0)=(3,2),\qquad
+q_{k+1}=3q_k+4p_k,\qquad p_{k+1}=2q_k+3p_k.
+\end{equation}
+Induction proves
+\begin{equation}\label{eq:pell}
+q_k^2-2p_k^2=1,\quad 3\le q_k,\quad 1\le p_k,\quad
+q_k\le2p_k,\quad p_k\le q_k,\quad k+3\le q_k.
+\end{equation}
+Fix $k$ and abbreviate $q=q_k$, $p=p_k$, $\delta=q\alpha-p$.
+Since $\alpha^2=1/2$, the Pell identity gives
+\begin{equation}\label{eq:deltaproduct}
+\delta(q\alpha+p)=\frac12.
+\end{equation}
+Thus $0<\delta<1$. We shall use
+\[
+\frac23<\alpha<\frac57,
+\]
+which follows by squaring positive quantities and comparing with $1/2$.
+
+\subsection{Separation}
+Put $Q=q+2p$ and $P=q+p$. Direct calculation gives
+\[
+Pq-pQ=1,\qquad Q\alpha=P-\varepsilon,
+\qquad \varepsilon=(2\alpha-1)\delta>0.
+\]
+Lemma~\ref{lem:neighbors} supplies the separation bound through $Q-1$.
+
+\subsection{Coverage}
+Use the next lower approximation as the grid:
+\[
+G=q_{k+1}=3q+4p=2Q+q,\qquad R=p_{k+1}=2q+3p.
+\]
+Its error and Bezout certificate are
+\begin{equation}\label{eq:next}
+e=G\alpha-R=(3-4\alpha)\delta>0,
+\qquad -QR+PG=1.
+\end{equation}
+The required width condition follows from the exact identity
+\begin{equation}\label{eq:width}
+G(\delta-e)-1
+=\delta\bigl((10\alpha-6)q+(16\alpha-10)p\bigr)\ge0.
+\end{equation}
+To verify it, substitute \eqref{eq:next} and replace $1$ using twice
+\eqref{eq:deltaproduct}. The last inequality follows from
+$\alpha>2/3$ and nonnegativity of $q,p,\delta$.
+Lemma~\ref{lem:grid}, with $U=-Q$ and $V=P$, proves uniform coverage.
+
+\begin{center}
+\begin{tabular}{rrrrr}
+\toprule
+$k$ & $q_k$ & $p_k$ & $Q=q_k+2p_k$ & $G=q_{k+1}$\\
+\midrule
+0 & 3 & 2 & 7 & 17\\
+1 & 17 & 12 & 41 & 99\\
+2 & 99 & 70 & 239 & 577\\
+3 & 577 & 408 & 1393 & 3363\\
+\bottomrule
+\end{tabular}
+\end{center}
+Unlike a finite verification of candidate starting values, each row
+supplies arithmetic statements quantified over every intercept. The
+recurrence and its invariants provide these certificates for all levels.
+
+\section{The size estimate and completion of the proof}
+Put $a=3^\alpha$. We have $a\ge2$. A useful strict rational upper bound is
+\begin{equation}\label{eq:abounds}
+a<\frac{20}{9},\qquad a^2\le8,\qquad a^6<128.
+\end{equation}
+Indeed $a^7=3^{7\alpha}<3^5=243<(20/9)^7$, and the remaining comparisons
+are rational arithmetic. The formal proof uses these inequalities,
+not floating-point logarithms.
+
+From \eqref{eq:pell}, $Q\ge2q$ and $G\le7q$. Let $d=Q-2q\ge0$. Then
+\begin{equation}\label{eq:exponents}
+q+G=6q+2d,\qquad Q+G=7q+3d.
+\end{equation}
+For a fixed candidate start $N$, multiply \eqref{eq:endpoint} by $8$.
+As $Q\ge3$, it becomes
+\begin{equation}\label{eq:multiplied}
+24a^{q+G}(3N+3G+1)<2^{Q+G}.
+\end{equation}
+Using \eqref{eq:abounds} and \eqref{eq:exponents}, its left side is at most
+\[
+24(3N+21q+1)(a^6)^q8^d,
+\]
+whereas its right side is $128^q8^d$. Thus it suffices that
+\begin{equation}\label{eq:scalar}
+24(3N+21q+1)\left(\frac{a^6}{128}\right)^q<1.
+\end{equation}
+Since $0<a^6/128<1$, a geometric decay dominates the linear factor.
+For each $N$, inequality~\eqref{eq:scalar} holds for all sufficiently
+large $q$. The lower bound $k+3\le q_k$ ensures a suitable level exists.
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Fix $N$ and $\rho$. Choose a level large enough for \eqref{eq:scalar}.
+The Pell certificates supply \eqref{eq:sep}, the rational grid supplies
+\eqref{eq:vis}, and the preceding estimate supplies
+\eqref{eq:endpoint}. Proposition~\ref{prop:level} gives the contradiction.
+\end{proof}
+The only limit theorem needed in the final step is Mathlib's proved
+statement that $n^j c^n\to0$ for $|c|<1$, here for $j=0,1$.
+The size estimate is independent of $\rho$, while the grid argument
+covers every $\rho$.
+
+\section{Formalization and verification}
+The new proof is organized as follows. All paths in the table are
+relative to \code{lean/Collatz/}.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+Module & Mathematical responsibility\\
+\midrule
+\code{SturmianEndpoint.lean} & Reduce all size inequalities to the endpoint.\\
+\code{SturmianApprox.lean} & Determinant-one separation and Bezout-grid coverage.\\
+\code{SturmianSilver.lean} & Pell recurrence, slope and width bounds, eventual size estimate, final exclusion.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+They use the existing parity, shadow, prefix-power, and Sturmian modules.
+The main declaration has the type
+\begin{quote}\small\ttfamily
+Collatz.Silver.no\_\allowbreak{}itinerary (N : $\N$) ($\rho$ : $\R$) :\\
+\hspace*{1em}$\neg$ Collatz.HasItin Collatz.Silver.alpha $\rho$ N
+\end{quote}
+Here \code{HasItin} means equality of every parity letter with
+\eqref{eq:mechanical}; it does not include an additional hypothesis
+about approximation, density, or divergence.
+
+The selected modules were rebuilt with Lean
+\code{v4.27.0-rc1}. Querying \code{\#print axioms} for both headline
+declarations returned exactly \code{propext}, \code{Classical.choice},
+and \code{Quot.sound}. These are the standard foundational axioms used
+by Mathlib, not assumptions of unproved Collatz statements. The
+reproducible audit script \code{analysis/audit\_\allowbreak{}theorems.py} records
+printed types, dependencies, and project provenance. This verification
+was not an independent kernel replay of every imported library or a
+fresh rebuild of the large KL certificates. The finite experiments are
+not premises of the theorem.
+
+\section{Additional formal arithmetic tools}\label{sec:tools}
+The same research pass produced the following reusable statements. They
+are included to document the associated results without presenting them
+as a proof of universal itinerary coverage.
+
+\subsection{Adjacent swaps and compensated differences}
+For a Boolean word $u$, let $|u|$ be its length, $o(u)$ its number of ones,
+and $d(u)$ its affine correction. The concatenation law is
+\[
+d(uv)=3^{o(v)}d(u)+2^{|u|}d(v).
+\]
+Since $d(01)=2$ and $d(10)=1$, it implies the exact identity
+\begin{equation}\label{eq:swap}
+d(u01v)=d(u10v)+2^{|u|}3^{o(v)}.
+\end{equation}
+If equal-length, equal-weight words $u,v$ are realized from starts $x,y$,
+with length $L$ and weight $o$, their endpoints satisfy
+\[
+2^L(y'-x')=3^o(y-x)+d(v)-d(u).
+\]
+When $y'\ne x'$, the compensated integer on the right is nonzero and
+has absolute value at least $2^L$. These are
+\code{WordAffine.adjacent\_\allowbreak{}swap}, \code{compare}, and \code{compare\_\allowbreak{}bound}.
+An actual exclusion still requires an independent upper bound on the
+weighted correction difference. A small number of mismatches alone
+provides no such bound.
+
+\subsection{Height-limited survivor intervals}
+For $r<2^k$ and a nonnegative quotient $h$, every prefix endpoint is
+\begin{equation}\label{eq:cylinder}
+T^i(r+2^kh)=T^i(r)+3^{j_i(r)}2^{k-i}h\qquad(0\le i\le k).
+\end{equation}
+This follows by comparing \eqref{eq:affine} on congruent starts.
+Consequently, the height condition $1\le r+2^kh\le H$ and all prefix
+survival conditions $T^i(r+2^kh)\ge r+2^kh$ are affine inequalities in
+the same integer $h$. Their intersection is a finite integer interval,
+possibly empty. Membership and order convexity are formalized in
+\code{Cylinder.mem\_\allowbreak{}parameters} and \code{parameters\_\allowbreak{}convex};
+\eqref{eq:cylinder} is \code{prefix\_\allowbreak{}transport}.
+This describes finite survivor sets exactly, but does not prove they
+eventually disappear at every height.
+
+\subsection{Initial-height bounds must include the correction}
+For an unbounded orbit with an $\ell$-periodic block of $M$ letters
+starting at time $s$, let $o=j_\ell(T^s(n))$. Multiplying the prefix-power
+bound by $2^s$ and using \eqref{eq:affine} gives
+\begin{equation}\label{eq:seedbound}
+\begin{split}
+2^{M+s}\le{}&(2^\ell+3^o)\bigl(3^{j_s(n)}n+d_s(n)\bigr)\\
+&+3^o2^{\ell+s}.
+\end{split}
+\end{equation}
+This is \code{prefix\_\allowbreak{}power\_\allowbreak{}initial\_\allowbreak{}bound}. It supplies exact finite
+excluded-height certificates for the revised repetition experiment.
+Dropping $d_s(n)$ would be unjustified: $T(3)=5>3\cdot3/2$ already
+contradicts the corresponding drift-only upper bound.
+
+\subsection{A precise bounded-correction hypothesis}
+Define $c_t=d_t(n)/3^{j_t(n)}$. The formal theorem
+\code{supercritical\_\allowbreak{}of\_\allowbreak{}geometric} states that if $C\ge0$, $0\le r<1$,
+and
+\[
+2^t\le Cr^t3^{j_t(n)}\qquad\text{for every }t,
+\]
+then $c_t\le C/(1-r)$ for every $t$. The proof bounds each correction
+increment by $Cr^t$ and sums the geometric series, expressed as a finite
+induction in Lean. This is an explicit sufficient condition. The
+critical density floor alone does not supply it for every hypothetical
+divergent orbit.
+
+\newpage
+\section{What remains open}
+The present theorem rules out one slope with every intercept, and the
+arithmetic lemmas make further instances plausible targets. Other slopes
+need their own certified approximation and size data. The swap identities
+need a genuinely useful bound on accumulated weighted defects. Neither
+these tools nor the exact survivor intervals show that every possible
+counterexample itinerary belongs to an excluded family. Nontrivial cycles
+also remain a separate issue. The formal result is the quantified family
+exclusion in Theorem~\ref{thm:main}, with these limits kept explicit.
+
+\begin{thebibliography}{9}
+\raggedright
+\bibitem{rung1} M.~Sharpe, \emph{Rung One of the Word-Complexity Ladder:
+a Machine-Verified Exclusion of an Automatic Collatz Itinerary by
+Mahler's Method in Degree One}, August 2026.
+Repository file \code{paper/rung1.tex}, especially its prefix-power
+criterion and conditional Sturmian level theorem.
+\bibitem{shadow} M.~Sharpe, companion paper on the 3-adic shadow,
+\code{paper/shadow.tex}; formal development \code{lean/Collatz/Shadow.lean}.
+\bibitem{ladder} M.~Sharpe, companion paper on the word-complexity ladder,
+\code{paper/ladder.tex}; formal development \code{lean/Collatz/Ladder.lean}.
+\bibitem{source} M.~Sharpe, \emph{Collatz at the Critical Line}, source
+repository, \url{https://github.com/msharpe248/collatz}.
+For this result see \code{SturmianSilver.lean} and its supporting modules;
+verification metadata are in \code{analysis/theorem\_\allowbreak{}audit.json}.
+\end{thebibliography}
+\end{document}

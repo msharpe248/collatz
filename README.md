@@ -62,6 +62,14 @@ numerics in [analysis/pade_rung1.py](analysis/pade_rung1.py)). See
 [lean/Collatz/Ladder.lean](lean/Collatz/Ladder.lean), and
 [analysis/RUNG1_ATTACK.md](analysis/RUNG1_ATTACK.md).
 
+**September 2026: an unconditional Sturmian case is now proved in Lean.**
+No natural number has the mechanical parity itinerary of slope **1/√2**,
+for any real intercept, even after a finite orbit prefix. The proof supplies
+all approximation and size obligations using Pell recurrences and a rational
+grid, without assuming the three-distance theorem. See the
+[paper](paper/silver.pdf), [friendly guide](paper/silver_guide.pdf), and
+[SturmianSilver.lean](lean/Collatz/SturmianSilver.lean).
+
 ## The library ([library/](library/))
 
 Every formalization of a Collatz-literature paper known to
@@ -93,13 +101,15 @@ All results depend only on Lean's standard foundations (`propext`,
 | `no_uniform_descent_bound` | For every window B and cutoff N₀, some n ≥ N₀ has no descent within B steps |
 | `uniform_descent_53_false` | The plausible-looking uniform-descent claim `∀ n > 300, ∃ t ≤ 53, collatz_iter t n < n` is false — witness 2^28 − 1 (smallest violator: 447) |
 | `no_finite_certificate` | **The no-go theorem**: no bounded multiplicative potential V(n) = n·W(n) with contraction factor ρ < 1 over a bounded window certifies descent |
-| `no_finite_state_certificate` | Corollary for finite-state observers: no residue-class scheme (any modulus), no finite-automaton potential, can certify descent |
+| `no_finite_state_certificate` | Corollary for finite-state weights: no positive finite-state multiplier can give fixed-factor contraction over a uniformly bounded window |
 
-In words: any argument whose memory of n is a bounded amount of
-information — a residue class, an automaton state, a bounded potential —
-is defeated by n = 2^L − 1, because −1 is a fixed point of the odd
+In words: a positive bounded multiplier, including one selected by a
+residue class or finite automaton state, cannot provide a fixed contraction
+factor over a uniformly bounded window. This certificate family is
+defeated by n = 2^L − 1, because −1 is a fixed point of the odd
 Collatz branch on the 2-adic integers with drift log(3/2) > 0, and
-2^L − 1 imitates it for L steps.
+2^L − 1 imitates it for L steps. Input-dependent unbounded windows and
+unbounded weights are outside this theorem's hypotheses.
 
 ### The density side ([lean/Collatz/Density.lean](lean/Collatz/Density.lean))
 
@@ -115,11 +125,11 @@ for the number of odd iterates among the first T Terras iterates:
 | `early_no_descent_forces_density` | Inside the log₂ n-bit information budget of n, survival forces supercritical density |
 | `collatz_iff_descent` | **The descent reduction**: the Collatz conjecture is *equivalent* to "every n ≥ 2 eventually drops strictly below itself under the Terras map" |
 
-Together the two files pin the conjecture into a corridor, formal at
-both walls: it is *exactly* the claim that no orbit sustains
-supercritical odd density forever (`Density.lean`), and no argument
-that remembers only boundedly much about n can prove that claim
-(`NoGo.lean`).
+Together the two files give an exact reduction to universal descent and
+necessary finite-window density constraints on non-descenders. The no-go
+theorem excludes the bounded-weight, bounded-window contraction family.
+The density bounds do not establish a strict asymptotic gap above the
+critical density for every hypothetical divergent orbit.
 
 ### The cycle side ([lean/Collatz/Cycles.lean](lean/Collatz/Cycles.lean))
 
@@ -242,7 +252,30 @@ For the mechanical word w_n = ⌊(n+1)α+ρ⌋ − ⌊nα+ρ⌋ with 2 ≤ 3^α 
 | `dcoef_le_of_itin` | On such an itinerary the correction term satisfies d_s ≤ 3s·3^{sα} — because 2 ≤ 3^α |
 | `sturmian_level` | **The level theorem**: if in addition every window of length G contains a visit (three-distance theorem, G = q_k + q_{k+1}, taken as a hypothesis) and 2^(Q−3+s) > 3^((q+s)α+1)(3N+3s+1) for all s ≤ G, then N does not have itinerary w |
 
-The size condition holds at level k whenever the partial quotient a_{k+1} exceeds (1+2η)/(1−η), η = α·log₂3 − 1; so, given the two classical Diophantine facts, every Sturmian itinerary whose slope has infinitely many partial quotients ≥ 2 (for α < 0.789), ≥ 3 (α < 0.883), ≥ 4 (α < 0.946) or ≥ 6 (any α < 1) is excluded, at every intercept. Golden-tail slopes (partial quotients eventually 1) are excluded numerically up to α ≈ 0.9 but need the long returns q_k + q_{k+1}, not proved here. The two Diophantine facts are not formalized.
+The paper's asymptotic size argument uses partial quotients a_{k+1}
+exceeding (1+2η)/(1−η), η = α·log₂3 − 1, infinitely often **on positive-error
+convergent levels**. The general continued-fraction family corollary remains
+conditional. Historical golden-tail experiments suggested further exclusions,
+but their drift-only score omitted a correction term. The revised experiment
+uses exact finite-height bounds; it does not prove an all-slopes theorem.
+
+### Unconditional Sturmian exclusion and new arithmetic tools
+
+| Theorem | Statement |
+|---|---|
+| `Silver.no_itinerary`, `Silver.no_eventual_itinerary` | No natural-number orbit has, or eventually acquires, the mechanical itinerary of slope √2/2, for any real intercept |
+| `sturmian_size_at_endpoint` | Above the critical line, the size inequality at s = G implies every earlier one |
+| `sturmian_separation_of_neighbors` | A determinant-one bracketing pair gives the level theorem's separation hypothesis |
+| `rotation_window_of_grid` | Bezout and an explicit approximation-width inequality give a visit in every window |
+| `WordAffine.adjacent_swap`, `compare_bound` | Exact weighted correction for swapping adjacent 01 and 10; a divisibility/height obstruction for equal-weight realized blocks |
+| `Cylinder.prefix_transport`, `mem_parameters`, `parameters_convex` | All prefix endpoints are affine in one quotient; height-limited survivor quotients form an exact finite interval |
+| `prefix_power_initial_bound` | Repetition bounds expressed at the original seed, including the positive affine correction |
+| `supercritical_of_geometric` | A summable inverse-drift bound implies bounded ideal correction; this is an explicit extra hypothesis |
+
+See [RESEARCH_STATUS.md](analysis/RESEARCH_STATUS.md) for completed work and
+the missing coverage and cycle arguments. The reproducible
+[theorem audit](analysis/theorem_audit.json) records exact statements,
+axiom dependencies, and library provenance.
 
 ### The critical line ([lean/Collatz/Critical.lean](lean/Collatz/Critical.lean))
 
@@ -263,17 +296,18 @@ critical density (`critical_line_sharp`). The non-descenders are a
 vanishing minority (`no_descent_window_bound`), and the conjecture is
 exactly universal descent (`collatz_iff_descent`). **Almost-all is now
 formal; all is the conjecture** — precisely whether any single integer
-tracks the critical strip at every scale simultaneously, a question
-`no_finite_certificate` proves no bounded-memory argument can settle.
+avoids descent at every scale simultaneously. The bounded-weight,
+bounded-window contraction family cannot settle this question.
 
 ## What a real proof must overcome
 
 Worst-case reasoning over finitely many bits treats the bits revealed by
 successive halvings as adversarial, and the adversarial bit-string
-(all ones) climbs forever. A proof must show that no actual orbit
-sustains odd-step density ≥ log 2 / log 3 ≈ 63.09% indefinitely — an
-equidistribution statement about individual orbits in ℤ₂. This is
-precisely where the strongest known result (Tao 2019, "almost all orbits
+(all ones) climbs forever in the 2-adic system. A proof must exclude
+every positive-integer counterexample, including critical-boundary
+divergence and nontrivial cycles. Individual-orbit density control is
+one possible approach, but the existing density inequalities do not
+give an exhaustive itinerary classification. Tao's result (2019, "almost all orbits
 attain almost bounded values") stops short of the full conjecture.
 `Density.lean` makes the reduction formal: the conjecture is equivalent
 to universal descent (`collatz_iff_descent`), and avoiding descent

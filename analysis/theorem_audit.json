@@ -1,0 +1,277 @@
+{
+  "generated_utc": "2026-09-05T03:40:07.717460+00:00",
+  "main_commit": "e84ab424b263d3fdce9953f02edbeca60b5da209",
+  "main_worktree_status": " M README.md\n M analysis/NOVEL_APPROACHES.md\n M analysis/sturmian_prefix_power.py\n M lean/Collatz/Ideal.lean\n?? analysis/REVIEW_2026_09_04.md\n?? analysis/audit_theorems.py\n?? analysis/mahler_candidates.json\n?? analysis/mahler_certificate_search.py\n?? analysis/survivor_cylinders.py\n?? analysis/test_research_certificates.py\n?? analysis/theorem_audit.json\n?? lean/Collatz/Cylinder.lean\n?? lean/Collatz/IdealBounds.lean\n?? lean/Collatz/PrefixCertificate.lean\n?? lean/Collatz/SturmianApprox.lean\n?? lean/Collatz/SturmianEndpoint.lean\n?? lean/Collatz/SturmianSilver.lean\n?? lean/Collatz/WordAffine.lean\n",
+  "toolchain": "leanprover/lean4:v4.27.0-rc1",
+  "selected_modules_built": true,
+  "verification_scope": "Lean axiom inspection; no independent kernel replay or clean rebuild",
+  "all_selected_standard_foundations_only": true,
+  "theorems": [
+    {
+      "declaration": "Collatz.collatz_iff_descent",
+      "source": "lean/Collatz/Density.lean",
+      "line": 342,
+      "scope": "Universal descent equivalence",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.no_finite_certificate",
+      "source": "lean/Collatz/NoGo.lean",
+      "line": 205,
+      "scope": "Bounded positive multiplier; fixed window and contraction",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.no_shifted_sigWord_itinerary",
+      "source": "lean/Collatz/Rung1.lean",
+      "line": 612,
+      "scope": "One substitution, every natural start and shift",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.sturmian_level",
+      "source": "lean/Collatz/Sturmian.lean",
+      "line": 291,
+      "scope": "Separation, coverage and size are hypotheses",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.sturmian_level_endpoint",
+      "source": "lean/Collatz/SturmianEndpoint.lean",
+      "line": 56,
+      "scope": "Separation and coverage; size checked at endpoint",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.sturmian_separation_of_neighbors",
+      "source": "lean/Collatz/SturmianApprox.lean",
+      "line": 11,
+      "scope": "Determinant-one bracket and positive errors",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.rotation_window_of_grid",
+      "source": "lean/Collatz/SturmianApprox.lean",
+      "line": 115,
+      "scope": "Bezout, approximation and width certificates",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Silver.no_itinerary",
+      "source": "lean/Collatz/SturmianSilver.lean",
+      "line": 226,
+      "scope": "Unconditional for slope sqrt(2)/2, every intercept",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Silver.no_eventual_itinerary",
+      "source": "lean/Collatz/SturmianSilver.lean",
+      "line": 243,
+      "scope": "Unconditional exclusion after every finite orbit prefix",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.WordAffine.adjacent_swap",
+      "source": "lean/Collatz/WordAffine.lean",
+      "line": 40,
+      "scope": "All finite Boolean prefix and suffix words",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.WordAffine.compare_bound",
+      "source": "lean/Collatz/WordAffine.lean",
+      "line": 105,
+      "scope": "Realized equal-length/equal-weight words, distinct endpoints",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Cylinder.prefix_transport",
+      "source": "lean/Collatz/Cylinder.lean",
+      "line": 24,
+      "scope": "Every prefix up to cylinder depth",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Cylinder.mem_parameters",
+      "source": "lean/Collatz/Cylinder.lean",
+      "line": 54,
+      "scope": "Finite height and prefix non-descent",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.Cylinder.parameters_convex",
+      "source": "lean/Collatz/Cylinder.lean",
+      "line": 68,
+      "scope": "Two surviving quotients and one between them",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.prefix_power_initial_bound",
+      "source": "lean/Collatz/PrefixCertificate.lean",
+      "line": 8,
+      "scope": "Unbounded orbit and a repeated parity block",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.fract_ideal",
+      "source": "lean/Collatz/Ideal.lean",
+      "line": 227,
+      "scope": "Bounded correction (Supercritical), not inferred from divergence",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    },
+    {
+      "declaration": "Collatz.supercritical_of_geometric",
+      "source": "lean/Collatz/IdealBounds.lean",
+      "line": 47,
+      "scope": "Explicit summable inverse-drift bound; not asserted for every divergent orbit",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "standard_foundations_only": true
+    }
+  ],
+  "library_provenance": [
+    {
+      "repository": "Menta2357__collatz-classical",
+      "commit": "ccc561db3a6aa45006229ae15fef55e05fbb6ab0",
+      "toolchain": "leanprover/lean4:v4.21.0",
+      "audit_status": "not checked by this main-project audit"
+    },
+    {
+      "repository": "PhilNorfleet__Hercher2023_lean",
+      "commit": "2f9d1a2633cdc0c7f9238c0fc81eca054fd6afec",
+      "toolchain": "leanprover/lean4:v4.32.0",
+      "audit_status": "not checked by this main-project audit"
+    },
+    {
+      "repository": "gotrevor__tao-collatz",
+      "commit": "15efca2ae308a100b5e1d769b9cc9661df170396",
+      "toolchain": "leanprover/lean4:v4.33.1",
+      "audit_status": "not checked by this main-project audit"
+    },
+    {
+      "repository": "lechmazur__terras_density_one",
+      "commit": "83c436ccd727c35b7ef7b497558be9395e011b83",
+      "toolchain": "leanprover/lean4:v4.30.0-rc2",
+      "audit_status": "not checked by this main-project audit"
+    },
+    {
+      "repository": "rwst__Collatz-Map-Basics",
+      "commit": "96e063fde9f5153a492a809e9ebce3c235a73d20",
+      "toolchain": "leanprover/lean4:v4.29.0",
+      "audit_status": "not checked by this main-project audit"
+    },
+    {
+      "repository": "rwst__lean-code",
+      "commit": "ce1619b6418dc263efb911b11ad09409c2083d80",
+      "toolchain": "leanprover/lean4:v4.34.0-rc2",
+      "audit_status": "not checked by this main-project audit"
+    },
+    {
+      "repository": "tangentstorm__eliahou-collatz-bounds",
+      "commit": "fdb0b2e1ac0d774f4e288ffa2106785efd351563",
+      "toolchain": "leanprover/lean4:v4.28.0",
+      "audit_status": "not checked by this main-project audit"
+    },
+    {
+      "repository": "tcosmo__BohmSontacchi1978_lean",
+      "commit": "dddd3a4217f9493faeb1830d7b76baf1cf9bb6f0",
+      "toolchain": "leanprover/lean4:v4.28.0",
+      "audit_status": "not checked by this main-project audit"
+    },
+    {
+      "repository": "tcosmo__Knight2026_lean",
+      "commit": "a535cd1db48e2bd62790a8efed24e91120b1e2ff",
+      "toolchain": "leanprover/lean4:v4.28.0",
+      "audit_status": "not checked by this main-project audit"
+    },
+    {
+      "repository": "tcosmo__Monks2006_lean",
+      "commit": "85645c4a6694cf14e2b5ed0726082ac4b24b100a",
+      "toolchain": "leanprover/lean4:v4.28.0",
+      "audit_status": "not checked by this main-project audit"
+    }
+  ],
+  "lean_output": "Collatz.collatz_iff_descent : Collatz.CollatzConjecture \u2194 \u2200 (n : \u2115), 2 \u2264 n \u2192 \u2203 t, Collatz.terras_iter t n < n\n'Collatz.collatz_iff_descent' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.no_finite_certificate (W : \u2115 \u2192 \u211a) (lo hi : \u211a) (hlo : 0 < lo) (hW : \u2200 (n : \u2115), lo \u2264 W n \u2227 W n \u2264 hi) (B N\u2080 : \u2115)\n  (\u03c1 : \u211a) (h\u03c1\u2080 : 0 \u2264 \u03c1) (h\u03c1 : \u03c1 < 1)\n  (hcert :\n    \u2200 (n : \u2115), N\u2080 \u2264 n \u2192 \u2203 t, 1 \u2264 t \u2227 t \u2264 B \u2227 \u2191(Collatz.terras_iter t n) * W (Collatz.terras_iter t n) \u2264 \u2191n * W n * \u03c1) :\n  False\n'Collatz.no_finite_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.no_shifted_sigWord_itinerary (n s : \u2115) : \u00ac\u2200 (t : \u2115), Collatz.terras_iter t n % 2 = Collatz.sigWord (s + t)\n'Collatz.no_shifted_sigWord_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.sturmian_level {\u03b1 \u03c1 \u03b4 : \u211d} {q Q G : \u2115} {p : \u2124} (h\u03b10 : 0 \u2264 \u03b1) (hcrit : 2 \u2264 3 ^ \u03b1) (hq : \u2191q * \u03b1 = \u2191p + \u03b4)\n  (h\u03b40 : 0 < \u03b4) (h\u03b41 : \u03b4 < 1) (hQ : 3 \u2264 Q) (hL : \u2200 (m : \u2115), 0 < m \u2192 m < Q \u2192 \u2200 (r : \u2124), \u03b4 \u2264 |\u2191m * \u03b1 - \u2191r|)\n  (hT : \u2200 (a : \u2115), \u2203 n, a \u2264 n \u2227 n < a + G \u2227 Collatz.visit \u03b1 \u03c1 \u03b4 n) (N : \u2115)\n  (hS : \u2200 s \u2264 G, 3 ^ (\u2191(q + s) * \u03b1 + 1) * (3 * \u2191N + 3 * \u2191s + 1) < 2 ^ (Q - 3 + s)) : \u00acCollatz.HasItin \u03b1 \u03c1 N\n'Collatz.sturmian_level' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.sturmian_level_endpoint {\u03b1 \u03c1 \u03b4 : \u211d} {q Q G : \u2115} {p : \u2124} (h\u03b10 : 0 \u2264 \u03b1) (hcrit : 2 \u2264 3 ^ \u03b1) (hq : \u2191q * \u03b1 = \u2191p + \u03b4)\n  (h\u03b40 : 0 < \u03b4) (h\u03b41 : \u03b4 < 1) (hQ : 3 \u2264 Q) (hL : \u2200 (m : \u2115), 0 < m \u2192 m < Q \u2192 \u2200 (r : \u2124), \u03b4 \u2264 |\u2191m * \u03b1 - \u2191r|)\n  (hT : \u2200 (a : \u2115), \u2203 n, a \u2264 n \u2227 n < a + G \u2227 Collatz.visit \u03b1 \u03c1 \u03b4 n) (N : \u2115)\n  (hG : 3 ^ (\u2191(q + G) * \u03b1 + 1) * (3 * \u2191N + 3 * \u2191G + 1) < 2 ^ (Q - 3 + G)) : \u00acCollatz.HasItin \u03b1 \u03c1 N\n'Collatz.sturmian_level_endpoint' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.sturmian_separation_of_neighbors {\u03b1 \u03b4 \u03b5 : \u211d} {q Q : \u2115} {p P : \u2124} (hq : 0 < q) (hQ : 0 < Q) (h\u03b4 : 0 < \u03b4)\n  (h\u03b5 : 0 < \u03b5) (hlo : \u2191q * \u03b1 = \u2191p + \u03b4) (hhi : \u2191Q * \u03b1 = \u2191P - \u03b5) (hdet : P * \u2191q - p * \u2191Q = 1) (m : \u2115) :\n  0 < m \u2192 m < Q \u2192 \u2200 (r : \u2124), \u03b4 \u2264 |\u2191m * \u03b1 - \u2191r|\n'Collatz.sturmian_separation_of_neighbors' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.rotation_window_of_grid {\u03b1 \u03b4 \u03b5 : \u211d} {G : \u2115} {P U V : \u2124} (hG : 0 < G) (h\u03b4 : \u03b4 < 1) (h\u03b5 : 0 \u2264 \u03b5)\n  (hbez : U * P + V * \u2191G = 1) (happrox : \u2191G * \u03b1 = \u2191P + \u03b5) (hwidth : 1 + \u2191G * \u03b5 \u2264 \u2191G * \u03b4) (\u03c1 : \u211d) (a : \u2115) :\n  \u2203 n, a \u2264 n \u2227 n < a + G \u2227 Collatz.visit \u03b1 \u03c1 \u03b4 n\n'Collatz.rotation_window_of_grid' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Silver.no_itinerary (N : \u2115) (\u03c1 : \u211d) : \u00acCollatz.HasItin Collatz.Silver.alpha \u03c1 N\n'Collatz.Silver.no_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Silver.no_eventual_itinerary (N s : \u2115) (\u03c1 : \u211d) :\n  \u00ac\u2200 (t : \u2115), \u2191(Collatz.terras_iter (s + t) N) % 2 = Collatz.mech Collatz.Silver.alpha \u03c1 t\n'Collatz.Silver.no_eventual_itinerary' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.WordAffine.adjacent_swap (u v : List Bool) :\n  Collatz.WordAffine.correction (u ++ false :: true :: v) =\n    Collatz.WordAffine.correction (u ++ true :: false :: v) + 2 ^ u.length * 3 ^ Collatz.WordAffine.ones v\n'Collatz.WordAffine.adjacent_swap' depends on axioms: [propext, Quot.sound]\nCollatz.WordAffine.compare_bound {x y : \u2115} {u v : List Bool} (hx : Collatz.WordAffine.Realizes x u)\n  (hy : Collatz.WordAffine.Realizes y v) (hlen : u.length = v.length)\n  (hones : Collatz.WordAffine.ones u = Collatz.WordAffine.ones v)\n  (hne : Collatz.terras_iter u.length y \u2260 Collatz.terras_iter u.length x) :\n  2 ^ u.length \u2264\n    |3 ^ Collatz.WordAffine.ones u * (\u2191y - \u2191x) + \u2191(Collatz.WordAffine.correction v) -\n        \u2191(Collatz.WordAffine.correction u)|\n'Collatz.WordAffine.compare_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Cylinder.prefix_transport (k r q i : \u2115) (hi : i \u2264 k) :\n  Collatz.terras_iter i (r + 2 ^ k * q) = Collatz.terras_iter i r + 3 ^ Collatz.oddSteps i r * 2 ^ (k - i) * q\n'Collatz.Cylinder.prefix_transport' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Cylinder.mem_parameters (k r H q : \u2115) :\n  q \u2208 Collatz.Cylinder.parameters k r H \u2194\n    1 \u2264 r + 2 ^ k * q \u2227 r + 2 ^ k * q \u2264 H \u2227 Collatz.Cylinder.Survives k (r + 2 ^ k * q)\n'Collatz.Cylinder.mem_parameters' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.Cylinder.parameters_convex {k r H a b q : \u2115} (ha : a \u2208 Collatz.Cylinder.parameters k r H)\n  (hb : b \u2208 Collatz.Cylinder.parameters k r H) (haq : a \u2264 q) (hqb : q \u2264 b) : q \u2208 Collatz.Cylinder.parameters k r H\n'Collatz.Cylinder.parameters_convex' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.prefix_power_initial_bound (n : \u2115) (hdiv : \u2200 (B : \u2115), \u2203 t, B < Collatz.terras_iter t n) (s \u2113 M : \u2115) (h\u2113 : 1 \u2264 \u2113)\n  (hM : \u2113 \u2264 M)\n  (h : \u2200 (t : \u2115), t + \u2113 < M \u2192 Collatz.terras_iter (s + t) n % 2 = Collatz.terras_iter (s + (t + \u2113)) n % 2) :\n  2 ^ (M + s) \u2264\n    (2 ^ \u2113 + 3 ^ Collatz.oddSteps \u2113 (Collatz.terras_iter s n)) * (3 ^ Collatz.oddSteps s n * n + Collatz.dcoef s n) +\n      3 ^ Collatz.oddSteps \u2113 (Collatz.terras_iter s n) * 2 ^ (\u2113 + s)\n'Collatz.prefix_power_initial_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.fract_ideal {n : \u2115} (h : Collatz.Supercritical n) (T : \u2115) :\n  Int.fract ((\u2191n + Collatz.idealLimit n) * 3 ^ Collatz.oddSteps T n / 2 ^ T) =\n    Int.fract (Collatz.idealLimit (Collatz.terras_iter T n))\n'Collatz.fract_ideal' depends on axioms: [propext, Classical.choice, Quot.sound]\nCollatz.supercritical_of_geometric {n : \u2115} {C r : \u211d} (hC : 0 \u2264 C) (hr0 : 0 \u2264 r) (hr1 : r < 1)\n  (hgeom : \u2200 (t : \u2115), 2 ^ t \u2264 C * r ^ t * 3 ^ Collatz.oddSteps t n) : Collatz.Supercritical n\n'Collatz.supercritical_of_geometric' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+}
