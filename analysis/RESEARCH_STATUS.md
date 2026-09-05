@@ -26,7 +26,7 @@ belong to an excluded family.
 | Correct experimental bound | `prefix_power_initial_bound` | Retains the affine correction after shifting an orbit |
 | Critical-boundary discipline | `supercritical_of_geometric` | Explicit summable inverse-drift hypothesis, not universal divergence |
 | Exact correction characterization | `supercritical_iff_summable_reciprocal` | For every positive seed, bounded ideal correction iff the reciprocal orbit series converges; no density hypothesis |
-| Escape consequence | `supercritical_orbit_tendsto_atTop` | Bounded correction forces eventual escape from every finite bound; converse not established |
+| Escape consequence | `supercritical_orbit_tendsto_atTop`, `unbounded_orbit_supercritical` | Bounded correction forces eventual escape; unboundedness now implies bounded correction as well |
 | Polynomial correction control | `idealC_sixth_bound_of_prefix`, `unbounded_idealC_sixth_bound` | (N+c_T)^6 ≤ N^6(j_T+1); every unbounded positive orbit, without summability or density assumptions |
 | Finite drift restriction | `unbounded_nondescent_drift` | 2^(6T) ≤ 3^(6j_T)(j_T+1) at every non-descent time of an unbounded positive orbit |
 | Drift escape | `unbounded_prefix_drift_escape` | On every prefix, some drift 3^j_t/2^t is at least (T+1)^(5/6)/N; a running-maximum statement |
@@ -53,7 +53,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 120 declarations using only standard
+The selected theorem audit now covers 124 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -71,12 +71,14 @@ finiteness across all lengths. The source theorem reducing global finiteness
 to Collatz is already present in the nested RT project and was not re-audited
 in this pass.
 
-The new proved suffix envelope supports `paradoxical_pruned.py`: selected
-lengths 27 and 40 complete in 38,425 and 123,887 tree nodes, respectively,
-finding 50 and zero segments. The length-65 run is explicitly incomplete at
-two million nodes. These are tested Python censuses using a Lean-proved
-pruning rule, not kernel-certified larger-length classifications. No
-all-length cutoff is established.
+The proved suffix envelope supports `paradoxical_pruned.py`. Maximal-count
+monotonicity and early resolution of finite seed intervals now reduce
+lengths 27 and 40 to 955 and 2,889 tree nodes, respectively, finding 50 and
+zero segments. The length-65 census is now complete: 5,324,915 tree nodes
+and 27,386,515 direct candidate checks find 244 segments, all with earlier
+descent. These are tested Python censuses using Lean-proved bounds, not
+kernel-certified larger-length classifications. No all-length cutoff is
+established. Earlier incomplete length-65 records below are historical.
 
 `sturmian_prefix_power.py` now produces exact integer excluded-height
 certificates, using the correction term in `prefix_power_initial_bound`.
@@ -415,3 +417,39 @@ Five new audit targets bring the total to 120. The Lean build and audit
 pass with standard foundations only; the three existing exact packing
 controls pass. The summability paper and guide include these results and
 the previous relative-correction identity.
+
+## Maximal-count pruning and completed length 65 (2026-09-05)
+
+Four new theorems in `ParadoxicalPruning.lean` prove that the completion
+correction envelope increases with the allowed suffix odd count, that only
+the largest admissible count needs testing, and that every paradoxical
+completion lies below the resulting finite seed bound. The Python search
+precomputes these tests and resolves a prefix class directly when its
+remaining quotient interval has at most sixteen candidates. Exact
+8-step affine residue lookups accelerate replay; successes are also replayed
+one step at a time. This preserves the all-seed scope at each fixed length.
+
+The length-65 result replaces the former incomplete census: 244 segments,
+seeds 73 through 4547, all with 41 odd steps and an earlier descent. The
+search visits 5,324,915 nodes, resolves 2,662,431 candidate intervals, checks
+27,386,515 seeds, and has zero pending nodes. The earlier all-count run
+extended to twenty million nodes was still incomplete; an intermediate
+individual-step replay run was interrupted for performance and supplied no
+census result. The final run uses the tested block replay implementation.
+
+Ten Python tests pass, including agreement with exhaustive small searches,
+the old all-count rule, enabled/disabled interval resolution, and a separate
+individual-step scan below 65,536 reproducing all 244 witnesses. That last
+scan verifies only its finite slice; absence of higher seeds depends on the
+complete pruned traversal. The Lean build and 124-declaration audit pass
+with standard foundations only. The traversal is not Lean-extracted, and
+its complete larger-length census is not a kernel-certified enumeration.
+The paper and guide in `paper/paradoxical_cylinders.*` are updated.
+
+Next arithmetic lead: at a *first* coefficient contraction, all preceding
+inverse drifts are at most one, so the correction increments suggest
+`3*c_T <= oddSteps T N`. Combined with a paradoxical endpoint, this would
+bound the seed far more sharply than the unrestricted envelope. This is
+not yet formalized here. It concerns first coefficient crossings, whereas
+the 244 length-65 examples allow earlier coefficient crossings/descent.
+It would still require an all-length argument to prove Collatz.

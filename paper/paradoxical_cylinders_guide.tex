@@ -41,12 +41,25 @@ Let $m$ be the smallest seed at least three with the current prefix. When the wh
 \[
 (2^{s+h}-3^{a+k})m.
 \]
-If even $U_k$ is smaller, that choice of $k$ cannot work. If every possible ending odd count is excluded, the entire branch is discarded.
+If even $U_k$ is smaller, that choice of $k$ cannot work. Lean now proves
+that only the largest allowed odd count needs testing: it permits the
+largest correction and requires the smallest correction to avoid descent.
+
+The same inequality also bounds every possible seed in the unfinished
+class. When at most sixteen candidates remain, the search checks them
+directly and finishes that branch. Exact eight-step lookups accelerate
+these checks; every reported segment is replayed one step at a time.
 
 \section{What the improved search found}
-At length 27, the search completed after 38,425 tree nodes and found 50 segments. A full residue scan would require 134,217,728 residue classes. At length 40, it completed after 123,887 nodes and found no segments.
+At length 27, the search finds the same 50 segments using 955 tree nodes
+and 5,159 direct candidate checks. At length 40, it finds none using 2,889
+nodes and 15,703 candidate checks.
 
-These are results at specific lengths, not a claim that all intervening lengths were checked. The run at length 65 stopped at its two-million-node work limit and is explicitly incomplete; its result cannot be used to infer absence of segments.
+The previously incomplete length-65 census now finishes: 5,324,915 tree
+nodes and 27,386,515 candidate checks find 244 segments. Their seeds range
+from 73 to 4547. All 244 had already descended below their seed before the
+endpoint. No branches remain pending. These are results at selected
+lengths; intervening lengths were not all checked.
 
 \section{How much is proved}
 The correction bound and pruning implication are Lean theorems. The larger searches are Python computations checked against full enumeration at smaller lengths, with the affine identity checked at each visited node and every reported segment replayed directly. They are not kernel-verified census certificates.
@@ -69,5 +82,5 @@ The statement does not say that all search methods fail, or that deeper pruning 
 \section{Where to go next}
 The next argument should connect a suffix's possible correction to the residue of the seed that actually realizes it. Alternatively, it needs another restriction valid uniformly in length. More computation can help study those constraints, but simply increasing the current search limit is not a proof of the missing uniform statement.
 
-The limitation and its finite-family consequence are Lean theorems in \texttt{Collatz.PruningLimit}. They are included in the expanded 66-declaration audit. This result changes the research direction by identifying precisely what the present bound cannot establish on its own.
+The limitation and its finite-family consequence are Lean theorems in \texttt{Collatz.PruningLimit}. They are included in the expanded 124-declaration audit. This result changes the research direction by identifying precisely what the present bound cannot establish on its own.
 \end{document}

@@ -168,3 +168,18 @@ odd count and correction. The artificial return example fails this stronger
 test. The current audit covers 72 declarations; three additional Python tests
 compare reconstruction with exhaustive word sets. This does not bound the
 set of successful lengths or corrections. See the updated attainability note.
+
+## Update: completed length-65 census (2026-09-05)
+
+The previous incomplete length-65 record is superseded. Lean now proves
+maximal-odd-count envelope monotonicity and its finite seed bound. The search
+uses those results to test one count per node and replay short candidate
+intervals with exact eight-step residue maps. At length 65 it completes
+with 5,324,915 tree nodes and 27,386,515 candidate checks: 244 segments,
+seeds 73 through 4547, all with 41 odd steps and earlier descent. There are
+no pending branches. Run `python3 analysis/paradoxical_pruned.py --work-limit
+20000000` from the root to reproduce the selected lengths. Ten controls pass;
+the new bounds are included in the 124-declaration standard-foundations audit.
+The fixed-length Python census remains distinct from a kernel-certified
+all-seed theorem and supplies no all-length finiteness claim. The technical
+paper and guide contain the current method, counts, and verification limits.

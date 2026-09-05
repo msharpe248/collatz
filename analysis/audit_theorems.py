@@ -17,6 +17,10 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.completion_envelope_mono", "Completion envelope increases with the allowed suffix odd count"),
+    ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.completion_test_mono", "Only the largest admissible suffix odd count is needed for the relaxed necessary test"),
+    ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.prune_paradoxical_completion_max", "A maximal-count pruning inequality excludes every realized suffix below that count"),
+    ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.paradoxical_completion_seed_bound", "Every paradoxical completion lies in the finite seed interval implied by the maximal-count envelope"),
     ("Collatz.OrbitSummability", "Collatz.unbounded_reciprocal_value_tail", "Explicit geometric reciprocal budget for all finite orbit-value sets above a threshold"),
     ("Collatz.OrbitSummability", "Collatz.unbounded_reciprocal_tsum_le", "Full reciprocal series bound for an unbounded orbit staying above the threshold"),
     ("Collatz.OrbitSummability", "Collatz.orbitTailBudget_tendsto_zero", "The explicit value-tail budget tends to zero"),
