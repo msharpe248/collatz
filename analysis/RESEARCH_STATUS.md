@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 84 declarations using only standard
+The selected theorem audit now covers 87 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -234,3 +234,22 @@ excluding individual residues. Broader merging-path classes are a possible
 next source of restrictions. However, exponent refinements alone do not
 supply a universal upper drift envelope or eliminate nontrivial cycles;
 those coverage gaps remain the decisive requirements for Collatz.
+
+## Bounded-correction coverage review
+
+`Collatz.IdealBarrier` proves c_infinity(n)>1 for every positive seed with
+bounded ideal correction. Every tail has the same strict lower bound, and
+some tail exceeds two. Hence UniformSupercritical n B implies B>2, and the
+canonical geometric ideal lies more than one above the actual orbit value.
+These are lower barriers, not an inferred upper bound or confinement result.
+
+The nested Z32 source review concerns fractional parts of fixed (p/q)^k
+progressions. Applying it here needs both a transport from the variable
+3^j_t/2^t clock and a proved fractional confinement hypothesis. Neither is
+supplied by Supercritical or the tracking identity. The barrier does not
+exclude fractional confinement in a translated window, nor show that shifted
+corrections are unbounded. Nested sources were not compiled or audited here.
+Three new targets bring the current audit to 87. The paper and guide are
+`paper/ideal_tracking_barrier*`. A proof of that missing transport and
+confinement, or another unconditional exclusion of bounded-correction
+positive orbits, remains a central coverage target.

@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.IdealBarrier", "Collatz.one_lt_idealLimit", "Positive seed with bounded ideal correction; strict lower bound one on the limiting correction"),
+    ("Collatz.IdealBarrier", "Collatz.uniformSupercritical_bound_gt_two", "Uniform bound on every shifted finite correction must exceed two; no uniform upper bound inferred"),
+    ("Collatz.IdealBarrier", "Collatz.ideal_tracking_gap_gt_one", "Canonical geometric ideal lies more than one above every orbit value under bounded correction"),
     ("Collatz.SiblingCorrection", "Collatz.SiblingCorrection.pair_free_product_bound", "Tenth-power weighted product bound for distinct odd values above five, coprime to three, with no sibling pair"),
     ("Collatz.SiblingCorrection", "Collatz.unbounded_eventual_tenth_bound", "Every unbounded positive orbit has a tail with tenth-power correction control"),
     ("Collatz.SiblingCorrection", "Collatz.unbounded_eventual_tenth_escape", "Every unbounded positive orbit has a tail with drift excursions at exponent 9/10"),

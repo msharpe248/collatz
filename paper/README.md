@@ -53,3 +53,8 @@ The current theorem audit is [theorem_audit.json](../analysis/theorem_audit.json
 - [Tenth-power correction bound](sibling_correction.md) and
   [guide](sibling_correction_guide.md): forbidden sibling pairs strengthen the
   correction exponent to 1/10 and the conditional drift threshold to 9/10.
+
+- [Ideal-tracking lower barriers](ideal_tracking_barrier.md) and
+  [guide](ideal_tracking_barrier_guide.md): strict lower bounds on limiting
+  corrections, exclusion of uniform bounds at most two, and the unresolved
+  transport and confinement needed for the geometric-progression library.
