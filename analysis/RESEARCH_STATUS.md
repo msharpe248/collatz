@@ -32,6 +32,7 @@ belong to an excluded family.
 | Finite drift certificate | `finite_drift_certificate_bounds_orbit` | A finite envelope through T with C*N^(6a)<T+1 and b<5a forces a bounded orbit |
 | Paradoxical cylinders | `paradoxical_quotient_interval`, `paradoxical_residue_iff` | Exact fixed-length quotient intervals, no seed cutoff; global finiteness remains open |
 | Checked small classification | `paradoxical_eight_iff` | All seeds above two at length eight: exactly 7,9,18,19,25; reproduction, not a new discovery |
+| Prefix pruning | `WordAffine.prune_paradoxical_completion` | A suffix correction envelope excludes whole contracting completion classes above a certified seed floor |
 | Dependency audit | `audit_theorems.py`, `theorem_audit.json` | Selected declarations, printed types and axioms, pinned library provenance |
 
 See [STURMIAN_SILVER.md](STURMIAN_SILVER.md) for the new theorem's proof.
@@ -50,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 60 declarations using only standard
+The selected theorem audit now covers 64 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -67,6 +68,13 @@ kernel-proved; the broader census is tested Python. This does not establish
 finiteness across all lengths. The source theorem reducing global finiteness
 to Collatz is already present in the nested RT project and was not re-audited
 in this pass.
+
+The new proved suffix envelope supports `paradoxical_pruned.py`: selected
+lengths 27 and 40 complete in 38,425 and 123,887 tree nodes, respectively,
+finding 50 and zero segments. The length-65 run is explicitly incomplete at
+two million nodes. These are tested Python censuses using a Lean-proved
+pruning rule, not kernel-certified larger-length classifications. No
+all-length cutoff is established.
 
 `sturmian_prefix_power.py` now produces exact integer excluded-height
 certificates, using the correction term in `prefix_power_initial_bound`.

@@ -27,5 +27,29 @@ Lean proves that the only seeds above two producing a paradoxical segment of len
 \]
 Each of these had already descended before the endpoint. A separate tested Python search through length twenty finds the same five segments and no others. The full twenty-length computation is not a Lean proof; the length-eight classification is.
 
-This reproduces a small known case and provides a checked search tool. The number of remainders doubles with every extra step, so simply searching longer will not settle finiteness across all lengths. The next task is to find and prove a restriction that rules out arbitrarily long surviving words.
+This reproduces a small known case and provides a checked search tool. The number of remainders doubles with every extra step, so simply searching longer will not settle finiteness across all lengths. The next page explains a proved pruning rule that makes longer searches practical. A restriction uniform in length is still missing.
+
+\newpage
+\section{Skipping impossible completions}
+We can now reject many unfinished parity words without enumerating their endings. Suppose a prefix already has correction $D$, length $s$, and $a$ odd steps. If the unfinished part has length $h$ and $k$ odd steps, its total correction cannot exceed
+\[
+U_k=3^kD+2^{s+h-k}(3^k-2^k).
+\]
+Lean proves this bound for every possible arrangement of those ending letters. It is generous: the test gives the unfinished word the largest correction it could obtain.
+
+Let $m$ be the smallest seed at least three with the current prefix. When the whole word would have a contracting coefficient, a paradoxical endpoint needs correction at least
+\[
+(2^{s+h}-3^{a+k})m.
+\]
+If even $U_k$ is smaller, that choice of $k$ cannot work. If every possible ending odd count is excluded, the entire branch is discarded.
+
+\section{What the improved search found}
+At length 27, the search completed after 38,425 tree nodes and found 50 segments. A full residue scan would require 134,217,728 residue classes. At length 40, it completed after 123,887 nodes and found no segments.
+
+These are results at specific lengths, not a claim that all intervening lengths were checked. The run at length 65 stopped at its two-million-node work limit and is explicitly incomplete; its result cannot be used to infer absence of segments.
+
+\section{How much is proved}
+The correction bound and pruning implication are Lean theorems. The larger searches are Python computations checked against full enumeration at smaller lengths, with the affine identity checked at each visited node and every reported segment replayed directly. They are not kernel-verified census certificates.
+
+This gives a better instrument for investigating long words. It does not prove that every sufficiently long word is excluded, so it does not finish the finiteness argument or prove Collatz. The formal note records the exact assumptions, measured results, and reproduction commands.
 \end{document}

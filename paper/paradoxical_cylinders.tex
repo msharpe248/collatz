@@ -10,7 +10,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We formalize an exact quotient-interval characterization of paradoxical shortcut Collatz segments. It permits exhaustive enumeration at each fixed length without a seed-height cutoff. Lean proves the complete length-eight classification above seed two. A separate exact-integer Python enumeration through length twenty reproduces the same five segments. This note supplies a checked research instrument; it does not prove finiteness over all lengths or the Collatz conjecture.
+We formalize an exact quotient-interval characterization of paradoxical shortcut Collatz segments. It permits exhaustive enumeration at each fixed length without a seed-height cutoff. Lean proves the complete length-eight classification above seed two. A separate exact-integer Python enumeration through length twenty reproduces the same five segments. A suffix-correction bound now prunes whole prefix subtrees. Tested searches at selected lengths through forty complete with substantially fewer nodes than full residue enumeration. This remains a fixed-length research instrument, not a proof of global finiteness or Collatz.
 \end{abstract}
 \section{Definition and quotient interval}
 Let $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$. Let $j_L(n)$ count odd steps before time $L$. Following Rozier and Terracol~\cite{RT}, a segment is paradoxical when
@@ -67,9 +67,86 @@ paradoxical\_quotient\_interval\\
 paradoxical\_residue\_iff\\
 paradoxical\_eight\_iff
 \end{quote}
-These are included in the expanded 60-declaration audit, with only standard foundational axioms. No new axiom, \texttt{sorry}, or \texttt{native\_decide} is used. The table uses ordinary kernel-checked \texttt{decide}.
+These are included in the expanded 64-declaration audit, with only standard foundational axioms. No new axiom, \texttt{sorry}, or \texttt{native\_decide} is used. The table uses ordinary kernel-checked \texttt{decide}.
 
-Build with \texttt{lake build Collatz.Paradoxical} from \texttt{lean/}. From the repository root, run {\small\texttt{python3 analysis/paradoxical\_cylinders.py}}; the JSON output records the exact finite scope. Brute-force residue enumeration costs exponentially many states and is not an all-length method. The missing task is an independently proved restriction on the contracting words that could support arbitrarily long paradoxical segments. Finite experimental absence does not supply that restriction.
+Build with \texttt{lake build Collatz.Paradoxical} from \texttt{lean/}. From the repository root, run {\small\texttt{python3 analysis/paradoxical\_cylinders.py}}; the JSON output records the exact finite scope. Brute-force residue enumeration costs exponentially many states. The prefix pruning extension below avoids many of those states, without establishing all-length termination. The missing task is an independently proved restriction on the contracting words that could support arbitrarily long paradoxical segments. Finite experimental absence does not supply that restriction.
+
+\newpage
+\section{A proved prefix-pruning rule}
+Represent a parity word by Boolean letters in orbit order. For a word $w$, let $|w|$ be its length, $j(w)$ its number of ones, and $d(w)$ its affine correction. The exact composition identity is
+\[
+d(uv)=3^{j(v)}d(u)+2^{|u|}d(v).
+\]
+The maximal suffix correction at fixed length $h$ and odd count $k$ is bounded by
+\begin{equation}\label{eq:suffix}
+d(v)\le2^{h-k}(3^k-2^k).
+\end{equation}
+This is the same extremal correction bound appearing in Rozier--Terracol~\cite{RT}, Theorem 2.2, translated from the remainder $d(v)/2^h$ to the integer correction. The new module proves it directly by induction, without importing that paper's formalization.
+
+\begin{theorem}
+Let a prefix $u$ have length $s$, odd count $a$, and correction $D$. Every suffix $v$ of length $h$ and odd count $k$ satisfies
+\[
+d(uv)\le U_k:=3^kD+2^{s+h-k}(3^k-2^k).
+\]
+Suppose a seed $n\ge m$ realizes $uv$ and $3^{a+k}<2^{s+h}$. If
+\begin{equation}\label{eq:prune}
+U_k<(2^{s+h}-3^{a+k})m,
+\end{equation}
+then its segment of length $s+h$ is not paradoxical.
+\end{theorem}
+\begin{proof}
+The upper bound follows from composition and~\eqref{eq:suffix}. If the endpoint is at least $n$, the exact affine identity gives
+\[
+(2^{s+h}-3^{a+k})n\le d(uv)\le U_k.
+\]
+The positive coefficient and $n\ge m$ contradict~\eqref{eq:prune}.
+\end{proof}
+For a canonical prefix residue $r\bmod2^s$, the smallest seed at least three in the class is
+\[
+m=r+2^s\max\!\left(0,\left\lceil\frac{3-r}{2^s}\right\rceil\right).
+\]
+Check all $k=0,\ldots,h$. A noncontracting count contributes no paradoxical completion. If every contracting count passes the strict pruning test, the entire prefix subtree can be discarded. No monotonicity shortcut over the possible counts is assumed in the implementation.
+
+The induction behind~\eqref{eq:suffix} first proves the division-free inequality
+\[
+2^{j(w)}(d(w)+2^{|w|})\le2^{|w|}3^{j(w)}.
+\]
+Then $j(w)\le|w|$ and cancellation of $2^{j(w)}>0$ give~\eqref{eq:suffix}. These steps and the exclusion theorem are checked in \texttt{Collatz.ParadoxicalPruning}.
+
+\newpage
+\section{Search results and verification boundary}
+The implementation \texttt{analysis/paradoxical\_pruned.py} follows residue lifts in a depth-first tree. Each node stores its depth, residue, endpoint, odd count, and correction. The affine identity is checked at every visited node. Surviving leaves use the exact quotient interval from Section 1, so there is no seed-height cutoff.
+\begin{center}\small
+\begin{tabular}{rrrrl}
+\toprule
+Length&Visited nodes&Full residue count&Segments&Status\\
+\midrule
+8&201&256&5&Complete\\
+20&1,095&1,048,576&0&Complete\\
+27&38,425&134,217,728&50&Complete\\
+32&28,443&4,294,967,296&0&Complete\\
+40&123,887&1,099,511,627,776&0&Complete\\
+65&2,000,000&$2^{65}$&---&Incomplete\\
+\bottomrule
+\end{tabular}
+\end{center}
+These are selected lengths, not every length through forty. Tree nodes and full-scan residues are different units; both counts are provided explicitly. The length-65 run reaches its work limit with 21 pending nodes. Its lack of emitted segments does not establish absence of segments.
+
+The six Python controls include exhaustive comparisons through length fourteen, all short suffix bounds through length eight, direct residue and endpoint checks, and a test that a work-limited run cannot report completion. Every emitted segment is independently replayed with the shortcut rule. The JSON file \texttt{analysis/paradoxical\_pruned\_results.json} preserves the status and discovered segments.
+
+\subsection*{Formal and computational claims}
+The added module proves \texttt{correction\_upper}, the completion bound, and the pruning implication. These mathematical statements are in Lean. The Python tree traversal and the reported larger-length counts are tested computations, not Lean-extracted code or kernel-verified search certificates. The existing all-seed length-eight classification remains separately kernel-proved. The selected 64-declaration audit includes the new bounds and reports only standard foundational axioms.
+
+Build from \texttt{lean/} with
+\begin{quote}\small\ttfamily
+lake build Collatz.ParadoxicalPruning
+\end{quote}
+From the repository root, reproduce the experiment with
+\begin{quote}\small\ttfamily
+python3 analysis/paradoxical\_pruned.py
+\end{quote}
+The result makes fixed-length investigation substantially more practical, but does not yield a uniform cutoff on possible lengths. The length-65 work limit is an observed computational boundary, not a mathematical obstruction. A restriction uniform in length or circuit count is still needed to obtain global paradoxical finiteness and use the existing reduction to Collatz.
+
 \begin{thebibliography}{1}
 \bibitem{RT} O. Rozier and C. Terracol, \emph{Paradoxical behavior in Collatz sequences}, arXiv:2502.00948v3 (2025), Definition 1.1 and Section 3. \url{https://arxiv.org/html/2502.00948v3}.
 \end{thebibliography}

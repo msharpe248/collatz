@@ -56,15 +56,61 @@ direct iteration; interval membership and adjacent endpoints through length
 eight are compared with direct seeds; known and truncation-boundary controls
 are checked. Every emitted census segment is replayed directly as well.
 
-The selected module build and expanded 60-declaration audit pass with standard
-foundational axioms only. The three-page formal note and one-page guide in
-`paper/paradoxical_cylinders*` compile without warnings and were visually checked.
+The selected module builds and expanded 64-declaration audit pass with standard
+foundational axioms only. The expanded five-page formal note and two-page guide
+in `paper/paradoxical_cylinders*` compile without warnings; all seven pages were
+visually checked.
+
+## Proved prefix pruning
+
+`lean/Collatz/ParadoxicalPruning.lean` proves the suffix bound
+d(v)≤2^(h-k)*(3^k−2^k), where h is suffix length and k its odd count.
+The bound is already present in the literature cited above (Theorem 2.2),
+and is proved directly here by induction. For prefix length s and correction D,
+composition gives total correction at most
+
+    U_k = 3^k*D + 2^(s+h-k)*(3^k−2^k).
+
+Let m be a lower bound on the possible seed and a the prefix odd count.
+When 3^(a+k)<2^(s+h), the strict inequality
+
+    U_k < (2^(s+h)−3^(a+k))*m
+
+excludes every realized completion with that odd count. The Python search
+tests every possible suffix count; it uses no unproved monotonicity shortcut.
+For each prefix, m is the smallest seed at least three in its residue class.
+
+`paradoxical_pruned.py` performs depth-first residue lifting and applies this
+rule. It asserts the affine identity at every visited node and directly
+replays each emitted segment. Six unit tests cover the old interval method,
+every short suffix bound through length eight, exhaustive comparison through
+length fourteen, and correct reporting of an interrupted work-limited search.
+
+The recorded selected-length results in `paradoxical_pruned_results.json` are:
+
+| Length | Visited tree nodes | Full residue count | Segments | Status |
+|---|---:|---:|---:|---|
+| 8 | 201 | 256 | 5 | Complete |
+| 20 | 1,095 | 1,048,576 | 0 | Complete |
+| 27 | 38,425 | 134,217,728 | 50 | Complete |
+| 32 | 28,443 | 4,294,967,296 | 0 | Complete |
+| 40 | 123,887 | 1,099,511,627,776 | 0 | Complete |
+| 65 | 2,000,000 | 2^65 | Not determined | Work limit; 21 pending nodes |
+
+These are selected lengths, not all lengths through forty. The completed
+searches cover all seeds above two at those lengths. The traversal and larger
+counts are tested Python, not Lean-extracted code or kernel-certified census
+proofs. The pruning inequality is a Lean theorem. The length-eight census
+remains independently proved in Lean.
 
 ## What the evidence changes next
 
-Do not duplicate the nested finiteness implication or treat this small census
-as evidence sufficient for all lengths. Exponential enumeration becomes the
-bottleneck. The next useful target is a rigorous pruning rule for contracting
-words, or an independently proved restriction uniform across circuit counts.
+Do not duplicate the nested finiteness implication or treat fixed-length
+censuses as evidence sufficient for all lengths. The first rigorous pruning
+rule is now available and substantially reduces the tested trees. The next
+useful target is an independently proved restriction uniform across lengths
+or circuit counts, or a formal certificate checker connecting the pruned
+traversal to all-seed Lean statements at larger lengths. The length-65 resource
+limit is computational, not a mathematical obstruction.
 Any proposed rule must preserve the five known length-eight examples and must
 not confuse endpoint non-descent with absence of earlier descent.

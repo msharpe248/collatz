@@ -77,6 +77,10 @@ TARGETS = [
     ("Collatz.Paradoxical", "Collatz.paradoxical_quotient_interval", "Exact finite-length contracting cylinder interval without a seed cutoff"),
     ("Collatz.Paradoxical", "Collatz.paradoxical_residue_iff", "Complete decomposition of arbitrary positive seeds into residue cylinders"),
     ("Collatz.Paradoxical", "Collatz.paradoxical_eight_iff", "All seeds above two at length eight: exactly 7, 9, 18, 19, 25; kernel-decided residue table"),
+    ("Collatz.WordAffine", "Collatz.WordAffine.correction_append", "Exact composition identity for finite parity words"),
+    ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.correction_upper", "Sharp suffix correction upper bound by length and odd count"),
+    ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.completion_correction_upper", "Uniform correction bound for every completion of a specified odd count"),
+    ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.prune_paradoxical_completion", "Strict envelope inequality excludes all realized completions above a certified seed floor"),
 ]
 
 

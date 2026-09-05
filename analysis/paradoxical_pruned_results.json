@@ -1,0 +1,509 @@
+{
+  "method": "prefix correction envelope for each admissible suffix odd count",
+  "scope": "fixed lengths; Python computation with Lean-proved pruning inequality; no seed cutoff",
+  "work_limit_per_length": 2000000,
+  "results": [
+    {
+      "length": 8,
+      "status": "complete",
+      "visited_nodes": 201,
+      "pruned_nodes": 96,
+      "surviving_leaves": 5,
+      "full_residue_count": 256,
+      "pending_nodes": 0,
+      "segments": [
+        {
+          "length": 8,
+          "seed": 7,
+          "endpoint": 8,
+          "odd_steps": 5,
+          "quotient": 0,
+          "first_descent_within_segment": 7
+        },
+        {
+          "length": 8,
+          "seed": 9,
+          "endpoint": 10,
+          "odd_steps": 5,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 8,
+          "seed": 18,
+          "endpoint": 20,
+          "odd_steps": 5,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 8,
+          "seed": 19,
+          "endpoint": 20,
+          "odd_steps": 5,
+          "quotient": 0,
+          "first_descent_within_segment": 4
+        },
+        {
+          "length": 8,
+          "seed": 25,
+          "endpoint": 26,
+          "odd_steps": 5,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        }
+      ]
+    },
+    {
+      "length": 20,
+      "status": "complete",
+      "visited_nodes": 1095,
+      "pruned_nodes": 548,
+      "surviving_leaves": 0,
+      "full_residue_count": 1048576,
+      "pending_nodes": 0,
+      "segments": []
+    },
+    {
+      "length": 27,
+      "status": "complete",
+      "visited_nodes": 38425,
+      "pruned_nodes": 19163,
+      "surviving_leaves": 50,
+      "full_residue_count": 134217728,
+      "pending_nodes": 0,
+      "segments": [
+        {
+          "length": 27,
+          "seed": 164,
+          "endpoint": 167,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 165,
+          "endpoint": 167,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 27,
+          "seed": 166,
+          "endpoint": 167,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 171,
+          "endpoint": 175,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 5
+        },
+        {
+          "length": 27,
+          "seed": 231,
+          "endpoint": 233,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 12
+        },
+        {
+          "length": 27,
+          "seed": 248,
+          "endpoint": 251,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 250,
+          "endpoint": 251,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 257,
+          "endpoint": 263,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 27,
+          "seed": 258,
+          "endpoint": 263,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 259,
+          "endpoint": 263,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 4
+        },
+        {
+          "length": 27,
+          "seed": 328,
+          "endpoint": 334,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 330,
+          "endpoint": 334,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 332,
+          "endpoint": 334,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 333,
+          "endpoint": 334,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 27,
+          "seed": 342,
+          "endpoint": 350,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 343,
+          "endpoint": 350,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 5
+        },
+        {
+          "length": 27,
+          "seed": 345,
+          "endpoint": 350,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 27,
+          "seed": 347,
+          "endpoint": 350,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 10
+        },
+        {
+          "length": 27,
+          "seed": 376,
+          "endpoint": 377,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 386,
+          "endpoint": 395,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 387,
+          "endpoint": 395,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 4
+        },
+        {
+          "length": 27,
+          "seed": 388,
+          "endpoint": 395,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 389,
+          "endpoint": 395,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 27,
+          "seed": 390,
+          "endpoint": 395,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 391,
+          "endpoint": 395,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 7
+        },
+        {
+          "length": 27,
+          "seed": 432,
+          "endpoint": 445,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 436,
+          "endpoint": 445,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 437,
+          "endpoint": 445,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 27,
+          "seed": 440,
+          "endpoint": 445,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 442,
+          "endpoint": 445,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 580,
+          "endpoint": 593,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 581,
+          "endpoint": 593,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 27,
+          "seed": 582,
+          "endpoint": 593,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 584,
+          "endpoint": 593,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 586,
+          "endpoint": 593,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 587,
+          "endpoint": 593,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 5
+        },
+        {
+          "length": 27,
+          "seed": 588,
+          "endpoint": 593,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 589,
+          "endpoint": 593,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 27,
+          "seed": 656,
+          "endpoint": 668,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 660,
+          "endpoint": 668,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 661,
+          "endpoint": 668,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 27,
+          "seed": 664,
+          "endpoint": 668,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 666,
+          "endpoint": 668,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 864,
+          "endpoint": 890,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 872,
+          "endpoint": 890,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 874,
+          "endpoint": 890,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 880,
+          "endpoint": 890,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 881,
+          "endpoint": 890,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        },
+        {
+          "length": 27,
+          "seed": 884,
+          "endpoint": 890,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 1
+        },
+        {
+          "length": 27,
+          "seed": 885,
+          "endpoint": 890,
+          "odd_steps": 17,
+          "quotient": 0,
+          "first_descent_within_segment": 2
+        }
+      ]
+    },
+    {
+      "length": 32,
+      "status": "complete",
+      "visited_nodes": 28443,
+      "pruned_nodes": 14222,
+      "surviving_leaves": 0,
+      "full_residue_count": 4294967296,
+      "pending_nodes": 0,
+      "segments": []
+    },
+    {
+      "length": 40,
+      "status": "complete",
+      "visited_nodes": 123887,
+      "pruned_nodes": 61944,
+      "surviving_leaves": 0,
+      "full_residue_count": 1099511627776,
+      "pending_nodes": 0,
+      "segments": []
+    },
+    {
+      "length": 65,
+      "status": "incomplete_work_limit",
+      "visited_nodes": 2000000,
+      "pruned_nodes": 999990,
+      "surviving_leaves": 0,
+      "full_residue_count": 36893488147419103232,
+      "pending_nodes": 21,
+      "segments": []
+    }
+  ]
+}
