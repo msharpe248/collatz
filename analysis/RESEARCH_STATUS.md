@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 68 declarations using only standard
+The selected theorem audit now covers 69 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -162,3 +162,15 @@ These two declarations bring the current audit to 68. This preserves the
 arithmetic omitted by the envelope but does not yet bound it uniformly.
 See `analysis/PARADOXICAL_CYLINDERS.md` for the statement and a false-candidate
 example eliminated by the congruence.
+
+## Correction attainability boundary
+
+`Collatz.WordAffine.relaxed_closing_correction` in module
+`Collatz.CongruenceRelaxation` proves that an arbitrary
+correction inside the suffix envelope can satisfy an artificial exact return
+at every sufficiently large target length for any fixed positive affine prefix.
+The construction supplies no actual suffix word. Endpoint congruence therefore
+cannot by itself repair the envelope relaxation. Additional orbit constraints
+are not ruled out. The next target must control attainable corrections as both
+length and odd count grow. The 69-declaration audit includes this result;
+`paper/correction_attainability.md` and its guide document it.

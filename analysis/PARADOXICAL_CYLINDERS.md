@@ -56,7 +56,7 @@ direct iteration; interval membership and adjacent endpoints through length
 eight are compared with direct seeds; known and truncation-boundary controls
 are checked. Every emitted census segment is replayed directly as well.
 
-The selected module builds and expanded 68-declaration audit pass with standard
+The selected module builds and expanded 69-declaration audit pass with standard
 foundational axioms only. The expanded six-page formal note and three-page guide
 in `paper/paradoxical_cylinders*` compile without warnings; all nine pages were
 visually checked.
@@ -82,7 +82,7 @@ For each prefix, m is the smallest seed at least three in its residue class.
 
 `paradoxical_pruned.py` performs depth-first residue lifting and applies this
 rule. It asserts the affine identity at every visited node and directly
-replays each emitted segment. Eight unit tests cover the old interval method,
+replays each emitted segment. Nine unit tests cover the old interval method,
 every short suffix bound through length eight, exhaustive comparison through
 length fourteen, and correct reporting of an interrupted work-limited search.
 
@@ -155,3 +155,9 @@ This arithmetic bridge brings the current audit to 68; no mathematical novelty
 or uniform finiteness is claimed for it. The next substantive task remains a
 uniform bound on the interaction of correction and realizing residue, rather
 than merely enumerating the exact criterion at additional fixed lengths.
+
+The next pass proved a further limitation: the correction envelope plus full
+endpoint congruence still admits artificial exact returns for every fixed
+positive affine prefix at all sufficiently large lengths. These corrections
+need not be attained by any suffix word. See `paper/correction_attainability.md`
+and `Collatz.CongruenceRelaxation`. The current selected audit has 69 declarations.

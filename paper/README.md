@@ -34,3 +34,8 @@ tectonic paper/paradoxical_cylinders_guide.tex
 
 After editing, check the compiler log, cross-references, and rendered pages.
 The current theorem audit is [theorem_audit.json](../analysis/theorem_audit.json).
+
+- [Correction attainability](correction_attainability.md) and
+  [guide](correction_attainability_guide.md): Lean-proved limitation of combining
+  a relaxed suffix correction interval with exact endpoint congruence. Markdown
+  sources; no claim of an actual cycle or uniform Collatz proof.

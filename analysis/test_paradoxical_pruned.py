@@ -28,6 +28,25 @@ class PruningControls(unittest.TestCase):
                               and coefficient < modulus)
                     self.assertEqual(joint, direct)
 
+    def test_artificial_closing_correction(self):
+        for depth, states in layers(7):
+            modulus = 1 << depth
+            for r, (endpoint, odd) in enumerate(states):
+                q = max(0, (3-r+modulus-1)//modulus)
+                seed = r+modulus*q
+                value = endpoint+3**odd*q
+                prefix_corr = modulus*value-3**odd*seed
+                for extra in (0, 5):
+                    length = depth+2*(odd+2*seed)+value+1+extra
+                    k = 2*seed
+                    d = (1 << (length-depth))*seed-3**k*value
+                    self.assertGreaterEqual(d, 0)
+                    self.assertLessEqual(k, length-depth)
+                    self.assertLess(3**(odd+k), 1 << length)
+                    self.assertLessEqual(d, (1 << (length-depth-k))*(3**k-(1 << k)))
+                    self.assertEqual(3**(odd+k)*seed+3**k*prefix_corr+modulus*d,
+                                     (1 << length)*seed)
+
     def test_all_short_suffix_envelopes(self):
         for length in range(9):
             for word in itertools.product((0, 1), repeat=length):

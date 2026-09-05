@@ -5,7 +5,8 @@ Every fixed prefix eventually passes its necessary envelope test. This is
 not a claim that it has any actual paradoxical completion. -/
 namespace Collatz.WordAffine
 
-private theorem enough_odd_budget (m : ℕ) :
+/-- An explicit odd-count budget with sufficient relaxed correction mass. -/
+theorem enough_odd_budget (m : ℕ) :
     (m+1)*2^(2*m) ≤ 3^(2*m) := by
   induction m with
   | zero => norm_num
