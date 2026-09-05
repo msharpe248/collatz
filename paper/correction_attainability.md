@@ -102,3 +102,43 @@ claim is made for every residue-based method.
 The next substantive objective is a restriction on the attainable correction
 set that remains useful as both word length and odd count grow. The congruence
 equivalence alone does not provide that restriction. Collatz remains unproved.
+
+## Subsequent formalization: exact reconstruction
+
+`lean/Collatz/CorrectionDecode.lean` now supplies a deterministic test for the
+missing attainability condition. Given h,k,D, reconstruct a word of length h.
+If D is even, its first letter must be zero and continue with (h−1,k,D/2).
+If D is odd, its first letter must be one and continue with
+(h−1,k−1,(D−3^(k−1))/2), using natural subtraction. Finally recompute the
+word's odd count and correction, and accept only if both exactly equal k,D.
+The final check rejects invalid parameters and any misleading truncated subtraction.
+
+The reason is the defining identity
+
+    correction(b :: w) = (if b then 3^ones(w) else 0) + 2 correction(w).
+
+The power of three is odd, so the low bit of the correction fixes b. Induction
+proves that reconstruction recovers every actual word. Conversely, successful
+final checks provide the required word themselves. Thus the test accepts
+exactly the attainable corrections; fixed length, odd count, and correction
+also determine at most one word.
+
+Lean proves `decodeCorrection_correct`, `correctionAttainable_iff`, and
+`attainable_paradoxical_iff`. The last equivalence says that attainability,
+positivity, coefficient contraction, endpoint congruence, and the correction
+inequality together describe an actual paradoxical word. This is an exact
+criterion, not an exclusion theorem.
+
+Ordinary kernel `decide` verifies that (h,k,D)=(8,5,347) is attainable and
+(16,6,194421) is not. The latter rejects the artificial return above. The Python
+implementation `analysis/correction_decode.py` is independently tested against
+all words through length ten and exhaustive attainable sets through length
+seven, including invalid inputs and genuine length-eight examples. It is not
+extracted from Lean. Three additional controls pass. The current audit covers
+72 declarations with standard foundations only; the earlier 69 count describes
+the preceding limitation snapshot.
+
+The criterion avoids enumerating words when testing one proposed correction.
+It does not avoid searching the possible corrections or lengths. The open
+mathematical task remains a uniform restriction on accepted data, so this
+formalization supplies infrastructure rather than a new Collatz exclusion.

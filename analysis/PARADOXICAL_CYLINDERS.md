@@ -56,7 +56,7 @@ direct iteration; interval membership and adjacent endpoints through length
 eight are compared with direct seeds; known and truncation-boundary controls
 are checked. Every emitted census segment is replayed directly as well.
 
-The selected module builds and expanded 69-declaration audit pass with standard
+The selected module builds and expanded 72-declaration audit pass with standard
 foundational axioms only. The expanded six-page formal note and three-page guide
 in `paper/paradoxical_cylinders*` compile without warnings; all nine pages were
 visually checked.
@@ -161,3 +161,10 @@ endpoint congruence still admits artificial exact returns for every fixed
 positive affine prefix at all sufficiently large lengths. These corrections
 need not be attained by any suffix word. See `paper/correction_attainability.md`
 and `Collatz.CongruenceRelaxation`. The current selected audit has 69 declarations.
+
+`Collatz.CorrectionDecode` now supplies exact deterministic attainability
+checking by reconstructing the word from correction bits and verifying its
+odd count and correction. The artificial return example fails this stronger
+test. The current audit covers 72 declarations; three additional Python tests
+compare reconstruction with exhaustive word sets. This does not bound the
+set of successful lengths or corrections. See the updated attainability note.

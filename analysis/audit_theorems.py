@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.CorrectionDecode", "Collatz.WordAffine.decodeCorrection_correct", "Deterministic reconstruction recovers every finite Boolean word"),
+    ("Collatz.CorrectionDecode", "Collatz.WordAffine.correctionAttainable_iff", "Exact correction acceptance iff a word with the specified length, count and correction exists"),
+    ("Collatz.CorrectionDecode", "Collatz.WordAffine.attainable_paradoxical_iff", "Attainability plus numerical criterion is equivalent to an actual paradoxical word; no uniform exclusion"),
     ("Collatz.CongruenceRelaxation", "Collatz.WordAffine.relaxed_closing_correction", "Artificial suffix correction in the envelope closes every fixed positive prefix at sufficiently large lengths; no attainability claim"),
     ("Collatz.WordCongruence", "Collatz.WordAffine.realizes_iff_dvd", "Exact parity realization iff affine numerator is divisible by the full power of two"),
     ("Collatz.WordCongruence", "Collatz.WordAffine.realizes_paradoxical_iff", "Joint congruence and correction criterion; all natural seeds and finite words"),

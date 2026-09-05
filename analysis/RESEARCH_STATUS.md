@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 69 declarations using only standard
+The selected theorem audit now covers 72 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -174,3 +174,11 @@ cannot by itself repair the envelope relaxation. Additional orbit constraints
 are not ruled out. The next target must control attainable corrections as both
 length and odd count grow. The 69-declaration audit includes this result;
 `paper/correction_attainability.md` and its guide document it.
+
+The subsequent `Collatz.CorrectionDecode` module reconstructs a word from its
+length, odd count, and correction, then checks the reconstructed data exactly.
+It proves attainability equivalence, uniqueness, and the complete joint
+paradoxical criterion. Kernel controls reject the artificial (16,6,194421)
+correction and accept the genuine (8,5,347) correction. The current selected
+audit has 72 declarations. This is infrastructure; no new uniform exclusion
+is established. The companion paper and guide were updated accordingly.

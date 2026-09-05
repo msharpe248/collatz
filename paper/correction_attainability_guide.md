@@ -28,3 +28,14 @@ restriction that works as the length and odd count grow.
 The companion [technical note](correction_attainability.md) gives the theorem,
 explicit witness, proof, Lean declaration, and validation commands. This is a
 verified limitation of one method; Collatz remains open.
+
+An exact reconstruction test is now implemented and proved in Lean. The low
+bit of the correction determines the next parity; repeating this recovers a
+candidate word. Recomputing its odd count and correction rejects invalid data.
+The test rejects the artificial sixteen-step return described above and accepts
+the known length-eight correction from seed 7, both checked by Lean's kernel.
+
+This closes the correctness gap for testing a single correction. It still
+leaves infinitely many possible inputs, so it does not establish a cutoff or
+prove Collatz. The technical note now includes the reconstruction proof and
+its verification boundary.
