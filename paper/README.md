@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Every unbounded positive orbit has summable reciprocals and bounded correction | [orbit_summability.pdf](orbit_summability.pdf) | [orbit_summability_guide.pdf](orbit_summability_guide.pdf) |
 | Complete positive-seed mechanical classification | [mechanical_classification.pdf](mechanical_classification.pdf) | [mechanical_classification_guide.pdf](mechanical_classification_guide.pdf) |
 | Endpoint-swapped natural return words force the trivial cycle | [endpoint_cycles.pdf](endpoint_cycles.pdf) | [endpoint_cycles_guide.pdf](endpoint_cycles_guide.pdf) |
 | All irrational mechanical itineraries excluded | [mechanical_complexity.pdf](mechanical_complexity.pdf) | [mechanical_complexity_guide.pdf](mechanical_complexity_guide.pdf) |

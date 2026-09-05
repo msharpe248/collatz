@@ -8,6 +8,7 @@ belong to an excluded family.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Universal correction coverage | `unbounded_orbit_reciprocal_summable`, `supercritical_iff_unbounded_orbit` | All unbounded positive natural orbits have summable reciprocals and bounded correction; no escape exclusion |
 | Full mechanical classification | `mechanical_classification`, `eventual_mechanical_reaches_one` | All real slopes and intercepts; positive global seed is 1 or 2 with slope 1/2; any mechanical tail forces reaching one |
 | Sturmian itineraries | `Silver.no_itinerary`, `Silver.no_eventual_itinerary` | Slope √2/2, every intercept and natural seed; unconditional |
 | Infinite Sturmian family | `Metallic.no_itinerary`, `Metallic.no_eventual_itinerary` | Every integer m≥6, slope 1/(1+(√(m²+4)−m)/2), every intercept and natural seed; unconditional |
@@ -52,7 +53,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 107 declarations using only standard
+The selected theorem audit now covers 113 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -120,16 +121,13 @@ checks swap identities, and replays the finite Mahler candidates.
 3. **Ordinary integer coverage.** Prove an independently meaningful
    restriction forcing every counterexample into an excluded class. No
    complexity-versus-defect dichotomy has been established.
-4. **Critical-boundary orbits.** Bounded ideal correction is not known for
-   every hypothetical divergent orbit. It is now proved equivalent to
-   summability of reciprocal orbit values. An escaping orbit with divergent
-   reciprocal sum is the precise remaining coverage case. The residue-based
-   tenth-root bound improves the tail drift threshold to 9/10, with finite
-   and global conditional boundedness theorems for seeds not divisible by
-   three. Every positive orbit eventually satisfies that residue restriction.
-   This does not exclude faster drift or all critical-density orbits, and does
-   not make correction bounded in the remaining case. Even a proof of
-   coverage would not itself exclude bounded-correction orbits.
+4. **Correction coverage completed.** `OrbitSummability` now proves that
+   EVERY unbounded positive natural orbit has summable reciprocals and
+   bounded ideal correction. This follows from an explicit finite packing
+   argument, not a strict density gap or imported density axiom. The inverse
+   drift 2^t/3^j tends to zero. What remains is to exclude the bounded-correction
+   unbounded orbits themselves. No uniform absolute bound across all shifted
+   corrections is supplied. Nontrivial cycles remain separate.
 5. **Survivor exhaustion.** Exact interval computation is not a termination
    proof. Universal finite-height exhaustion is equivalent to universal
    descent; using it as a completeness assumption would be circular.
@@ -344,3 +342,36 @@ exact regression controls pass. Paper and guide: mechanical_classification.pdf
 and mechanical_classification_guide.pdf under paper/, with LaTeX sources.
 Next research priority: independent restrictions on general counterexamples,
 or a general descent/cycle argument outside the completed mechanical class.
+
+
+## Universal orbit packing and correction coverage (2026-09-05)
+
+`Collatz.packing_bound` (in module OrbitPacking) proves
+8^m card(S) <= 2*216^m+243^m for every finite S below 32^m on which T^(5m)
+is injective. Every unbounded orbit is coalescence-free at every fixed time,
+so the bound applies to all its finite subsets, including late orbit values.
+The two bounds are the small image for odd count <3m and the binomial tail
+for count >=3m. Both come from the main project's existing theorems.
+
+`OrbitSummability` sums reciprocal values over geometric shells. The budget
+is 54*(27/32)^m + (243/8)*(243/256)^m. Time injectivity preserves multiplicities
+when replacing a finite orbit prefix by its value set. Thus EVERY unbounded
+positive orbit has summable reciprocals and bounded ideal correction.
+`supercritical_iff_unbounded_orbit` proves the exact positive-seed equivalence;
+`unbounded_inverse_drift_tendsto_zero` gives the inverse-drift limit.
+
+This supersedes earlier claims in this ledger and correction papers that an
+unbounded orbit with divergent reciprocal sum was an unresolved coverage case.
+The critical density floor alone still does not prove summability; the new
+packing argument supplies the missing independent input. No strict density
+gap or uniform absolute bound on every shifted ideal correction follows.
+All hypothetical unbounded positive orbits are now in the existing ideal
+framework; exclusion within that framework and general cycles remain open.
+
+Provenance: Garcia–Tal 1999, DOI 10.4064/aa-90-3-245-250, equation (6) and
+Corollary 1 support the literature implication highlighted in MathOverflow
+question 513539. The original paper was checked in full. The Lean proof uses
+an independent explicit origin-based packing specialization and imports no
+external density axiom. No mathematical novelty claim.
+Six declarations bring the audit to 113; three exact controls pass.
+Paper and guide: paper/orbit_summability.pdf and paper/orbit_summability_guide.pdf.

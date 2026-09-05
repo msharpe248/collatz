@@ -110,3 +110,10 @@ No literature-priority claim is made.
 The technical paper is `paper/correction_growth.tex` and `.pdf`; the guide
 is `paper/correction_growth_guide.tex` and `.pdf`. Both compile without
 warnings, and all nine rendered pages of the expanded pair were visually inspected.
+
+
+Update 2026-09-05: the previously open reciprocal-summability coverage case
+is now closed by `OrbitSummability.lean`. Every unbounded positive orbit has
+summable reciprocals and bounded correction, by a separate packing proof.
+The polynomial inequalities above remain valid; they alone did not establish
+this stronger conclusion. See `paper/orbit_summability.pdf`.

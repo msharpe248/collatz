@@ -11,6 +11,13 @@ and a systematic experimental program on what lies beyond. The full
 story is in the paper: [paper/nogo.pdf](paper/nogo.pdf), with a
 non-specialist guide at [paper/nogo_guide.pdf](paper/nogo_guide.pdf).
 
+The correction-coverage gap is also closed: Lean proves that every unbounded
+positive orbit has summable reciprocals and bounded ideal correction, using
+an explicit packing bound. This does not exclude unbounded orbits or cycles.
+See the [summability paper](paper/orbit_summability.pdf),
+[guide](paper/orbit_summability_guide.pdf), and
+[Lean theorem](lean/Collatz/OrbitSummability.lean).
+
 The mechanical itinerary branch is now complete: a positive natural seed
 with a globally mechanical parity itinerary must be 1 or 2, with slope 1/2.
 Any mechanical tail forces reaching 1. The proof covers all real slopes and

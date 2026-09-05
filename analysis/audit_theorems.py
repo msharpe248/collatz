@@ -17,6 +17,13 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.OrbitPacking", "Collatz.packing_bound", "Finite power-saving bound for equal-time injective sets below 32^m"),
+    ("Collatz.OrbitPacking", "Collatz.unbounded_orbit_packing", "All unbounded natural orbits obey the finite packing bound at every scale"),
+    ("Collatz.OrbitSummability", "Collatz.unbounded_orbit_reciprocal_summable", "Every unbounded positive natural orbit has summable reciprocals; unconditional coverage"),
+    ("Collatz.OrbitSummability", "Collatz.unbounded_orbit_supercritical", "Every unbounded positive natural orbit has bounded ideal correction"),
+    ("Collatz.OrbitSummability", "Collatz.supercritical_iff_unbounded_orbit", "For positive seeds bounded ideal correction is equivalent to unboundedness"),
+    ("Collatz.OrbitSummability", "Collatz.unbounded_inverse_drift_tendsto_zero", "Inverse multiplicative drift tends to zero on every unbounded positive orbit; no strict density gap"),
+
     ("Collatz.MechanicalPeriod", "Collatz.mechanical_period_return", "Integral slope increment forces an actual natural return at the initial seed"),
     ("Collatz.MechanicalPeriod", "Collatz.WordAffine.endpoint_rotations_trivial", "Endpoint-swapped rotations of an actual return word force the trivial cycle"),
     ("Collatz.RationalGrid", "Collatz.RationalGrid.extreme_words", "Uniform endpoint-swapped structure of the extreme phases of every reduced rational grid"),
