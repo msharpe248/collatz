@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 87 declarations using only standard
+The selected theorem audit now covers 90 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -253,3 +253,24 @@ Three new targets bring the current audit to 87. The paper and guide are
 `paper/ideal_tracking_barrier*`. A proof of that missing transport and
 confinement, or another unconditional exclusion of bounded-correction
 positive orbits, remains a central coverage target.
+
+## General parity complexity obstruction
+
+`Collatz.ParityComplexity` formalizes the state-congruence/height argument:
+if N+1≤2^K, every unbounded orbit has at least 5q+1 parity factors of length
+3q+K. A uniform factor-complexity slope below 5/3 forces boundedness. Since
+bounded orbits have bounded factor complexity, no natural seed or shifted
+seed satisfies the Sturmian condition p(L)=L+1 for every L.
+
+This closes the abstract Sturmian complexity class, beyond the earlier
+individual rotation-family exclusions. It does not yet port the equivalence
+between `mech alpha rho` and the factor-complexity definition, so no new
+all-slopes mechanical-word Lean statement is claimed. The next concrete
+transport task is the mechanical-word factor upper bound, together with
+irrational-slope aperiodicity. No universal low-complexity coverage statement
+for Collatz counterexamples is available.
+
+Dubickas (2009), Theorem 5, already proves a stronger asymptotic Collatz-word
+complexity lower bound. This is a main-project formalization and consequence,
+not a mathematical novelty claim. Three new targets bring the selected audit
+to 90. Paper and guide: `paper/parity_complexity*`.

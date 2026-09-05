@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.ParityComplexity", "Collatz.ParityComplexity.unbounded_factor_floor", "Every unbounded orbit has at least 5q+1 distinct parity factors of length 3q+K when N+1 <= 2^K"),
+    ("Collatz.ParityComplexity", "Collatz.ParityComplexity.bounded_of_linear_complexity", "A uniform factor-complexity slope below 5/3 forces boundedness; no universal envelope assumed"),
+    ("Collatz.ParityComplexity", "Collatz.ParityComplexity.no_sturmian_complexity", "No natural seed has exactly L+1 factors at every length; standard Sturmian complexity definition"),
     ("Collatz.IdealBarrier", "Collatz.one_lt_idealLimit", "Positive seed with bounded ideal correction; strict lower bound one on the limiting correction"),
     ("Collatz.IdealBarrier", "Collatz.uniformSupercritical_bound_gt_two", "Uniform bound on every shifted finite correction must exceed two; no uniform upper bound inferred"),
     ("Collatz.IdealBarrier", "Collatz.ideal_tracking_gap_gt_one", "Canonical geometric ideal lies more than one above every orbit value under bounded correction"),

@@ -58,3 +58,8 @@ The current theorem audit is [theorem_audit.json](../analysis/theorem_audit.json
   [guide](ideal_tracking_barrier_guide.md): strict lower bounds on limiting
   corrections, exclusion of uniform bounds at most two, and the unresolved
   transport and confinement needed for the geometric-progression library.
+
+- [Parity complexity](parity_complexity.md) and [guide](parity_complexity_guide.md):
+  an explicit complexity floor, conditional boundedness below slope 5/3, and
+  exclusion of the entire Sturmian class in its factor-complexity definition.
+  The mechanical-word equivalence has not been ported into this result.
