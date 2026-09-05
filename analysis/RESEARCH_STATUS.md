@@ -8,6 +8,7 @@ belong to an excluded family.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Noncontracting tails | `unbounded_iff_noncontracting_tail`, `all_orbits_bounded_iff_all_contract` | Exact reduction of nondivergence to universal coefficient contraction; arbitrarily late noncontracting tails cover every hypothetical unbounded positive orbit |
 | First contraction | `first_contraction_seed_bound`, `descent_of_contraction_le65`, `return_le65_reaches_one` | Sharper seed bound at any first contraction; every seed above one descends by a coefficient contraction within 65 steps; positive returns of length at most 65 reach one |
 | Universal correction coverage | `unbounded_orbit_reciprocal_summable`, `supercritical_iff_unbounded_orbit` | All unbounded positive natural orbits have summable reciprocals and bounded correction; no escape exclusion |
 | Full mechanical classification | `mechanical_classification`, `eventual_mechanical_reaches_one` | All real slopes and intercepts; positive global seed is 1 or 2 with slope 1/2; any mechanical tail forces reaching one |
@@ -54,7 +55,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 131 declarations using only standard
+The selected theorem audit now covers 139 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -486,3 +487,43 @@ and longer nontrivial cycles remain open. No priority or cycle-bound record
 claim is made. Seven targets bring the standard-foundations audit to 131;
 the selected build passes. Paper and guide: `paper/first_contraction.*`
 and `paper/first_contraction_guide.*`.
+
+## Exact reduction to noncontracting tails (2026-09-05)
+
+`NoncontractingTail.lean` defines `NeverContracts N` as the infinite
+condition `forall t, 2^t <= 3^(oddSteps t N)`. On every unbounded positive
+orbit the inverse drift tends to zero and starts at one, so it attains a
+global maximum. The multiplicative cocycle shows that the seed at this
+maximum is noncontracting. Applying the construction to each shifted orbit
+gives such tails beyond every prescribed time, not at every late index.
+
+Conversely, a positive noncontracting seed is unbounded: if its values were
+bounded by B, the exact correction identity would give `idealC t N <= B`.
+Bounded correction forces escape, contradicting the value bound.
+Thus `unbounded_iff_noncontracting_tail` is a genuine orbit-level
+biconditional. The global `all_orbits_bounded_iff_all_contract` equates
+nondivergence with the existence of a coefficient contraction for every
+positive seed. Neither side is established. Nontrivial cycles are not
+excluded by this equivalence.
+
+Backward arithmetic begins with `neverContracts_of_prefix`: a finite
+prefix with all coefficients at least one, followed by a noncontracting
+tail, preserves the property. In particular an odd predecessor does so.
+Every noncontracting seed is odd, and a seed N congruent to 2 modulo 3
+has the smaller positive odd noncontracting predecessor `(2*N-1)/3`.
+Consequently a least positive noncontracting seed cannot be 2 modulo 3.
+This is a restriction on a least seed, not an exclusion of that residue
+on arbitrary orbits. Residues 0 and 1 remain unresolved.
+
+The module build and selected 139-declaration standard-foundations audit
+pass. Eight new targets cover the reduction and backward transport.
+Paper and guide: `paper/noncontracting_tails.*` and
+`paper/noncontracting_tails_guide.*`. No mathematical priority claim.
+
+The next arithmetic task is to exclude the positive `NeverContracts`
+class, now proved to cover all escape. A finite-horizon certificate alone
+cannot do that. Backward transport may restrict a least seed further, but
+there is no current proof that every remaining residue has a smaller
+admissible predecessor. In particular, a residue reduction must preserve
+the full noncontraction property; merely finding a merging predecessor
+or an unbounded seed in an arithmetic progression would not suffice.

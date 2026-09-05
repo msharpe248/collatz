@@ -17,6 +17,14 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.NoncontractingTail", "Collatz.unbounded_has_noncontracting_tail", "Every unbounded positive orbit has a tail whose coefficients never contract"),
+    ("Collatz.NoncontractingTail", "Collatz.NeverContracts.unbounded", "A positive seed with no coefficient contraction has an unbounded orbit"),
+    ("Collatz.NoncontractingTail", "Collatz.unbounded_iff_noncontracting_tail", "Exact orbit-level equivalence between unboundedness and a noncontracting tail"),
+    ("Collatz.NoncontractingTail", "Collatz.unbounded_has_arbitrarily_late_noncontracting_tail", "Noncontracting tails occur beyond every prescribed time on any unbounded positive orbit"),
+    ("Collatz.NoncontractingTail", "Collatz.all_orbits_bounded_iff_all_contract", "Nondivergence is equivalent to universal existence of coefficient contraction; neither side proved"),
+    ("Collatz.NoncontractingTail", "Collatz.NeverContracts.smaller_predecessor", "A noncontracting seed two modulo three has a smaller positive noncontracting predecessor"),
+    ("Collatz.NoncontractingTail", "Collatz.neverContracts_of_prefix", "Exact transport through a finite prefix whose coefficients are all noncontracting"),
+    ("Collatz.NoncontractingTail", "Collatz.least_noncontracting_not_two_mod_three", "A least positive noncontracting seed cannot be two modulo three; remaining residues not excluded"),
     ("Collatz.FirstContraction", "Collatz.first_contraction_correction_bound", "Scaled correction is bounded by the odd count while every earlier coefficient is noncontracting"),
     ("Collatz.FirstContraction", "Collatz.first_contraction_seed_bound", "All-time conditional seed bound for a non-descending first coefficient contraction"),
     ("Collatz.FirstContraction", "Collatz.descent_at_first_contraction", "Seeds above the explicit first-contraction bound descend at that endpoint"),

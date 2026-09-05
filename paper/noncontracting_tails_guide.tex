@@ -1,0 +1,60 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,microtype}
+\setlength{\emergencystretch}{3em}
+\title{Guide: Where to Look for an Unbounded Orbit}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\section*{What Lean now proves}
+Every hypothetical unbounded positive Collatz orbit has a point from which
+its multiplicative coefficient never drops below one. Such starting points
+occur arbitrarily late. Conversely, a positive seed whose coefficient
+never drops below one must have an unbounded orbit.
+
+This turns the escape problem into one exact task: prove that every positive
+seed eventually has a coefficient below one. That task is still open.
+Even after solving it, nontrivial cycles would still need to be excluded.
+
+\section*{Why a suitable starting point exists}
+The earlier summability result proves that the inverse coefficient
+$2^t/3^{j_t}$ tends to zero along any unbounded orbit. Its value at time zero
+is one, so its largest value is attained at some finite time.
+
+Start at that maximum. Every later inverse coefficient, measured relative
+to the new starting point, is at most one. This is precisely the required
+noncontraction condition. The same argument can start after any prescribed
+time; it does not say that every late point has the property.
+
+For the converse, suppose such a seed had a bounded orbit. The exact orbit
+identity would then bound its ideal correction too. But bounded ideal
+correction already forces escape, giving a contradiction.
+
+\section*{A first arithmetic restriction}
+A seed with no coefficient contraction must be odd. If it is also two
+modulo three, then $(2N-1)/3$ is a smaller positive odd predecessor. Its
+first coefficient is $3/2$, so it also has no future contraction.
+
+Therefore a smallest positive seed with this property cannot be two modulo
+three. This does not eliminate the remaining residues. Lean also proves
+a general rule for transporting noncontraction backward through a finite
+prefix whose coefficients all stay at least one.
+
+\section*{What this changes, and what it does not}
+The reduction gives complete coverage of hypothetical unbounded positive
+orbits by a specific arithmetic class. We still have to prove that this
+class has no positive natural seed. Passing a finite prefix test cannot
+establish the infinite condition.
+
+The earlier 65-step descent certificate helps when a coefficient
+contraction happens within that horizon. It does not prove that every
+seed contracts within 65 steps, or at any time. The Collatz goal remains
+open; no mathematical priority claim is made here.
+
+\section*{Verification}
+The build and 139-declaration standard-foundations audit pass.
+{\raggedright Run \texttt{lake build Collatz.NoncontractingTail} from
+\texttt{lean/}.\par}
+The technical paper gives the exact equivalences and hypotheses.
+\end{document}

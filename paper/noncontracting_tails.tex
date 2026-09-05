@@ -1,0 +1,135 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{3em}
+\newtheorem{theorem}{Theorem}
+\title{Noncontracting Tails of Unbounded Collatz Orbits:\\An Exact Reduction in Lean}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Using the repository's reciprocal-summability theorem, we prove that every
+unbounded positive natural Collatz orbit has arbitrarily late tails whose
+multiplicative coefficients never contract. Conversely, every positive
+seed with no coefficient contraction has an unbounded orbit. Thus
+nondivergence is equivalent to the assertion that every positive seed
+has some coefficient contraction. We also prove backward transport and
+one residue restriction on a least noncontracting seed. Neither side of
+the global equivalence is established; nontrivial cycles remain a separate
+problem. No mathematical priority claim is made.
+\end{abstract}
+
+\section{Definitions and the tail reduction}
+Use the shortcut map $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$.
+Let $x_t=T^t(N)$ and let $j_t(N)$ count odd states before time $t$. Write
+\[
+a_t(N)=\frac{2^t}{3^{j_t(N)}}.
+\]
+A seed is \emph{noncontracting} when $2^t\le3^{j_t(N)}$ for every $t$,
+or equivalently $a_t(N)\le1$ for every $t$. This is an infinite condition;
+a finite prefix check does not establish it.
+\begin{theorem}\label{thm:tail}
+For every $N>0$,
+\[
+\bigl(\forall B\;\exists t\;B<T^t(N)\bigr)
+\quad\Longleftrightarrow\quad
+\exists s\;\forall t\;2^t\le3^{j_t(T^s(N))}.
+\]
+On an unbounded orbit, such indices $s$ occur beyond every prescribed time.
+This does not assert that every sufficiently late index has the property.
+\end{theorem}
+
+\subsection*{From unboundedness to a noncontracting tail}
+The earlier module \texttt{OrbitSummability.lean} proves $a_t(N)\to0$
+for every unbounded positive orbit. Since $a_0(N)=1$, all sufficiently
+late values are less than one. A maximum on the remaining finite initial
+set is therefore a global maximum. Choose an index $s$ attaining it.
+The odd-count cocycle gives the exact identity
+\[
+a_{s+t}(N)=a_s(N)\,a_t(T^s(N)).
+\]
+The left side is at most $a_s(N)>0$, hence the shifted factor is at most
+one. This proves the forward implication.
+
+The argument can start from any shifted unbounded orbit. Bounded ideal
+correction propagates to shifts and forces escape there, so each shift
+is unbounded. Applying the same maximum argument after any prescribed
+index gives arbitrarily late noncontracting tails.
+
+\subsection*{From a noncontracting seed to unboundedness}
+Suppose a positive noncontracting seed had $x_t\le B$ for every $t$.
+The exact correction identity
+\[
+2^t x_t=3^{j_t}N+d_t
+\]
+would imply $d_t\le2^t x_t\le3^{j_t}B$. Therefore its ideal corrections
+$c_t=d_t/3^{j_t}$ would be bounded above by $B$. The earlier reciprocal
+theorem proves that bounded ideal correction forces escape to infinity,
+contradicting the assumed bound on $x_t$. Thus a positive noncontracting
+seed is unbounded. If it occurs on another orbit, that orbit is unbounded
+as well, completing Theorem~\ref{thm:tail}.
+
+\section{The precise global obligation}
+\begin{theorem}
+The following propositions are equivalent:
+\begin{enumerate}
+\item Every positive natural orbit is bounded above.
+\item For every $N>0$, there exists $t$ such that $3^{j_t(N)}<2^t$.
+\end{enumerate}
+\end{theorem}
+If (1) holds, the converse in Theorem~\ref{thm:tail} excludes a
+noncontracting seed, proving (2). If (2) holds and an unbounded orbit
+existed, its positive noncontracting tail would contradict (2).
+
+This equivalence concerns nondivergence. It does not rule out nontrivial
+cycles or prove that bounded orbits reach one. The earlier first-contraction
+certificate supplies actual descent when a coefficient contraction occurs
+within 65 steps, but it supplies neither a universal contraction time nor
+the all-time assertion (2).
+
+\section{Backward transport and a residue restriction}
+A finite prefix of length $k$ with $2^t\le3^{j_t(N)}$ for every $t\le k$,
+followed by a noncontracting tail at $T^k(N)$, is noncontracting at all
+times. For $t=k+r$, multiply the inequalities for the prefix and tail,
+using $j_{k+r}(N)=j_k(N)+j_r(T^k(N))$. This transport rule is proved
+for arbitrary prefix lengths.
+
+In particular, an odd predecessor of a noncontracting seed is
+noncontracting: its first coefficient is $3/2$, and the remaining
+coefficients are that factor times the tail coefficients.
+A noncontracting seed must itself be odd, since an even first step would
+have coefficient $1/2$.
+\begin{theorem}
+If $N$ is noncontracting and $N\equiv2\pmod3$, then
+\[
+M=\frac{2N-1}{3}
+\]
+is a smaller positive odd noncontracting seed. Consequently a least
+positive noncontracting seed cannot be $2\pmod3$.
+\end{theorem}
+Indeed $N$ is odd and at least five, so $M$ is an odd positive integer,
+$M<N$, and $3M+1=2N$. Thus $T(M)=N$ and odd backward transport applies.
+This excludes the residue only for a least such seed. It does not exclude
+all noncontracting seeds of that residue, and it leaves residues zero
+and one modulo three unresolved.
+
+\section{Verification and remaining work}
+{\raggedright
+Source: \texttt{lean/Collatz/NoncontractingTail.lean}. The central
+declarations are \texttt{unbounded\_iff\_noncontracting\_tail},
+\texttt{unbounded\_has\_arbitrarily\_late\_noncontracting\_tail}, and
+\texttt{all\_orbits\_bounded\_iff\_all\_contract}. Backward transport
+is \texttt{neverContracts\_of\_prefix}; the least-seed restriction is
+\texttt{least\_noncontracting\_not\_two\_mod\_three}.
+The module build and selected 139-declaration axiom audit pass using only
+standard foundations. No new axiom or \texttt{sorry} is used.
+Build with \texttt{lake build Collatz.NoncontractingTail} from
+\texttt{lean/}.\par}
+
+The full proof still needs an exclusion of every positive noncontracting
+seed, and an exclusion of nontrivial cycles. The reduction proves that the
+noncontracting class covers the escape problem; it does not prove that the
+class is empty. The Collatz conjecture remains unresolved.
+\end{document}
