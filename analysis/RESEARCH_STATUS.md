@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 79 declarations using only standard
+The selected theorem audit now covers 84 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -123,7 +123,7 @@ checks swap identities, and replays the finite Mahler candidates.
    every hypothetical divergent orbit. It is now proved equivalent to
    summability of reciprocal orbit values. An escaping orbit with divergent
    reciprocal sum is the precise remaining coverage case. The residue-based
-   ninth-root bound improves the tail drift threshold to 8/9, with finite
+   tenth-root bound improves the tail drift threshold to 9/10, with finite
    and global conditional boundedness theorems for seeds not divisible by
    three. Every positive orbit eventually satisfies that residue restriction.
    This does not exclude faster drift or all critical-density orbits, and does
@@ -211,10 +211,26 @@ history requirement; it does not address restrictions specific to divergence.
 
 It also proves that an unbounded orbit cannot contain both odd n and 4n+1.
 Their paths merge, contradicting injectivity at incompatible times. This is
-joint information beyond residue exclusion. The next target is a weighted
-set bound incorporating these forbidden pairs; no improved correction exponent
-from pairs is proved yet. A candidate compression replaces occupied children
-4n+1 congruent to 5 modulo 24 by their absent smaller parents n. Proving its
-injectivity, weight domination, and the resulting rank bound is outstanding.
+joint information beyond residue exclusion. The weighted
+set bound proposed here is now proved in `Collatz.SiblingCorrection`: compression
+replaces occupied children congruent to 5 modulo 24 by their absent parents.
+Injectivity, weight domination, and rank control yield the tenth-power bound.
 The selected audit has 79 declarations. The new paper and guide are
 `paper/odd_histories_and_collisions*`.
+
+## Tenth-power bound from sibling exclusion
+
+`Collatz.SiblingCorrection` completes the weighted argument. A finite set of
+odd values above five, outside multiples of three and containing no sibling
+pair, satisfies the tenth-power product bound ≤2*card+1. Every unbounded
+positive orbit has a tail with (M+c_T)^10 ≤ M^10(2j_T+1), improving the ninth
+bound with the same right-hand factor. Tail drift excursions have exponent
+9/10, with finite and global conditional boundedness criteria below 9/10.
+Five new audit targets bring the total to 84. The paper and guide are
+`paper/sibling_correction*`.
+
+The pair argument preserves relations between values rather than merely
+excluding individual residues. Broader merging-path classes are a possible
+next source of restrictions. However, exponent refinements alone do not
+supply a universal upper drift envelope or eliminate nontrivial cycles;
+those coverage gaps remain the decisive requirements for Collatz.

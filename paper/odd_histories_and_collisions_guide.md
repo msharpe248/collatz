@@ -23,3 +23,8 @@ correction estimate remains the best exponent established by this track.
 The [technical paper](odd_histories_and_collisions.md) gives the construction,
 merging proof, Lean declarations, and validation commands. Neither theorem
 proves Collatz or eliminates all nontrivial cycles.
+
+Subsequent update: the proposed weighted-pair bound is now proved. See the
+[tenth-power correction paper](sibling_correction.md) and its
+[guide](sibling_correction_guide.md). The previously open weighted step above
+is resolved; the full Collatz coverage gaps remain open.

@@ -102,3 +102,8 @@ python3 -m unittest discover -s analysis -p 'test_odd_prehistory.py'
 Collatz remains unproved. The result identifies a joint orbit constraint to
 use next, while guarding against an unsupported strengthening of individual
 residue exclusion.
+
+Subsequent update: the proposed weighted-pair bound is now proved. See the
+[tenth-power correction paper](sibling_correction.md) and its
+[guide](sibling_correction_guide.md). The previously open weighted step above
+is resolved; the full Collatz coverage gaps remain open.

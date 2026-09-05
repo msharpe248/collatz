@@ -49,3 +49,7 @@ The current theorem audit is [theorem_audit.json](../analysis/theorem_audit.json
   [guide](odd_histories_and_collisions_guide.md): arbitrary finite odd histories
   for every allowed target, and a forbidden pair on every unbounded orbit.
   The weighted correction improvement from pairs remains open.
+
+- [Tenth-power correction bound](sibling_correction.md) and
+  [guide](sibling_correction_guide.md): forbidden sibling pairs strengthen the
+  correction exponent to 1/10 and the conditional drift threshold to 9/10.

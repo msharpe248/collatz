@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.SiblingCorrection", "Collatz.SiblingCorrection.pair_free_product_bound", "Tenth-power weighted product bound for distinct odd values above five, coprime to three, with no sibling pair"),
+    ("Collatz.SiblingCorrection", "Collatz.unbounded_eventual_tenth_bound", "Every unbounded positive orbit has a tail with tenth-power correction control"),
+    ("Collatz.SiblingCorrection", "Collatz.unbounded_eventual_tenth_escape", "Every unbounded positive orbit has a tail with drift excursions at exponent 9/10"),
+    ("Collatz.SiblingCorrection", "Collatz.finite_tenth_drift_certificate", "Finite rational polynomial drift certificate below 9/10 forces boundedness outside multiples of three"),
+    ("Collatz.SiblingCorrection", "Collatz.bounded_orbit_of_tenth_polynomial_drift", "Global rational polynomial drift envelope below 9/10; boundedness, not convergence"),
     ("Collatz.OddPrehistory", "Collatz.arbitrarily_long_odd_prehistory", "Every positive odd target coprime to three has genuine histories of any odd-step count; starting seed varies"),
     ("Collatz.OddPrehistory", "Collatz.unbounded_excludes_odd_siblings", "An unbounded orbit cannot contain both odd n and 4n+1; pair exclusion, not exclusion of either value individually"),
     ("Collatz.ResidueCorrection", "Collatz.idealC_ninth_bound_of_prefix", "Distinct prefix avoiding one, positive seed not divisible by three; ninth-power correction bound"),
