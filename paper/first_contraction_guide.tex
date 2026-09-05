@@ -1,0 +1,61 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,microtype}
+\setlength{\emergencystretch}{3em}
+\title{Guide: Turning First Contraction into Verified Descent}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\section*{What has been proved}
+For every natural starting value above one, if the powers-of-three versus
+powers-of-two coefficient contracts within 65 shortcut Collatz steps,
+then the actual orbit has already fallen below its starting value by that
+time. This theorem covers arbitrarily large starting values.
+
+Lean also proves that every positive return of length at most 65 reaches
+one. These are finite-horizon results, not a proof of Collatz or a claim
+of a new cycle-bound record.
+
+\section*{Why coefficient contraction needs care}
+After $t$ steps, with $j$ odd steps, the exact orbit value is
+\[
+T^t(N)=\frac{3^jN+d_t}{2^t}.
+\]
+Even when $3^j<2^t$, the accumulated correction $d_t$ may prevent descent.
+The new argument considers the first time the coefficient contracts.
+Every earlier coefficient was at least one, which bounds the correction:
+$3d_t\le j3^j$.
+
+If the endpoint still does not descend, the starting value must satisfy
+\[
+N\le\frac{j3^j}{3(2^t-3^j)}.
+\]
+For times through 65 this leaves only seeds at most 1,185. Every larger
+seed descends at its first contraction in that time range.
+
+\section*{How the remaining finite cases are checked}
+A small recursive program follows each remaining seed. It succeeds as
+soon as the orbit descends. Until then, it checks that the coefficient
+has not contracted. Lean proves this program's soundness and checks all
+seeds from two through 1,185 by ordinary kernel reduction.
+
+The all-seed theorem combines the general bound, the checker proof, and
+two kernel-checked tables. It does not assume every seed contracts or
+descends within 65 steps.
+
+\section*{What remains unresolved}
+The new theorem explains the earlier-descent property of the 244
+length-65 census examples for every possible seed, without certifying
+the exact census list.
+
+The correction bound is valid at any first contraction, but the finite
+certificate stops at 65. We still need an argument for all later times
+and for orbits with no coefficient contraction. Longer nontrivial cycles
+also remain unresolved. The full Collatz goal stays open.
+
+\section*{Verification}
+The module build and 131-declaration standard-foundations audit pass.
+{\raggedright Run \texttt{lake build Collatz.FirstContraction} from \texttt{lean/}.\par}
+The technical paper includes the precise hypotheses and proof structure.
+\end{document}

@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| First-contraction seed bound and universal descent certificate through 65 steps | [first_contraction.pdf](first_contraction.pdf) | [first_contraction_guide.pdf](first_contraction_guide.pdf) |
 | Every unbounded positive orbit has summable reciprocals and bounded correction | [orbit_summability.pdf](orbit_summability.pdf) | [orbit_summability_guide.pdf](orbit_summability_guide.pdf) |
 | Complete positive-seed mechanical classification | [mechanical_classification.pdf](mechanical_classification.pdf) | [mechanical_classification_guide.pdf](mechanical_classification_guide.pdf) |
 | Endpoint-swapped natural return words force the trivial cycle | [endpoint_cycles.pdf](endpoint_cycles.pdf) | [endpoint_cycles_guide.pdf](endpoint_cycles_guide.pdf) |

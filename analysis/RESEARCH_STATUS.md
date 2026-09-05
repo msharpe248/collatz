@@ -8,6 +8,7 @@ belong to an excluded family.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| First contraction | `first_contraction_seed_bound`, `descent_of_contraction_le65`, `return_le65_reaches_one` | Sharper seed bound at any first contraction; every seed above one descends by a coefficient contraction within 65 steps; positive returns of length at most 65 reach one |
 | Universal correction coverage | `unbounded_orbit_reciprocal_summable`, `supercritical_iff_unbounded_orbit` | All unbounded positive natural orbits have summable reciprocals and bounded correction; no escape exclusion |
 | Full mechanical classification | `mechanical_classification`, `eventual_mechanical_reaches_one` | All real slopes and intercepts; positive global seed is 1 or 2 with slope 1/2; any mechanical tail forces reaching one |
 | Sturmian itineraries | `Silver.no_itinerary`, `Silver.no_eventual_itinerary` | Slope √2/2, every intercept and natural seed; unconditional |
@@ -53,7 +54,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 124 declarations using only standard
+The selected theorem audit now covers 131 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -446,10 +447,42 @@ with standard foundations only. The traversal is not Lean-extracted, and
 its complete larger-length census is not a kernel-certified enumeration.
 The paper and guide in `paper/paradoxical_cylinders.*` are updated.
 
-Next arithmetic lead: at a *first* coefficient contraction, all preceding
+Historical arithmetic lead, now completed below: at a *first* coefficient contraction, all preceding
 inverse drifts are at most one, so the correction increments suggest
 `3*c_T <= oddSteps T N`. Combined with a paradoxical endpoint, this would
 bound the seed far more sharply than the unrestricted envelope. This is
 not yet formalized here. It concerns first coefficient crossings, whereas
 the 244 length-65 examples allow earlier coefficient crossings/descent.
 It would still require an all-length argument to prove Collatz.
+
+## First contraction and kernel-checked descent through 65 (2026-09-05)
+
+`FirstContraction.lean` proves the proposed all-time conditional correction
+bound: if `2^s <= 3^(oddSteps s N)` for every `s<T`, then
+`3*dcoef T N <= oddSteps T N * 3^(oddSteps T N)`.
+At a contracting, non-descending endpoint this implies
+`3*(2^T-3^j)*N <= j*3^j`, where `j=oddSteps T N`.
+Seeds above that bound descend at the endpoint.
+
+For `T<=65`, a kernel-decided table bounds every such seed by 1185 (the
+largest integer bound occurs at T=65, j=41). A recursive Boolean checker
+accepts descent immediately and otherwise requires noncontraction at every
+visited time through its horizon. Its general soundness theorem and a
+second kernel-decided table cover all seeds 2 through 1185. No native-decide
+axiom, custom axiom, or sorry is used.
+
+The resulting theorem `descent_of_contraction_le65` covers every natural
+seed above one: any coefficient contraction within 65 steps implies actual
+descent at or before that time. It does not assume every seed contracts
+within the horizon. Strong induction on a returning seed, using the existing
+strict cycle coefficient inequality, gives `return_le65_reaches_one`.
+Every positive return of length at most 65 reaches one.
+
+This kernel theorem now explains the earlier-descent property in the
+length-65 census for every possible seed, without kernel-certifying the
+244-element census list. The generic seed bound has no time cutoff, but
+the finite tables do. Later contraction times, orbits with no contraction,
+and longer nontrivial cycles remain open. No priority or cycle-bound record
+claim is made. Seven targets bring the standard-foundations audit to 131;
+the selected build passes. Paper and guide: `paper/first_contraction.*`
+and `paper/first_contraction_guide.*`.

@@ -17,6 +17,13 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.FirstContraction", "Collatz.first_contraction_correction_bound", "Scaled correction is bounded by the odd count while every earlier coefficient is noncontracting"),
+    ("Collatz.FirstContraction", "Collatz.first_contraction_seed_bound", "All-time conditional seed bound for a non-descending first coefficient contraction"),
+    ("Collatz.FirstContraction", "Collatz.descent_at_first_contraction", "Seeds above the explicit first-contraction bound descend at that endpoint"),
+    ("Collatz.FirstContraction", "Collatz.contractionCheck_sound", "Soundness of the finite executable descent-versus-contraction checker"),
+    ("Collatz.FirstContraction", "Collatz.descent_by_first_contraction_65", "Every seed above one descends by its first coefficient contraction if it occurs within 65 steps"),
+    ("Collatz.FirstContraction", "Collatz.descent_of_contraction_le65", "Any coefficient contraction within 65 steps forces prior or simultaneous descent for every seed above one"),
+    ("Collatz.FirstContraction", "Collatz.return_le65_reaches_one", "Every positive natural return of length at most 65 reaches one; small finite-horizon exclusion"),
     ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.completion_envelope_mono", "Completion envelope increases with the allowed suffix odd count"),
     ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.completion_test_mono", "Only the largest admissible suffix odd count is needed for the relaxed necessary test"),
     ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.prune_paradoxical_completion_max", "A maximal-count pruning inequality excludes every realized suffix below that count"),
