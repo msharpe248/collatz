@@ -26,3 +26,9 @@ The [technical paper](parity_complexity.md) gives the exact statements,
 literature reference, Lean declarations, and validation. No universal upper
 bound on Collatz itinerary complexity is proved, so this class exclusion
 does not settle Collatz.
+
+
+Update: the mechanical-word bridge described above is now proved for all
+irrational slopes and all intercepts. See [the follow-up paper](mechanical_complexity.pdf)
+and [guide](mechanical_complexity_guide.pdf). The earlier gap statements
+describe the state before this follow-up.

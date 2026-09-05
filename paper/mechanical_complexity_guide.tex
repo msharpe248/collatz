@@ -1,0 +1,56 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,microtype}
+\title{Guide: All Irrational Mechanical Itineraries Are Excluded}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\section*{What Lean now proves}
+No natural Collatz orbit can have the parity pattern
+\[
+\lfloor(t+1)\alpha+\rho\rfloor-\lfloor t\alpha+\rho\rfloor
+\]
+when $\alpha$ is irrational. This holds for every real intercept $\rho$,
+and even if the pattern starts after any finite number of orbit steps.
+Earlier results treated particular slopes and an infinite family. The new
+proof covers every irrational slope in this mechanical-word definition.
+
+\section*{Why the argument works}
+A parity block is a finite string recording whether successive orbit values
+are even or odd. An unbounded Collatz orbit must produce sufficiently many
+different blocks: identical long blocks force early starting values to be
+equal, which would trap the orbit in a repeating cycle.
+
+A mechanical pattern has too few blocks. For length $L$, slide its starting
+intercept through one unit interval. There are only $L$ floor thresholds
+that can change the resulting prefix counts. An ordered rank from zero to
+$L$ distinguishes the possible blocks, so there are at most $L+1$.
+Combining these bounds forces the orbit to be bounded.
+
+A bounded natural orbit repeats a state. Suppose the repeating section has
+$q$ steps and contains $p$ odd steps. Repeating it $k$ times contributes
+exactly $kp$ odd steps. The mechanical formula puts this within one of
+$kq\alpha$. This is possible for all $k$ only if $q\alpha=p$, making the
+slope rational. That contradicts the assumed irrationality.
+
+\section*{What this changes, and what remains}
+The formal bridge between the complexity proof and the repository's
+slope-and-intercept definition is now complete. The argument is a
+formalization of classical ideas; no claim of mathematical novelty is made.
+The technical paper gives the exact declarations and literature context.
+
+This does not prove Collatz. A possible counterexample need not have a
+mechanical parity pattern. For rational mechanical slopes, this proof only
+forces boundedness; it does not prove that the eventual cycle is the usual
+one. The central remaining problem is a restriction covering every possible
+counterexample, or a general descent proof.
+
+\section*{Reproduce the verification}
+From \texttt{lean/}, run
+\texttt{lake build Collatz.MechanicalComplexity}.
+From the repository root, with Lean on the executable path, run
+\texttt{python3 analysis/audit\_theorems.py --build}.
+The audit checks selected declaration dependencies, not a separate kernel
+implementation. Both paper and guide have editable LaTeX sources.
+\end{document}

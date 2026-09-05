@@ -1,0 +1,116 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.95in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage[colorlinks=true,urlcolor=blue!50!black]{hyperref}
+\usepackage{xcolor}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\title{Excluding All Irrational Mechanical\\Collatz Itineraries in Lean}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We connect the repository's parity factor-complexity obstruction to its
+mechanical-word definition. Every mechanical parity itinerary has at most
+$L+1$ distinct length-$L$ factors, hence its natural Collatz orbit is bounded.
+A return of period $q$ forces $q\alpha$ to be an integer. Consequently no
+natural seed, including any shifted seed, has a mechanical itinerary of
+irrational slope, for any real intercept. The proof is checked in Lean
+without added mathematical axioms. It closes a formal coverage gap between
+previous slope-specific results and a full irrational mechanical class
+exclusion. It does not prove Collatz; no mathematical priority is claimed.
+\end{abstract}
+
+\section{Definitions and statement}
+Let $T(n)=n/2$ for even $n$ and $T(n)=(3n+1)/2$ for odd $n$.
+Write $x_t=T^t(N)$ and let $p_N(L)$ count all distinct factors
+$(x_t\bmod2,\ldots,x_{t+L-1}\bmod2)$ for $t\ge0$.
+For real $\alpha,\rho$, define
+\[
+w_t=\floor{(t+1)\alpha+\rho}-\floor{t\alpha+\rho}.
+\]
+The Lean predicate \texttt{HasItin} equates these integer letters with
+the actual parity values for every natural time.
+\begin{theorem}
+For every irrational real $\alpha$, real $\rho$, and natural $N$, the
+parity itinerary of $N$ is not $w$. The same holds for every tail $T^s(N)$.
+\end{theorem}
+No critical-density, continued-fraction, or positive-seed hypothesis is
+needed. The complexity implication below even allows arbitrary real slopes;
+the itinerary hypothesis itself enforces binary letters.
+
+\section{The ordered-threshold argument}
+Normalize a starting time $t$ to
+$\beta_t=\{t\alpha+\rho\}\in[0,1)$.
+Subtracting the integer part shows that the length-$L$ factor is determined
+by $\floor{i\alpha+\beta_t}$ for $0\le i\le L$.
+For $1\le i\le L$, put
+\[
+d_i(\beta)=\floor{i\alpha+\beta}-\floor{i\alpha},\qquad
+R(\beta)=\sum_{i=1}^L d_i(\beta).
+\]
+Each $d_i$ is nondecreasing and takes values in $\{0,1\}$, so
+$0\le R(\beta)\le L$. If two intercepts have the same rank, order them.
+All coordinate differences then have the same sign and sum to zero;
+thus every coordinate agrees. Their successive floor differences agree
+as well. Choose one realizing start for each factor and assign its rank.
+This is an injection into $\{0,\ldots,L\}$, proving
+\[
+p_N(L)\le L+1.
+\]
+The finite set of globally realized factors and the choice of representatives
+are noncomputable definitions, not an orbit-enumeration algorithm.
+
+\section{Boundedness and the irrational contradiction}
+The previously verified factor floor states that an unbounded orbit satisfies
+\[
+5q+1\le p_N(3q+K)\quad\text{whenever }N+1\le2^K.
+\]
+Combining it with $p_N(L)\le L+1$ contradicts sufficiently large $q$.
+Thus a mechanical itinerary forces boundedness. Pigeonhole gives repeated
+states, and shifting to the first repeated state gives a return of some
+positive period $q$.
+
+Let $p$ be the odd-step count of that period. Determinism and additivity
+imply that $k$ periods contain $kp$ odd steps. Mechanical telescoping yields
+\[
+kp=\floor{kq\alpha+\rho'}-\floor{\rho'},\qquad
+-1<k(q\alpha-p)<1\quad(k\ge0).
+\]
+If $q\alpha-p$ were nonzero, the Archimedean property would violate one of
+these bounds for a sufficiently large natural $k$. Therefore $q\alpha=p$,
+contradicting irrationality because $q>0$.
+
+\section{Formal declarations and verification}
+All new declarations are in \texttt{Collatz/MechanicalComplexity.lean}:
+\begin{itemize}
+\item \texttt{mechanical\_complexity\_le}: the global factor upper bound;
+\item \texttt{bounded\_of\_mechanical}: boundedness for any mechanical itinerary;
+\item \texttt{mechanical\_return\_slope}: integral slope times return period;
+\item \texttt{no\_irrational\_mechanical}: the full irrational-slope exclusion;
+\item \texttt{no\_eventual\_irrational\_mechanical}: every tail is excluded.
+\end{itemize}
+The module builds under the repository's Lean toolchain. These five
+statements are included in the selected axiom audit; their dependencies
+are confined to the standard foundations \texttt{propext},
+\texttt{Classical.choice}, and \texttt{Quot.sound}. No external Sturmian
+equivalence or literature axiom is imported. This is a Lean build and
+axiom inspection, not an independent kernel replay.
+
+\section{Context and remaining problem}
+Dubickas proved a stronger asymptotic complexity lower bound for escaping
+Collatz trajectories in Theorem~5 of \emph{On integer sequences generated
+by linear maps}, Glasgow Mathematical Journal 51 (2009), 243--252,
+\href{https://doi.org/10.1017/S0017089508004655}{doi:10.1017/S0017089508004655}.
+Our contribution here is the explicit formal bridge to mechanical words,
+using the repository's weaker finite rational complexity floor.
+
+This theorem subsumes the earlier irrational slope-family exclusions at
+the level of conclusions, while preserving their different quantitative
+proofs. It gives neither a complexity upper bound for arbitrary Collatz
+orbits nor a classification of all possible counterexamples. For rational
+mechanical slopes it proves boundedness but does not identify the eventual
+cycle. General escape and nontrivial cycles remain unresolved.
+\end{document}

@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| All irrational mechanical itineraries excluded | [mechanical_complexity.pdf](mechanical_complexity.pdf) | [mechanical_complexity_guide.pdf](mechanical_complexity_guide.pdf) |
 | Critical line and bounded-certificate obstruction | [nogo.pdf](nogo.pdf) | [nogo_guide.pdf](nogo_guide.pdf) |
 | Krasikov–Lagarias density bounds | [klbound.pdf](klbound.pdf) | [klbound_guide.pdf](klbound_guide.pdf) |
 | The 3-adic shadow | [shadow.pdf](shadow.pdf) | [shadow_guide.pdf](shadow_guide.pdf) |

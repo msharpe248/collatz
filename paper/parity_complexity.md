@@ -129,3 +129,9 @@ The missing universal step is still coverage: no theorem forces every
 hypothetical counterexample into this low-complexity class. More complicated
 itineraries and nontrivial cycles are not excluded by the linear-envelope
 boundedness theorem. Collatz remains unproved.
+
+
+Update: the mechanical-word bridge described above is now proved for all
+irrational slopes and all intercepts. See [the follow-up paper](mechanical_complexity.pdf)
+and [guide](mechanical_complexity_guide.pdf). The earlier gap statements
+describe the state before this follow-up.

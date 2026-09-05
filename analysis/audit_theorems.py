@@ -17,6 +17,12 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.MechanicalComplexity", "Collatz.mechanical_complexity_le", "Every mechanical parity itinerary has at most L+1 global factors"),
+    ("Collatz.MechanicalComplexity", "Collatz.bounded_of_mechanical", "Any mechanical parity itinerary forces boundedness; eventual cycle not identified"),
+    ("Collatz.MechanicalComplexity", "Collatz.mechanical_return_slope", "A return forces period times mechanical slope to equal its odd-step count"),
+    ("Collatz.MechanicalComplexity", "Collatz.no_irrational_mechanical", "All irrational real slopes, all real intercepts, all natural seeds"),
+    ("Collatz.MechanicalComplexity", "Collatz.no_eventual_irrational_mechanical", "Every shifted natural seed excludes every irrational mechanical itinerary"),
+
     ("Collatz.ParityComplexity", "Collatz.ParityComplexity.unbounded_factor_floor", "Every unbounded orbit has at least 5q+1 distinct parity factors of length 3q+K when N+1 <= 2^K"),
     ("Collatz.ParityComplexity", "Collatz.ParityComplexity.bounded_of_linear_complexity", "A uniform factor-complexity slope below 5/3 forces boundedness; no universal envelope assumed"),
     ("Collatz.ParityComplexity", "Collatz.ParityComplexity.no_sturmian_complexity", "No natural seed has exactly L+1 factors at every length; standard Sturmian complexity definition"),

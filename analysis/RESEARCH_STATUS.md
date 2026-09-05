@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 90 declarations using only standard
+The selected theorem audit now covers 95 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -274,3 +274,26 @@ Dubickas (2009), Theorem 5, already proves a stronger asymptotic Collatz-word
 complexity lower bound. This is a main-project formalization and consequence,
 not a mathematical novelty claim. Three new targets bring the selected audit
 to 90. Paper and guide: `paper/parity_complexity*`.
+
+
+## Full mechanical-word bridge (2026-09-05)
+
+The transport task above is now complete in `Collatz.MechanicalComplexity`.
+`mechanical_complexity_le` proves p(L) <= L+1 directly by ordered floor
+thresholds, for any real slope and intercept satisfying HasItin. This forces
+boundedness. A repeated state gives a return, and `mechanical_return_slope`
+proves q*alpha = oddSteps q N by telescoping at every multiple of the period.
+Thus `no_irrational_mechanical` and `no_eventual_irrational_mechanical` exclude
+ALL irrational slopes and intercepts for all natural seeds and tails.
+The previous statement that this bridge was unported is historical.
+
+This is a classical class exclusion formalized in the main project, not a
+new proof of Collatz. Rational mechanical slopes yield boundedness without
+cycle identification. No complexity envelope for arbitrary itineraries is
+provided. Further slope-specific exclusion work is no longer needed to
+establish irrational mechanical coverage; the next research target should
+address general counterexample coverage or rational/balanced cycle structure.
+
+Five new declarations bring the selected audit to 95. Paper and guide:
+`paper/mechanical_complexity.pdf`, `paper/mechanical_complexity_guide.pdf`
+(with editable LaTeX).
