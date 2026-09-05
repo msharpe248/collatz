@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 77 declarations using only standard
+The selected theorem audit now covers 79 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -200,3 +200,21 @@ The global-envelope corollary is also proved. No such envelope is asserted
 for all orbits, and boundedness still leaves the nontrivial-cycle question.
 Five new audit targets bring the selected total to 77. The paper and guide
 are `paper/residue_correction.md` and `paper/residue_correction_guide.md`.
+
+## Finite-history support and joint orbit exclusions
+
+`Collatz.OddPrehistory` proves that every positive odd target not divisible
+by three has genuine histories with any prescribed number K of odd steps,
+starting at seeds at least y+K and using between 3K and 6K shortcut steps.
+This prevents deleting further individual targets solely from a fixed finite
+history requirement; it does not address restrictions specific to divergence.
+
+It also proves that an unbounded orbit cannot contain both odd n and 4n+1.
+Their paths merge, contradicting injectivity at incompatible times. This is
+joint information beyond residue exclusion. The next target is a weighted
+set bound incorporating these forbidden pairs; no improved correction exponent
+from pairs is proved yet. A candidate compression replaces occupied children
+4n+1 congruent to 5 modulo 24 by their absent smaller parents n. Proving its
+injectivity, weight domination, and the resulting rank bound is outstanding.
+The selected audit has 79 declarations. The new paper and guide are
+`paper/odd_histories_and_collisions*`.

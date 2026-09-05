@@ -44,3 +44,8 @@ The current theorem audit is [theorem_audit.json](../analysis/theorem_audit.json
   [guide](residue_correction_guide.md): residue exclusion strengthens the
   eventual correction exponent to 1/9 and the drift excursion exponent to
   8/9, with finite and global conditional boundedness theorems in Lean.
+
+- [Odd histories and collisions](odd_histories_and_collisions.md) and
+  [guide](odd_histories_and_collisions_guide.md): arbitrary finite odd histories
+  for every allowed target, and a forbidden pair on every unbounded orbit.
+  The weighted correction improvement from pairs remains open.

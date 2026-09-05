@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.OddPrehistory", "Collatz.arbitrarily_long_odd_prehistory", "Every positive odd target coprime to three has genuine histories of any odd-step count; starting seed varies"),
+    ("Collatz.OddPrehistory", "Collatz.unbounded_excludes_odd_siblings", "An unbounded orbit cannot contain both odd n and 4n+1; pair exclusion, not exclusion of either value individually"),
     ("Collatz.ResidueCorrection", "Collatz.idealC_ninth_bound_of_prefix", "Distinct prefix avoiding one, positive seed not divisible by three; ninth-power correction bound"),
     ("Collatz.ResidueCorrection", "Collatz.unbounded_eventual_ninth_bound", "Every unbounded positive orbit has a tail with ninth-power correction control at every length"),
     ("Collatz.ResidueCorrection", "Collatz.unbounded_eventual_ninth_escape", "Every unbounded positive orbit has a tail with drift excursions at exponent 8/9"),
