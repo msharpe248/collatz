@@ -17,6 +17,10 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.EndpointCycles", "Collatz.WordAffine.endpoint_cancellation", "Exact endpoint-swap correction identity for every finite middle word"),
+    ("Collatz.EndpointCycles", "Collatz.WordAffine.endpoint_returns_trivial", "Two actual natural returns with words 1u0 and 0u1 force empty u and seeds 1 and 2"),
+    ("Collatz.EndpointCycles", "Collatz.WordAffine.endpoint_cycle_shift_trivial", "Endpoint-swapped return words within one orbit force the trivial cycle"),
+
     ("Collatz.MechanicalComplexity", "Collatz.mechanical_complexity_le", "Every mechanical parity itinerary has at most L+1 global factors"),
     ("Collatz.MechanicalComplexity", "Collatz.bounded_of_mechanical", "Any mechanical parity itinerary forces boundedness; eventual cycle not identified"),
     ("Collatz.MechanicalComplexity", "Collatz.mechanical_return_slope", "A return forces period times mechanical slope to equal its odd-step count"),

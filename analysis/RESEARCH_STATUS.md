@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 95 declarations using only standard
+The selected theorem audit now covers 98 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -297,3 +297,26 @@ address general counterexample coverage or rational/balanced cycle structure.
 Five new declarations bring the selected audit to 95. Paper and guide:
 `paper/mechanical_complexity.pdf`, `paper/mechanical_complexity_guide.pdf`
 (with editable LaTeX).
+
+
+## Endpoint-swapped cycle words (2026-09-05)
+
+`Collatz.EndpointCycles` connects Knight's high-cycle cancellation idea to
+actual natural orbit returns. For every Boolean middle u, if 1u0 and 0u1
+are realized at returning seeds x and y, then u=[] and x=1,y=2. No palindrome,
+coprimality, or common-orbit assumption is needed. The single-orbit shift
+corollary is also checked. Three declarations bring the selected audit to 98.
+
+Three exact finite controls pass: all middles of lengths 0..12; endpoint-pair
+rotation witnesses for reduced mechanical slopes 0<p<q<=80; and a negative
+coverage control, word 11100 (rational cyclic value 19/5). No universal
+mechanical rotation bridge is inferred from these tests. That bridge, period
+reduction, and eventual-tail transport remain the next concrete tasks.
+No general cycle or escape exclusion follows.
+
+Provenance: nested tcosmo__Knight2026_lean/Knight2026/NoHighCycles.lean,
+with fresh arithmetic proof in the main definitions. No nested module or
+custom axiom imported. The publisher gives Knight's article as 114812,
+DOI 10.1016/j.disc.2025.114812; the nested summary's article 114425 and
+HAL-04206985v3 are incorrect (challenge catalog links HAL-04261183).
+Paper and guide: paper/endpoint_cycles.pdf and paper/endpoint_cycles_guide.pdf.

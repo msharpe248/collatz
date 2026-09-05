@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,microtype}
+\title{Guide: A Pair of Parity Words That Forces the Trivial Cycle}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\section*{The result}
+Take any finite binary word $u$. Put an odd step at its beginning and an
+even step at its end, making $1u0$. Now swap only those endpoint bits,
+making $0u1$.
+
+Lean proves that these two words cannot both describe complete returns
+from natural Collatz seeds, unless $u$ is empty. In the empty case they
+are simply $10$ and $01$, starting at 1 and 2 in the usual cycle.
+The returning seeds do not even have to lie in the same orbit.
+
+\section*{Why this works}
+Every parity word gives an exact affine equation for its endpoint.
+For a cycle, this expresses its starting seed as a correction divided by
+$D=2^{\text{length}}-3^{\text{odd count}}$. On a positive natural cycle,
+$D$ is positive and odd.
+
+For our paired words, a short cancellation shows that $D$ must divide a
+power of two. Therefore $D=1$. If the middle word is nonempty, reducing
+$2^{\text{length}}=3^{\text{odd count}}+1$ modulo 8 gives a contradiction.
+Only the empty middle survives, and its return equations give seeds 1 and 2.
+
+\section*{How this helps the research}
+The nested Knight formalization uses this cancellation to exclude a class
+of evenly spaced parity patterns called high cycles. The new theorem puts
+the obstruction directly into this project's actual-orbit language and
+does not require a palindrome condition on the middle word.
+
+The next task is to prove that every primitive rational mechanical pattern
+contains the required pair as rotations of one period. Exact finite checks
+confirm this for all reduced slopes with denominator up to 80. That finite
+check does not prove the universal statement. Nonprimitive periods and
+eventual tails also need explicit treatment.
+
+\section*{The limitation}
+Arbitrary parity words need not have the required pair. The word $11100$
+is a concrete example with no such pair among its rotations. Its associated
+cyclic value is the fraction $19/5$, not an integer counterexample.
+
+This result is a formal integration of a known cancellation idea, not a
+proof of Collatz or a claim of mathematical novelty. The full conjecture
+still requires general descent, or both escape and nontrivial-cycle exclusion.
+
+\section*{Verification}
+From \texttt{lean/}, run \texttt{lake build Collatz.EndpointCycles}.
+From the root, with Lean on the executable path, run
+\texttt{python3 analysis/audit\_theorems.py --build}.
+The three exact finite controls run with
+\texttt{python3 -m unittest discover -s analysis -p test\_endpoint\_cycles.py}.
+The companion technical paper gives the algebra, exact theorem scope,
+provenance, and remaining formal bridge.
+\end{document}

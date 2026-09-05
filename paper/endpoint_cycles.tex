@@ -1,0 +1,110 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype,xcolor}
+\usepackage[colorlinks=true,urlcolor=blue!50!black]{hyperref}
+\newtheorem{theorem}{Theorem}
+\setlength{\emergencystretch}{3em}
+\title{An Endpoint-Swap Obstruction for Natural Collatz Cycles}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We formalize an elementary cancellation obstruction for actual natural
+Collatz returns. If the binary words $1u0$ and $0u1$ are realized by returning
+natural seeds, then $u$ is empty and the seeds are respectively 1 and 2.
+No palindrome, coprimality, or common-orbit assumption is required.
+The argument adapts the cancellation underlying Knight's high-cycle
+exclusion to the main project's word and orbit definitions. It is not a
+proof of Collatz or a claim of mathematical novelty. The word-structure
+bridge needed to apply it to all rational mechanical itineraries remains open
+in this main-project formalization.
+\end{abstract}
+
+\section{Actual return words}
+Use the shortcut map $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$.
+A word $w$ is realized by $n$ when its bits give the parities of the first
+$|w|$ orbit values. Let $j(w)$ count its ones and let $C(w)$ denote its
+affine correction, defined recursively by
+\[
+ C(\epsilon)=0,\quad C(0w)=2C(w),\quad
+ C(1w)=3^{j(w)}+2C(w).
+\]
+The verified affine identity is
+$2^{|w|}T^{|w|}(n)=3^{j(w)}n+C(w)$.
+
+\begin{theorem}
+Let $u$ be any finite binary word. If $x$ realizes $1u0$, $y$ realizes
+$0u1$, and both seeds return after $|u|+2$ shortcut steps, then
+\[
+ u=\epsilon,\qquad x=1,\qquad y=2.
+\]
+\end{theorem}
+The first letter of $1u0$ already forces $x>0$. The two returns need not
+belong to the same orbit. For one cyclic orbit, the theorem applies whenever
+a shift realizes the second word; a return at one state implies the same
+return length at every shifted state.
+
+\section{Cancellation proof}
+Set $\ell=|u|$, $j=j(u)+1$, $A=2^{\ell+2}$, and $B=3^j$.
+The positive-cycle inequality gives $B<A$, so $D=A-B$ is a positive
+odd integer. Write $C_L=C(1u0)$ and $C_R=C(0u1)$.
+Direct expansion, valid for every $u$, yields
+\[
+3C_L+A=C_R+B+2^{\ell+1}.
+\]
+The two return identities give $C_L=Dx$ and $C_R=Dy$. Substitution gives
+\[
+D(3x+1)=Dy+2^{\ell+1},\qquad D\mid2^{\ell+1}.
+\]
+An odd positive divisor of a power of two is 1. Thus $A=B+1$.
+If $\ell>0$, then $A$ is divisible by 8, whereas $3^j$ is congruent to
+1 or 3 modulo 8. This contradicts $A=B+1$. Consequently $\ell=0$.
+The two affine equations now reduce to $4x=3x+1$ and $4y=3y+2$,
+giving $x=1$ and $y=2$.
+
+\section{Lean statements and validation}
+The new module \texttt{Collatz/EndpointCycles.lean} provides
+\begin{itemize}
+\item \texttt{endpoint\_cancellation}, the arbitrary-word identity;
+\item \texttt{endpoint\_returns\_trivial}, the two-seed theorem;
+\item \texttt{endpoint\_cycle\_shift\_trivial}, its single-orbit corollary.
+\end{itemize}
+All three are included in the selected axiom audit. The module builds with
+only standard foundational axiom dependencies; the conditional finite-range
+verification in \texttt{Cycles.lean} is not used. The audit is a Lean build
+and dependency inspection, not an independent kernel replay.
+
+The exact Python controls in \texttt{analysis/test\_endpoint\_cycles.py}
+check the cancellation and paired-integrality conclusion for every middle
+of length at most 12. They also find endpoint-swapped rotations for every
+reduced rational mechanical slope $p/q$ with $0<p<q\le80$.
+These are finite controls, not a proof of the universal rotation statement.
+
+\section{Provenance and remaining bridge}
+The cancellation was located in the nested repository
+\texttt{tcosmo\_\_Knight2026\_lean}. The relevant file is
+\texttt{Knight2026/NoHighCycles.lean}. Its high-cycle proof also uses
+Christoffel word structure and rotation preservation of integrality.
+The present proof uses the same mathematical idea, with fresh natural-number
+arithmetic in the main project's definitions, and imports no nested module.
+The relevant published source is Kevin Knight,
+\emph{Collatz high cycles do not exist}, Discrete Mathematics
+349(3) (2026), article 114812,
+\href{https://doi.org/10.1016/j.disc.2025.114812}{doi:10.1016/j.disc.2025.114812}.
+The nested summary's article number 114425 and HAL identifier are inaccurate;
+the publisher lists 114812 and the challenge catalog links HAL-04261183.
+
+To finish the rational mechanical route, one must prove that a primitive
+rational mechanical period has both endpoint-swapped words among its
+rotations, and transport those rotations to actual returning states.
+Handling nonprimitive periods and eventual tails is also required.
+The irrational mechanical exclusion already proved in the main project does
+not supply these steps.
+
+The witness property is not universal for arbitrary parity words. For example,
+$11100$ has no endpoint-swapped pair among its rotations. Its formal cyclic
+value is $19/5$, so it is a rational example illustrating the structural gap,
+not an integer Collatz counterexample. Neither general nontrivial cycles nor
+unbounded orbits are excluded by this result.
+\end{document}
