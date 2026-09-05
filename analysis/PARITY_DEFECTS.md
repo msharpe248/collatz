@@ -43,6 +43,21 @@ cost in their count.
 
 ## Worked controls and verification
 
+The later height-sensitive extension is in `lean/Collatz/DefectHeight.lean`.
+It proves `2^u(T^u(N)+1) ≤ 3^u(N+1)` and the universal bit-height bound
+`T^u(N) < 2^(ceil(3u/5)+K)`. The ceiling is computed exactly as `(3u+4)/5`
+using natural division. The argument groups five steps, with 3^5≤2^8,
+and checks the five possible remainders.
+
+The sharper checkpoints are
+`sigma_0=0`, `sigma_(k+1)=sigma_k+ceil(3(sigma_k+q)/5)+K`.
+The return theorem holds at horizon `sigma_(D+1)`, and edited templates
+use `sigma_(2e+1)`. These checkpoints are never greater than the original
+ones. With C=3q+5K+4, Lean proves
+`5^k(3 sigma_k+C) ≤ 8^k C`, giving growth base 8/5 instead of 2.
+The general interface also accepts any independently proved monotone
+bit-height envelope; the 3/5 specialization adds no orbit hypothesis.
+
 For N=3, K=2, q=2, the only shift disagreements below L=60 are at
 times 0, 1 and 3. The threshold is (2^4-1)*4=60. The checkpoints are
 0, 4, 12 and 28; the return already occurs at s=4, at orbit value 2.
@@ -51,8 +66,18 @@ For e=2, the template threshold is L=124, requiring 126 parity letters.
 These finite counts and thresholds were checked with Lean's kernel-checked
 `decide` in a temporary control file; they are not computation records.
 
-`lake build Collatz.ParityDefects` passes. The expanded command
-`python3 analysis/audit_theorems.py --build` audits 35 declarations,
+With the sharper bound, the comparison horizons for q=2 are:
+
+| Seed N | K | D | Original horizon | Sharper horizon |
+|---|---|---|---|---|
+| 3 | 2 | 3 | 60 | 36 |
+| 7 | 3 | 5 | 315 | 128 |
+| 9 | 4 | 6 | 762 | 250 |
+
+The new counts and horizons were likewise checked with Lean's `decide`.
+
+`lake build Collatz.ParityDefects Collatz.DefectHeight` passes. The expanded command
+`python3 analysis/audit_theorems.py --build` audits 44 declarations,
 including the new return, template, boundedness and period-two results.
 Only standard foundational axioms occur. This is ordinary Lean checking
 and axiom inspection, not independent kernel replay or a fresh rebuild
@@ -73,5 +98,6 @@ trivial cycle, but universal availability of its certificate is unproved.
 Since an orbit reaching 1 eventually alternates, assuming universal
 availability would rephrase the desired convergence.
 
-Next: derive independent, noncircular restrictions on defect counts or
-sharpen the window growth using proved local height information.
+The uniform height sharpening is now proved. Next: derive independent,
+noncircular restrictions on defect counts. The improved exponential
+horizon does not supply universal sparsity or resolve the cycle gap.

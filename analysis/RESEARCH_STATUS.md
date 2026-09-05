@@ -16,6 +16,7 @@ belong to an excluded family.
 | Finite defect certificates | `ParityDefects.few_defects_force_return` | At most D shift disagreements over (2^(D+1)−1)(q+K) comparisons force a q-step return; N+1≤2^K |
 | Edited periodic templates | `ParityDefects.near_power_force_return`, `near_power_bound_orbit` | At most e edits, arbitrary positions, explicit exponential horizon; positive period bounds the orbit |
 | Period-two convergence | `ParityDefects.few_defects_two_reaches_one`, `near_two_power_reaches_one` | Positive seed plus the finite period-two certificate implies reaching 1 |
+| Sharper defect horizons | `sharp_few_defects_force_return`, `sharpCheckpoint_growth`, `sharpCheckpoint_le_old` | Universal ceiling(3u/5)+K height envelope; geometric window factor 8/5 instead of 2, never longer than the original horizon |
 | Rotation arithmetic | `sturmian_separation_of_neighbors`, `rotation_window_of_grid` | General certified approximation inputs; no cited axioms |
 | Size control | `sturmian_size_at_endpoint` | One endpoint replaces all earlier size tests |
 | Block comparisons | `WordAffine.adjacent_swap`, `compare`, `compare_dvd`, `compare_bound` | Exact identities and conditional height obstructions |
@@ -77,8 +78,9 @@ checks swap identities, and replays the finite Mahler candidates.
 2. **Useful defect bounds.** A finite near-periodicity class is now excluded
    from unbounded orbits, using disjoint windows instead of raw swap costs.
    The sufficient horizon is exponential in the disagreement or edit
-   count. No universal sparsity bound is proved; improving the horizon or
-   proving independent restrictions on defect counts remains open.
+   count. A universal 3/5-bit height bound has now reduced the geometric
+   window factor from 2 to 8/5. No independent universal sparsity bound
+   is proved; that coverage step remains open.
 3. **Ordinary integer coverage.** Prove an independently meaningful
    restriction forcing every counterexample into an excluded class. No
    complexity-versus-defect dichotomy has been established.
@@ -96,6 +98,7 @@ checks swap identities, and replays the finite Mahler candidates.
    in an unconditional theorem; preserve map-convention bridges.
 
 KL exponent improvements remain a separate density-results track. The
-rotation-family and finite defect extensions are now proved. The next
-proof-focused priority is an independent restriction on possible integer
-counterexample itineraries, or sharper height-dependent defect windows.
+rotation-family, finite defect, and universal height refinements are now
+proved. The next proof-focused priority is an independent restriction on
+possible integer counterexample itineraries. Improved sufficient horizons
+do not establish that every counterexample must meet their sparsity bounds.

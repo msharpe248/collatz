@@ -89,6 +89,10 @@ period-two certificates for positive seeds imply reaching 1.
 Universal availability of such certificates remains unproved.
 See the [paper](paper/defects.pdf), [guide](paper/defects_guide.pdf), and
 [ParityDefects.lean](lean/Collatz/ParityDefects.lean).
+The height refinement in [DefectHeight.lean](lean/Collatz/DefectHeight.lean)
+now reduces the geometric window factor from 2 to 8/5, using the proved
+bound `T^u(N) < 2^(ceil(3u/5)+K)`. The shorter horizons are never worse
+than the original ones and add no orbit hypothesis.
 
 ## The library ([library/](library/))
 

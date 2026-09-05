@@ -126,6 +126,48 @@ times $0$ and $3$. This gives $e=2$ edited letters, whose more
 conservative template bound is $L=124$. The distinction matters:
 edited letters and shift disagreements are different counts.
 
+\section{Shorter windows from a sharper height bound}
+The first theorem allowed one bit of height growth per step. We can
+improve this without assuming anything new about the orbit. Keeping
+the added-one correction, the shortcut map satisfies
+\[
+2^u\bigl(T^u(N)+1\bigr)\le3^u(N+1).
+\]
+Five steps therefore need at most three bits of growth, since
+$3^5=243<256=2^8$. Checking the remaining zero to four steps gives
+\[
+T^u(N)<2^{\lceil3u/5\rceil+K}.
+\]
+Use that smaller allowance to choose the checkpoints:
+\[
+\sigma_0=0,\qquad
+\sigma_{k+1}=\sigma_k+\left\lceil\frac{3(\sigma_k+q)}5\right\rceil+K.
+\]
+The same counting proof works with the shorter horizon
+$L\ge\sigma_{D+1}$. Edited templates use $\sigma_{2e+1}$.
+
+\begin{keyidea}
+\textbf{A checked improvement.} Lean proves that these horizons are
+never larger than the original ones. Their geometric growth has an
+upper bound with factor $8/5=1.6$, improving the old factor of $2$.
+The hypotheses about the seed and the allowed defects are unchanged.
+\end{keyidea}
+\newpage
+For lag two, the worked examples become
+\begin{center}
+\begin{tabular}{rrrrr}
+\toprule
+Start $N$&Bit bound $K$&Defects $D$&Old horizon&New horizon\\
+\midrule
+3&2&3&60&36\\
+7&3&5&315&128\\
+9&4&6&762&250\\
+\bottomrule
+\end{tabular}
+\end{center}
+Lean checked the new horizons and finite defect counts. These illustrate
+the theorem; they are not new computational Collatz records.
+
 \section{What remains between this and Collatz}
 \begin{keyidea}
 \textbf{The missing step.} We know what happens if a finite parity
@@ -139,13 +181,14 @@ But its universal availability is still unproved. Every orbit reaching
 one eventually alternates; assuming that all orbits have the needed
 period-two certificate would simply rephrase the convergence problem.
 
-The next useful advance needs an independent restriction on the number
-of defects, or a sharper bound on the time available between defects.
-The expanded audit checks 35 selected declarations using only Lean's
+The shorter windows still require an independent restriction on the
+number of defects. No such universal restriction has been established.
+The expanded audit checks 44 selected declarations using only Lean's
 standard foundational axioms; it is not an independent kernel replay.
 
 The technical paper is \code{paper/defects.pdf}, with source
 \code{paper/defects.tex}. The formal development is
-\code{lean/Collatz/ParityDefects.lean}; the research note is
+\code{lean/Collatz/ParityDefects.lean} and
+\code{lean/Collatz/DefectHeight.lean}; the research note is
 \code{analysis/PARITY\_\allowbreak{}DEFECTS.md}.
 \end{document}

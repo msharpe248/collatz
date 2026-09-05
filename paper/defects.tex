@@ -31,8 +31,11 @@ no restrictions on edit positions or odd-step density.
 For positive $q$ the certificate bounds the entire orbit. For $q=2$
 and a positive seed it proves that the orbit reaches one. The general
 return, template, boundedness, and period-two results are checked in
-Lean~4 using only standard foundational axioms. Universal availability
-of these finite certificates is not established.
+Lean~4 using only standard foundational axioms. We also prove a sharper
+universal height bound, reducing the geometric window-growth factor from
+two to $8/5$, with no additional orbit hypothesis. The new horizons are
+never longer than the original ones. Universal availability of these
+finite certificates is not established.
 \end{abstract}
 
 \section{Definitions and the finite return theorem}
@@ -239,8 +242,113 @@ uses $126$ parity letters. This illustrates the distinction between
 shift disagreements and edited letters. These counts and thresholds
 were also checked using Lean's kernel-checked \code{decide}.
 
+\section{Sharper windows from the actual growth bound}\label{sec:sharp}
+The original height estimate uses one bit per step. The shortcut map
+permits a smaller uniform allowance while retaining the added-one correction.
+
+\begin{lemma}\label{lem:sharpheight}
+For every natural $N,u$,
+\begin{equation}\label{eq:threehalves}
+2^u\bigl(T^u(N)+1\bigr)\le3^u(N+1).
+\end{equation}
+Define $g(u)=\lceil3u/5\rceil=\lfloor(3u+4)/5\rfloor$.
+If $N+1\le2^K$, then
+\begin{equation}\label{eq:sharpheight}
+T^u(N)<2^{g(u)+K}.
+\end{equation}
+Moreover, $g$ is nondecreasing and $g(u)\le u$.
+\end{lemma}
+\begin{proof}
+Both branches satisfy $2(T(n)+1)\le3(n+1)$; induction gives
+\eqref{eq:threehalves}. Write $u=5a+r$, $0\le r<5$. We have
+$3^5=243\le256=2^8$ and the five elementary bounds
+\[
+\begin{array}{c|rrrrr}
+r&0&1&2&3&4\\\hline
+3^r&1&3&9&27&81\\
+2^{r+g(r)}&1&4&16&32&128
+\end{array}
+\]
+Since $g(u)=3a+g(r)$, these give
+$3^u\le2^{8a+r+g(r)}=2^{u+g(u)}$.
+Combine with \eqref{eq:threehalves} and $N+1\le2^K$, cancel $2^u$,
+and use integrality. The remaining properties follow from the ceiling
+formula on natural arguments.
+\end{proof}
+
+\begin{proposition}[Height-sensitive windows]\label{prop:heightwindow}
+Suppose $H:\N\to\N$ is nondecreasing and $T^u(N)<2^{H(u)}$ for every $u$.
+Set $h_0=0$ and $h_{k+1}=h_k+H(h_k+q)$. If $d_{N,q}(L)\le D$ and
+$h_{D+1}\le L$, then $T^{h_k+q}(N)=T^{h_k}(N)$ at some $k\le D$.
+\end{proposition}
+\begin{proof}
+Absence of defects in $[s,s+H(s+q))$ gives $H(s+q)$ matching parity
+letters for $T^s(N)$ and $T^{s+q}(N)$. Both values are strictly below
+$2^{H(s+q)}$, the first by monotonicity of $H$. They must therefore be
+equal by parity congruence. Apply this local alternative to the disjoint
+windows $[h_k,h_{k+1})$ and count as before.
+\end{proof}
+The envelope here is an explicit hypothesis. The next specialization
+supplies it from the initial bit bound, without an additional orbit assumption.
+
+\begin{theorem}[Sharper universal certificate]\label{thm:sharp}
+Suppose $N+1\le2^K$. Define
+\begin{equation}\label{eq:sharpcheckpoints}
+\sigma_0=0,\qquad \sigma_{k+1}=\sigma_k+
+\left\lceil\frac{3(\sigma_k+q)}5\right\rceil+K.
+\end{equation}
+If $d_{N,q}(L)\le D$ and $L\ge\sigma_{D+1}$, an exact $q$-step return
+occurs at some $\sigma_k$, $k\le D$. The conclusions about boundedness
+for $q>0$ and convergence for $q=2$, $N>0$, still apply. The template
+certificate also holds with $L\ge\sigma_{2e+1}$.
+\end{theorem}
+\begin{proof}
+Use $H(u)=g(u)+K$ in Proposition~\ref{prop:heightwindow}, justified by
+Lemma~\ref{lem:sharpheight}. The earlier return and template lemmas then apply.
+\end{proof}
+
+\begin{proposition}[Comparison and geometric rate]\label{prop:rate}
+For all natural $q,K,k$,
+\begin{equation}\label{eq:neverlonger}
+\sigma_k\le(2^k-1)(q+K).
+\end{equation}
+With $C=3q+5K+4$, the following division-free bound also holds:
+\begin{equation}\label{eq:rate}
+5^k(3\sigma_k+C)\le8^kC.
+\end{equation}
+In particular, $\sigma_k\le\frac C3((8/5)^k-1)$.
+\end{proposition}
+\begin{proof}
+Since $g(u)\le u$, induction compares the two checkpoint recurrences
+and proves \eqref{eq:neverlonger}. For the sharper rate, the ceiling gives
+$5\sigma_{k+1}\le8\sigma_k+C$, hence
+$5(3\sigma_{k+1}+C)\le8(3\sigma_k+C)$.
+Multiply by $5^k$ and induct from $\sigma_0=0$ to obtain \eqref{eq:rate}.
+The final real inequality is its rearrangement.
+\end{proof}
+
+These worked examples compare exact horizons for $q=2$. The new horizons
+and defect counts were checked with Lean's \code{decide}; the old horizons
+use the original formula. These are not new computation records.
+\begin{center}
+\begin{tabular}{rrrrr}
+\toprule
+$N$&$K$&$D$&Original horizon&Sharper horizon\\
+\midrule
+3&2&3&60&36\\
+7&3&5&315&128\\
+9&4&6&762&250\\
+\bottomrule
+\end{tabular}
+\end{center}
+For $N=3$, the new checkpoints are $0,4,10,20,36$, with defects at
+$0,1,3$. For $N=7$, the five defects are at $1,4,5,7,9$; for $N=9$,
+the six are at $1,3,6,7,9,11$. The improvement shortens the sufficient
+certificate without proving that every orbit has few enough defects.
+
 \section{Formalization and remaining coverage}
-All new general results are in \code{lean/Collatz/ParityDefects.lean}.
+The original results are in \code{lean/Collatz/ParityDefects.lean};
+the height-sensitive extension is in \code{lean/Collatz/DefectHeight.lean}.
 The main interfaces, in namespace \code{Collatz.ParityDefects}, are:
 \begin{center}
 \begin{tabularx}{\textwidth}{@{}lX@{}}
@@ -253,14 +361,16 @@ Declaration&Conclusion\\
 \code{unbounded\_\allowbreak{}forces\_\allowbreak{}defects}&The necessary defect bound \eqref{eq:many}.\\
 \code{few\_\allowbreak{}defects\_\allowbreak{}two\_\allowbreak{}reaches\_\allowbreak{}one}&A positive seed with the period-two certificate reaches one.\\
 \code{near\_\allowbreak{}two\_\allowbreak{}power\_\allowbreak{}reaches\_\allowbreak{}one}&The period-two template-edit version.\\
+\code{sharp\_\allowbreak{}few\_\allowbreak{}defects\_\allowbreak{}force\_\allowbreak{}return}&A return at the shorter universal horizon.\\
+\code{sharpCheckpoint\_\allowbreak{}growth}&The certified $8/5$ geometric upper bound.\\
 \bottomrule
 \end{tabularx}
 \end{center}
-The module builds with Lean \code{v4.27.0-rc1}. The expanded command
+The modules build with Lean \code{v4.27.0-rc1}. The expanded command
 \code{python3 analysis/audit\_\allowbreak{}theorems.py --build}
-audits 35 selected declarations. All inspected transitive dependencies
+audits 44 selected declarations. All inspected transitive dependencies
 are within \code{propext}, \code{Classical.choice}, and \code{Quot.sound}.
-The new general module contains no \code{sorry},
+The new general modules contain no \code{sorry},
 \code{native\_\allowbreak{}decide}, or added mathematical axiom.
 The finite worked controls used ordinary \code{decide} in a temporary
 Lean file. This verification is not independent kernel replay or a
@@ -268,7 +378,7 @@ fresh rebuild of every external dependency and large certificate.
 
 The theorem excludes a concrete family of approximate repetitions from
 unbounded trajectories, extending exact repetition without restricting
-the placement of defects. Its horizon is conservative and exponential;
+the placement of defects. The horizons are conservative and exponential;
 directly checking a long certificate is not proposed as a faster
 algorithm than observing the orbit return itself.
 For arbitrary $q$, boundedness still leaves nontrivial cycles open.
