@@ -51,5 +51,23 @@ These are results at specific lengths, not a claim that all intervening lengths 
 \section{How much is proved}
 The correction bound and pruning implication are Lean theorems. The larger searches are Python computations checked against full enumeration at smaller lengths, with the affine identity checked at each visited node and every reported segment replayed directly. They are not kernel-verified census certificates.
 
-This gives a better instrument for investigating long words. It does not prove that every sufficiently long word is excluded, so it does not finish the finiteness argument or prove Collatz. The formal note records the exact assumptions, measured results, and reproduction commands.
+This gives a better instrument for investigating long words. It does not prove that every sufficiently long word is excluded, so it does not finish the finiteness argument or prove Collatz. The next page explains a proved limitation of this test. The formal note records the exact statements and reproduction commands.
+
+\newpage
+\section{Why this test alone cannot finish the proof}
+We have now proved a limitation of the pruning rule. Fix any prefix and its smallest allowed seed. If the target length is taken sufficiently large, at least one choice of the number of odd steps in the unfinished part always passes the correction-envelope test.
+
+The reason is that the envelope lets us arrange the unfinished odd steps in the most favorable possible way. Enough odd steps make its permitted correction large enough to offset the apparent contraction. Adding more allowed even steps makes the total coefficient contracting again, while the correction allowance is still large.
+
+This does not construct a real orbit. The favorable arrangement may require a different seed residue, or fail other arithmetic constraints. It demonstrates that the envelope forgets information which an eventual proof will need.
+
+\section{The precise consequence}
+For any fixed finite collection of prefixes, there is a length beyond which all their relaxed tests survive. Therefore this test alone cannot exclude every sufficiently long word using one fixed finite prefix tree.
+
+The statement does not say that all search methods fail, or that deeper pruning is useless. The successful fixed-length searches remain valid. It also says nothing about whether Collatz is true or false.
+
+\section{Where to go next}
+The next argument should connect a suffix's possible correction to the residue of the seed that actually realizes it. Alternatively, it needs another restriction valid uniformly in length. More computation can help study those constraints, but simply increasing the current search limit is not a proof of the missing uniform statement.
+
+The limitation and its finite-family consequence are Lean theorems in \texttt{Collatz.PruningLimit}. They are included in the expanded 66-declaration audit. This result changes the research direction by identifying precisely what the present bound cannot establish on its own.
 \end{document}

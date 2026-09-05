@@ -10,7 +10,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-We formalize an exact quotient-interval characterization of paradoxical shortcut Collatz segments. It permits exhaustive enumeration at each fixed length without a seed-height cutoff. Lean proves the complete length-eight classification above seed two. A separate exact-integer Python enumeration through length twenty reproduces the same five segments. A suffix-correction bound now prunes whole prefix subtrees. Tested searches at selected lengths through forty complete with substantially fewer nodes than full residue enumeration. This remains a fixed-length research instrument, not a proof of global finiteness or Collatz.
+We formalize an exact quotient-interval characterization of paradoxical shortcut Collatz segments. It permits exhaustive enumeration at each fixed length without a seed-height cutoff. Lean proves the complete length-eight classification above seed two. A separate exact-integer Python enumeration through length twenty reproduces the same five segments. A suffix-correction bound now prunes whole prefix subtrees. Tested searches at selected lengths through forty complete with substantially fewer nodes than full residue enumeration. We also prove a limitation: any fixed finite collection of these relaxed prefix tests eventually fails to prune at large target lengths. This remains a fixed-length instrument, not a proof of global finiteness or Collatz.
 \end{abstract}
 \section{Definition and quotient interval}
 Let $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$. Let $j_L(n)$ count odd steps before time $L$. Following Rozier and Terracol~\cite{RT}, a segment is paradoxical when
@@ -67,7 +67,7 @@ paradoxical\_quotient\_interval\\
 paradoxical\_residue\_iff\\
 paradoxical\_eight\_iff
 \end{quote}
-These are included in the expanded 64-declaration audit, with only standard foundational axioms. No new axiom, \texttt{sorry}, or \texttt{native\_decide} is used. The table uses ordinary kernel-checked \texttt{decide}.
+These are included in the expanded 66-declaration audit, with only standard foundational axioms. No new axiom, \texttt{sorry}, or \texttt{native\_decide} is used. The table uses ordinary kernel-checked \texttt{decide}.
 
 Build with \texttt{lake build Collatz.Paradoxical} from \texttt{lean/}. From the repository root, run {\small\texttt{python3 analysis/paradoxical\_cylinders.py}}; the JSON output records the exact finite scope. Brute-force residue enumeration costs exponentially many states. The prefix pruning extension below avoids many of those states, without establishing all-length termination. The missing task is an independently proved restriction on the contracting words that could support arbitrarily long paradoxical segments. Finite experimental absence does not supply that restriction.
 
@@ -132,10 +132,10 @@ Length&Visited nodes&Full residue count&Segments&Status\\
 \end{center}
 These are selected lengths, not every length through forty. Tree nodes and full-scan residues are different units; both counts are provided explicitly. The length-65 run reaches its work limit with 21 pending nodes. Its lack of emitted segments does not establish absence of segments.
 
-The six Python controls include exhaustive comparisons through length fourteen, all short suffix bounds through length eight, direct residue and endpoint checks, and a test that a work-limited run cannot report completion. Every emitted segment is independently replayed with the shortcut rule. The JSON file \texttt{analysis/paradoxical\_pruned\_results.json} preserves the status and discovered segments.
+The seven Python controls include exhaustive comparisons through length fourteen, all short suffix bounds through length eight, direct residue and endpoint checks, and a test that a work-limited run cannot report completion. Every emitted segment is independently replayed with the shortcut rule. The JSON file \texttt{analysis/paradoxical\_pruned\_results.json} preserves the status and discovered segments.
 
 \subsection*{Formal and computational claims}
-The added module proves \texttt{correction\_upper}, the completion bound, and the pruning implication. These mathematical statements are in Lean. The Python tree traversal and the reported larger-length counts are tested computations, not Lean-extracted code or kernel-verified search certificates. The existing all-seed length-eight classification remains separately kernel-proved. The selected 64-declaration audit includes the new bounds and reports only standard foundational axioms.
+The added module proves \texttt{correction\_upper}, the completion bound, and the pruning implication. These mathematical statements are in Lean. The Python tree traversal and the reported larger-length counts are tested computations, not Lean-extracted code or kernel-verified search certificates. The existing all-seed length-eight classification remains separately kernel-proved. The selected 66-declaration audit includes the new bounds and reports only standard foundational axioms.
 
 Build from \texttt{lean/} with
 \begin{quote}\small\ttfamily
@@ -145,7 +145,54 @@ From the repository root, reproduce the experiment with
 \begin{quote}\small\ttfamily
 python3 analysis/paradoxical\_pruned.py
 \end{quote}
-The result makes fixed-length investigation substantially more practical, but does not yield a uniform cutoff on possible lengths. The length-65 work limit is an observed computational boundary, not a mathematical obstruction. A restriction uniform in length or circuit count is still needed to obtain global paradoxical finiteness and use the existing reduction to Collatz.
+The result makes fixed-length investigation substantially more practical, but does not yield a uniform cutoff on possible lengths. The length-65 work limit is an observed computational boundary, not a mathematical obstruction. The limitation below shows why these envelopes alone do not yield closure with a fixed finite prefix tree. A restriction uniform in length or circuit count is still needed.
+
+
+\newpage
+\section{A limitation of the relaxed envelope}
+The observed work limit is computational. There is also a precise mathematical limitation of the pruning test itself. Keep a prefix length $s$, odd count $a$, correction $D$, and seed floor $m$ fixed. The test relaxes the unfinished word to an arbitrary arrangement with a chosen odd count $k$.
+
+\begin{theorem}\label{thm:limit}
+For any natural $s,a,D,m$ and every target length
+\[
+L\ge s+2(a+2m)+1,
+\]
+there exists $k\le L-s$ such that
+\[
+3^{a+k}<2^L,\qquad
+(2^L-3^{a+k})m\le3^kD+2^{L-k}(3^k-2^k).
+\]
+Thus at least one contracting odd-count choice fails the strict pruning inequality.
+\end{theorem}
+\begin{proof}
+Choose $k=2m$. Elementary induction gives
+\[
+(m+1)2^{2m}\le3^{2m}.
+\]
+For the inductive step, multiply the previous bound by nine and use $4(m+2)\le9(m+1)$. Hence $3^k-2^k\ge m2^k$. The length threshold ensures both $k\le L-s$ and
+\[
+3^{a+k}\le4^{a+k}=2^{2(a+k)}<2^L.
+\]
+Finally,
+\[
+3^kD+2^{L-k}(3^k-2^k)\ge2^{L-k}m2^k=2^Lm
+\ge(2^L-3^{a+k})m.
+\]
+\end{proof}
+
+For a finite collection of fixed prefix records, take the maximum of their thresholds. All records then simultaneously survive the relaxed test at every larger length. This consequence is also proved in Lean.
+
+\subsection*{Scope and strategic consequence}
+Surviving the envelope is only a necessary test: the theorem constructs an odd-count budget, not a realizable parity suffix, integer trajectory, or paradoxical segment. It does not invalidate pruning at a specified length, nor exclude proofs using target-dependent depth, stronger arithmetic, or another method. It rules out closing all sufficiently large lengths with a fixed finite collection of these relaxed envelope tests alone.
+
+The envelope discards compatibility between a suffix's correction and its realizing seed residue. The next argument must retain this arithmetic or supply a separate uniform restriction.
+
+Source: \texttt{lean/Collatz/PruningLimit.lean}. The explicit threshold and finite-family declarations are
+\begin{quote}\small\ttfamily
+completion\_envelope\_survives\\
+finite\_envelopes\_eventually\_survive.
+\end{quote}
+Both declarations pass the 66-theorem axiom audit. Python checks the thresholds on every residue prefix through depth seven. Collatz remains open.
 
 \begin{thebibliography}{1}
 \bibitem{RT} O. Rozier and C. Terracol, \emph{Paradoxical behavior in Collatz sequences}, arXiv:2502.00948v3 (2025), Definition 1.1 and Section 3. \url{https://arxiv.org/html/2502.00948v3}.

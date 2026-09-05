@@ -1,7 +1,7 @@
 import itertools
 import unittest
 from paradoxical_pruned import search, completion_possible
-from paradoxical_cylinders import census
+from paradoxical_cylinders import census, layers
 
 
 def correction(word):
@@ -29,6 +29,17 @@ class PruningControls(unittest.TestCase):
             self.assertEqual(row["status"], "complete")
             actual.extend(row["segments"])
         self.assertEqual(actual, expected)
+
+    def test_fixed_prefix_envelopes_eventually_survive(self):
+        for depth, states in layers(7):
+            modulus = 1 << depth
+            for r, (endpoint, odd) in enumerate(states):
+                floor = r + modulus*max(0, (3-r+modulus-1)//modulus)
+                corr = modulus*endpoint-3**odd*r
+                threshold = depth+2*(odd+2*floor)+1
+                for length in (threshold, threshold+7):
+                    self.assertTrue(completion_possible(length, depth, r, odd, corr,
+                                                        [3**j for j in range(length+1)]))
 
     def test_work_limit_cannot_claim_completeness(self):
         row = search(8, work_limit=1)

@@ -51,7 +51,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 64 declarations using only standard
+The selected theorem audit now covers 66 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -143,3 +143,14 @@ rotation-family, finite defect, and universal height refinements are now
 proved. The next proof-focused priority is an independent restriction on
 possible integer counterexample itineraries. Improved sufficient horizons
 do not establish that every counterexample must meet their sparsity bounds.
+
+## Limitation of fixed prefix envelope pruning
+
+`Collatz.PruningLimit` proves that each relaxed prefix test survives every
+length L ≥ s+2*(a+2*m)+1, using odd-count witness k=2*m. Any fixed finite
+family therefore survives simultaneously at all sufficiently large lengths.
+This rules out uniform closure by a fixed finite tree of these tests alone;
+it constructs no realizable orbit. The next arithmetic target is the joint
+constraint on suffix correction and its realizing seed residue. The theorem
+and finite-family consequence are included in the 66-declaration audit and
+documented in `paper/paradoxical_cylinders*`.

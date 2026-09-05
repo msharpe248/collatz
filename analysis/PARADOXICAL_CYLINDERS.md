@@ -56,9 +56,9 @@ direct iteration; interval membership and adjacent endpoints through length
 eight are compared with direct seeds; known and truncation-boundary controls
 are checked. Every emitted census segment is replayed directly as well.
 
-The selected module builds and expanded 64-declaration audit pass with standard
-foundational axioms only. The expanded five-page formal note and two-page guide
-in `paper/paradoxical_cylinders*` compile without warnings; all seven pages were
+The selected module builds and expanded 66-declaration audit pass with standard
+foundational axioms only. The expanded six-page formal note and three-page guide
+in `paper/paradoxical_cylinders*` compile without warnings; all nine pages were
 visually checked.
 
 ## Proved prefix pruning
@@ -82,7 +82,7 @@ For each prefix, m is the smallest seed at least three in its residue class.
 
 `paradoxical_pruned.py` performs depth-first residue lifting and applies this
 rule. It asserts the affine identity at every visited node and directly
-replays each emitted segment. Six unit tests cover the old interval method,
+replays each emitted segment. Seven unit tests cover the old interval method,
 every short suffix bound through length eight, exhaustive comparison through
 length fourteen, and correct reporting of an interrupted work-limited search.
 
@@ -103,14 +103,23 @@ counts are tested Python, not Lean-extracted code or kernel-certified census
 proofs. The pruning inequality is a Lean theorem. The length-eight census
 remains independently proved in Lean.
 
-## What the evidence changes next
+## Proved limitation and next direction
+
+`lean/Collatz/PruningLimit.lean` proves that every fixed prefix envelope
+survives at every target length L ≥ s+2*(a+2*m)+1. The witness k=2*m
+has contracting coefficient yet satisfies U_k ≥ (2^L−3^(a+k))*m.
+Taking the maximum threshold proves simultaneous survival for any fixed finite
+family. The new Python control checks these thresholds on all residue prefixes
+through depth seven.
+
+This is a limitation of the relaxed test, not a realizable suffix or a
+counterexample to Collatz. A fixed finite tree of these tests cannot close
+all sufficiently large lengths. Growing depth and stronger arithmetic remain
+possible. The next useful target is compatibility between a suffix's correction
+and the seed residue that realizes it, or a separate restriction uniform in
+length. Increasing a finite search budget does not supply that theorem.
 
 Do not duplicate the nested finiteness implication or treat fixed-length
-censuses as evidence sufficient for all lengths. The first rigorous pruning
-rule is now available and substantially reduces the tested trees. The next
-useful target is an independently proved restriction uniform across lengths
-or circuit counts, or a formal certificate checker connecting the pruned
-traversal to all-seed Lean statements at larger lengths. The length-65 resource
-limit is computational, not a mathematical obstruction.
-Any proposed rule must preserve the five known length-eight examples and must
-not confuse endpoint non-descent with absence of earlier descent.
+censuses as an all-length proof. Any proposed rule must preserve the five
+known length-eight examples and distinguish endpoint non-descent from absence
+of earlier descent.

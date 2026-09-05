@@ -81,6 +81,8 @@ TARGETS = [
     ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.correction_upper", "Sharp suffix correction upper bound by length and odd count"),
     ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.completion_correction_upper", "Uniform correction bound for every completion of a specified odd count"),
     ("Collatz.ParadoxicalPruning", "Collatz.WordAffine.prune_paradoxical_completion", "Strict envelope inequality excludes all realized completions above a certified seed floor"),
+    ("Collatz.PruningLimit", "Collatz.WordAffine.completion_envelope_survives", "Explicit target-length threshold beyond which every fixed relaxed prefix envelope admits an odd-count budget"),
+    ("Collatz.PruningLimit", "Collatz.WordAffine.finite_envelopes_eventually_survive", "Any finite collection of fixed relaxed envelopes simultaneously survives all sufficiently large lengths; no realizability claim"),
 ]
 
 
