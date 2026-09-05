@@ -17,37 +17,31 @@ The previously unresolved case of an unbounded orbit with divergent
 reciprocal sum is now ruled out.
 
 \section*{The key idea}
-An unbounded orbit never repeats a value. Two of its distinct values also
-cannot merge after the same number of additional steps: that would create
-a repeated value later.
+An unbounded orbit never repeats a value. Its distinct values cannot merge
+after the same number of steps, since that would create a repetition.
+Most small starting values map into a smaller range after suitably many
+steps. Injectivity limits how many of them can belong to one unbounded orbit.
 
-Most small starting values map into a much smaller range after a suitable
-number of steps. Their odd-step counts have an exact binomial distribution,
-and high odd-step counts are rare. An orbit on which this map is injective
-cannot contain too many of these small starting values, because there are
-too few distinct endpoints to hold them.
-
-Lean proves an explicit bound: among values below $32^m$, any finite set
-from an unbounded orbit has size $S$ satisfying
-\[
-8^mS\le2\cdot216^m+243^m.
-\]
-Dividing the positive integers into shells from $32^m$ to $32^{m+1}$ turns
-this counting bound into a sum of two convergent geometric series.
+Lean proves that a finite set of $S$ orbit values below $32^m$ satisfies
+$8^mS\le2\cdot216^m+243^m$. Splitting the positive integers into shells
+from $32^m$ to $32^{m+1}$ turns this into a convergent reciprocal majorant.
 
 \section*{What this adds to the proof program}
-The exact drift identity now gives
-\[
-\frac{2^t}{3^{j_t}}\longrightarrow0,
-\]
-where $j_t$ counts odd steps. This means the additive logarithmic drift
-escapes to positive infinity. It does not imply a fixed positive gap in
-average odd-step density.
+Every hypothetical unbounded positive orbit now belongs to the existing
+bounded-correction framework. Its inverse drift $2^t/3^{j_t}$ tends to zero,
+and its shifted correction divided by its current value tends to zero.
+Neither statement supplies a fixed gap in average odd-step density.
 
-The bounded-correction machinery can now be applied to every hypothetical
-unbounded positive orbit. The next task is to find a contradiction using
-that machinery and the exact arithmetic constraints. A uniform absolute
-bound on all shifted corrections has not been proved.
+The quantitative refinement gives an explicit budget $B_K\to0$: an
+unbounded orbit that always stays above $32^K$ has reciprocal sum at most
+$B_K$ and correction at most $N(e^{B_K}-1)$. The technical paper gives
+the two geometric terms in $B_K$ and their Lean proofs.
+
+This bound does not make the absolute correction small. Lean proves that
+the upper envelope, even at $N=32^K$, is at least $(1728/5)27^K$.
+That is a limitation of this estimate, not a lower bound on actual errors.
+A separate verified barrier puts actual shifted corrections above one.
+We therefore still need an arithmetic argument beyond rounding the ideal.
 
 \section*{Why this is not Collatz yet}
 Bounded correction is a restriction on an unbounded orbit; it is not an
@@ -60,8 +54,7 @@ Garcia and Tal. We make no novelty claim. The main project's proof uses its
 own existing bounds and adds no external mathematical axiom.
 
 \section*{Verification}
-The Lean build and 113-declaration axiom audit pass, as do three exact finite
+The Lean build and 120-declaration axiom audit pass, as do three exact finite
 controls. Run \texttt{lake build Collatz.OrbitSummability} from \texttt{lean/}.
-The technical paper and editable LaTeX sources provide the full argument,
-provenance, and precise remaining gap.
+The technical paper provides the argument and precise remaining gap.
 \end{document}

@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.OrbitSummability", "Collatz.unbounded_reciprocal_value_tail", "Explicit geometric reciprocal budget for all finite orbit-value sets above a threshold"),
+    ("Collatz.OrbitSummability", "Collatz.unbounded_reciprocal_tsum_le", "Full reciprocal series bound for an unbounded orbit staying above the threshold"),
+    ("Collatz.OrbitSummability", "Collatz.orbitTailBudget_tendsto_zero", "The explicit value-tail budget tends to zero"),
+    ("Collatz.OrbitSummability", "Collatz.unbounded_idealLimit_le_tailBudget", "Threshold-dependent limiting correction upper bound; requires a lower bound on every orbit value"),
+    ("Collatz.OrbitSummability", "Collatz.tail_correction_envelope_lower", "The upper envelope grows even at the smallest admissible seed; not a lower bound on the actual correction"),
     ("Collatz.RelativeCorrection", "Collatz.relative_shifted_idealLimit", "Exact relative shifted correction identity for positive seeds with bounded correction"),
     ("Collatz.RelativeCorrection", "Collatz.unbounded_relative_correction_tendsto_zero", "Relative shifted correction tends to zero on every unbounded positive orbit; no absolute error bound"),
     ("Collatz.OrbitPacking", "Collatz.packing_bound", "Finite power-saving bound for equal-time injective sets below 32^m"),

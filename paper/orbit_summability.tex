@@ -88,8 +88,8 @@ For a finite time prefix, take the image of its orbit values as a finite
 set. Unboundedness supplies injectivity in time, so passing to this set
 preserves the reciprocal sum without losing multiplicities. Each such sum
 is bounded by $\sum_m b_m$, proving summability. The displayed majorant
-has sum less than 1000; the named Lean theorem asserts summability rather
-than this numerical constant.
+has sum less than 1000; the quantitative refinement below bounds every
+value tail explicitly.
 
 This distinction between values and time is essential. A finite cycle has
 a finite reciprocal sum over its distinct values but a divergent reciprocal
@@ -117,15 +117,69 @@ scale, $j_t\log3-t\log2$ tends to positive infinity. The Lean declaration
 uses the inverse-drift limit directly. Dividing by $t$ need not leave a
 positive limit: no uniform strict density gap is claimed.
 
+\section{Quantitative tails and the remaining absolute-error gap}
+Define the closed-form tail budget
+\[
+B_K=\frac{1728}{5}\left(\frac{27}{32}\right)^K
+ +\frac{7776}{13}\left(\frac{243}{256}\right)^K.
+\]
+It satisfies $B_K=b_K+B_{K+1}$, is nonnegative, and tends to zero.
+\begin{theorem}
+For any finite set $S$ of values on an unbounded orbit with $n\ge32^K$
+for every $n\in S$, one has $\sum_{n\in S}1/n\le B_K$.
+If a positive unbounded orbit stays above $32^K$ at all times, then
+\[
+\sum_{t\ge0}\frac1{x_t}\le B_K,
+\qquad c_\infty(N)\le N\bigl(e^{B_K}-1\bigr).
+\]
+\end{theorem}
+For a finite set below $32^{K+d}$, induction on $d$ proves the sharper bound
+$\sum_{n\in S}1/n\le B_K-B_{K+d}$. Split the last shell and use
+$B_{K+d}=b_{K+d}+B_{K+d+1}$. Every finite set fits below some such endpoint;
+dropping the nonnegative remainder proves the first claim. Injectivity in
+time transfers it to reciprocal partial sums. The earlier exponential
+correction estimate
+\[
+N+c_t(N)\le N\exp\!\left(\sum_{s<t}\frac1{x_s}\right)
+\]
+then bounds every finite correction by $N(e^{B_K}-1)$; take the supremum.
+
+There is also an exact relative tail identity, proved in
+\texttt{RelativeCorrection.lean}:
+\[
+\frac{c_\infty(x_t)}{x_t}
+ =\frac{c_\infty(N)-c_t(N)}{N+c_t(N)}\longrightarrow0.
+\]
+Its denominator has a positive limit. This statement gives relative
+approximation, not a vanishing absolute error.
+
+The explicit upper envelope cannot repair that distinction. Lean also proves
+\[
+32^K\bigl(e^{B_K}-1\bigr)\ge\frac{1728}{5}\,27^K.
+\]
+Indeed $e^u-1\ge u$ and the first summand of $B_K$ already gives the
+right-hand side. Thus even at the smallest allowed seed, this upper bound
+grows with $K$. This is a lower bound on the \emph{upper envelope}, not on
+the actual correction. Independently, the existing ideal-barrier theorem
+places the actual shifted correction strictly above one. Neither relative
+convergence nor the quantitative envelope identifies an orbit value by
+rounding the canonical ideal.
+
 \section{Formal verification and provenance}
 {\raggedright
-The new modules are \texttt{Collatz/OrbitPacking.lean} and
-\texttt{Collatz/OrbitSummability.lean}. Principal declarations include
+The modules are \texttt{Collatz/OrbitPacking.lean},
+\texttt{Collatz/OrbitSummability.lean}, and
+\texttt{Collatz/RelativeCorrection.lean}. Principal declarations include
 \texttt{unbounded\_orbit\_reciprocal\_summable},
 \texttt{unbounded\_orbit\_supercritical},
 \texttt{supercritical\_iff\_unbounded\_orbit}, and
 \texttt{unbounded\_inverse\_drift\_tendsto\_zero}.
-The build and selected audit pass: 113 declarations use only standard
+The quantitative declarations include
+\texttt{unbounded\_reciprocal\_value\_tail},
+\texttt{unbounded\_reciprocal\_tsum\_le},
+\texttt{unbounded\_idealLimit\_le\_tailBudget}, and
+\texttt{tail\_correction\_envelope\_lower}.
+The build and selected audit pass: 120 declarations use only standard
 foundations. Three exact finite controls check full small residue images,
 the geometric identity, and the coalescence/multiplicity boundary.
 The audit is dependency inspection, not independent kernel replay.\par}

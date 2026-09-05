@@ -53,7 +53,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 115 declarations using only standard
+The selected theorem audit now covers 120 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -389,3 +389,29 @@ This is a routine consequence, not a new exclusion theorem. It does not
 imply bounded absolute correction or rounding of the ideal to the orbit:
 `IdealBarrier.one_lt_idealLimit` still puts the absolute correction above
 one at every shift. An arithmetic contradiction requires additional input.
+
+## Explicit value tails and correction envelope (2026-09-05)
+
+`OrbitSummability.lean` now proves a uniform reciprocal bound for any finite
+set of unbounded-orbit values above `32^K`, with no restriction on their
+occurrence times. Its explicit budget is
+`B_K = (1728/5)(27/32)^K + (7776/13)(243/256)^K`, and tends to zero.
+The finite proof telescopes shell budgets, retaining the sharper remainder
+`B_K - B_(K+d)` below the upper endpoint `32^(K+d)`.
+
+If an unbounded positive orbit stays above `32^K` at every time, its full
+reciprocal series is at most `B_K` and
+`idealLimit N <= N * (exp B_K - 1)`. The all-times lower bound is explicit
+in both theorem statements; the starting value alone is insufficient.
+
+The attempted rounding route still fails: Lean also proves
+`32^K * (exp B_K - 1) >= (1728/5) * 27^K`.
+This concerns the upper envelope, not the actual correction. The estimate
+therefore cannot provide an absolute error below one, even at the smallest
+allowed seed. Further arithmetic input, rather than this envelope alone,
+is needed to exclude escape. General cycles remain unresolved as well.
+
+Five new audit targets bring the total to 120. The Lean build and audit
+pass with standard foundations only; the three existing exact packing
+controls pass. The summability paper and guide include these results and
+the previous relative-correction identity.
