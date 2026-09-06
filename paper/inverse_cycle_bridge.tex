@@ -1,0 +1,92 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\newcommand{\R}{\mathcal R}
+\newcommand{\A}{\mathcal A}
+\begin{document}
+\begin{center}
+{\Large An Inverse Excursion That Lowers Cycle Charge}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+Let $T$ be the shortcut Collatz map, $j_t(n)$ its odd-step count,
+$\R(n)$ eventual reachability of one, and
+$\A(u)=[\R(3u+2)\Rightarrow\R(27u+20)]$.
+The previous growth bound excludes lowering cycle charge using only forward
+steps and auxiliary bridges $x\mapsto9x+2$. We now give a concrete signed
+excursion outside that bound. Its recursive transfer premise remains explicit.
+
+\begin{theorem}[Kernel-checked inverse bridge]
+For every natural $Q$,
+\begin{align*}
+T^{65}(3(15+2^{65}Q)+2)&=2+3^{39}Q,\\
+T^{38}(27(15+2^{65}Q)+20)&=2+3^{22}2^{27}Q.
+\end{align*}
+Consequently, assuming $\A(15+2^{65}Q)$,
+\[
+ \R(2+3^{39}Q)\ \Longrightarrow\ \R(2+3^{22}2^{27}Q).
+\]
+\end{theorem}
+\begin{proof}
+The base computations are
+$T^{65}(47)=2$, $j_{65}(47)=38$,
+$T^{38}(425)=2$, and $j_{38}(425)=19$.
+Binary-cylinder transport gives the displayed identities.
+Transport convergence backward through the first identity, apply the explicit
+transfer premise, and transport forward through the second.
+Lean checks both base paths, both identities for every $Q$, and the implication.
+\end{proof}
+
+\paragraph{Effect on the symbolic state.}
+At a cycle state $(2,p,s)$, representing $2+3^p2^{D-s}Q$, reverse the
+65-step path from 47, use its bridge $47\mapsto425$, and advance 38 steps.
+The resulting state is $(2,p-17,s-27)$, provided the reversed lift is integral.
+Thus the cycle charge $L(x,p,s)=2p-s+\mathbf1_{x=1}$ changes by
+$2(-17)-(-27)=-7$. This does not contradict the forward-only theorem.
+
+\paragraph{Admissibility in parameter induction.}
+The original parameter is $U=u+2^D Q$.
+For this excursion the recursive parameter is
+\[
+ v=15+3^{p-39}2^{D-s+65}Q.
+\]
+Sufficient conditions are $u>15$, $p\geq39$, $s\geq65$, and
+$3^{p-39}\leq2^{s-65}$. They ensure integrality and $v<U$ for every $Q$.
+Waiting two ordinary steps at base state 2 raises $p$ by one and $s$ by two;
+the slope ratio is multiplied by $3/4$. Sufficiently long waiting therefore
+satisfies the slope condition and the required minimum clock and exponent.
+Waiting is also chosen so the target remains past its cycle entry when the
+source clock is moved backward.
+
+\paragraph{Conditional local completeness: a written construction.}
+Fix $u>15$ and suppose both finite base partners reach the trivial cycle.
+Their charge difference is an integer. Repeated $-7$ excursions can lower the
+source charge below or to the target charge. Repeated $+1$ excursions
+$2\mapsto20\to\cdots\to2$ then make the charges equal.
+The latter uses seven ordinary steps with two odd steps and recursive base
+parameter zero. Each finite excursion can be made admissible by waiting.
+At a common clock, equal cycle charge determines both cycle phase and slope.
+Choose $D$ at least the maximum clock visited, not merely the net final clock,
+and advance both matched endpoints to $D$ if necessary.
+This gives a conditional all-quotient transfer certificate on $u+2^D Q$.
+The complete scheduling argument is not yet formalized in Lean; the displayed
+inverse macro is formalized.
+
+\paragraph{Finite verification.}
+The implementation constructs certificates for all 985 parameters from 16
+through 1000; the largest final depth is 412. Every generated certificate is
+replayed at $Q=0,1,7$, checking reverse identities, all recursive decreases,
+and equality of the final affine endpoints. Three tests pass. The saved report
+contains the census and four representative paths, not a kernel-certified census.
+The maximum-clock condition is tested explicitly on parameter 20, which needs
+two negative excursions.
+
+\paragraph{The unresolved global step.}
+The construction uses convergence of the base target to determine its charge.
+Assuming that for every parameter would already assume the convergence problem.
+Thus local completeness for convergent base pairs is not universal induction
+coverage. The new transition removes the earlier directional obstruction but
+supplies no proof of Collatz. The three public declarations in
+\texttt{Collatz.InverseCycleBridge} are included in the axiom audit.
+No mathematical priority claim is made.
+\end{document}

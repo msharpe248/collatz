@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: Repairing the Cycle Mismatch with an Inverse Path}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{What the earlier bound ruled out}
+The forward bridge search could get stuck after both base orbits reached
+the trivial cycle. An integer quantity combining slope, clock, and cycle
+phase could only move in one direction. Adding more forward bridges could
+not repair the opposite mismatch.
+
+\guideheading{The new route}
+We can transport convergence backward along a verified orbit segment.
+The number 47 reaches 2 in 65 shortcut steps. Its auxiliary bridge is
+$47\mapsto425$, and 425 reaches 2 in 38 steps. The combined route is
+\[
+ 2\ \longleftarrow\ 47\ \longmapsto\ 425\ \longrightarrow\ 2.
+\]
+Reading the first segment backward makes this a different operation from
+the forward paths covered by the earlier bound. Its net change in the
+cycle quantity is negative seven. Lean checks the exact orbit computations
+and their extension to whole arithmetic progressions.
+
+\guideheading{The premise is still required}
+The middle bridge invokes transfer at a smaller parameter. Lean retains
+that premise explicitly. The numerical fact that 47 and 425 converge does
+not by itself prove convergence for every point on their lifted progressions.
+The construction checks that each recursive parameter is smaller for every
+quotient, using enough waiting steps when needed.
+
+\guideheading{Why two excursions are enough in principle}
+The previous cycle excursion changes the quantity by positive one. The
+new one changes it by negative seven. Combining them can correct any
+integer mismatch. This gives a construction for a fixed parameter above
+15 when both of its base partners are already known to converge.
+
+Moving backward also changes the clock used to define the arithmetic
+progression. The binary modulus must retain enough precision for the
+largest clock ever visited, including clocks before a backward move.
+The program records and checks this condition.
+
+\guideheading{What was tested}
+The constructor succeeded for every parameter from 16 through 1000:
+985 conditional certificates, with maximum final depth 412. Tests replay
+all of them at three quotients, including every reverse segment and every
+smaller-parameter comparison. The exact inverse macro is checked in Lean;
+the general scheduling argument and the entire census are not yet Lean
+coverage theorems.
+
+\guideheading{Why this still does not prove Collatz}
+The construction needs the base target to reach the cycle before it can
+measure the mismatch. Applying it to every parameter would therefore
+require the convergence statement we are trying to prove. The inverse
+route fixes a limitation of the certificate language; it does not remove
+this global coverage gap.
+
+\guideheading{Verification files}
+\begingroup\raggedright
+Build \texttt{Collatz.InverseCycleBridge} from \texttt{lean/}.
+Run \texttt{python3 analysis/inverse\_cycle\_bridge.py} and
+\texttt{python3 -m unittest discover -s analysis -p test\_inverse\_cycle\_bridge.py}.
+\par\endgroup
+\end{document}

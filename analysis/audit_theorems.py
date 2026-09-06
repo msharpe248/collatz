@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.InverseCycleBridge', 'Collatz.inverse_cycle_geometry', 'Exact orbit lengths and odd counts for the 47-to-2 and 425-to-2 paths'),
+    ('Collatz.InverseCycleBridge', 'Collatz.inverse_cycle_transport', 'Exact all-quotient cylinder lifts underlying a charge-minus-seven inverse excursion'),
+    ('Collatz.InverseCycleBridge', 'Collatz.inverse_cycle_transfer', 'Conditional convergence transfer through an inverse ordinary segment and auxiliary bridge'),
     ('Collatz.BridgeGrowth', 'Collatz.BridgeGrowth.Path.pos', 'Mixed forward Collatz and auxiliary bridge paths preserve positivity'),
     ('Collatz.BridgeGrowth', 'Collatz.BridgeGrowth.Path.growth_bound', 'All mixed paths satisfy 2^t*x <= 2^e*n, with e twice the symbolic exponent increment'),
     ('Collatz.BridgeGrowth', 'Collatz.BridgeGrowth.Path.cycle_charge_nondecrease', 'Arbitrary forward bridge interleavings between trivial-cycle states cannot lower cycle charge'),

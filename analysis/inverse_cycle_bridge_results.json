@@ -1,0 +1,286 @@
+{
+  "scope": "finite base census; smaller-transfer premises remain",
+  "kernel_certified_census": false,
+  "counts": {
+    "certificate": 985
+  },
+  "max_depth": 412,
+  "examples": [
+    {
+      "kind": "certificate",
+      "parameter": 16,
+      "depth": 97,
+      "operations": [
+        {
+          "kind": "forward",
+          "length": 82
+        },
+        {
+          "kind": "inverse_47",
+          "length": 65
+        },
+        {
+          "kind": "bridge",
+          "parameter": 15
+        },
+        {
+          "kind": "forward",
+          "length": 38
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        }
+      ],
+      "endpoint": 2,
+      "exponent": 48,
+      "initial_gap": -1,
+      "negative_excursions": 1
+    },
+    {
+      "kind": "certificate",
+      "parameter": 20,
+      "depth": 133,
+      "operations": [
+        {
+          "kind": "forward",
+          "length": 133
+        },
+        {
+          "kind": "inverse_47",
+          "length": 65
+        },
+        {
+          "kind": "bridge",
+          "parameter": 15
+        },
+        {
+          "kind": "forward",
+          "length": 64
+        },
+        {
+          "kind": "inverse_47",
+          "length": 65
+        },
+        {
+          "kind": "bridge",
+          "parameter": 15
+        },
+        {
+          "kind": "forward",
+          "length": 66
+        }
+      ],
+      "endpoint": 2,
+      "exponent": 66,
+      "initial_gap": -14,
+      "negative_excursions": 2
+    },
+    {
+      "kind": "certificate",
+      "parameter": 23,
+      "depth": 144,
+      "operations": [
+        {
+          "kind": "forward",
+          "length": 130
+        },
+        {
+          "kind": "inverse_47",
+          "length": 65
+        },
+        {
+          "kind": "bridge",
+          "parameter": 15
+        },
+        {
+          "kind": "forward",
+          "length": 64
+        },
+        {
+          "kind": "inverse_47",
+          "length": 65
+        },
+        {
+          "kind": "bridge",
+          "parameter": 15
+        },
+        {
+          "kind": "forward",
+          "length": 38
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        }
+      ],
+      "endpoint": 2,
+      "exponent": 74,
+      "initial_gap": -8,
+      "negative_excursions": 2
+    },
+    {
+      "kind": "certificate",
+      "parameter": 1000,
+      "depth": 114,
+      "operations": [
+        {
+          "kind": "forward",
+          "length": 99
+        },
+        {
+          "kind": "inverse_47",
+          "length": 65
+        },
+        {
+          "kind": "bridge",
+          "parameter": 15
+        },
+        {
+          "kind": "forward",
+          "length": 38
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        },
+        {
+          "kind": "bridge",
+          "parameter": 0
+        },
+        {
+          "kind": "forward",
+          "length": 7
+        }
+      ],
+      "endpoint": 2,
+      "exponent": 55,
+      "initial_gap": -1,
+      "negative_excursions": 1
+    }
+  ]
+}

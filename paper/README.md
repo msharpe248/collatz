@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Inverse excursion lowering cycle charge | [inverse_cycle_bridge.pdf](inverse_cycle_bridge.pdf) | [inverse_cycle_bridge_guide.pdf](inverse_cycle_bridge_guide.pdf) |
 | Growth bound for arbitrarily interleaved transfer bridges | [bridge_growth.pdf](bridge_growth.pdf) | [bridge_growth_guide.pdf](bridge_growth_guide.pdf) |
 | Precision audit of proposed Collatz residue transitions | [residue_precision_audit.pdf](residue_precision_audit.pdf) | [residue_precision_audit_guide.pdf](residue_precision_audit_guide.pdf) |
 | Auxiliary smaller-transfer bridges | [affine_bridges.pdf](affine_bridges.pdf) | [affine_bridges_guide.pdf](affine_bridges_guide.pdf) |

@@ -16,9 +16,14 @@ Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
 947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
 remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
 records five kernel-checked precision/count findings for a proposed literature
-input; the selected declaration audit now contains 217 entries. The new `BridgeGrowth`
+input; the selected declaration audit now contains 220 entries. The new `BridgeGrowth`
 bound rules out lowering cycle charge through arbitrary forward bridge
 interleavings and justifies pruning those states in the affine bridge search.
+`InverseCycleBridge` now verifies a signed 2 <- 47 -> 425 -> 2 excursion
+with charge change -7. Its all-quotient transfer premise is explicit. The
+constructor handles every tested base parameter 16..1000, but still needs
+base-target convergence and therefore does not prove global coverage. See
+`paper/inverse_cycle_bridge.tex` and its companion guide.
 
 ## Completed in this research pass
 
