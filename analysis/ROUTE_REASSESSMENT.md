@@ -265,3 +265,47 @@ surgery, not a new proof of Collatz. An all-time extension would need
 relative correction control or additional parity information. For the
 main goal, variable-length/count applicability remains the unproved
 load-bearing step; finite injectivity must not replace that objective.
+
+## Shifted merge chains with exact coefficient deficits (2026-09-05)
+
+The initial applicability check found that the 360 retained rules have
+maximum boost 3/2. Their affine intercepts have mixed signs (257 positive,
+103 negative, none zero), so neither arbitrarily strong single-rule boosts
+nor a uniform negative additive correction is available from this table.
+This evidence motivated chaining rules while retaining a quantitative
+bound on a shifted orbit, rather than assuming shifted noncontraction.
+
+`MergeDeficit.lean` represents a coefficient floor a/b by
+`CoefficientBound a b n := ∀ i, a*2^i ≤ b*3^oddSteps i n`.
+A shift of a NeverContracts seed has floor 1/C_k(N). A merge of boost rho
+and an NC replacement prefix changes the inverse floor D to max(1,D/rho).
+The merge and binary-cylinder versions are proved by natural arithmetic.
+The kernel-checked all-quotient example is
+
+    NeverContracts (447 + 549755813888Q)
+      → NeverContracts (307 + 376572715308Q),
+
+with a positive, strictly smaller replacement. It uses a shift of 23 and
+three rules. Intermediate deficits remain above one; the final bound is
+one. Thus the proof explicitly handles the shifted-tail applicability gap.
+It does not prove that the new progression, or all possible chains,
+covers every hypothetical least NC seed.
+
+The exact DAG search processes decreasing seeds and keeps the smallest
+deficit found at each seed. Among the 2,336 previously unresolved canonical
+seeds at depth 18, shifts through 64 yield 1,012 chain certificates, 1,216
+coefficient contractions before a certificate, and 108 horizon exits.
+No 10,000-state-per-shift cap is reached. Of the successful seeds, 182
+have no single-rule witness at any searched shift before contraction;
+101 selected chain witnesses start at shifts at most 18. All saved chains
+pass independent direct-orbit replay. Search completeness is Python
+evidence; only the general transport and explicit infinite family are
+newly kernel certified. The selected audit now covers 183 declarations.
+
+The next substantive obligation is structural coverage or a useful
+obstruction to such coverage. Increasing finite orbit horizons alone
+would mostly rediscover known convergence of the sampled small seeds.
+An approach based on these chains must force enough accumulated boost
+and a final seed below the original, with actual rule congruences, for
+arbitrary hypothetical least NC seeds. Even that would address
+nondivergence; exclusion of nontrivial cycles remains a separate task.

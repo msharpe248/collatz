@@ -1,0 +1,87 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype,booktabs}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\begin{center}
+{\Large Quantitative Transport Through Shifted Collatz Merge Chains}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+Write $T(n)=n/2$ for even $n$, $T(n)=(3n+1)/2$ for odd $n$, and
+$C_i(n)=3^{j_i(n)}/2^i$, where $j_i$ counts odd steps. Full
+noncontraction means $C_i(n)\geq1$ for every $i$. Shifting such an orbit
+does not in general preserve that property. An explicit coefficient
+deficit makes the shifted orbit usable in further conditional descent.
+
+\begin{theorem}[Deficit transport]
+Suppose $D\geq1$, $C_i(y)\geq1/D$ for all $i$, and $T^s(x)=T^t(y)$.
+Assume $C_i(x)\geq1$ for $0\leq i\leq s$. Put
+$\rho=C_s(x)/C_t(y)>0$. Then
+\[
+ C_i(x)\geq\frac1{D'}\quad\hbox{for all }i,
+ \qquad D'=\max(1,D/\rho).
+\]
+If $N$ is fully noncontracting, $y=T^k(N)$ satisfies the input bound
+with $D=C_k(N)$. Along a chain with boosts $\rho_r\geq1$, the final
+deficit is $\max(1,C_k(N)/\prod_r\rho_r)$.
+\end{theorem}
+\begin{proof}
+For $v\geq0$ the shared endpoint gives
+$C_{s+v}(x)=\rho C_{t+v}(y)\geq\rho/D$; earlier times use the prefix
+hypothesis. The shift formula is
+$C_i(T^k(N))=C_{k+i}(N)/C_k(N)\geq1/C_k(N)$.
+The chain formula follows by induction, using $\rho_r\geq1$.
+Lean represents a floor $a/b$ by the natural inequalities
+$a2^i\leq b3^{j_i(n)}$. Its merge theorem accepts $a'\leq b'$ and
+$a'b2^s3^{j_t(y)}\leq b'a2^t3^{j_s(x)}$, with $b>0$.
+Thus no numerical approximation enters the formal transport.
+\end{proof}
+
+\begin{theorem}[An infinite conditional descent family]
+For every natural $Q$, if $N=447+549755813888Q$ is fully noncontracting,
+then so is $M=307+376572715308Q$, and $0<M<N$.
+\end{theorem}
+\begin{proof}
+The following paths and odd counts hold for every $Q$, by binary-cylinder
+transport. Each replacement has a one-step odd prefix.
+\[
+\begin{array}{c|r|l}
+\text{seed}&\text{value}&\text{meeting identity}\\\hline
+y&767+940369969152Q&T^{23}(N)=y,\quad j_{23}(N)=15\\
+x_1&511+626913312768Q&T(x_1)=y\\
+x_2&461+564859072962Q&T(x_2)=T^{17}(x_1),\quad j_{17}(x_1)=11\\
+M&307+376572715308Q&T(M)=x_2
+\end{array}
+\]
+The boosts are $3/2$, $65536/59049$, and $3/2$. Successive deficits are
+\[
+\frac{14348907}{8388608},\qquad
+\frac{4782969}{4194304},\qquad
+\frac{282429536481}{274877906944},\qquad 1.
+\]
+Apply the transport theorem three times. Finally,
+$N-M=140+173183098580Q>0$. All statements in this proof, including the
+all-quotient transport, are kernel checked in \texttt{Collatz.MergeDeficit}.
+\end{proof}
+
+\paragraph{Finite evidence and limits.}
+Using the existing 360 certified rules, an exact rational search revisits
+2,336 canonical seeds below $2^{18}$ unresolved by the earlier bounded
+merge search. At shifts $0\leq k\leq64$, stopping when $C_k(N)<1$, it
+finds chains for 1,012 seeds; 1,216 others reach coefficient contraction
+first, and 108 reach the horizon. No state cap is reached. Among the
+1,012, exactly 182 have no single-rule witness anywhere in this same
+range; 101 chain witnesses use shifts at most 18. These are Python
+census results, not kernel-certified completeness claims. Independent
+orbit replay checks every reported chain. A cap would be reported as
+incomplete, separately from exhausting a reachable graph.
+
+\paragraph{Verification and remaining obligation.}
+Five public declarations in \texttt{Collatz.MergeDeficit} enter the axiom
+audit. The search, saved witnesses and independent tests are under
+\texttt{analysis/merge\_chain\_search*}. A successful chain with final
+seed below $N$ excludes $N$ from being the least positive noncontracting
+seed. No theorem forces such a chain for every candidate. This work
+does not prove nondivergence or exclude nontrivial cycles, and makes
+no mathematical priority claim.
+\end{document}

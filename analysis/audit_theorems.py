@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.MergeDeficit', 'Collatz.NeverContracts.shift_bound', 'A shifted noncontracting orbit retains its exact rational coefficient floor; no shift-invariance assumption'),
+    ('Collatz.MergeDeficit', 'Collatz.CoefficientBound.merge', 'Quantitative coefficient bounds transfer across a merging path with a noncontracting replacement prefix'),
+    ('Collatz.MergeDeficit', 'Collatz.CoefficientBound.neverContracts', 'Restoring a coefficient floor of at least one gives full noncontraction'),
+    ('Collatz.MergeDeficit', 'Collatz.CoefficientBound.merge_cylinder', 'Quantitative merge transport for arbitrary balanced binary-cylinder quotients'),
+    ('Collatz.MergeDeficit', 'Collatz.NeverContracts.smaller_merge_chain_447', 'A three-rule chain after a 23-step shift gives a smaller NC replacement on an entire arithmetic progression'),
     ('Collatz.NCPrefixInjective', 'Collatz.NCPrefixInjective.correction_interval_31', 'All-seed NC-prefix correction interval through time 31, using a kernel-checked arithmetic envelope'),
     ('Collatz.NCPrefixInjective', 'Collatz.NCPrefixInjective.equal_count_injective_31', 'All natural seeds: equal endpoint and odd count with both prefixes NC force equal seeds for times at most 31'),
     ('Collatz.NCPrefixInjective', 'Collatz.NCPrefixInjective.different_counts_collision', 'Kernel-checked seven-step NC collision of 31 and 95 with different odd counts'),

@@ -10,19 +10,22 @@ cannot supply the missing convergence premise. The nested predicate
 explicitly contains reach-one, its existence declaration has `sorry`,
 and the Rhin estimate is a cited axiom. No such premise was imported.
 The newer Niu note was withdrawn for duplication. This review adds no
-new theorem; the selected main-project audit remains at 159 declarations.
+new theorem. Subsequent work is recorded below and in the current theorem audit.
 
 ## Completed in this research pass
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Quantitative merge chains | `CoefficientBound.merge`, `NeverContracts.smaller_merge_chain_447` | Exact coefficient-deficit transport after shifting; a three-rule chain excludes the progression 447 + 549755813888Q from least positive NC seeds; no universal coverage |
+| Certified merge progressions | `MergeRuleTable.rules_valid`, `MergeRule.sound` | 360 kernel-checked rules apply to every natural quotient, conditional on noncontraction |
+| NC-prefix injectivity | `NCPrefixInjective.equal_count_injective_31` | Equal endpoint and odd count force equal seeds when both prefixes are NC and time is at most 31; interval bound fails at 32, not an injectivity counterexample |
 | Growing consecutive returns | `arbitrarily_many_growing_returns` | For each finite R, a positive seed has R consecutive growing four-step returns to two modulo nine; different seed for each R, no infinite escape |
 | Sampled nondivergence equivalence | `all_bounded_iff_sampled_contraction` | Nondivergence is equivalent to universal contraction at residue-two visits; exact coverage by sampled-noncontracting tails, not full NeverContracts |
 | Contracting residue returns | `even_steps_between_two_mod_nine`, `contracting_two_mod_nine_segment_descends` | At most six even steps between visits; contracting first returns have sharp length bound sixteen and strictly descend for every seed above two; eventual contraction remains open |
 | Forward residue coverage | `exists_two_mod_nine`, `arbitrarily_late_two_mod_nine` | Every positive orbit visits two modulo nine arbitrarily late; formalization of Monks et al., no noncontraction property at the selected visit |
 | Inverse-search obstruction | `bounded_odd_inverse_obstruction`, `arbitrarily_large_inverse_obstructions` | Every fixed odd-step budget leaves the class 1 modulo 3^K without a noncontracting predecessor segment; total length unrestricted, no noncontracting target asserted |
 | Noncontracting tails | `unbounded_iff_noncontracting_tail`, `all_orbits_bounded_iff_all_contract` | Exact reduction of nondivergence to universal coefficient contraction; arbitrarily late noncontracting tails cover every hypothetical unbounded positive orbit |
-| First contraction | `first_contraction_seed_bound`, `descent_of_contraction_le65`, `return_le65_reaches_one` | Sharper seed bound at any first contraction; every seed above one descends by a coefficient contraction within 65 steps; positive returns of length at most 65 reach one |
+| First contraction | `first_contraction_seed_bound`, `descent_of_contraction_le65`, `return_le65_reaches_one` | Sharper seed bound at any first contraction; coefficient contraction by time 65 implies descent for every seed above one; positive returns of length at most 65 reach one |
 | Universal correction coverage | `unbounded_orbit_reciprocal_summable`, `supercritical_iff_unbounded_orbit` | All unbounded positive natural orbits have summable reciprocals and bounded correction; no escape exclusion |
 | Full mechanical classification | `mechanical_classification`, `eventual_mechanical_reaches_one` | All real slopes and intercepts; positive global seed is 1 or 2 with slope 1/2; any mechanical tail forces reaching one |
 | Sturmian itineraries | `Silver.no_itinerary`, `Silver.no_eventual_itinerary` | Slope √2/2, every intercept and natural seed; unconditional |

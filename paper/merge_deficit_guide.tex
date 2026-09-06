@@ -1,0 +1,73 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: Using Merge Rules After an Orbit Shift}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{What changed}
+Earlier rules could replace certain hypothetical noncontracting seeds
+with smaller ones. A noncontracting seed is one whose multiplicative
+coefficient never falls below one. Moving forward along its orbit can
+lose that property, so applying the old rule theorem directly to a
+shifted value would leave a gap.
+
+The new Lean proof keeps a numerical lower bound on every future
+coefficient. A rule improves that bound. Several rules can restore it
+to one, at which point the resulting seed is fully noncontracting again.
+If that seed is smaller than the original, the original could not have
+been the least positive noncontracting seed.
+
+\guideheading{How the accounting works}
+Represent the lower bound as $1/D$, with $D\geq1$. Moving forward by
+$k$ steps from a fully noncontracting seed supplies the initial value
+$D=C_k$, the coefficient accumulated during that shift. A merging rule
+with coefficient boost $\rho$ updates the bound by
+\[
+ D\longmapsto\max(1,D/\rho).
+\]
+The rule must have an actual merging path and a noncontracting
+replacement prefix. These hypotheses are checked; they are not assumed
+for arbitrary paths. All calculations use exact integers or fractions.
+
+\guideheading{A verified infinite family}
+For every natural number $Q$, Lean proves the conditional implication
+\[
+447+549755813888Q\text{ is noncontracting}
+\quad\Longrightarrow\quad
+307+376572715308Q\text{ is noncontracting}.
+\]
+The second seed is always positive and smaller. At $Q=0$, the proof
+shifts 447 forward 23 steps to 767, then applies three rules producing
+511, 461 and 307. The intermediate deficits exceed one; the third rule
+restores the bound to one. The theorem applies to every quotient, not
+just these four displayed small seeds.
+
+\guideheading{What the experiment says}
+Of 2,336 finite seeds left unresolved by the earlier search, the new
+search finds chain certificates for 1,012. For 182 of these, no single
+rule suffices at any searched shift. Another 1,216 reach coefficient
+contraction before a chain is found; 108 remain at the 64-step horizon.
+These counts concern the actual finite seeds, not all numbers sharing
+their initial parity patterns. No resource cap was reached. Independent
+orbit replay checks every saved chain, but the full census is not a
+Lean completeness theorem.
+
+\guideheading{What still needs to be proved}
+We need an argument that a suitable chain exists for every hypothetical
+least positive noncontracting seed. Neither the finite search nor the
+infinite family supplies that coverage. The nontrivial-cycle problem
+also remains. Collatz is not proved.
+
+\guideheading{Where to check the work}
+\begingroup\raggedright
+The formal proofs are in \texttt{lean/Collatz/MergeDeficit.lean}.
+From \texttt{lean/}, run \texttt{lake build Collatz.MergeDeficit}.
+From the root, run \texttt{python3 analysis/merge\_chain\_search.py} to
+reproduce the census, or \texttt{python3 -m unittest discover -s analysis
+-p test\_merge\_chain\_search.py} for independent checks.
+The technical paper gives the exact hypotheses and family arithmetic.
+\par\endgroup
+\end{document}
