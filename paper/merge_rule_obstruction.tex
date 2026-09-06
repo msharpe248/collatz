@@ -1,0 +1,97 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\begin{center}
+{\Large A Forward-Horizon Obstruction for the Current Merge Table}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+The current table contains 360 verified rules of the form
+$n_0+AQ\mapsto x_0+BQ$, for natural $Q$, with smaller positive outputs
+and exact merging paths. This note studies only that particular table.
+Write $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$.
+
+\begin{theorem}[Finite-table congruence classification; Lean checked]
+Put $L=2^{18}3^{11}=46438023168$. For $0\leq j\leq11$, let $c_j$
+be the unique residue modulo $L$ satisfying
+\[
+c_j\equiv-1\pmod{2^{18}},\qquad
+c_j\equiv3^j2^{-j}-1\pmod{3^{11}},
+\]
+where $2^{-j}$ denotes modular inversion. If a listed rule applies to
+$n\equiv c_j\pmod L$, it must be the inverse odd rule
+\[
+2+3Q\longmapsto1+2Q.
+\]
+No listed rule applies when $n\equiv c_0\pmod L$.
+\end{theorem}
+\begin{proof}
+Every rule step $A$ divides $L$. The finite check verifies, for every
+non-inverse-odd rule and each of the twelve classes,
+$c_j\not\equiv n_0\pmod A$. Any application would contradict this
+check. The remaining rule requires residue two modulo three, whereas
+$c_0$ is divisible by three.
+
+The exact representatives are
+\[
+\begin{array}{rrrr}
+42120773631&16743137279&25114705919&14453047295\\
+21679570943&9300344831&13950517247&44144787455\\
+42998169599&41278242815&15479341055&46438023167.
+\end{array}
+\]
+Lean checks the exclusions for these explicit representatives by ordinary
+\texttt{decide}, and proves their extension to every natural quotient.
+The Chinese-remainder interpretation is reproduced by the exact Python
+certificate; it is not an additional Lean theorem.
+\end{proof}
+
+\begin{theorem}[Arbitrary fixed horizon; written deduction]
+For every natural $K$, there are arbitrarily large positive seeds $N$
+with noncontracting prefixes through $K$ such that, for every $k\leq K$,
+every chain of the listed rules starting at $T^k(N)$ stops at or above
+$N$. Chain length is unrestricted. In particular, no such chain supplies
+a smaller replacement for $N$.
+\end{theorem}
+\begin{proof}
+Choose any positive solution of
+\[
+N\equiv-1\pmod{2^{K+18}},\qquad N\equiv0\pmod{3^{11}}.
+\]
+The moduli are coprime, so solutions form an unbounded arithmetic
+progression. The first $K$ steps are odd, and
+\[
+y_k:=T^k(N)=\frac{3^k(N+1)}{2^k}-1\qquad(0\leq k\leq K).
+\]
+Consequently $y_k\equiv-1\pmod{2^{18}}$ and
+$y_k\equiv3^k2^{-k}-1\pmod{3^{11}}$. For $k\geq11$ the latter
+residue is stationary at $-1$. Thus $y_k$ belongs to class
+$c_{\min(k,11)}$.
+
+For $k>0$, the only possible rule is the inverse odd rule, and its output
+is exactly $y_{k-1}$, since $3y_{k-1}+1=2y_k$. At $k=0$ there is no
+listed rule. Induction therefore restricts every chain to
+$y_k,y_{k-1},\ldots,N$. All these seeds are at least $N$, and the
+prefix coefficients are $(3/2)^i\geq1$. Under deficit transport the
+initial deficit $(3/2)^k$ reaches one only on returning to $N$.
+\end{proof}
+
+\paragraph{Formal status and reproduction.}
+The first theorem's classification of the explicit residues is kernel
+checked in \texttt{Collatz.MergeRuleObstruction}; both public theorems
+enter the axiom audit. The arbitrary-horizon deduction is a written proof,
+not yet formalized in Lean. \texttt{analysis/merge\_rule\_obstruction.py}
+reconstructs the residues and the CRT seeds; independent tests replay
+horizons through 128 and multiple progression quotients. Those examples
+are checks of the construction, not the reason its quantifier over $K$
+holds.
+
+\paragraph{Implication for the proof program.}
+No uniformly bounded forward horizon combined with arbitrarily long
+chains from this fixed table covers all finite-prefix candidates.
+This does not refute coverage with a seed-dependent horizon, a larger
+rule family, or another strategy. The constructed seeds are not asserted
+to be fully noncontracting or divergent. Collatz remains unproved;
+no mathematical priority claim is made.
+\end{document}

@@ -16,6 +16,7 @@ new theorem. Subsequent work is recorded below and in the current theorem audit.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Fixed-table coverage obstruction | `MergeRuleObstruction.only_inverse_odd`, `no_rule_on_initial_class` | Kernel-checked congruence classification; written arbitrary-horizon construction permits only retracing odd runs. Does not exclude new rules or seed-dependent horizons |
 | Quantitative merge chains | `CoefficientBound.merge`, `NeverContracts.smaller_merge_chain_447` | Exact coefficient-deficit transport after shifting; a three-rule chain excludes the progression 447 + 549755813888Q from least positive NC seeds; no universal coverage |
 | Certified merge progressions | `MergeRuleTable.rules_valid`, `MergeRule.sound` | 360 kernel-checked rules apply to every natural quotient, conditional on noncontraction |
 | NC-prefix injectivity | `NCPrefixInjective.equal_count_injective_31` | Equal endpoint and odd count force equal seeds when both prefixes are NC and time is at most 31; interval bound fails at 32, not an injectivity counterexample |

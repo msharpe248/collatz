@@ -1,0 +1,68 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: Where the Current Merge Table Cannot Help}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{The question}
+The previous result let us combine several verified merge rules after
+moving forward along an orbit. Could a fixed number of forward steps,
+followed by as many rules as needed, cover every remaining candidate?
+For the current table of 360 rules, the answer is no. There are systematic
+arithmetic gaps, even when rule-chain length is unlimited.
+
+\guideheading{The construction}
+Choose any proposed forward horizon $K$. Take a seed $N$ satisfying
+\[
+N+1\text{ is divisible by }2^{K+18},\qquad
+N\text{ is divisible by }3^{11}.
+\]
+These two requirements are compatible and give arbitrarily large seeds.
+The first requirement makes the first $K$ steps odd. The second controls
+which reverse rules can apply to the resulting values.
+
+The exact residue check shows that at each of these forward values,
+the only available rule undoes one odd step. Applying it repeatedly
+returns to $N$, where no listed rule applies. Stopping earlier leaves
+a value larger than $N$. No chain can get below the original seed.
+
+\guideheading{What Lean verifies}
+Lean checks twelve complete arithmetic classes. On eleven of them,
+only the inverse odd rule can apply; on the initial class no rule can
+apply. These claims hold for arbitrarily large members of the classes,
+not just their smallest representatives. The finite checks use ordinary
+kernel reduction and are included in the theorem audit.
+
+The technical paper then proves, in ordinary mathematics, that the
+construction above stays within those classes for any horizon $K$.
+That arbitrary-horizon deduction has not yet been formalized in Lean.
+The Python program independently reconstructs the classes and replays
+sample horizons, including 128, with several progression quotients.
+
+\guideheading{What this rules out}
+Simply increasing a fixed forward-search limit and allowing longer
+chains from the same table cannot establish universal coverage of
+finite-prefix candidates. For every chosen limit, the construction
+supplies candidates that defeat it. The seed depends on the limit;
+this does not construct one orbit defeating every limit.
+
+\guideheading{What remains possible}
+The obstruction is specific to the current table and a uniform forward
+horizon. It leaves open a proof that each candidate eventually reaches
+a useful rule after a seed-dependent number of steps. New rules may also
+break the obstruction. The constructed seeds have long noncontracting
+prefixes, but they are not proved to be fully noncontracting or divergent.
+This is a limitation of one proof approach, not a counterexample to Collatz.
+
+\guideheading{Where to inspect the evidence}
+\begingroup\raggedright
+The formal module is \texttt{lean/Collatz/MergeRuleObstruction.lean}.
+From \texttt{lean/}, run \texttt{lake build Collatz.MergeRuleObstruction}.
+From the root, run \texttt{python3 analysis/merge\_rule\_obstruction.py
+--horizon 64}. The adjacent test file checks residue agreement with Lean,
+actual orbit steps, and the available rule outputs.
+\par\endgroup
+\end{document}

@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.MergeRuleObstruction', 'Collatz.MergeRuleObstruction.only_inverse_odd', 'On twelve entire congruence classes, only the inverse odd rule can apply from the current 360-rule table'),
+    ('Collatz.MergeRuleObstruction', 'Collatz.MergeRuleObstruction.no_rule_on_initial_class', 'The initial obstruction class admits no listed rule at any quotient; not an exclusion of all possible rules'),
     ('Collatz.MergeDeficit', 'Collatz.NeverContracts.shift_bound', 'A shifted noncontracting orbit retains its exact rational coefficient floor; no shift-invariance assumption'),
     ('Collatz.MergeDeficit', 'Collatz.CoefficientBound.merge', 'Quantitative coefficient bounds transfer across a merging path with a noncontracting replacement prefix'),
     ('Collatz.MergeDeficit', 'Collatz.CoefficientBound.neverContracts', 'Restoring a coefficient floor of at least one gives full noncontraction'),

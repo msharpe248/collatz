@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Arbitrary-horizon obstruction for the current finite merge table | [merge_rule_obstruction.pdf](merge_rule_obstruction.pdf) | [merge_rule_obstruction_guide.pdf](merge_rule_obstruction_guide.pdf) |
 | Quantitative coefficient transport through shifted merge chains | [merge_deficit.pdf](merge_deficit.pdf) | [merge_deficit_guide.pdf](merge_deficit_guide.pdf) |
 | Equal-count injectivity of noncontracting prefixes through 31 steps | [nc_prefix_injectivity.pdf](nc_prefix_injectivity.pdf) | [nc_prefix_injectivity_guide.pdf](nc_prefix_injectivity_guide.pdf) |
 | Noncontraction transport through unequal-length merges | [dominating_merges.pdf](dominating_merges.pdf) | [dominating_merges_guide.pdf](dominating_merges_guide.pdf) |

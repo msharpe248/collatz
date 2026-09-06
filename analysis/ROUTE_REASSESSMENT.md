@@ -309,3 +309,32 @@ An approach based on these chains must force enough accumulated boost
 and a final seed below the original, with actual rule congruences, for
 arbitrary hypothetical least NC seeds. Even that would address
 nondivergence; exclusion of nontrivial cycles remains a separate task.
+
+## A fixed-table obstruction at every forward horizon (2026-09-05)
+
+The coverage investigation found a structural gap, rather than merely
+another finite failed search. Put M=2^18*3^11. On the twelve CRT classes
+with binary residue -1 and ternary residue 3^k*2^(-k)-1, k=0,...,11,
+the only possible listed rule is the inverse odd rule. At k=0 even that
+rule is unavailable. The k=11 ternary residue stays -1 for all larger k.
+Lean checks the explicit residue classification and all-quotient exclusion
+in `MergeRuleObstruction`; the selected audit now has 185 declarations.
+
+For every fixed K, choose N=-1 modulo 2^(K+18) and N=0 modulo 3^11.
+CRT supplies arbitrarily large such N. The first K steps are odd, and
+T^k(N)+1=3^k*(N+1)/2^k. Every shifted value for k<=K is in one of the
+classified residues. Each available rule simply undoes an odd step;
+every chain stops at or above N, regardless of its length. This
+arbitrary-horizon deduction is a written proof in the new paper, not yet
+a Lean theorem. Python reconstructs the exact residues and replays
+instances through K=128; these tests are not its universal proof.
+
+This rules out a uniform forward horizon plus arbitrarily long chains
+from the current 360-rule table as coverage of all finite-prefix
+candidates. It does not construct a fully NC seed or an orbit evading
+all horizons. The construction depends on K. It also does not rule out
+other merge rules, or a seed-dependent horizon for the existing table.
+The next route must confront that distinction: an argument forcing a
+useful event after a seed-dependent time, or a parameterized rule family
+that breaks the odd-run obstruction. Merely increasing constant bounds
+does not address this gap.
