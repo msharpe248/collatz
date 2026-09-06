@@ -17,6 +17,14 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.AffineConvergence', 'Collatz.ReachesOne.step_iff', 'Reaching one is invariant under one shortcut Collatz step, including the trivial cycle'),
+    ('Collatz.AffineConvergence', 'Collatz.ReachesOne.shift_iff', 'Reaching one is invariant under every finite orbit shift'),
+    ('Collatz.AffineConvergence', 'Collatz.collatz_iff_restricted_affine_transfer', 'Full Collatz is equivalent to reaching-one transfer z to 9z+2 restricted to z two modulo three; neither side proved'),
+    ('Collatz.AffineBoundedness', 'Collatz.OrbitBounded.shift', 'A bounded orbit has bounded shifted orbits'),
+    ('Collatz.AffineBoundedness', 'Collatz.exists_affine_boundedness_failure', 'Any failure of nondivergence yields a bounded z two modulo three with unbounded 9z+2'),
+    ('Collatz.AffineBoundedness', 'Collatz.all_bounded_iff_affine_transfer', 'Unrestricted affine boundedness transfer is equivalent to nondivergence; neither side proved'),
+    ('Collatz.AffineBoundedness', 'Collatz.all_bounded_iff_restricted_affine_transfer', 'Boundedness transfer restricted to z two modulo three still has the full strength of nondivergence'),
+    ('Collatz.OddRunMerges', 'Collatz.WordAffine.single_even_exit_predecessor_mod_three', 'After at least two initial odd steps, the smaller endpoint in the single-even branch is two modulo three'),
     ('Collatz.OddRunMerges', 'Collatz.WordAffine.realizes_append_iff', 'Concatenating realized parity words corresponds to shifting by the first word length'),
     ('Collatz.OddRunMerges', 'Collatz.WordAffine.realizes_odd_run', 'Exact divisibility of n+1 gives actual odd-run realization and endpoint at any run length'),
     ('Collatz.OddRunMerges', 'Collatz.WordAffine.garner_merge_of_odd_run', 'Arithmetic applicability of the classical Garner stem for arbitrary initial odd-run length'),
@@ -223,6 +231,14 @@ def run(args, cwd=ROOT):
     return result.stdout
 
 
+def parse_axiom_output(output):
+    """Accept both Lean formats; absent declarations remain absent."""
+    found = dict(re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", output))
+    found.update({name: '' for name in re.findall(
+        r"'([^']+)' does not depend on any axioms", output)})
+    return found
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--build", action="store_true")
@@ -241,7 +257,7 @@ def main():
         query = Path(directory) / "Audit.lean"
         query.write_text(imports + "\n" + queries + "\n")
         output = run(["lake", "env", "lean", str(query)], LEAN)
-    found = dict(re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", output))
+    found = parse_axiom_output(output)
     entries = []
     all_clean = True
     for module, name, scope in targets:
@@ -253,7 +269,7 @@ def main():
         source = LEAN / (module.replace(".", "/") + ".lean")
         declaration = name.rsplit(".", 1)[1]
         line = next((i for i, text in enumerate(source.read_text().splitlines(), 1)
-                     if re.search(rf"\btheorem\s+{re.escape(declaration)}\b", text)), None)
+                     if re.search(rf"\btheorem\s+(?:[\w']+\.)*{re.escape(declaration)}\b", text)), None)
         entries.append({"declaration": name, "source": str(source.relative_to(ROOT)),
                         "line": line, "scope": scope, "axioms": axioms,
                         "standard_foundations_only": clean})

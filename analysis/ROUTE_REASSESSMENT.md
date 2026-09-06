@@ -374,3 +374,35 @@ and 9z+2 is on the allegedly unbounded orbit of n. A proof transferring
 boundedness from z to 9z+2 would address this branch, but no such transfer
 has been proved. This is the next substantive question, not an assumption
 to import or a conclusion justified by testing bounded small seeds.
+
+## Exact strength of affine transfer, including cycles (2026-09-05)
+
+The proposed boundedness transfer was checked before attempting to use it
+as a lemma. `AffineBoundedness` proves that universal boundedness is
+equivalent to transfer z -> 9z+2, even when transfer is only required for
+z=2 modulo 3. If any unbounded seed exists, a least one gives an actual
+bounded/unbounded pair on this progression. Thus this transfer carries
+the whole nondivergence gap; it is not established by the local identities.
+
+The arithmetic restriction follows because the least counterexample
+cannot be even or one modulo four. Its initial odd run therefore has
+length a>=2, and in the nonmerging branch 4z+1=3^(a-1)m, so z=2 modulo 3.
+The supporting residue calculation is now a theorem in `OddRunMerges`.
+
+The same argument also targets the original full conjecture. The new
+`AffineConvergence` module proves by strong induction
+
+    (∀ n>0, ReachesOne n) ↔
+      (∀ z, z%3=2 → ReachesOne z → ReachesOne (9*z+2)).
+
+This version includes nontrivial cycles. It does not replace reaching one
+by boundedness and does not assume the transfer. The open implication can
+equivalently be written ReachesOne(3u+2) -> ReachesOne(27u+20). Establishing
+it remains the full unresolved mathematical task, rather than a consequence
+of the equivalence. Avoid spending subsequent turns merely restating it
+under other affine coordinates or checking already convergent finite pairs.
+
+The audit parser needed a correctness fix because `ReachesOne.step_iff`
+uses no axioms and Lean reports that in a distinct format. Both Lean output
+formats are now recognized; missing/error output is still rejected. Tests
+cover these cases. Qualified theorem names now also get source line numbers.

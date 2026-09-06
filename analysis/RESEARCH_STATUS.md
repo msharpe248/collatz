@@ -16,6 +16,7 @@ new theorem. Subsequent work is recorded below and in the current theorem audit.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Affine-transfer scope check | `collatz_iff_restricted_affine_transfer`, `all_bounded_iff_restricted_affine_transfer` | Transfer z to 9z+2 on z=2 mod 3 is equivalent to full Collatz when using reach-one, or to nondivergence when using boundedness; transfer premises remain unproved |
 | Classical odd-run merge applicability | `garner_merge_iff`, `single_even_exit_pair`, `least_unbounded_odd_run_exit` | Any run length: a double-even exit merges n with n-1; the single-even exit gives endpoint pair 9z+2 and z. Garner/LaDue identities, not new universal coverage |
 | Fixed-table coverage obstruction | `MergeRuleObstruction.only_inverse_odd`, `no_rule_on_initial_class` | Kernel-checked congruence classification; written arbitrary-horizon construction permits only retracing odd runs. Does not exclude new rules or seed-dependent horizons |
 | Quantitative merge chains | `CoefficientBound.merge`, `NeverContracts.smaller_merge_chain_447` | Exact coefficient-deficit transport after shifting; a three-rule chain excludes the progression 447 + 549755813888Q from least positive NC seeds; no universal coverage |

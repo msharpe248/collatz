@@ -1,0 +1,67 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: What the Affine Transfer Would Prove}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{The result}
+Lean now verifies that the full Collatz conjecture is equivalent to this
+single transfer statement:
+\[
+\begin{gathered}
+z\equiv2\pmod3\text{ and }z\text{ reaches one}\\
+\Longrightarrow\quad9z+2\text{ reaches one}.
+\end{gathered}
+\]
+Equivalently, reaching one must transfer from $3u+2$ to $27u+20$ for
+every natural $u$. The implication itself has not been proved. This is
+an exact reformulation of the goal, not a completed proof.
+
+\guideheading{Why this pair appears}
+Compare an odd seed $n$ with the smaller seed $n-1$. The previous
+classical odd-run result gives two possibilities. In one case they
+merge. In the other, their later values are $9z+2$ and $z$.
+After excluding the short cases that already descend, the smaller
+endpoint $z$ is always two modulo three.
+
+If every smaller positive seed reaches one, then $n-1$ and its later
+value $z$ do too. The proposed transfer would make $9z+2$ reach one,
+and therefore make $n$ reach one. Lean checks this argument by strong
+induction, including the even seeds and the short odd-run cases.
+
+\guideheading{Boundedness is a different version}
+Replacing ``reaches one'' with ``has a bounded orbit'' gives an equivalent
+reformulation of nondivergence. In fact, if any unbounded orbit exists,
+Lean proves that there must be a bounded $z\equiv2\pmod3$ whose partner
+$9z+2$ is unbounded.
+
+Boundedness alone allows nontrivial cycles. The reaching-one version
+addresses them as well, so it matches the full original goal. We should
+not treat the two transfer statements as interchangeable without proof.
+
+\guideheading{What this changes in the research plan}
+The affine transfer cannot be assumed as a routine stability property.
+Even its restriction to one residue class contains the full unresolved
+claim. The useful output is a precise target and a proof that it would
+suffice. A future argument must explain why reaching one transfers
+between these partners for every allowed input.
+
+Finite examples cannot establish that statement: both members may
+converge in every tested pair while the universal implication remains
+unproved. The new Lean proofs use no experimental premise and do not
+assert any progress on establishing the transfer itself.
+
+\guideheading{Where to check the proofs}
+\begingroup\raggedright
+The main theorem is \texttt{collatz\_iff\_restricted\_affine\_transfer}
+in \texttt{lean/Collatz/AffineConvergence.lean}. The boundedness
+equivalences and failure-pair construction are in
+\texttt{lean/Collatz/AffineBoundedness.lean}. Build these modules from
+\texttt{lean/}. The repository theorem audit checks their statements
+and axiom dependencies. The technical paper gives the proof structure
+and relates it to the classical odd-run identities.
+\par\endgroup
+\end{document}

@@ -111,6 +111,31 @@ theorem garner_merge_iff {a n m : ℕ} (ha : 0 < a)
     omega
   · exact garner_merge_of_odd_run ha hn
 
+/-- The remaining pair's smaller endpoint is two modulo three once
+there are at least two initial odd steps. -/
+theorem single_even_exit_predecessor_mod_three {a n m : ℕ} (ha2 : 2 ≤ a)
+    (he : n+1 = 2^a*m) (hmod : (3^a*m) % 4 = 3) :
+    terras_iter (a+2) (n-1) % 3 = 2 := by
+  have ha : 0 < a := by omega
+  let z := terras_iter (a+2) (n-1)
+  have hrun := (WordAffine.realizes_odd_run a he).2
+  have hpair := WordAffine.odd_run_pair_endpoint ha he
+  have hx4 : terras_iter a n % 4 = 2 := by omega
+  have hy4 : terras_iter a (n-1) % 4 = 0 := by omega
+  have hye : terras_iter a (n-1) % 2 = 0 := by omega
+  have ht := two_mul_terras_even (terras_iter a (n-1)) hye
+  have hye' : terras (terras_iter a (n-1)) % 2 = 0 := by omega
+  have ht' := two_mul_terras_even (terras (terras_iter a (n-1))) hye'
+  have hz4 : 4*z = terras_iter a (n-1) := by
+    dsimp [z]
+    rw [← terras_iter_add]
+    change 4*terras (terras (terras_iter a (n-1))) = terras_iter a (n-1)
+    omega
+  obtain ⟨b, hab⟩ := Nat.exists_eq_add_of_le ha2
+  have hpow : 3^a*m = 9*(3^b*m) := by rw [hab, pow_add]; ring
+  rw [hpow] at hrun
+  omega
+
 end Collatz.WordAffine
 
 namespace Collatz
