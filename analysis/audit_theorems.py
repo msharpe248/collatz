@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.CycleCylinderBoundary', 'Collatz.CycleCylinderBoundary.seed_le_scaled_endpoint', 'Every shortcut orbit satisfies n <= 2^t*T^t(n)'),
+    ('Collatz.CycleCylinderBoundary', 'Collatz.CycleCylinderBoundary.target_cycle_size_bound', 'Target cycle entry by depth d forces 27r+20 <= 2^(d+1)'),
+    ('Collatz.CycleCylinderBoundary', 'Collatz.CycleCylinderBoundary.top_residue_not_in_target_cycle', 'The target at top binary parameter residue is above two at the cylinder depth'),
+    ('Collatz.CycleCylinderBoundary', 'Collatz.CycleCylinderBoundary.mersenne_residue', 'Every depth-d prefix residue of 2^k-1 with d<=k is 2^d-1'),
+    ('Collatz.CycleCylinderBoundary', 'Collatz.CycleCylinderBoundary.no_smaller_cycle_base', 'No proper smaller canonical cycle base covers a Mersenne parameter at any binary depth'),
     ('Collatz.InverseCycleBridge', 'Collatz.inverse_cycle_geometry', 'Exact orbit lengths and odd counts for the 47-to-2 and 425-to-2 paths'),
     ('Collatz.InverseCycleBridge', 'Collatz.inverse_cycle_transport', 'Exact all-quotient cylinder lifts underlying a charge-minus-seven inverse excursion'),
     ('Collatz.InverseCycleBridge', 'Collatz.inverse_cycle_transfer', 'Conditional convergence transfer through an inverse ordinary segment and auxiliary bridge'),

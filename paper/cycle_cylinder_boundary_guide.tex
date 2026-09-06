@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: Why Local Cycle Certificates Do Not Cover Everything}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{The question}
+The inverse excursion can repair either cycle mismatch once both base
+partners are known to converge. Could we now prove every parameter by
+covering it with a certificate built from a strictly smaller base?
+Lean identifies an infinite family that this particular bootstrap misses.
+
+\guideheading{The basic speed limit}
+A shortcut Collatz step cannot shrink a number faster than dividing it by
+two. Therefore, if a target reaches 1 or 2 within $d$ steps, its starting
+value is at most $2^{d+1}$.
+
+A base parameter $r$ has target $27r+20$. To use a certificate whose binary
+precision is $d$, with the base target already in the cycle by that depth,
+we must have
+\[
+ 27r+20\leq2^{d+1}.
+\]
+This forces the base to be small compared with the binary modulus.
+
+\guideheading{The missed family}
+Consider parameters $u=2^k-1$, whose binary digits are all ones.
+Every shorter binary prefix has the same form: $r=2^d-1$.
+That base is far too large to satisfy the required speed limit.
+
+For example, parameter 31 has proper prefix values 1, 3, 7, and 15.
+None has its target in the cycle within its corresponding prefix depth.
+At a larger precision the base becomes 31 itself, so it is no longer
+strictly smaller. Lean proves the analogous statement for every exponent
+$k$ and every choice of depth $d$.
+
+\guideheading{Why more inverse excursions do not fix this}
+The obstruction appears before choosing excursions: the required smaller
+base does not meet the cycle-entry condition. Adding more bridges after
+the cycle, or allowing the inverse bridge, cannot change that fact.
+
+This explains why a successful constructor for many individually verified
+base pairs is not yet a proof that every new parameter is covered.
+
+\guideheading{What the theorem does not say}
+It does not say these parameters fail to converge. It does not exclude a
+direct merge before reaching the cycle, a different induction, or another
+family of certificates. The inverse bridge theorem remains valid with
+its explicit premises.
+
+The result rules out one attempted use of those local certificates as a
+universal bootstrap. A complete proof needs an additional argument that
+does not depend on selecting a smaller base satisfying this condition.
+Collatz remains unproved.
+
+\guideheading{Verification}
+Build \texttt{Collatz.CycleCylinderBoundary} from the repository's
+\texttt{lean/} directory. Its five public declarations are included in the
+axiom audit. The technical paper states the exact hypotheses and their
+all-depth contradiction.
+\end{document}

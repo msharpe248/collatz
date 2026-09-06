@@ -1,0 +1,86 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\begin{center}
+{\Large A Boundary for Bootstrapping from Convergent Base Cylinders}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+The inverse-cycle construction supplies conditional transfer certificates on
+$u=r+2^dQ$ once the two base partners $3r+2$ and $27r+20$ have reached the
+trivial cycle. It can repair either cycle-charge mismatch, but its binary
+precision must accommodate the base target's path to the cycle.
+We test whether such certificates can bootstrap all parameters from strictly
+smaller canonical bases. The answer is negative for an explicit infinite family.
+
+\begin{theorem}[Necessary size condition]
+For every natural $n,t$, $n\leq2^tT^t(n)$, where $T$ is the shortcut
+Collatz map. Consequently,
+\[
+ T^d(27r+20)\leq2\quad\Longrightarrow\quad27r+20\leq2^{d+1}.
+\]
+\end{theorem}
+\begin{proof}
+The exact affine iterate formula is
+$2^tT^t(n)=3^{j_t(n)}n+c_t(n)$, where $j_t(n)$ and $c_t(n)$ are
+nonnegative integers. Its right side is at least $n$.
+Apply this to the target and its assumed endpoint bound.
+Equivalently, no shortcut step can reduce a positive value faster than halving.
+\end{proof}
+
+\begin{theorem}[Top residues cannot be cycle bases at their own depth]
+For every natural $d$,
+\[
+ 2<T^d\bigl(27(2^d-1)+20\bigr).
+\]
+\end{theorem}
+\begin{proof}
+The contrary would imply $27\cdot2^d-7\leq2\cdot2^d$.
+Thus $25\cdot2^d\leq7$, impossible since $2^d\geq1$.
+This argument covers every depth, not a finite search interval.
+\end{proof}
+
+\begin{theorem}[No smaller cycle-base certificate for Mersenne parameters]
+Let $u=2^k-1$. There are no natural $d,r$ satisfying all four conditions
+\[
+ r<2^d,\qquad r=u\bmod2^d,\qquad r<u,\qquad
+ T^d(27r+20)\leq2.
+\]
+\end{theorem}
+\begin{proof}
+If $d>k$, then $u<2^d$ and its canonical residue is $u$ itself,
+contradicting $r<u$. Hence $d\leq k$.
+Since $2^d$ divides $2^k$, the residue of $2^k-1$ is $2^d-1$.
+The preceding theorem excludes the required target endpoint.
+Lean checks the residue identity and both cases with natural-number arithmetic.
+\end{proof}
+
+\paragraph{Implication for the current strategy.}
+For instance, proper binary prefixes of parameter 31 have values
+1, 3, 7, and 15. None can serve as a base whose target has reached the
+cycle within that prefix depth. Choosing more precision eventually selects
+31 itself as the base, reintroducing the convergence obligation at that
+same parameter. The theorem applies to every $2^k-1$, not only this example.
+
+No choice of later positive or negative cycle excursions repairs this base
+selection problem: the obstruction precedes those excursions. Increasing the
+number of certificates constructed by first verifying their base targets does
+not establish the missing global induction coverage.
+
+\paragraph{Scope and next obligation.}
+This is not a nonconvergence theorem and does not exclude direct merges before
+the cycle, other residue conventions, other induction orders, or a separate
+uniform treatment of these parameters. It excludes only the stated bootstrap
+from proper smaller canonical bases that have reached the target cycle by the
+binary depth. In particular, it does not contradict the inverse excursion's
+exact transfer identities or its conditional local construction.
+
+\paragraph{Verification.}
+\begingroup\raggedright
+Five declarations in \texttt{Collatz.CycleCylinderBoundary} prove the size bound,
+the cycle-entry restriction, the top-residue inequality, the Mersenne residue
+identity, and the final all-depth exclusion. They are included in the selected
+Lean axiom audit. No mathematical priority claim is made. Collatz remains unproved.
+\par\endgroup
+\end{document}

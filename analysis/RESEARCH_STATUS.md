@@ -16,7 +16,7 @@ Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
 947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
 remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
 records five kernel-checked precision/count findings for a proposed literature
-input; the selected declaration audit now contains 220 entries. The new `BridgeGrowth`
+input; the selected declaration audit now contains 225 entries. The new `BridgeGrowth`
 bound rules out lowering cycle charge through arbitrary forward bridge
 interleavings and justifies pruning those states in the affine bridge search.
 `InverseCycleBridge` now verifies a signed 2 <- 47 -> 425 -> 2 excursion
@@ -24,6 +24,11 @@ with charge change -7. Its all-quotient transfer premise is explicit. The
 constructor handles every tested base parameter 16..1000, but still needs
 base-target convergence and therefore does not prove global coverage. See
 `paper/inverse_cycle_bridge.tex` and its companion guide.
+The subsequent `CycleCylinderBoundary.no_smaller_cycle_base` theorem rules out
+bootstrapping any parameter 2^k-1 from a proper smaller canonical base whose
+target reaches the cycle by the binary depth. This is an all-depth obstruction
+to that particular coverage argument, not to Collatz. Further cycle-certificate
+censuses do not remove it; see `paper/cycle_cylinder_boundary.tex`.
 
 ## Completed in this research pass
 
