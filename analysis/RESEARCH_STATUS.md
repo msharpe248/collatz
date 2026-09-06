@@ -16,7 +16,7 @@ Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
 947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
 remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
 records five kernel-checked precision/count findings for a proposed literature
-input; the selected declaration audit now contains 238 entries. The new `BridgeGrowth`
+input; the selected declaration audit now contains 243 entries. The new `BridgeGrowth`
 bound rules out lowering cycle charge through arbitrary forward bridge
 interleavings and justifies pruning those states in the affine bridge search.
 `InverseCycleBridge` now verifies a signed 2 <- 47 -> 425 -> 2 excursion
@@ -1056,3 +1056,22 @@ is a separate premise: smaller affine-transfer instances are not silently
 converted into convergence of all smaller integers. This route requires
 a variable-length theorem and a justified convergence premise before it
 can close the transfer induction.
+
+
+## Bounded transfer criterion repairs the descent premise
+
+`BoundedTransfer.lean` proves that transfer instances satisfying
+`36*v+27 <= 3^b` suffice for convergence of every positive n<2^b.
+The exact odd-run exit size is `36*v+27 = 3^a*m`, bounded by 3^b when
+n+1=2^a*m <= 2^b. Thus all transfer instances v<u supply convergence
+below 2^b whenever 3^b<=36*u. A target descent into that interval now
+closes A(u) with the smaller-transfer premises still explicit.
+
+`mersenne_safe_descent.py` tests the largest justified b at each Mersenne
+parameter for h=0..512. All 513 reduced targets descend below 2^b within
+20,000 steps; the maximum observed exit clock is 6268 at h=487. These
+are finite Python witnesses, not Lean-certified family coverage. The
+uniform cutoff and conditional descent rule are Lean-proved and audited.
+See `paper/bounded_transfer.tex` and its guide. The remaining task is a
+general descent theorem or a covering combination of valid rules, not
+another inference from the finite census alone.

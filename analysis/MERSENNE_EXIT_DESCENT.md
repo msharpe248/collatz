@@ -71,3 +71,13 @@ complete the current induction.
 
 - `python3 analysis/mersenne_exit_descent.py`
 - `python3 -m unittest discover -s analysis -p 'test_mersenne_exit_descent.py'`
+
+
+## Subsequent repair of the missing premise
+
+`BoundedTransfer.lean` now supplies a justified replacement threshold:
+smaller transfer instances v<u imply convergence below 2^b provided
+3^b<=36*u. It does not identify the original threshold u with that
+interval. `mersenne_safe_descent.py` repeats the finite test using the
+largest justified b; see `paper/bounded_transfer.tex` and its guide.
+The universal descent and coverage claims remain open.

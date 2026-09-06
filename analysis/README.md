@@ -7,6 +7,7 @@ reproducible byte-for-byte.
 
 | script | what it does | paper section |
 |---|---|---|
+| `mersenne_safe_descent.py` | finite descents to the dyadic cutoff justified by the bounded transfer theorem | `../paper/bounded_transfer.tex`, `../lean/Collatz/BoundedTransfer.lean` |
 | `mersenne_exit_descent.py` | finite target descents below original Mersenne parameters; growing depth requirement and missing induction premise explicit | `MERSENNE_EXIT_DESCENT.md` |
 | `AFFINE_CLOCK_CHECK.md` | Lean-checked restriction: equal ordinary-orbit cylinders with power-of-three slope ratios force equal clocks | `../lean/Collatz/AffineClock.lean` |
 | `mersenne_exit_returns.py` | smaller-exponent pair returns add three conditional obligations but no closed coverage beyond the depth-20 direct merges | `MERSENNE_EXIT_RETURNS.md` |

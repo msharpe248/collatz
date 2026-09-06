@@ -1,0 +1,38 @@
+\documentclass[10pt]{article}
+\usepackage[margin=.8in]{geometry}
+\usepackage{amsmath,hyperref}
+\title{Guide: using the bounded transfer cutoff}
+\author{Collatz Lean research project}
+\date{September 6, 2026}
+\begin{document}
+\maketitle
+\section*{The gap this repairs}
+Knowing the transfer statements $A(v)$ for $v<u$ does not automatically give convergence of every integer below u. The odd-run proof can request a larger transfer parameter: seed 511 invokes parameter 546. The new theorem supplies an explicit threshold that the smaller-transfer hypotheses really do justify.
+\section*{How to apply the rule}
+Given all $A(v)$ for $v<u$, choose b with $3^b\le36u$. It is then legitimate to use convergence of every positive integer below $2^b$. If the target $27u+20$ reaches that interval, the transfer at u follows.
+
+The cutoff is obtained entirely with integers. The search multiplies by three until the next power would exceed $36u$. No rounded logarithms are used. An unsuccessful bounded search remains a depth limit, not a counterexample.
+\section*{Formal entry points}
+\raggedright
+In \texttt{lean/Collatz/BoundedTransfer.lean}:
+\begin{itemize}
+\item \texttt{odd\_run\_size\_bound} and \texttt{odd\_run\_transfer\_size} justify the size accounting.
+\item \texttt{reachesOne\_below\_pow\_two} proves convergence below $2^b$ from transfer instances satisfying $36v+27\le3^b$.
+\item \texttt{reachesOne\_of\_smaller\_transfers} connects this cutoff to the strong-induction hypotheses.
+\item \texttt{AffineTransfer.of\_dyadic\_descent} closes a transfer from a descent into the justified interval.
+\end{itemize}
+For Mersenne exits, compose the target identity from \texttt{MersenneExit.lean} with this last rule. The finite search checks the exit state, so its recorded clock is additional to the growing prefix.
+\section*{Reproduce}
+From the repository root, with the pinned toolchain on PATH:
+\begin{verbatim}
+python3 analysis/mersenne_safe_descent.py
+python3 -m unittest discover -s analysis \
+  -p 'test_mersenne_safe_descent.py'
+python3 analysis/audit_theorems.py --build
+\end{verbatim}
+From \texttt{lean/}, run \texttt{lake build Collatz.BoundedTransfer}.
+The saved finite witnesses are in
+\texttt{analysis/mersenne\_safe\_descent\_results.json}.
+\section*{What remains}
+All 513 tested Mersenne exits descend to the justified cutoff, but this does not establish the rule for every exponent or every parameter. The next mathematical requirement is a general descent argument, or a covering combination of descent and transfer rules. Smaller-transfer premises must remain explicit until that induction is complete.
+\end{document}

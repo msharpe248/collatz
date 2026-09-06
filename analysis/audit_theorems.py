@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.BoundedTransfer', 'Collatz.odd_run_size_bound', 'Dyadic size of a seed bounds the ternary size of its initial odd run'),
+    ('Collatz.BoundedTransfer', 'Collatz.odd_run_transfer_size', 'Exact size identity for the transfer argument in the single-even odd-run branch'),
+    ('Collatz.BoundedTransfer', 'Collatz.reachesOne_below_pow_two', 'Explicit finite transfer cutoff implies convergence for all positive seeds below 2^b'),
+    ('Collatz.BoundedTransfer', 'Collatz.reachesOne_of_smaller_transfers', 'Smaller transfer hypotheses supply convergence below a justified dyadic cutoff'),
+    ('Collatz.BoundedTransfer', 'Collatz.AffineTransfer.of_dyadic_descent', 'Descent below the justified cutoff closes an affine transfer instance conditionally'),
     ('Collatz.AffineClock', 'Collatz.two_three_slope_injective', 'Independence of powers of two and three in equal cylinder slopes'),
     ('Collatz.AffineClock', 'Collatz.uniform_cylinder_clock_rigidity', 'Equal affine endpoints over a shared binary cylinder force equal clocks and exponents'),
     ('Collatz.AffineClock', 'Collatz.uniform_orbit_clock_rigidity', 'Uniform orbit merging of power-of-three slope cylinders cannot use different clocks'),

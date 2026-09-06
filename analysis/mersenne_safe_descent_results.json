@@ -1,0 +1,3601 @@
+{
+  "scope": "finite witnesses for a Lean-proved conditional criterion; not global coverage",
+  "kernel_certified_witnesses": false,
+  "max_h": 512,
+  "cap": 20000,
+  "descents": 513,
+  "depth_limits": 0,
+  "probes": [
+    {
+      "h": 0,
+      "kind": "descent",
+      "cutoff_exponent": 5,
+      "exit_depth": 24,
+      "odd_steps": 12
+    },
+    {
+      "h": 1,
+      "kind": "descent",
+      "cutoff_exponent": 9,
+      "exit_depth": 69,
+      "odd_steps": 39
+    },
+    {
+      "h": 2,
+      "kind": "descent",
+      "cutoff_exponent": 13,
+      "exit_depth": 46,
+      "odd_steps": 23
+    },
+    {
+      "h": 3,
+      "kind": "descent",
+      "cutoff_exponent": 17,
+      "exit_depth": 56,
+      "odd_steps": 28
+    },
+    {
+      "h": 4,
+      "kind": "descent",
+      "cutoff_exponent": 20,
+      "exit_depth": 72,
+      "odd_steps": 36
+    },
+    {
+      "h": 5,
+      "kind": "descent",
+      "cutoff_exponent": 24,
+      "exit_depth": 122,
+      "odd_steps": 66
+    },
+    {
+      "h": 6,
+      "kind": "descent",
+      "cutoff_exponent": 28,
+      "exit_depth": 95,
+      "odd_steps": 47
+    },
+    {
+      "h": 7,
+      "kind": "descent",
+      "cutoff_exponent": 32,
+      "exit_depth": 137,
+      "odd_steps": 72
+    },
+    {
+      "h": 8,
+      "kind": "descent",
+      "cutoff_exponent": 36,
+      "exit_depth": 94,
+      "odd_steps": 44
+    },
+    {
+      "h": 9,
+      "kind": "descent",
+      "cutoff_exponent": 39,
+      "exit_depth": 84,
+      "odd_steps": 35
+    },
+    {
+      "h": 10,
+      "kind": "descent",
+      "cutoff_exponent": 43,
+      "exit_depth": 160,
+      "odd_steps": 82
+    },
+    {
+      "h": 11,
+      "kind": "descent",
+      "cutoff_exponent": 47,
+      "exit_depth": 291,
+      "odd_steps": 163
+    },
+    {
+      "h": 12,
+      "kind": "descent",
+      "cutoff_exponent": 51,
+      "exit_depth": 167,
+      "odd_steps": 83
+    },
+    {
+      "h": 13,
+      "kind": "descent",
+      "cutoff_exponent": 54,
+      "exit_depth": 191,
+      "odd_steps": 96
+    },
+    {
+      "h": 14,
+      "kind": "descent",
+      "cutoff_exponent": 58,
+      "exit_depth": 217,
+      "odd_steps": 111
+    },
+    {
+      "h": 15,
+      "kind": "descent",
+      "cutoff_exponent": 62,
+      "exit_depth": 230,
+      "odd_steps": 118
+    },
+    {
+      "h": 16,
+      "kind": "descent",
+      "cutoff_exponent": 66,
+      "exit_depth": 217,
+      "odd_steps": 108
+    },
+    {
+      "h": 17,
+      "kind": "descent",
+      "cutoff_exponent": 70,
+      "exit_depth": 203,
+      "odd_steps": 98
+    },
+    {
+      "h": 18,
+      "kind": "descent",
+      "cutoff_exponent": 73,
+      "exit_depth": 232,
+      "odd_steps": 114
+    },
+    {
+      "h": 19,
+      "kind": "descent",
+      "cutoff_exponent": 77,
+      "exit_depth": 424,
+      "odd_steps": 234
+    },
+    {
+      "h": 20,
+      "kind": "descent",
+      "cutoff_exponent": 81,
+      "exit_depth": 221,
+      "odd_steps": 104
+    },
+    {
+      "h": 21,
+      "kind": "descent",
+      "cutoff_exponent": 85,
+      "exit_depth": 293,
+      "odd_steps": 148
+    },
+    {
+      "h": 22,
+      "kind": "descent",
+      "cutoff_exponent": 89,
+      "exit_depth": 344,
+      "odd_steps": 179
+    },
+    {
+      "h": 23,
+      "kind": "descent",
+      "cutoff_exponent": 92,
+      "exit_depth": 281,
+      "odd_steps": 137
+    },
+    {
+      "h": 24,
+      "kind": "descent",
+      "cutoff_exponent": 96,
+      "exit_depth": 252,
+      "odd_steps": 117
+    },
+    {
+      "h": 25,
+      "kind": "descent",
+      "cutoff_exponent": 100,
+      "exit_depth": 341,
+      "odd_steps": 172
+    },
+    {
+      "h": 26,
+      "kind": "descent",
+      "cutoff_exponent": 104,
+      "exit_depth": 405,
+      "odd_steps": 211
+    },
+    {
+      "h": 27,
+      "kind": "descent",
+      "cutoff_exponent": 107,
+      "exit_depth": 398,
+      "odd_steps": 204
+    },
+    {
+      "h": 28,
+      "kind": "descent",
+      "cutoff_exponent": 111,
+      "exit_depth": 359,
+      "odd_steps": 178
+    },
+    {
+      "h": 29,
+      "kind": "descent",
+      "cutoff_exponent": 115,
+      "exit_depth": 280,
+      "odd_steps": 127
+    },
+    {
+      "h": 30,
+      "kind": "descent",
+      "cutoff_exponent": 119,
+      "exit_depth": 436,
+      "odd_steps": 224
+    },
+    {
+      "h": 31,
+      "kind": "descent",
+      "cutoff_exponent": 123,
+      "exit_depth": 545,
+      "odd_steps": 291
+    },
+    {
+      "h": 32,
+      "kind": "descent",
+      "cutoff_exponent": 126,
+      "exit_depth": 542,
+      "odd_steps": 287
+    },
+    {
+      "h": 33,
+      "kind": "descent",
+      "cutoff_exponent": 130,
+      "exit_depth": 569,
+      "odd_steps": 303
+    },
+    {
+      "h": 34,
+      "kind": "descent",
+      "cutoff_exponent": 134,
+      "exit_depth": 565,
+      "odd_steps": 299
+    },
+    {
+      "h": 35,
+      "kind": "descent",
+      "cutoff_exponent": 138,
+      "exit_depth": 538,
+      "odd_steps": 280
+    },
+    {
+      "h": 36,
+      "kind": "descent",
+      "cutoff_exponent": 142,
+      "exit_depth": 512,
+      "odd_steps": 262
+    },
+    {
+      "h": 37,
+      "kind": "descent",
+      "cutoff_exponent": 145,
+      "exit_depth": 570,
+      "odd_steps": 297
+    },
+    {
+      "h": 38,
+      "kind": "descent",
+      "cutoff_exponent": 149,
+      "exit_depth": 565,
+      "odd_steps": 292
+    },
+    {
+      "h": 39,
+      "kind": "descent",
+      "cutoff_exponent": 153,
+      "exit_depth": 524,
+      "odd_steps": 265
+    },
+    {
+      "h": 40,
+      "kind": "descent",
+      "cutoff_exponent": 157,
+      "exit_depth": 514,
+      "odd_steps": 257
+    },
+    {
+      "h": 41,
+      "kind": "descent",
+      "cutoff_exponent": 160,
+      "exit_depth": 487,
+      "odd_steps": 238
+    },
+    {
+      "h": 42,
+      "kind": "descent",
+      "cutoff_exponent": 164,
+      "exit_depth": 631,
+      "odd_steps": 327
+    },
+    {
+      "h": 43,
+      "kind": "descent",
+      "cutoff_exponent": 168,
+      "exit_depth": 455,
+      "odd_steps": 215
+    },
+    {
+      "h": 44,
+      "kind": "descent",
+      "cutoff_exponent": 172,
+      "exit_depth": 610,
+      "odd_steps": 311
+    },
+    {
+      "h": 45,
+      "kind": "descent",
+      "cutoff_exponent": 176,
+      "exit_depth": 879,
+      "odd_steps": 479
+    },
+    {
+      "h": 46,
+      "kind": "descent",
+      "cutoff_exponent": 179,
+      "exit_depth": 841,
+      "odd_steps": 453
+    },
+    {
+      "h": 47,
+      "kind": "descent",
+      "cutoff_exponent": 183,
+      "exit_depth": 619,
+      "odd_steps": 312
+    },
+    {
+      "h": 48,
+      "kind": "descent",
+      "cutoff_exponent": 187,
+      "exit_depth": 609,
+      "odd_steps": 304
+    },
+    {
+      "h": 49,
+      "kind": "descent",
+      "cutoff_exponent": 191,
+      "exit_depth": 806,
+      "odd_steps": 427
+    },
+    {
+      "h": 50,
+      "kind": "descent",
+      "cutoff_exponent": 195,
+      "exit_depth": 799,
+      "odd_steps": 421
+    },
+    {
+      "h": 51,
+      "kind": "descent",
+      "cutoff_exponent": 198,
+      "exit_depth": 795,
+      "odd_steps": 416
+    },
+    {
+      "h": 52,
+      "kind": "descent",
+      "cutoff_exponent": 202,
+      "exit_depth": 635,
+      "odd_steps": 314
+    },
+    {
+      "h": 53,
+      "kind": "descent",
+      "cutoff_exponent": 206,
+      "exit_depth": 581,
+      "odd_steps": 278
+    },
+    {
+      "h": 54,
+      "kind": "descent",
+      "cutoff_exponent": 210,
+      "exit_depth": 708,
+      "odd_steps": 357
+    },
+    {
+      "h": 55,
+      "kind": "descent",
+      "cutoff_exponent": 213,
+      "exit_depth": 702,
+      "odd_steps": 351
+    },
+    {
+      "h": 56,
+      "kind": "descent",
+      "cutoff_exponent": 217,
+      "exit_depth": 677,
+      "odd_steps": 334
+    },
+    {
+      "h": 57,
+      "kind": "descent",
+      "cutoff_exponent": 221,
+      "exit_depth": 665,
+      "odd_steps": 325
+    },
+    {
+      "h": 58,
+      "kind": "descent",
+      "cutoff_exponent": 225,
+      "exit_depth": 652,
+      "odd_steps": 315
+    },
+    {
+      "h": 59,
+      "kind": "descent",
+      "cutoff_exponent": 229,
+      "exit_depth": 646,
+      "odd_steps": 310
+    },
+    {
+      "h": 60,
+      "kind": "descent",
+      "cutoff_exponent": 232,
+      "exit_depth": 751,
+      "odd_steps": 374
+    },
+    {
+      "h": 61,
+      "kind": "descent",
+      "cutoff_exponent": 236,
+      "exit_depth": 746,
+      "odd_steps": 369
+    },
+    {
+      "h": 62,
+      "kind": "descent",
+      "cutoff_exponent": 240,
+      "exit_depth": 730,
+      "odd_steps": 358
+    },
+    {
+      "h": 63,
+      "kind": "descent",
+      "cutoff_exponent": 244,
+      "exit_depth": 723,
+      "odd_steps": 352
+    },
+    {
+      "h": 64,
+      "kind": "descent",
+      "cutoff_exponent": 248,
+      "exit_depth": 711,
+      "odd_steps": 343
+    },
+    {
+      "h": 65,
+      "kind": "descent",
+      "cutoff_exponent": 251,
+      "exit_depth": 700,
+      "odd_steps": 334
+    },
+    {
+      "h": 66,
+      "kind": "descent",
+      "cutoff_exponent": 255,
+      "exit_depth": 914,
+      "odd_steps": 467
+    },
+    {
+      "h": 67,
+      "kind": "descent",
+      "cutoff_exponent": 259,
+      "exit_depth": 778,
+      "odd_steps": 380
+    },
+    {
+      "h": 68,
+      "kind": "descent",
+      "cutoff_exponent": 263,
+      "exit_depth": 1078,
+      "odd_steps": 568
+    },
+    {
+      "h": 69,
+      "kind": "descent",
+      "cutoff_exponent": 266,
+      "exit_depth": 1067,
+      "odd_steps": 559
+    },
+    {
+      "h": 70,
+      "kind": "descent",
+      "cutoff_exponent": 270,
+      "exit_depth": 1021,
+      "odd_steps": 528
+    },
+    {
+      "h": 71,
+      "kind": "descent",
+      "cutoff_exponent": 274,
+      "exit_depth": 795,
+      "odd_steps": 384
+    },
+    {
+      "h": 72,
+      "kind": "descent",
+      "cutoff_exponent": 278,
+      "exit_depth": 781,
+      "odd_steps": 374
+    },
+    {
+      "h": 73,
+      "kind": "descent",
+      "cutoff_exponent": 282,
+      "exit_depth": 1099,
+      "odd_steps": 573
+    },
+    {
+      "h": 74,
+      "kind": "descent",
+      "cutoff_exponent": 285,
+      "exit_depth": 1085,
+      "odd_steps": 562
+    },
+    {
+      "h": 75,
+      "kind": "descent",
+      "cutoff_exponent": 289,
+      "exit_depth": 1078,
+      "odd_steps": 556
+    },
+    {
+      "h": 76,
+      "kind": "descent",
+      "cutoff_exponent": 293,
+      "exit_depth": 1058,
+      "odd_steps": 542
+    },
+    {
+      "h": 77,
+      "kind": "descent",
+      "cutoff_exponent": 297,
+      "exit_depth": 1046,
+      "odd_steps": 533
+    },
+    {
+      "h": 78,
+      "kind": "descent",
+      "cutoff_exponent": 301,
+      "exit_depth": 914,
+      "odd_steps": 448
+    },
+    {
+      "h": 79,
+      "kind": "descent",
+      "cutoff_exponent": 304,
+      "exit_depth": 906,
+      "odd_steps": 441
+    },
+    {
+      "h": 80,
+      "kind": "descent",
+      "cutoff_exponent": 308,
+      "exit_depth": 1143,
+      "odd_steps": 589
+    },
+    {
+      "h": 81,
+      "kind": "descent",
+      "cutoff_exponent": 312,
+      "exit_depth": 1129,
+      "odd_steps": 579
+    },
+    {
+      "h": 82,
+      "kind": "descent",
+      "cutoff_exponent": 316,
+      "exit_depth": 1117,
+      "odd_steps": 570
+    },
+    {
+      "h": 83,
+      "kind": "descent",
+      "cutoff_exponent": 319,
+      "exit_depth": 1108,
+      "odd_steps": 562
+    },
+    {
+      "h": 84,
+      "kind": "descent",
+      "cutoff_exponent": 323,
+      "exit_depth": 1083,
+      "odd_steps": 545
+    },
+    {
+      "h": 85,
+      "kind": "descent",
+      "cutoff_exponent": 327,
+      "exit_depth": 1079,
+      "odd_steps": 541
+    },
+    {
+      "h": 86,
+      "kind": "descent",
+      "cutoff_exponent": 331,
+      "exit_depth": 1056,
+      "odd_steps": 525
+    },
+    {
+      "h": 87,
+      "kind": "descent",
+      "cutoff_exponent": 335,
+      "exit_depth": 1022,
+      "odd_steps": 502
+    },
+    {
+      "h": 88,
+      "kind": "descent",
+      "cutoff_exponent": 338,
+      "exit_depth": 1330,
+      "odd_steps": 694
+    },
+    {
+      "h": 89,
+      "kind": "descent",
+      "cutoff_exponent": 342,
+      "exit_depth": 1310,
+      "odd_steps": 680
+    },
+    {
+      "h": 90,
+      "kind": "descent",
+      "cutoff_exponent": 346,
+      "exit_depth": 1304,
+      "odd_steps": 675
+    },
+    {
+      "h": 91,
+      "kind": "descent",
+      "cutoff_exponent": 350,
+      "exit_depth": 1262,
+      "odd_steps": 647
+    },
+    {
+      "h": 92,
+      "kind": "descent",
+      "cutoff_exponent": 354,
+      "exit_depth": 1255,
+      "odd_steps": 641
+    },
+    {
+      "h": 93,
+      "kind": "descent",
+      "cutoff_exponent": 357,
+      "exit_depth": 1211,
+      "odd_steps": 611
+    },
+    {
+      "h": 94,
+      "kind": "descent",
+      "cutoff_exponent": 361,
+      "exit_depth": 1239,
+      "odd_steps": 627
+    },
+    {
+      "h": 95,
+      "kind": "descent",
+      "cutoff_exponent": 365,
+      "exit_depth": 1233,
+      "odd_steps": 622
+    },
+    {
+      "h": 96,
+      "kind": "descent",
+      "cutoff_exponent": 369,
+      "exit_depth": 1207,
+      "odd_steps": 604
+    },
+    {
+      "h": 97,
+      "kind": "descent",
+      "cutoff_exponent": 372,
+      "exit_depth": 1177,
+      "odd_steps": 583
+    },
+    {
+      "h": 98,
+      "kind": "descent",
+      "cutoff_exponent": 376,
+      "exit_depth": 1271,
+      "odd_steps": 641
+    },
+    {
+      "h": 99,
+      "kind": "descent",
+      "cutoff_exponent": 380,
+      "exit_depth": 1251,
+      "odd_steps": 627
+    },
+    {
+      "h": 100,
+      "kind": "descent",
+      "cutoff_exponent": 384,
+      "exit_depth": 1157,
+      "odd_steps": 566
+    },
+    {
+      "h": 101,
+      "kind": "descent",
+      "cutoff_exponent": 388,
+      "exit_depth": 1220,
+      "odd_steps": 604
+    },
+    {
+      "h": 102,
+      "kind": "descent",
+      "cutoff_exponent": 391,
+      "exit_depth": 1202,
+      "odd_steps": 591
+    },
+    {
+      "h": 103,
+      "kind": "descent",
+      "cutoff_exponent": 395,
+      "exit_depth": 1192,
+      "odd_steps": 583
+    },
+    {
+      "h": 104,
+      "kind": "descent",
+      "cutoff_exponent": 399,
+      "exit_depth": 1164,
+      "odd_steps": 564
+    },
+    {
+      "h": 105,
+      "kind": "descent",
+      "cutoff_exponent": 403,
+      "exit_depth": 1154,
+      "odd_steps": 556
+    },
+    {
+      "h": 106,
+      "kind": "descent",
+      "cutoff_exponent": 407,
+      "exit_depth": 1148,
+      "odd_steps": 551
+    },
+    {
+      "h": 107,
+      "kind": "descent",
+      "cutoff_exponent": 410,
+      "exit_depth": 1145,
+      "odd_steps": 547
+    },
+    {
+      "h": 108,
+      "kind": "descent",
+      "cutoff_exponent": 414,
+      "exit_depth": 1305,
+      "odd_steps": 646
+    },
+    {
+      "h": 109,
+      "kind": "descent",
+      "cutoff_exponent": 418,
+      "exit_depth": 1458,
+      "odd_steps": 741
+    },
+    {
+      "h": 110,
+      "kind": "descent",
+      "cutoff_exponent": 422,
+      "exit_depth": 1293,
+      "odd_steps": 636
+    },
+    {
+      "h": 111,
+      "kind": "descent",
+      "cutoff_exponent": 425,
+      "exit_depth": 1427,
+      "odd_steps": 718
+    },
+    {
+      "h": 112,
+      "kind": "descent",
+      "cutoff_exponent": 429,
+      "exit_depth": 1399,
+      "odd_steps": 699
+    },
+    {
+      "h": 113,
+      "kind": "descent",
+      "cutoff_exponent": 433,
+      "exit_depth": 1246,
+      "odd_steps": 601
+    },
+    {
+      "h": 114,
+      "kind": "descent",
+      "cutoff_exponent": 437,
+      "exit_depth": 1358,
+      "odd_steps": 670
+    },
+    {
+      "h": 115,
+      "kind": "descent",
+      "cutoff_exponent": 441,
+      "exit_depth": 1382,
+      "odd_steps": 684
+    },
+    {
+      "h": 116,
+      "kind": "descent",
+      "cutoff_exponent": 444,
+      "exit_depth": 1352,
+      "odd_steps": 663
+    },
+    {
+      "h": 117,
+      "kind": "descent",
+      "cutoff_exponent": 448,
+      "exit_depth": 1315,
+      "odd_steps": 638
+    },
+    {
+      "h": 118,
+      "kind": "descent",
+      "cutoff_exponent": 452,
+      "exit_depth": 1553,
+      "odd_steps": 787
+    },
+    {
+      "h": 119,
+      "kind": "descent",
+      "cutoff_exponent": 456,
+      "exit_depth": 1500,
+      "odd_steps": 752
+    },
+    {
+      "h": 120,
+      "kind": "descent",
+      "cutoff_exponent": 460,
+      "exit_depth": 1650,
+      "odd_steps": 845
+    },
+    {
+      "h": 121,
+      "kind": "descent",
+      "cutoff_exponent": 463,
+      "exit_depth": 1509,
+      "odd_steps": 754
+    },
+    {
+      "h": 122,
+      "kind": "descent",
+      "cutoff_exponent": 467,
+      "exit_depth": 1483,
+      "odd_steps": 736
+    },
+    {
+      "h": 123,
+      "kind": "descent",
+      "cutoff_exponent": 471,
+      "exit_depth": 1598,
+      "odd_steps": 807
+    },
+    {
+      "h": 124,
+      "kind": "descent",
+      "cutoff_exponent": 475,
+      "exit_depth": 1592,
+      "odd_steps": 802
+    },
+    {
+      "h": 125,
+      "kind": "descent",
+      "cutoff_exponent": 478,
+      "exit_depth": 1684,
+      "odd_steps": 858
+    },
+    {
+      "h": 126,
+      "kind": "descent",
+      "cutoff_exponent": 482,
+      "exit_depth": 1633,
+      "odd_steps": 824
+    },
+    {
+      "h": 127,
+      "kind": "descent",
+      "cutoff_exponent": 486,
+      "exit_depth": 1594,
+      "odd_steps": 798
+    },
+    {
+      "h": 128,
+      "kind": "descent",
+      "cutoff_exponent": 490,
+      "exit_depth": 1446,
+      "odd_steps": 703
+    },
+    {
+      "h": 129,
+      "kind": "descent",
+      "cutoff_exponent": 494,
+      "exit_depth": 1569,
+      "odd_steps": 779
+    },
+    {
+      "h": 130,
+      "kind": "descent",
+      "cutoff_exponent": 497,
+      "exit_depth": 1564,
+      "odd_steps": 774
+    },
+    {
+      "h": 131,
+      "kind": "descent",
+      "cutoff_exponent": 501,
+      "exit_depth": 1538,
+      "odd_steps": 756
+    },
+    {
+      "h": 132,
+      "kind": "descent",
+      "cutoff_exponent": 505,
+      "exit_depth": 1738,
+      "odd_steps": 881
+    },
+    {
+      "h": 133,
+      "kind": "descent",
+      "cutoff_exponent": 509,
+      "exit_depth": 1693,
+      "odd_steps": 851
+    },
+    {
+      "h": 134,
+      "kind": "descent",
+      "cutoff_exponent": 513,
+      "exit_depth": 1686,
+      "odd_steps": 845
+    },
+    {
+      "h": 135,
+      "kind": "descent",
+      "cutoff_exponent": 516,
+      "exit_depth": 1677,
+      "odd_steps": 837
+    },
+    {
+      "h": 136,
+      "kind": "descent",
+      "cutoff_exponent": 520,
+      "exit_depth": 1671,
+      "odd_steps": 832
+    },
+    {
+      "h": 137,
+      "kind": "descent",
+      "cutoff_exponent": 524,
+      "exit_depth": 1649,
+      "odd_steps": 817
+    },
+    {
+      "h": 138,
+      "kind": "descent",
+      "cutoff_exponent": 528,
+      "exit_depth": 1764,
+      "odd_steps": 888
+    },
+    {
+      "h": 139,
+      "kind": "descent",
+      "cutoff_exponent": 531,
+      "exit_depth": 1749,
+      "odd_steps": 876
+    },
+    {
+      "h": 140,
+      "kind": "descent",
+      "cutoff_exponent": 535,
+      "exit_depth": 1743,
+      "odd_steps": 871
+    },
+    {
+      "h": 141,
+      "kind": "descent",
+      "cutoff_exponent": 539,
+      "exit_depth": 1867,
+      "odd_steps": 948
+    },
+    {
+      "h": 142,
+      "kind": "descent",
+      "cutoff_exponent": 543,
+      "exit_depth": 1832,
+      "odd_steps": 924
+    },
+    {
+      "h": 143,
+      "kind": "descent",
+      "cutoff_exponent": 547,
+      "exit_depth": 2051,
+      "odd_steps": 1061
+    },
+    {
+      "h": 144,
+      "kind": "descent",
+      "cutoff_exponent": 550,
+      "exit_depth": 1812,
+      "odd_steps": 908
+    },
+    {
+      "h": 145,
+      "kind": "descent",
+      "cutoff_exponent": 554,
+      "exit_depth": 1982,
+      "odd_steps": 1014
+    },
+    {
+      "h": 146,
+      "kind": "descent",
+      "cutoff_exponent": 558,
+      "exit_depth": 1932,
+      "odd_steps": 981
+    },
+    {
+      "h": 147,
+      "kind": "descent",
+      "cutoff_exponent": 562,
+      "exit_depth": 1928,
+      "odd_steps": 977
+    },
+    {
+      "h": 148,
+      "kind": "descent",
+      "cutoff_exponent": 566,
+      "exit_depth": 1885,
+      "odd_steps": 948
+    },
+    {
+      "h": 149,
+      "kind": "descent",
+      "cutoff_exponent": 569,
+      "exit_depth": 1880,
+      "odd_steps": 943
+    },
+    {
+      "h": 150,
+      "kind": "descent",
+      "cutoff_exponent": 573,
+      "exit_depth": 1859,
+      "odd_steps": 928
+    },
+    {
+      "h": 151,
+      "kind": "descent",
+      "cutoff_exponent": 577,
+      "exit_depth": 1842,
+      "odd_steps": 916
+    },
+    {
+      "h": 152,
+      "kind": "descent",
+      "cutoff_exponent": 581,
+      "exit_depth": 1835,
+      "odd_steps": 910
+    },
+    {
+      "h": 153,
+      "kind": "descent",
+      "cutoff_exponent": 584,
+      "exit_depth": 2144,
+      "odd_steps": 1103
+    },
+    {
+      "h": 154,
+      "kind": "descent",
+      "cutoff_exponent": 588,
+      "exit_depth": 2128,
+      "odd_steps": 1091
+    },
+    {
+      "h": 155,
+      "kind": "descent",
+      "cutoff_exponent": 592,
+      "exit_depth": 2112,
+      "odd_steps": 1080
+    },
+    {
+      "h": 156,
+      "kind": "descent",
+      "cutoff_exponent": 596,
+      "exit_depth": 1726,
+      "odd_steps": 835
+    },
+    {
+      "h": 157,
+      "kind": "descent",
+      "cutoff_exponent": 600,
+      "exit_depth": 1722,
+      "odd_steps": 831
+    },
+    {
+      "h": 158,
+      "kind": "descent",
+      "cutoff_exponent": 603,
+      "exit_depth": 1719,
+      "odd_steps": 827
+    },
+    {
+      "h": 159,
+      "kind": "descent",
+      "cutoff_exponent": 607,
+      "exit_depth": 2170,
+      "odd_steps": 1110
+    },
+    {
+      "h": 160,
+      "kind": "descent",
+      "cutoff_exponent": 611,
+      "exit_depth": 2158,
+      "odd_steps": 1101
+    },
+    {
+      "h": 161,
+      "kind": "descent",
+      "cutoff_exponent": 615,
+      "exit_depth": 2145,
+      "odd_steps": 1091
+    },
+    {
+      "h": 162,
+      "kind": "descent",
+      "cutoff_exponent": 619,
+      "exit_depth": 2138,
+      "odd_steps": 1085
+    },
+    {
+      "h": 163,
+      "kind": "descent",
+      "cutoff_exponent": 622,
+      "exit_depth": 2124,
+      "odd_steps": 1074
+    },
+    {
+      "h": 164,
+      "kind": "descent",
+      "cutoff_exponent": 626,
+      "exit_depth": 2102,
+      "odd_steps": 1059
+    },
+    {
+      "h": 165,
+      "kind": "descent",
+      "cutoff_exponent": 630,
+      "exit_depth": 2087,
+      "odd_steps": 1048
+    },
+    {
+      "h": 166,
+      "kind": "descent",
+      "cutoff_exponent": 634,
+      "exit_depth": 2075,
+      "odd_steps": 1039
+    },
+    {
+      "h": 167,
+      "kind": "descent",
+      "cutoff_exponent": 637,
+      "exit_depth": 2107,
+      "odd_steps": 1057
+    },
+    {
+      "h": 168,
+      "kind": "descent",
+      "cutoff_exponent": 641,
+      "exit_depth": 2101,
+      "odd_steps": 1052
+    },
+    {
+      "h": 169,
+      "kind": "descent",
+      "cutoff_exponent": 645,
+      "exit_depth": 2124,
+      "odd_steps": 1065
+    },
+    {
+      "h": 170,
+      "kind": "descent",
+      "cutoff_exponent": 649,
+      "exit_depth": 2117,
+      "odd_steps": 1059
+    },
+    {
+      "h": 171,
+      "kind": "descent",
+      "cutoff_exponent": 653,
+      "exit_depth": 2102,
+      "odd_steps": 1048
+    },
+    {
+      "h": 172,
+      "kind": "descent",
+      "cutoff_exponent": 656,
+      "exit_depth": 2090,
+      "odd_steps": 1038
+    },
+    {
+      "h": 173,
+      "kind": "descent",
+      "cutoff_exponent": 660,
+      "exit_depth": 2062,
+      "odd_steps": 1019
+    },
+    {
+      "h": 174,
+      "kind": "descent",
+      "cutoff_exponent": 664,
+      "exit_depth": 2053,
+      "odd_steps": 1012
+    },
+    {
+      "h": 175,
+      "kind": "descent",
+      "cutoff_exponent": 668,
+      "exit_depth": 1976,
+      "odd_steps": 962
+    },
+    {
+      "h": 176,
+      "kind": "descent",
+      "cutoff_exponent": 672,
+      "exit_depth": 1961,
+      "odd_steps": 951
+    },
+    {
+      "h": 177,
+      "kind": "descent",
+      "cutoff_exponent": 675,
+      "exit_depth": 1952,
+      "odd_steps": 943
+    },
+    {
+      "h": 178,
+      "kind": "descent",
+      "cutoff_exponent": 679,
+      "exit_depth": 2325,
+      "odd_steps": 1177
+    },
+    {
+      "h": 179,
+      "kind": "descent",
+      "cutoff_exponent": 683,
+      "exit_depth": 2310,
+      "odd_steps": 1166
+    },
+    {
+      "h": 180,
+      "kind": "descent",
+      "cutoff_exponent": 687,
+      "exit_depth": 1914,
+      "odd_steps": 915
+    },
+    {
+      "h": 181,
+      "kind": "descent",
+      "cutoff_exponent": 690,
+      "exit_depth": 2293,
+      "odd_steps": 1152
+    },
+    {
+      "h": 182,
+      "kind": "descent",
+      "cutoff_exponent": 694,
+      "exit_depth": 2270,
+      "odd_steps": 1136
+    },
+    {
+      "h": 183,
+      "kind": "descent",
+      "cutoff_exponent": 698,
+      "exit_depth": 2266,
+      "odd_steps": 1132
+    },
+    {
+      "h": 184,
+      "kind": "descent",
+      "cutoff_exponent": 702,
+      "exit_depth": 2251,
+      "odd_steps": 1121
+    },
+    {
+      "h": 185,
+      "kind": "descent",
+      "cutoff_exponent": 706,
+      "exit_depth": 2247,
+      "odd_steps": 1117
+    },
+    {
+      "h": 186,
+      "kind": "descent",
+      "cutoff_exponent": 709,
+      "exit_depth": 2241,
+      "odd_steps": 1111
+    },
+    {
+      "h": 187,
+      "kind": "descent",
+      "cutoff_exponent": 713,
+      "exit_depth": 2221,
+      "odd_steps": 1097
+    },
+    {
+      "h": 188,
+      "kind": "descent",
+      "cutoff_exponent": 717,
+      "exit_depth": 2213,
+      "odd_steps": 1090
+    },
+    {
+      "h": 189,
+      "kind": "descent",
+      "cutoff_exponent": 721,
+      "exit_depth": 2196,
+      "odd_steps": 1078
+    },
+    {
+      "h": 190,
+      "kind": "descent",
+      "cutoff_exponent": 725,
+      "exit_depth": 2331,
+      "odd_steps": 1162
+    },
+    {
+      "h": 191,
+      "kind": "descent",
+      "cutoff_exponent": 728,
+      "exit_depth": 2298,
+      "odd_steps": 1139
+    },
+    {
+      "h": 192,
+      "kind": "descent",
+      "cutoff_exponent": 732,
+      "exit_depth": 2286,
+      "odd_steps": 1130
+    },
+    {
+      "h": 193,
+      "kind": "descent",
+      "cutoff_exponent": 736,
+      "exit_depth": 2279,
+      "odd_steps": 1124
+    },
+    {
+      "h": 194,
+      "kind": "descent",
+      "cutoff_exponent": 740,
+      "exit_depth": 2275,
+      "odd_steps": 1120
+    },
+    {
+      "h": 195,
+      "kind": "descent",
+      "cutoff_exponent": 743,
+      "exit_depth": 2228,
+      "odd_steps": 1088
+    },
+    {
+      "h": 196,
+      "kind": "descent",
+      "cutoff_exponent": 747,
+      "exit_depth": 2214,
+      "odd_steps": 1078
+    },
+    {
+      "h": 197,
+      "kind": "descent",
+      "cutoff_exponent": 751,
+      "exit_depth": 2725,
+      "odd_steps": 1399
+    },
+    {
+      "h": 198,
+      "kind": "descent",
+      "cutoff_exponent": 755,
+      "exit_depth": 2168,
+      "odd_steps": 1046
+    },
+    {
+      "h": 199,
+      "kind": "descent",
+      "cutoff_exponent": 759,
+      "exit_depth": 2159,
+      "odd_steps": 1039
+    },
+    {
+      "h": 200,
+      "kind": "descent",
+      "cutoff_exponent": 762,
+      "exit_depth": 2145,
+      "odd_steps": 1028
+    },
+    {
+      "h": 201,
+      "kind": "descent",
+      "cutoff_exponent": 766,
+      "exit_depth": 2137,
+      "odd_steps": 1021
+    },
+    {
+      "h": 202,
+      "kind": "descent",
+      "cutoff_exponent": 770,
+      "exit_depth": 2703,
+      "odd_steps": 1377
+    },
+    {
+      "h": 203,
+      "kind": "descent",
+      "cutoff_exponent": 774,
+      "exit_depth": 2677,
+      "odd_steps": 1359
+    },
+    {
+      "h": 204,
+      "kind": "descent",
+      "cutoff_exponent": 778,
+      "exit_depth": 2437,
+      "odd_steps": 1206
+    },
+    {
+      "h": 205,
+      "kind": "descent",
+      "cutoff_exponent": 781,
+      "exit_depth": 2429,
+      "odd_steps": 1199
+    },
+    {
+      "h": 206,
+      "kind": "descent",
+      "cutoff_exponent": 785,
+      "exit_depth": 2609,
+      "odd_steps": 1311
+    },
+    {
+      "h": 207,
+      "kind": "descent",
+      "cutoff_exponent": 789,
+      "exit_depth": 2481,
+      "odd_steps": 1229
+    },
+    {
+      "h": 208,
+      "kind": "descent",
+      "cutoff_exponent": 793,
+      "exit_depth": 2908,
+      "odd_steps": 1497
+    },
+    {
+      "h": 209,
+      "kind": "descent",
+      "cutoff_exponent": 796,
+      "exit_depth": 2905,
+      "odd_steps": 1493
+    },
+    {
+      "h": 210,
+      "kind": "descent",
+      "cutoff_exponent": 800,
+      "exit_depth": 2895,
+      "odd_steps": 1485
+    },
+    {
+      "h": 211,
+      "kind": "descent",
+      "cutoff_exponent": 804,
+      "exit_depth": 2577,
+      "odd_steps": 1283
+    },
+    {
+      "h": 212,
+      "kind": "descent",
+      "cutoff_exponent": 808,
+      "exit_depth": 2860,
+      "odd_steps": 1460
+    },
+    {
+      "h": 213,
+      "kind": "descent",
+      "cutoff_exponent": 812,
+      "exit_depth": 2896,
+      "odd_steps": 1481
+    },
+    {
+      "h": 214,
+      "kind": "descent",
+      "cutoff_exponent": 815,
+      "exit_depth": 2536,
+      "odd_steps": 1252
+    },
+    {
+      "h": 215,
+      "kind": "descent",
+      "cutoff_exponent": 819,
+      "exit_depth": 2884,
+      "odd_steps": 1470
+    },
+    {
+      "h": 216,
+      "kind": "descent",
+      "cutoff_exponent": 823,
+      "exit_depth": 2848,
+      "odd_steps": 1446
+    },
+    {
+      "h": 217,
+      "kind": "descent",
+      "cutoff_exponent": 827,
+      "exit_depth": 2838,
+      "odd_steps": 1438
+    },
+    {
+      "h": 218,
+      "kind": "descent",
+      "cutoff_exponent": 831,
+      "exit_depth": 2832,
+      "odd_steps": 1433
+    },
+    {
+      "h": 219,
+      "kind": "descent",
+      "cutoff_exponent": 834,
+      "exit_depth": 2809,
+      "odd_steps": 1416
+    },
+    {
+      "h": 220,
+      "kind": "descent",
+      "cutoff_exponent": 838,
+      "exit_depth": 2813,
+      "odd_steps": 1417
+    },
+    {
+      "h": 221,
+      "kind": "descent",
+      "cutoff_exponent": 842,
+      "exit_depth": 2414,
+      "odd_steps": 1164
+    },
+    {
+      "h": 222,
+      "kind": "descent",
+      "cutoff_exponent": 846,
+      "exit_depth": 2763,
+      "odd_steps": 1383
+    },
+    {
+      "h": 223,
+      "kind": "descent",
+      "cutoff_exponent": 849,
+      "exit_depth": 2734,
+      "odd_steps": 1362
+    },
+    {
+      "h": 224,
+      "kind": "descent",
+      "cutoff_exponent": 853,
+      "exit_depth": 2701,
+      "odd_steps": 1340
+    },
+    {
+      "h": 225,
+      "kind": "descent",
+      "cutoff_exponent": 857,
+      "exit_depth": 2651,
+      "odd_steps": 1307
+    },
+    {
+      "h": 226,
+      "kind": "descent",
+      "cutoff_exponent": 861,
+      "exit_depth": 2825,
+      "odd_steps": 1415
+    },
+    {
+      "h": 227,
+      "kind": "descent",
+      "cutoff_exponent": 865,
+      "exit_depth": 2798,
+      "odd_steps": 1397
+    },
+    {
+      "h": 228,
+      "kind": "descent",
+      "cutoff_exponent": 868,
+      "exit_depth": 2795,
+      "odd_steps": 1393
+    },
+    {
+      "h": 229,
+      "kind": "descent",
+      "cutoff_exponent": 872,
+      "exit_depth": 2939,
+      "odd_steps": 1482
+    },
+    {
+      "h": 230,
+      "kind": "descent",
+      "cutoff_exponent": 876,
+      "exit_depth": 2760,
+      "odd_steps": 1368
+    },
+    {
+      "h": 231,
+      "kind": "descent",
+      "cutoff_exponent": 880,
+      "exit_depth": 2745,
+      "odd_steps": 1357
+    },
+    {
+      "h": 232,
+      "kind": "descent",
+      "cutoff_exponent": 884,
+      "exit_depth": 2711,
+      "odd_steps": 1334
+    },
+    {
+      "h": 233,
+      "kind": "descent",
+      "cutoff_exponent": 887,
+      "exit_depth": 2884,
+      "odd_steps": 1441
+    },
+    {
+      "h": 234,
+      "kind": "descent",
+      "cutoff_exponent": 891,
+      "exit_depth": 2842,
+      "odd_steps": 1413
+    },
+    {
+      "h": 235,
+      "kind": "descent",
+      "cutoff_exponent": 895,
+      "exit_depth": 2808,
+      "odd_steps": 1390
+    },
+    {
+      "h": 236,
+      "kind": "descent",
+      "cutoff_exponent": 899,
+      "exit_depth": 2772,
+      "odd_steps": 1366
+    },
+    {
+      "h": 237,
+      "kind": "descent",
+      "cutoff_exponent": 902,
+      "exit_depth": 2750,
+      "odd_steps": 1350
+    },
+    {
+      "h": 238,
+      "kind": "descent",
+      "cutoff_exponent": 906,
+      "exit_depth": 2718,
+      "odd_steps": 1328
+    },
+    {
+      "h": 239,
+      "kind": "descent",
+      "cutoff_exponent": 910,
+      "exit_depth": 2699,
+      "odd_steps": 1315
+    },
+    {
+      "h": 240,
+      "kind": "descent",
+      "cutoff_exponent": 914,
+      "exit_depth": 3077,
+      "odd_steps": 1552
+    },
+    {
+      "h": 241,
+      "kind": "descent",
+      "cutoff_exponent": 918,
+      "exit_depth": 2684,
+      "odd_steps": 1302
+    },
+    {
+      "h": 242,
+      "kind": "descent",
+      "cutoff_exponent": 921,
+      "exit_depth": 3020,
+      "odd_steps": 1512
+    },
+    {
+      "h": 243,
+      "kind": "descent",
+      "cutoff_exponent": 925,
+      "exit_depth": 2957,
+      "odd_steps": 1471
+    },
+    {
+      "h": 244,
+      "kind": "descent",
+      "cutoff_exponent": 929,
+      "exit_depth": 2940,
+      "odd_steps": 1459
+    },
+    {
+      "h": 245,
+      "kind": "descent",
+      "cutoff_exponent": 933,
+      "exit_depth": 2936,
+      "odd_steps": 1455
+    },
+    {
+      "h": 246,
+      "kind": "descent",
+      "cutoff_exponent": 937,
+      "exit_depth": 2918,
+      "odd_steps": 1442
+    },
+    {
+      "h": 247,
+      "kind": "descent",
+      "cutoff_exponent": 940,
+      "exit_depth": 3115,
+      "odd_steps": 1564
+    },
+    {
+      "h": 248,
+      "kind": "descent",
+      "cutoff_exponent": 944,
+      "exit_depth": 3108,
+      "odd_steps": 1558
+    },
+    {
+      "h": 249,
+      "kind": "descent",
+      "cutoff_exponent": 948,
+      "exit_depth": 3051,
+      "odd_steps": 1521
+    },
+    {
+      "h": 250,
+      "kind": "descent",
+      "cutoff_exponent": 952,
+      "exit_depth": 3277,
+      "odd_steps": 1662
+    },
+    {
+      "h": 251,
+      "kind": "descent",
+      "cutoff_exponent": 955,
+      "exit_depth": 3274,
+      "odd_steps": 1658
+    },
+    {
+      "h": 252,
+      "kind": "descent",
+      "cutoff_exponent": 959,
+      "exit_depth": 3269,
+      "odd_steps": 1653
+    },
+    {
+      "h": 253,
+      "kind": "descent",
+      "cutoff_exponent": 963,
+      "exit_depth": 3263,
+      "odd_steps": 1648
+    },
+    {
+      "h": 254,
+      "kind": "descent",
+      "cutoff_exponent": 967,
+      "exit_depth": 3257,
+      "odd_steps": 1643
+    },
+    {
+      "h": 255,
+      "kind": "descent",
+      "cutoff_exponent": 971,
+      "exit_depth": 3246,
+      "odd_steps": 1634
+    },
+    {
+      "h": 256,
+      "kind": "descent",
+      "cutoff_exponent": 974,
+      "exit_depth": 3227,
+      "odd_steps": 1620
+    },
+    {
+      "h": 257,
+      "kind": "descent",
+      "cutoff_exponent": 978,
+      "exit_depth": 3216,
+      "odd_steps": 1612
+    },
+    {
+      "h": 258,
+      "kind": "descent",
+      "cutoff_exponent": 982,
+      "exit_depth": 3203,
+      "odd_steps": 1602
+    },
+    {
+      "h": 259,
+      "kind": "descent",
+      "cutoff_exponent": 986,
+      "exit_depth": 3216,
+      "odd_steps": 1609
+    },
+    {
+      "h": 260,
+      "kind": "descent",
+      "cutoff_exponent": 990,
+      "exit_depth": 3179,
+      "odd_steps": 1584
+    },
+    {
+      "h": 261,
+      "kind": "descent",
+      "cutoff_exponent": 993,
+      "exit_depth": 3166,
+      "odd_steps": 1574
+    },
+    {
+      "h": 262,
+      "kind": "descent",
+      "cutoff_exponent": 997,
+      "exit_depth": 3156,
+      "odd_steps": 1566
+    },
+    {
+      "h": 263,
+      "kind": "descent",
+      "cutoff_exponent": 1001,
+      "exit_depth": 3151,
+      "odd_steps": 1561
+    },
+    {
+      "h": 264,
+      "kind": "descent",
+      "cutoff_exponent": 1005,
+      "exit_depth": 3139,
+      "odd_steps": 1552
+    },
+    {
+      "h": 265,
+      "kind": "descent",
+      "cutoff_exponent": 1008,
+      "exit_depth": 3124,
+      "odd_steps": 1541
+    },
+    {
+      "h": 266,
+      "kind": "descent",
+      "cutoff_exponent": 1012,
+      "exit_depth": 3101,
+      "odd_steps": 1525
+    },
+    {
+      "h": 267,
+      "kind": "descent",
+      "cutoff_exponent": 1016,
+      "exit_depth": 3072,
+      "odd_steps": 1505
+    },
+    {
+      "h": 268,
+      "kind": "descent",
+      "cutoff_exponent": 1020,
+      "exit_depth": 3423,
+      "odd_steps": 1725
+    },
+    {
+      "h": 269,
+      "kind": "descent",
+      "cutoff_exponent": 1024,
+      "exit_depth": 3389,
+      "odd_steps": 1702
+    },
+    {
+      "h": 270,
+      "kind": "descent",
+      "cutoff_exponent": 1027,
+      "exit_depth": 3023,
+      "odd_steps": 1469
+    },
+    {
+      "h": 271,
+      "kind": "descent",
+      "cutoff_exponent": 1031,
+      "exit_depth": 3000,
+      "odd_steps": 1453
+    },
+    {
+      "h": 272,
+      "kind": "descent",
+      "cutoff_exponent": 1035,
+      "exit_depth": 3330,
+      "odd_steps": 1660
+    },
+    {
+      "h": 273,
+      "kind": "descent",
+      "cutoff_exponent": 1039,
+      "exit_depth": 3317,
+      "odd_steps": 1650
+    },
+    {
+      "h": 274,
+      "kind": "descent",
+      "cutoff_exponent": 1043,
+      "exit_depth": 3313,
+      "odd_steps": 1646
+    },
+    {
+      "h": 275,
+      "kind": "descent",
+      "cutoff_exponent": 1046,
+      "exit_depth": 3297,
+      "odd_steps": 1634
+    },
+    {
+      "h": 276,
+      "kind": "descent",
+      "cutoff_exponent": 1050,
+      "exit_depth": 3667,
+      "odd_steps": 1866
+    },
+    {
+      "h": 277,
+      "kind": "descent",
+      "cutoff_exponent": 1054,
+      "exit_depth": 3647,
+      "odd_steps": 1852
+    },
+    {
+      "h": 278,
+      "kind": "descent",
+      "cutoff_exponent": 1058,
+      "exit_depth": 3637,
+      "odd_steps": 1844
+    },
+    {
+      "h": 279,
+      "kind": "descent",
+      "cutoff_exponent": 1061,
+      "exit_depth": 3623,
+      "odd_steps": 1833
+    },
+    {
+      "h": 280,
+      "kind": "descent",
+      "cutoff_exponent": 1065,
+      "exit_depth": 3562,
+      "odd_steps": 1793
+    },
+    {
+      "h": 281,
+      "kind": "descent",
+      "cutoff_exponent": 1069,
+      "exit_depth": 3555,
+      "odd_steps": 1787
+    },
+    {
+      "h": 282,
+      "kind": "descent",
+      "cutoff_exponent": 1073,
+      "exit_depth": 3827,
+      "odd_steps": 1957
+    },
+    {
+      "h": 283,
+      "kind": "descent",
+      "cutoff_exponent": 1077,
+      "exit_depth": 3609,
+      "odd_steps": 1818
+    },
+    {
+      "h": 284,
+      "kind": "descent",
+      "cutoff_exponent": 1080,
+      "exit_depth": 3606,
+      "odd_steps": 1814
+    },
+    {
+      "h": 285,
+      "kind": "descent",
+      "cutoff_exponent": 1084,
+      "exit_depth": 3576,
+      "odd_steps": 1794
+    },
+    {
+      "h": 286,
+      "kind": "descent",
+      "cutoff_exponent": 1088,
+      "exit_depth": 3761,
+      "odd_steps": 1909
+    },
+    {
+      "h": 287,
+      "kind": "descent",
+      "cutoff_exponent": 1092,
+      "exit_depth": 3754,
+      "odd_steps": 1903
+    },
+    {
+      "h": 288,
+      "kind": "descent",
+      "cutoff_exponent": 1096,
+      "exit_depth": 3750,
+      "odd_steps": 1899
+    },
+    {
+      "h": 289,
+      "kind": "descent",
+      "cutoff_exponent": 1099,
+      "exit_depth": 3736,
+      "odd_steps": 1888
+    },
+    {
+      "h": 290,
+      "kind": "descent",
+      "cutoff_exponent": 1103,
+      "exit_depth": 3732,
+      "odd_steps": 1884
+    },
+    {
+      "h": 291,
+      "kind": "descent",
+      "cutoff_exponent": 1107,
+      "exit_depth": 3726,
+      "odd_steps": 1879
+    },
+    {
+      "h": 292,
+      "kind": "descent",
+      "cutoff_exponent": 1111,
+      "exit_depth": 3719,
+      "odd_steps": 1873
+    },
+    {
+      "h": 293,
+      "kind": "descent",
+      "cutoff_exponent": 1114,
+      "exit_depth": 3461,
+      "odd_steps": 1708
+    },
+    {
+      "h": 294,
+      "kind": "descent",
+      "cutoff_exponent": 1118,
+      "exit_depth": 3674,
+      "odd_steps": 1841
+    },
+    {
+      "h": 295,
+      "kind": "descent",
+      "cutoff_exponent": 1122,
+      "exit_depth": 3633,
+      "odd_steps": 1814
+    },
+    {
+      "h": 296,
+      "kind": "descent",
+      "cutoff_exponent": 1126,
+      "exit_depth": 3617,
+      "odd_steps": 1802
+    },
+    {
+      "h": 297,
+      "kind": "descent",
+      "cutoff_exponent": 1130,
+      "exit_depth": 3586,
+      "odd_steps": 1781
+    },
+    {
+      "h": 298,
+      "kind": "descent",
+      "cutoff_exponent": 1133,
+      "exit_depth": 3583,
+      "odd_steps": 1777
+    },
+    {
+      "h": 299,
+      "kind": "descent",
+      "cutoff_exponent": 1137,
+      "exit_depth": 3572,
+      "odd_steps": 1769
+    },
+    {
+      "h": 300,
+      "kind": "descent",
+      "cutoff_exponent": 1141,
+      "exit_depth": 3568,
+      "odd_steps": 1765
+    },
+    {
+      "h": 301,
+      "kind": "descent",
+      "cutoff_exponent": 1145,
+      "exit_depth": 3549,
+      "odd_steps": 1751
+    },
+    {
+      "h": 302,
+      "kind": "descent",
+      "cutoff_exponent": 1149,
+      "exit_depth": 3516,
+      "odd_steps": 1729
+    },
+    {
+      "h": 303,
+      "kind": "descent",
+      "cutoff_exponent": 1152,
+      "exit_depth": 3489,
+      "odd_steps": 1710
+    },
+    {
+      "h": 304,
+      "kind": "descent",
+      "cutoff_exponent": 1156,
+      "exit_depth": 3477,
+      "odd_steps": 1701
+    },
+    {
+      "h": 305,
+      "kind": "descent",
+      "cutoff_exponent": 1160,
+      "exit_depth": 4085,
+      "odd_steps": 2083
+    },
+    {
+      "h": 306,
+      "kind": "descent",
+      "cutoff_exponent": 1164,
+      "exit_depth": 4078,
+      "odd_steps": 2077
+    },
+    {
+      "h": 307,
+      "kind": "descent",
+      "cutoff_exponent": 1167,
+      "exit_depth": 4053,
+      "odd_steps": 2059
+    },
+    {
+      "h": 308,
+      "kind": "descent",
+      "cutoff_exponent": 1171,
+      "exit_depth": 4001,
+      "odd_steps": 2025
+    },
+    {
+      "h": 309,
+      "kind": "descent",
+      "cutoff_exponent": 1175,
+      "exit_depth": 3985,
+      "odd_steps": 2013
+    },
+    {
+      "h": 310,
+      "kind": "descent",
+      "cutoff_exponent": 1179,
+      "exit_depth": 3981,
+      "odd_steps": 2009
+    },
+    {
+      "h": 311,
+      "kind": "descent",
+      "cutoff_exponent": 1183,
+      "exit_depth": 3417,
+      "odd_steps": 1652
+    },
+    {
+      "h": 312,
+      "kind": "descent",
+      "cutoff_exponent": 1186,
+      "exit_depth": 3988,
+      "odd_steps": 2010
+    },
+    {
+      "h": 313,
+      "kind": "descent",
+      "cutoff_exponent": 1190,
+      "exit_depth": 3976,
+      "odd_steps": 2001
+    },
+    {
+      "h": 314,
+      "kind": "descent",
+      "cutoff_exponent": 1194,
+      "exit_depth": 3950,
+      "odd_steps": 1983
+    },
+    {
+      "h": 315,
+      "kind": "descent",
+      "cutoff_exponent": 1198,
+      "exit_depth": 3944,
+      "odd_steps": 1978
+    },
+    {
+      "h": 316,
+      "kind": "descent",
+      "cutoff_exponent": 1202,
+      "exit_depth": 3931,
+      "odd_steps": 1968
+    },
+    {
+      "h": 317,
+      "kind": "descent",
+      "cutoff_exponent": 1205,
+      "exit_depth": 3924,
+      "odd_steps": 1962
+    },
+    {
+      "h": 318,
+      "kind": "descent",
+      "cutoff_exponent": 1209,
+      "exit_depth": 3909,
+      "odd_steps": 1951
+    },
+    {
+      "h": 319,
+      "kind": "descent",
+      "cutoff_exponent": 1213,
+      "exit_depth": 3904,
+      "odd_steps": 1946
+    },
+    {
+      "h": 320,
+      "kind": "descent",
+      "cutoff_exponent": 1217,
+      "exit_depth": 3898,
+      "odd_steps": 1941
+    },
+    {
+      "h": 321,
+      "kind": "descent",
+      "cutoff_exponent": 1220,
+      "exit_depth": 3895,
+      "odd_steps": 1937
+    },
+    {
+      "h": 322,
+      "kind": "descent",
+      "cutoff_exponent": 1224,
+      "exit_depth": 3872,
+      "odd_steps": 1921
+    },
+    {
+      "h": 323,
+      "kind": "descent",
+      "cutoff_exponent": 1228,
+      "exit_depth": 3844,
+      "odd_steps": 1902
+    },
+    {
+      "h": 324,
+      "kind": "descent",
+      "cutoff_exponent": 1232,
+      "exit_depth": 3839,
+      "odd_steps": 1897
+    },
+    {
+      "h": 325,
+      "kind": "descent",
+      "cutoff_exponent": 1236,
+      "exit_depth": 3832,
+      "odd_steps": 1891
+    },
+    {
+      "h": 326,
+      "kind": "descent",
+      "cutoff_exponent": 1239,
+      "exit_depth": 3789,
+      "odd_steps": 1862
+    },
+    {
+      "h": 327,
+      "kind": "descent",
+      "cutoff_exponent": 1243,
+      "exit_depth": 3782,
+      "odd_steps": 1856
+    },
+    {
+      "h": 328,
+      "kind": "descent",
+      "cutoff_exponent": 1247,
+      "exit_depth": 3757,
+      "odd_steps": 1839
+    },
+    {
+      "h": 329,
+      "kind": "descent",
+      "cutoff_exponent": 1251,
+      "exit_depth": 3747,
+      "odd_steps": 1831
+    },
+    {
+      "h": 330,
+      "kind": "descent",
+      "cutoff_exponent": 1255,
+      "exit_depth": 4290,
+      "odd_steps": 2172
+    },
+    {
+      "h": 331,
+      "kind": "descent",
+      "cutoff_exponent": 1258,
+      "exit_depth": 4282,
+      "odd_steps": 2165
+    },
+    {
+      "h": 332,
+      "kind": "descent",
+      "cutoff_exponent": 1262,
+      "exit_depth": 4205,
+      "odd_steps": 2115
+    },
+    {
+      "h": 333,
+      "kind": "descent",
+      "cutoff_exponent": 1266,
+      "exit_depth": 4583,
+      "odd_steps": 2352
+    },
+    {
+      "h": 334,
+      "kind": "descent",
+      "cutoff_exponent": 1270,
+      "exit_depth": 4562,
+      "odd_steps": 2337
+    },
+    {
+      "h": 335,
+      "kind": "descent",
+      "cutoff_exponent": 1273,
+      "exit_depth": 4555,
+      "odd_steps": 2331
+    },
+    {
+      "h": 336,
+      "kind": "descent",
+      "cutoff_exponent": 1277,
+      "exit_depth": 4412,
+      "odd_steps": 2239
+    },
+    {
+      "h": 337,
+      "kind": "descent",
+      "cutoff_exponent": 1281,
+      "exit_depth": 4402,
+      "odd_steps": 2231
+    },
+    {
+      "h": 338,
+      "kind": "descent",
+      "cutoff_exponent": 1285,
+      "exit_depth": 4398,
+      "odd_steps": 2227
+    },
+    {
+      "h": 339,
+      "kind": "descent",
+      "cutoff_exponent": 1289,
+      "exit_depth": 4387,
+      "odd_steps": 2219
+    },
+    {
+      "h": 340,
+      "kind": "descent",
+      "cutoff_exponent": 1292,
+      "exit_depth": 4384,
+      "odd_steps": 2215
+    },
+    {
+      "h": 341,
+      "kind": "descent",
+      "cutoff_exponent": 1296,
+      "exit_depth": 4374,
+      "odd_steps": 2207
+    },
+    {
+      "h": 342,
+      "kind": "descent",
+      "cutoff_exponent": 1300,
+      "exit_depth": 3536,
+      "odd_steps": 1677
+    },
+    {
+      "h": 343,
+      "kind": "descent",
+      "cutoff_exponent": 1304,
+      "exit_depth": 4356,
+      "odd_steps": 2193
+    },
+    {
+      "h": 344,
+      "kind": "descent",
+      "cutoff_exponent": 1308,
+      "exit_depth": 4349,
+      "odd_steps": 2187
+    },
+    {
+      "h": 345,
+      "kind": "descent",
+      "cutoff_exponent": 1311,
+      "exit_depth": 4345,
+      "odd_steps": 2182
+    },
+    {
+      "h": 346,
+      "kind": "descent",
+      "cutoff_exponent": 1315,
+      "exit_depth": 4209,
+      "odd_steps": 2095
+    },
+    {
+      "h": 347,
+      "kind": "descent",
+      "cutoff_exponent": 1319,
+      "exit_depth": 4196,
+      "odd_steps": 2085
+    },
+    {
+      "h": 348,
+      "kind": "descent",
+      "cutoff_exponent": 1323,
+      "exit_depth": 4190,
+      "odd_steps": 2080
+    },
+    {
+      "h": 349,
+      "kind": "descent",
+      "cutoff_exponent": 1326,
+      "exit_depth": 4187,
+      "odd_steps": 2076
+    },
+    {
+      "h": 350,
+      "kind": "descent",
+      "cutoff_exponent": 1330,
+      "exit_depth": 4162,
+      "odd_steps": 2059
+    },
+    {
+      "h": 351,
+      "kind": "descent",
+      "cutoff_exponent": 1334,
+      "exit_depth": 4152,
+      "odd_steps": 2051
+    },
+    {
+      "h": 352,
+      "kind": "descent",
+      "cutoff_exponent": 1338,
+      "exit_depth": 4200,
+      "odd_steps": 2080
+    },
+    {
+      "h": 353,
+      "kind": "descent",
+      "cutoff_exponent": 1342,
+      "exit_depth": 4128,
+      "odd_steps": 2033
+    },
+    {
+      "h": 354,
+      "kind": "descent",
+      "cutoff_exponent": 1345,
+      "exit_depth": 4122,
+      "odd_steps": 2027
+    },
+    {
+      "h": 355,
+      "kind": "descent",
+      "cutoff_exponent": 1349,
+      "exit_depth": 4131,
+      "odd_steps": 2031
+    },
+    {
+      "h": 356,
+      "kind": "descent",
+      "cutoff_exponent": 1353,
+      "exit_depth": 4507,
+      "odd_steps": 2267
+    },
+    {
+      "h": 357,
+      "kind": "descent",
+      "cutoff_exponent": 1357,
+      "exit_depth": 4497,
+      "odd_steps": 2259
+    },
+    {
+      "h": 358,
+      "kind": "descent",
+      "cutoff_exponent": 1361,
+      "exit_depth": 4480,
+      "odd_steps": 2247
+    },
+    {
+      "h": 359,
+      "kind": "descent",
+      "cutoff_exponent": 1364,
+      "exit_depth": 4453,
+      "odd_steps": 2228
+    },
+    {
+      "h": 360,
+      "kind": "descent",
+      "cutoff_exponent": 1368,
+      "exit_depth": 4438,
+      "odd_steps": 2217
+    },
+    {
+      "h": 361,
+      "kind": "descent",
+      "cutoff_exponent": 1372,
+      "exit_depth": 4433,
+      "odd_steps": 2212
+    },
+    {
+      "h": 362,
+      "kind": "descent",
+      "cutoff_exponent": 1376,
+      "exit_depth": 4418,
+      "odd_steps": 2201
+    },
+    {
+      "h": 363,
+      "kind": "descent",
+      "cutoff_exponent": 1379,
+      "exit_depth": 4999,
+      "odd_steps": 2566
+    },
+    {
+      "h": 364,
+      "kind": "descent",
+      "cutoff_exponent": 1383,
+      "exit_depth": 4862,
+      "odd_steps": 2478
+    },
+    {
+      "h": 365,
+      "kind": "descent",
+      "cutoff_exponent": 1387,
+      "exit_depth": 4850,
+      "odd_steps": 2469
+    },
+    {
+      "h": 366,
+      "kind": "descent",
+      "cutoff_exponent": 1391,
+      "exit_depth": 4843,
+      "odd_steps": 2463
+    },
+    {
+      "h": 367,
+      "kind": "descent",
+      "cutoff_exponent": 1395,
+      "exit_depth": 4839,
+      "odd_steps": 2459
+    },
+    {
+      "h": 368,
+      "kind": "descent",
+      "cutoff_exponent": 1398,
+      "exit_depth": 4717,
+      "odd_steps": 2380
+    },
+    {
+      "h": 369,
+      "kind": "descent",
+      "cutoff_exponent": 1402,
+      "exit_depth": 4690,
+      "odd_steps": 2361
+    },
+    {
+      "h": 370,
+      "kind": "descent",
+      "cutoff_exponent": 1406,
+      "exit_depth": 4808,
+      "odd_steps": 2434
+    },
+    {
+      "h": 371,
+      "kind": "descent",
+      "cutoff_exponent": 1410,
+      "exit_depth": 4696,
+      "odd_steps": 2362
+    },
+    {
+      "h": 372,
+      "kind": "descent",
+      "cutoff_exponent": 1414,
+      "exit_depth": 4647,
+      "odd_steps": 2330
+    },
+    {
+      "h": 373,
+      "kind": "descent",
+      "cutoff_exponent": 1417,
+      "exit_depth": 4644,
+      "odd_steps": 2326
+    },
+    {
+      "h": 374,
+      "kind": "descent",
+      "cutoff_exponent": 1421,
+      "exit_depth": 4634,
+      "odd_steps": 2318
+    },
+    {
+      "h": 375,
+      "kind": "descent",
+      "cutoff_exponent": 1425,
+      "exit_depth": 4576,
+      "odd_steps": 2280
+    },
+    {
+      "h": 376,
+      "kind": "descent",
+      "cutoff_exponent": 1429,
+      "exit_depth": 4555,
+      "odd_steps": 2265
+    },
+    {
+      "h": 377,
+      "kind": "descent",
+      "cutoff_exponent": 1432,
+      "exit_depth": 4552,
+      "odd_steps": 2261
+    },
+    {
+      "h": 378,
+      "kind": "descent",
+      "cutoff_exponent": 1436,
+      "exit_depth": 4548,
+      "odd_steps": 2257
+    },
+    {
+      "h": 379,
+      "kind": "descent",
+      "cutoff_exponent": 1440,
+      "exit_depth": 4596,
+      "odd_steps": 2286
+    },
+    {
+      "h": 380,
+      "kind": "descent",
+      "cutoff_exponent": 1444,
+      "exit_depth": 4581,
+      "odd_steps": 2275
+    },
+    {
+      "h": 381,
+      "kind": "descent",
+      "cutoff_exponent": 1448,
+      "exit_depth": 4567,
+      "odd_steps": 2265
+    },
+    {
+      "h": 382,
+      "kind": "descent",
+      "cutoff_exponent": 1451,
+      "exit_depth": 4561,
+      "odd_steps": 2259
+    },
+    {
+      "h": 383,
+      "kind": "descent",
+      "cutoff_exponent": 1455,
+      "exit_depth": 5301,
+      "odd_steps": 2724
+    },
+    {
+      "h": 384,
+      "kind": "descent",
+      "cutoff_exponent": 1459,
+      "exit_depth": 4537,
+      "odd_steps": 2241
+    },
+    {
+      "h": 385,
+      "kind": "descent",
+      "cutoff_exponent": 1463,
+      "exit_depth": 5237,
+      "odd_steps": 2681
+    },
+    {
+      "h": 386,
+      "kind": "descent",
+      "cutoff_exponent": 1467,
+      "exit_depth": 5228,
+      "odd_steps": 2674
+    },
+    {
+      "h": 387,
+      "kind": "descent",
+      "cutoff_exponent": 1470,
+      "exit_depth": 5211,
+      "odd_steps": 2661
+    },
+    {
+      "h": 388,
+      "kind": "descent",
+      "cutoff_exponent": 1474,
+      "exit_depth": 5201,
+      "odd_steps": 2653
+    },
+    {
+      "h": 389,
+      "kind": "descent",
+      "cutoff_exponent": 1478,
+      "exit_depth": 5190,
+      "odd_steps": 2645
+    },
+    {
+      "h": 390,
+      "kind": "descent",
+      "cutoff_exponent": 1482,
+      "exit_depth": 5115,
+      "odd_steps": 2596
+    },
+    {
+      "h": 391,
+      "kind": "descent",
+      "cutoff_exponent": 1485,
+      "exit_depth": 5101,
+      "odd_steps": 2585
+    },
+    {
+      "h": 392,
+      "kind": "descent",
+      "cutoff_exponent": 1489,
+      "exit_depth": 4777,
+      "odd_steps": 2379
+    },
+    {
+      "h": 393,
+      "kind": "descent",
+      "cutoff_exponent": 1493,
+      "exit_depth": 4767,
+      "odd_steps": 2371
+    },
+    {
+      "h": 394,
+      "kind": "descent",
+      "cutoff_exponent": 1497,
+      "exit_depth": 4748,
+      "odd_steps": 2358
+    },
+    {
+      "h": 395,
+      "kind": "descent",
+      "cutoff_exponent": 1501,
+      "exit_depth": 5126,
+      "odd_steps": 2595
+    },
+    {
+      "h": 396,
+      "kind": "descent",
+      "cutoff_exponent": 1504,
+      "exit_depth": 5080,
+      "odd_steps": 2564
+    },
+    {
+      "h": 397,
+      "kind": "descent",
+      "cutoff_exponent": 1508,
+      "exit_depth": 5072,
+      "odd_steps": 2557
+    },
+    {
+      "h": 398,
+      "kind": "descent",
+      "cutoff_exponent": 1512,
+      "exit_depth": 5060,
+      "odd_steps": 2548
+    },
+    {
+      "h": 399,
+      "kind": "descent",
+      "cutoff_exponent": 1516,
+      "exit_depth": 5045,
+      "odd_steps": 2537
+    },
+    {
+      "h": 400,
+      "kind": "descent",
+      "cutoff_exponent": 1520,
+      "exit_depth": 4782,
+      "odd_steps": 2370
+    },
+    {
+      "h": 401,
+      "kind": "descent",
+      "cutoff_exponent": 1523,
+      "exit_depth": 4738,
+      "odd_steps": 2340
+    },
+    {
+      "h": 402,
+      "kind": "descent",
+      "cutoff_exponent": 1527,
+      "exit_depth": 4734,
+      "odd_steps": 2336
+    },
+    {
+      "h": 403,
+      "kind": "descent",
+      "cutoff_exponent": 1531,
+      "exit_depth": 4719,
+      "odd_steps": 2325
+    },
+    {
+      "h": 404,
+      "kind": "descent",
+      "cutoff_exponent": 1535,
+      "exit_depth": 4709,
+      "odd_steps": 2317
+    },
+    {
+      "h": 405,
+      "kind": "descent",
+      "cutoff_exponent": 1538,
+      "exit_depth": 4706,
+      "odd_steps": 2313
+    },
+    {
+      "h": 406,
+      "kind": "descent",
+      "cutoff_exponent": 1542,
+      "exit_depth": 4679,
+      "odd_steps": 2295
+    },
+    {
+      "h": 407,
+      "kind": "descent",
+      "cutoff_exponent": 1546,
+      "exit_depth": 4653,
+      "odd_steps": 2277
+    },
+    {
+      "h": 408,
+      "kind": "descent",
+      "cutoff_exponent": 1550,
+      "exit_depth": 4649,
+      "odd_steps": 2273
+    },
+    {
+      "h": 409,
+      "kind": "descent",
+      "cutoff_exponent": 1554,
+      "exit_depth": 5298,
+      "odd_steps": 2681
+    },
+    {
+      "h": 410,
+      "kind": "descent",
+      "cutoff_exponent": 1557,
+      "exit_depth": 5295,
+      "odd_steps": 2677
+    },
+    {
+      "h": 411,
+      "kind": "descent",
+      "cutoff_exponent": 1561,
+      "exit_depth": 5282,
+      "odd_steps": 2667
+    },
+    {
+      "h": 412,
+      "kind": "descent",
+      "cutoff_exponent": 1565,
+      "exit_depth": 5271,
+      "odd_steps": 2659
+    },
+    {
+      "h": 413,
+      "kind": "descent",
+      "cutoff_exponent": 1569,
+      "exit_depth": 5267,
+      "odd_steps": 2655
+    },
+    {
+      "h": 414,
+      "kind": "descent",
+      "cutoff_exponent": 1573,
+      "exit_depth": 5244,
+      "odd_steps": 2639
+    },
+    {
+      "h": 415,
+      "kind": "descent",
+      "cutoff_exponent": 1576,
+      "exit_depth": 5237,
+      "odd_steps": 2632
+    },
+    {
+      "h": 416,
+      "kind": "descent",
+      "cutoff_exponent": 1580,
+      "exit_depth": 5607,
+      "odd_steps": 2864
+    },
+    {
+      "h": 417,
+      "kind": "descent",
+      "cutoff_exponent": 1584,
+      "exit_depth": 5211,
+      "odd_steps": 2613
+    },
+    {
+      "h": 418,
+      "kind": "descent",
+      "cutoff_exponent": 1588,
+      "exit_depth": 5199,
+      "odd_steps": 2604
+    },
+    {
+      "h": 419,
+      "kind": "descent",
+      "cutoff_exponent": 1591,
+      "exit_depth": 5196,
+      "odd_steps": 2600
+    },
+    {
+      "h": 420,
+      "kind": "descent",
+      "cutoff_exponent": 1595,
+      "exit_depth": 5137,
+      "odd_steps": 2561
+    },
+    {
+      "h": 421,
+      "kind": "descent",
+      "cutoff_exponent": 1599,
+      "exit_depth": 5128,
+      "odd_steps": 2554
+    },
+    {
+      "h": 422,
+      "kind": "descent",
+      "cutoff_exponent": 1603,
+      "exit_depth": 5111,
+      "odd_steps": 2542
+    },
+    {
+      "h": 423,
+      "kind": "descent",
+      "cutoff_exponent": 1607,
+      "exit_depth": 5107,
+      "odd_steps": 2538
+    },
+    {
+      "h": 424,
+      "kind": "descent",
+      "cutoff_exponent": 1610,
+      "exit_depth": 5103,
+      "odd_steps": 2533
+    },
+    {
+      "h": 425,
+      "kind": "descent",
+      "cutoff_exponent": 1614,
+      "exit_depth": 5506,
+      "odd_steps": 2786
+    },
+    {
+      "h": 426,
+      "kind": "descent",
+      "cutoff_exponent": 1618,
+      "exit_depth": 5082,
+      "odd_steps": 2517
+    },
+    {
+      "h": 427,
+      "kind": "descent",
+      "cutoff_exponent": 1622,
+      "exit_depth": 5367,
+      "odd_steps": 2695
+    },
+    {
+      "h": 428,
+      "kind": "descent",
+      "cutoff_exponent": 1626,
+      "exit_depth": 5052,
+      "odd_steps": 2495
+    },
+    {
+      "h": 429,
+      "kind": "descent",
+      "cutoff_exponent": 1629,
+      "exit_depth": 5036,
+      "odd_steps": 2483
+    },
+    {
+      "h": 430,
+      "kind": "descent",
+      "cutoff_exponent": 1633,
+      "exit_depth": 5341,
+      "odd_steps": 2674
+    },
+    {
+      "h": 431,
+      "kind": "descent",
+      "cutoff_exponent": 1637,
+      "exit_depth": 5480,
+      "odd_steps": 2760
+    },
+    {
+      "h": 432,
+      "kind": "descent",
+      "cutoff_exponent": 1641,
+      "exit_depth": 5447,
+      "odd_steps": 2738
+    },
+    {
+      "h": 433,
+      "kind": "descent",
+      "cutoff_exponent": 1644,
+      "exit_depth": 5311,
+      "odd_steps": 2650
+    },
+    {
+      "h": 434,
+      "kind": "descent",
+      "cutoff_exponent": 1648,
+      "exit_depth": 5391,
+      "odd_steps": 2699
+    },
+    {
+      "h": 435,
+      "kind": "descent",
+      "cutoff_exponent": 1652,
+      "exit_depth": 5273,
+      "odd_steps": 2623
+    },
+    {
+      "h": 436,
+      "kind": "descent",
+      "cutoff_exponent": 1656,
+      "exit_depth": 5363,
+      "odd_steps": 2678
+    },
+    {
+      "h": 437,
+      "kind": "descent",
+      "cutoff_exponent": 1660,
+      "exit_depth": 5357,
+      "odd_steps": 2673
+    },
+    {
+      "h": 438,
+      "kind": "descent",
+      "cutoff_exponent": 1663,
+      "exit_depth": 5354,
+      "odd_steps": 2669
+    },
+    {
+      "h": 439,
+      "kind": "descent",
+      "cutoff_exponent": 1667,
+      "exit_depth": 5236,
+      "odd_steps": 2593
+    },
+    {
+      "h": 440,
+      "kind": "descent",
+      "cutoff_exponent": 1671,
+      "exit_depth": 5478,
+      "odd_steps": 2744
+    },
+    {
+      "h": 441,
+      "kind": "descent",
+      "cutoff_exponent": 1675,
+      "exit_depth": 5450,
+      "odd_steps": 2725
+    },
+    {
+      "h": 442,
+      "kind": "descent",
+      "cutoff_exponent": 1679,
+      "exit_depth": 5444,
+      "odd_steps": 2720
+    },
+    {
+      "h": 443,
+      "kind": "descent",
+      "cutoff_exponent": 1682,
+      "exit_depth": 5435,
+      "odd_steps": 2712
+    },
+    {
+      "h": 444,
+      "kind": "descent",
+      "cutoff_exponent": 1686,
+      "exit_depth": 5225,
+      "odd_steps": 2578
+    },
+    {
+      "h": 445,
+      "kind": "descent",
+      "cutoff_exponent": 1690,
+      "exit_depth": 5210,
+      "odd_steps": 2567
+    },
+    {
+      "h": 446,
+      "kind": "descent",
+      "cutoff_exponent": 1694,
+      "exit_depth": 6120,
+      "odd_steps": 3140
+    },
+    {
+      "h": 447,
+      "kind": "descent",
+      "cutoff_exponent": 1697,
+      "exit_depth": 5198,
+      "odd_steps": 2556
+    },
+    {
+      "h": 448,
+      "kind": "descent",
+      "cutoff_exponent": 1701,
+      "exit_depth": 5188,
+      "odd_steps": 2548
+    },
+    {
+      "h": 449,
+      "kind": "descent",
+      "cutoff_exponent": 1705,
+      "exit_depth": 5136,
+      "odd_steps": 2514
+    },
+    {
+      "h": 450,
+      "kind": "descent",
+      "cutoff_exponent": 1709,
+      "exit_depth": 6067,
+      "odd_steps": 3100
+    },
+    {
+      "h": 451,
+      "kind": "descent",
+      "cutoff_exponent": 1713,
+      "exit_depth": 5112,
+      "odd_steps": 2496
+    },
+    {
+      "h": 452,
+      "kind": "descent",
+      "cutoff_exponent": 1716,
+      "exit_depth": 6059,
+      "odd_steps": 3091
+    },
+    {
+      "h": 453,
+      "kind": "descent",
+      "cutoff_exponent": 1720,
+      "exit_depth": 5286,
+      "odd_steps": 2602
+    },
+    {
+      "h": 454,
+      "kind": "descent",
+      "cutoff_exponent": 1724,
+      "exit_depth": 6005,
+      "odd_steps": 3054
+    },
+    {
+      "h": 455,
+      "kind": "descent",
+      "cutoff_exponent": 1728,
+      "exit_depth": 5991,
+      "odd_steps": 3044
+    },
+    {
+      "h": 456,
+      "kind": "descent",
+      "cutoff_exponent": 1732,
+      "exit_depth": 5979,
+      "odd_steps": 3035
+    },
+    {
+      "h": 457,
+      "kind": "descent",
+      "cutoff_exponent": 1735,
+      "exit_depth": 5238,
+      "odd_steps": 2565
+    },
+    {
+      "h": 458,
+      "kind": "descent",
+      "cutoff_exponent": 1739,
+      "exit_depth": 5958,
+      "odd_steps": 3018
+    },
+    {
+      "h": 459,
+      "kind": "descent",
+      "cutoff_exponent": 1743,
+      "exit_depth": 5914,
+      "odd_steps": 2989
+    },
+    {
+      "h": 460,
+      "kind": "descent",
+      "cutoff_exponent": 1747,
+      "exit_depth": 5850,
+      "odd_steps": 2947
+    },
+    {
+      "h": 461,
+      "kind": "descent",
+      "cutoff_exponent": 1750,
+      "exit_depth": 5836,
+      "odd_steps": 2936
+    },
+    {
+      "h": 462,
+      "kind": "descent",
+      "cutoff_exponent": 1754,
+      "exit_depth": 5796,
+      "odd_steps": 2909
+    },
+    {
+      "h": 463,
+      "kind": "descent",
+      "cutoff_exponent": 1758,
+      "exit_depth": 5773,
+      "odd_steps": 2893
+    },
+    {
+      "h": 464,
+      "kind": "descent",
+      "cutoff_exponent": 1762,
+      "exit_depth": 5767,
+      "odd_steps": 2888
+    },
+    {
+      "h": 465,
+      "kind": "descent",
+      "cutoff_exponent": 1766,
+      "exit_depth": 5752,
+      "odd_steps": 2877
+    },
+    {
+      "h": 466,
+      "kind": "descent",
+      "cutoff_exponent": 1769,
+      "exit_depth": 5744,
+      "odd_steps": 2870
+    },
+    {
+      "h": 467,
+      "kind": "descent",
+      "cutoff_exponent": 1773,
+      "exit_depth": 5732,
+      "odd_steps": 2861
+    },
+    {
+      "h": 468,
+      "kind": "descent",
+      "cutoff_exponent": 1777,
+      "exit_depth": 5724,
+      "odd_steps": 2854
+    },
+    {
+      "h": 469,
+      "kind": "descent",
+      "cutoff_exponent": 1781,
+      "exit_depth": 5718,
+      "odd_steps": 2849
+    },
+    {
+      "h": 470,
+      "kind": "descent",
+      "cutoff_exponent": 1785,
+      "exit_depth": 5663,
+      "odd_steps": 2813
+    },
+    {
+      "h": 471,
+      "kind": "descent",
+      "cutoff_exponent": 1788,
+      "exit_depth": 5654,
+      "odd_steps": 2805
+    },
+    {
+      "h": 472,
+      "kind": "descent",
+      "cutoff_exponent": 1792,
+      "exit_depth": 5650,
+      "odd_steps": 2801
+    },
+    {
+      "h": 473,
+      "kind": "descent",
+      "cutoff_exponent": 1796,
+      "exit_depth": 5628,
+      "odd_steps": 2786
+    },
+    {
+      "h": 474,
+      "kind": "descent",
+      "cutoff_exponent": 1800,
+      "exit_depth": 6236,
+      "odd_steps": 3168
+    },
+    {
+      "h": 475,
+      "kind": "descent",
+      "cutoff_exponent": 1803,
+      "exit_depth": 6219,
+      "odd_steps": 3155
+    },
+    {
+      "h": 476,
+      "kind": "descent",
+      "cutoff_exponent": 1807,
+      "exit_depth": 5579,
+      "odd_steps": 2750
+    },
+    {
+      "h": 477,
+      "kind": "descent",
+      "cutoff_exponent": 1811,
+      "exit_depth": 6181,
+      "odd_steps": 3128
+    },
+    {
+      "h": 478,
+      "kind": "descent",
+      "cutoff_exponent": 1815,
+      "exit_depth": 6153,
+      "odd_steps": 3109
+    },
+    {
+      "h": 479,
+      "kind": "descent",
+      "cutoff_exponent": 1819,
+      "exit_depth": 6117,
+      "odd_steps": 3085
+    },
+    {
+      "h": 480,
+      "kind": "descent",
+      "cutoff_exponent": 1822,
+      "exit_depth": 5522,
+      "odd_steps": 2707
+    },
+    {
+      "h": 481,
+      "kind": "descent",
+      "cutoff_exponent": 1826,
+      "exit_depth": 5765,
+      "odd_steps": 2859
+    },
+    {
+      "h": 482,
+      "kind": "descent",
+      "cutoff_exponent": 1830,
+      "exit_depth": 6073,
+      "odd_steps": 3052
+    },
+    {
+      "h": 483,
+      "kind": "descent",
+      "cutoff_exponent": 1834,
+      "exit_depth": 6037,
+      "odd_steps": 3028
+    },
+    {
+      "h": 484,
+      "kind": "descent",
+      "cutoff_exponent": 1838,
+      "exit_depth": 5954,
+      "odd_steps": 2974
+    },
+    {
+      "h": 485,
+      "kind": "descent",
+      "cutoff_exponent": 1841,
+      "exit_depth": 5959,
+      "odd_steps": 2975
+    },
+    {
+      "h": 486,
+      "kind": "descent",
+      "cutoff_exponent": 1845,
+      "exit_depth": 5692,
+      "odd_steps": 2805
+    },
+    {
+      "h": 487,
+      "kind": "descent",
+      "cutoff_exponent": 1849,
+      "exit_depth": 6268,
+      "odd_steps": 3167
+    },
+    {
+      "h": 488,
+      "kind": "descent",
+      "cutoff_exponent": 1853,
+      "exit_depth": 5933,
+      "odd_steps": 2954
+    },
+    {
+      "h": 489,
+      "kind": "descent",
+      "cutoff_exponent": 1856,
+      "exit_depth": 5927,
+      "odd_steps": 2948
+    },
+    {
+      "h": 490,
+      "kind": "descent",
+      "cutoff_exponent": 1860,
+      "exit_depth": 6232,
+      "odd_steps": 3139
+    },
+    {
+      "h": 491,
+      "kind": "descent",
+      "cutoff_exponent": 1864,
+      "exit_depth": 5900,
+      "odd_steps": 2928
+    },
+    {
+      "h": 492,
+      "kind": "descent",
+      "cutoff_exponent": 1868,
+      "exit_depth": 5892,
+      "odd_steps": 2922
+    },
+    {
+      "h": 493,
+      "kind": "descent",
+      "cutoff_exponent": 1872,
+      "exit_depth": 5869,
+      "odd_steps": 2906
+    },
+    {
+      "h": 494,
+      "kind": "descent",
+      "cutoff_exponent": 1875,
+      "exit_depth": 5855,
+      "odd_steps": 2895
+    },
+    {
+      "h": 495,
+      "kind": "descent",
+      "cutoff_exponent": 1879,
+      "exit_depth": 5763,
+      "odd_steps": 2835
+    },
+    {
+      "h": 496,
+      "kind": "descent",
+      "cutoff_exponent": 1883,
+      "exit_depth": 5755,
+      "odd_steps": 2829
+    },
+    {
+      "h": 497,
+      "kind": "descent",
+      "cutoff_exponent": 1887,
+      "exit_depth": 6119,
+      "odd_steps": 3057
+    },
+    {
+      "h": 498,
+      "kind": "descent",
+      "cutoff_exponent": 1891,
+      "exit_depth": 6096,
+      "odd_steps": 3041
+    },
+    {
+      "h": 499,
+      "kind": "descent",
+      "cutoff_exponent": 1894,
+      "exit_depth": 6088,
+      "odd_steps": 3034
+    },
+    {
+      "h": 500,
+      "kind": "descent",
+      "cutoff_exponent": 1898,
+      "exit_depth": 6073,
+      "odd_steps": 3023
+    },
+    {
+      "h": 501,
+      "kind": "descent",
+      "cutoff_exponent": 1902,
+      "exit_depth": 6058,
+      "odd_steps": 3012
+    },
+    {
+      "h": 502,
+      "kind": "descent",
+      "cutoff_exponent": 1906,
+      "exit_depth": 6038,
+      "odd_steps": 2998
+    },
+    {
+      "h": 503,
+      "kind": "descent",
+      "cutoff_exponent": 1909,
+      "exit_depth": 6031,
+      "odd_steps": 2991
+    },
+    {
+      "h": 504,
+      "kind": "descent",
+      "cutoff_exponent": 1913,
+      "exit_depth": 5968,
+      "odd_steps": 2950
+    },
+    {
+      "h": 505,
+      "kind": "descent",
+      "cutoff_exponent": 1917,
+      "exit_depth": 5958,
+      "odd_steps": 2942
+    },
+    {
+      "h": 506,
+      "kind": "descent",
+      "cutoff_exponent": 1921,
+      "exit_depth": 5930,
+      "odd_steps": 2923
+    },
+    {
+      "h": 507,
+      "kind": "descent",
+      "cutoff_exponent": 1925,
+      "exit_depth": 5913,
+      "odd_steps": 2911
+    },
+    {
+      "h": 508,
+      "kind": "descent",
+      "cutoff_exponent": 1928,
+      "exit_depth": 5904,
+      "odd_steps": 2903
+    },
+    {
+      "h": 509,
+      "kind": "descent",
+      "cutoff_exponent": 1932,
+      "exit_depth": 5871,
+      "odd_steps": 2881
+    },
+    {
+      "h": 510,
+      "kind": "descent",
+      "cutoff_exponent": 1936,
+      "exit_depth": 6189,
+      "odd_steps": 3080
+    },
+    {
+      "h": 511,
+      "kind": "descent",
+      "cutoff_exponent": 1940,
+      "exit_depth": 6150,
+      "odd_steps": 3054
+    },
+    {
+      "h": 512,
+      "kind": "descent",
+      "cutoff_exponent": 1944,
+      "exit_depth": 6143,
+      "odd_steps": 3048
+    }
+  ]
+}
