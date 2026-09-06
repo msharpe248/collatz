@@ -79,4 +79,128 @@ theorem reaches_one_of_two_mod_nine
   obtain ⟨t, ht⟩ := h (terras_iter s n) (terras_iter_pos s n hn) hs
   exact ⟨s+t, by simpa only [terras_iter_add] using ht⟩
 
+/-- Remaining even-step allowance before reaching two modulo nine. -/
+private def residueHeight (n : ℕ) : ℕ :=
+  if n % 9 = 1 then 5 else if n % 9 = 5 then 4 else
+  if n % 9 = 7 then 3 else if n % 9 = 8 then 2 else
+  if n % 9 = 4 then 1 else 0
+
+set_option maxHeartbeats 1600000 in
+private theorem residueHeight_step {n : ℕ} (hn : n % 3 ≠ 0)
+    (h2 : n % 9 ≠ 2) :
+    (if n % 2 = 0 then 1 else 0) + residueHeight (terras n) ≤ residueHeight n := by
+  have hr := Nat.mod_lt n (by omega : 0 < 9)
+  have hs := Nat.mod_lt (terras n) (by omega : 0 < 9)
+  interval_cases hnr : n % 9 <;> interval_cases hns : terras n % 9 <;>
+    rcases residue_edge n with ⟨he, heq⟩ | ⟨he, heq⟩ <;>
+    simp [residueHeight, hnr, hns, he] <;> omega
+
+private theorem even_steps_before_hit (t : ℕ) : ∀ n, n % 3 ≠ 0 →
+    (∀ s < t, terras_iter s n % 9 ≠ 2) →
+    t + residueHeight (terras_iter t n) ≤ oddSteps t n + residueHeight n := by
+  induction t with
+  | zero => intro n hn ha; simp [terras_iter, oddSteps]
+  | succ t ih =>
+    intro n hn ha
+    have h2 := ha 0 (by omega)
+    change n % 9 ≠ 2 at h2
+    have hedge := residueHeight_step hn h2
+    have htail : ∀ s < t, terras_iter s (terras n) % 9 ≠ 2 := by
+      intro s hs
+      exact ha (s+1) (by omega)
+    have hh := ih (terras n) (terras_mod_three_ne_zero hn) htail
+    rcases Nat.mod_two_eq_zero_or_one n with he | ho
+    · rw [oddSteps_succ_even t n he]
+      simp only [he, if_pos] at hedge
+      change t+1 + residueHeight (terras_iter t (terras n)) ≤ _
+      omega
+    · rw [oddSteps_succ_odd t n ho]
+      simp only [ho, Nat.one_ne_zero, if_false, zero_add] at hedge
+      change t+1 + residueHeight (terras_iter t (terras n)) ≤ _
+      omega
+
+/-- At most six even steps occur before the next visit to two modulo nine.
+The total length and number of odd steps need not be bounded. -/
+theorem even_steps_between_two_mod_nine {n t : ℕ} (hn : n % 9 = 2)
+    (ha : ∀ s, 0 < s → s < t → terras_iter s n % 9 ≠ 2) :
+    t ≤ oddSteps t n + 6 := by
+  cases t with
+  | zero => omega
+  | succ t =>
+    have h3 : n % 3 ≠ 0 := by omega
+    have htail : ∀ s < t, terras_iter s (terras n) % 9 ≠ 2 := by
+      intro s hs
+      exact ha (s+1) (by omega) (by omega)
+    have hh := even_steps_before_hit t (terras n) (terras_mod_three_ne_zero h3) htail
+    have hb : residueHeight (terras n) ≤ 5 := by
+      unfold residueHeight
+      split_ifs <;> omega
+    rcases Nat.mod_two_eq_zero_or_one n with he | ho
+    · rw [oddSteps_succ_even t n he]; omega
+    · rw [oddSteps_succ_odd t n ho]; omega
+
+private theorem eleven_odds_dominate_six_evens (j : ℕ) (hj : 11 ≤ j) :
+    64 * 2^j < 3^j := by
+  induction j, hj using Nat.le_induction with
+  | base => norm_num
+  | succ j hj ih => simp only [pow_succ]; omega
+
+/-- A contracting segment before the next residue-two visit has length
+at most sixteen. In particular this applies to a contracting first return. -/
+theorem contracting_two_mod_nine_segment_le_sixteen {n t : ℕ}
+    (hn : n % 9 = 2)
+    (ha : ∀ s, 0 < s → s < t → terras_iter s n % 9 ≠ 2)
+    (hc : 3^oddSteps t n < 2^t) : t ≤ 16 := by
+  have hb := even_steps_between_two_mod_nine hn ha
+  have hj : oddSteps t n < 11 := by
+    by_contra hh
+    have hg := eleven_odds_dominate_six_evens (oddSteps t n) (by omega)
+    have hp : 2^t ≤ 2^(oddSteps t n + 6) := Nat.pow_le_pow_right (by omega) hb
+    rw [pow_add] at hp
+    norm_num at hp
+    omega
+  omega
+
+/-- The sixteen-step upper bound is attained by an actual first return. -/
+theorem contracting_return_sixteen_sharp :
+    147440 % 9 = 2 ∧
+    (∀ s : Fin 16, 0 < s.val → terras_iter s.val 147440 % 9 ≠ 2) ∧
+    terras_iter 16 147440 = 132860 ∧ 132860 % 9 = 2 ∧
+    oddSteps 16 147440 = 10 ∧ 3^10 < (2:ℕ)^16 := by decide
+
+set_option maxRecDepth 100000 in
+private theorem return_growth_table : ∀ t j : Fin 17, j.val ≤ t.val →
+    3^j.val < (2:ℕ)^t.val →
+    3^j.val * (573 + 2^(t.val-j.val)) < (2:ℕ)^t.val * 574 := by decide
+
+set_option maxRecDepth 100000 in
+set_option maxHeartbeats 0 in
+private theorem small_return_table : ∀ n : Fin 573, n.val % 9 = 2 → 2 < n.val →
+    ∀ t : Fin 17,
+    (∀ s : Fin 17, 0 < s.val → s.val < t.val → terras_iter s.val n.val % 9 ≠ 2) →
+    3^oddSteps t.val n.val < (2:ℕ)^t.val → terras_iter t.val n.val < n.val := by decide
+
+/-- Every coefficient-contracting segment before the next residue-two visit
+strictly descends for seeds above two. This includes every contracting first
+return and has no seed-height or time cutoff in its hypotheses. -/
+theorem contracting_two_mod_nine_segment_descends {n t : ℕ}
+    (hn : n % 9 = 2) (hn2 : 2 < n)
+    (ha : ∀ s, 0 < s → s < t → terras_iter s n % 9 ≠ 2)
+    (hc : 3^oddSteps t n < 2^t) : terras_iter t n < n := by
+  have ht := contracting_two_mod_nine_segment_le_sixteen hn ha hc
+  by_cases hsmall : n < 573
+  · exact small_return_table ⟨n, hsmall⟩ hn hn2 ⟨t, by omega⟩
+      (fun s hs hst => ha s.val hs hst) hc
+  · have hj := oddSteps_le t n
+    have hb := return_growth_table ⟨t, by omega⟩ ⟨oddSteps t n, by omega⟩ hj hc
+    dsimp at hb
+    have hg := terras_growth_bound t n
+    by_contra hnd
+    have hx : n ≤ terras_iter t n := by omega
+    have hn573 : 573 ≤ n := by omega
+    have hs := Nat.sub_add_cancel hn573
+    have hm := Nat.mul_le_mul_left (n-573) hc.le
+    have hxmul := Nat.mul_le_mul_left (2^t) hx
+    nlinarith
+
 end Collatz

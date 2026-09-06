@@ -1,5 +1,5 @@
 \documentclass[10pt]{article}
-\usepackage[margin=0.9in]{geometry}
+\usepackage[margin=0.75in]{geometry}
 \usepackage{amsmath,microtype}
 \title{Guide: The Verified Residue-Coverage Tool}
 \author{Collatz proof project}
@@ -30,6 +30,21 @@ a lower bound on the time.
 The theorem \texttt{reaches\_one\_of\_two\_mod\_nine} reduces full
 convergence to convergence for positive seeds in that progression.
 Its convergence hypothesis still needs a proof.
+
+\section*{What consecutive visits tell us}
+Between consecutive visits to the progression, at most six steps are even.
+The number of odd steps can still be arbitrarily large. If the accumulated
+coefficient is below one, however, the return takes at most sixteen steps.
+This bound is attained: $147440$ next visits at $132860$ after sixteen steps.
+Lean also proves that every such contracting return from a seed above two
+has an endpoint smaller than its starting value. The proof combines a
+global arithmetic bound with a kernel-checked finite table, so it applies
+to every seed, not just those tested numerically.
+
+Growing returns exist too: eleven next visits at twenty. We have not
+proved that every orbit eventually takes a contracting return. The new
+theorem identifies the possible contracting branches of this return map;
+it does not establish convergence of that map.
 
 \section*{The missing connection}
 Earlier work proves that every hypothetical unbounded orbit contains

@@ -17,6 +17,10 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.ResidueCoverage", "Collatz.contracting_two_mod_nine_segment_descends", "Every coefficient-contracting segment before the next residue-two visit strictly descends for every seed above two"),
+    ("Collatz.ResidueCoverage", "Collatz.even_steps_between_two_mod_nine", "At most six even steps before the next residue-two visit; unbounded odd runs allowed"),
+    ("Collatz.ResidueCoverage", "Collatz.contracting_two_mod_nine_segment_le_sixteen", "Every coefficient-contracting segment before the next residue-two visit has length at most sixteen"),
+    ("Collatz.ResidueCoverage", "Collatz.contracting_return_sixteen_sharp", "Kernel-checked first return from 147440 to 132860 attains the sixteen-step contraction bound"),
     ("Collatz.IdealBarrier", "Collatz.exists_even_value", "Every natural orbit contains an even value"),
     ("Collatz.ResidueCoverage", "Collatz.exists_two_mod_nine", "Every positive natural orbit visits two modulo nine; Monks et al. Corollary 5.8"),
     ("Collatz.ResidueCoverage", "Collatz.arbitrarily_late_two_mod_nine", "Visits to two modulo nine occur beyond any prescribed time"),

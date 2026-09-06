@@ -8,6 +8,7 @@ belong to an excluded family.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Contracting residue returns | `even_steps_between_two_mod_nine`, `contracting_two_mod_nine_segment_descends` | At most six even steps between visits; contracting first returns have sharp length bound sixteen and strictly descend for every seed above two; eventual contraction remains open |
 | Forward residue coverage | `exists_two_mod_nine`, `arbitrarily_late_two_mod_nine` | Every positive orbit visits two modulo nine arbitrarily late; formalization of Monks et al., no noncontraction property at the selected visit |
 | Inverse-search obstruction | `bounded_odd_inverse_obstruction`, `arbitrarily_large_inverse_obstructions` | Every fixed odd-step budget leaves the class 1 modulo 3^K without a noncontracting predecessor segment; total length unrestricted, no noncontracting target asserted |
 | Noncontracting tails | `unbounded_iff_noncontracting_tail`, `all_orbits_bounded_iff_all_contract` | Exact reduction of nondivergence to universal coefficient contraction; arbitrarily late noncontracting tails cover every hypothetical unbounded positive orbit |
@@ -57,7 +58,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 148 declarations using only standard
+The selected theorem audit now covers 152 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -596,3 +597,39 @@ not a mathematical priority claim or a proof of Collatz.
 
 The module build and expanded 148-declaration audit pass using only
 standard foundations. Both one-page PDFs were rendered and visually checked.
+
+
+## Contracting first returns have a sharp finite bound (2026-09-05)
+
+The next-return graph on two modulo nine does have growing branches:
+11 -> 17 -> 26 -> 13 -> 20. So return coverage alone is not descent.
+However `ResidueCoverage.lean` now proves at most six even steps occur
+before the next visit. A potential on the other allowed residues takes
+values H(1)=5, H(5)=4, H(7)=3, H(8)=2, H(4)=1. An even step lowers it
+by at least one; odd steps do not increase it. The first step accounts
+for the sixth possible even step. This permits arbitrarily long odd runs.
+
+If the coefficient contracts, j odd steps and t total steps satisfy
+3^j < 2^t and t <= j+6. Since 3^11 > 64*2^11 and the inequality persists
+for larger j, necessarily j <= 10 and t <= 16. The bound is attained by
+the actual first return from 147440 to 132860, with ten odd and six even
+steps, including a kernel check of all intermediate residues.
+
+More strongly, `contracting_two_mod_nine_segment_descends` proves that
+all such contracting segments strictly descend when n>2. For n>=573,
+the exact growth inequality and a finite arithmetic table through length
+sixteen prove descent. The remaining n<573 are checked by an ordinary
+Lean `decide` table using the actual avoidance and coefficient hypotheses.
+The final theorem has no seed-height or time cutoff in its assumptions.
+It applies even when the endpoint has not yet returned to residue two.
+The exceptional seed two has the contracting return 2 -> 1 -> 2.
+
+This controls contracting branches of the induced map, not whether an
+orbit eventually takes one or whether repeated growing returns are
+impossible. It does not close the noncontracting-tail selection gap.
+The paper and guide `paper/residue_coverage.*` and its companion are
+updated; no mathematical priority claim is made.
+
+Verification: the full selected build passes (7829 jobs); all 152 audited
+declarations use standard foundations only. The revised two-page paper
+and one-page guide were rendered and visually checked.
