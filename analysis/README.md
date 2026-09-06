@@ -7,6 +7,7 @@ reproducible byte-for-byte.
 
 | script | what it does | paper section |
 |---|---|---|
+| `exponent_return_search.py` | uniform smaller-exponent merges for terminal targets 3^k+1; finite coverage census | `EXPONENT_RETURN_CHECK.md` |
 | `source_witness_search.py` | rejects a bounded greedy affine-rank strategy and records unbounded source-at-one obligations | `SOURCE_WITNESS_CHECK.md` |
 | `affine_bridge_search.py` | symbolic auxiliary-orbit transfer certificates with strict decrease for every quotient; explicit depth and state limits | `../paper/affine_bridges.tex`, `AFFINE_TRANSFER_REASSESSMENT.md` |
 | `certificate_search.py` | Karp max-mean-cycle search for residue-class descent certificates over joint 2-adic/3-adic states; always blocked by the n ≡ −1 self-loop (the finite-resolution shadow of the no-go theorem) | §10.1 |
