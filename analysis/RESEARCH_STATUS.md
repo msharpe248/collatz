@@ -16,7 +16,7 @@ Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
 947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
 remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
 records five kernel-checked precision/count findings for a proposed literature
-input; the selected declaration audit now contains 235 entries. The new `BridgeGrowth`
+input; the selected declaration audit now contains 238 entries. The new `BridgeGrowth`
 bound rules out lowering cycle charge through arbitrary forward bridge
 interleavings and justifies pruning those states in the affine bridge search.
 `InverseCycleBridge` now verifies a signed 2 <- 47 -> 425 -> 2 excursion
@@ -1030,3 +1030,16 @@ cannot enlarge an exhaustive direct-merge census, by transitivity at
 the common depth. This is a written argument with exact Python tests,
 not a new Lean declaration. Seek a different terminal proof or additional
 transfer mechanism before formalizing more of these isolated returns.
+
+
+## Unequal-clock extension ruled out for the current cylinder slopes
+
+`AffineClock.lean` proves that a uniform ordinary-orbit equality between
+shared binary cylinders with initial slopes differing only by powers of
+three forces equal clocks and equal total odd exponents. This elementary
+restriction shows that an asynchronous version of the current exponent
+return search adds no certificates under the same affine assumptions.
+It does not exclude inverse/auxiliary operations, quotient-dependent
+parity descriptions, individual seed equalities, or initial slope ratios
+containing powers of two. See `AFFINE_CLOCK_CHECK.md`. The full Collatz
+convergence claim and the unresolved transfer premises remain open.

@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.AffineClock', 'Collatz.two_three_slope_injective', 'Independence of powers of two and three in equal cylinder slopes'),
+    ('Collatz.AffineClock', 'Collatz.uniform_cylinder_clock_rigidity', 'Equal affine endpoints over a shared binary cylinder force equal clocks and exponents'),
+    ('Collatz.AffineClock', 'Collatz.uniform_orbit_clock_rigidity', 'Uniform orbit merging of power-of-three slope cylinders cannot use different clocks'),
     ('Collatz.MersenneExit', 'Collatz.mersenne_exit_smaller', 'Strict decrease of the recursive transfer parameter on the Mersenne exponent progression'),
     ('Collatz.MersenneExit', 'Collatz.AffineTransfer.mersenne_exit', 'Smaller transfer premise proves A(2^k-1) for all k=1468+1536z; premise remains explicit'),
     ('Collatz.MersenneExit', 'Collatz.mersenne_exit_merge', 'Uniform twelve-step merge for the exit power parameter X=2995+4096Q'),

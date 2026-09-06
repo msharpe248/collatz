@@ -7,6 +7,7 @@ reproducible byte-for-byte.
 
 | script | what it does | paper section |
 |---|---|---|
+| `AFFINE_CLOCK_CHECK.md` | Lean-checked restriction: equal ordinary-orbit cylinders with power-of-three slope ratios force equal clocks | `../lean/Collatz/AffineClock.lean` |
 | `mersenne_exit_returns.py` | smaller-exponent pair returns add three conditional obligations but no closed coverage beyond the depth-20 direct merges | `MERSENNE_EXIT_RETURNS.md` |
 | `mersenne_exit_search.py` | symbolic exit merges after growing Mersenne prefixes; first infinite exponent progression formalized | `MERSENNE_EXIT_CHECK.md`, `../lean/Collatz/MersenneExit.lean` |
 | `mersenne_inverse_prefix.py` | exact prefix formulas explain a growing delay before the three-step inverse template can certify Mersenne parameters; not Lean-certified | `MERSENNE_INVERSE_PREFIX.md` |
