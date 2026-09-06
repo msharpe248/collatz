@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Ternary obstruction to inverse searches with a fixed odd-step budget | [inverse_barrier.pdf](inverse_barrier.pdf) | [inverse_barrier_guide.pdf](inverse_barrier_guide.pdf) |
 | Noncontracting tails and an exact reduction of nondivergence | [noncontracting_tails.pdf](noncontracting_tails.pdf) | [noncontracting_tails_guide.pdf](noncontracting_tails_guide.pdf) |
 | First-contraction seed bound and universal descent certificate through 65 steps | [first_contraction.pdf](first_contraction.pdf) | [first_contraction_guide.pdf](first_contraction_guide.pdf) |
 | Every unbounded positive orbit has summable reciprocals and bounded correction | [orbit_summability.pdf](orbit_summability.pdf) | [orbit_summability_guide.pdf](orbit_summability_guide.pdf) |

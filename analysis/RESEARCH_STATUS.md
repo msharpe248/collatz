@@ -8,6 +8,7 @@ belong to an excluded family.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Inverse-search obstruction | `bounded_odd_inverse_obstruction`, `arbitrarily_large_inverse_obstructions` | Every fixed odd-step budget leaves the class 1 modulo 3^K without a noncontracting predecessor segment; total length unrestricted, no noncontracting target asserted |
 | Noncontracting tails | `unbounded_iff_noncontracting_tail`, `all_orbits_bounded_iff_all_contract` | Exact reduction of nondivergence to universal coefficient contraction; arbitrarily late noncontracting tails cover every hypothetical unbounded positive orbit |
 | First contraction | `first_contraction_seed_bound`, `descent_of_contraction_le65`, `return_le65_reaches_one` | Sharper seed bound at any first contraction; every seed above one descends by a coefficient contraction within 65 steps; positive returns of length at most 65 reach one |
 | Universal correction coverage | `unbounded_orbit_reciprocal_summable`, `supercritical_iff_unbounded_orbit` | All unbounded positive natural orbits have summable reciprocals and bounded correction; no escape exclusion |
@@ -55,7 +56,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 139 declarations using only standard
+The selected theorem audit now covers 144 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -527,3 +528,39 @@ there is no current proof that every remaining residue has a smaller
 admissible predecessor. In particular, a residue reduction must preserve
 the full noncontraction property; merely finding a merging predecessor
 or an unbounded seed in an arithmetic progression would not suffice.
+
+## Fixed odd-step inverse coverage is obstructed (2026-09-05)
+
+`InverseBarrier.lean` proves the sharper canonical-residue endpoint bound
+`terras_iter t r < 3^(oddSteps t r)` for every `r < 2^t`. Binary residue
+lifting gives an intermediate endpoint below twice the ternary scale; the
+next even or odd step preserves the strict bound at its new odd count.
+This strengthens the factor-two bound previously sufficient for packing,
+without changing that earlier valid argument.
+
+For any positive-length segment with `2^t <= 3^j`, the endpoint cannot be
+one modulo `3^j`. Otherwise canonical reduction would give endpoint one;
+the exact affine identity forces the canonical seed to be one, and the
+strict cycle coefficient inequality contradicts noncontraction.
+
+Consequently if `y = 1 mod 3^K`, any segment ending at y with at most K odd
+steps must have a contracting final coefficient, however many even steps
+it contains. Thus no `NeverContracts` predecessor reaches y within that
+odd-step budget. The targets `1+3^(K+1)*(B+1)` provide arbitrarily large
+obstructions outside multiples of three. They are NOT asserted to satisfy
+`NeverContracts`, and their convergence is not decided by this theorem.
+
+This rules out uniform fixed-odd-budget predecessor coverage of this
+residue class as a standalone least-seed exclusion. It does not rule out
+target-dependent budgets or a separate exclusion of the remaining class.
+The explicit boundary example `3 -> 5 -> 8 -> 4` has two odd steps and
+coefficient 9/8, illustrating why a one-odd-step restriction cannot simply
+be dropped from the finite-segment conclusion. The theorem also requires
+positive total length, excluding identity segments.
+
+Five new targets bring the selected audit to 144, with standard foundations
+only; the Lean build passes. Paper and guide: `paper/inverse_barrier.*` and
+`paper/inverse_barrier_guide.*`. No priority claim. The previous plan to
+extend fixed-budget inverse residue coverage must account for this exact
+unresolved class. Full exclusion of positive noncontracting seeds and
+nontrivial cycles remains open.

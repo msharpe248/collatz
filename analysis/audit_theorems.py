@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.InverseBarrier", "Collatz.canonical_endpoint_lt_three_pow", "Canonical binary-residue endpoint lies strictly below the ternary odd-count scale"),
+    ("Collatz.InverseBarrier", "Collatz.noncontracting_endpoint_not_one_mod", "A positive-length segment with noncontracting final coefficient cannot end at one modulo its ternary scale"),
+    ("Collatz.InverseBarrier", "Collatz.bounded_odd_inverse_obstruction", "Targets one modulo 3^K force contraction for every predecessor segment with at most K odd steps, regardless of length"),
+    ("Collatz.InverseBarrier", "Collatz.no_noncontracting_predecessor_of_one_mod", "No NeverContracts predecessor reaches the obstructed target within the fixed odd-step budget"),
+    ("Collatz.InverseBarrier", "Collatz.arbitrarily_large_inverse_obstructions", "Arbitrarily large targets outside multiples of three obstruct every fixed odd-step budget; no noncontracting target claimed"),
     ("Collatz.NoncontractingTail", "Collatz.unbounded_has_noncontracting_tail", "Every unbounded positive orbit has a tail whose coefficients never contract"),
     ("Collatz.NoncontractingTail", "Collatz.NeverContracts.unbounded", "A positive seed with no coefficient contraction has an unbounded orbit"),
     ("Collatz.NoncontractingTail", "Collatz.unbounded_iff_noncontracting_tail", "Exact orbit-level equivalence between unboundedness and a noncontracting tail"),
