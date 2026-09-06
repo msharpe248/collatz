@@ -1,0 +1,17 @@
+{
+  "scope": "finite Python experiment; not a universal theorem",
+  "seed_limit_inclusive": 9000001,
+  "step_limit": 3000,
+  "tested_seeds": 999999,
+  "completed_seeds": 999999,
+  "censored_seeds": [],
+  "counterexamples": [],
+  "longest_first_sampled_contraction": {
+    "seed": 1689023,
+    "endpoint": 196274,
+    "time": 225,
+    "odd_steps": 140,
+    "visits": 45,
+    "descends": true
+  }
+}

@@ -203,4 +203,23 @@ theorem contracting_two_mod_nine_segment_descends {n t : ℕ}
     have hxmul := Nat.mul_le_mul_left (2^t) hx
     nlinarith
 
+set_option maxRecDepth 100000 in
+/-- Arbitrary later residue-two visits can be paradoxical. Thus the
+first-return avoidance hypothesis cannot simply be dropped. -/
+theorem later_two_mod_nine_visit_can_be_paradoxical :
+    470 % 9 = 2 ∧ terras_iter 46 470 = 479 ∧ 479 % 9 = 2 ∧
+    oddSteps 46 470 = 29 ∧ 3^29 < (2:ℕ)^46 ∧
+    terras_iter 2 470 = 353 ∧ 353 % 9 = 2 ∧ 353 < 470 := by decide
+
+set_option maxRecDepth 100000 in
+set_option maxHeartbeats 0 in
+/-- A long first sampled contraction. This is one finite witness, not a
+universal theorem about stopping at residue-two visits. -/
+theorem first_sampled_contraction_225 :
+    1689023 % 9 = 2 ∧
+    (∀ s : Fin 225, 0 < s.val → terras_iter s.val 1689023 % 9 = 2 →
+      (2:ℕ)^s.val ≤ 3^oddSteps s.val 1689023) ∧
+    terras_iter 225 1689023 = 196274 ∧ 196274 % 9 = 2 ∧
+    oddSteps 225 1689023 = 140 ∧ 3^140 < (2:ℕ)^225 ∧ 196274 < 1689023 := by decide
+
 end Collatz

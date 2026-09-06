@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.ResidueCoverage", "Collatz.later_two_mod_nine_visit_can_be_paradoxical", "Exact counterexample to dropping first-return avoidance: 470 reaches 479 at time 46 with contracting coefficient"),
+    ("Collatz.ResidueCoverage", "Collatz.first_sampled_contraction_225", "Exact individual first sampled contraction at time 225; no universal claim"),
     ("Collatz.ResidueCoverage", "Collatz.contracting_two_mod_nine_segment_descends", "Every coefficient-contracting segment before the next residue-two visit strictly descends for every seed above two"),
     ("Collatz.ResidueCoverage", "Collatz.even_steps_between_two_mod_nine", "At most six even steps before the next residue-two visit; unbounded odd runs allowed"),
     ("Collatz.ResidueCoverage", "Collatz.contracting_two_mod_nine_segment_le_sixteen", "Every coefficient-contracting segment before the next residue-two visit has length at most sixteen"),

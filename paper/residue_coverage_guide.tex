@@ -22,15 +22,6 @@ An even number with remainder eight moves to remainder four, so this
 would require only odd steps forever. Our existing Lean parity argument
 rules that out for natural starting values.
 
-\section*{How to use it in Lean}
-Import \texttt{Collatz.ResidueCoverage}.
-The theorem \texttt{exists\_two\_mod\_nine} supplies a hitting time.
-The theorem \texttt{arbitrarily\_late\_two\_mod\_nine} also accepts
-a lower bound on the time.
-The theorem \texttt{reaches\_one\_of\_two\_mod\_nine} reduces full
-convergence to convergence for positive seeds in that progression.
-Its convergence hypothesis still needs a proof.
-
 \section*{What consecutive visits tell us}
 Between consecutive visits to the progression, at most six steps are even.
 The number of odd steps can still be arbitrarily large. If the accumulated
@@ -46,14 +37,21 @@ proved that every orbit eventually takes a contracting return. The new
 theorem identifies the possible contracting branches of this return map;
 it does not establish convergence of that map.
 
+\section*{Why the first-return condition matters}
+At a later visit, $470$ reaches $479$ with a coefficient below one.
+Lean checks this counterexample to the unrestricted extension.
+It had already descended earlier. A separate finite scan tested the first
+cumulative contraction observed at a visit, across 999,999 starting seeds.
+All tested endpoints descended, with no seed hitting the 3000-step cap.
+The longest case took 225 steps. That single case is also checked in Lean;
+the full scan remains experimental evidence. Neither universal descent at
+this sampled stopping time nor its existence for all seeds is proved.
+
 \section*{The missing connection}
-Earlier work proves that every hypothetical unbounded orbit contains
-starting points whose multiplicative coefficients never fall below one.
-It also restricts the smallest such starting point.
-The residue-coverage theorem does not say its chosen visit has that
-coefficient property. Two separately guaranteed kinds of visits need
-not occur at the same time. A proof using both results must establish
-that extra connection or use a different invariant.
+Earlier work guarantees noncontracting starting points on hypothetical
+unbounded orbits. Residue coverage does not say those points are two
+modulo nine. These two kinds of visits have not been shown to coincide.
+The Collatz conjecture remains open.
 
 \section*{Verification}
 From \texttt{lean/}, run

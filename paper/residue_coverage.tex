@@ -84,6 +84,29 @@ Growing returns also occur, for example $11,17,26,13,20$.
 No statement here asserts that a given orbit eventually has a contracting
 first return or that a succession of growing returns is impossible.
 
+\section*{Multiple returns: a failed extension and an open test}
+The avoidance hypothesis cannot be discarded. Lean checks
+\[
+T^{46}(470)=479,\qquad j_{46}(470)=29,\qquad 3^{29}<2^{46},
+\]
+with both endpoints two modulo nine. An earlier visit is
+$T^2(470)=353<470$, so this does not refute descent at the \emph{first}
+cumulative coefficient contraction observed in the progression.
+
+We tested that latter condition for the 999,999 seeds
+$11,20,\ldots,8999993$, with a cap of 3000 steps per seed.
+Every tested seed reached a sampled contraction within the cap, and every
+such endpoint was smaller than its starting seed. The longest was
+$T^{225}(1689023)=196274$, with 140 odd steps and 45 positive-time visits.
+Lean separately checks that individual endpoint, its contracting
+coefficient, and noncontraction at every earlier residue-two visit.
+The million-scale scan itself is Python evidence, not a Lean theorem.
+The reproducible program and output are
+\texttt{analysis/residue\_return\_stopping.py} and its
+\texttt{\_results.json} companion. Descent at the first sampled contraction
+remains an unproved candidate statement. Its eventual existence also
+remains unproved for arbitrary seeds.
+
 \paragraph{Convergence reduction and remaining gap.}
 If every positive $n\equiv2\pmod9$ reaches one, then every positive seed
 reaches one by composition with the hitting time above. That premise is

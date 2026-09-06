@@ -58,7 +58,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 152 declarations using only standard
+The selected theorem audit now covers 154 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -633,3 +633,39 @@ updated; no mathematical priority claim is made.
 Verification: the full selected build passes (7829 jobs); all 152 audited
 declarations use standard foundations only. The revised two-page paper
 and one-page guide were rendered and visually checked.
+
+
+## Multiple-return test: unrestricted extension rejected (2026-09-05)
+
+The proposed extension of first-return descent to arbitrary later
+residue-two visits is false. `later_two_mod_nine_visit_can_be_paradoxical`
+checks T^46(470)=479, j=29, and 3^29<2^46, with both endpoints two modulo
+nine. The same proof checks the earlier visit T^2(470)=353<470. Thus this
+is not a counterexample to descent at the first cumulative coefficient
+contraction observed at a visit.
+
+`analysis/residue_return_stopping.py` tests that latter candidate, using
+exact integers and explicitly reporting time-censored seeds. The saved
+JSON covers all 999,999 seeds 11,20,...,8999993 with a 3000-step cap.
+All completed before the cap; all first sampled contracting endpoints
+were smaller. The longest was n=1689023, t=225, endpoint=196274, j=140,
+with 45 positive-time visits. `first_sampled_contraction_225` independently
+checks that individual witness and every earlier sampled noncontraction
+in Lean. The full scan is Python evidence, not a universal theorem.
+Boundary tests distinguish an exhausted cap from a completed stopping
+time and distinguish a later paradoxical visit from the first contraction.
+
+This leaves TWO separate unproved claims: descent at an arbitrary first
+sampled contraction, and existence of such a contraction for every seed.
+The previously proved sixteen-step first-return bound addresses neither
+claim across multiple returns; the 225-step witness makes that difference
+concrete. No convergence theorem or new universal hypothesis was added.
+The paper and guide were updated to keep these scopes explicit.
+
+Context: Rozier and Terracol study the distinction between coefficient
+and actual stopping in arXiv:2502.00948. The sampled-residue experiment
+here is not asserted to resolve their coefficient-stopping conjecture.
+
+Verification: 154 audited declarations use standard foundations only;
+the selected build and three experiment boundary tests pass. The updated
+two-page paper and one-page guide were rendered and visually checked.
