@@ -17,6 +17,10 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.SampledContraction", "Collatz.SampledNeverContracts.deficit", "No contraction at residue-two visits bounds every inverse coefficient by sixty-four"),
+    ("Collatz.SampledContraction", "Collatz.SampledNeverContracts.unbounded", "Failure of sampled contraction forces escape for positive seeds"),
+    ("Collatz.SampledContraction", "Collatz.unbounded_has_sampled_noncontracting_tail", "Every unbounded positive orbit has a residue-two tail with no contraction at subsequent residue-two visits"),
+    ("Collatz.SampledContraction", "Collatz.all_bounded_iff_sampled_contraction", "Universal sampled contraction on two modulo nine is equivalent to nondivergence; neither side proved"),
     ("Collatz.ResidueCoverage", "Collatz.later_two_mod_nine_visit_can_be_paradoxical", "Exact counterexample to dropping first-return avoidance: 470 reaches 479 at time 46 with contracting coefficient"),
     ("Collatz.ResidueCoverage", "Collatz.first_sampled_contraction_225", "Exact individual first sampled contraction at time 225; no universal claim"),
     ("Collatz.ResidueCoverage", "Collatz.contracting_two_mod_nine_segment_descends", "Every coefficient-contracting segment before the next residue-two visit strictly descends for every seed above two"),

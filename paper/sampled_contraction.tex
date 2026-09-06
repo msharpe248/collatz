@@ -1,0 +1,84 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\title{Sampled Coefficient Contraction and Nondivergence}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We prove in Lean that universal coefficient contraction observed only at
+visits to two modulo nine is equivalent to boundedness of every positive
+Collatz orbit. The proof selects inverse-coefficient maxima on the sampled
+visits and controls intervening coefficients by a factor of sixty-four.
+Neither equivalent statement is proved here. Nontrivial cycles are not
+excluded, and no mathematical priority claim is made.
+\end{abstract}
+Let $n_t=T^t(n)$ for the shortcut Collatz map, let $j_t(n)$ count odd
+steps, and write $C_t(n)=3^{j_t(n)}/2^t$.
+Call $n$ sampled-noncontracting if $n\equiv2\pmod9$ and
+$C_t(n)\geq1$ whenever $n_t\equiv2\pmod9$.
+
+\begin{theorem}
+Every sampled-noncontracting seed satisfies $C_t(n)\geq1/64$ at all times.
+Every positive sampled-noncontracting seed has an unbounded orbit.
+\end{theorem}
+\begin{proof}
+Fix a time $t$ and take the last residue-two visit $k\leq t$; time zero
+is such a visit. Our previous residue-height theorem bounds the number
+of even steps between $k$ and $t$ by six. The coefficient on that segment
+is therefore at least $1/64$. Multiplying by $C_k(n)\geq1$ gives the bound.
+
+Suppose all orbit values were at most $B$. The exact affine identity
+$2^t n_t=3^{j_t(n)}n+d_t(n)$ then gives
+$d_t(n)/3^{j_t(n)}\leq64B$ for all $t$.
+This bounds the ideal correction, which our earlier formal summability
+theory proves equivalent to escape for positive seeds. This contradicts
+the assumed orbit bound.
+\end{proof}
+
+\begin{theorem}
+Every unbounded positive orbit has a sampled-noncontracting tail.
+\end{theorem}
+\begin{proof}
+First shift to a visit to two modulo nine, using formal forward coverage.
+The shifted orbit is still unbounded. Its inverse coefficient
+$f(t)=1/C_t$ tends to zero by the existing summability theorem, and
+$f(0)=1$. Consequently $f$ attains a maximum on the subset of times
+whose orbit value is two modulo nine: a sufficiently late tail has
+$f(t)<1$, so only finitely many earlier sampled times need be compared.
+Choose a maximizing sampled time $s$.
+For every subsequent sampled visit at time $s+t$, the coefficient cocycle
+gives $1/C_t(n_s)=f(s+t)/f(s)\leq1$. Thus $n_s$ is the required seed.
+\end{proof}
+
+\begin{theorem}
+Every positive orbit is bounded if and only if for every positive
+$n\equiv2\pmod9$ some $t$ satisfies $n_t\equiv2\pmod9$ and $C_t(n)<1$.
+\end{theorem}
+\begin{proof}
+Under universal boundedness, failure of sampled contraction contradicts
+Theorem 1. Conversely an unbounded orbit supplies, by Theorem 2, a
+positive sampled-noncontracting seed, contradicting universal sampled
+contraction.
+\end{proof}
+
+\paragraph{Scope and remaining work.}
+This resolves simultaneous selection of a residue and \emph{sampled}
+noncontraction, not selection with full noncontraction at every time.
+The latter property cannot be substituted for the former in a proof.
+Universal sampled contraction is still an open nondivergence obligation.
+The separate candidate that the first sampled contraction forces descent
+also remains unproved; the earlier finite scan supplies evidence only.
+Neither the equivalence nor its unproved sides exclude nontrivial cycles.
+
+\raggedright
+\paragraph{Formal artifacts.}
+The module \texttt{Collatz.SampledContraction} contains the definition
+\texttt{SampledNeverContracts}, its \texttt{deficit} and \texttt{unbounded}
+theorems, \texttt{unbounded\_has\_sampled\_noncontracting\_tail}, and
+\texttt{all\_bounded\_iff\_sampled\_contraction}. It imports the project's
+proved residue-coverage and noncontracting-tail results. No new axiom or
+experimental premise is used.
+\end{document}

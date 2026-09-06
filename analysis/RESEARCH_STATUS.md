@@ -8,6 +8,7 @@ belong to an excluded family.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Sampled nondivergence equivalence | `all_bounded_iff_sampled_contraction` | Nondivergence is equivalent to universal contraction at residue-two visits; exact coverage by sampled-noncontracting tails, not full NeverContracts |
 | Contracting residue returns | `even_steps_between_two_mod_nine`, `contracting_two_mod_nine_segment_descends` | At most six even steps between visits; contracting first returns have sharp length bound sixteen and strictly descend for every seed above two; eventual contraction remains open |
 | Forward residue coverage | `exists_two_mod_nine`, `arbitrarily_late_two_mod_nine` | Every positive orbit visits two modulo nine arbitrarily late; formalization of Monks et al., no noncontraction property at the selected visit |
 | Inverse-search obstruction | `bounded_odd_inverse_obstruction`, `arbitrarily_large_inverse_obstructions` | Every fixed odd-step budget leaves the class 1 modulo 3^K without a noncontracting predecessor segment; total length unrestricted, no noncontracting target asserted |
@@ -58,7 +59,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 154 declarations using only standard
+The selected theorem audit now covers 158 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -669,3 +670,36 @@ here is not asserted to resolve their coefficient-stopping conjecture.
 Verification: 154 audited declarations use standard foundations only;
 the selected build and three experiment boundary tests pass. The updated
 two-page paper and one-page guide were rendered and visually checked.
+
+
+## Sampled contraction existence is exactly nondivergence (2026-09-05)
+
+`SampledContraction.lean` defines `SampledNeverContracts n`: n is two
+modulo nine and every later visit to that progression has coefficient
+at least one. Its `deficit` theorem chooses the last sampled visit before
+an arbitrary time and uses the six-even-step bound to prove
+2^t <= 64*3^j_t at every time. Its `unbounded` theorem shows a positive
+seed with this property must escape: an orbit bound B would bound the
+ideal correction by 64B, contradicting the earlier correction equivalence.
+
+Conversely, `unbounded_has_sampled_noncontracting_tail` first moves an
+unbounded orbit to a residue-two visit and maximizes its inverse
+coefficient over sampled times. The inverse coefficient tends to zero,
+so a finite sampled maximum exists. The cocycle then proves sampled
+noncontraction at that starting point. This supplies simultaneous residue
+and SAMPLED noncontraction, resolving that weaker selection problem.
+It does not supply full NeverContracts; the intervening bound is 1/64.
+
+`all_bounded_iff_sampled_contraction` gives the exact global equivalence.
+The sampled-contraction existence obligation from the previous turn is
+therefore the nondivergence problem itself, not an additional independent
+obligation. Neither side is proved. The separate sampled-stopping descent
+candidate remains open, and nontrivial cycles remain unexcluded.
+
+Paper and guide: `paper/sampled_contraction.*` and
+`paper/sampled_contraction_guide.*`. No new axiom, finite experiment as
+premise, or mathematical priority claim is used.
+
+Verification: selected build passes (7830 jobs), and all 158 audited
+declarations use standard foundations only. Both one-page PDFs were
+rendered and visually checked.

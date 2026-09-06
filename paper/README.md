@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Sampled coefficient contraction is equivalent to nondivergence | [sampled_contraction.pdf](sampled_contraction.pdf) | [sampled_contraction_guide.pdf](sampled_contraction_guide.pdf) |
 | Forward coverage modulo nine and sharp contracting-return bounds | [residue_coverage.pdf](residue_coverage.pdf) | [residue_coverage_guide.pdf](residue_coverage_guide.pdf) |
 | Ternary obstruction to inverse searches with a fixed odd-step budget | [inverse_barrier.pdf](inverse_barrier.pdf) | [inverse_barrier_guide.pdf](inverse_barrier_guide.pdf) |
 | Noncontracting tails and an exact reduction of nondivergence | [noncontracting_tails.pdf](noncontracting_tails.pdf) | [noncontracting_tails_guide.pdf](noncontracting_tails_guide.pdf) |

@@ -1,0 +1,46 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,microtype}
+\title{Guide: What Sampled Contraction Would Prove}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\raggedright
+\section*{The exact result}
+Lean now proves that the following two claims are equivalent: every
+positive Collatz orbit is bounded; and every positive seed two modulo
+nine eventually has a coefficient below one at a later visit to that
+same progression. Both claims remain unproved.
+
+\section*{Why restricting the observations works}
+Suppose the coefficient never contracts at any of those visits.
+Between consecutive visits, at most six even steps occur. Even steps
+halve the coefficient and odd steps increase it, so at every intervening
+time it remains at least one sixty-fourth. Our previous exact correction
+theory then shows that such a positive seed must have an unbounded orbit.
+
+Conversely, on any hypothetical unbounded orbit the inverse coefficient
+tends to zero. Look only at visits to two modulo nine and choose a visit
+where this inverse coefficient is largest. Relative to that starting
+point, every later sampled coefficient is at least one. This supplies
+both the required residue and sampled noncontraction in the same tail.
+
+\section*{What remains unresolved}
+The selected tail need not have coefficients at least one at every time;
+the proved intervening bound is one sixty-fourth. The distinction matters
+when applying earlier lemmas that require full noncontraction.
+
+We still need a proof that every seed in the progression eventually
+contracts at a visit. The equivalence identifies that as the full
+nondivergence problem. It does not eliminate nontrivial cycles.
+The finite experiment about descent at the first sampled contraction
+remains a separate, unproved candidate. No proof of Collatz is claimed.
+
+\section*{Verification}
+From \texttt{lean/}, run
+\texttt{lake build Collatz.SampledContraction}.
+The repository's selected theorem audit checks the four new declarations
+and their axiom dependencies. The proof uses existing exact theorems,
+without importing an experimental result as an assumption.
+\end{document}
