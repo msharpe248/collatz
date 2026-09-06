@@ -17,6 +17,8 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.TwoEarlyBridges', 'Collatz.two_early_bridge_geometry', 'Two uniformly smaller recursive parameters and exact orbit identities for u=15+9*2^40*Q'),
+    ('Collatz.TwoEarlyBridges', 'Collatz.AffineTransfer.two_early_15', 'Two smaller transfer premises prove the early inverse progression through parameter fifteen'),
     ('Collatz.EarlyInverseBridge', 'Collatz.early_inverse_predecessor', 'An immediate odd predecessor exposes the smaller transfer parameter 2w+1 at u=3w+2'),
     ('Collatz.EarlyInverseBridge', 'Collatz.early_inverse_bridge_59', 'Exact inverse/merge identities and strict decrease from 59+192Q to 39+128Q'),
     ('Collatz.EarlyInverseBridge', 'Collatz.AffineTransfer.early_inverse_59', 'Conditional early inverse transfer step without a target-cycle convergence premise'),

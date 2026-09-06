@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Two smaller transfer instances after an early inverse step | [two_early_bridges.pdf](two_early_bridges.pdf) | [two_early_bridges_guide.pdf](two_early_bridges_guide.pdf) |
 | Early inverse bridge without target-cycle assumptions | [early_inverse_bridge.pdf](early_inverse_bridge.pdf) | [early_inverse_bridge_guide.pdf](early_inverse_bridge_guide.pdf) |
 | Boundary for bootstrapping from convergent base cylinders | [cycle_cylinder_boundary.pdf](cycle_cylinder_boundary.pdf) | [cycle_cylinder_boundary_guide.pdf](cycle_cylinder_boundary_guide.pdf) |
 | Inverse excursion lowering cycle charge | [inverse_cycle_bridge.pdf](inverse_cycle_bridge.pdf) | [inverse_cycle_bridge_guide.pdf](inverse_cycle_bridge_guide.pdf) |

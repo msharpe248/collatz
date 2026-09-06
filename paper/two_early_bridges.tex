@@ -1,0 +1,88 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\newcommand{\R}{\mathcal R}
+\newcommand{\A}{\mathcal A}
+\begin{document}
+\begin{center}
+{\Large Combining Two Smaller Transfer Instances After an Inverse Step}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+Let $T$ be the shortcut Collatz map and
+$\A(u)=[\R(3u+2)\Rightarrow\R(27u+20)]$, where $\R$ means reaching one.
+The three-step inverse template at parameter 15 supplies an auxiliary orbit
+but fails its single-merge criterion. A second smaller transfer instance
+completes the certificate on an entire progression. The recursive premises
+remain explicit, and global coverage remains open.
+
+\begin{theorem}[Two-premise induction step]
+For any natural $Q$, set
+\[
+ u=15+9\cdot2^{40}Q,\qquad
+ v=13+8\cdot2^{40}Q,\qquad
+ w=2+3^{16}2^{15}Q.
+\]
+Then $v<u$, $w<u$, and
+\begin{align*}
+ T^3(3v+2)&=3u+2,\\
+ T^{28}(27v+20)&=3w+2,\\
+ T^{15}(27w+20)&=T^{40}(27u+20)=2+3^{25}Q.
+\end{align*}
+Consequently $\A(v)\land\A(w)\Rightarrow\A(u)$.
+\end{theorem}
+\begin{proof}
+The four base paths have endpoints and odd-step counts
+\[
+\begin{array}{c|c|c}
+\text{path}&\text{endpoint}&\text{odd count}\\\hline
+T^3(41)&47&2\\
+T^{28}(371)&8&14\\
+T^{15}(74)&2&6\\
+T^{40}(425)&2&20
+\end{array}
+\]
+Their input increments are respectively
+$2^3(3\cdot2^{40}Q)$,
+$2^{28}(27\cdot2^{15}Q)$,
+$2^{15}(3^{19}Q)$, and $2^{40}(243Q)$.
+Binary-cylinder transport gives every displayed identity.
+For strict decrease, $u-v=2+2^{40}Q>0$, and the coefficient comparison
+for $w$ reduces to $3^{14}<2^{25}$, alongside $2<15$.
+
+Assume $\R(3u+2)$. The first identity transports convergence backward to
+$3v+2$. Apply $\A(v)$ and advance 28 steps to $3w+2$. Apply $\A(w)$
+and advance 15 steps to the target's 40-step endpoint. Transport convergence
+back to $27u+20$. Lean checks the geometry and this argument for arbitrary $Q$.
+\end{proof}
+
+\paragraph{How the second bridge was found.}
+For $u=9a+6$, the inverse template uses the smaller parameter $8a+5$.
+After its bridge and three forward steps, the remaining pair is
+$243a+175$ and $243a+182$ with the same slope.
+At $a=1$, the auxiliary base value reaches 8 after another 25 steps.
+This exposes the second recursive base parameter $(8-2)/3=2$.
+Its larger partner is 74, whose 15-step endpoint supplies the required merge.
+Thus the initial single-template failure is not a failure of all configurations
+of smaller transfer instances.
+
+\paragraph{Finite search and verification.}
+The reproducible search allows one extra forward bridge after the inverse
+template. On $a=0,\ldots,255$, through comparison depth 60, it finds
+142 conditional certificates and leaves 114 at the depth limit; there are
+no state-cap outcomes. These are finite sample counts, not residue-density
+or global-coverage claims. Three tests replay every successful sample at
+$Q=0,1,7$, check that the parameter-15 certificate needs the extra bridge,
+and distinguish the explicit state cap. The saved report contains the
+counts and the parameter-15 example.
+
+\paragraph{Scope and remaining goal.}
+The two public declarations in \texttt{Collatz.TwoEarlyBridges} prove the
+uniform strict decreases, all orbit identities, and the conditional implication.
+The search census is not kernel certified. No convergence premise for the
+unknown lifted target is assumed. Nevertheless this one progression does
+not treat every Mersenne parameter $2^k-1$; it contains the base case 15,
+not a uniform family of those exponents. The missing global argument still
+requires coverage of all parameters by decreasing rules or another method.
+No mathematical priority claim or proof of Collatz is asserted.
+\end{document}

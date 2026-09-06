@@ -16,7 +16,7 @@ Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
 947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
 remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
 records five kernel-checked precision/count findings for a proposed literature
-input; the selected declaration audit now contains 228 entries. The new `BridgeGrowth`
+input; the selected declaration audit now contains 230 entries. The new `BridgeGrowth`
 bound rules out lowering cycle charge through arbitrary forward bridge
 interleavings and justifies pruning those states in the affine bridge search.
 `InverseCycleBridge` now verifies a signed 2 <- 47 -> 425 -> 2 excursion
@@ -990,3 +990,11 @@ Collatz. The full goal remains open.
 Verification: selected build passes (7836 jobs); all 178 audited
 declarations use standard foundations only. Six new tests pass. Both
 one-page PDFs were rendered and visually checked.
+
+### Two early recursive transfers
+
+`TwoEarlyBridges` verifies the progression u=15+9*2^40*Q using the two
+strictly smaller parameters 13+8*2^40*Q and 2+3^16*2^15*Q. This repairs the
+parameter-15 failure of the single three-step inverse template. Both recursive
+transfer premises remain explicit; this is not uniform coverage of Mersenne
+parameters. See `paper/two_early_bridges.tex` and its guide.

@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: A Second Transfer Instance Completes the Path}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{The failed case}
+The previous inverse template did not produce the required uniform merge
+at parameter 15. Its auxiliary orbit was useful, however: farther along
+that orbit, another smaller transfer instance became available.
+Lean now verifies that using both instances completes an induction step
+for an entire arithmetic progression.
+
+\guideheading{The three parameters}
+For any natural quotient $Q$, define
+\[
+\begin{aligned}
+ u&=15+9\cdot2^{40}Q,\\
+ v&=13+8\cdot2^{40}Q,\\
+ w&=2+3^{16}2^{15}Q.
+\end{aligned}
+\]
+Both $v$ and $w$ are strictly smaller than $u$ for every quotient.
+The new theorem says that transfer at these two smaller parameters
+implies transfer at $u$.
+
+\guideheading{How the proof moves}
+Start with convergence of the smaller partner at $u$. A verified backward
+segment supplies the smaller partner at $v$. Transfer at $v$ supplies its
+larger partner. After 28 forward steps, that orbit reaches the smaller
+partner at $w$. Transfer at $w$ supplies another auxiliary larger partner,
+which meets the original target after 15 more steps.
+
+The final common value is $2+3^{25}Q$. Every orbit identity and both strict
+parameter inequalities hold for the whole progression, not just for $Q=0$.
+Lean checks them and the resulting conditional transfer proof.
+
+\guideheading{What the search checked}
+The experiment tested 256 base cases of the three-step inverse template,
+allowing one extra bridge and sixty comparison steps. It found 142
+conditional certificates and left 114 at the depth limit. Tests replay
+all successful cases at three quotients, checking every recursive decrease
+and the final endpoint. These finite counts do not establish global coverage.
+
+\guideheading{Why this matters, and what it does not settle}
+A failed single merge need not mean the available smaller transfer instances
+are exhausted. This example shows how an additional instance can finish
+one of those cases without assuming convergence of the unknown lifted target.
+
+The two smaller transfer premises still need proofs in a complete induction.
+The displayed progression contains parameter 15, but does not provide a
+uniform solution for all parameters $2^k-1$. Collatz remains unproved.
+
+\guideheading{Verification files}
+\begingroup\raggedright
+Build \texttt{Collatz.TwoEarlyBridges} from \texttt{lean/}.
+Run \texttt{python3 analysis/two\_early\_bridges.py} and
+\texttt{python3 -m unittest discover -s analysis -p test\_two\_early\_bridges.py}.
+The technical paper gives the exact paths and assumptions.
+\par\endgroup
+\end{document}

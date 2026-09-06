@@ -7,6 +7,7 @@ reproducible byte-for-byte.
 
 | script | what it does | paper section |
 |---|---|---|
+| `two_early_bridges.py` | an additional transfer bridge resolves the parameter-15 inverse template on an entire progression | `../paper/two_early_bridges.tex` |
 | `three_step_inverse_search.py` | longer early inverse template in u=6 mod 9 and terminal limitations on selected Mersenne cases | `THREE_STEP_INVERSE_CHECK.md` |
 | `early_inverse_bridge_search.py` | exact early inverse induction rules in the parameter class two modulo three | `../paper/early_inverse_bridge.tex` |
 | `inverse_cycle_bridge.py` | signed inverse excursions repair either cycle-charge mismatch for convergent base pairs | `../paper/inverse_cycle_bridge.tex` |

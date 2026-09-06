@@ -64,3 +64,8 @@ significant Lean milestone or a claim of mathematical priority.
 
 Reproduce with `python3 analysis/three_step_inverse_search.py`.
 Run `python3 -m unittest discover -s analysis -p 'test_*inverse*py'`.
+
+Subsequent result: `Collatz.TwoEarlyBridges` verifies that an additional
+smaller transfer instance resolves the base-15 failure on an infinite parameter
+progression. The original single-template failure remains correct; it did not
+exclude that two-premise path. See `paper/two_early_bridges.tex`.

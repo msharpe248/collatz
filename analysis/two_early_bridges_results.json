@@ -1,0 +1,22 @@
+{
+  "scope": "finite sample; smaller-transfer premises explicit",
+  "kernel_certified_census": false,
+  "counts": {
+    "certificate": 151,
+    "depth_limit": 105
+  },
+  "example": {
+    "kind": "certificate",
+    "w": 1,
+    "depth": 40,
+    "extra": [
+      {
+        "time": 25,
+        "parameter": 2,
+        "exponent": 16
+      }
+    ],
+    "endpoint": 2,
+    "exponent": 25
+  }
+}
