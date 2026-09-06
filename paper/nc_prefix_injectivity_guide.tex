@@ -1,0 +1,62 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\LARGE Guide: When Equal-Count Prefixes Cannot Merge}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\raggedright
+\guideheading{What Lean proves}
+Take any two natural starting numbers and run the shortcut Collatz map
+for at most 31 steps. Suppose each path's multiplicative coefficient
+stays at least one, the paths use the same number of odd steps, and they
+end at the same value. Then the starting numbers were identical.
+This holds for arbitrarily large seeds, not just a finite seed sample.
+
+\guideheading{Why this matters for the current approach}
+A smaller merging predecessor can help rule out a least noncontracting
+seed. But the transport method needs a noncontracting replacement prefix.
+The new result shows that keeping both the time and odd count unchanged
+cannot provide such a distinct replacement within 31 steps. Different
+lengths or odd counts remain available, as in the earlier merge rules.
+
+\guideheading{The proof in two observations}
+A noncontracting prefix of at least two steps must start with two odd
+steps. Both seeds therefore have remainder three modulo four.
+
+The exact endpoint formula consists of a multiplier times the starting
+seed, plus a correction. A small checked table bounds that correction.
+If two prefixes have the same time, odd count and endpoint, the bound
+forces their starting numbers to differ by less than four. Two integers
+with the same remainder modulo four cannot be distinct that close together.
+
+\guideheading{Why the large search is not the proof}
+An exploratory program found no equal-count collision through depth 30,
+which contains 12,771,274 noncontracting prefixes. The Lean proof does
+not trust that enumeration. Instead, the kernel checks a 32-by-32 table
+of correction bounds and verifies the induction that applies it to every
+natural seed. The resulting theorem reaches time 31.
+
+\guideheading{What fails if we remove the hypotheses}
+The seeds 31 and 95 both reach 182 after seven steps, and both prefixes
+are noncontracting. They use six and five odd steps, respectively.
+Lean checks this counterexample to dropping the equal-count condition.
+
+The particular correction interval also fails at time 32. Lean certifies
+a noncontracting prefix starting at 3,384,695,803 whose correction exceeds
+that interval. This is not a counterexample to equal-count injectivity
+at time 32. It means that extending the theorem needs a stronger argument.
+
+\guideheading{What remains open}
+The theorem is limited to 31 steps. No arbitrary-time injectivity result
+has been proved, and neither nondivergence nor exclusion of all nontrivial
+cycles follows. The full Collatz conjecture remains unproved.
+
+\guideheading{Reproduce}
+From \texttt{lean/}, run \texttt{lake build Collatz.NCPrefixInjective}.
+The table generator and tests are in \texttt{analysis/}. The separate
+\texttt{nc\_collision\_search.py} records a state-limit stop distinctly
+from a completed search; it is not needed to check the Lean proof.
+\end{document}

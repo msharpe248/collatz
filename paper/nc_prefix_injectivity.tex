@@ -1,0 +1,93 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\begin{center}
+{\Large Equal-Count Injectivity of Noncontracting Prefixes Through 31 Steps}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\begin{abstract}
+For every time at most 31 and every pair of natural seeds, noncontracting
+prefixes with the same odd count and endpoint have the same seed. Lean
+proves this using a small correction-envelope certificate, independently
+of the exploratory enumeration. We also certify why the odd-count
+hypothesis is essential and why this particular correction bound stops
+at 31. No arbitrary-time injectivity or Collatz theorem is claimed.
+\end{abstract}
+Use the shortcut map $T(n)=n/2$ for even $n$, and $(3n+1)/2$ for odd $n$.
+Write $j_t(n)$ for the odd count and $d_t(n)$ for the affine correction:
+\[
+2^tT^t(n)=3^{j_t(n)}n+d_t(n).
+\]
+A prefix through $t$ is noncontracting if $2^i\leq3^{j_i(n)}$ for every
+$0\leq i\leq t$.
+
+\begin{theorem}[Correction interval]
+If $t\leq31$ and the prefix from $n$ through $t$ is noncontracting, then
+\[
+3^{j_t(n)}\leq d_t(n)+2^{j_t(n)}<5\cdot3^{j_t(n)}.
+\]
+There is no bound on $n$.
+\end{theorem}
+\begin{proof}
+The lower inequality follows from the repository's general lower master
+inequality and the exact affine form. For the upper inequality, let
+$H_{0,j}=0$. For $0\leq j\leq t+1$, set
+\[
+H_{t+1,j}=\begin{cases}
+\max\{H_{t,j},\,3H_{t,j-1}+2^t\},&2^{t+1}\leq3^j,\\
+0,&\text{otherwise},
+\end{cases}
+\]
+with the second candidate omitted when $j=0$ and out-of-range entries
+zero. The two candidates bound an appended even or odd step respectively.
+Induction along an actual noncontracting prefix gives
+$d_t(n)\leq H_{t,j_t(n)}$.
+A $32\times32$ natural-number table is supplied to Lean. The kernel
+checks its base value, both transition inequalities, and
+$H_{t,j}+2^j<5\cdot3^j$ for $j\leq t\leq31$ with $2^t\leq3^j$.
+These checked inequalities prove the claimed upper bound.
+\end{proof}
+
+\begin{theorem}[Equal-count injectivity]
+Suppose $t\leq31$, both seeds $n,m$ have noncontracting prefixes through
+$t$, $j_t(n)=j_t(m)$, and $T^t(n)=T^t(m)$. Then $n=m$.
+\end{theorem}
+\begin{proof}
+For $t\geq2$, the first two steps of each prefix must be odd: an even
+first step or an odd-even start contracts the coefficient. Thus
+$n\equiv m\equiv3\pmod4$. Write $j$ for their common odd count.
+The affine identities imply
+\[
+3^j(n-m)=d_t(m)-d_t(n).
+\]
+The correction interval gives $|n-m|<4$. Congruence modulo four then
+forces equality. Time zero is immediate; at time one the map is injective
+on the forced odd seeds.
+\end{proof}
+
+\paragraph{Two distinct limits of the statement.}
+The odd-count hypothesis cannot be dropped: Lean checks
+$T^7(31)=T^7(95)=182$, with odd counts six and five respectively,
+and both prefixes noncontracting. The displayed correction interval
+cannot simply be extended to time 32 either. For $n=3384695803$, Lean
+checks all noncontraction inequalities through 32 and
+\[
+j_{32}(n)=21,\qquad d_{32}(n)=54020229503,\qquad
+5\cdot3^{21}\leq d_{32}(n)+2^{21}.
+\]
+This is a counterexample to the strict interval, not to injectivity at 32.
+
+\paragraph{Research consequence and verification.}
+There is no distinct equal-time/equal-count replacement through 31 steps
+when both prefixes must remain noncontracting. This explains a limitation
+of the dominating-merge route; it does not exclude unequal counts or
+unequal lengths. The module is \texttt{Collatz.NCPrefixInjective}, with four
+public declarations in the axiom audit. The generator is
+\texttt{analysis/nc\_correction\_envelope.py}. An independent Python search
+found no equal-count collision through depth 30 (12,771,274 prefixes at
+that depth); it is exploratory evidence, not an input to the proof.
+An extension needs stronger relative correction information or another
+argument. Collatz remains open. No mathematical priority claim is made.
+\end{document}

@@ -17,6 +17,10 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.NCPrefixInjective', 'Collatz.NCPrefixInjective.correction_interval_31', 'All-seed NC-prefix correction interval through time 31, using a kernel-checked arithmetic envelope'),
+    ('Collatz.NCPrefixInjective', 'Collatz.NCPrefixInjective.equal_count_injective_31', 'All natural seeds: equal endpoint and odd count with both prefixes NC force equal seeds for times at most 31'),
+    ('Collatz.NCPrefixInjective', 'Collatz.NCPrefixInjective.different_counts_collision', 'Kernel-checked seven-step NC collision of 31 and 95 with different odd counts'),
+    ('Collatz.NCPrefixInjective', 'Collatz.NCPrefixInjective.correction_interval_fails_at_32', 'Actual NC prefix at time 32 violates the strict correction interval; not a counterexample to injectivity'),
     ('Collatz.MergeProgression', 'Collatz.MergeRule.sound', 'A valid finite merge rule gives smaller noncontracting replacements for all natural quotients'),
     ('Collatz.MergeRuleTable', 'Collatz.MergeRuleTable.rules_valid', 'Kernel validation of every one of the 360 listed merge rules; no completeness claim'),
     ('Collatz.MergeRuleTable', 'Collatz.MergeRuleTable.certified_rule_sound', 'Every listed rule certifies its entire conditional noncontraction descent progression'),

@@ -242,3 +242,26 @@ checks all 2,336 unresolved source seeds against the retained union; none
 is falsely reclassified as covered. Further work must find an applicability
 argument using rules that may depend on the seed, rather than treating a
 finite list as a full proof.
+
+
+## A structural constraint on equal-count NC merges (2026-09-05)
+
+The zero-addition observation for varying counts at fixed time was tested
+through depth 20, still with no additions; this remains finite evidence.
+A separate NC-only collision search found no equal-count collision through
+depth 30. General injectivity without matching counts is false already
+at time seven (31 and 95 merge at 182 with counts six and five).
+
+The finite pattern has a compact proof through time 31 for all natural
+seeds. `NCPrefixInjective` bounds d+2^j between 3^j and 5*3^j using a
+kernel-checked arithmetic envelope. Both seeds are 3 modulo 4; an equal
+count/endpoint merge forces their difference below four and hence zero.
+The interval itself fails at time 32 for an actual NC-prefix seed, also
+kernel certified. The injectivity question at time 32 and beyond remains
+open here; interval failure is not an injectivity counterexample.
+
+This is a limitation of same-time/equal-count noncontraction-preserving
+surgery, not a new proof of Collatz. An all-time extension would need
+relative correction control or additional parity information. For the
+main goal, variable-length/count applicability remains the unproved
+load-bearing step; finite injectivity must not replace that objective.

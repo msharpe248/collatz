@@ -1,0 +1,160 @@
+{
+  "requested_depth": 30,
+  "max_states": 13000000,
+  "completed_depth": 30,
+  "status": "completed",
+  "levels": [
+    {
+      "depth": 1,
+      "noncontracting_prefixes": 1,
+      "collision": null
+    },
+    {
+      "depth": 2,
+      "noncontracting_prefixes": 1,
+      "collision": null
+    },
+    {
+      "depth": 3,
+      "noncontracting_prefixes": 2,
+      "collision": null
+    },
+    {
+      "depth": 4,
+      "noncontracting_prefixes": 3,
+      "collision": null
+    },
+    {
+      "depth": 5,
+      "noncontracting_prefixes": 4,
+      "collision": null
+    },
+    {
+      "depth": 6,
+      "noncontracting_prefixes": 8,
+      "collision": null
+    },
+    {
+      "depth": 7,
+      "noncontracting_prefixes": 13,
+      "collision": null
+    },
+    {
+      "depth": 8,
+      "noncontracting_prefixes": 19,
+      "collision": null
+    },
+    {
+      "depth": 9,
+      "noncontracting_prefixes": 38,
+      "collision": null
+    },
+    {
+      "depth": 10,
+      "noncontracting_prefixes": 64,
+      "collision": null
+    },
+    {
+      "depth": 11,
+      "noncontracting_prefixes": 128,
+      "collision": null
+    },
+    {
+      "depth": 12,
+      "noncontracting_prefixes": 226,
+      "collision": null
+    },
+    {
+      "depth": 13,
+      "noncontracting_prefixes": 367,
+      "collision": null
+    },
+    {
+      "depth": 14,
+      "noncontracting_prefixes": 734,
+      "collision": null
+    },
+    {
+      "depth": 15,
+      "noncontracting_prefixes": 1295,
+      "collision": null
+    },
+    {
+      "depth": 16,
+      "noncontracting_prefixes": 2114,
+      "collision": null
+    },
+    {
+      "depth": 17,
+      "noncontracting_prefixes": 4228,
+      "collision": null
+    },
+    {
+      "depth": 18,
+      "noncontracting_prefixes": 7495,
+      "collision": null
+    },
+    {
+      "depth": 19,
+      "noncontracting_prefixes": 14990,
+      "collision": null
+    },
+    {
+      "depth": 20,
+      "noncontracting_prefixes": 27328,
+      "collision": null
+    },
+    {
+      "depth": 21,
+      "noncontracting_prefixes": 46611,
+      "collision": null
+    },
+    {
+      "depth": 22,
+      "noncontracting_prefixes": 93222,
+      "collision": null
+    },
+    {
+      "depth": 23,
+      "noncontracting_prefixes": 168807,
+      "collision": null
+    },
+    {
+      "depth": 24,
+      "noncontracting_prefixes": 286581,
+      "collision": null
+    },
+    {
+      "depth": 25,
+      "noncontracting_prefixes": 573162,
+      "collision": null
+    },
+    {
+      "depth": 26,
+      "noncontracting_prefixes": 1037374,
+      "collision": null
+    },
+    {
+      "depth": 27,
+      "noncontracting_prefixes": 1762293,
+      "collision": null
+    },
+    {
+      "depth": 28,
+      "noncontracting_prefixes": 3524586,
+      "collision": null
+    },
+    {
+      "depth": 29,
+      "noncontracting_prefixes": 6385637,
+      "collision": null
+    },
+    {
+      "depth": 30,
+      "noncontracting_prefixes": 12771274,
+      "collision": null
+    }
+  ],
+  "scope": "finite prefix test; no arbitrary-depth theorem",
+  "kernel_certified": false
+}

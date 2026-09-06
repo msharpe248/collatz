@@ -914,3 +914,49 @@ two variable-length tests pass. Collatz remains open.
 
 The revised two-page technical paper and one-page guide were rendered
 and visually checked.
+
+
+## All-seed equal-count NC-prefix injectivity through 31 steps (2026-09-05)
+
+`lean/Collatz/NCPrefixInjective.lean` proves that, for every t<=31 and
+all natural n,m, if both prefixes through t are noncontracting and have
+the same endpoint and odd count, then n=m. This is an all-seed theorem,
+not an exhaustive seed-bound computation. The proof uses a 32-by-32
+kernel-checked correction-envelope table, induction along the actual
+prefix, and the interval
+
+    3^j <= d_t(n)+2^j < 5*3^j.
+
+For t>=2 both seeds must be 3 modulo 4. Equal endpoints and odd counts
+then force their difference below four, hence equality. Times zero and
+one are handled separately. The public `correction_interval_31` and
+`equal_count_injective_31` declarations state the exact scope.
+
+Two kernel-certified boundary examples prevent overstatement:
+- `different_counts_collision`: 31 and 95 both reach 182 at time seven,
+  with NC prefixes and odd counts six and five. Equal count is essential.
+- `correction_interval_fails_at_32`: n=3384695803 has an NC prefix through
+  32, j=21 and d=54020229503, violating the strict upper interval. This
+  is not a counterexample to injectivity at time 32.
+
+The exploratory `nc_collision_search.py` exhausts NC prefixes, with a
+conservative allocation guard and an explicit non-completion status at
+its state cap. The saved run completed through depth 30, containing
+12,771,274 prefixes at that depth, without equal-count collisions.
+That enumeration is not used in the Lean proof. Reproduce it with
+--max-depth 30 --max-states 13000000; the default run is smaller.
+`nc_correction_envelope.py` reproducibly generates the much smaller Lean
+certificate. Six tests pass, covering direct orbit comparisons, the
+resource-cap status, table agreement, and the two boundary examples.
+
+The paper and guide are `paper/nc_prefix_injectivity.*` and
+`paper/nc_prefix_injectivity_guide.*`. The result excludes distinct
+same-time/equal-count dominating replacements through 31; it does not
+exclude different lengths or counts and does not prove nondivergence or
+rule out all nontrivial cycles. Arbitrary-time injectivity remains
+unproved and would itself only clarify the merge approach, not establish
+Collatz. The full goal remains open.
+
+Verification: selected build passes (7836 jobs); all 178 audited
+declarations use standard foundations only. Six new tests pass. Both
+one-page PDFs were rendered and visually checked.

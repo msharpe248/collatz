@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Equal-count injectivity of noncontracting prefixes through 31 steps | [nc_prefix_injectivity.pdf](nc_prefix_injectivity.pdf) | [nc_prefix_injectivity_guide.pdf](nc_prefix_injectivity_guide.pdf) |
 | Noncontraction transport through unequal-length merges | [dominating_merges.pdf](dominating_merges.pdf) | [dominating_merges_guide.pdf](dominating_merges_guide.pdf) |
 | Exact word replacement, classical Garner stems, and an all-time coverage boundary | [word_surgery.pdf](word_surgery.pdf) | [word_surgery_guide.pdf](word_surgery_guide.pdf) |
 | Arbitrarily long finite strings of growing consecutive returns | [growing_returns.pdf](growing_returns.pdf) | [growing_returns_guide.pdf](growing_returns_guide.pdf) |
