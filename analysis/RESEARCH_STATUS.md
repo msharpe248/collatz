@@ -4,6 +4,14 @@ Updated 2026-09-05. The Collatz conjecture remains open. This ledger separates
 proved family exclusions from the unproved claim that all counterexamples
 belong to an excluded family.
 
+Latest literature check: `analysis/SEED_DEPENDENT_ROUTE_REVIEW.md` records
+why the Rozier–Terracol Section 6 delay-bound chain is conditional and
+cannot supply the missing convergence premise. The nested predicate
+explicitly contains reach-one, its existence declaration has `sorry`,
+and the Rhin estimate is a cited axiom. No such premise was imported.
+The newer Niu note was withdrawn for duplication. This review adds no
+new theorem; the selected main-project audit remains at 159 declarations.
+
 ## Completed in this research pass
 
 | Direction | Checked result | Scope |
