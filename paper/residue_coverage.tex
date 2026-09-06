@@ -1,0 +1,71 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype,hyperref}
+\newtheorem{theorem}{Theorem}
+\title{Formal Forward Coverage of Two Modulo Nine}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\setlength{\emergencystretch}{3em}
+\begin{document}
+\raggedright
+\maketitle
+\begin{abstract}
+We formalize Corollary 5.8 of Monks et al.: every positive natural
+Collatz orbit visits two modulo nine. Applying the result to every tail
+gives arbitrarily late visits and a conditional reduction of convergence
+to this progression. This is a Lean formalization of a known theorem;
+it does not exclude divergence or nontrivial cycles.
+\end{abstract}
+Write $T(n)=n/2$ for even $n$ and $T(n)=(3n+1)/2$ for odd $n$.
+\begin{theorem}
+For every $n>0$ and $K\geq0$, some $t\geq K$ satisfies
+$T^t(n)\equiv2\pmod9$.
+\end{theorem}
+\begin{proof}
+Our existing formal arithmetic results give a tail outside multiples of
+three and an even value on every natural orbit. On the six remaining
+residues the possible transitions, with parity suppressed, are
+\[
+\begin{array}{c|cccccc}
+r&1&2&4&5&7&8\\\hline
+T(r)&5,2&1,8&2&7,8&8,2&4,8.
+\end{array}
+\]
+Assume a tail avoids residue two. The finite transition constraints force
+its value after three steps to have residue eight: residue four must be excluded since
+its successor is two, and the remaining non-eight chain is $1,5,7,8$.
+Applying this argument to every further tail shows that all values from
+time three onward have residue eight. An even value of residue eight has
+successor residue four, a contradiction. This proves a visit exists.
+Starting the same argument at $T^K(n)>0$ gives the stated time bound.
+\end{proof}
+The even-value lemma uses finite parity injectivity: if a natural seed
+$n$ had only odd steps, its parity prefix of length $k=n+2$ would agree
+with $2^k-1$, forcing equality of their residues modulo $2^k$.
+Both lie below $2^k$, while $n<2^k-1$, a contradiction.
+
+\paragraph{Convergence reduction and remaining gap.}
+If every positive $n\equiv2\pmod9$ reaches one, then every positive seed
+reaches one by composition with the hitting time above. That premise is
+unproved. In particular, the result cannot be combined directly with the
+least-noncontracting-seed restriction: the property
+$2^t\leq3^{j_t(n)}$ for all $t$ is not supplied at the selected residue
+visit. Coverage and the existence of noncontracting tails are separate
+existential statements; their witnesses have not been shown to coincide.
+
+\paragraph{Formal artifacts.}
+\texttt{Collatz.ResidueCoverage} proves
+\texttt{exists\_two\_mod\_nine},
+\texttt{arbitrarily\_late\_two\_mod\_nine}, and
+\texttt{reaches\_one\_of\_two\_mod\_nine}.
+The existing \texttt{exists\_even\_value} is now public.
+The proofs use exact arithmetic and existing parity results, with no
+imported literature axiom or finite seed cutoff.
+
+\begin{thebibliography}{1}
+\bibitem{monks} K. Monks, K. G. Monks, K. M. Monks, and M. Monks,
+\emph{Strongly sufficient sets and the distribution of arithmetic
+sequences in the $3x+1$ graph}, arXiv:1204.3904v2 (2012), Corollary 5.8.
+\url{https://arxiv.org/abs/1204.3904}.
+\end{thebibliography}
+\end{document}

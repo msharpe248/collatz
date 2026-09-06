@@ -8,6 +8,7 @@ belong to an excluded family.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Forward residue coverage | `exists_two_mod_nine`, `arbitrarily_late_two_mod_nine` | Every positive orbit visits two modulo nine arbitrarily late; formalization of Monks et al., no noncontraction property at the selected visit |
 | Inverse-search obstruction | `bounded_odd_inverse_obstruction`, `arbitrarily_large_inverse_obstructions` | Every fixed odd-step budget leaves the class 1 modulo 3^K without a noncontracting predecessor segment; total length unrestricted, no noncontracting target asserted |
 | Noncontracting tails | `unbounded_iff_noncontracting_tail`, `all_orbits_bounded_iff_all_contract` | Exact reduction of nondivergence to universal coefficient contraction; arbitrarily late noncontracting tails cover every hypothetical unbounded positive orbit |
 | First contraction | `first_contraction_seed_bound`, `descent_of_contraction_le65`, `return_le65_reaches_one` | Sharper seed bound at any first contraction; every seed above one descends by a coefficient contraction within 65 steps; positive returns of length at most 65 reach one |
@@ -56,7 +57,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 144 declarations using only standard
+The selected theorem audit now covers 148 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -564,3 +565,34 @@ only; the Lean build passes. Paper and guide: `paper/inverse_barrier.*` and
 extend fixed-budget inverse residue coverage must account for this exact
 unresolved class. Full exclusion of positive noncontracting seeds and
 nontrivial cycles remains open.
+
+
+## Forward residue coverage and the selection gap (2026-09-05)
+
+`ResidueCoverage.lean` formalizes Monks et al., arXiv:1204.3904v2,
+Corollary 5.8: every positive natural orbit visits two modulo nine.
+Applying the theorem to any tail gives visits beyond any prescribed time.
+The proof combines the exact six-vertex residue graph outside multiples
+of three with the existing parity-injectivity proof that every natural
+orbit has an even value (`IdealBarrier.exists_even_value`, now public).
+No literature axiom is imported. The convergence reduction
+`reaches_one_of_two_mod_nine` leaves convergence on that progression as
+an explicit unproved premise.
+
+This resolves the factual coverage question, but does not close the
+proposed connection to noncontracting tails. Coverage and noncontracting
+tail selection produce different existential witnesses; no theorem says
+that a residue-two visit is also a noncontracting starting point.
+Consequently the least-noncontracting-seed restriction cannot be combined
+with coverage to claim a contradiction. The next useful target must
+control both the arithmetic residue and inverse-drift maxima, or replace
+that selection argument with a different invariant. Merely adding more
+strongly sufficient progressions does not supply this missing property.
+
+Primary source: https://arxiv.org/abs/1204.3904, Corollary 5.8.
+Paper and guide: `paper/residue_coverage.*` and
+`paper/residue_coverage_guide.*`. This is a known result formalized here,
+not a mathematical priority claim or a proof of Collatz.
+
+The module build and expanded 148-declaration audit pass using only
+standard foundations. Both one-page PDFs were rendered and visually checked.

@@ -59,7 +59,7 @@ theorem one_le_idealLimit {n : ℕ} (hn : 0 < n) (h : Supercritical n) :
     simpa using tendsto_const_nhds.sub hp
   exact le_of_tendsto ht (Filter.Eventually.of_forall hb)
 
-private theorem exists_even_value (n : ℕ) : ∃ t, terras_iter t n % 2 = 0 := by
+theorem exists_even_value (n : ℕ) : ∃ t, terras_iter t n % 2 = 0 := by
   by_contra hh
   push_neg at hh
   let k := n+2

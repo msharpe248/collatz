@@ -17,6 +17,10 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.IdealBarrier", "Collatz.exists_even_value", "Every natural orbit contains an even value"),
+    ("Collatz.ResidueCoverage", "Collatz.exists_two_mod_nine", "Every positive natural orbit visits two modulo nine; Monks et al. Corollary 5.8"),
+    ("Collatz.ResidueCoverage", "Collatz.arbitrarily_late_two_mod_nine", "Visits to two modulo nine occur beyond any prescribed time"),
+    ("Collatz.ResidueCoverage", "Collatz.reaches_one_of_two_mod_nine", "Convergence on the progression two modulo nine implies full convergence; premise unproved"),
     ("Collatz.InverseBarrier", "Collatz.canonical_endpoint_lt_three_pow", "Canonical binary-residue endpoint lies strictly below the ternary odd-count scale"),
     ("Collatz.InverseBarrier", "Collatz.noncontracting_endpoint_not_one_mod", "A positive-length segment with noncontracting final coefficient cannot end at one modulo its ternary scale"),
     ("Collatz.InverseBarrier", "Collatz.bounded_odd_inverse_obstruction", "Targets one modulo 3^K force contraction for every predecessor segment with at most K odd steps, regardless of length"),

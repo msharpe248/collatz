@@ -1,0 +1,51 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,microtype}
+\title{Guide: The Verified Residue-Coverage Tool}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\setlength{\emergencystretch}{3em}
+\begin{document}
+\raggedright
+\maketitle
+\section*{What has been proved}
+Every positive Collatz orbit visits a number whose remainder on division
+by nine is two. Such visits occur after any specified time. This is a
+formalization of a known theorem of Monks and coauthors, not a new proof
+of the Collatz conjecture.
+
+\section*{How the argument works}
+First move past any multiples of three. The remaining remainders are
+one, two, four, five, seven, and eight. If the orbit avoids two, the
+allowed remainder transitions force it eventually to stay at eight.
+An even number with remainder eight moves to remainder four, so this
+would require only odd steps forever. Our existing Lean parity argument
+rules that out for natural starting values.
+
+\section*{How to use it in Lean}
+Import \texttt{Collatz.ResidueCoverage}.
+The theorem \texttt{exists\_two\_mod\_nine} supplies a hitting time.
+The theorem \texttt{arbitrarily\_late\_two\_mod\_nine} also accepts
+a lower bound on the time.
+The theorem \texttt{reaches\_one\_of\_two\_mod\_nine} reduces full
+convergence to convergence for positive seeds in that progression.
+Its convergence hypothesis still needs a proof.
+
+\section*{The missing connection}
+Earlier work proves that every hypothetical unbounded orbit contains
+starting points whose multiplicative coefficients never fall below one.
+It also restricts the smallest such starting point.
+The residue-coverage theorem does not say its chosen visit has that
+coefficient property. Two separately guaranteed kinds of visits need
+not occur at the same time. A proof using both results must establish
+that extra connection or use a different invariant.
+
+\section*{Verification}
+From \texttt{lean/}, run
+\texttt{lake build Collatz.ResidueCoverage}.
+From the repository root, run
+\texttt{python3 analysis/audit\_theorems.py --build} with
+the project's Lean executable on \texttt{PATH}.
+The selected audit checks the actual theorem statements and axiom
+dependencies; no additional axiom asserts the literature result.
+\end{document}
