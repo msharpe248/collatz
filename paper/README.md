@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Arithmetic applicability of classical odd-run merges | [odd_run_merges.pdf](odd_run_merges.pdf) | [odd_run_merges_guide.pdf](odd_run_merges_guide.pdf) |
 | Arbitrary-horizon obstruction for the current finite merge table | [merge_rule_obstruction.pdf](merge_rule_obstruction.pdf) | [merge_rule_obstruction_guide.pdf](merge_rule_obstruction_guide.pdf) |
 | Quantitative coefficient transport through shifted merge chains | [merge_deficit.pdf](merge_deficit.pdf) | [merge_deficit_guide.pdf](merge_deficit_guide.pdf) |
 | Equal-count injectivity of noncontracting prefixes through 31 steps | [nc_prefix_injectivity.pdf](nc_prefix_injectivity.pdf) | [nc_prefix_injectivity_guide.pdf](nc_prefix_injectivity_guide.pdf) |

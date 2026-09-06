@@ -1,0 +1,93 @@
+{
+  "scope": "constructed examples; no global coverage or novelty claim",
+  "examples": [
+    {
+      "run_length": 18,
+      "quotient": 0,
+      "seed": 88558796799,
+      "odd_part": 337825,
+      "table_obstruction_horizon": 0,
+      "branch": "double_even_merge",
+      "endpoint": 32720081674106,
+      "predecessor_endpoint": 32720081674106,
+      "meeting_test_time": 20
+    },
+    {
+      "run_length": 18,
+      "quotient": 0,
+      "seed": 181434843135,
+      "odd_part": 692119,
+      "table_obstruction_horizon": 0,
+      "branch": "single_even_pair",
+      "endpoint": 201105811069643,
+      "predecessor_endpoint": 22345090118849,
+      "meeting_test_time": 20
+    },
+    {
+      "run_length": 19,
+      "quotient": 0,
+      "seed": 42120773631,
+      "odd_part": 80339,
+      "table_obstruction_horizon": 1,
+      "branch": "double_even_merge",
+      "endpoint": 23343730999328,
+      "predecessor_endpoint": 23343730999328,
+      "meeting_test_time": 21
+    },
+    {
+      "run_length": 19,
+      "quotient": 0,
+      "seed": 227872866303,
+      "odd_part": 434633,
+      "table_obstruction_horizon": 1,
+      "branch": "single_even_pair",
+      "endpoint": 378867891139958,
+      "predecessor_endpoint": 42096432348884,
+      "meeting_test_time": 21
+    },
+    {
+      "run_length": 32,
+      "quotient": 0,
+      "seed": 332073986424831,
+      "odd_part": 77317,
+      "table_obstruction_horizon": 14,
+      "branch": "double_even_merge",
+      "endpoint": 35817490485364447649,
+      "predecessor_endpoint": 35817490485364447649,
+      "meeting_test_time": 34
+    },
+    {
+      "run_length": 32,
+      "quotient": 0,
+      "seed": 1853755129593855,
+      "odd_part": 431611,
+      "table_obstruction_horizon": 14,
+      "branch": "single_even_pair",
+      "endpoint": 599837922547898959388,
+      "predecessor_endpoint": 66648658060877662154,
+      "meeting_test_time": 34
+    },
+    {
+      "run_length": 64,
+      "quotient": 0,
+      "seed": 4982852955934497792065535,
+      "odd_part": 270121,
+      "table_obstruction_horizon": 46,
+      "branch": "double_even_merge",
+      "endpoint": 231877526805308441217065713461418250,
+      "predecessor_endpoint": 231877526805308441217065713461418250,
+      "meeting_test_time": 66
+    },
+    {
+      "run_length": 64,
+      "quotient": 0,
+      "seed": 11518423700785349672304639,
+      "odd_part": 624415,
+      "table_obstruction_horizon": 46,
+      "branch": "single_even_pair",
+      "endpoint": 1608032761985961887330723129312546711,
+      "predecessor_endpoint": 178670306887329098592302569923616301,
+      "meeting_test_time": 66
+    }
+  ]
+}

@@ -17,6 +17,13 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.OddRunMerges', 'Collatz.WordAffine.realizes_append_iff', 'Concatenating realized parity words corresponds to shifting by the first word length'),
+    ('Collatz.OddRunMerges', 'Collatz.WordAffine.realizes_odd_run', 'Exact divisibility of n+1 gives actual odd-run realization and endpoint at any run length'),
+    ('Collatz.OddRunMerges', 'Collatz.WordAffine.garner_merge_of_odd_run', 'Arithmetic applicability of the classical Garner stem for arbitrary initial odd-run length'),
+    ('Collatz.OddRunMerges', 'Collatz.WordAffine.odd_run_pair_endpoint', 'Classical consecutive-seed endpoint identity after the initial odd run; LaDue Lemma 3.1'),
+    ('Collatz.OddRunMerges', 'Collatz.WordAffine.single_even_exit_pair', 'The remaining early branch has endpoint pair 9z+2 and z; LaDue Theorem 4.1 second case'),
+    ('Collatz.OddRunMerges', 'Collatz.WordAffine.garner_merge_iff', 'Exact classical early meeting criterion; no claim about all later meeting times'),
+    ('Collatz.OddRunMerges', 'Collatz.least_unbounded_odd_run_exit', 'A least positive unbounded seed cannot leave its initial odd run with two consecutive even steps'),
     ('Collatz.MergeRuleObstruction', 'Collatz.MergeRuleObstruction.only_inverse_odd', 'On twelve entire congruence classes, only the inverse odd rule can apply from the current 360-rule table'),
     ('Collatz.MergeRuleObstruction', 'Collatz.MergeRuleObstruction.no_rule_on_initial_class', 'The initial obstruction class admits no listed rule at any quotient; not an exclusion of all possible rules'),
     ('Collatz.MergeDeficit', 'Collatz.NeverContracts.shift_bound', 'A shifted noncontracting orbit retains its exact rational coefficient floor; no shift-invariance assumption'),

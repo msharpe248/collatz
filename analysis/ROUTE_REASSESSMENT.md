@@ -338,3 +338,39 @@ The next route must confront that distinction: an argument forcing a
 useful event after a seed-dependent time, or a parameterized rule family
 that breaks the odd-run obstruction. Merely increasing constant bounds
 does not address this gap.
+
+## Classical variable-length stems and the remaining affine pair (2026-09-05)
+
+An exploratory inverse search from the first-even exit of the initial
+obstruction seed reached its two-million-state cap at backward depth 50.
+It supplied no certificate and is not a global negative result. More
+importantly, demanding an NC replacement was unnecessarily restrictive
+for an argument about the least unbounded seed: ordinary merging suffices.
+
+The existing classical Garner stem applies at every initial odd-run length
+when that run exits through two even steps. The new `OddRunMerges` module
+proves its arithmetic applicability. If n+1=2^a*m with a>=1 and m odd,
+then the first a steps are actually odd. At time a+2 the consecutive seeds
+merge exactly when 3^a*m=1 modulo 4. In the other branch their endpoints
+are exactly 9z+2 and z. These are the classical identities in LaDue (2017),
+Lemma 3.1 and Theorem 4.1, verified against the primary paper:
+https://arxiv.org/abs/1709.02979. No new mathematical discovery is claimed.
+
+Lean now also proves that a least positive unbounded seed above one cannot
+take the double-even exit: its positive predecessor n-1 is bounded, so
+their common tail would be bounded. This is distinct from least-NC
+minimality, because the even replacement n-1 is not NC. The selected audit
+now contains 192 declarations and uses standard foundations only.
+
+CRT places either exit branch inside the fixed-table obstruction for
+arbitrarily long initial runs. Choose m=2^(-a) modulo 3^11 and either
+m=3^(-a) or m=3*3^(-a) modulo 4. The first branch merges outside the
+uniform horizon; the second remains a pair 9z+2,z. The generic endpoint
+identities are Lean theorems. This CRT application remains a written
+deduction, with reproducible exact instances in `odd_run_merges.py`.
+
+For the remaining least-unbounded case, z is on the bounded orbit of n-1,
+and 9z+2 is on the allegedly unbounded orbit of n. A proof transferring
+boundedness from z to 9z+2 would address this branch, but no such transfer
+has been proved. This is the next substantive question, not an assumption
+to import or a conclusion justified by testing bounded small seeds.

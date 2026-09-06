@@ -1,0 +1,68 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype,hyperref}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: A Variable-Length Route Past Some Table Gaps}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{Why this matters}
+The finite table can fail throughout an arbitrarily long initial odd run.
+That does not mean every merging argument fails there. A classical
+Garner rule has a length determined by the run itself. We have now
+formalized its arithmetic applicability and the exact case it leaves open.
+These identities are known mathematics, also treated explicitly by
+\href{https://arxiv.org/abs/1709.02979}{LaDue (2017)}.
+
+\guideheading{The two exits}
+Write an odd seed as $n=2^am-1$, where $m$ is odd. The number $a$ is
+the length of the initial odd run. After that run the orbit takes an
+even step. What happens next determines the early comparison with $n-1$.
+
+If the next step is also even, the two seeds reach the same value after
+$a+2$ steps. This works for every run length. If the next step is odd,
+their values at time $a+2$ are instead
+\[
+9z+2\quad\text{and}\quad z,
+\]
+where $z$ is the value reached from $n-1$. Lean checks both branches
+and the precise arithmetic condition selecting them.
+
+\guideheading{Which minimality argument applies}
+Suppose $n>1$ were the least positive seed with an unbounded orbit.
+The smaller seed $n-1$ would have a bounded orbit. If the two seeds
+merge, their shared tail makes $n$ bounded too, a contradiction.
+
+This argument needs ordinary merging. It does not require the smaller
+seed to have noncontracting coefficients. In fact $n-1$ is even, so its
+first coefficient is below one. Requiring every replacement to preserve
+full noncontraction would miss this useful classical rule.
+
+\guideheading{Connection to the previous obstruction}
+We can construct arbitrarily large members of the table-obstruction
+family that take the double-even exit. The table only retraces their
+early odd steps, but the variable-length Garner rule merges them with
+their predecessor later. We can also construct members taking the
+single-even exit. The obstruction therefore contains both cases;
+the new application does not dispose of the whole family.
+
+\guideheading{The remaining gap}
+In the single-even case, $z$ lies on the bounded orbit of $n-1$,
+while $9z+2$ lies on the supposedly unbounded orbit of $n$.
+We have not proved a rule that transfers boundedness from $z$ to $9z+2$.
+The exact relationship identifies the unresolved problem; it does not
+solve it. Collatz remains unproved, including the nontrivial-cycle issue.
+
+\guideheading{How to verify the work}
+\begingroup\raggedright
+The formal source is \texttt{lean/Collatz/OddRunMerges.lean}.
+From \texttt{lean/}, run \texttt{lake build Collatz.OddRunMerges}.
+From the root, run \texttt{python3 analysis/odd\_run\_merges.py} for
+constructed examples or \texttt{python3 -m unittest discover -s analysis
+-p test\_odd\_run\_merges.py} for independent orbit checks.
+The generic endpoint identities and least-unbounded exclusion are
+kernel checked. The CRT application to the obstruction is a written
+deduction, supported by exact instance checks.
+\par\endgroup
+\end{document}

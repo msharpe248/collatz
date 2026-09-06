@@ -16,6 +16,7 @@ new theorem. Subsequent work is recorded below and in the current theorem audit.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Classical odd-run merge applicability | `garner_merge_iff`, `single_even_exit_pair`, `least_unbounded_odd_run_exit` | Any run length: a double-even exit merges n with n-1; the single-even exit gives endpoint pair 9z+2 and z. Garner/LaDue identities, not new universal coverage |
 | Fixed-table coverage obstruction | `MergeRuleObstruction.only_inverse_odd`, `no_rule_on_initial_class` | Kernel-checked congruence classification; written arbitrary-horizon construction permits only retracing odd runs. Does not exclude new rules or seed-dependent horizons |
 | Quantitative merge chains | `CoefficientBound.merge`, `NeverContracts.smaller_merge_chain_447` | Exact coefficient-deficit transport after shifting; a three-rule chain excludes the progression 447 + 549755813888Q from least positive NC seeds; no universal coverage |
 | Certified merge progressions | `MergeRuleTable.rules_valid`, `MergeRule.sound` | 360 kernel-checked rules apply to every natural quotient, conditional on noncontraction |
