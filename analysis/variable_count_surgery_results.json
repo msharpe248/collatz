@@ -1,0 +1,186 @@
+{
+  "scope": "finite depth; all nonnegative cylinder quotients",
+  "kernel_certified": false,
+  "results": [
+    {
+      "depth": 1,
+      "words": 2,
+      "noncontracting_prefixes": 1,
+      "not_covered_by_equal_count": 1,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 2,
+      "words": 4,
+      "noncontracting_prefixes": 1,
+      "not_covered_by_equal_count": 1,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 3,
+      "words": 8,
+      "noncontracting_prefixes": 2,
+      "not_covered_by_equal_count": 2,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 4,
+      "words": 16,
+      "noncontracting_prefixes": 3,
+      "not_covered_by_equal_count": 3,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 5,
+      "words": 32,
+      "noncontracting_prefixes": 4,
+      "not_covered_by_equal_count": 4,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 6,
+      "words": 64,
+      "noncontracting_prefixes": 8,
+      "not_covered_by_equal_count": 7,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 7,
+      "words": 128,
+      "noncontracting_prefixes": 13,
+      "not_covered_by_equal_count": 11,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 8,
+      "words": 256,
+      "noncontracting_prefixes": 19,
+      "not_covered_by_equal_count": 16,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 9,
+      "words": 512,
+      "noncontracting_prefixes": 38,
+      "not_covered_by_equal_count": 31,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 10,
+      "words": 1024,
+      "noncontracting_prefixes": 64,
+      "not_covered_by_equal_count": 52,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 11,
+      "words": 2048,
+      "noncontracting_prefixes": 128,
+      "not_covered_by_equal_count": 103,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 12,
+      "words": 4096,
+      "noncontracting_prefixes": 226,
+      "not_covered_by_equal_count": 182,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 13,
+      "words": 8192,
+      "noncontracting_prefixes": 367,
+      "not_covered_by_equal_count": 297,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 14,
+      "words": 16384,
+      "noncontracting_prefixes": 734,
+      "not_covered_by_equal_count": 593,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 15,
+      "words": 32768,
+      "noncontracting_prefixes": 1295,
+      "not_covered_by_equal_count": 1049,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 16,
+      "words": 65536,
+      "noncontracting_prefixes": 2114,
+      "not_covered_by_equal_count": 1720,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 17,
+      "words": 131072,
+      "noncontracting_prefixes": 4228,
+      "not_covered_by_equal_count": 3439,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    },
+    {
+      "depth": 18,
+      "words": 262144,
+      "noncontracting_prefixes": 7495,
+      "not_covered_by_equal_count": 6104,
+      "added_by_lower_count_at_quotient_zero": 0,
+      "added_by_higher_count_for_some_lifts": 0,
+      "first_lower_example": [],
+      "first_higher_example": []
+    }
+  ]
+}

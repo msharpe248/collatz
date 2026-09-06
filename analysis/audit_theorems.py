@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.WordSurgery', 'Collatz.lower_count_merge_bound', 'Equal-time merging with fewer odd steps forces 3n < x + 2^(t-j_x)'),
+    ('Collatz.WordSurgery', 'Collatz.lower_count_merge_gt_twice', 'At or above the binary cylinder scale a lower-count equal-time merging seed exceeds twice the original seed'),
+    ('Collatz.WordSurgery', 'Collatz.higher_count_merge_lifts', 'Compatible canonical endpoints with more odd steps merge on an explicit ternary progression of binary-cylinder quotients'),
     ('Collatz.WordSurgery', 'Collatz.WordAffine.replacement_iff', 'Exact affine criterion proves actual equal-length equal-count merging word realization'),
     ('Collatz.WordSurgery', 'Collatz.WordAffine.replacement_of_correction_shift', 'Attainable correction increase by a ternary multiple certifies a smaller merging predecessor with explicit seed bound'),
     ('Collatz.WordSurgery', 'Collatz.WordAffine.garner_stem_merge', 'Classical Garner stem family formalized for every positive odd-run length; no global coverage claim'),

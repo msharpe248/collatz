@@ -807,3 +807,33 @@ Verification: selected build passes (7832 jobs); all 165 selected
 declarations use standard foundations only. The technical paper and
 plain-language guide are `paper/word_surgery.*` and
 `paper/word_surgery_guide.*`. Collatz remains open.
+
+
+## Variable odd counts do not enlarge the tested survivor cover (2026-09-05)
+
+New Lean theorems in `WordSurgery.lean`:
+- `lower_count_merge_bound`: if T^t(x)=T^t(n) and j_t(x)<j_t(n), then
+  3n < x + 2^(t-j_t(x)).
+- `lower_count_merge_gt_twice`: under the same hypotheses and n>=2^t,
+  x>2n. Lower-count replacements cannot supply a smaller predecessor there.
+- `higher_count_merge_lifts`: compatible canonical endpoints with count
+  difference d merge for quotients q=q0+3^d*Q and p=Q.
+
+The exact Python comparison in `analysis/variable_count_surgery.py` checks
+all nonnegative cylinder quotients via finite residue sets. At every depth
+1 through 18, there are zero additions from varying odd counts to the
+noncontracting-prefix cylinders missed by equal-count replacement. At
+depth 18, this leaves 6,104 out of 7,495 noncontracting-prefix cylinders.
+The result is finite-depth evidence, not an arbitrary-depth redundancy
+lemma. Canonical rows are independently replayed through depth 9; quotient
+formulas are tested on every pair through depth 6, including successful
+higher-count lifts outside the restricted survivor set.
+
+The paper and guide `paper/word_surgery.*` are updated. The next experiment
+will allow different replacement lengths. No smaller-predecessor existence
+hypothesis for a least unbounded seed has been proved. Collatz remains open.
+
+Verification: selected build passes (7832 jobs), and all 168 audited
+declarations use standard foundations only. Both three-test surgery suites
+pass. The updated two-page paper and one-page guide were rendered and
+visually checked.

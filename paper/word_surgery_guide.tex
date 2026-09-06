@@ -5,14 +5,16 @@
 \author{Collatz proof project}
 \date{September 5, 2026}
 \begin{document}
-\maketitle
+\begin{center}
+{\LARGE Guide: Replacing an Orbit Prefix}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
 \raggedright
 \section*{Why merging helps}
 Imagine the smallest positive integer with an unbounded Collatz orbit.
 If a smaller positive integer eventually joins that orbit, its orbit is
-also unbounded, contradicting the choice of the smallest one. This is a
-valid proof strategy only if we can guarantee that smaller predecessor.
-Lean now proves the implication; existence remains open.
+also unbounded, contradicting the choice of the smallest one. Lean proves this implication; guaranteeing that smaller predecessor
+remains open.
 
 \section*{What the replacement certificate checks}
 A finite odd/even pattern determines an affine endpoint formula. Two
@@ -28,38 +30,36 @@ and smaller. It need not grow at every intermediate step.
 \section*{A working infinite family}
 Any initial run of odd steps followed by two even steps can be replaced
 by a pattern starting from the integer immediately below the original
-seed. For example,
-\[
-\begin{array}{rrrrrrr}
-15&23&35&53&80&40&20\\
-14&7&11&17&26&13&20
-\end{array}
-\]
-These are six shortcut steps with four odd steps on each row. This is
-the classical Garner stem family, now formalized in this project.
-It is not a new mathematical discovery or a universal coverage result.
+seed. For example, 15 and 14 both reach 20 after six shortcut steps, with four
+odd steps each. This classical Garner family is now formalized here;
+it is not a new discovery or a universal coverage result.
 
 \section*{Why this version cannot cover every seed}
 Lean proves that 27 never merges with a smaller positive seed at the
-same time with the same number of odd steps. This holds for every time,
-not just a search cutoff. The proof checks the initial 70 steps and then
-uses the repeating cycle: 27 has accumulated too many odd steps for any
-smaller seed to catch up under these two restrictions.
+same time with the same number of odd steps. The proof checks the initial 70 steps, then uses the repeating cycle:
+27 has accumulated too many odd steps for any smaller seed to catch up
+under these two restrictions.
 
-Since 27 reaches one, this does not disprove the proposed strategy for
-a hypothetical least unbounded seed. It does mean that an unrestricted
-claim of equal-time, equal-count replacement for every seed would be false.
+Since 27 reaches one, this refutes unrestricted universal coverage,
+but not coverage conditional on least-unboundedness.
 
-\section*{What the experiment establishes}
-At depth 18, exact enumeration finds replacements for 193,309 of all
-262,144 binary cylinders. Among the 7,495 patterns whose every prefix
-coefficient is at least one, it covers 1,391. The uncovered patterns are
-not divergent orbits. The counts do not prove asymptotic or universal coverage.
+\section*{Different odd counts: a bound and a test}
+Lean proves that a merging seed with fewer odd steps must exceed $2n$
+when $n\geq2^t$. It therefore cannot be the smaller predecessor we need.
+More odd steps introduce a congruence condition modulo a power of three.
+The experiment accounts for every nonnegative quotient in each tested
+binary cylinder, including larger seeds than its canonical representative.
+
+At depth 18, equal-count replacement covers 1,391 of 7,495 patterns whose
+every prefix coefficient is at least one. Varying the odd count adds no
+coverage among the remaining 6,104 cylinders, for any quotient. The same
+zero-addition result holds through depth 17. These are finite-depth Python
+results, not a theorem for arbitrary lengths or evidence of divergence.
 
 \section*{Reproduce and continue}
 From \texttt{lean/}, run \texttt{lake build Collatz.WordSurgery}.
-From the root, run \texttt{python3 analysis/word\_surgery.py} and
-\texttt{python3 -m unittest discover -s analysis -p test\_word\_surgery.py}.
+The new experiment is \texttt{analysis/variable\_count\_surgery.py};
+its derivation and tests are in matching \texttt{analysis/} files.
 Different word lengths or odd counts may help, but neither nondivergence
 nor exclusion of all nontrivial cycles has been proved here.
 \end{document}

@@ -1,5 +1,6 @@
 import Collatz.WordCongruence
 import Collatz.NoncontractingTail
+import Collatz.Cylinder
 
 /-! Exact merging certificates. The parameterized stem is the classical
 Garner family; no claim that these stems cover all orbits is made. -/
@@ -78,6 +79,43 @@ theorem garner_stem_merge {n : ℕ} (a : ℕ) (hn : 1 ≤ n)
 end Collatz.WordAffine
 
 namespace Collatz
+
+/-- A merging predecessor with fewer odd steps obeys a universal size bound. -/
+theorem lower_count_merge_bound {n x t : ℕ}
+    (he : terras_iter t x = terras_iter t n)
+    (hj : oddSteps t x < oddSteps t n) :
+    3*n < x + 2^(t-oddSteps t x) := by
+  have hn := terras_exact_form t n
+  have hx := terras_growth_bound t x
+  rw [he] at hx
+  have hp := Nat.pow_le_pow_right (n := 3) (by decide) (show oddSteps t x+1 ≤ oddSteps t n by omega)
+  rw [pow_succ] at hp
+  have hm := Nat.mul_le_mul_right n hp
+  have htwo : 0 < 2^t := by positivity
+  by_contra hh
+  have hh' : x + 2^(t-oddSteps t x) ≤ 3*n := by omega
+  have hmul := Nat.mul_le_mul_left (3^oddSteps t x) hh'
+  nlinarith only [hn, hx, hm, htwo, hmul, Nat.zero_le (dcoef t n)]
+
+/-- Above the binary cylinder scale, fewer odd steps force a merging seed
+to be more than twice as large. Such a replacement cannot be smaller. -/
+theorem lower_count_merge_gt_twice {n x t : ℕ} (hn : 2^t ≤ n)
+    (he : terras_iter t x = terras_iter t n)
+    (hj : oddSteps t x < oddSteps t n) : 2*n < x := by
+  have hb := lower_count_merge_bound he hj
+  have hp : 2^(t-oddSteps t x) ≤ 2^t :=
+    Nat.pow_le_pow_right (by decide) (by omega)
+  omega
+
+/-- With extra odd steps, compatible canonical endpoints merge on a ternary
+progression of binary-cylinder quotients. This is a certificate, not coverage. -/
+theorem higher_count_merge_lifts {t r s d q0 : ℕ}
+    (hj : oddSteps t s = oddSteps t r + d)
+    (he : terras_iter t s = terras_iter t r + 3^oddSteps t r*q0) (Q : ℕ) :
+    terras_iter t (s+2^t*Q) =
+      terras_iter t (r+2^t*(q0+3^d*Q)) := by
+  rw [Cylinder.transport, Cylinder.transport, hj, he, pow_add]
+  ring
 
 private theorem cycle_odd_counts (k : ℕ) :
     oddSteps k 2 ≤ oddSteps k 1 ∧ oddSteps k 1 ≤ oddSteps k 2 + 1 := by

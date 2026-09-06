@@ -15,6 +15,8 @@ the classical Garner stem family. We also prove that the convergent seed
 equal odd count, at any time. The results validate a local replacement
 method but refute its unrestricted universal coverage. They do not settle
 coverage for a hypothetical least unbounded seed or prove Collatz.
+We also bound lower-count replacements and test varying odd counts
+through depth 18, accounting for every cylinder quotient.
 \end{abstract}
 Use $T(n)=n/2$ for even $n$, and $(3n+1)/2$ for odd $n$.
 For a word $w$, let $|w|$ be its length, $j(w)$ its number of ones, and
@@ -67,12 +69,61 @@ The odd-count cocycle therefore gives
 $j_{70+k}(x)\leq35+j_k(1)<41+j_k(1)=j_{70+k}(27)$.
 \end{proof}
 
+\newpage
+\section*{Allowing the odd count to change}
+\begin{theorem}[Lower-count size bound]
+If $T^t(x)=T^t(n)$ and $j_t(x)<j_t(n)$, then
+\[
+3n<x+2^{t-j_t(x)}.
+\]
+Consequently, if $2^t\leq n$, then $2n<x$.
+\end{theorem}
+\begin{proof}
+Write $a=j_t(x)$ and $b=j_t(n)$. The exact form and the universal
+shifted-height bound give
+\[
+3^{a+1}n\leq3^bn\leq2^tT^t(n)
+ <2^t(T^t(x)+1)\leq3^a(x+2^{t-a}).
+\]
+Cancel $3^a$. If $2^t\leq n$, then $2^{t-a}\leq n$, giving $2n<x$.
+Both conclusions are formalized in Lean.
+\end{proof}
+
+\paragraph{The full quotient test.}
+Put $L=2^t$ and choose canonical seeds $0\leq r,s<L$ with odd counts
+$j,k$ and endpoints $e,f$. The library proves $e<3^j$, $f<3^k$ and
+\[
+T^t(r+Lq)=e+3^jq,\qquad T^t(s+Lp)=f+3^kp.
+\]
+Thus an exact merge is equivalent to $f+3^kp=e+3^jq$.
+When $k<j$, a smaller merging predecessor can occur only for $q=0$,
+by the preceding theorem. In that case $s+Lp<r<L$ forces $p=0$,
+so it suffices to test $f=e$ and $0<s<r$.
+
+When $k>j$, compatibility is exactly $f\equiv e\pmod{3^j}$. Write
+$f=e+3^jq_0$ and $d=k-j>0$. All compatible nonnegative quotients are
+\[
+q=q_0+3^dQ,\qquad p=Q,\qquad Q\geq0.
+\]
+The resulting endpoint equality is \texttt{higher\_count\_merge\_lifts}.
+For $Q\geq1$, the replacement is positive and smaller because
+\[
+(r+Lq)-(s+LQ)=r-s+L\bigl(q_0+(3^d-1)Q\bigr)>0.
+\]
+Consequently a finite residue intersection detects infinitely many useful
+lifts; testing only the canonical seed would miss them.
+
 \paragraph{Finite evidence and remaining obligation.}
 An exhaustive Python census at depth 18 certifies replacements for
 193,309 of 262,144 binary cylinders, including 1,391 of the 7,495 whose
 every prefix coefficient is at least one. Each reported canonical merge
 is independently replayed; equal counts extend it to the whole cylinder.
 These counts are experimental, not kernel-certified coverage.
+The new all-quotient test finds no additional coverage from different odd
+counts among the remaining 6,104 noncontracting-prefix cylinders at depth
+18. Both tests also give zero additions at every depth 1 through 17.
+This is a finite-depth observation; no theorem of redundancy at arbitrary
+depth has been proved.
 A smaller positive merging predecessor contradicts least-unboundedness;
 that implication is formalized without imposing noncontraction on its path.
 The missing theorem is existence for every hypothetical least unbounded
@@ -80,8 +131,11 @@ seed. The counterexample 27 is convergent and does not refute that
 conditional statement. Variable lengths or odd counts remain possible.
 
 \paragraph{Verification.}
-The five public declarations in \texttt{Collatz.WordSurgery} are included
+The eight public declarations in \texttt{Collatz.WordSurgery} are included
 in the axiom audit. The census and independent small-depth tests are
 \texttt{analysis/word\_surgery.py} and \texttt{test\_word\_surgery.py}.
+The variable-count comparison is \texttt{variable\_count\_surgery.py},
+with a separate test file. Canonical rows are independently replayed
+through depth 9 and the quotient formulas on all word pairs through depth 6.
 No unproved Collatz premise is discharged by the finite computation.
 \end{document}

@@ -167,3 +167,22 @@ Next experiment: allow the replacement odd count to vary, with exact
 attainability and seed positivity retained. Cylinder transport with equal
 slopes no longer applies unchanged: ternary congruences must also track
 the cylinder quotient. No universal existence premise has been inserted.
+
+
+## Variable odd-count comparison completed (2026-09-05)
+
+`analysis/variable_count_surgery.md` derives a finite endpoint-residue test
+that accounts for every nonnegative quotient, not merely the canonical
+seed or sampled lifts. At every depth 1 through 18, changing the odd count
+adds no smaller same-time merging predecessor to any noncontracting-prefix
+cylinder missed by equal-count replacement. At depth 18, all 6,104 such
+remaining cylinders fail both the lower- and higher-count tests. This is
+an exact Python census, not a kernel-certified all-depth theorem.
+
+Three new Lean declarations support the arithmetic: the universal bound
+3n < x + 2^(t-j_x) for a lower-count same-time merge; its consequence
+x>2n when n>=2^t; and the exact higher-count merging lift formula on a
+ternary progression of binary-cylinder quotients. The technical paper
+and guide have been updated. The next experiment should vary replacement
+length, and distinguish meeting before forward descent from merely
+rediscovering a later orbit value already below the starting seed.
