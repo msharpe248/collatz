@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Direct merging and contracting parameter returns for affine transfer | [affine_pair_returns.pdf](affine_pair_returns.pdf) | [affine_pair_returns_guide.pdf](affine_pair_returns_guide.pdf) |
 | Exact affine-transfer reformulations of nondivergence and full Collatz | [affine_transfer.pdf](affine_transfer.pdf) | [affine_transfer_guide.pdf](affine_transfer_guide.pdf) |
 | Arithmetic applicability of classical odd-run merges | [odd_run_merges.pdf](odd_run_merges.pdf) | [odd_run_merges_guide.pdf](odd_run_merges_guide.pdf) |
 | Arbitrary-horizon obstruction for the current finite merge table | [merge_rule_obstruction.pdf](merge_rule_obstruction.pdf) | [merge_rule_obstruction_guide.pdf](merge_rule_obstruction_guide.pdf) |

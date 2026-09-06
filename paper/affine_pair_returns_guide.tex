@@ -1,0 +1,71 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: Induction Steps for the Affine Pair}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{The task}
+The transfer problem asks whether reaching one passes from $3u+2$ to
+$27u+20$ for every natural parameter $u$. The previous Lean result
+shows that this would prove full Collatz. We now have two kinds of
+verified certificates for particular parameter families.
+
+\guideheading{A direct certificate}
+For $u=36+64Q$, both partners reach exactly the same value after six
+steps, for every natural $Q$. If the smaller partner reaches one,
+the larger partner therefore does too. This is an unconditional proof
+of the transfer implication on that progression.
+
+\guideheading{A genuine induction step}
+For the parameter family
+\[
+u=2308+4096Q,
+\]
+twelve steps transform the two partners into the same kind of pair at
+\[
+v=45+81Q<u.
+\]
+This reduces the question at $u$ to the question at a smaller parameter
+$v$. Lean proves the endpoint identities, the strict inequality, and
+the conditional transfer step for every quotient.
+
+The smaller-parameter premise has not been removed. To turn these steps
+into a complete induction, every parameter would need a direct proof,
+a checked base case, or a reduction of this kind.
+
+\guideheading{What the search found}
+At depth 18, the exact search classifies 30,176 parameter residues by
+direct merging and 1,267 by a smaller-parameter return. It leaves
+230,701 unresolved. Each found rule describes all nonnegative quotients
+on its binary arithmetic progression. The search stops at the first
+certificate, so these counts describe that procedure rather than every
+possible later certificate.
+
+Independent tests replay all 3,236 saved certificates on several lifts
+and compare small complete searches against direct orbits. The two
+displayed infinite families and the general transport identities are
+kernel checked; the full census is not a Lean completeness theorem.
+
+\guideheading{Why ordinary convergence is not enough for a merge certificate}
+At parameter zero, the partners are 2 and 20. Both reach one, but they
+never have equal values at equal times. Lean checks this for all times.
+Thus a search for aligned merging alone cannot settle every parameter.
+Zero can be handled as a base case; the example does not disprove the
+combined induction approach.
+
+\guideheading{What remains open}
+The missing step is coverage: a proof that every parameter can be
+handled by a valid base case, direct merge, or contracting return.
+The current families do not establish this. Collatz remains unproved.
+
+\guideheading{Where to verify the work}
+\begingroup\raggedright
+Build \texttt{Collatz.AffinePairReturn} from \texttt{lean/}.
+From the root, run \texttt{python3 analysis/affine\_pair\_search.py} or
+\texttt{python3 -m unittest discover -s analysis -p test\_affine\_pair\_search.py}.
+The technical paper states the exact lifting and induction conditions.
+\par\endgroup
+\end{document}

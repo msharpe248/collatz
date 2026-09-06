@@ -17,6 +17,12 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.AffinePairReturn', 'Collatz.affine_pair_transport', 'Exact binary-cylinder transport for both partners 3u+2 and 27u+20'),
+    ('Collatz.AffinePairReturn', 'Collatz.AffineTransfer.of_return', 'Transfer at a returned parameter implies transfer at the original parameter under exact endpoint identities'),
+    ('Collatz.AffinePairReturn', 'Collatz.AffineTransfer.merge_36', 'Direct six-step merging proves transfer on u=36+64Q for every natural quotient'),
+    ('Collatz.AffinePairReturn', 'Collatz.affine_pair_return_2308', 'Twelve-step return maps u=2308+4096Q to strictly smaller v=45+81Q for every natural quotient'),
+    ('Collatz.AffinePairReturn', 'Collatz.AffineTransfer.return_2308', 'Conditional strong-induction step for the contracting parameter-return family; recursive premise retained'),
+    ('Collatz.AffinePairReturn', 'Collatz.zero_pair_never_coalesces', 'The partners 2 and 20 both reach one but never meet at equal times'),
     ('Collatz.AffineConvergence', 'Collatz.ReachesOne.step_iff', 'Reaching one is invariant under one shortcut Collatz step, including the trivial cycle'),
     ('Collatz.AffineConvergence', 'Collatz.ReachesOne.shift_iff', 'Reaching one is invariant under every finite orbit shift'),
     ('Collatz.AffineConvergence', 'Collatz.collatz_iff_restricted_affine_transfer', 'Full Collatz is equivalent to reaching-one transfer z to 9z+2 restricted to z two modulo three; neither side proved'),

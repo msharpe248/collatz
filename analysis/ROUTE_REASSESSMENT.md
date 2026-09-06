@@ -406,3 +406,42 @@ The audit parser needed a correctness fix because `ReachesOne.step_iff`
 uses no axioms and Lean reports that in a distinct format. Both Lean output
 formats are now recognized; missing/error output is still rejected. Tests
 cover these cases. Qualified theorem names now also get source line numbers.
+
+## Direct cylinders and contracting affine-pair returns (2026-09-05)
+
+The next search retained the actual paired affine slopes, not merely
+coincidence of two finite seed orbits. On u=r+2^tQ the endpoints have
+increments 3^(j+1)Q and 3^(k+3)Q. Direct merging requires matching base
+endpoints and j=k+2. A return to the same pair shape requires y=9x+2,
+j=k and x=2 modulo three. It is usable for induction when its new base
+parameter v=(x-2)/3 is below r and 3^j<=2^t.
+
+Lean now proves direct transfer on u=36+64Q: both partners reach
+47+81Q at time six. More significantly for the remaining transfer
+obligation, it proves an actual contracting return at time twelve:
+
+    u=2308+4096Q -> v=45+81Q < u.
+
+Both partners map to the corresponding partners at v. The theorem
+`AffineTransfer.return_2308` explicitly retains transfer at v as its
+premise. This is a valid induction step, not proof of the whole family
+without that premise. `AffinePairReturn` supplies generic paired cylinder
+transport and the logical return step as well.
+
+The first-certificate census through depth 18 has 3,236 certificates:
+30,176 residues are classified by direct merging and 1,267 by conditional
+contracting returns, leaving 230,701 unresolved. These are counts at
+denominator 2^18 after stopping each cylinder at its first certificate.
+Tests compare direct orbits over the complete small parameter intervals
+and replay every saved certificate at Q=0,1,7. The census is Python
+evidence; the displayed infinite families are kernel checked. The audit
+has 206 selected declarations, all using standard foundations.
+
+An all-time scope boundary is also kernel checked: the partners at u=0,
+namely 2 and 20, both reach one but never meet at equal times. Equality
+on an infinite parameter progression with fixed path lengths forces those
+lengths to coincide (by comparing powers of two and three in the slopes).
+Thus aligned merging alone needs exceptions or another mechanism. The
+single example can be handled as a base case and does not disprove an
+induction with returns. Global coverage by valid base cases, direct
+certificates or smaller-parameter returns remains the missing theorem.

@@ -1,0 +1,95 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\newcommand{\R}{\mathcal R}
+\newcommand{\A}{\mathcal A}
+\begin{document}
+\begin{center}
+{\Large Direct Merging and Contracting Returns for Affine Transfer}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+Let $T$ be the shortcut Collatz map, $j_t(n)$ its odd-step count, and
+$\R(n)$ the assertion that $n$ reaches one. Put
+$\A(u):=[\R(3u+2)\Rightarrow\R(27u+20)]$.
+The previous formalization proves that $\forall u\geq0,\A(u)$ is
+equivalent to full Collatz. Here we give direct and inductive certificates
+on particular arithmetic progressions; the universal statement remains open.
+
+\begin{theorem}[Direct merging]
+For every natural $Q$, $\A(36+64Q)$ holds.
+\end{theorem}
+\begin{proof}
+At the base parameter, $T^6(110)=T^6(992)=47$, with odd counts three
+and one. Exact binary-cylinder transport therefore gives
+\[
+T^6(110+192Q)=T^6(992+1728Q)=47+81Q.
+\]
+Reaching one transfers through the common endpoint in either direction.
+Lean checks both the base computations and the extension to every $Q$.
+\end{proof}
+
+\begin{theorem}[Contracting parameter return]
+For every natural $Q$, set $u=2308+4096Q$ and $v=45+81Q$. Then
+\[
+v<u,\qquad T^{12}(3u+2)=3v+2,\qquad
+T^{12}(27u+20)=27v+20.
+\]
+Consequently $\A(v)\Rightarrow\A(u)$. The premise $\A(v)$ is retained;
+the theorem does not prove transfer unconditionally on this progression.
+\end{theorem}
+\begin{proof}
+The base endpoints are $T^{12}(6926)=137$ and $T^{12}(62336)=1235$,
+both with four odd steps. Parameter increments of $4096Q$ give endpoint
+increments $243Q$ and $2187Q$, respectively. These are precisely the
+increments obtained by replacing the parameter $45$ with $45+81Q$.
+Also $u-v=2263+4015Q>0$.
+If $3u+2$ reaches one, so does its shifted value $3v+2$. Apply $\A(v)$,
+then transport convergence back from $27v+20$ to $27u+20$.
+Every step is kernel checked in \texttt{Collatz.AffinePairReturn}.
+\end{proof}
+
+\paragraph{Exact search criterion.}
+On the cylinder $u=r+2^tQ$, the two endpoints are
+\[
+x+3^{j+1}Q,\qquad y+3^{k+3}Q,
+\]
+where $x=T^t(3r+2)$, $y=T^t(27r+20)$ and $j,k$ are the respective
+odd counts. Direct merging requires $x=y$ and $j=k+2$.
+A return requires $y=9x+2$, $j=k$ and $x\equiv2\pmod3$.
+Then $v=(x-2)/3+3^jQ$; checking $(x-2)/3<r$ and $3^j\leq2^t$
+proves $v<u$ for every quotient. Base endpoint coincidence alone is
+insufficient for either certificate.
+
+\paragraph{Finite evidence.}
+The reproducible search stops extending a cylinder once either certificate
+is found. Through depth 18, its 3,236 first certificates classify 30,176
+of the $2^{18}$ parameter residues by direct merging and 1,267 by a
+contracting return; 230,701 remain unresolved. The return count is
+conditional induction coverage, not a count of independently proved
+transfer statements. These census figures are Python evidence, not a
+kernel completeness theorem. Tests compare the full small-depth census
+against direct orbits and replay every saved certificate at $Q=0,1,7$.
+The formulas above, rather than those sample quotients, justify lifting.
+
+\paragraph{A boundary for aligned merging.}
+Lean also proves that both 2 and 20 reach one but $T^t(2)\ne T^t(20)$
+for every $t$. Their joint orbit enters the two-state cycle $(1,2),(2,1)$.
+Thus parameter zero needs a base case or another argument, even though
+its transfer is true. More generally, an identity on an infinite parameter
+progression using fixed path lengths $s,t$ forces equality of endpoint
+slopes. For these partners that equality is
+$3^{j+1}/2^s=3^{k+3}/2^t$, hence $s=t$ and $j=k+2$.
+The slope deduction is a written arithmetic observation, not an additional
+Lean theorem. The single exceptional parameter does not refute a proof
+combining base cases and contracting returns.
+
+\paragraph{Remaining obligation and verification.}
+A complete induction needs every parameter to be a base case, admit a
+direct certificate, or return to a smaller parameter. No such coverage
+theorem is proved. Six public declarations in \texttt{AffinePairReturn}
+enter the axiom audit. The search and saved data are
+\texttt{analysis/affine\_pair\_search.py} and its matching JSON file.
+This work supplies induction steps, not the full induction, and makes
+no mathematical priority claim.
+\end{document}
