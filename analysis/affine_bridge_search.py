@@ -39,13 +39,19 @@ def classify_pair(u, cap=10000):
     return dict(kind='cap', time=cap)
 
 
-def search(u, depth=30, max_bridges=2, state_cap=10000):
+def search(u, depth=30, max_bridges=2, state_cap=10000, prune_cycle=True):
     if u < 0 or depth < 1 or max_bridges < 0 or state_cap < 1:
         raise ValueError('invalid search limits')
     states = {(3*u+2, 1): ()}
     y, q = 27*u+20, 3
     peak = 1
     for t in range(depth+1):
+        if prune_cycle and y in (1, 2):
+            # BridgeGrowth.Path.cycle_charge_nondecrease: any future
+            # forward path back to the target cycle cannot lower charge.
+            # This remains true with arbitrarily many intermediate bridges.
+            states = {(x,p): path for (x,p),path in states.items()
+                      if x not in (1,2) or 2*p+(x==1) <= 2*q+(y==1)}
         # Closure at this clock; fewer bridges dominates more bridges for
         # the same symbolic state. Every bridge strictly increases p.
         queue = list(states)

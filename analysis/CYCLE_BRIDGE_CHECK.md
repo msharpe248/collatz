@@ -61,8 +61,10 @@ certificate uses 36 bridges and reaches clock 412. There are no cap outcomes.
 All saved certificates are independently replayed on integer quotients 0,1,7,
 checking the entire path, each recursive parameter, and the endpoint slope.
 
-The 302 figure does not mean these parameters are unsolvable: earlier bridges or
-bridges inserted inside an excursion may have different effects. Nor does the
+The 302 figure does not mean these parameters are unsolvable: earlier bridges
+may have different effects. A subsequent Lean theorem in `Collatz.BridgeGrowth`
+now rules out lowering charge even with bridges inserted inside excursions; see
+`paper/bridge_growth.tex`. Nor does the
 698 figure count independently proved transfer implications: smaller transfer
 premises remain explicit. Parameter zero is excluded because its bridge parameter
 would not be strictly smaller at Q=0; it can instead be a separately checked base

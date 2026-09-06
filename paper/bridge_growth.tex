@@ -1,0 +1,87 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\begin{center}
+{\Large A Growth Bound for Arbitrarily Interleaved Transfer Bridges}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+Let $T$ be the shortcut Collatz map and $B(x)=9x+2$.
+Consider a finite path starting at a positive integer $n$, using ordinary
+$T$ steps and bridges $B$ in any order. Let $x$ be its endpoint, $t$ its
+number of ordinary steps, $j$ its number of odd ordinary steps, and $b$
+its number of bridges. Set $e=2j+4b$.
+We impose no congruence or recursive-parameter restrictions on bridges.
+This relaxation makes the exclusion below apply to every admissible
+forward transfer-bridge path as well.
+
+\begin{theorem}[Mixed-path growth bound]
+Every such path satisfies
+\[
+ 2^t x\leq 2^e n.
+\]
+\end{theorem}
+\begin{proof}
+An even step divides the current value by two. At a positive odd value $y$,
+$2T(y)=3y+1\leq4y$, so an odd step increases size by at most a factor of two.
+A bridge satisfies $9y+2\leq16y$ for $y\geq1$.
+Multiplying these bounds gives
+$x\leq2^{j-(t-j)+4b}n=2^{e-t}n$.
+The Lean proof uses natural-number inequalities and induction on the path,
+without negative powers, logarithms, or a convergence premise.
+\end{proof}
+
+\begin{theorem}[Cycle charge cannot decrease]
+If the starting and ending values both lie in $\{1,2\}$, then
+\[
+ t+\mathbf1_{n=1}\leq e+\mathbf1_{x=1}.
+\]
+Equivalently, a symbolic path with initial slope exponent $p$ and initial
+clock $s$ cannot lower
+\[
+ L(y,p,s)=2p-s+\mathbf1_{y=1}
+\]
+between its starting and ending cycle states.
+\end{theorem}
+\begin{proof}
+Write $n=2^{1-\mathbf1_{n=1}}$ and
+$x=2^{1-\mathbf1_{x=1}}$ in the growth bound and compare powers of two.
+The symbolic slope exponent increases by $j+2b=e/2$ and the clock by $t$,
+giving the equivalent charge comparison. Lean checks the natural-number
+inequality by the four possible cycle endpoint cases.
+\end{proof}
+
+\paragraph{Consequence for transfer search.}
+At clock $s$, suppose a source and target have cycle base values and their
+symbolic endpoints are $x+3^p2^{D-s}Q$ and $y+3^q2^{D-s}Q$.
+If $L(x,p,s)>L(y,q,s)$, no subsequent forward source path, using any number
+of bridges, can match the target's ordinary continuation in both constant
+and slope. The target remains in the cycle and preserves its charge.
+At a fixed clock, equal symbolic endpoints require equal cycle state and
+slope exponent, hence equal charge, contradicting the theorem.
+This allows sound pruning without imposing a future bridge-count bound.
+
+\paragraph{What changed from the earlier cycle experiment.}
+Previously, the exclusion covered repeated $2\mapsto20$ excursions with
+no bridges inside an excursion. The new theorem allows bridges anywhere
+along a forward path, including inside excursions. The earlier finite
+sample's 302 negative-gap base pairs therefore cannot be rescued by any
+forward bridge path started only after both unmodified base orbits have
+entered the cycle. Earlier auxiliary paths, inverse steps, and other
+inference rules are outside this conclusion.
+
+\paragraph{Verification and remaining goal.}
+\begingroup\raggedright
+The module \texttt{Collatz.BridgeGrowth} proves positivity, the growth bound,
+and the cycle inequality. The search now removes the excluded states.
+A complete comparison on parameters 0--1000 preserves certificate outcomes
+and first-hit depths with pruning enabled or disabled; all eight affine
+search tests pass. The census remains Python evidence. The selected Lean
+axiom audit contains 217 declarations, using only standard foundations.
+\par\endgroup
+This result limits a proof-search mechanism; it does not establish global
+transfer coverage or prove Collatz. The next useful extension must reach
+these cases before the late-cycle obstruction applies or introduce a
+transition not covered by this forward-path bound. No priority claim is made.
+\end{document}

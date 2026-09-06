@@ -16,7 +16,9 @@ Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
 947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
 remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
 records five kernel-checked precision/count findings for a proposed literature
-input; the selected declaration audit contains 214 entries.
+input; the selected declaration audit now contains 217 entries. The new `BridgeGrowth`
+bound rules out lowering cycle charge through arbitrary forward bridge
+interleavings and justifies pruning those states in the affine bridge search.
 
 ## Completed in this research pass
 

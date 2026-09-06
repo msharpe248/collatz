@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: Which Late Bridges Cannot Work}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{The search being studied}
+Our transfer search follows a known-convergent source and occasionally uses
+a smaller transfer instance to introduce an auxiliary source. At the level
+of base values, the bridge replaces $x$ by $9x+2$. The aim is to make a
+source meet the target uniformly across a whole arithmetic progression.
+
+\guideheading{The stronger result}
+Lean now proves a size bound for every finite path combining ordinary
+forward Collatz steps and these bridges, in any order. The proof does not
+limit the number of bridges or require them to occur at a particular value.
+It even allows more bridges than the actual induction rules permit, so
+its impossibility consequence applies to the restricted search too.
+
+\guideheading{Why the bound is simple}
+An even step halves the value. An odd shortcut step increases it by at most
+a factor of two. A bridge increases it by at most a factor of sixteen.
+Multiplying those bounds gives a constraint on the endpoint after any
+combination of operations. Lean checks the multiplication argument for
+arbitrary paths.
+
+\guideheading{What happens at the trivial cycle}
+Once a base value is 1 or 2, we can combine the clock, its cycle phase, and
+the symbolic slope exponent into an integer quantity called its charge.
+Ordinary steps around the cycle preserve this charge.
+The new bound proves that a source cannot lower its charge by leaving the
+cycle through bridges and eventually returning, even if it inserts more
+bridges during the excursion.
+
+If the source charge is already above the target charge, it cannot match
+the target later using these forward operations. Increasing the future
+bridge budget will not fix that mismatch.
+
+\guideheading{How this improves the search}
+The program now discards such states immediately. A complete comparison
+for parameters 0 through 1000 found the same certificate outcomes and
+first successful depths with this pruning switched on or off. All eight
+affine-search tests passed. The pruning rule rests on a general Lean
+inequality, not on the finite comparison alone.
+
+\guideheading{What remains possible}
+The result does not exclude auxiliary paths introduced earlier, inverse
+orbit steps, or different proof rules. It also does not say that the
+excluded parameters fail to converge. They are exclusions from this
+particular search strategy after it reaches a particular state.
+
+The full Collatz goal still needs a proof covering every parameter.
+These findings tell us where adding more of the same forward bridges
+cannot help; they do not supply the missing global argument.
+
+\guideheading{Where the proof lives}
+Build \texttt{Collatz.BridgeGrowth} from \texttt{lean/}. Its three public
+results are included in the theorem axiom audit. The technical paper gives
+the exact inequality and its application to symbolic endpoint matching.
+\end{document}

@@ -56,6 +56,15 @@ class BridgeTests(unittest.TestCase):
         self.assertEqual(search(28, 12, state_cap=1)['kind'], 'state_cap')
         self.assertEqual(classify_pair(28, cap=1)['kind'], 'cap')
 
+    def test_proved_pruning_preserves_complete_sample(self):
+        for u in range(1001):
+            old = search(u, prune_cycle=False)
+            new = search(u, prune_cycle=True)
+            self.assertEqual((old['kind'], old['depth']), (new['kind'], new['depth']))
+            if new['kind'] == 'certificate':
+                for Q in (0,1,7):
+                    replay(new,Q)
+
     def test_same_clock_multiple_bridges(self):
         # Independent brute-force paths, without deduplication, check the
         # closure implementation and earliest success on a complete sample.

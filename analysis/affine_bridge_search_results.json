@@ -86,7 +86,7 @@
         "kind": "depth_limit",
         "parameter": 4,
         "depth": 30,
-        "peak_states": 34
+        "peak_states": 8
       }
     },
     {
@@ -281,7 +281,7 @@
         "kind": "depth_limit",
         "parameter": 16,
         "depth": 30,
-        "peak_states": 52
+        "peak_states": 21
       }
     },
     {
@@ -476,7 +476,7 @@
         "kind": "depth_limit",
         "parameter": 29,
         "depth": 30,
-        "peak_states": 45
+        "peak_states": 23
       }
     },
     {
@@ -645,7 +645,7 @@
         "kind": "depth_limit",
         "parameter": 39,
         "depth": 30,
-        "peak_states": 49
+        "peak_states": 32
       }
     },
     {
@@ -733,7 +733,7 @@
         "kind": "depth_limit",
         "parameter": 44,
         "depth": 30,
-        "peak_states": 55
+        "peak_states": 33
       }
     },
     {
@@ -1003,7 +1003,7 @@
         "kind": "depth_limit",
         "parameter": 59,
         "depth": 30,
-        "peak_states": 60
+        "peak_states": 43
       }
     },
     {
@@ -1015,7 +1015,7 @@
         "kind": "depth_limit",
         "parameter": 60,
         "depth": 30,
-        "peak_states": 18
+        "peak_states": 15
       }
     },
     {
@@ -1027,7 +1027,7 @@
         "kind": "depth_limit",
         "parameter": 61,
         "depth": 30,
-        "peak_states": 48
+        "peak_states": 41
       }
     },
     {
@@ -1171,7 +1171,7 @@
         "kind": "depth_limit",
         "parameter": 68,
         "depth": 30,
-        "peak_states": 16
+        "peak_states": 12
       }
     },
     {
@@ -1798,7 +1798,7 @@
         "kind": "depth_limit",
         "parameter": 103,
         "depth": 30,
-        "peak_states": 19
+        "peak_states": 17
       }
     },
     {
@@ -1930,7 +1930,7 @@
         "kind": "depth_limit",
         "parameter": 109,
         "depth": 30,
-        "peak_states": 49
+        "peak_states": 47
       }
     },
     {
@@ -2040,7 +2040,7 @@
         "kind": "depth_limit",
         "parameter": 116,
         "depth": 30,
-        "peak_states": 22
+        "peak_states": 18
       }
     },
     {
@@ -2332,7 +2332,7 @@
         "kind": "depth_limit",
         "parameter": 132,
         "depth": 30,
-        "peak_states": 24
+        "peak_states": 23
       }
     },
     {
@@ -2660,7 +2660,7 @@
         "kind": "depth_limit",
         "parameter": 149,
         "depth": 30,
-        "peak_states": 27
+        "peak_states": 24
       }
     },
     {
@@ -6687,7 +6687,7 @@
         "kind": "depth_limit",
         "parameter": 370,
         "depth": 30,
-        "peak_states": 91
+        "peak_states": 85
       }
     },
     {
@@ -7396,7 +7396,7 @@
         "kind": "depth_limit",
         "parameter": 412,
         "depth": 30,
-        "peak_states": 56
+        "peak_states": 54
       }
     },
     {
@@ -8763,7 +8763,7 @@
         "kind": "depth_limit",
         "parameter": 488,
         "depth": 30,
-        "peak_states": 49
+        "peak_states": 48
       }
     },
     {
@@ -16020,7 +16020,7 @@
         "kind": "depth_limit",
         "parameter": 898,
         "depth": 30,
-        "peak_states": 73
+        "peak_states": 70
       }
     },
     {

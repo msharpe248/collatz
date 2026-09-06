@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.BridgeGrowth', 'Collatz.BridgeGrowth.Path.pos', 'Mixed forward Collatz and auxiliary bridge paths preserve positivity'),
+    ('Collatz.BridgeGrowth', 'Collatz.BridgeGrowth.Path.growth_bound', 'All mixed paths satisfy 2^t*x <= 2^e*n, with e twice the symbolic exponent increment'),
+    ('Collatz.BridgeGrowth', 'Collatz.BridgeGrowth.Path.cycle_charge_nondecrease', 'Arbitrary forward bridge interleavings between trivial-cycle states cannot lower cycle charge'),
     ('Collatz.ResidueMapAudit', 'Collatz.ResidueMapAudit.gap_precision_witness', 'Inputs 3 and 35 share a mod-32 gap residue but their shortcut images differ modulo 32'),
     ('Collatz.ResidueMapAudit', 'Collatz.ResidueMapAudit.no_gap_map_mod32', 'No function of the input mod-32 residue alone represents all gap outputs modulo 32'),
     ('Collatz.ResidueMapAudit', 'Collatz.ResidueMapAudit.gap_lift_formula', 'Exact quotient-sensitive gap formula T(3+32q)=5+48q'),
