@@ -16,7 +16,7 @@ Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
 947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
 remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
 records five kernel-checked precision/count findings for a proposed literature
-input; the selected declaration audit now contains 225 entries. The new `BridgeGrowth`
+input; the selected declaration audit now contains 228 entries. The new `BridgeGrowth`
 bound rules out lowering cycle charge through arbitrary forward bridge
 interleavings and justifies pruning those states in the affine bridge search.
 `InverseCycleBridge` now verifies a signed 2 <- 47 -> 425 -> 2 excursion
@@ -29,6 +29,11 @@ bootstrapping any parameter 2^k-1 from a proper smaller canonical base whose
 target reaches the cycle by the binary depth. This is an all-depth obstruction
 to that particular coverage argument, not to Collatz. Further cycle-certificate
 censuses do not remove it; see `paper/cycle_cylinder_boundary.tex`.
+`EarlyInverseBridge` now supplies the conditional early step 59+192Q ->39+128Q,
+with no target-cycle premise. Its general predecessor template only treats
+u=2 mod 3. The complete depth-12 census covers 407/4096 w-residues in u=3w+2;
+other parameter classes and global coverage remain open. See
+`paper/early_inverse_bridge.tex`.
 
 ## Completed in this research pass
 

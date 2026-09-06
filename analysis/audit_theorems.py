@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.EarlyInverseBridge', 'Collatz.early_inverse_predecessor', 'An immediate odd predecessor exposes the smaller transfer parameter 2w+1 at u=3w+2'),
+    ('Collatz.EarlyInverseBridge', 'Collatz.early_inverse_bridge_59', 'Exact inverse/merge identities and strict decrease from 59+192Q to 39+128Q'),
+    ('Collatz.EarlyInverseBridge', 'Collatz.AffineTransfer.early_inverse_59', 'Conditional early inverse transfer step without a target-cycle convergence premise'),
     ('Collatz.CycleCylinderBoundary', 'Collatz.CycleCylinderBoundary.seed_le_scaled_endpoint', 'Every shortcut orbit satisfies n <= 2^t*T^t(n)'),
     ('Collatz.CycleCylinderBoundary', 'Collatz.CycleCylinderBoundary.target_cycle_size_bound', 'Target cycle entry by depth d forces 27r+20 <= 2^(d+1)'),
     ('Collatz.CycleCylinderBoundary', 'Collatz.CycleCylinderBoundary.top_residue_not_in_target_cycle', 'The target at top binary parameter residue is above two at the cylinder depth'),

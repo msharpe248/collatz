@@ -1,0 +1,66 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: An Inverse Step Before Target Convergence}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{What changed}
+The earlier inverse excursion began after both base partners reached the
+trivial cycle. That could not provide the missing convergence proof for
+an unknown target. The new family uses an immediate predecessor of the
+source and a short, exact merge. It never assumes the target reaches one.
+
+\guideheading{The induction step}
+The transfer question at parameter $u$ asks whether convergence of $3u+2$
+implies convergence of $27u+20$. Lean now verifies the reduction
+\[
+ u=59+192Q\quad\longrightarrow\quad v=39+128Q<u
+\]
+for every natural quotient $Q$.
+
+The smaller partner at $v$ maps to the smaller partner at $u$ in one step.
+Thus knowing the latter converges also proves convergence of the former.
+Applying transfer at $v$ supplies its larger partner. That auxiliary larger
+partner and the original larger partner then meet: after seven and six
+steps respectively, both equal $227+729Q$.
+
+\guideheading{The premise remains explicit}
+The proof uses transfer at the strictly smaller parameter $v$. It is an
+induction step, not an unconditional proof of transfer on every member of
+the family. To obtain a full induction, all parameters still need valid
+base cases or decreasing recursive rules.
+
+\guideheading{How the search extends it}
+For parameters $u=3w+2$, the immediate predecessor exposes $v=2w+1$.
+After applying that smaller transfer, the remaining pair differs by three:
+$81w+71$ and $81w+74$.
+The search looks for exact merges that preserve both the base endpoint
+and its dependence on the quotient.
+
+Through depth twelve, 104 rules cover 407 of the 4096 tested binary
+residues of $w$. The other 3689 remain unresolved. These counts concern
+one class modulo three and are not global Collatz coverage.
+
+\guideheading{What has been checked}
+Lean proves the predecessor identities, the strict parameter decrease,
+and the entire displayed family for arbitrary $Q$. Three tests check the
+finite search against direct trajectories and replay every saved rule
+on several quotient lifts. The full census is not a Lean coverage theorem.
+
+\guideheading{What remains open}
+This removes the target-convergence assumption for one useful kind of
+certificate. It does not cover the other two parameter classes modulo
+three, which include the previously identified $2^k-1$ parameters.
+A full proof needs more than extending this one template. Collatz remains
+unproved.
+
+\guideheading{Verification files}
+\begingroup\raggedright
+Build \texttt{Collatz.EarlyInverseBridge} from \texttt{lean/}.
+Run \texttt{python3 analysis/early\_inverse\_bridge\_search.py} and
+\texttt{python3 -m unittest discover -s analysis -p test\_early\_inverse\_bridge\_search.py}.
+\par\endgroup
+\end{document}

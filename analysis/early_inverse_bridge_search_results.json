@@ -1,0 +1,704 @@
+{
+  "scope": "all quotients of certified w-cylinders; smaller-transfer premise retained",
+  "kernel_certified_census": false,
+  "levels": [
+    {
+      "depth": 1,
+      "covered": 0,
+      "unresolved": 2,
+      "new_rules": 0
+    },
+    {
+      "depth": 2,
+      "covered": 0,
+      "unresolved": 4,
+      "new_rules": 0
+    },
+    {
+      "depth": 3,
+      "covered": 0,
+      "unresolved": 8,
+      "new_rules": 0
+    },
+    {
+      "depth": 4,
+      "covered": 0,
+      "unresolved": 16,
+      "new_rules": 0
+    },
+    {
+      "depth": 5,
+      "covered": 0,
+      "unresolved": 32,
+      "new_rules": 0
+    },
+    {
+      "depth": 6,
+      "covered": 1,
+      "unresolved": 63,
+      "new_rules": 1
+    },
+    {
+      "depth": 7,
+      "covered": 4,
+      "unresolved": 124,
+      "new_rules": 2
+    },
+    {
+      "depth": 8,
+      "covered": 12,
+      "unresolved": 244,
+      "new_rules": 4
+    },
+    {
+      "depth": 9,
+      "covered": 31,
+      "unresolved": 481,
+      "new_rules": 7
+    },
+    {
+      "depth": 10,
+      "covered": 76,
+      "unresolved": 948,
+      "new_rules": 14
+    },
+    {
+      "depth": 11,
+      "covered": 179,
+      "unresolved": 1869,
+      "new_rules": 27
+    },
+    {
+      "depth": 12,
+      "covered": 407,
+      "unresolved": 3689,
+      "new_rules": 49
+    }
+  ],
+  "certificates": [
+    {
+      "w": 19,
+      "depth": 6,
+      "endpoint": 227,
+      "odds": 2
+    },
+    {
+      "w": 110,
+      "depth": 7,
+      "endpoint": 632,
+      "odds": 2
+    },
+    {
+      "w": 35,
+      "depth": 7,
+      "endpoint": 614,
+      "odds": 3
+    },
+    {
+      "w": 92,
+      "depth": 8,
+      "endpoint": 794,
+      "odds": 3
+    },
+    {
+      "w": 14,
+      "depth": 8,
+      "endpoint": 128,
+      "odds": 3
+    },
+    {
+      "w": 3,
+      "depth": 8,
+      "endpoint": 101,
+      "odds": 4
+    },
+    {
+      "w": 171,
+      "depth": 8,
+      "endpoint": 1469,
+      "odds": 3
+    },
+    {
+      "w": 28,
+      "depth": 9,
+      "endpoint": 371,
+      "odds": 4
+    },
+    {
+      "w": 10,
+      "depth": 9,
+      "endpoint": 47,
+      "odds": 3
+    },
+    {
+      "w": 462,
+      "depth": 9,
+      "endpoint": 5933,
+      "odds": 4
+    },
+    {
+      "w": 286,
+      "depth": 9,
+      "endpoint": 1226,
+      "odds": 3
+    },
+    {
+      "w": 67,
+      "depth": 9,
+      "endpoint": 2612,
+      "odds": 5
+    },
+    {
+      "w": 363,
+      "depth": 9,
+      "endpoint": 4664,
+      "odds": 4
+    },
+    {
+      "w": 415,
+      "depth": 9,
+      "endpoint": 5330,
+      "odds": 4
+    },
+    {
+      "w": 156,
+      "depth": 10,
+      "endpoint": 3017,
+      "odds": 5
+    },
+    {
+      "w": 380,
+      "depth": 10,
+      "endpoint": 2441,
+      "odds": 4
+    },
+    {
+      "w": 498,
+      "depth": 10,
+      "endpoint": 3197,
+      "odds": 4
+    },
+    {
+      "w": 394,
+      "depth": 10,
+      "endpoint": 2531,
+      "odds": 4
+    },
+    {
+      "w": 358,
+      "depth": 10,
+      "endpoint": 767,
+      "odds": 3
+    },
+    {
+      "w": 590,
+      "depth": 10,
+      "endpoint": 11360,
+      "odds": 5
+    },
+    {
+      "w": 158,
+      "depth": 10,
+      "endpoint": 1019,
+      "odds": 4
+    },
+    {
+      "w": 689,
+      "depth": 10,
+      "endpoint": 4421,
+      "odds": 4
+    },
+    {
+      "w": 969,
+      "depth": 10,
+      "endpoint": 2072,
+      "odds": 3
+    },
+    {
+      "w": 963,
+      "depth": 10,
+      "endpoint": 55586,
+      "odds": 6
+    },
+    {
+      "w": 203,
+      "depth": 10,
+      "endpoint": 1307,
+      "odds": 4
+    },
+    {
+      "w": 1003,
+      "depth": 10,
+      "endpoint": 19298,
+      "odds": 5
+    },
+    {
+      "w": 439,
+      "depth": 10,
+      "endpoint": 2819,
+      "odds": 4
+    },
+    {
+      "w": 31,
+      "depth": 10,
+      "endpoint": 614,
+      "odds": 5
+    },
+    {
+      "w": 848,
+      "depth": 11,
+      "endpoint": 2720,
+      "odds": 4
+    },
+    {
+      "w": 1668,
+      "depth": 11,
+      "endpoint": 16040,
+      "odds": 5
+    },
+    {
+      "w": 1388,
+      "depth": 11,
+      "endpoint": 13349,
+      "odds": 5
+    },
+    {
+      "w": 924,
+      "depth": 11,
+      "endpoint": 26669,
+      "odds": 6
+    },
+    {
+      "w": 636,
+      "depth": 11,
+      "endpoint": 6122,
+      "odds": 5
+    },
+    {
+      "w": 754,
+      "depth": 11,
+      "endpoint": 7256,
+      "odds": 5
+    },
+    {
+      "w": 650,
+      "depth": 11,
+      "endpoint": 6257,
+      "odds": 5
+    },
+    {
+      "w": 1098,
+      "depth": 11,
+      "endpoint": 3521,
+      "odds": 4
+    },
+    {
+      "w": 730,
+      "depth": 11,
+      "endpoint": 2342,
+      "odds": 4
+    },
+    {
+      "w": 1126,
+      "depth": 11,
+      "endpoint": 3611,
+      "odds": 4
+    },
+    {
+      "w": 334,
+      "depth": 11,
+      "endpoint": 9659,
+      "odds": 6
+    },
+    {
+      "w": 414,
+      "depth": 11,
+      "endpoint": 3989,
+      "odds": 5
+    },
+    {
+      "w": 862,
+      "depth": 11,
+      "endpoint": 2765,
+      "odds": 4
+    },
+    {
+      "w": 1697,
+      "depth": 11,
+      "endpoint": 16319,
+      "odds": 5
+    },
+    {
+      "w": 945,
+      "depth": 11,
+      "endpoint": 9092,
+      "odds": 5
+    },
+    {
+      "w": 713,
+      "depth": 11,
+      "endpoint": 2288,
+      "odds": 4
+    },
+    {
+      "w": 921,
+      "depth": 11,
+      "endpoint": 2954,
+      "odds": 4
+    },
+    {
+      "w": 813,
+      "depth": 11,
+      "endpoint": 7823,
+      "odds": 5
+    },
+    {
+      "w": 317,
+      "depth": 11,
+      "endpoint": 1019,
+      "odds": 4
+    },
+    {
+      "w": 195,
+      "depth": 11,
+      "endpoint": 16949,
+      "odds": 7
+    },
+    {
+      "w": 459,
+      "depth": 11,
+      "endpoint": 4421,
+      "odds": 5
+    },
+    {
+      "w": 747,
+      "depth": 11,
+      "endpoint": 21566,
+      "odds": 6
+    },
+    {
+      "w": 1275,
+      "depth": 11,
+      "endpoint": 4088,
+      "odds": 4
+    },
+    {
+      "w": 1447,
+      "depth": 11,
+      "endpoint": 13916,
+      "odds": 5
+    },
+    {
+      "w": 695,
+      "depth": 11,
+      "endpoint": 6689,
+      "odds": 5
+    },
+    {
+      "w": 1823,
+      "depth": 11,
+      "endpoint": 52589,
+      "odds": 6
+    },
+    {
+      "w": 607,
+      "depth": 11,
+      "endpoint": 5843,
+      "odds": 5
+    },
+    {
+      "w": 3408,
+      "depth": 12,
+      "endpoint": 16382,
+      "odds": 5
+    },
+    {
+      "w": 816,
+      "depth": 12,
+      "endpoint": 3926,
+      "odds": 5
+    },
+    {
+      "w": 1156,
+      "depth": 12,
+      "endpoint": 16679,
+      "odds": 6
+    },
+    {
+      "w": 1700,
+      "depth": 12,
+      "endpoint": 8174,
+      "odds": 5
+    },
+    {
+      "w": 436,
+      "depth": 12,
+      "endpoint": 6299,
+      "odds": 6
+    },
+    {
+      "w": 3468,
+      "depth": 12,
+      "endpoint": 16670,
+      "odds": 5
+    },
+    {
+      "w": 2924,
+      "depth": 12,
+      "endpoint": 42167,
+      "odds": 6
+    },
+    {
+      "w": 1436,
+      "depth": 12,
+      "endpoint": 62147,
+      "odds": 7
+    },
+    {
+      "w": 124,
+      "depth": 12,
+      "endpoint": 1802,
+      "odds": 6
+    },
+    {
+      "w": 1788,
+      "depth": 12,
+      "endpoint": 8597,
+      "odds": 5
+    },
+    {
+      "w": 1906,
+      "depth": 12,
+      "endpoint": 9164,
+      "odds": 5
+    },
+    {
+      "w": 242,
+      "depth": 12,
+      "endpoint": 3503,
+      "odds": 6
+    },
+    {
+      "w": 2186,
+      "depth": 12,
+      "endpoint": 31529,
+      "odds": 6
+    },
+    {
+      "w": 1610,
+      "depth": 12,
+      "endpoint": 7742,
+      "odds": 5
+    },
+    {
+      "w": 3242,
+      "depth": 12,
+      "endpoint": 5195,
+      "odds": 4
+    },
+    {
+      "w": 3290,
+      "depth": 12,
+      "endpoint": 15815,
+      "odds": 5
+    },
+    {
+      "w": 698,
+      "depth": 12,
+      "endpoint": 3359,
+      "odds": 5
+    },
+    {
+      "w": 1798,
+      "depth": 12,
+      "endpoint": 2882,
+      "odds": 4
+    },
+    {
+      "w": 1638,
+      "depth": 12,
+      "endpoint": 7877,
+      "odds": 5
+    },
+    {
+      "w": 2534,
+      "depth": 12,
+      "endpoint": 4061,
+      "odds": 4
+    },
+    {
+      "w": 846,
+      "depth": 12,
+      "endpoint": 36632,
+      "odds": 7
+    },
+    {
+      "w": 1950,
+      "depth": 12,
+      "endpoint": 28127,
+      "odds": 6
+    },
+    {
+      "w": 1374,
+      "depth": 12,
+      "endpoint": 6608,
+      "odds": 5
+    },
+    {
+      "w": 3006,
+      "depth": 12,
+      "endpoint": 4817,
+      "odds": 4
+    },
+    {
+      "w": 3233,
+      "depth": 12,
+      "endpoint": 46622,
+      "odds": 6
+    },
+    {
+      "w": 2097,
+      "depth": 12,
+      "endpoint": 10082,
+      "odds": 5
+    },
+    {
+      "w": 433,
+      "depth": 12,
+      "endpoint": 6257,
+      "odds": 6
+    },
+    {
+      "w": 73,
+      "depth": 12,
+      "endpoint": 119,
+      "odds": 4
+    },
+    {
+      "w": 3273,
+      "depth": 12,
+      "endpoint": 15734,
+      "odds": 5
+    },
+    {
+      "w": 3481,
+      "depth": 12,
+      "endpoint": 16733,
+      "odds": 5
+    },
+    {
+      "w": 2261,
+      "depth": 12,
+      "endpoint": 32609,
+      "odds": 6
+    },
+    {
+      "w": 565,
+      "depth": 12,
+      "endpoint": 2720,
+      "odds": 5
+    },
+    {
+      "w": 1485,
+      "depth": 12,
+      "endpoint": 21422,
+      "odds": 6
+    },
+    {
+      "w": 2349,
+      "depth": 12,
+      "endpoint": 33878,
+      "odds": 6
+    },
+    {
+      "w": 2333,
+      "depth": 12,
+      "endpoint": 11216,
+      "odds": 5
+    },
+    {
+      "w": 829,
+      "depth": 12,
+      "endpoint": 3989,
+      "odds": 5
+    },
+    {
+      "w": 1731,
+      "depth": 12,
+      "endpoint": 224714,
+      "odds": 8
+    },
+    {
+      "w": 3315,
+      "depth": 12,
+      "endpoint": 5312,
+      "odds": 4
+    },
+    {
+      "w": 3659,
+      "depth": 12,
+      "endpoint": 17588,
+      "odds": 5
+    },
+    {
+      "w": 1995,
+      "depth": 12,
+      "endpoint": 28775,
+      "odds": 6
+    },
+    {
+      "w": 3307,
+      "depth": 12,
+      "endpoint": 143066,
+      "odds": 7
+    },
+    {
+      "w": 3835,
+      "depth": 12,
+      "endpoint": 18434,
+      "odds": 5
+    },
+    {
+      "w": 935,
+      "depth": 12,
+      "endpoint": 13493,
+      "odds": 6
+    },
+    {
+      "w": 919,
+      "depth": 12,
+      "endpoint": 4421,
+      "odds": 5
+    },
+    {
+      "w": 3895,
+      "depth": 12,
+      "endpoint": 18722,
+      "odds": 5
+    },
+    {
+      "w": 2231,
+      "depth": 12,
+      "endpoint": 32177,
+      "odds": 6
+    },
+    {
+      "w": 2335,
+      "depth": 12,
+      "endpoint": 101027,
+      "odds": 7
+    },
+    {
+      "w": 2143,
+      "depth": 12,
+      "endpoint": 30908,
+      "odds": 6
+    },
+    {
+      "w": 1279,
+      "depth": 12,
+      "endpoint": 18452,
+      "odds": 6
+    }
+  ]
+}

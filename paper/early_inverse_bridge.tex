@@ -1,0 +1,87 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\newcommand{\R}{\mathcal R}
+\newcommand{\A}{\mathcal A}
+\begin{document}
+\begin{center}
+{\Large An Early Inverse Bridge for Affine-Transfer Induction}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+Write $\R(n)$ for reaching one under the shortcut Collatz map $T$, and
+$\A(u)=[\R(3u+2)\Rightarrow\R(27u+20)]$.
+The preceding cycle-based construction needed convergence of a base target.
+Here an immediate inverse step yields a conditional induction certificate
+without that premise. The universal transfer statement remains unproved.
+
+\paragraph{The early predecessor.}
+For every natural $w$, put $u=3w+2$ and $v=2w+1$. Then
+\[
+ v<u,\qquad T(3v+2)=3u+2,\qquad T(27v+20)=81w+71,
+\]
+whereas $27u+20=81w+74$.
+Thus $\R(3u+2)$ and the induction hypothesis $\A(v)$ supply convergence
+of $81w+71$. A suitable orbit merge with $81w+74$ completes transfer at $u$.
+The source predecessor is available before inspecting any target trajectory.
+
+\begin{theorem}[Uniform early inverse family]
+For every natural $Q$, define
+\[
+ u=59+192Q,\qquad v=39+128Q.
+\]
+Then $v<u$ and
+\begin{align*}
+ T(3v+2)&=3u+2,\\
+ T^7(27v+20)&=T^6(27u+20)=227+729Q.
+\end{align*}
+Consequently $\A(v)\Rightarrow\A(u)$.
+\end{theorem}
+\begin{proof}
+The first identity follows by applying the odd shortcut step to
+$3v+2=119+384Q$.
+For the second, the base paths satisfy
+\[
+ T^7(1073)=227,\quad j_7(1073)=3,\qquad
+ T^6(1613)=227,\quad j_6(1613)=2.
+\]
+The input increments are $2^7\cdot27Q$ and $2^6\cdot81Q$,
+so binary-cylinder transport gives identical endpoint increments $729Q$.
+Also $u-v=20+64Q>0$.
+Given $\R(3u+2)$, transport convergence backward one step, apply $\A(v)$,
+and then use the common endpoint to conclude $\R(27u+20)$.
+Lean checks the identities, inequality, and conditional implication for every $Q$.
+\end{proof}
+
+\paragraph{Exact search criterion.}
+For a binary cylinder $w=r+2^tQ$, let $x,y$ be the $t$-step endpoints of
+$81r+71$ and $81r+74$, with odd counts $j,k$.
+The endpoint increments are $3^{j+4}Q$ and $3^{k+4}Q$.
+Hence $x=y$ and $j=k$ give a uniform merge. The recursive parameters are
+\[
+ u=3r+2+3\cdot2^tQ,\qquad
+ v=2r+1+2^{t+1}Q<u.
+\]
+These are early certificates: the criterion checks exact finite orbit identities,
+not eventual target cycle entry.
+
+\paragraph{Finite evidence.}
+At depth 12 the search finds 104 first rules. They cover 407 of the
+$4096$ binary residues of $w$, leaving 3689 unresolved. This is coverage
+inside $u\equiv2\pmod3$, not of all parameters. Three tests compare complete
+small-depth searches with direct orbits, replay all rules on three quotient
+lifts, and check the first rule $r=19,t=6$.
+The census is Python evidence; the displayed family is kernel checked.
+
+\paragraph{Remaining obligation and verification.}
+This family supplies a genuine smaller-parameter induction step without an
+unproved target-convergence premise. It does not establish universal rule
+coverage. In particular, parameters $2^k-1$ lie in the other two classes
+modulo three, so this first inverse template does not resolve the preceding
+bootstrap obstruction. Other templates or a global argument are still needed.
+\begingroup\raggedright
+The three public declarations in \texttt{Collatz.EarlyInverseBridge} enter
+the axiom audit. The search is \texttt{analysis/early\_inverse\_bridge\_search.py}.
+No mathematical priority claim or proof of Collatz is asserted.
+\par\endgroup
+\end{document}

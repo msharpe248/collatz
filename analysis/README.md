@@ -7,6 +7,7 @@ reproducible byte-for-byte.
 
 | script | what it does | paper section |
 |---|---|---|
+| `early_inverse_bridge_search.py` | exact early inverse induction rules in the parameter class two modulo three | `../paper/early_inverse_bridge.tex` |
 | `inverse_cycle_bridge.py` | signed inverse excursions repair either cycle-charge mismatch for convergent base pairs | `../paper/inverse_cycle_bridge.tex` |
 | `cycle_bridge_search.py` | constructive late-cycle transfer bridges and their exact directional limitation | `CYCLE_BRIDGE_CHECK.md` |
 | `exponent_return_search.py` | uniform smaller-exponent merges for terminal targets 3^k+1; finite coverage census | `EXPONENT_RETURN_CHECK.md` |
