@@ -1043,3 +1043,16 @@ It does not exclude inverse/auxiliary operations, quotient-dependent
 parity descriptions, individual seed equalities, or initial slope ratios
 containing powers of two. See `AFFINE_CLOCK_CHECK.md`. The full Collatz
 convergence claim and the unresolved transfer premises remain open.
+
+
+## Direct exit-descent check
+
+`MERSENNE_EXIT_DESCENT.md` records first descents of `729*81^h-10` below
+`16*64^h-1` for all h=0..512, with maximum observed depth 1098. These
+are finite Python witnesses only. An elementary per-step lower bound
+forces depth at least `floor(h/3)+6`, ruling out any fixed exit-depth
+bound for this stronger descent target. Convergence below the threshold
+is a separate premise: smaller affine-transfer instances are not silently
+converted into convergence of all smaller integers. This route requires
+a variable-length theorem and a justified convergence premise before it
+can close the transfer induction.

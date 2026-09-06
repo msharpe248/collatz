@@ -1,0 +1,3601 @@
+{
+  "scope": "finite ordinary descents only; no uniform bound or transfer closure",
+  "kernel_certified": false,
+  "max_h": 512,
+  "cap": 20000,
+  "descents": 513,
+  "depth_limits": 0,
+  "probes": [
+    {
+      "h": 0,
+      "kind": "descent",
+      "depth": 30,
+      "odd_steps": 15,
+      "necessary_minimum_depth": 6
+    },
+    {
+      "h": 1,
+      "kind": "descent",
+      "depth": 63,
+      "odd_steps": 36,
+      "necessary_minimum_depth": 6
+    },
+    {
+      "h": 2,
+      "kind": "descent",
+      "depth": 30,
+      "odd_steps": 15,
+      "necessary_minimum_depth": 7
+    },
+    {
+      "h": 3,
+      "kind": "descent",
+      "depth": 50,
+      "odd_steps": 27,
+      "necessary_minimum_depth": 7
+    },
+    {
+      "h": 4,
+      "kind": "descent",
+      "depth": 41,
+      "odd_steps": 21,
+      "necessary_minimum_depth": 7
+    },
+    {
+      "h": 5,
+      "kind": "descent",
+      "depth": 70,
+      "odd_steps": 39,
+      "necessary_minimum_depth": 8
+    },
+    {
+      "h": 6,
+      "kind": "descent",
+      "depth": 48,
+      "odd_steps": 25,
+      "necessary_minimum_depth": 8
+    },
+    {
+      "h": 7,
+      "kind": "descent",
+      "depth": 54,
+      "odd_steps": 29,
+      "necessary_minimum_depth": 8
+    },
+    {
+      "h": 8,
+      "kind": "descent",
+      "depth": 40,
+      "odd_steps": 20,
+      "necessary_minimum_depth": 9
+    },
+    {
+      "h": 9,
+      "kind": "descent",
+      "depth": 38,
+      "odd_steps": 18,
+      "necessary_minimum_depth": 9
+    },
+    {
+      "h": 10,
+      "kind": "descent",
+      "depth": 41,
+      "odd_steps": 20,
+      "necessary_minimum_depth": 9
+    },
+    {
+      "h": 11,
+      "kind": "descent",
+      "depth": 160,
+      "odd_steps": 95,
+      "necessary_minimum_depth": 10
+    },
+    {
+      "h": 12,
+      "kind": "descent",
+      "depth": 86,
+      "odd_steps": 48,
+      "necessary_minimum_depth": 10
+    },
+    {
+      "h": 13,
+      "kind": "descent",
+      "depth": 50,
+      "odd_steps": 25,
+      "necessary_minimum_depth": 10
+    },
+    {
+      "h": 14,
+      "kind": "descent",
+      "depth": 92,
+      "odd_steps": 51,
+      "necessary_minimum_depth": 11
+    },
+    {
+      "h": 15,
+      "kind": "descent",
+      "depth": 95,
+      "odd_steps": 53,
+      "necessary_minimum_depth": 11
+    },
+    {
+      "h": 16,
+      "kind": "descent",
+      "depth": 62,
+      "odd_steps": 32,
+      "necessary_minimum_depth": 11
+    },
+    {
+      "h": 17,
+      "kind": "descent",
+      "depth": 70,
+      "odd_steps": 37,
+      "necessary_minimum_depth": 12
+    },
+    {
+      "h": 18,
+      "kind": "descent",
+      "depth": 83,
+      "odd_steps": 45,
+      "necessary_minimum_depth": 12
+    },
+    {
+      "h": 19,
+      "kind": "descent",
+      "depth": 187,
+      "odd_steps": 110,
+      "necessary_minimum_depth": 12
+    },
+    {
+      "h": 20,
+      "kind": "descent",
+      "depth": 65,
+      "odd_steps": 33,
+      "necessary_minimum_depth": 13
+    },
+    {
+      "h": 21,
+      "kind": "descent",
+      "depth": 53,
+      "odd_steps": 25,
+      "necessary_minimum_depth": 13
+    },
+    {
+      "h": 22,
+      "kind": "descent",
+      "depth": 91,
+      "odd_steps": 49,
+      "necessary_minimum_depth": 13
+    },
+    {
+      "h": 23,
+      "kind": "descent",
+      "depth": 72,
+      "odd_steps": 37,
+      "necessary_minimum_depth": 14
+    },
+    {
+      "h": 24,
+      "kind": "descent",
+      "depth": 68,
+      "odd_steps": 34,
+      "necessary_minimum_depth": 14
+    },
+    {
+      "h": 25,
+      "kind": "descent",
+      "depth": 86,
+      "odd_steps": 45,
+      "necessary_minimum_depth": 15
+    },
+    {
+      "h": 26,
+      "kind": "descent",
+      "depth": 197,
+      "odd_steps": 115,
+      "necessary_minimum_depth": 15
+    },
+    {
+      "h": 27,
+      "kind": "descent",
+      "depth": 164,
+      "odd_steps": 94,
+      "necessary_minimum_depth": 15
+    },
+    {
+      "h": 28,
+      "kind": "descent",
+      "depth": 46,
+      "odd_steps": 19,
+      "necessary_minimum_depth": 16
+    },
+    {
+      "h": 29,
+      "kind": "descent",
+      "depth": 63,
+      "odd_steps": 30,
+      "necessary_minimum_depth": 16
+    },
+    {
+      "h": 30,
+      "kind": "descent",
+      "depth": 119,
+      "odd_steps": 65,
+      "necessary_minimum_depth": 16
+    },
+    {
+      "h": 31,
+      "kind": "descent",
+      "depth": 131,
+      "odd_steps": 72,
+      "necessary_minimum_depth": 17
+    },
+    {
+      "h": 32,
+      "kind": "descent",
+      "depth": 77,
+      "odd_steps": 38,
+      "necessary_minimum_depth": 17
+    },
+    {
+      "h": 33,
+      "kind": "descent",
+      "depth": 131,
+      "odd_steps": 72,
+      "necessary_minimum_depth": 17
+    },
+    {
+      "h": 34,
+      "kind": "descent",
+      "depth": 78,
+      "odd_steps": 38,
+      "necessary_minimum_depth": 18
+    },
+    {
+      "h": 35,
+      "kind": "descent",
+      "depth": 54,
+      "odd_steps": 23,
+      "necessary_minimum_depth": 18
+    },
+    {
+      "h": 36,
+      "kind": "descent",
+      "depth": 55,
+      "odd_steps": 23,
+      "necessary_minimum_depth": 18
+    },
+    {
+      "h": 37,
+      "kind": "descent",
+      "depth": 77,
+      "odd_steps": 37,
+      "necessary_minimum_depth": 19
+    },
+    {
+      "h": 38,
+      "kind": "descent",
+      "depth": 112,
+      "odd_steps": 59,
+      "necessary_minimum_depth": 19
+    },
+    {
+      "h": 39,
+      "kind": "descent",
+      "depth": 100,
+      "odd_steps": 51,
+      "necessary_minimum_depth": 19
+    },
+    {
+      "h": 40,
+      "kind": "descent",
+      "depth": 77,
+      "odd_steps": 36,
+      "necessary_minimum_depth": 20
+    },
+    {
+      "h": 41,
+      "kind": "descent",
+      "depth": 125,
+      "odd_steps": 66,
+      "necessary_minimum_depth": 20
+    },
+    {
+      "h": 42,
+      "kind": "descent",
+      "depth": 195,
+      "odd_steps": 110,
+      "necessary_minimum_depth": 20
+    },
+    {
+      "h": 43,
+      "kind": "descent",
+      "depth": 89,
+      "odd_steps": 43,
+      "necessary_minimum_depth": 21
+    },
+    {
+      "h": 44,
+      "kind": "descent",
+      "depth": 172,
+      "odd_steps": 95,
+      "necessary_minimum_depth": 21
+    },
+    {
+      "h": 45,
+      "kind": "descent",
+      "depth": 308,
+      "odd_steps": 181,
+      "necessary_minimum_depth": 21
+    },
+    {
+      "h": 46,
+      "kind": "descent",
+      "depth": 112,
+      "odd_steps": 57,
+      "necessary_minimum_depth": 22
+    },
+    {
+      "h": 47,
+      "kind": "descent",
+      "depth": 173,
+      "odd_steps": 95,
+      "necessary_minimum_depth": 22
+    },
+    {
+      "h": 48,
+      "kind": "descent",
+      "depth": 160,
+      "odd_steps": 87,
+      "necessary_minimum_depth": 22
+    },
+    {
+      "h": 49,
+      "kind": "descent",
+      "depth": 146,
+      "odd_steps": 78,
+      "necessary_minimum_depth": 23
+    },
+    {
+      "h": 50,
+      "kind": "descent",
+      "depth": 132,
+      "odd_steps": 69,
+      "necessary_minimum_depth": 23
+    },
+    {
+      "h": 51,
+      "kind": "descent",
+      "depth": 90,
+      "odd_steps": 42,
+      "necessary_minimum_depth": 23
+    },
+    {
+      "h": 52,
+      "kind": "descent",
+      "depth": 101,
+      "odd_steps": 49,
+      "necessary_minimum_depth": 24
+    },
+    {
+      "h": 53,
+      "kind": "descent",
+      "depth": 157,
+      "odd_steps": 84,
+      "necessary_minimum_depth": 24
+    },
+    {
+      "h": 54,
+      "kind": "descent",
+      "depth": 108,
+      "odd_steps": 53,
+      "necessary_minimum_depth": 24
+    },
+    {
+      "h": 55,
+      "kind": "descent",
+      "depth": 113,
+      "odd_steps": 56,
+      "necessary_minimum_depth": 25
+    },
+    {
+      "h": 56,
+      "kind": "descent",
+      "depth": 93,
+      "odd_steps": 43,
+      "necessary_minimum_depth": 25
+    },
+    {
+      "h": 57,
+      "kind": "descent",
+      "depth": 152,
+      "odd_steps": 80,
+      "necessary_minimum_depth": 25
+    },
+    {
+      "h": 58,
+      "kind": "descent",
+      "depth": 133,
+      "odd_steps": 68,
+      "necessary_minimum_depth": 26
+    },
+    {
+      "h": 59,
+      "kind": "descent",
+      "depth": 66,
+      "odd_steps": 25,
+      "necessary_minimum_depth": 26
+    },
+    {
+      "h": 60,
+      "kind": "descent",
+      "depth": 123,
+      "odd_steps": 61,
+      "necessary_minimum_depth": 26
+    },
+    {
+      "h": 61,
+      "kind": "descent",
+      "depth": 127,
+      "odd_steps": 63,
+      "necessary_minimum_depth": 27
+    },
+    {
+      "h": 62,
+      "kind": "descent",
+      "depth": 163,
+      "odd_steps": 86,
+      "necessary_minimum_depth": 27
+    },
+    {
+      "h": 63,
+      "kind": "descent",
+      "depth": 168,
+      "odd_steps": 89,
+      "necessary_minimum_depth": 27
+    },
+    {
+      "h": 64,
+      "kind": "descent",
+      "depth": 109,
+      "odd_steps": 51,
+      "necessary_minimum_depth": 28
+    },
+    {
+      "h": 65,
+      "kind": "descent",
+      "depth": 123,
+      "odd_steps": 60,
+      "necessary_minimum_depth": 28
+    },
+    {
+      "h": 66,
+      "kind": "descent",
+      "depth": 230,
+      "odd_steps": 127,
+      "necessary_minimum_depth": 28
+    },
+    {
+      "h": 67,
+      "kind": "descent",
+      "depth": 135,
+      "odd_steps": 67,
+      "necessary_minimum_depth": 29
+    },
+    {
+      "h": 68,
+      "kind": "descent",
+      "depth": 243,
+      "odd_steps": 135,
+      "necessary_minimum_depth": 29
+    },
+    {
+      "h": 69,
+      "kind": "descent",
+      "depth": 183,
+      "odd_steps": 97,
+      "necessary_minimum_depth": 29
+    },
+    {
+      "h": 70,
+      "kind": "descent",
+      "depth": 215,
+      "odd_steps": 117,
+      "necessary_minimum_depth": 30
+    },
+    {
+      "h": 71,
+      "kind": "descent",
+      "depth": 185,
+      "odd_steps": 98,
+      "necessary_minimum_depth": 30
+    },
+    {
+      "h": 72,
+      "kind": "descent",
+      "depth": 162,
+      "odd_steps": 83,
+      "necessary_minimum_depth": 30
+    },
+    {
+      "h": 73,
+      "kind": "descent",
+      "depth": 291,
+      "odd_steps": 164,
+      "necessary_minimum_depth": 31
+    },
+    {
+      "h": 74,
+      "kind": "descent",
+      "depth": 174,
+      "odd_steps": 90,
+      "necessary_minimum_depth": 31
+    },
+    {
+      "h": 75,
+      "kind": "descent",
+      "depth": 201,
+      "odd_steps": 107,
+      "necessary_minimum_depth": 31
+    },
+    {
+      "h": 76,
+      "kind": "descent",
+      "depth": 108,
+      "odd_steps": 48,
+      "necessary_minimum_depth": 32
+    },
+    {
+      "h": 77,
+      "kind": "descent",
+      "depth": 153,
+      "odd_steps": 76,
+      "necessary_minimum_depth": 32
+    },
+    {
+      "h": 78,
+      "kind": "descent",
+      "depth": 140,
+      "odd_steps": 68,
+      "necessary_minimum_depth": 33
+    },
+    {
+      "h": 79,
+      "kind": "descent",
+      "depth": 142,
+      "odd_steps": 69,
+      "necessary_minimum_depth": 33
+    },
+    {
+      "h": 80,
+      "kind": "descent",
+      "depth": 234,
+      "odd_steps": 127,
+      "necessary_minimum_depth": 33
+    },
+    {
+      "h": 81,
+      "kind": "descent",
+      "depth": 214,
+      "odd_steps": 114,
+      "necessary_minimum_depth": 34
+    },
+    {
+      "h": 82,
+      "kind": "descent",
+      "depth": 226,
+      "odd_steps": 121,
+      "necessary_minimum_depth": 34
+    },
+    {
+      "h": 83,
+      "kind": "descent",
+      "depth": 167,
+      "odd_steps": 84,
+      "necessary_minimum_depth": 34
+    },
+    {
+      "h": 84,
+      "kind": "descent",
+      "depth": 149,
+      "odd_steps": 72,
+      "necessary_minimum_depth": 35
+    },
+    {
+      "h": 85,
+      "kind": "descent",
+      "depth": 147,
+      "odd_steps": 71,
+      "necessary_minimum_depth": 35
+    },
+    {
+      "h": 86,
+      "kind": "descent",
+      "depth": 159,
+      "odd_steps": 78,
+      "necessary_minimum_depth": 35
+    },
+    {
+      "h": 87,
+      "kind": "descent",
+      "depth": 200,
+      "odd_steps": 104,
+      "necessary_minimum_depth": 36
+    },
+    {
+      "h": 88,
+      "kind": "descent",
+      "depth": 207,
+      "odd_steps": 108,
+      "necessary_minimum_depth": 36
+    },
+    {
+      "h": 89,
+      "kind": "descent",
+      "depth": 193,
+      "odd_steps": 99,
+      "necessary_minimum_depth": 36
+    },
+    {
+      "h": 90,
+      "kind": "descent",
+      "depth": 195,
+      "odd_steps": 100,
+      "necessary_minimum_depth": 37
+    },
+    {
+      "h": 91,
+      "kind": "descent",
+      "depth": 183,
+      "odd_steps": 92,
+      "necessary_minimum_depth": 37
+    },
+    {
+      "h": 92,
+      "kind": "descent",
+      "depth": 128,
+      "odd_steps": 57,
+      "necessary_minimum_depth": 37
+    },
+    {
+      "h": 93,
+      "kind": "descent",
+      "depth": 176,
+      "odd_steps": 87,
+      "necessary_minimum_depth": 38
+    },
+    {
+      "h": 94,
+      "kind": "descent",
+      "depth": 192,
+      "odd_steps": 97,
+      "necessary_minimum_depth": 38
+    },
+    {
+      "h": 95,
+      "kind": "descent",
+      "depth": 225,
+      "odd_steps": 118,
+      "necessary_minimum_depth": 38
+    },
+    {
+      "h": 96,
+      "kind": "descent",
+      "depth": 215,
+      "odd_steps": 111,
+      "necessary_minimum_depth": 39
+    },
+    {
+      "h": 97,
+      "kind": "descent",
+      "depth": 204,
+      "odd_steps": 104,
+      "necessary_minimum_depth": 39
+    },
+    {
+      "h": 98,
+      "kind": "descent",
+      "depth": 130,
+      "odd_steps": 57,
+      "necessary_minimum_depth": 39
+    },
+    {
+      "h": 99,
+      "kind": "descent",
+      "depth": 120,
+      "odd_steps": 51,
+      "necessary_minimum_depth": 40
+    },
+    {
+      "h": 100,
+      "kind": "descent",
+      "depth": 225,
+      "odd_steps": 117,
+      "necessary_minimum_depth": 40
+    },
+    {
+      "h": 101,
+      "kind": "descent",
+      "depth": 327,
+      "odd_steps": 181,
+      "necessary_minimum_depth": 40
+    },
+    {
+      "h": 102,
+      "kind": "descent",
+      "depth": 259,
+      "odd_steps": 138,
+      "necessary_minimum_depth": 41
+    },
+    {
+      "h": 103,
+      "kind": "descent",
+      "depth": 174,
+      "odd_steps": 84,
+      "necessary_minimum_depth": 41
+    },
+    {
+      "h": 104,
+      "kind": "descent",
+      "depth": 182,
+      "odd_steps": 89,
+      "necessary_minimum_depth": 41
+    },
+    {
+      "h": 105,
+      "kind": "descent",
+      "depth": 175,
+      "odd_steps": 84,
+      "necessary_minimum_depth": 42
+    },
+    {
+      "h": 106,
+      "kind": "descent",
+      "depth": 177,
+      "odd_steps": 85,
+      "necessary_minimum_depth": 42
+    },
+    {
+      "h": 107,
+      "kind": "descent",
+      "depth": 212,
+      "odd_steps": 107,
+      "necessary_minimum_depth": 42
+    },
+    {
+      "h": 108,
+      "kind": "descent",
+      "depth": 179,
+      "odd_steps": 86,
+      "necessary_minimum_depth": 43
+    },
+    {
+      "h": 109,
+      "kind": "descent",
+      "depth": 286,
+      "odd_steps": 153,
+      "necessary_minimum_depth": 43
+    },
+    {
+      "h": 110,
+      "kind": "descent",
+      "depth": 158,
+      "odd_steps": 72,
+      "necessary_minimum_depth": 43
+    },
+    {
+      "h": 111,
+      "kind": "descent",
+      "depth": 247,
+      "odd_steps": 128,
+      "necessary_minimum_depth": 44
+    },
+    {
+      "h": 112,
+      "kind": "descent",
+      "depth": 207,
+      "odd_steps": 103,
+      "necessary_minimum_depth": 44
+    },
+    {
+      "h": 113,
+      "kind": "descent",
+      "depth": 152,
+      "odd_steps": 68,
+      "necessary_minimum_depth": 44
+    },
+    {
+      "h": 114,
+      "kind": "descent",
+      "depth": 160,
+      "odd_steps": 73,
+      "necessary_minimum_depth": 45
+    },
+    {
+      "h": 115,
+      "kind": "descent",
+      "depth": 235,
+      "odd_steps": 120,
+      "necessary_minimum_depth": 45
+    },
+    {
+      "h": 116,
+      "kind": "descent",
+      "depth": 215,
+      "odd_steps": 107,
+      "necessary_minimum_depth": 45
+    },
+    {
+      "h": 117,
+      "kind": "descent",
+      "depth": 200,
+      "odd_steps": 97,
+      "necessary_minimum_depth": 46
+    },
+    {
+      "h": 118,
+      "kind": "descent",
+      "depth": 246,
+      "odd_steps": 126,
+      "necessary_minimum_depth": 46
+    },
+    {
+      "h": 119,
+      "kind": "descent",
+      "depth": 246,
+      "odd_steps": 126,
+      "necessary_minimum_depth": 46
+    },
+    {
+      "h": 120,
+      "kind": "descent",
+      "depth": 253,
+      "odd_steps": 130,
+      "necessary_minimum_depth": 47
+    },
+    {
+      "h": 121,
+      "kind": "descent",
+      "depth": 214,
+      "odd_steps": 105,
+      "necessary_minimum_depth": 47
+    },
+    {
+      "h": 122,
+      "kind": "descent",
+      "depth": 249,
+      "odd_steps": 127,
+      "necessary_minimum_depth": 47
+    },
+    {
+      "h": 123,
+      "kind": "descent",
+      "depth": 297,
+      "odd_steps": 157,
+      "necessary_minimum_depth": 48
+    },
+    {
+      "h": 124,
+      "kind": "descent",
+      "depth": 273,
+      "odd_steps": 142,
+      "necessary_minimum_depth": 48
+    },
+    {
+      "h": 125,
+      "kind": "descent",
+      "depth": 185,
+      "odd_steps": 86,
+      "necessary_minimum_depth": 48
+    },
+    {
+      "h": 126,
+      "kind": "descent",
+      "depth": 226,
+      "odd_steps": 112,
+      "necessary_minimum_depth": 49
+    },
+    {
+      "h": 127,
+      "kind": "descent",
+      "depth": 292,
+      "odd_steps": 153,
+      "necessary_minimum_depth": 49
+    },
+    {
+      "h": 128,
+      "kind": "descent",
+      "depth": 216,
+      "odd_steps": 105,
+      "necessary_minimum_depth": 50
+    },
+    {
+      "h": 129,
+      "kind": "descent",
+      "depth": 221,
+      "odd_steps": 108,
+      "necessary_minimum_depth": 50
+    },
+    {
+      "h": 130,
+      "kind": "descent",
+      "depth": 226,
+      "odd_steps": 111,
+      "necessary_minimum_depth": 50
+    },
+    {
+      "h": 131,
+      "kind": "descent",
+      "depth": 174,
+      "odd_steps": 78,
+      "necessary_minimum_depth": 51
+    },
+    {
+      "h": 132,
+      "kind": "descent",
+      "depth": 352,
+      "odd_steps": 190,
+      "necessary_minimum_depth": 51
+    },
+    {
+      "h": 133,
+      "kind": "descent",
+      "depth": 286,
+      "odd_steps": 148,
+      "necessary_minimum_depth": 51
+    },
+    {
+      "h": 134,
+      "kind": "descent",
+      "depth": 280,
+      "odd_steps": 144,
+      "necessary_minimum_depth": 52
+    },
+    {
+      "h": 135,
+      "kind": "descent",
+      "depth": 255,
+      "odd_steps": 128,
+      "necessary_minimum_depth": 52
+    },
+    {
+      "h": 136,
+      "kind": "descent",
+      "depth": 244,
+      "odd_steps": 121,
+      "necessary_minimum_depth": 52
+    },
+    {
+      "h": 137,
+      "kind": "descent",
+      "depth": 232,
+      "odd_steps": 113,
+      "necessary_minimum_depth": 53
+    },
+    {
+      "h": 138,
+      "kind": "descent",
+      "depth": 391,
+      "odd_steps": 213,
+      "necessary_minimum_depth": 53
+    },
+    {
+      "h": 139,
+      "kind": "descent",
+      "depth": 253,
+      "odd_steps": 126,
+      "necessary_minimum_depth": 53
+    },
+    {
+      "h": 140,
+      "kind": "descent",
+      "depth": 268,
+      "odd_steps": 135,
+      "necessary_minimum_depth": 54
+    },
+    {
+      "h": 141,
+      "kind": "descent",
+      "depth": 311,
+      "odd_steps": 162,
+      "necessary_minimum_depth": 54
+    },
+    {
+      "h": 142,
+      "kind": "descent",
+      "depth": 302,
+      "odd_steps": 156,
+      "necessary_minimum_depth": 54
+    },
+    {
+      "h": 143,
+      "kind": "descent",
+      "depth": 334,
+      "odd_steps": 176,
+      "necessary_minimum_depth": 55
+    },
+    {
+      "h": 144,
+      "kind": "descent",
+      "depth": 239,
+      "odd_steps": 116,
+      "necessary_minimum_depth": 55
+    },
+    {
+      "h": 145,
+      "kind": "descent",
+      "depth": 353,
+      "odd_steps": 188,
+      "necessary_minimum_depth": 55
+    },
+    {
+      "h": 146,
+      "kind": "descent",
+      "depth": 331,
+      "odd_steps": 174,
+      "necessary_minimum_depth": 56
+    },
+    {
+      "h": 147,
+      "kind": "descent",
+      "depth": 306,
+      "odd_steps": 158,
+      "necessary_minimum_depth": 56
+    },
+    {
+      "h": 148,
+      "kind": "descent",
+      "depth": 262,
+      "odd_steps": 130,
+      "necessary_minimum_depth": 56
+    },
+    {
+      "h": 149,
+      "kind": "descent",
+      "depth": 204,
+      "odd_steps": 93,
+      "necessary_minimum_depth": 57
+    },
+    {
+      "h": 150,
+      "kind": "descent",
+      "depth": 195,
+      "odd_steps": 87,
+      "necessary_minimum_depth": 57
+    },
+    {
+      "h": 151,
+      "kind": "descent",
+      "depth": 254,
+      "odd_steps": 124,
+      "necessary_minimum_depth": 57
+    },
+    {
+      "h": 152,
+      "kind": "descent",
+      "depth": 246,
+      "odd_steps": 119,
+      "necessary_minimum_depth": 58
+    },
+    {
+      "h": 153,
+      "kind": "descent",
+      "depth": 288,
+      "odd_steps": 145,
+      "necessary_minimum_depth": 58
+    },
+    {
+      "h": 154,
+      "kind": "descent",
+      "depth": 285,
+      "odd_steps": 143,
+      "necessary_minimum_depth": 58
+    },
+    {
+      "h": 155,
+      "kind": "descent",
+      "depth": 225,
+      "odd_steps": 105,
+      "necessary_minimum_depth": 59
+    },
+    {
+      "h": 156,
+      "kind": "descent",
+      "depth": 325,
+      "odd_steps": 168,
+      "necessary_minimum_depth": 59
+    },
+    {
+      "h": 157,
+      "kind": "descent",
+      "depth": 302,
+      "odd_steps": 153,
+      "necessary_minimum_depth": 59
+    },
+    {
+      "h": 158,
+      "kind": "descent",
+      "depth": 313,
+      "odd_steps": 160,
+      "necessary_minimum_depth": 60
+    },
+    {
+      "h": 159,
+      "kind": "descent",
+      "depth": 396,
+      "odd_steps": 212,
+      "necessary_minimum_depth": 60
+    },
+    {
+      "h": 160,
+      "kind": "descent",
+      "depth": 382,
+      "odd_steps": 203,
+      "necessary_minimum_depth": 60
+    },
+    {
+      "h": 161,
+      "kind": "descent",
+      "depth": 294,
+      "odd_steps": 147,
+      "necessary_minimum_depth": 61
+    },
+    {
+      "h": 162,
+      "kind": "descent",
+      "depth": 332,
+      "odd_steps": 171,
+      "necessary_minimum_depth": 61
+    },
+    {
+      "h": 163,
+      "kind": "descent",
+      "depth": 264,
+      "odd_steps": 128,
+      "necessary_minimum_depth": 61
+    },
+    {
+      "h": 164,
+      "kind": "descent",
+      "depth": 236,
+      "odd_steps": 110,
+      "necessary_minimum_depth": 62
+    },
+    {
+      "h": 165,
+      "kind": "descent",
+      "depth": 279,
+      "odd_steps": 137,
+      "necessary_minimum_depth": 62
+    },
+    {
+      "h": 166,
+      "kind": "descent",
+      "depth": 262,
+      "odd_steps": 126,
+      "necessary_minimum_depth": 62
+    },
+    {
+      "h": 167,
+      "kind": "descent",
+      "depth": 432,
+      "odd_steps": 233,
+      "necessary_minimum_depth": 63
+    },
+    {
+      "h": 168,
+      "kind": "descent",
+      "depth": 420,
+      "odd_steps": 225,
+      "necessary_minimum_depth": 63
+    },
+    {
+      "h": 169,
+      "kind": "descent",
+      "depth": 342,
+      "odd_steps": 176,
+      "necessary_minimum_depth": 63
+    },
+    {
+      "h": 170,
+      "kind": "descent",
+      "depth": 328,
+      "odd_steps": 167,
+      "necessary_minimum_depth": 64
+    },
+    {
+      "h": 171,
+      "kind": "descent",
+      "depth": 299,
+      "odd_steps": 148,
+      "necessary_minimum_depth": 64
+    },
+    {
+      "h": 172,
+      "kind": "descent",
+      "depth": 269,
+      "odd_steps": 129,
+      "necessary_minimum_depth": 64
+    },
+    {
+      "h": 173,
+      "kind": "descent",
+      "depth": 304,
+      "odd_steps": 151,
+      "necessary_minimum_depth": 65
+    },
+    {
+      "h": 174,
+      "kind": "descent",
+      "depth": 317,
+      "odd_steps": 159,
+      "necessary_minimum_depth": 65
+    },
+    {
+      "h": 175,
+      "kind": "descent",
+      "depth": 279,
+      "odd_steps": 135,
+      "necessary_minimum_depth": 65
+    },
+    {
+      "h": 176,
+      "kind": "descent",
+      "depth": 270,
+      "odd_steps": 129,
+      "necessary_minimum_depth": 66
+    },
+    {
+      "h": 177,
+      "kind": "descent",
+      "depth": 248,
+      "odd_steps": 115,
+      "necessary_minimum_depth": 66
+    },
+    {
+      "h": 178,
+      "kind": "descent",
+      "depth": 537,
+      "odd_steps": 297,
+      "necessary_minimum_depth": 67
+    },
+    {
+      "h": 179,
+      "kind": "descent",
+      "depth": 525,
+      "odd_steps": 289,
+      "necessary_minimum_depth": 67
+    },
+    {
+      "h": 180,
+      "kind": "descent",
+      "depth": 281,
+      "odd_steps": 135,
+      "necessary_minimum_depth": 67
+    },
+    {
+      "h": 181,
+      "kind": "descent",
+      "depth": 288,
+      "odd_steps": 139,
+      "necessary_minimum_depth": 68
+    },
+    {
+      "h": 182,
+      "kind": "descent",
+      "depth": 275,
+      "odd_steps": 131,
+      "necessary_minimum_depth": 68
+    },
+    {
+      "h": 183,
+      "kind": "descent",
+      "depth": 377,
+      "odd_steps": 195,
+      "necessary_minimum_depth": 68
+    },
+    {
+      "h": 184,
+      "kind": "descent",
+      "depth": 308,
+      "odd_steps": 151,
+      "necessary_minimum_depth": 69
+    },
+    {
+      "h": 185,
+      "kind": "descent",
+      "depth": 289,
+      "odd_steps": 139,
+      "necessary_minimum_depth": 69
+    },
+    {
+      "h": 186,
+      "kind": "descent",
+      "depth": 301,
+      "odd_steps": 146,
+      "necessary_minimum_depth": 69
+    },
+    {
+      "h": 187,
+      "kind": "descent",
+      "depth": 366,
+      "odd_steps": 187,
+      "necessary_minimum_depth": 70
+    },
+    {
+      "h": 188,
+      "kind": "descent",
+      "depth": 317,
+      "odd_steps": 156,
+      "necessary_minimum_depth": 70
+    },
+    {
+      "h": 189,
+      "kind": "descent",
+      "depth": 256,
+      "odd_steps": 117,
+      "necessary_minimum_depth": 70
+    },
+    {
+      "h": 190,
+      "kind": "descent",
+      "depth": 403,
+      "odd_steps": 210,
+      "necessary_minimum_depth": 71
+    },
+    {
+      "h": 191,
+      "kind": "descent",
+      "depth": 450,
+      "odd_steps": 239,
+      "necessary_minimum_depth": 71
+    },
+    {
+      "h": 192,
+      "kind": "descent",
+      "depth": 431,
+      "odd_steps": 227,
+      "necessary_minimum_depth": 71
+    },
+    {
+      "h": 193,
+      "kind": "descent",
+      "depth": 341,
+      "odd_steps": 170,
+      "necessary_minimum_depth": 72
+    },
+    {
+      "h": 194,
+      "kind": "descent",
+      "depth": 324,
+      "odd_steps": 159,
+      "necessary_minimum_depth": 72
+    },
+    {
+      "h": 195,
+      "kind": "descent",
+      "depth": 380,
+      "odd_steps": 194,
+      "necessary_minimum_depth": 72
+    },
+    {
+      "h": 196,
+      "kind": "descent",
+      "depth": 340,
+      "odd_steps": 169,
+      "necessary_minimum_depth": 73
+    },
+    {
+      "h": 197,
+      "kind": "descent",
+      "depth": 361,
+      "odd_steps": 182,
+      "necessary_minimum_depth": 73
+    },
+    {
+      "h": 198,
+      "kind": "descent",
+      "depth": 374,
+      "odd_steps": 190,
+      "necessary_minimum_depth": 73
+    },
+    {
+      "h": 199,
+      "kind": "descent",
+      "depth": 364,
+      "odd_steps": 183,
+      "necessary_minimum_depth": 74
+    },
+    {
+      "h": 200,
+      "kind": "descent",
+      "depth": 343,
+      "odd_steps": 170,
+      "necessary_minimum_depth": 74
+    },
+    {
+      "h": 201,
+      "kind": "descent",
+      "depth": 334,
+      "odd_steps": 164,
+      "necessary_minimum_depth": 74
+    },
+    {
+      "h": 202,
+      "kind": "descent",
+      "depth": 388,
+      "odd_steps": 198,
+      "necessary_minimum_depth": 75
+    },
+    {
+      "h": 203,
+      "kind": "descent",
+      "depth": 349,
+      "odd_steps": 173,
+      "necessary_minimum_depth": 75
+    },
+    {
+      "h": 204,
+      "kind": "descent",
+      "depth": 443,
+      "odd_steps": 232,
+      "necessary_minimum_depth": 75
+    },
+    {
+      "h": 205,
+      "kind": "descent",
+      "depth": 358,
+      "odd_steps": 178,
+      "necessary_minimum_depth": 76
+    },
+    {
+      "h": 206,
+      "kind": "descent",
+      "depth": 274,
+      "odd_steps": 125,
+      "necessary_minimum_depth": 76
+    },
+    {
+      "h": 207,
+      "kind": "descent",
+      "depth": 333,
+      "odd_steps": 162,
+      "necessary_minimum_depth": 76
+    },
+    {
+      "h": 208,
+      "kind": "descent",
+      "depth": 416,
+      "odd_steps": 214,
+      "necessary_minimum_depth": 77
+    },
+    {
+      "h": 209,
+      "kind": "descent",
+      "depth": 399,
+      "odd_steps": 203,
+      "necessary_minimum_depth": 77
+    },
+    {
+      "h": 210,
+      "kind": "descent",
+      "depth": 360,
+      "odd_steps": 178,
+      "necessary_minimum_depth": 77
+    },
+    {
+      "h": 211,
+      "kind": "descent",
+      "depth": 374,
+      "odd_steps": 187,
+      "necessary_minimum_depth": 78
+    },
+    {
+      "h": 212,
+      "kind": "descent",
+      "depth": 314,
+      "odd_steps": 149,
+      "necessary_minimum_depth": 78
+    },
+    {
+      "h": 213,
+      "kind": "descent",
+      "depth": 473,
+      "odd_steps": 249,
+      "necessary_minimum_depth": 78
+    },
+    {
+      "h": 214,
+      "kind": "descent",
+      "depth": 324,
+      "odd_steps": 155,
+      "necessary_minimum_depth": 79
+    },
+    {
+      "h": 215,
+      "kind": "descent",
+      "depth": 415,
+      "odd_steps": 212,
+      "necessary_minimum_depth": 79
+    },
+    {
+      "h": 216,
+      "kind": "descent",
+      "depth": 398,
+      "odd_steps": 201,
+      "necessary_minimum_depth": 79
+    },
+    {
+      "h": 217,
+      "kind": "descent",
+      "depth": 373,
+      "odd_steps": 185,
+      "necessary_minimum_depth": 80
+    },
+    {
+      "h": 218,
+      "kind": "descent",
+      "depth": 331,
+      "odd_steps": 158,
+      "necessary_minimum_depth": 80
+    },
+    {
+      "h": 219,
+      "kind": "descent",
+      "depth": 380,
+      "odd_steps": 189,
+      "necessary_minimum_depth": 80
+    },
+    {
+      "h": 220,
+      "kind": "descent",
+      "depth": 290,
+      "odd_steps": 132,
+      "necessary_minimum_depth": 81
+    },
+    {
+      "h": 221,
+      "kind": "descent",
+      "depth": 328,
+      "odd_steps": 156,
+      "necessary_minimum_depth": 81
+    },
+    {
+      "h": 222,
+      "kind": "descent",
+      "depth": 351,
+      "odd_steps": 170,
+      "necessary_minimum_depth": 81
+    },
+    {
+      "h": 223,
+      "kind": "descent",
+      "depth": 386,
+      "odd_steps": 192,
+      "necessary_minimum_depth": 82
+    },
+    {
+      "h": 224,
+      "kind": "descent",
+      "depth": 364,
+      "odd_steps": 178,
+      "necessary_minimum_depth": 82
+    },
+    {
+      "h": 225,
+      "kind": "descent",
+      "depth": 355,
+      "odd_steps": 172,
+      "necessary_minimum_depth": 82
+    },
+    {
+      "h": 226,
+      "kind": "descent",
+      "depth": 306,
+      "odd_steps": 141,
+      "necessary_minimum_depth": 83
+    },
+    {
+      "h": 227,
+      "kind": "descent",
+      "depth": 481,
+      "odd_steps": 251,
+      "necessary_minimum_depth": 83
+    },
+    {
+      "h": 228,
+      "kind": "descent",
+      "depth": 431,
+      "odd_steps": 219,
+      "necessary_minimum_depth": 83
+    },
+    {
+      "h": 229,
+      "kind": "descent",
+      "depth": 543,
+      "odd_steps": 290,
+      "necessary_minimum_depth": 84
+    },
+    {
+      "h": 230,
+      "kind": "descent",
+      "depth": 330,
+      "odd_steps": 155,
+      "necessary_minimum_depth": 84
+    },
+    {
+      "h": 231,
+      "kind": "descent",
+      "depth": 319,
+      "odd_steps": 148,
+      "necessary_minimum_depth": 85
+    },
+    {
+      "h": 232,
+      "kind": "descent",
+      "depth": 291,
+      "odd_steps": 130,
+      "necessary_minimum_depth": 85
+    },
+    {
+      "h": 233,
+      "kind": "descent",
+      "depth": 347,
+      "odd_steps": 165,
+      "necessary_minimum_depth": 85
+    },
+    {
+      "h": 234,
+      "kind": "descent",
+      "depth": 442,
+      "odd_steps": 225,
+      "necessary_minimum_depth": 86
+    },
+    {
+      "h": 235,
+      "kind": "descent",
+      "depth": 400,
+      "odd_steps": 198,
+      "necessary_minimum_depth": 86
+    },
+    {
+      "h": 236,
+      "kind": "descent",
+      "depth": 375,
+      "odd_steps": 182,
+      "necessary_minimum_depth": 86
+    },
+    {
+      "h": 237,
+      "kind": "descent",
+      "depth": 503,
+      "odd_steps": 263,
+      "necessary_minimum_depth": 87
+    },
+    {
+      "h": 238,
+      "kind": "descent",
+      "depth": 482,
+      "odd_steps": 249,
+      "necessary_minimum_depth": 87
+    },
+    {
+      "h": 239,
+      "kind": "descent",
+      "depth": 393,
+      "odd_steps": 193,
+      "necessary_minimum_depth": 87
+    },
+    {
+      "h": 240,
+      "kind": "descent",
+      "depth": 468,
+      "odd_steps": 240,
+      "necessary_minimum_depth": 88
+    },
+    {
+      "h": 241,
+      "kind": "descent",
+      "depth": 378,
+      "odd_steps": 183,
+      "necessary_minimum_depth": 88
+    },
+    {
+      "h": 242,
+      "kind": "descent",
+      "depth": 434,
+      "odd_steps": 218,
+      "necessary_minimum_depth": 88
+    },
+    {
+      "h": 243,
+      "kind": "descent",
+      "depth": 448,
+      "odd_steps": 227,
+      "necessary_minimum_depth": 89
+    },
+    {
+      "h": 244,
+      "kind": "descent",
+      "depth": 439,
+      "odd_steps": 221,
+      "necessary_minimum_depth": 89
+    },
+    {
+      "h": 245,
+      "kind": "descent",
+      "depth": 421,
+      "odd_steps": 209,
+      "necessary_minimum_depth": 89
+    },
+    {
+      "h": 246,
+      "kind": "descent",
+      "depth": 410,
+      "odd_steps": 202,
+      "necessary_minimum_depth": 90
+    },
+    {
+      "h": 247,
+      "kind": "descent",
+      "depth": 410,
+      "odd_steps": 202,
+      "necessary_minimum_depth": 90
+    },
+    {
+      "h": 248,
+      "kind": "descent",
+      "depth": 376,
+      "odd_steps": 180,
+      "necessary_minimum_depth": 90
+    },
+    {
+      "h": 249,
+      "kind": "descent",
+      "depth": 449,
+      "odd_steps": 226,
+      "necessary_minimum_depth": 91
+    },
+    {
+      "h": 250,
+      "kind": "descent",
+      "depth": 475,
+      "odd_steps": 242,
+      "necessary_minimum_depth": 91
+    },
+    {
+      "h": 251,
+      "kind": "descent",
+      "depth": 465,
+      "odd_steps": 236,
+      "necessary_minimum_depth": 91
+    },
+    {
+      "h": 252,
+      "kind": "descent",
+      "depth": 423,
+      "odd_steps": 209,
+      "necessary_minimum_depth": 92
+    },
+    {
+      "h": 253,
+      "kind": "descent",
+      "depth": 407,
+      "odd_steps": 199,
+      "necessary_minimum_depth": 92
+    },
+    {
+      "h": 254,
+      "kind": "descent",
+      "depth": 590,
+      "odd_steps": 314,
+      "necessary_minimum_depth": 92
+    },
+    {
+      "h": 255,
+      "kind": "descent",
+      "depth": 535,
+      "odd_steps": 279,
+      "necessary_minimum_depth": 93
+    },
+    {
+      "h": 256,
+      "kind": "descent",
+      "depth": 515,
+      "odd_steps": 266,
+      "necessary_minimum_depth": 93
+    },
+    {
+      "h": 257,
+      "kind": "descent",
+      "depth": 448,
+      "odd_steps": 224,
+      "necessary_minimum_depth": 93
+    },
+    {
+      "h": 258,
+      "kind": "descent",
+      "depth": 415,
+      "odd_steps": 203,
+      "necessary_minimum_depth": 94
+    },
+    {
+      "h": 259,
+      "kind": "descent",
+      "depth": 566,
+      "odd_steps": 298,
+      "necessary_minimum_depth": 94
+    },
+    {
+      "h": 260,
+      "kind": "descent",
+      "depth": 540,
+      "odd_steps": 281,
+      "necessary_minimum_depth": 94
+    },
+    {
+      "h": 261,
+      "kind": "descent",
+      "depth": 516,
+      "odd_steps": 266,
+      "necessary_minimum_depth": 95
+    },
+    {
+      "h": 262,
+      "kind": "descent",
+      "depth": 548,
+      "odd_steps": 286,
+      "necessary_minimum_depth": 95
+    },
+    {
+      "h": 263,
+      "kind": "descent",
+      "depth": 455,
+      "odd_steps": 227,
+      "necessary_minimum_depth": 95
+    },
+    {
+      "h": 264,
+      "kind": "descent",
+      "depth": 590,
+      "odd_steps": 312,
+      "necessary_minimum_depth": 96
+    },
+    {
+      "h": 265,
+      "kind": "descent",
+      "depth": 549,
+      "odd_steps": 286,
+      "necessary_minimum_depth": 96
+    },
+    {
+      "h": 266,
+      "kind": "descent",
+      "depth": 372,
+      "odd_steps": 174,
+      "necessary_minimum_depth": 96
+    },
+    {
+      "h": 267,
+      "kind": "descent",
+      "depth": 439,
+      "odd_steps": 216,
+      "necessary_minimum_depth": 97
+    },
+    {
+      "h": 268,
+      "kind": "descent",
+      "depth": 485,
+      "odd_steps": 245,
+      "necessary_minimum_depth": 97
+    },
+    {
+      "h": 269,
+      "kind": "descent",
+      "depth": 452,
+      "odd_steps": 224,
+      "necessary_minimum_depth": 97
+    },
+    {
+      "h": 270,
+      "kind": "descent",
+      "depth": 381,
+      "odd_steps": 179,
+      "necessary_minimum_depth": 98
+    },
+    {
+      "h": 271,
+      "kind": "descent",
+      "depth": 358,
+      "odd_steps": 164,
+      "necessary_minimum_depth": 98
+    },
+    {
+      "h": 272,
+      "kind": "descent",
+      "depth": 414,
+      "odd_steps": 199,
+      "necessary_minimum_depth": 98
+    },
+    {
+      "h": 273,
+      "kind": "descent",
+      "depth": 555,
+      "odd_steps": 288,
+      "necessary_minimum_depth": 99
+    },
+    {
+      "h": 274,
+      "kind": "descent",
+      "depth": 541,
+      "odd_steps": 279,
+      "necessary_minimum_depth": 99
+    },
+    {
+      "h": 275,
+      "kind": "descent",
+      "depth": 455,
+      "odd_steps": 224,
+      "necessary_minimum_depth": 99
+    },
+    {
+      "h": 276,
+      "kind": "descent",
+      "depth": 529,
+      "odd_steps": 271,
+      "necessary_minimum_depth": 100
+    },
+    {
+      "h": 277,
+      "kind": "descent",
+      "depth": 506,
+      "odd_steps": 256,
+      "necessary_minimum_depth": 100
+    },
+    {
+      "h": 278,
+      "kind": "descent",
+      "depth": 495,
+      "odd_steps": 249,
+      "necessary_minimum_depth": 100
+    },
+    {
+      "h": 279,
+      "kind": "descent",
+      "depth": 505,
+      "odd_steps": 255,
+      "necessary_minimum_depth": 101
+    },
+    {
+      "h": 280,
+      "kind": "descent",
+      "depth": 453,
+      "odd_steps": 222,
+      "necessary_minimum_depth": 101
+    },
+    {
+      "h": 281,
+      "kind": "descent",
+      "depth": 373,
+      "odd_steps": 171,
+      "necessary_minimum_depth": 102
+    },
+    {
+      "h": 282,
+      "kind": "descent",
+      "depth": 588,
+      "odd_steps": 307,
+      "necessary_minimum_depth": 102
+    },
+    {
+      "h": 283,
+      "kind": "descent",
+      "depth": 460,
+      "odd_steps": 226,
+      "necessary_minimum_depth": 102
+    },
+    {
+      "h": 284,
+      "kind": "descent",
+      "depth": 462,
+      "odd_steps": 227,
+      "necessary_minimum_depth": 103
+    },
+    {
+      "h": 285,
+      "kind": "descent",
+      "depth": 623,
+      "odd_steps": 328,
+      "necessary_minimum_depth": 103
+    },
+    {
+      "h": 286,
+      "kind": "descent",
+      "depth": 496,
+      "odd_steps": 248,
+      "necessary_minimum_depth": 103
+    },
+    {
+      "h": 287,
+      "kind": "descent",
+      "depth": 463,
+      "odd_steps": 227,
+      "necessary_minimum_depth": 104
+    },
+    {
+      "h": 288,
+      "kind": "descent",
+      "depth": 456,
+      "odd_steps": 222,
+      "necessary_minimum_depth": 104
+    },
+    {
+      "h": 289,
+      "kind": "descent",
+      "depth": 447,
+      "odd_steps": 216,
+      "necessary_minimum_depth": 104
+    },
+    {
+      "h": 290,
+      "kind": "descent",
+      "depth": 418,
+      "odd_steps": 198,
+      "necessary_minimum_depth": 105
+    },
+    {
+      "h": 291,
+      "kind": "descent",
+      "depth": 642,
+      "odd_steps": 339,
+      "necessary_minimum_depth": 105
+    },
+    {
+      "h": 292,
+      "kind": "descent",
+      "depth": 631,
+      "odd_steps": 332,
+      "necessary_minimum_depth": 105
+    },
+    {
+      "h": 293,
+      "kind": "descent",
+      "depth": 448,
+      "odd_steps": 216,
+      "necessary_minimum_depth": 106
+    },
+    {
+      "h": 294,
+      "kind": "descent",
+      "depth": 532,
+      "odd_steps": 269,
+      "necessary_minimum_depth": 106
+    },
+    {
+      "h": 295,
+      "kind": "descent",
+      "depth": 509,
+      "odd_steps": 254,
+      "necessary_minimum_depth": 106
+    },
+    {
+      "h": 296,
+      "kind": "descent",
+      "depth": 465,
+      "odd_steps": 226,
+      "necessary_minimum_depth": 107
+    },
+    {
+      "h": 297,
+      "kind": "descent",
+      "depth": 678,
+      "odd_steps": 360,
+      "necessary_minimum_depth": 107
+    },
+    {
+      "h": 298,
+      "kind": "descent",
+      "depth": 510,
+      "odd_steps": 254,
+      "necessary_minimum_depth": 107
+    },
+    {
+      "h": 299,
+      "kind": "descent",
+      "depth": 632,
+      "odd_steps": 331,
+      "necessary_minimum_depth": 108
+    },
+    {
+      "h": 300,
+      "kind": "descent",
+      "depth": 420,
+      "odd_steps": 197,
+      "necessary_minimum_depth": 108
+    },
+    {
+      "h": 301,
+      "kind": "descent",
+      "depth": 549,
+      "odd_steps": 278,
+      "necessary_minimum_depth": 108
+    },
+    {
+      "h": 302,
+      "kind": "descent",
+      "depth": 543,
+      "odd_steps": 274,
+      "necessary_minimum_depth": 109
+    },
+    {
+      "h": 303,
+      "kind": "descent",
+      "depth": 535,
+      "odd_steps": 269,
+      "necessary_minimum_depth": 109
+    },
+    {
+      "h": 304,
+      "kind": "descent",
+      "depth": 529,
+      "odd_steps": 265,
+      "necessary_minimum_depth": 109
+    },
+    {
+      "h": 305,
+      "kind": "descent",
+      "depth": 596,
+      "odd_steps": 307,
+      "necessary_minimum_depth": 110
+    },
+    {
+      "h": 306,
+      "kind": "descent",
+      "depth": 563,
+      "odd_steps": 286,
+      "necessary_minimum_depth": 110
+    },
+    {
+      "h": 307,
+      "kind": "descent",
+      "depth": 527,
+      "odd_steps": 263,
+      "necessary_minimum_depth": 110
+    },
+    {
+      "h": 308,
+      "kind": "descent",
+      "depth": 494,
+      "odd_steps": 242,
+      "necessary_minimum_depth": 111
+    },
+    {
+      "h": 309,
+      "kind": "descent",
+      "depth": 464,
+      "odd_steps": 223,
+      "necessary_minimum_depth": 111
+    },
+    {
+      "h": 310,
+      "kind": "descent",
+      "depth": 433,
+      "odd_steps": 203,
+      "necessary_minimum_depth": 111
+    },
+    {
+      "h": 311,
+      "kind": "descent",
+      "depth": 560,
+      "odd_steps": 283,
+      "necessary_minimum_depth": 112
+    },
+    {
+      "h": 312,
+      "kind": "descent",
+      "depth": 640,
+      "odd_steps": 333,
+      "necessary_minimum_depth": 112
+    },
+    {
+      "h": 313,
+      "kind": "descent",
+      "depth": 607,
+      "odd_steps": 312,
+      "necessary_minimum_depth": 112
+    },
+    {
+      "h": 314,
+      "kind": "descent",
+      "depth": 593,
+      "odd_steps": 303,
+      "necessary_minimum_depth": 113
+    },
+    {
+      "h": 315,
+      "kind": "descent",
+      "depth": 558,
+      "odd_steps": 281,
+      "necessary_minimum_depth": 113
+    },
+    {
+      "h": 316,
+      "kind": "descent",
+      "depth": 535,
+      "odd_steps": 266,
+      "necessary_minimum_depth": 113
+    },
+    {
+      "h": 317,
+      "kind": "descent",
+      "depth": 535,
+      "odd_steps": 266,
+      "necessary_minimum_depth": 114
+    },
+    {
+      "h": 318,
+      "kind": "descent",
+      "depth": 525,
+      "odd_steps": 259,
+      "necessary_minimum_depth": 114
+    },
+    {
+      "h": 319,
+      "kind": "descent",
+      "depth": 488,
+      "odd_steps": 236,
+      "necessary_minimum_depth": 114
+    },
+    {
+      "h": 320,
+      "kind": "descent",
+      "depth": 468,
+      "odd_steps": 223,
+      "necessary_minimum_depth": 115
+    },
+    {
+      "h": 321,
+      "kind": "descent",
+      "depth": 608,
+      "odd_steps": 311,
+      "necessary_minimum_depth": 115
+    },
+    {
+      "h": 322,
+      "kind": "descent",
+      "depth": 450,
+      "odd_steps": 211,
+      "necessary_minimum_depth": 115
+    },
+    {
+      "h": 323,
+      "kind": "descent",
+      "depth": 572,
+      "odd_steps": 288,
+      "necessary_minimum_depth": 116
+    },
+    {
+      "h": 324,
+      "kind": "descent",
+      "depth": 666,
+      "odd_steps": 347,
+      "necessary_minimum_depth": 116
+    },
+    {
+      "h": 325,
+      "kind": "descent",
+      "depth": 433,
+      "odd_steps": 200,
+      "necessary_minimum_depth": 116
+    },
+    {
+      "h": 326,
+      "kind": "descent",
+      "depth": 600,
+      "odd_steps": 305,
+      "necessary_minimum_depth": 117
+    },
+    {
+      "h": 327,
+      "kind": "descent",
+      "depth": 575,
+      "odd_steps": 289,
+      "necessary_minimum_depth": 117
+    },
+    {
+      "h": 328,
+      "kind": "descent",
+      "depth": 490,
+      "odd_steps": 235,
+      "necessary_minimum_depth": 117
+    },
+    {
+      "h": 329,
+      "kind": "descent",
+      "depth": 585,
+      "odd_steps": 295,
+      "necessary_minimum_depth": 118
+    },
+    {
+      "h": 330,
+      "kind": "descent",
+      "depth": 630,
+      "odd_steps": 323,
+      "necessary_minimum_depth": 118
+    },
+    {
+      "h": 331,
+      "kind": "descent",
+      "depth": 611,
+      "odd_steps": 311,
+      "necessary_minimum_depth": 119
+    },
+    {
+      "h": 332,
+      "kind": "descent",
+      "depth": 559,
+      "odd_steps": 278,
+      "necessary_minimum_depth": 119
+    },
+    {
+      "h": 333,
+      "kind": "descent",
+      "depth": 593,
+      "odd_steps": 299,
+      "necessary_minimum_depth": 119
+    },
+    {
+      "h": 334,
+      "kind": "descent",
+      "depth": 624,
+      "odd_steps": 318,
+      "necessary_minimum_depth": 120
+    },
+    {
+      "h": 335,
+      "kind": "descent",
+      "depth": 649,
+      "odd_steps": 334,
+      "necessary_minimum_depth": 120
+    },
+    {
+      "h": 336,
+      "kind": "descent",
+      "depth": 677,
+      "odd_steps": 351,
+      "necessary_minimum_depth": 120
+    },
+    {
+      "h": 337,
+      "kind": "descent",
+      "depth": 618,
+      "odd_steps": 314,
+      "necessary_minimum_depth": 121
+    },
+    {
+      "h": 338,
+      "kind": "descent",
+      "depth": 560,
+      "odd_steps": 277,
+      "necessary_minimum_depth": 121
+    },
+    {
+      "h": 339,
+      "kind": "descent",
+      "depth": 551,
+      "odd_steps": 271,
+      "necessary_minimum_depth": 121
+    },
+    {
+      "h": 340,
+      "kind": "descent",
+      "depth": 529,
+      "odd_steps": 257,
+      "necessary_minimum_depth": 122
+    },
+    {
+      "h": 341,
+      "kind": "descent",
+      "depth": 453,
+      "odd_steps": 209,
+      "necessary_minimum_depth": 122
+    },
+    {
+      "h": 342,
+      "kind": "descent",
+      "depth": 384,
+      "odd_steps": 165,
+      "necessary_minimum_depth": 122
+    },
+    {
+      "h": 343,
+      "kind": "descent",
+      "depth": 741,
+      "odd_steps": 390,
+      "necessary_minimum_depth": 123
+    },
+    {
+      "h": 344,
+      "kind": "descent",
+      "depth": 655,
+      "odd_steps": 336,
+      "necessary_minimum_depth": 123
+    },
+    {
+      "h": 345,
+      "kind": "descent",
+      "depth": 405,
+      "odd_steps": 178,
+      "necessary_minimum_depth": 123
+    },
+    {
+      "h": 346,
+      "kind": "descent",
+      "depth": 729,
+      "odd_steps": 382,
+      "necessary_minimum_depth": 124
+    },
+    {
+      "h": 347,
+      "kind": "descent",
+      "depth": 704,
+      "odd_steps": 366,
+      "necessary_minimum_depth": 124
+    },
+    {
+      "h": 348,
+      "kind": "descent",
+      "depth": 647,
+      "odd_steps": 330,
+      "necessary_minimum_depth": 124
+    },
+    {
+      "h": 349,
+      "kind": "descent",
+      "depth": 618,
+      "odd_steps": 311,
+      "necessary_minimum_depth": 125
+    },
+    {
+      "h": 350,
+      "kind": "descent",
+      "depth": 596,
+      "odd_steps": 297,
+      "necessary_minimum_depth": 125
+    },
+    {
+      "h": 351,
+      "kind": "descent",
+      "depth": 571,
+      "odd_steps": 281,
+      "necessary_minimum_depth": 125
+    },
+    {
+      "h": 352,
+      "kind": "descent",
+      "depth": 672,
+      "odd_steps": 345,
+      "necessary_minimum_depth": 126
+    },
+    {
+      "h": 353,
+      "kind": "descent",
+      "depth": 471,
+      "odd_steps": 218,
+      "necessary_minimum_depth": 126
+    },
+    {
+      "h": 354,
+      "kind": "descent",
+      "depth": 459,
+      "odd_steps": 210,
+      "necessary_minimum_depth": 126
+    },
+    {
+      "h": 355,
+      "kind": "descent",
+      "depth": 610,
+      "odd_steps": 305,
+      "necessary_minimum_depth": 127
+    },
+    {
+      "h": 356,
+      "kind": "descent",
+      "depth": 655,
+      "odd_steps": 333,
+      "necessary_minimum_depth": 127
+    },
+    {
+      "h": 357,
+      "kind": "descent",
+      "depth": 620,
+      "odd_steps": 311,
+      "necessary_minimum_depth": 127
+    },
+    {
+      "h": 358,
+      "kind": "descent",
+      "depth": 610,
+      "odd_steps": 304,
+      "necessary_minimum_depth": 128
+    },
+    {
+      "h": 359,
+      "kind": "descent",
+      "depth": 676,
+      "odd_steps": 346,
+      "necessary_minimum_depth": 128
+    },
+    {
+      "h": 360,
+      "kind": "descent",
+      "depth": 509,
+      "odd_steps": 240,
+      "necessary_minimum_depth": 128
+    },
+    {
+      "h": 361,
+      "kind": "descent",
+      "depth": 601,
+      "odd_steps": 298,
+      "necessary_minimum_depth": 129
+    },
+    {
+      "h": 362,
+      "kind": "descent",
+      "depth": 587,
+      "odd_steps": 289,
+      "necessary_minimum_depth": 129
+    },
+    {
+      "h": 363,
+      "kind": "descent",
+      "depth": 790,
+      "odd_steps": 417,
+      "necessary_minimum_depth": 129
+    },
+    {
+      "h": 364,
+      "kind": "descent",
+      "depth": 780,
+      "odd_steps": 410,
+      "necessary_minimum_depth": 130
+    },
+    {
+      "h": 365,
+      "kind": "descent",
+      "depth": 761,
+      "odd_steps": 398,
+      "necessary_minimum_depth": 130
+    },
+    {
+      "h": 366,
+      "kind": "descent",
+      "depth": 726,
+      "odd_steps": 376,
+      "necessary_minimum_depth": 130
+    },
+    {
+      "h": 367,
+      "kind": "descent",
+      "depth": 712,
+      "odd_steps": 367,
+      "necessary_minimum_depth": 131
+    },
+    {
+      "h": 368,
+      "kind": "descent",
+      "depth": 721,
+      "odd_steps": 372,
+      "necessary_minimum_depth": 131
+    },
+    {
+      "h": 369,
+      "kind": "descent",
+      "depth": 715,
+      "odd_steps": 368,
+      "necessary_minimum_depth": 131
+    },
+    {
+      "h": 370,
+      "kind": "descent",
+      "depth": 675,
+      "odd_steps": 343,
+      "necessary_minimum_depth": 132
+    },
+    {
+      "h": 371,
+      "kind": "descent",
+      "depth": 661,
+      "odd_steps": 334,
+      "necessary_minimum_depth": 132
+    },
+    {
+      "h": 372,
+      "kind": "descent",
+      "depth": 652,
+      "odd_steps": 328,
+      "necessary_minimum_depth": 132
+    },
+    {
+      "h": 373,
+      "kind": "descent",
+      "depth": 626,
+      "odd_steps": 311,
+      "necessary_minimum_depth": 133
+    },
+    {
+      "h": 374,
+      "kind": "descent",
+      "depth": 707,
+      "odd_steps": 362,
+      "necessary_minimum_depth": 133
+    },
+    {
+      "h": 375,
+      "kind": "descent",
+      "depth": 579,
+      "odd_steps": 281,
+      "necessary_minimum_depth": 133
+    },
+    {
+      "h": 376,
+      "kind": "descent",
+      "depth": 662,
+      "odd_steps": 333,
+      "necessary_minimum_depth": 134
+    },
+    {
+      "h": 377,
+      "kind": "descent",
+      "depth": 646,
+      "odd_steps": 323,
+      "necessary_minimum_depth": 134
+    },
+    {
+      "h": 378,
+      "kind": "descent",
+      "depth": 627,
+      "odd_steps": 311,
+      "necessary_minimum_depth": 134
+    },
+    {
+      "h": 379,
+      "kind": "descent",
+      "depth": 683,
+      "odd_steps": 346,
+      "necessary_minimum_depth": 135
+    },
+    {
+      "h": 380,
+      "kind": "descent",
+      "depth": 750,
+      "odd_steps": 388,
+      "necessary_minimum_depth": 135
+    },
+    {
+      "h": 381,
+      "kind": "descent",
+      "depth": 738,
+      "odd_steps": 380,
+      "necessary_minimum_depth": 135
+    },
+    {
+      "h": 382,
+      "kind": "descent",
+      "depth": 716,
+      "odd_steps": 366,
+      "necessary_minimum_depth": 136
+    },
+    {
+      "h": 383,
+      "kind": "descent",
+      "depth": 705,
+      "odd_steps": 359,
+      "necessary_minimum_depth": 136
+    },
+    {
+      "h": 384,
+      "kind": "descent",
+      "depth": 750,
+      "odd_steps": 387,
+      "necessary_minimum_depth": 137
+    },
+    {
+      "h": 385,
+      "kind": "descent",
+      "depth": 661,
+      "odd_steps": 331,
+      "necessary_minimum_depth": 137
+    },
+    {
+      "h": 386,
+      "kind": "descent",
+      "depth": 652,
+      "odd_steps": 325,
+      "necessary_minimum_depth": 137
+    },
+    {
+      "h": 387,
+      "kind": "descent",
+      "depth": 643,
+      "odd_steps": 319,
+      "necessary_minimum_depth": 138
+    },
+    {
+      "h": 388,
+      "kind": "descent",
+      "depth": 602,
+      "odd_steps": 293,
+      "necessary_minimum_depth": 138
+    },
+    {
+      "h": 389,
+      "kind": "descent",
+      "depth": 577,
+      "odd_steps": 277,
+      "necessary_minimum_depth": 138
+    },
+    {
+      "h": 390,
+      "kind": "descent",
+      "depth": 679,
+      "odd_steps": 341,
+      "necessary_minimum_depth": 139
+    },
+    {
+      "h": 391,
+      "kind": "descent",
+      "depth": 667,
+      "odd_steps": 333,
+      "necessary_minimum_depth": 139
+    },
+    {
+      "h": 392,
+      "kind": "descent",
+      "depth": 689,
+      "odd_steps": 347,
+      "necessary_minimum_depth": 139
+    },
+    {
+      "h": 393,
+      "kind": "descent",
+      "depth": 675,
+      "odd_steps": 338,
+      "necessary_minimum_depth": 140
+    },
+    {
+      "h": 394,
+      "kind": "descent",
+      "depth": 752,
+      "odd_steps": 386,
+      "necessary_minimum_depth": 140
+    },
+    {
+      "h": 395,
+      "kind": "descent",
+      "depth": 1012,
+      "odd_steps": 550,
+      "necessary_minimum_depth": 140
+    },
+    {
+      "h": 396,
+      "kind": "descent",
+      "depth": 724,
+      "odd_steps": 368,
+      "necessary_minimum_depth": 141
+    },
+    {
+      "h": 397,
+      "kind": "descent",
+      "depth": 700,
+      "odd_steps": 353,
+      "necessary_minimum_depth": 141
+    },
+    {
+      "h": 398,
+      "kind": "descent",
+      "depth": 658,
+      "odd_steps": 326,
+      "necessary_minimum_depth": 141
+    },
+    {
+      "h": 399,
+      "kind": "descent",
+      "depth": 711,
+      "odd_steps": 359,
+      "necessary_minimum_depth": 142
+    },
+    {
+      "h": 400,
+      "kind": "descent",
+      "depth": 694,
+      "odd_steps": 348,
+      "necessary_minimum_depth": 142
+    },
+    {
+      "h": 401,
+      "kind": "descent",
+      "depth": 656,
+      "odd_steps": 324,
+      "necessary_minimum_depth": 142
+    },
+    {
+      "h": 402,
+      "kind": "descent",
+      "depth": 743,
+      "odd_steps": 379,
+      "necessary_minimum_depth": 143
+    },
+    {
+      "h": 403,
+      "kind": "descent",
+      "depth": 674,
+      "odd_steps": 335,
+      "necessary_minimum_depth": 143
+    },
+    {
+      "h": 404,
+      "kind": "descent",
+      "depth": 633,
+      "odd_steps": 309,
+      "necessary_minimum_depth": 143
+    },
+    {
+      "h": 405,
+      "kind": "descent",
+      "depth": 621,
+      "odd_steps": 301,
+      "necessary_minimum_depth": 144
+    },
+    {
+      "h": 406,
+      "kind": "descent",
+      "depth": 608,
+      "odd_steps": 293,
+      "necessary_minimum_depth": 144
+    },
+    {
+      "h": 407,
+      "kind": "descent",
+      "depth": 571,
+      "odd_steps": 269,
+      "necessary_minimum_depth": 144
+    },
+    {
+      "h": 408,
+      "kind": "descent",
+      "depth": 554,
+      "odd_steps": 258,
+      "necessary_minimum_depth": 145
+    },
+    {
+      "h": 409,
+      "kind": "descent",
+      "depth": 676,
+      "odd_steps": 335,
+      "necessary_minimum_depth": 145
+    },
+    {
+      "h": 410,
+      "kind": "descent",
+      "depth": 665,
+      "odd_steps": 328,
+      "necessary_minimum_depth": 145
+    },
+    {
+      "h": 411,
+      "kind": "descent",
+      "depth": 616,
+      "odd_steps": 297,
+      "necessary_minimum_depth": 146
+    },
+    {
+      "h": 412,
+      "kind": "descent",
+      "depth": 633,
+      "odd_steps": 307,
+      "necessary_minimum_depth": 146
+    },
+    {
+      "h": 413,
+      "kind": "descent",
+      "depth": 543,
+      "odd_steps": 250,
+      "necessary_minimum_depth": 146
+    },
+    {
+      "h": 414,
+      "kind": "descent",
+      "depth": 819,
+      "odd_steps": 424,
+      "necessary_minimum_depth": 147
+    },
+    {
+      "h": 415,
+      "kind": "descent",
+      "depth": 572,
+      "odd_steps": 268,
+      "necessary_minimum_depth": 147
+    },
+    {
+      "h": 416,
+      "kind": "descent",
+      "depth": 811,
+      "odd_steps": 419,
+      "necessary_minimum_depth": 147
+    },
+    {
+      "h": 417,
+      "kind": "descent",
+      "depth": 845,
+      "odd_steps": 440,
+      "necessary_minimum_depth": 148
+    },
+    {
+      "h": 418,
+      "kind": "descent",
+      "depth": 696,
+      "odd_steps": 346,
+      "necessary_minimum_depth": 148
+    },
+    {
+      "h": 419,
+      "kind": "descent",
+      "depth": 782,
+      "odd_steps": 400,
+      "necessary_minimum_depth": 148
+    },
+    {
+      "h": 420,
+      "kind": "descent",
+      "depth": 743,
+      "odd_steps": 375,
+      "necessary_minimum_depth": 149
+    },
+    {
+      "h": 421,
+      "kind": "descent",
+      "depth": 710,
+      "odd_steps": 354,
+      "necessary_minimum_depth": 149
+    },
+    {
+      "h": 422,
+      "kind": "descent",
+      "depth": 704,
+      "odd_steps": 350,
+      "necessary_minimum_depth": 149
+    },
+    {
+      "h": 423,
+      "kind": "descent",
+      "depth": 692,
+      "odd_steps": 342,
+      "necessary_minimum_depth": 150
+    },
+    {
+      "h": 424,
+      "kind": "descent",
+      "depth": 757,
+      "odd_steps": 383,
+      "necessary_minimum_depth": 150
+    },
+    {
+      "h": 425,
+      "kind": "descent",
+      "depth": 938,
+      "odd_steps": 497,
+      "necessary_minimum_depth": 150
+    },
+    {
+      "h": 426,
+      "kind": "descent",
+      "depth": 723,
+      "odd_steps": 361,
+      "necessary_minimum_depth": 151
+    },
+    {
+      "h": 427,
+      "kind": "descent",
+      "depth": 961,
+      "odd_steps": 511,
+      "necessary_minimum_depth": 151
+    },
+    {
+      "h": 428,
+      "kind": "descent",
+      "depth": 641,
+      "odd_steps": 309,
+      "necessary_minimum_depth": 151
+    },
+    {
+      "h": 429,
+      "kind": "descent",
+      "depth": 615,
+      "odd_steps": 292,
+      "necessary_minimum_depth": 152
+    },
+    {
+      "h": 430,
+      "kind": "descent",
+      "depth": 842,
+      "odd_steps": 435,
+      "necessary_minimum_depth": 152
+    },
+    {
+      "h": 431,
+      "kind": "descent",
+      "depth": 836,
+      "odd_steps": 431,
+      "necessary_minimum_depth": 152
+    },
+    {
+      "h": 432,
+      "kind": "descent",
+      "depth": 798,
+      "odd_steps": 407,
+      "necessary_minimum_depth": 153
+    },
+    {
+      "h": 433,
+      "kind": "descent",
+      "depth": 752,
+      "odd_steps": 378,
+      "necessary_minimum_depth": 153
+    },
+    {
+      "h": 434,
+      "kind": "descent",
+      "depth": 762,
+      "odd_steps": 384,
+      "necessary_minimum_depth": 154
+    },
+    {
+      "h": 435,
+      "kind": "descent",
+      "depth": 710,
+      "odd_steps": 351,
+      "necessary_minimum_depth": 154
+    },
+    {
+      "h": 436,
+      "kind": "descent",
+      "depth": 718,
+      "odd_steps": 356,
+      "necessary_minimum_depth": 154
+    },
+    {
+      "h": 437,
+      "kind": "descent",
+      "depth": 698,
+      "odd_steps": 343,
+      "necessary_minimum_depth": 155
+    },
+    {
+      "h": 438,
+      "kind": "descent",
+      "depth": 687,
+      "odd_steps": 336,
+      "necessary_minimum_depth": 155
+    },
+    {
+      "h": 439,
+      "kind": "descent",
+      "depth": 673,
+      "odd_steps": 327,
+      "necessary_minimum_depth": 155
+    },
+    {
+      "h": 440,
+      "kind": "descent",
+      "depth": 680,
+      "odd_steps": 331,
+      "necessary_minimum_depth": 156
+    },
+    {
+      "h": 441,
+      "kind": "descent",
+      "depth": 661,
+      "odd_steps": 319,
+      "necessary_minimum_depth": 156
+    },
+    {
+      "h": 442,
+      "kind": "descent",
+      "depth": 648,
+      "odd_steps": 310,
+      "necessary_minimum_depth": 156
+    },
+    {
+      "h": 443,
+      "kind": "descent",
+      "depth": 640,
+      "odd_steps": 305,
+      "necessary_minimum_depth": 157
+    },
+    {
+      "h": 444,
+      "kind": "descent",
+      "depth": 735,
+      "odd_steps": 365,
+      "necessary_minimum_depth": 157
+    },
+    {
+      "h": 445,
+      "kind": "descent",
+      "depth": 775,
+      "odd_steps": 390,
+      "necessary_minimum_depth": 157
+    },
+    {
+      "h": 446,
+      "kind": "descent",
+      "depth": 958,
+      "odd_steps": 505,
+      "necessary_minimum_depth": 158
+    },
+    {
+      "h": 447,
+      "kind": "descent",
+      "depth": 646,
+      "odd_steps": 308,
+      "necessary_minimum_depth": 158
+    },
+    {
+      "h": 448,
+      "kind": "descent",
+      "depth": 632,
+      "odd_steps": 299,
+      "necessary_minimum_depth": 158
+    },
+    {
+      "h": 449,
+      "kind": "descent",
+      "depth": 691,
+      "odd_steps": 336,
+      "necessary_minimum_depth": 159
+    },
+    {
+      "h": 450,
+      "kind": "descent",
+      "depth": 989,
+      "odd_steps": 524,
+      "necessary_minimum_depth": 159
+    },
+    {
+      "h": 451,
+      "kind": "descent",
+      "depth": 609,
+      "odd_steps": 284,
+      "necessary_minimum_depth": 159
+    },
+    {
+      "h": 452,
+      "kind": "descent",
+      "depth": 779,
+      "odd_steps": 391,
+      "necessary_minimum_depth": 160
+    },
+    {
+      "h": 453,
+      "kind": "descent",
+      "depth": 1098,
+      "odd_steps": 592,
+      "necessary_minimum_depth": 160
+    },
+    {
+      "h": 454,
+      "kind": "descent",
+      "depth": 669,
+      "odd_steps": 321,
+      "necessary_minimum_depth": 160
+    },
+    {
+      "h": 455,
+      "kind": "descent",
+      "depth": 828,
+      "odd_steps": 421,
+      "necessary_minimum_depth": 161
+    },
+    {
+      "h": 456,
+      "kind": "descent",
+      "depth": 814,
+      "odd_steps": 412,
+      "necessary_minimum_depth": 161
+    },
+    {
+      "h": 457,
+      "kind": "descent",
+      "depth": 838,
+      "odd_steps": 427,
+      "necessary_minimum_depth": 161
+    },
+    {
+      "h": 458,
+      "kind": "descent",
+      "depth": 829,
+      "odd_steps": 421,
+      "necessary_minimum_depth": 162
+    },
+    {
+      "h": 459,
+      "kind": "descent",
+      "depth": 760,
+      "odd_steps": 377,
+      "necessary_minimum_depth": 162
+    },
+    {
+      "h": 460,
+      "kind": "descent",
+      "depth": 733,
+      "odd_steps": 360,
+      "necessary_minimum_depth": 162
+    },
+    {
+      "h": 461,
+      "kind": "descent",
+      "depth": 717,
+      "odd_steps": 350,
+      "necessary_minimum_depth": 163
+    },
+    {
+      "h": 462,
+      "kind": "descent",
+      "depth": 612,
+      "odd_steps": 283,
+      "necessary_minimum_depth": 163
+    },
+    {
+      "h": 463,
+      "kind": "descent",
+      "depth": 645,
+      "odd_steps": 304,
+      "necessary_minimum_depth": 163
+    },
+    {
+      "h": 464,
+      "kind": "descent",
+      "depth": 752,
+      "odd_steps": 371,
+      "necessary_minimum_depth": 164
+    },
+    {
+      "h": 465,
+      "kind": "descent",
+      "depth": 809,
+      "odd_steps": 407,
+      "necessary_minimum_depth": 164
+    },
+    {
+      "h": 466,
+      "kind": "descent",
+      "depth": 798,
+      "odd_steps": 400,
+      "necessary_minimum_depth": 164
+    },
+    {
+      "h": 467,
+      "kind": "descent",
+      "depth": 780,
+      "odd_steps": 388,
+      "necessary_minimum_depth": 165
+    },
+    {
+      "h": 468,
+      "kind": "descent",
+      "depth": 726,
+      "odd_steps": 354,
+      "necessary_minimum_depth": 165
+    },
+    {
+      "h": 469,
+      "kind": "descent",
+      "depth": 921,
+      "odd_steps": 477,
+      "necessary_minimum_depth": 165
+    },
+    {
+      "h": 470,
+      "kind": "descent",
+      "depth": 895,
+      "odd_steps": 460,
+      "necessary_minimum_depth": 166
+    },
+    {
+      "h": 471,
+      "kind": "descent",
+      "depth": 903,
+      "odd_steps": 465,
+      "necessary_minimum_depth": 166
+    },
+    {
+      "h": 472,
+      "kind": "descent",
+      "depth": 862,
+      "odd_steps": 439,
+      "necessary_minimum_depth": 166
+    },
+    {
+      "h": 473,
+      "kind": "descent",
+      "depth": 805,
+      "odd_steps": 403,
+      "necessary_minimum_depth": 167
+    },
+    {
+      "h": 474,
+      "kind": "descent",
+      "depth": 1015,
+      "odd_steps": 535,
+      "necessary_minimum_depth": 167
+    },
+    {
+      "h": 475,
+      "kind": "descent",
+      "depth": 992,
+      "odd_steps": 520,
+      "necessary_minimum_depth": 167
+    },
+    {
+      "h": 476,
+      "kind": "descent",
+      "depth": 743,
+      "odd_steps": 363,
+      "necessary_minimum_depth": 168
+    },
+    {
+      "h": 477,
+      "kind": "descent",
+      "depth": 951,
+      "odd_steps": 494,
+      "necessary_minimum_depth": 168
+    },
+    {
+      "h": 478,
+      "kind": "descent",
+      "depth": 932,
+      "odd_steps": 482,
+      "necessary_minimum_depth": 168
+    },
+    {
+      "h": 479,
+      "kind": "descent",
+      "depth": 899,
+      "odd_steps": 461,
+      "necessary_minimum_depth": 169
+    },
+    {
+      "h": 480,
+      "kind": "descent",
+      "depth": 751,
+      "odd_steps": 367,
+      "necessary_minimum_depth": 169
+    },
+    {
+      "h": 481,
+      "kind": "descent",
+      "depth": 637,
+      "odd_steps": 295,
+      "necessary_minimum_depth": 169
+    },
+    {
+      "h": 482,
+      "kind": "descent",
+      "depth": 766,
+      "odd_steps": 376,
+      "necessary_minimum_depth": 170
+    },
+    {
+      "h": 483,
+      "kind": "descent",
+      "depth": 730,
+      "odd_steps": 353,
+      "necessary_minimum_depth": 170
+    },
+    {
+      "h": 484,
+      "kind": "descent",
+      "depth": 714,
+      "odd_steps": 343,
+      "necessary_minimum_depth": 170
+    },
+    {
+      "h": 485,
+      "kind": "descent",
+      "depth": 863,
+      "odd_steps": 437,
+      "necessary_minimum_depth": 171
+    },
+    {
+      "h": 486,
+      "kind": "descent",
+      "depth": 537,
+      "odd_steps": 231,
+      "necessary_minimum_depth": 171
+    },
+    {
+      "h": 487,
+      "kind": "descent",
+      "depth": 1040,
+      "odd_steps": 548,
+      "necessary_minimum_depth": 172
+    },
+    {
+      "h": 488,
+      "kind": "descent",
+      "depth": 741,
+      "odd_steps": 359,
+      "necessary_minimum_depth": 172
+    },
+    {
+      "h": 489,
+      "kind": "descent",
+      "depth": 721,
+      "odd_steps": 346,
+      "necessary_minimum_depth": 172
+    },
+    {
+      "h": 490,
+      "kind": "descent",
+      "depth": 981,
+      "odd_steps": 510,
+      "necessary_minimum_depth": 173
+    },
+    {
+      "h": 491,
+      "kind": "descent",
+      "depth": 805,
+      "odd_steps": 399,
+      "necessary_minimum_depth": 173
+    },
+    {
+      "h": 492,
+      "kind": "descent",
+      "depth": 793,
+      "odd_steps": 391,
+      "necessary_minimum_depth": 173
+    },
+    {
+      "h": 493,
+      "kind": "descent",
+      "depth": 770,
+      "odd_steps": 376,
+      "necessary_minimum_depth": 174
+    },
+    {
+      "h": 494,
+      "kind": "descent",
+      "depth": 805,
+      "odd_steps": 398,
+      "necessary_minimum_depth": 174
+    },
+    {
+      "h": 495,
+      "kind": "descent",
+      "depth": 789,
+      "odd_steps": 388,
+      "necessary_minimum_depth": 174
+    },
+    {
+      "h": 496,
+      "kind": "descent",
+      "depth": 772,
+      "odd_steps": 377,
+      "necessary_minimum_depth": 175
+    },
+    {
+      "h": 497,
+      "kind": "descent",
+      "depth": 860,
+      "odd_steps": 432,
+      "necessary_minimum_depth": 175
+    },
+    {
+      "h": 498,
+      "kind": "descent",
+      "depth": 847,
+      "odd_steps": 424,
+      "necessary_minimum_depth": 175
+    },
+    {
+      "h": 499,
+      "kind": "descent",
+      "depth": 830,
+      "odd_steps": 413,
+      "necessary_minimum_depth": 176
+    },
+    {
+      "h": 500,
+      "kind": "descent",
+      "depth": 796,
+      "odd_steps": 391,
+      "necessary_minimum_depth": 176
+    },
+    {
+      "h": 501,
+      "kind": "descent",
+      "depth": 779,
+      "odd_steps": 380,
+      "necessary_minimum_depth": 176
+    },
+    {
+      "h": 502,
+      "kind": "descent",
+      "depth": 769,
+      "odd_steps": 374,
+      "necessary_minimum_depth": 177
+    },
+    {
+      "h": 503,
+      "kind": "descent",
+      "depth": 977,
+      "odd_steps": 505,
+      "necessary_minimum_depth": 177
+    },
+    {
+      "h": 504,
+      "kind": "descent",
+      "depth": 960,
+      "odd_steps": 494,
+      "necessary_minimum_depth": 177
+    },
+    {
+      "h": 505,
+      "kind": "descent",
+      "depth": 869,
+      "odd_steps": 436,
+      "necessary_minimum_depth": 178
+    },
+    {
+      "h": 506,
+      "kind": "descent",
+      "depth": 836,
+      "odd_steps": 415,
+      "necessary_minimum_depth": 178
+    },
+    {
+      "h": 507,
+      "kind": "descent",
+      "depth": 828,
+      "odd_steps": 410,
+      "necessary_minimum_depth": 178
+    },
+    {
+      "h": 508,
+      "kind": "descent",
+      "depth": 851,
+      "odd_steps": 424,
+      "necessary_minimum_depth": 179
+    },
+    {
+      "h": 509,
+      "kind": "descent",
+      "depth": 822,
+      "odd_steps": 406,
+      "necessary_minimum_depth": 179
+    },
+    {
+      "h": 510,
+      "kind": "descent",
+      "depth": 935,
+      "odd_steps": 477,
+      "necessary_minimum_depth": 179
+    },
+    {
+      "h": 511,
+      "kind": "descent",
+      "depth": 880,
+      "odd_steps": 442,
+      "necessary_minimum_depth": 180
+    },
+    {
+      "h": 512,
+      "kind": "descent",
+      "depth": 833,
+      "odd_steps": 412,
+      "necessary_minimum_depth": 180
+    }
+  ]
+}
