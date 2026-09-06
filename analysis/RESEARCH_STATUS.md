@@ -837,3 +837,39 @@ Verification: selected build passes (7832 jobs), and all 168 audited
 declarations use standard foundations only. Both three-test surgery suites
 pass. The updated two-page paper and one-page guide were rendered and
 visually checked.
+
+
+## Dominating unequal-length merges preserve noncontraction (2026-09-05)
+
+New module `lean/Collatz/DominatingMerge.lean` proves:
+- `neverContracts_of_dominating_merge`: if n is noncontracting,
+  T^s(x)=T^t(n), every prefix through s at x is noncontracting, and
+  2^s*3^j_t(n) <= 2^t*3^j_s(x), then x is noncontracting at every time.
+  There is no unsupported noncontraction assumption on the shifted tail.
+- `dominating_merge_111_family`: for every Q, the smaller positive seed
+  103+4096Q merges after twelve steps with 111+4374Q after one step,
+  with odd counts eight and one and a noncontracting replacement prefix.
+- `NeverContracts.smaller_merge_111`: full noncontraction transfers from
+  the larger to the smaller seed. Thus a least positive noncontracting
+  seed cannot lie in this progression. No such seed is constructed and
+  no universal coverage is asserted.
+
+`analysis/variable_length_surgery.py` searches both lengths through 18.
+Among 7,495 canonical seeds below 2^18 with noncontracting prefixes,
+1,391 have the previous equal-time/equal-count smaller merge. Variable
+lengths add 3,768, all with the stronger domination certificate; 937
+selected certificates use positive forward time. The search leaves
+2,336 seeds unresolved, beginning 27,327,447,495,639,667,703,763.
+These are finite seeds, not entire lifted cylinders. Every certificate
+and every selected forward-prefix hypothesis is independently replayed.
+Two tests pass, including comparison to all smaller seeds at depth 8
+and five sample members of the infinite family.
+
+Paper and guide: `paper/dominating_merges.*` and
+`paper/dominating_merges_guide.*`. The global existence theorem for a
+smaller noncontracting merging seed is still missing. Nontrivial cycles
+are also not excluded. Collatz remains open.
+
+Verification: selected build passes (7833 jobs); all 171 audited
+declarations use standard foundations only. Both new tests pass. The
+one-page technical paper and one-page guide were visually checked.

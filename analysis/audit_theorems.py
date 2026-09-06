@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.DominatingMerge', 'Collatz.neverContracts_of_dominating_merge', 'Unequal-length merging preserves full noncontraction under prefix noncontraction and coefficient domination'),
+    ('Collatz.DominatingMerge', 'Collatz.dominating_merge_111_family', 'Every Q gives exact one-step/twelve-step merging of 111+4374Q and smaller 103+4096Q with a noncontracting replacement prefix'),
+    ('Collatz.DominatingMerge', 'Collatz.NeverContracts.smaller_merge_111', 'Conditional full noncontraction transfers to a smaller merging seed on the parameterized progression; no such seed asserted'),
     ('Collatz.WordSurgery', 'Collatz.lower_count_merge_bound', 'Equal-time merging with fewer odd steps forces 3n < x + 2^(t-j_x)'),
     ('Collatz.WordSurgery', 'Collatz.lower_count_merge_gt_twice', 'At or above the binary cylinder scale a lower-count equal-time merging seed exceeds twice the original seed'),
     ('Collatz.WordSurgery', 'Collatz.higher_count_merge_lifts', 'Compatible canonical endpoints with more odd steps merge on an explicit ternary progression of binary-cylinder quotients'),

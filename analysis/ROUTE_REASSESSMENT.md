@@ -186,3 +186,35 @@ ternary progression of binary-cylinder quotients. The technical paper
 and guide have been updated. The next experiment should vary replacement
 length, and distinguish meeting before forward descent from merely
 rediscovering a later orbit value already below the starting seed.
+
+
+## Variable lengths produce additional certificates (2026-09-05)
+
+The bounded search now varies both forward time and replacement length
+from zero through 18, for canonical seeds 0<n<2^18 whose first 18
+coefficients never contract. Of 7,495 such seeds, 1,391 were covered by
+the previous equal-time/equal-count test. Variable lengths add 3,768,
+leaving 2,336 unresolved. All additions have certificates preserving full
+noncontraction; 937 selected certificates use positive forward time.
+These are finite seed counts, not all-quotient cylinder coverage. The
+smallest uncovered seeds include 27, 327, 447, 495, 639, 667 and 703.
+No original path descends before a certified meeting.
+
+`Collatz.DominatingMerge` formalizes the exact condition: the replacement
+prefix must be noncontracting and its final coefficient must dominate the
+original prefix coefficient. This avoids the invalid inference that a
+shift of a noncontracting seed must itself be noncontracting. The cocycle
+then proves full noncontraction of the replacement from that of the
+original, even when the meeting times differ.
+
+The infinite family N=111+4374Q, M=103+4096Q, Q>=0, merges at T(N)=T^12(M).
+The coefficients are 3/2 and 3^8/2^12, with domination ratio 2187/2048.
+Lean proves the actual parities, prefix inequalities, and 0<M<N, and hence
+NeverContracts N implies NeverContracts M. It excludes this progression
+for a least positive noncontracting seed, not arbitrary noncontracting
+seeds, and it does not prove convergence of the entire progression.
+
+Next action: examine the unresolved seeds and compress successful
+certificates into seed-dependent arithmetic rules, keeping coefficient
+transport and positivity explicit. Merely increasing a fixed search
+length cannot be treated as a universal proof.

@@ -1,0 +1,67 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\begin{document}
+\begin{center}
+{\LARGE Guide: Merging Paths of Different Lengths}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\raggedright
+\section*{What changed}
+Earlier replacements required the two paths to take the same number of
+steps. Allowing different lengths finds additional smaller starting seeds
+that reach the same endpoint. Lean now checks when such a replacement
+preserves noncontraction for the entire future orbit.
+
+\section*{What noncontraction means}
+After $t$ shortcut steps with $j$ odd steps, the multiplicative coefficient
+is $3^j/2^t$. A seed is called noncontracting when that coefficient is at
+least one for every prefix. This is stronger than merely seeing a finite
+initial run without descent. No infinite noncontracting seed is constructed.
+
+\section*{The two checks needed for transport}
+The smaller seed's path must have coefficient at least one at every step
+before the meeting. At the meeting, its coefficient must be at least as
+large as the original path's coefficient. Afterward the two paths follow
+the same values, so they receive the same further multiplicative factors.
+Those two checks preserve full noncontraction if the original seed has it.
+
+This matters because shifting a noncontracting seed forward does not
+automatically give another noncontracting seed. The comparison at the
+meeting accounts for the coefficient already accumulated before that shift.
+
+\section*{A concrete infinite family}
+For any whole number $Q\geq0$, take
+\[
+N=111+4374Q,\qquad M=103+4096Q.
+\]
+The larger seed reaches $167+6561Q$ in one step. The smaller seed reaches
+the same value in twelve steps with eight odd steps. Its prefix passes
+both transport checks. For $Q=0$, this is the meeting of 111 and 103 at 167.
+The difference $N-M=8+278Q$ is always positive.
+
+Thus, if $N$ were noncontracting, the smaller $M$ would be noncontracting
+too. A least positive noncontracting seed cannot be in this progression.
+This does not show that every member converges, or cover all possible
+least seeds. The meeting occurs before any forward descent of $N$.
+
+\section*{What the search establishes}
+Among 7,495 seeds below $2^{18}$ with noncontracting prefixes through time
+18, the previous equal-time/equal-count test covers 1,391 as smaller
+merges. Searching different lengths through 18 adds 3,768, all with
+certificates satisfying the new transport theorem. There are still 2,336
+unresolved seeds within this search, including 27 and 703.
+
+These counts concern finitely many starting seeds and bounded path
+lengths. They are exact Python results, not kernel-certified global
+coverage. An unresolved seed can have a useful longer replacement;
+it is not a counterexample to Collatz.
+
+\section*{Reproduce and continue}
+From \texttt{lean/}, run \texttt{lake build Collatz.DominatingMerge}.
+The search is \texttt{analysis/variable\_length\_surgery.py}, with a
+matching test file and saved results. The next challenge is to find
+arithmetic conditions that guarantee a suitable replacement beyond these
+bounded searches. Neither a proof of nondivergence nor a full Collatz
+proof has been obtained.
+\end{document}

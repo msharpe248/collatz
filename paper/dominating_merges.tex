@@ -1,0 +1,93 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\title{Noncontraction Transport Through Unequal-Length Merges}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\begin{center}
+{\Large Noncontraction Transport Through Unequal-Length Merges}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\begin{abstract}
+An unequal-length merging predecessor inherits full noncontraction when
+its finite prefix is noncontracting and its final coefficient dominates
+the original prefix coefficient. We formalize this transport principle
+and an infinite arithmetic family meeting after one versus twelve steps.
+A bounded exact search supplies additional examples but leaves a global
+existence obligation. Neither nondivergence nor Collatz is proved.
+\end{abstract}
+Let $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$. Write
+$j_t(n)$ for the odd count and $C_t(n)=3^{j_t(n)}/2^t$.
+Call $n$ noncontracting if $C_t(n)\geq1$ for every $t\geq0$.
+
+\begin{theorem}[Dominating merge]
+Suppose $n$ is noncontracting, $T^s(x)=T^t(n)$,
+$C_i(x)\geq1$ for $0\leq i\leq s$, and $C_s(x)\geq C_t(n)$.
+Then $x$ is noncontracting.
+\end{theorem}
+\begin{proof}
+For $v\geq0$, the coefficient cocycle and the shared endpoint give
+\[
+C_{s+v}(x)=C_s(x)C_v(T^s(x))
+ =\frac{C_s(x)}{C_t(n)}C_{t+v}(n)\geq1.
+\]
+Earlier times are covered by the prefix hypothesis. The Lean proof uses
+natural-number cross multiplication and cancellation of a positive power
+of three. It does not assume the shifted seed $T^t(n)$ is noncontracting;
+that property does not follow just by shifting the original hypothesis.
+\end{proof}
+
+\begin{theorem}[An infinite merging family]
+For every integer $Q\geq0$, put
+\[
+N=111+4374Q,\qquad M=103+4096Q.
+\]
+Then $0<M<N$, and
+\[
+T(N)=T^{12}(M)=167+6561Q,\qquad j_1(N)=1,\qquad j_{12}(M)=8.
+\]
+Every prefix of the twelve-step path from $M$ is noncontracting.
+Consequently, if $N$ is noncontracting, so is the smaller seed $M$.
+\end{theorem}
+\begin{proof}
+Lean's kernel verifies $T^{12}(103)=167$, $j_{12}(103)=8$ and all
+thirteen prefix coefficient inequalities. Binary-cylinder transport
+preserves these parities for $103+2^{12}Q$ and adds $3^8Q$ to its
+endpoint. The seed $N$ is odd, giving the same endpoint after one step.
+The coefficient comparison is
+\[
+\frac{C_{12}(M)}{C_1(N)}
+=\frac{3^8/2^{12}}{3/2}=\frac{2187}{2048}>1.
+\]
+The first theorem applies, and $N-M=8+278Q>0$.
+\end{proof}
+Thus no least positive noncontracting seed can belong to this progression.
+All $N$ are multiples of three, and the meeting occurs after an increasing
+forward step. The result is not a construction of a noncontracting seed,
+nor an exclusion of noncontraction for every member without the minimality
+condition. No mathematical priority claim is made.
+
+\paragraph{Finite search.}
+The exact Python search takes the 7,495 seeds $0<n<2^{18}$ whose first
+18 prefix coefficients are at least one. Equal-time/equal-count replacement
+already covers 1,391 of them as ordinary smaller merges. Searching both
+forward and replacement lengths from zero through 18 covers another 3,768.
+All 3,768 additions have certificates satisfying the first theorem;
+937 of the selected certificates use a positive forward time. Each is
+independently replayed, and no original path descends before its meeting.
+The 2,336 unresolved seeds begin $27,327,447,495,639,667,703,763$.
+These are finite seed counts, not coverage of all their cylinder lifts.
+Failure within these bounds says nothing about longer replacements.
+
+\paragraph{Verification and remaining gap.}
+The three public declarations in \texttt{Collatz.DominatingMerge} are
+included in the axiom audit. The reproducible search is
+\texttt{analysis/variable\_length\_surgery.py}; its tests compare against
+every smaller seed at depth eight and replay five members of the family.
+The census is not kernel certified. A proof must still force a suitable
+smaller predecessor for every hypothetical least noncontracting seed;
+the present certificates cover only particular cases. Nontrivial cycles
+also remain outside the conclusion.
+\end{document}

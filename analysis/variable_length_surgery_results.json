@@ -1,0 +1,185 @@
+{
+  "depth": 18,
+  "seed_interval": [
+    1,
+    262143
+  ],
+  "scope": "finite seeds and bounded lengths; not universal coverage",
+  "kernel_certified": false,
+  "counts": {
+    "noncontracting_prefixes": 7495,
+    "equal_count_covered": 1391,
+    "variable_length_additions": 3768,
+    "additions_preserving_noncontraction": 3768,
+    "positive_forward_time_certificates": 937,
+    "no_bounded_certificate": 2336
+  },
+  "examples": [
+    {
+      "seed": 31,
+      "predecessor": 27,
+      "forward_time": 0,
+      "inverse_time": 3,
+      "endpoint": 31,
+      "forward_odds": 0,
+      "inverse_odds": 2
+    },
+    {
+      "seed": 47,
+      "predecessor": 31,
+      "forward_time": 0,
+      "inverse_time": 1,
+      "endpoint": 47,
+      "forward_odds": 0,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 71,
+      "predecessor": 47,
+      "forward_time": 0,
+      "inverse_time": 1,
+      "endpoint": 71,
+      "forward_odds": 0,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 91,
+      "predecessor": 71,
+      "forward_time": 0,
+      "inverse_time": 6,
+      "endpoint": 91,
+      "forward_odds": 0,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 103,
+      "predecessor": 91,
+      "forward_time": 0,
+      "inverse_time": 3,
+      "endpoint": 103,
+      "forward_odds": 0,
+      "inverse_odds": 2
+    },
+    {
+      "seed": 111,
+      "predecessor": 103,
+      "forward_time": 1,
+      "inverse_time": 12,
+      "endpoint": 167,
+      "forward_odds": 1,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 155,
+      "predecessor": 103,
+      "forward_time": 0,
+      "inverse_time": 1,
+      "endpoint": 155,
+      "forward_odds": 0,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 159,
+      "predecessor": 111,
+      "forward_time": 7,
+      "inverse_time": 16,
+      "endpoint": 911,
+      "forward_odds": 6,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 167,
+      "predecessor": 111,
+      "forward_time": 0,
+      "inverse_time": 1,
+      "endpoint": 167,
+      "forward_odds": 0,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 239,
+      "predecessor": 159,
+      "forward_time": 0,
+      "inverse_time": 1,
+      "endpoint": 239,
+      "forward_odds": 0,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 251,
+      "predecessor": 167,
+      "forward_time": 0,
+      "inverse_time": 1,
+      "endpoint": 251,
+      "forward_odds": 0,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 283,
+      "predecessor": 251,
+      "forward_time": 0,
+      "inverse_time": 3,
+      "endpoint": 283,
+      "forward_odds": 0,
+      "inverse_odds": 2
+    },
+    {
+      "seed": 487,
+      "predecessor": 463,
+      "forward_time": 9,
+      "inverse_time": 1,
+      "endpoint": 695,
+      "forward_odds": 6,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 671,
+      "predecessor": 447,
+      "forward_time": 0,
+      "inverse_time": 1,
+      "endpoint": 671,
+      "forward_odds": 0,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 743,
+      "predecessor": 495,
+      "forward_time": 0,
+      "inverse_time": 1,
+      "endpoint": 743,
+      "forward_odds": 0,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 751,
+      "predecessor": 667,
+      "forward_time": 0,
+      "inverse_time": 3,
+      "endpoint": 751,
+      "forward_odds": 0,
+      "inverse_odds": 2
+    }
+  ],
+  "smallest_uncovered": [
+    27,
+    327,
+    447,
+    495,
+    639,
+    667,
+    703,
+    763,
+    871,
+    1051,
+    1263,
+    1383,
+    1695,
+    1767,
+    1819,
+    1959,
+    2151,
+    2175,
+    2215,
+    2287
+  ]
+}
