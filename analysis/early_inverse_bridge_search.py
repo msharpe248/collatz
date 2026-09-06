@@ -9,15 +9,15 @@ import json
 from affine_bridge_search import step
 
 
-def search(depth=12):
-    rows=[(0,71,74,0,0)]
+def search(depth=12, *, multiplier=81, small=71, large=74):
+    rows=[(0,small,large,0,0)]
     covered=0
     levels=[];certs=[]
     for t in range(1,depth+1):
         new=[];hits=0
         for r,x,y,j,k in rows:
             for bit in (0,1):
-                xx,yy=x+3**(j+4)*bit,y+3**(k+4)*bit
+                xx,yy=x+multiplier*3**j*bit,y+multiplier*3**k*bit
                 jj,kk=j+xx%2,k+yy%2
                 xx,yy=step(xx),step(yy)
                 rr=r+2**(t-1)*bit
