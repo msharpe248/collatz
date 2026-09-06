@@ -1,0 +1,47 @@
+\documentclass[10pt]{article}
+\usepackage[margin=.65in]{geometry}
+\usepackage{amsmath,amssymb,hyperref}
+\title{\vspace{-0.8cm}Certifying optimized transfer cutoffs}
+\author{Collatz Lean research project}
+\date{September 6, 2026}
+\begin{document}
+\maketitle\vspace{-0.4cm}
+\begin{abstract}
+We give a finite certificate for bounding every transfer request of the classical odd-run proof below a seed threshold. Two residue maxima per possible run length suffice. Lean verifies optimized cutoffs at parameters 61 and $2^{64}-1$, together with their maximality for this request criterion. All convergence conclusions retain the smaller-transfer hypotheses.
+\end{abstract}
+\section{Requests and the certificate}
+Let $T$ be the shortcut Collatz map, $R(n)$ eventual arrival at one, and
+$A(v)$ the implication $R(3v+2)\Rightarrow R(27v+20)$.
+The bounded-transfer theorem needs only requests satisfying
+\[
+ a\ge2,\quad m>0\text{ odd},\quad 2^a m\le N,
+ \qquad 36v+27=3^a m.                         \tag{1}
+\]
+If every such v is below U and $A(v)$ holds for all $v<U$, then every positive seed below N reaches one.
+
+Choose L with $N<2^L$. Any request has $a<L$. For $r\in\{1,3\}$ define
+\[
+ M(B,r)=\begin{cases}r+4\lfloor(B-r)/4\rfloor,&r\le B,\\0,&r>B.\end{cases}
+\]
+The certificate checks, for $2\le a<L$ and each r,
+\[
+ 3^a r\equiv3\pmod4\quad\Longrightarrow\quad
+ 3^a M(\lfloor N/2^a\rfloor,r)<36U+27.        \tag{2}
+\]
+This tests only the largest possible odd part in each eligible residue class. It does not enumerate all seeds or all transfer parameters.
+\section{Soundness and descent}
+For a request (1), let $r=m\bmod4$. Then r is 1 or 3 and $m\le\lfloor N/2^a\rfloor$. The residue-maximum formula gives $m\le M(\lfloor N/2^a\rfloor,r)$. Its congruence condition follows from (1). Equation (2) therefore yields $36v+27<36U+27$, hence $v<U$.
+
+Compose this bound with the exact-request theorem in \texttt{BoundedTransfer.lean}. If a target $T^t(27U+20)$ lies below N, its positivity and the convergence cutoff prove $A(U)$ from the smaller-transfer hypotheses. This is a conditional induction rule, not an assertion that its hypotheses hold for all U.
+\section{Checked cutoffs and maximality}
+Lean's ordinary \texttt{decide} tactic verifies both certificates:
+\[
+ (U,N,L)=(61,415,9),\qquad
+ (2^{64}-1,\ 30786325577727,\ 45).
+\]
+Their previous sufficient dyadic cutoffs were 128 and $2^{43}$ respectively.
+For U=61, the next seed 415 has $a=5,m=13$ and requests $v=87\ge61$. For the larger U, seed 30786325577727 has $a=42,m=7$ and requests $v=21275914553349625401\ge U$.
+
+Lean proves that every larger N, with any valid L, fails this request certificate in each case. Maximality concerns this arithmetic request system; it does not rule out other convergence proofs or larger cutoffs obtained by proving additional transfer instances.
+The formal module \texttt{Collatz.RequestCutoff} uses only standard foundations. The Python optimizer proposes the checked outputs; its general correctness and a global descent or covering argument remain unproved. No literature-priority claim is made.
+\end{document}

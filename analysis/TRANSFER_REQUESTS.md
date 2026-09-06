@@ -73,3 +73,13 @@ The formal request schema is in `lean/Collatz/BoundedTransfer.lean`.
 A next useful formal step is to certify the optimized cutoff or exploit
 its first missing requests in the induction. Neither the request schema
 nor its finite enumeration proves global coverage or the Collatz conjecture.
+
+
+## Subsequent Lean certification
+
+`RequestCutoff.lean` now provides a sound finite residue-maxima checker.
+The optimized outputs U=61,N=415 and U=2^64-1,N=30786325577727 are
+certified with ordinary `decide`, together with maximality in the request
+schema. The general Python optimizer and the other enumerated outputs
+remain computations rather than Lean algorithm-correctness theorems.
+See `paper/request_cutoff.tex` and its guide.

@@ -1,0 +1,40 @@
+\documentclass[10pt]{article}
+\usepackage[margin=.8in]{geometry}
+\usepackage{amsmath,hyperref}
+\title{Guide: certified request cutoffs}
+\author{Collatz Lean research project}
+\date{September 6, 2026}
+\begin{document}
+\maketitle
+\section*{What is now checked}
+The earlier optimizer proposed a seed cutoff from the transfer parameters available in an induction. The new Lean checker verifies that no odd-run request below that cutoff needs an unavailable parameter.
+
+For transfer parameters below 61, the certified seed cutoff is 415, improving the sufficient dyadic cutoff 128. For parameters below $2^{64}-1$, the certified cutoff is 30786325577727. These are conditional convergence thresholds: all smaller transfer instances must still be available.
+\section*{Using the certificate}
+Choose U, a proposed seed bound N, and L such that $N<2^L$.
+Prove \texttt{RequestCutoff.Check U N L}. The checker considers each run length below L and the two odd residue classes modulo four. It checks only their largest eligible odd parts.
+
+Use \texttt{RequestCutoff.reachesOne} to obtain convergence below N from all transfer instances below U. To close a transfer target that descends into this interval, use
+\texttt{AffineTransfer.of\_request\_cutoff\_descent}.
+The source convergence argument alone does not establish the cutoff's smaller-transfer premises.
+\section*{Source and verification}
+\raggedright
+The formal source is \texttt{lean/Collatz/RequestCutoff.lean}.
+The declarations \texttt{check\_61} and \texttt{check\_mersenne64} are evaluated by ordinary \texttt{decide}, with no extra computational axiom.
+The declarations \texttt{maximal\_61} and \texttt{maximal\_mersenne64} exhibit the first unavailable requests and exclude every larger cutoff in the same request system.
+
+From \texttt{lean/}, run:
+\begin{verbatim}
+lake build Collatz.RequestCutoff
+\end{verbatim}
+From the repository root, with the pinned toolchain on PATH:
+\begin{verbatim}
+python3 analysis/audit_theorems.py --build
+python3 analysis/transfer_requests.py
+python3 -m unittest discover -s analysis \
+  -p 'test_transfer_requests.py'
+\end{verbatim}
+The Python program proposes thresholds. Only the two selected outputs described here are certified in this module; its full enumeration and optimizer are not formalized as Lean algorithms.
+\section*{The remaining mathematical task}
+A cutoff certificate supplies an induction premise, not a descent witness. We still need a general argument that targets descend into their certified intervals, or a covering combination of this rule and other valid transfer rules. Maximality of these cutoffs does not establish nonconvergence above them. The Collatz conjecture remains unproved.
+\end{document}

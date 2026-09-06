@@ -17,6 +17,13 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.RequestCutoff', 'Collatz.RequestCutoff.sound', 'Finite residue-maxima certificate bounds every odd-run transfer request'),
+    ('Collatz.RequestCutoff', 'Collatz.RequestCutoff.reachesOne', 'Certified request cutoff implies convergence from smaller transfer hypotheses'),
+    ('Collatz.RequestCutoff', 'Collatz.RequestCutoff.check_61', 'Kernel-checked optimized cutoff 415 for available transfer parameters below 61'),
+    ('Collatz.RequestCutoff', 'Collatz.RequestCutoff.check_mersenne64', 'Kernel-checked cutoff 30786325577727 for parameters below 2^64-1'),
+    ('Collatz.RequestCutoff', 'Collatz.RequestCutoff.maximal_61', 'No larger cutoff for parameter 61 satisfies the odd-run request certificate'),
+    ('Collatz.RequestCutoff', 'Collatz.RequestCutoff.maximal_mersenne64', 'No larger cutoff for parameter 2^64-1 satisfies the odd-run request certificate'),
+    ('Collatz.RequestCutoff', 'Collatz.AffineTransfer.of_request_cutoff_descent', 'Certified optimized cutoffs can close transfer instances by conditional target descent'),
     ('Collatz.BoundedTransfer', 'Collatz.reachesOne_below_of_odd_run_requests', 'Only transfer instances actually arising from odd runs below N are needed for convergence below N'),
     ('Collatz.BoundedTransfer', 'Collatz.odd_run_size_bound', 'Dyadic size of a seed bounds the ternary size of its initial odd run'),
     ('Collatz.BoundedTransfer', 'Collatz.odd_run_transfer_size', 'Exact size identity for the transfer argument in the single-even odd-run branch'),

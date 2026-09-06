@@ -16,7 +16,7 @@ Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
 947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
 remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
 records five kernel-checked precision/count findings for a proposed literature
-input; the selected declaration audit now contains 244 entries. The new `BridgeGrowth`
+input; the selected declaration audit now contains 251 entries. The new `BridgeGrowth`
 bound rules out lowering cycle charge through arbitrary forward bridge
 interleavings and justifies pruning those states in the affine bridge search.
 `InverseCycleBridge` now verifies a signed 2 <- 47 -> 425 -> 2 excursion
@@ -1091,3 +1091,19 @@ example, parameters below 61 cover the requests below seed 415, versus
 the dyadic bound 128. The request theorem is Lean-proved; the enumeration
 and optimized-cutoff algorithm are not yet Lean certificates. No remaining
 transfer premise or global coverage claim is treated as discharged.
+
+
+## Optimized cutoffs are now certifiable without enumerating seeds
+
+`RequestCutoff.lean` checks two odd residue maxima per possible run length
+and proves soundness for every actual odd-run request. Certified cutoffs
+supply convergence from smaller-transfer hypotheses and can be used in
+`AffineTransfer.of_request_cutoff_descent`. Ordinary `decide` certifies
+(U,N,L)=(61,415,9) and (2^64-1,30786325577727,45).
+
+Both cutoffs are proved maximal for this request schema, using explicit
+first unavailable requests. This is not maximality among all possible
+convergence proofs. The optimizer itself is not yet a Lean algorithm;
+these outputs are checked by a generic sound certificate. A general
+descent or coverage argument is still missing. See `paper/request_cutoff.tex`
+and its guide. All smaller-transfer premises remain explicit.
