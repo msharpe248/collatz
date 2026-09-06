@@ -1,0 +1,40 @@
+\documentclass[10pt]{article}
+\usepackage[margin=.75in]{geometry}
+\usepackage{amsmath,amssymb,hyperref}
+\title{Uniform exits from a growing Mersenne prefix}
+\author{Collatz Lean research project}
+\date{September 6, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We give exact endpoints for a growing prefix of an inverse-transfer comparison and a uniform merge on an infinite arithmetic progression of Mersenne exponents. The result supports a conditional induction step; it does not prove Collatz convergence or cover all exponents.
+\end{abstract}
+\section{The growing prefix}
+Let $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$.
+Put $k=6h+4$, $u=2^k-1$, and $w=(2^k-7)/9$. The three-step inverse template uses $v=8w+5<u=9w+6$ and the identities
+\[
+ T^3(3v+2)=3u+2,\qquad T^3(27v+20)=27\cdot2^k-14.
+\]
+The original target is $27u+20=27\cdot2^k-7$. Its reduced comparison has the exact endpoints
+\[
+ T^k(27\cdot2^k-14)=3^{4h+5}-7,\qquad
+ T^k(27\cdot2^k-7)=3^{4h+6}-10.                 \tag{1}
+\]
+To prove (1), four steps give $243\cdot 8^{2h}-7$ and $729\cdot 8^{2h}-10$. The identities
+$T^3(8q-7)=9q-7$ for $q\ge1$ and $T^3(8q-10)=9q-10$ for $q\ge2$, iterated $2h$ times, finish the calculation. These are arithmetic identities, with no convergence assumption.
+\section{An infinite exit progression}
+For every $Q\ge0$, direct cylinder transport gives
+\[
+ T^{12}(2988+4096Q)=T^{12}(8975+12288Q)=533+729Q. \tag{2}
+\]
+The base paths have six and five odd steps. Writing their inputs as $X-7$ and $3X-10$, both affine numerators are $729X-187$ over denominator $4096$.
+Since $3^{981}\equiv2995\pmod{4096}$ and $3^{1024}\equiv1\pmod{4096}$, equations (1)--(2) imply, for every $z\ge0$ and $k=1468+1536z$,
+\[
+ T^{k+12}(27\cdot2^k-14)=T^{k+12}(27\cdot2^k-7). \tag{3}
+\]
+Thus the merge occurs after a prefix whose length grows with the exponent. It does not contradict the earlier obstruction to this template merging by clock $k$.
+\section{Induction scope and validation}
+Define $A(u)$ to mean that reaching one from $3u+2$ implies reaching one from $27u+20$. Applying $A(v)$ after the inverse segment and then using (3) gives $A(v)\Rightarrow A(u)$ on the progression above. The smaller-parameter premise remains essential: these identities neither establish all such premises nor supply a covering induction.
+
+The Lean module \texttt{Collatz.MersenneExit} proves the uniform merge, the exact prefix endpoints, the infinite progression identity, strict parameter decrease, and the conditional transfer theorem. The associated search tracks both coefficients and constants, accepting only symbolic equalities. At exit depth 16 it finds 44 first cylinder rules covering 110 of 4096 eligible exponent residues; 3986 remain unresolved. These census counts are Python evidence, not Lean coverage theorems. Tests independently replay positive lifts and the first full Mersenne example. No claim of literature priority is made.
+\end{document}

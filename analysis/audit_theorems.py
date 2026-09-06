@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.MersenneExit', 'Collatz.mersenne_exit_smaller', 'Strict decrease of the recursive transfer parameter on the Mersenne exponent progression'),
+    ('Collatz.MersenneExit', 'Collatz.AffineTransfer.mersenne_exit', 'Smaller transfer premise proves A(2^k-1) for all k=1468+1536z; premise remains explicit'),
+    ('Collatz.MersenneExit', 'Collatz.mersenne_exit_merge', 'Uniform twelve-step merge for the exit power parameter X=2995+4096Q'),
+    ('Collatz.MersenneExit', 'Collatz.mersenne_inverse_exit', 'Exact reduced endpoints after k=6h+4 steps of the Mersenne inverse prefix'),
+    ('Collatz.MersenneExit', 'Collatz.mersenne_inverse_exit_progression', 'Reduced inverse pair merges at clock k+12 for every k=1468+1536z; no global convergence claim'),
     ('Collatz.TwoEarlyBridges', 'Collatz.two_early_bridge_geometry', 'Two uniformly smaller recursive parameters and exact orbit identities for u=15+9*2^40*Q'),
     ('Collatz.TwoEarlyBridges', 'Collatz.AffineTransfer.two_early_15', 'Two smaller transfer premises prove the early inverse progression through parameter fifteen'),
     ('Collatz.EarlyInverseBridge', 'Collatz.early_inverse_predecessor', 'An immediate odd predecessor exposes the smaller transfer parameter 2w+1 at u=3w+2'),

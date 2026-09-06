@@ -1,6 +1,6 @@
 # Active proof program
 
-Updated 2026-09-05. The Collatz conjecture remains open. This ledger separates
+Updated 2026-09-06. The Collatz conjecture remains open. This ledger separates
 proved family exclusions from the unproved claim that all counterexamples
 belong to an excluded family.
 
@@ -16,7 +16,7 @@ Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
 947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
 remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
 records five kernel-checked precision/count findings for a proposed literature
-input; the selected declaration audit now contains 230 entries. The new `BridgeGrowth`
+input; the selected declaration audit now contains 235 entries. The new `BridgeGrowth`
 bound rules out lowering cycle charge through arbitrary forward bridge
 interleavings and justifies pruning those states in the affine bridge search.
 `InverseCycleBridge` now verifies a signed 2 <- 47 -> 425 -> 2 excursion
@@ -998,3 +998,21 @@ strictly smaller parameters 13+8*2^40*Q and 2+3^16*2^15*Q. This repairs the
 parameter-15 failure of the single three-step inverse template. Both recursive
 transfer premises remain explicit; this is not uniform coverage of Mersenne
 parameters. See `paper/two_early_bridges.tex` and its guide.
+
+
+## Growing Mersenne prefixes and symbolic exits
+
+`MersenneExit.lean` proves the exact reduced endpoints at clock k=6h+4:
+`3^(4h+5)-7` and `3^(4h+6)-10`. It then proves an infinite progression
+of merges at clock k+12 for k=1468+1536z and the resulting conditional
+transfer step from `8*(2^k/9)+5` to `2^k-1`, with strict decrease.
+The smaller transfer premise remains explicit. No global coverage follows.
+
+`mersenne_exit_search.py` finds 44 first exponent cylinder rules at exit
+depth 16, covering 110 of 4096 eligible residues, with 3986 unresolved.
+This census is experimental; only the first progression is formalized.
+The growing-prefix limitation and its exit are compatible: these merges
+occur after the prefix, at depths that grow with k. See
+`MERSENNE_EXIT_CHECK.md` and `paper/mersenne_exits.tex` with its guide.
+The next task is a covering, well-founded system of exit transfers or
+exponent reductions; a sparse progression is not such a system.

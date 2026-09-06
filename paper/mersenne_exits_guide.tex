@@ -1,0 +1,47 @@
+\documentclass[10pt]{article}
+\usepackage[margin=.8in]{geometry}
+\usepackage{amsmath,hyperref}
+\title{Guide: Mersenne prefix exits}
+\author{Collatz Lean research project}
+\date{September 6, 2026}
+\begin{document}
+\maketitle
+\section*{What changed}
+A growing prefix previously prevented a fixed search depth from handling all Mersenne parameters. We now express the states after that prefix as
+\[
+ X-7,\quad 3X-10,\qquad X=3^{4h+5},\quad k=6h+4.
+\]
+This permits searching the exponent modulo a power of two, instead of simulating a separately bounded prefix for each k.
+\section*{The first formal rule}
+For every $k=1468+1536z$, the reduced inverse pair merges after $k+12$ steps. The additional twelve steps are the same symbolic rule throughout the progression. The prefix length is unbounded.
+
+This is useful for the transfer program: a smaller transfer instance at
+$v=8w+5$, where $w=(2^k-7)/9$, can prove the instance at $u=2^k-1$.
+It is a conditional step, not a proof that every Collatz orbit reaches one.
+\section*{Where to inspect it}
+\raggedright
+The formal source is \texttt{lean/Collatz/MersenneExit.lean}.
+The declarations \texttt{mersenne\_exit\_merge},
+\texttt{mersenne\_inverse\_exit}, and
+\texttt{mersenne\_inverse\_exit\_progression} separate the small merge,
+the growing prefix, and their composition.
+The declarations \texttt{mersenne\_exit\_smaller} and
+\texttt{AffineTransfer.mersenne\_exit} verify strict decrease and the conditional induction step.
+
+The experiment and exact saved census are
+\texttt{analysis/mersenne\_exit\_search.py} and
+\texttt{analysis/mersenne\_exit\_results.json}.
+The scope and derivation are recorded in
+\texttt{analysis/MERSENNE\_EXIT\_CHECK.md}.
+\section*{Reproduce}
+From the repository root, run
+\begin{verbatim}
+python3 analysis/mersenne_exit_search.py --depth 16
+python3 -m unittest discover -s analysis -p 'test_mersenne*.py'
+python3 analysis/audit_theorems.py --build
+\end{verbatim}
+From \texttt{lean/}, run \texttt{lake build Collatz.MersenneExit}.
+Lean and Lake must use the repository's pinned toolchain.
+\section*{What remains}
+The depth-16 census covers 110 of 4096 eligible exponent residues. The unresolved classes are not counterexamples. A full proof still needs transfers or reductions that cover every remaining case and make the induction well founded. The finite census has not been imported as a Lean theorem.
+\end{document}

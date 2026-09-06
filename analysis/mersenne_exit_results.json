@@ -1,0 +1,458 @@
+{
+  "scope": "uniform direct exit merges only; unresolved is not impossible",
+  "kernel_certified": false,
+  "depth": 16,
+  "exponent_modulus": 16384,
+  "eligible": 4096,
+  "covered": 110,
+  "unresolved": 3986,
+  "covered_by_first_depth": {
+    "15": 24,
+    "12": 16,
+    "16": 22,
+    "13": 24,
+    "14": 24
+  },
+  "rules": [
+    {
+      "depth": 12,
+      "coefficient": 729,
+      "correction": -187,
+      "exponent_residue": 981,
+      "exponent_modulus": 1024,
+      "power_residue": 2995,
+      "mersenne_k_residue": 1468,
+      "mersenne_k_modulus": 1536
+    },
+    {
+      "depth": 13,
+      "coefficient": 2187,
+      "correction": -2561,
+      "exponent_residue": 1145,
+      "exponent_modulus": 2048,
+      "power_residue": 7459,
+      "mersenne_k_residue": 1714,
+      "mersenne_k_modulus": 3072
+    },
+    {
+      "depth": 13,
+      "coefficient": 2187,
+      "correction": -2417,
+      "exponent_residue": 1253,
+      "exponent_modulus": 2048,
+      "power_residue": 6515,
+      "mersenne_k_residue": 1876,
+      "mersenne_k_modulus": 3072
+    },
+    {
+      "depth": 13,
+      "coefficient": 2187,
+      "correction": 463,
+      "exponent_residue": 1749,
+      "exponent_modulus": 2048,
+      "power_residue": 4019,
+      "mersenne_k_residue": 2620,
+      "mersenne_k_modulus": 3072
+    },
+    {
+      "depth": 14,
+      "coefficient": 6561,
+      "correction": -11395,
+      "exponent_residue": 1497,
+      "exponent_modulus": 4096,
+      "power_residue": 15267,
+      "mersenne_k_residue": 2242,
+      "mersenne_k_modulus": 6144
+    },
+    {
+      "depth": 14,
+      "coefficient": 6561,
+      "correction": -5635,
+      "exponent_residue": 1657,
+      "exponent_modulus": 4096,
+      "power_residue": 13603,
+      "mersenne_k_residue": 2482,
+      "mersenne_k_modulus": 6144
+    },
+    {
+      "depth": 14,
+      "coefficient": 6561,
+      "correction": -5203,
+      "exponent_residue": 1765,
+      "exponent_modulus": 4096,
+      "power_residue": 12659,
+      "mersenne_k_residue": 2644,
+      "mersenne_k_modulus": 6144
+    },
+    {
+      "depth": 14,
+      "coefficient": 6561,
+      "correction": 3437,
+      "exponent_residue": 2261,
+      "exponent_modulus": 4096,
+      "power_residue": 10163,
+      "mersenne_k_residue": 3388,
+      "mersenne_k_modulus": 6144
+    },
+    {
+      "depth": 14,
+      "coefficient": 2187,
+      "correction": 3023,
+      "exponent_residue": 2645,
+      "exponent_modulus": 4096,
+      "power_residue": 4531,
+      "mersenne_k_residue": 3964,
+      "mersenne_k_modulus": 6144
+    },
+    {
+      "depth": 14,
+      "coefficient": 6561,
+      "correction": -11683,
+      "exponent_residue": 3409,
+      "exponent_modulus": 4096,
+      "power_residue": 10435,
+      "mersenne_k_residue": 5110,
+      "mersenne_k_modulus": 6144
+    },
+    {
+      "depth": 15,
+      "coefficient": 19683,
+      "correction": -11513,
+      "exponent_residue": 741,
+      "exponent_modulus": 8192,
+      "power_residue": 16755,
+      "mersenne_k_residue": 1108,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 6561,
+      "correction": -515,
+      "exponent_residue": 889,
+      "exponent_modulus": 8192,
+      "power_residue": 24867,
+      "mersenne_k_residue": 1330,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 6561,
+      "correction": -83,
+      "exponent_residue": 997,
+      "exponent_modulus": 8192,
+      "power_residue": 23923,
+      "mersenne_k_residue": 1492,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 2187,
+      "correction": 10447,
+      "exponent_residue": 3605,
+      "exponent_modulus": 8192,
+      "power_residue": 23219,
+      "mersenne_k_residue": 5404,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 6561,
+      "correction": -2387,
+      "exponent_residue": 4005,
+      "exponent_modulus": 8192,
+      "power_residue": 18035,
+      "mersenne_k_residue": 6004,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 19683,
+      "correction": -30089,
+      "exponent_residue": 4569,
+      "exponent_modulus": 8192,
+      "power_residue": 19363,
+      "mersenne_k_residue": 6850,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 19683,
+      "correction": -12809,
+      "exponent_residue": 4729,
+      "exponent_modulus": 8192,
+      "power_residue": 17699,
+      "mersenne_k_residue": 7090,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 19683,
+      "correction": 14407,
+      "exponent_residue": 5333,
+      "exponent_modulus": 8192,
+      "power_residue": 30643,
+      "mersenne_k_residue": 7996,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 19683,
+      "correction": -30953,
+      "exponent_residue": 6481,
+      "exponent_modulus": 8192,
+      "power_residue": 30915,
+      "mersenne_k_residue": 9718,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 19683,
+      "correction": -42473,
+      "exponent_residue": 7057,
+      "exponent_modulus": 8192,
+      "power_residue": 10179,
+      "mersenne_k_residue": 10582,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 19683,
+      "correction": -43049,
+      "exponent_residue": 7393,
+      "exponent_modulus": 8192,
+      "power_residue": 28803,
+      "mersenne_k_residue": 11086,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 15,
+      "coefficient": 6561,
+      "correction": 13165,
+      "exponent_residue": 7765,
+      "exponent_modulus": 8192,
+      "power_residue": 16819,
+      "mersenne_k_residue": 11644,
+      "mersenne_k_modulus": 12288
+    },
+    {
+      "depth": 16,
+      "coefficient": 19683,
+      "correction": -22009,
+      "exponent_residue": 1061,
+      "exponent_modulus": 16384,
+      "power_residue": 50291,
+      "mersenne_k_residue": 1588,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 59049,
+      "correction": -120955,
+      "exponent_residue": 1249,
+      "exponent_modulus": 16384,
+      "power_residue": 20611,
+      "mersenne_k_residue": 1870,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 19683,
+      "correction": 1031,
+      "exponent_residue": 1957,
+      "exponent_modulus": 16384,
+      "power_residue": 26227,
+      "mersenne_k_residue": 2932,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 59049,
+      "correction": -26347,
+      "exponent_residue": 2789,
+      "exponent_modulus": 16384,
+      "power_residue": 8563,
+      "mersenne_k_residue": 4180,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 19683,
+      "correction": -19849,
+      "exponent_residue": 4057,
+      "exponent_modulus": 16384,
+      "power_residue": 37795,
+      "mersenne_k_residue": 6082,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 19683,
+      "correction": 47687,
+      "exponent_residue": 5717,
+      "exponent_modulus": 16384,
+      "power_residue": 57779,
+      "mersenne_k_residue": 8572,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 19683,
+      "correction": -20713,
+      "exponent_residue": 5969,
+      "exponent_modulus": 16384,
+      "power_residue": 16579,
+      "mersenne_k_residue": 8950,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 6561,
+      "correction": 23405,
+      "exponent_residue": 6229,
+      "exponent_modulus": 16384,
+      "power_residue": 6579,
+      "mersenne_k_residue": 9340,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 59049,
+      "correction": -82075,
+      "exponent_residue": 6617,
+      "exponent_modulus": 16384,
+      "power_residue": 11171,
+      "mersenne_k_residue": 9922,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 19683,
+      "correction": -24457,
+      "exponent_residue": 6745,
+      "exponent_modulus": 16384,
+      "power_residue": 55715,
+      "mersenne_k_residue": 10114,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 19683,
+      "correction": 6647,
+      "exponent_residue": 7033,
+      "exponent_modulus": 16384,
+      "power_residue": 33059,
+      "mersenne_k_residue": 10546,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 59049,
+      "correction": 51413,
+      "exponent_residue": 7381,
+      "exponent_modulus": 16384,
+      "power_residue": 55219,
+      "mersenne_k_residue": 11068,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 6561,
+      "correction": 14333,
+      "exponent_residue": 7673,
+      "exponent_modulus": 16384,
+      "power_residue": 59171,
+      "mersenne_k_residue": 11506,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 59049,
+      "correction": -84667,
+      "exponent_residue": 8529,
+      "exponent_modulus": 16384,
+      "power_residue": 55491,
+      "mersenne_k_residue": 12790,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 59049,
+      "correction": -145147,
+      "exponent_residue": 9025,
+      "exponent_modulus": 16384,
+      "power_residue": 19203,
+      "mersenne_k_residue": 13534,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 59049,
+      "correction": -119227,
+      "exponent_residue": 9105,
+      "exponent_modulus": 16384,
+      "power_residue": 34755,
+      "mersenne_k_residue": 13654,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 59049,
+      "correction": -143995,
+      "exponent_residue": 9825,
+      "exponent_modulus": 16384,
+      "power_residue": 6787,
+      "mersenne_k_residue": 14734,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 6561,
+      "correction": 14765,
+      "exponent_residue": 9829,
+      "exponent_modulus": 16384,
+      "power_residue": 25459,
+      "mersenne_k_residue": 14740,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 6561,
+      "correction": 13613,
+      "exponent_residue": 13381,
+      "exponent_modulus": 16384,
+      "power_residue": 6131,
+      "mersenne_k_residue": 20068,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 6561,
+      "correction": 39533,
+      "exponent_residue": 13845,
+      "exponent_modulus": 16384,
+      "power_residue": 15027,
+      "mersenne_k_residue": 20764,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 59049,
+      "correction": -30235,
+      "exponent_residue": 14969,
+      "exponent_modulus": 16384,
+      "power_residue": 42275,
+      "mersenne_k_residue": 22450,
+      "mersenne_k_modulus": 24576
+    },
+    {
+      "depth": 16,
+      "coefficient": 19683,
+      "correction": 7943,
+      "exponent_residue": 15333,
+      "exponent_modulus": 16384,
+      "power_residue": 64883,
+      "mersenne_k_residue": 22996,
+      "mersenne_k_modulus": 24576
+    }
+  ]
+}
