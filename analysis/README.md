@@ -7,6 +7,7 @@ reproducible byte-for-byte.
 
 | script | what it does | paper section |
 |---|---|---|
+| `mersenne_exit_returns.py` | smaller-exponent pair returns add three conditional obligations but no closed coverage beyond the depth-20 direct merges | `MERSENNE_EXIT_RETURNS.md` |
 | `mersenne_exit_search.py` | symbolic exit merges after growing Mersenne prefixes; first infinite exponent progression formalized | `MERSENNE_EXIT_CHECK.md`, `../lean/Collatz/MersenneExit.lean` |
 | `mersenne_inverse_prefix.py` | exact prefix formulas explain a growing delay before the three-step inverse template can certify Mersenne parameters; not Lean-certified | `MERSENNE_INVERSE_PREFIX.md` |
 | `two_early_bridges.py` | an additional transfer bridge resolves the parameter-15 inverse template on an entire progression | `../paper/two_early_bridges.tex` |

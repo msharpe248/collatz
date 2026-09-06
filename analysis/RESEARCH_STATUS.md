@@ -1016,3 +1016,17 @@ occur after the prefix, at depths that grow with k. See
 `MERSENNE_EXIT_CHECK.md` and `paper/mersenne_exits.tex` with its guide.
 The next task is a covering, well-founded system of exit transfers or
 exponent reductions; a sparse progression is not such a system.
+
+
+## Exit-return closure check
+
+`MERSENNE_EXIT_RETURNS.md` records the next bounded test: depth 20 and
+drops 4, 8, 12, 16 yield five uniform smaller-exponent pair returns among
+65,536 eligible residues. Three lie outside direct-merge coverage, but
+all three smaller premises remain outside both the merge and return
+tables. Thus there is no additional closed coverage. Same-clock orbit
+return equalities followed only by merges within the same depth bound
+cannot enlarge an exhaustive direct-merge census, by transitivity at
+the common depth. This is a written argument with exact Python tests,
+not a new Lean declaration. Seek a different terminal proof or additional
+transfer mechanism before formalizing more of these isolated returns.

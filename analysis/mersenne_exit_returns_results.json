@@ -1,0 +1,53 @@
+{
+  "scope": "conditional F(e-drop) implies F(e), only when e-drop>=5; no global coverage",
+  "kernel_certified": false,
+  "depth": 20,
+  "max_drop": 16,
+  "eligible": 65536,
+  "source_return_residues": 2334,
+  "target_return_residues": 76,
+  "pair_return_residues": 5,
+  "additional_to_direct_merges": 3,
+  "certificates": [
+    {
+      "exponent_residue": 24541,
+      "exponent_modulus": 262144,
+      "drop": 4,
+      "source_depth": 20,
+      "target_depth": 18,
+      "direct_merge_within_bound": true
+    },
+    {
+      "exponent_residue": 173669,
+      "exponent_modulus": 262144,
+      "drop": 4,
+      "source_depth": 20,
+      "target_depth": 20,
+      "direct_merge_within_bound": true
+    },
+    {
+      "exponent_residue": 207273,
+      "exponent_modulus": 262144,
+      "drop": 4,
+      "source_depth": 13,
+      "target_depth": 20,
+      "direct_merge_within_bound": false
+    },
+    {
+      "exponent_residue": 216957,
+      "exponent_modulus": 262144,
+      "drop": 4,
+      "source_depth": 19,
+      "target_depth": 20,
+      "direct_merge_within_bound": false
+    },
+    {
+      "exponent_residue": 247389,
+      "exponent_modulus": 262144,
+      "drop": 4,
+      "source_depth": 16,
+      "target_depth": 20,
+      "direct_merge_within_bound": false
+    }
+  ]
+}
