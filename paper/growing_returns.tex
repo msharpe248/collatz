@@ -1,5 +1,5 @@
 \documentclass[10pt]{article}
-\usepackage[margin=0.9in]{geometry}
+\usepackage[margin=0.75in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,microtype}
 \newtheorem{theorem}{Theorem}
 \title{Arbitrarily Long Finite Strings of Growing Returns}
@@ -47,6 +47,26 @@ These positive seeds meet the required conditions. Adding the odd counts
 of the blocks proves the final count $3R$.
 \end{proof}
 
+\paragraph{Variable branches can replenish divisibility.}
+For a branch $F_w(n)=(A_wn+B_w)/D_w$, put
+$q_w(n)=(A_w-D_w)n+B_w$. Repeating the branch gives
+$q_w(F_w(n))=A_wq_w(n)/D_w$, which decreases its two-adic valuation
+by the block length. This alone is not a termination measure when branches
+change. Take $w=1101$ and $v=101$, with respective triples
+$(A,B,D)=(27,23,16)$ and $(9,7,8)$. For $r\geq1$, let
+$n=16\cdot64^r-5$ and $y=F_w(n)$. Lean proves the exact certificate
+\[
+ n\equiv11\pmod{144},\quad y\equiv65\pmod{72},\quad
+ 11n+23\equiv32\pmod{64},\quad y+7=27\cdot64^r.
+\]
+The first two congruences put the actual consecutive returns in branches
+$w$ and $v$. Thus $v_2(q_w(n))=5$ but $v_2(q_v(y))=6r$.
+Even this fixed branch pair has no uniform upper bound on the valuation
+reset. A length-debit argument needs to account for that reset using
+information in the seed. This does not exclude every possible amortized
+potential. The new certificate is
+\texttt{Collatz.unbounded\_reserve\_reset}.
+
 \paragraph{Consequence for the proof program.}
 The coefficient through $R$ returns is $(27/16)^R$, not a contraction.
 Thus no fixed number of returns guarantees descent uniformly over all
@@ -58,11 +78,7 @@ $\exists n\,\forall R$; this construction does not prove divergence.
 
 \raggedright
 \paragraph{Formal verification.}
-\texttt{Collatz.GrowingReturns.arbitrarily\_many\_growing\_returns}
-includes the positive seed, final residue, total odd count, strict growth
-at every return, and all intermediate residues. Its proof uses exact
-arithmetic and cylinder transport, with no finite scan or external axiom.
-The explicit recurrence is \texttt{growingReturnSeed}. No mathematical
-priority claim is made. The remaining program requires a seed-dependent
-arithmetic argument; fixed powers of this return map cannot supply one.
+Run \texttt{lake build Collatz.GrowingReturns} from \texttt{lean/}.
+Both results use exact arithmetic, with no finite-scan premise or external
+axiom. No mathematical priority claim is made.
 \end{document}

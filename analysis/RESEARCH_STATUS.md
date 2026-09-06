@@ -68,7 +68,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 159 declarations using only standard
+The selected theorem audit now covers 160 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -745,3 +745,33 @@ Paper and guide: `paper/growing_returns.*` and
 Verification: the selected build passes (7831 jobs); all 159 audited
 declarations use standard foundations only. Both one-page PDFs were
 rendered and visually checked.
+
+
+## Independent reassessment and a failed valuation budget (2026-09-05)
+
+The repository ideation skill was applied with three isolated parallel
+frames (available capacity), then scoring and three focused follow-ups.
+The full pool, scores, traps, and decisions are in
+`analysis/ROUTE_REASSESSMENT.md`. It produced no complete proof route.
+The next retained candidate is exact admissible word replacement for a
+least unbounded seed, with the existence obligation left explicit.
+
+A concrete divisibility-reset proposal was tested immediately. For the
+fixed growing branches 1101 and 101, let n=16*64^r-5, r>=1, and y=T^4(n).
+`GrowingReturns.unbounded_reserve_reset` proves n=11 mod144, y=65 mod72,
+11n+23=32 mod64, and y+7=27*64^r. Thus the incoming branch reserve has
+valuation five, but the next branch reserve has valuation 6r. A uniform
+bound on reset gains for a fixed pair is false. This does not exclude
+all possible amortized potentials using richer arithmetic information.
+The growing-return paper and guide are updated with the exact scope.
+
+`analysis/reassessment_checks.py` independently replays seven reset-family
+members and checks the binary carry identity on 65,536 seeds. The carry
+identity is an experimental implementation check here, not a new Lean
+termination theorem. Finite initial binary support alone has not supplied
+a signed bound on future carry or high-bit flux. No such hypothesis was
+introduced into the proof project.
+
+Verification: all 160 selected declarations pass the standard-foundations
+audit, the selected build passes, and the exact reassessment checks pass.
+The revised one-page paper and one-page guide were visually checked.

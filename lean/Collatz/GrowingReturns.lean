@@ -125,4 +125,24 @@ theorem arbitrarily_many_growing_returns (R : ℕ) :
   exact ⟨growingReturnSeed R, hp, hr,
     repeated_endpoint R _ (seed_divisibility R) hr, hc, hs⟩
 
+/-- Switching the fixed growing branches 1101 then 101 can recharge an
+arbitrarily large power of two despite a fixed incoming valuation five.
+The congruences specify the actual branch domains. -/
+theorem unbounded_reserve_reset (r : ℕ) (hr : 1 ≤ r) :
+    ∃ n, n % 144 = 11 ∧ terras_iter 4 n % 72 = 65 ∧
+      (11*n+23) % 64 = 32 ∧ terras_iter 4 n+7 = 27*64^r := by
+  have ha : 64^r % 72 = 64 := by
+    induction r, hr using Nat.le_induction with
+    | base => norm_num
+    | succ r hr ih => simp [pow_succ, Nat.mul_mod, ih]
+  let n := 16*64^r-5
+  have hn : n % 144 = 11 := by dsimp [n]; omega
+  have hn16 : n % 16 = 11 := by omega
+  have hb := (block hn16).1
+  have heN : n+5 = 16*64^r := by dsimp [n]; omega
+  have he : terras_iter 4 n+7 = 27*64^r := by omega
+  refine ⟨n, hn, ?_, ?_, he⟩
+  · omega
+  · dsimp [n]; omega
+
 end Collatz

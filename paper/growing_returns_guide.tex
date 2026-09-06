@@ -34,6 +34,16 @@ The result does not construct an infinite growing orbit. A larger requested
 length uses a different, larger seed. Exchanging those two quantifiers
 would be an invalid inference.
 
+\section*{Changing branches can reset the divisibility count}
+The repeated-branch proof consumes powers of two in $11n+23$. It might
+suggest counting those powers as a resource. But switching from the
+four-step pattern $1101$ to the three-step pattern $101$ can reset the
+count arbitrarily high. Lean now certifies a family with incoming count
+five and outgoing count $6r$, for any positive $r$. Thus a proof cannot
+assume a fixed bound on the reset even for these two fixed branches.
+It must account for the additional divisibility encoded in the seed.
+This does not rule out all more sophisticated decreasing measures.
+
 \section*{How this fits the earlier results}
 The earlier sixteen-step theorem applies when a first return contracts.
 Here the chosen returns expand, so the theorems do not conflict. Likewise,
