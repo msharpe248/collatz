@@ -7,6 +7,7 @@ reproducible byte-for-byte.
 
 | script | what it does | paper section |
 |---|---|---|
+| `affine_bridge_search.py` | symbolic auxiliary-orbit transfer certificates with strict decrease for every quotient; explicit depth and state limits | `../paper/affine_bridges.tex`, `AFFINE_TRANSFER_REASSESSMENT.md` |
 | `certificate_search.py` | Karp max-mean-cycle search for residue-class descent certificates over joint 2-adic/3-adic states; always blocked by the n ≡ −1 self-loop (the finite-resolution shadow of the no-go theorem) | §10.1 |
 | `rational_cycles.py` | enumerates the T-cycles on rationals a/q (q ≤ 99 odd): the positive-drift cycles are the complete adversary spectrum behind the no-go theorem; also sweeps the 2-parameter 1-state digit potential adversarially | §10.2 |
 | `automaton_potentials.py` | first digit-weight experiment: V(n) = n·c^popcount(n) — contracts on Mersenne iff c > 9/4, killed by sparse injection | §10.3 |

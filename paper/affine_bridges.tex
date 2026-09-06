@@ -1,0 +1,94 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\newcommand{\R}{\mathcal R}
+\newcommand{\A}{\mathcal A}
+\begin{document}
+\begin{center}
+{\Large Auxiliary Orbits for Affine-Transfer Induction}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+Let $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$.
+Write $\R(n)$ for eventual reachability of one and
+$\A(u)=[\R(3u+2)\Rightarrow\R(27u+20)]$.
+The universal transfer statement is equivalent to full Collatz by the
+previous formalization. We extend the available conditional induction
+steps using auxiliary orbits; universal coverage remains unproved.
+
+\begin{theorem}[Bridge rule]
+Suppose natural numbers $u,v,s,t,r$ satisfy
+\[
+ T^s(3u+2)=3v+2,\qquad T^t(27u+20)=T^r(27v+20).
+\]
+Then $\A(v)\Rightarrow\A(u)$. When $v<u$, this is a valid
+strong-induction step on the transfer parameter.
+\end{theorem}
+\begin{proof}
+From $\R(3u+2)$, the first identity gives $\R(3v+2)$.
+Apply $\A(v)$ and advance its larger partner $r$ steps.
+The second identity then gives $\R(T^t(27u+20))$, hence
+$\R(27u+20)$. Reachability is invariant under finite orbit shifts.
+The rule and this invariance are kernel checked.
+\end{proof}
+
+\begin{theorem}[A progression requiring an auxiliary orbit]
+For every natural $Q$, put $u=28+4096Q$ and $v=21+3072Q$.
+Then $v<u$ and
+\[
+ T^2(3u+2)=3v+2,\qquad
+ T^{12}(27u+20)=T^{10}(27v+20)=47+6561Q.
+\]
+Consequently $\A(21+3072Q)\Rightarrow\A(28+4096Q)$.
+\end{theorem}
+\begin{proof}
+The base computations and odd-step counts are
+\[
+ T^2(86)=65\ (j=1),\quad T^{12}(776)=47\ (j=5),\quad
+ T^{10}(587)=47\ (j=4).
+\]
+Binary-cylinder transport gives respective increments $9216Q$,
+$6561Q$, and $6561Q$. Also $u-v=7+1024Q>0$.
+These identities and the implication are proved for every $Q$ in
+\texttt{Collatz.AffineBridge}; the smaller transfer is an explicit premise.
+\end{proof}
+
+\paragraph{Symbolic search.}
+Fix a parameter cylinder $u=u_0+2^D Q$.
+At clock $t\leq D$, represent a known-convergent source by
+$x+3^p2^{D-t}Q$, initially $(x,p)=(3u_0+2,1)$.
+An ordinary step changes $(x,p)$ to $(T(x),p+(x\bmod2))$.
+If $x\equiv2\pmod3$, $(x-2)/3<u_0$, and $3^{p-1}\leq2^t$,
+its associated parameter
+\[
+ v=(x-2)/3+3^{p-1}2^{D-t}Q
+\]
+is strictly smaller than $u$ for all $Q\geq0$.
+Invoking $\A(v)$ permits replacement of $(x,p)$ by $(9x+2,p+2)$.
+After any bounded sequence of such bridges, matching both the constant
+and slope of the target certifies the original transfer conditionally.
+Multiple bridges at the same clock are allowed. Search limits are explicit.
+
+\paragraph{Finite comparison and its limits.}
+For $u_0=0,\ldots,1000$, the original aligned merge and simultaneous
+return criteria find 133 merges and 56 returns. The other 812 paired
+orbits enter $\{1,2\}^2$ without either certificate. Equal cycle states
+preserve their odd-count difference; unequal states never meet; neither
+permits $y=9x+2$. Thus these 812 fail the original criteria at every later
+time, not merely up to a cutoff. This is finite Python evidence, not a
+Lean census theorem or an obstruction to handling finite base cases.
+
+Allowing at most two bridges through clock 30 finds 599 conditional
+certificates, including 421 of those 812; 402 parameters reach the depth
+limit and none hit the state cap. Parameter 28 is among the 421.
+Every saved certificate is replayed on integer lifts $Q=0,1,7,2^{32}$;
+a separate small exhaustive path search checks deduplication and closure.
+Sample replay does not prove universal lifting; the affine formulas above
+explain it, while Lean verifies the displayed family and general bridge rule.
+
+\paragraph{Open obligation.}
+A complete proof still needs coverage by valid base cases and decreasing
+recursive certificates. Auxiliary bridges enlarge the proof search, but
+no global saturation or decreasing measure for unresolved states is known.
+No mathematical priority claim or proof of Collatz is asserted.
+\end{document}

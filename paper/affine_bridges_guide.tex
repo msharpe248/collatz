@@ -1,0 +1,66 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: Using an Auxiliary Convergent Orbit}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{The proof strategy}
+For a natural parameter $u$, the transfer question asks whether convergence
+of $3u+2$ implies convergence of $27u+20$. Proving this for every parameter
+would prove Collatz. Strong induction lets us use transfer at any strictly
+smaller parameter, provided every case is eventually covered.
+
+\guideheading{What the new bridge does}
+Start with the known-convergent smaller partner. If its orbit reaches
+$3v+2$ for some $v<u$, the induction hypothesis supplies convergence of
+$27v+20$. This auxiliary orbit can then meet the original larger partner.
+The original two partners do not have to return together to a smaller pair.
+
+Lean verifies this rule and the following infinite family:
+\[
+ u=28+4096Q,\qquad v=21+3072Q<u.
+\]
+The smaller partner reaches $3v+2$ after two steps. The original larger
+partner after twelve steps and the auxiliary larger partner after ten
+steps both equal $47+6561Q$. These identities hold for every natural $Q$.
+Transfer at $v$ therefore implies transfer at $u$.
+
+\guideheading{What the experiment adds}
+Among parameters 0 through 1000, 812 pairs enter the trivial cycle without
+ever meeting the old merge or simultaneous-return criteria. Following
+those same pairs for longer cannot produce either old certificate.
+This does not make their transfer statements false: both partners converge.
+It also does not rule out using finite base cases in an induction.
+
+The expanded search allows up to two auxiliary bridges and thirty ordinary
+steps. It finds 599 conditional certificates, including 421 of those 812
+previously excluded parameters. It leaves 402 parameters at its depth
+limit. These are finite search results, not a proof that every parameter
+has a bridge certificate. Larger search limits may change the counts.
+
+\guideheading{What has been checked}
+Lean checks the general inference rule, the strict decrease in the displayed
+family, and all its orbit identities for arbitrary $Q$. The search records
+every recursive bridge and checks its parameter decreases uniformly over
+the entire cylinder. Tests replay all saved certificates at four quotients
+and compare a small complete search with independent path enumeration.
+The whole census has not been certified in Lean.
+
+\guideheading{What remains open}
+The smaller transfer premises are still required. We need a proof that
+all parameters admit a checked base case or a finite certificate whose
+recursive parameters are smaller. The current search does not establish
+this coverage. Collatz remains unproved.
+
+\guideheading{Reproducing the work}
+\begingroup\raggedright
+Build \texttt{Collatz.AffineBridge} from \texttt{lean/}.
+From the repository root, run
+\texttt{python3 analysis/affine\_bridge\_search.py} and
+\texttt{python3 -m unittest discover -s analysis -p test\_affine\_bridge\_search.py}.
+The accompanying technical paper gives the exact symbolic bridge conditions.
+\par\endgroup
+\end{document}

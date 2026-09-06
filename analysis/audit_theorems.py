@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.AffineBridge', 'Collatz.AffineTransfer.of_bridge', 'An auxiliary smaller-transfer instance supplies a convergent orbit meeting the target; recursive premise explicit'),
+    ('Collatz.AffineBridge', 'Collatz.affine_bridge_28', 'Exact bridge identities and strict parameter decrease from 28+4096Q to 21+3072Q'),
+    ('Collatz.AffineBridge', 'Collatz.AffineTransfer.bridge_28', 'Conditional transfer through an auxiliary orbit on an entire arithmetic progression'),
     ('Collatz.AffinePairReturn', 'Collatz.affine_pair_transport', 'Exact binary-cylinder transport for both partners 3u+2 and 27u+20'),
     ('Collatz.AffinePairReturn', 'Collatz.AffineTransfer.of_return', 'Transfer at a returned parameter implies transfer at the original parameter under exact endpoint identities'),
     ('Collatz.AffinePairReturn', 'Collatz.AffineTransfer.merge_36', 'Direct six-step merging proves transfer on u=36+64Q for every natural quotient'),
