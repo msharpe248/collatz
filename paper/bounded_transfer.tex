@@ -19,7 +19,7 @@ For every natural $b$, Lean proves
  \bigl[\forall v,\ 36v+27\le3^b\Longrightarrow A(v)\bigr]
  \Longrightarrow \bigl[\forall n,\ 0<n<2^b\Longrightarrow R(n)\bigr]. \tag{1}
 \]
-This is a bounded form of the repository's restricted affine-transfer criterion. It does not identify smaller transfer instances with convergence of all smaller integers.
+More precisely, it suffices to assume only transfer instances arising from odd runs below the seed bound. The interval in (1) is a sufficient overestimate of those requests.
 \section{Proof mechanism}
 Use strong induction on $n<2^b$. Even seeds and odd seeds with only one initial odd step descend directly. For the remaining odd seeds, write $n+1=2^a m$ with $m$ odd and $a\ge2$. The classical double-even exit merges with $n-1$, whose convergence is available by induction.
 
@@ -39,7 +39,7 @@ Suppose $A(v)$ is known for every $v<u$. If $3^b\le36u$, then $36v+27\le3^b$ imp
 \]
 The source convergence premise in $A(u)$ is not needed once these stronger descent hypotheses hold. A proof that (3) or another rule covers every parameter is still missing.
 \section{Validation and scope}
-The five declarations in \texttt{Collatz.BoundedTransfer} formalize the size bounds, (1), its smaller-transfer corollary, and (3). The arguments use standard foundations; no conjectural transfer instance is imported as a fact.
+The six declarations in \texttt{Collatz.BoundedTransfer} formalize the exact-request criterion, the size bounds, (1), its smaller-transfer corollary, and (3). The arguments use standard foundations; no conjectural transfer instance is imported as a fact.
 
 For Mersenne parameters $u=16\cdot64^h-1$, the known reduced target is $729\cdot81^h-10$. Choosing the largest integer $b$ with $3^b\le36u$, exact Python searches find a descent below $2^b$ for every $h=0,\ldots,512$. The maximum observed exit depth is 6268 at $h=487$. These are finite computational witnesses, not Lean-certified family coverage. They support testing (3), not a global convergence claim. No literature-priority claim is made for this quantitative formulation.
 \end{document}

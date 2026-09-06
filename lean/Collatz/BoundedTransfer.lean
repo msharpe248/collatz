@@ -29,11 +29,11 @@ theorem odd_run_transfer_size {a n m : ℕ} (ha : 0 < a)
   change 12*terras (terras (terras_iter a (n-1)))+3 = 3^a*m
   omega
 
-/-- A finite transfer cutoff suffices for convergence below a dyadic bound.
-The transfer hypotheses remain explicit. -/
-theorem reachesOne_below_pow_two (b : ℕ)
-    (h : ∀ v : ℕ, 36*v+27 ≤ 3^b → AffineTransfer v) :
-    ∀ n : ℕ, 0 < n → n < 2^b → ReachesOne n := by
+/-- Only transfer requests actually arising from odd runs below N are needed. -/
+theorem reachesOne_below_of_odd_run_requests (N : ℕ)
+    (h : ∀ a m v : ℕ, 2 ≤ a → 0 < m → m%2 = 1 →
+      2^a*m ≤ N → 36*v+27 = 3^a*m → AffineTransfer v) :
+    ∀ n : ℕ, 0 < n → n < N → ReachesOne n := by
   intro n
   induction n using Nat.strong_induction_on with
   | h n ih =>
@@ -88,12 +88,10 @@ theorem reachesOne_below_pow_two (b : ℕ)
             by_contra hh
             have : m = 0 := by omega
             simp [this] at he
-          have hpbound : 3^a*m ≤ 3^b :=
-            odd_run_size_bound hmpos (by omega)
           have hsize := odd_run_transfer_size ha he hmod'
           change 12*z+3 = 3^a*m at hsize
-          have hvbound : 36*v+27 ≤ 3^b := by rw [hv] at hsize; omega
-          have hrec := h v hvbound
+          have hvsize : 36*v+27 = 3^a*m := by rw [hv] at hsize; omega
+          have hrec := h a m v ha2 hmpos hm' (by omega) hvsize
           change ReachesOne z at hz
           rw [hv] at hz
           have hout := hrec hz
@@ -101,6 +99,17 @@ theorem reachesOne_below_pow_two (b : ℕ)
           have htarg : 9*z+2 = 27*v+20 := by rw [hv]; ring
           rw [htarg]
           exact hout
+
+/-- A finite transfer cutoff suffices for convergence below a dyadic bound.
+The transfer hypotheses remain explicit. -/
+theorem reachesOne_below_pow_two (b : ℕ)
+    (h : ∀ v : ℕ, 36*v+27 ≤ 3^b → AffineTransfer v) :
+    ∀ n : ℕ, 0 < n → n < 2^b → ReachesOne n := by
+  apply reachesOne_below_of_odd_run_requests (2^b)
+  intro a m v _ hm _ hn hv
+  apply h v
+  rw [hv]
+  exact odd_run_size_bound hm hn
 
 /-- Smaller transfer instances give convergence below a justified dyadic cutoff. -/
 theorem reachesOne_of_smaller_transfers {U b n : ℕ}

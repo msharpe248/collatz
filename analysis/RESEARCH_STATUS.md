@@ -16,7 +16,7 @@ Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
 947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
 remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
 records five kernel-checked precision/count findings for a proposed literature
-input; the selected declaration audit now contains 243 entries. The new `BridgeGrowth`
+input; the selected declaration audit now contains 244 entries. The new `BridgeGrowth`
 bound rules out lowering cycle charge through arbitrary forward bridge
 interleavings and justifies pruning those states in the affine bridge search.
 `InverseCycleBridge` now verifies a signed 2 <- 47 -> 425 -> 2 excursion
@@ -1075,3 +1075,19 @@ uniform cutoff and conditional descent rule are Lean-proved and audited.
 See `paper/bounded_transfer.tex` and its guide. The remaining task is a
 general descent theorem or a covering combination of valid rules, not
 another inference from the finite census alone.
+
+
+## Exact-request refinement of the bounded transfer theorem
+
+`reachesOne_below_of_odd_run_requests` now proves convergence below N
+assuming only the transfer instances arising from odd runs below N.
+The old dyadic cutoff theorem follows as a corollary. The existing APIs
+retain their statements. Below 2^16, exact Python enumeration finds
+5461 distinct requests versus 1195742 instances in the sufficient interval.
+
+`TRANSFER_REQUESTS.md` derives the minimum seed requesting a given
+parameter and an optimized first-unavailable-request cutoff N(u). For
+example, parameters below 61 cover the requests below seed 415, versus
+the dyadic bound 128. The request theorem is Lean-proved; the enumeration
+and optimized-cutoff algorithm are not yet Lean certificates. No remaining
+transfer premise or global coverage claim is treated as discharged.

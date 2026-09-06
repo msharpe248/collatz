@@ -1,0 +1,101 @@
+{
+  "scope": "finite request enumeration and optimized cutoffs; no global convergence",
+  "kernel_certified_computations": false,
+  "census": [
+    {
+      "b": 8,
+      "distinct_requests": 21,
+      "interval_instances": 182,
+      "largest_request": 60,
+      "requests_above_seed_bound": 0
+    },
+    {
+      "b": 12,
+      "distinct_requests": 341,
+      "interval_instances": 14762,
+      "largest_request": 4920,
+      "requests_above_seed_bound": 1
+    },
+    {
+      "b": 16,
+      "distinct_requests": 5461,
+      "interval_instances": 1195742,
+      "largest_request": 398580,
+      "requests_above_seed_bound": 13
+    }
+  ],
+  "cutoffs": [
+    {
+      "parameter_cutoff": 1,
+      "seed_cutoff": 27,
+      "witness": {
+        "a": 2,
+        "m": 7,
+        "parameter": 1
+      }
+    },
+    {
+      "parameter_cutoff": 2,
+      "seed_cutoff": 31,
+      "witness": {
+        "a": 5,
+        "m": 1,
+        "parameter": 6
+      }
+    },
+    {
+      "parameter_cutoff": 15,
+      "seed_cutoff": 111,
+      "witness": {
+        "a": 4,
+        "m": 7,
+        "parameter": 15
+      }
+    },
+    {
+      "parameter_cutoff": 60,
+      "seed_cutoff": 127,
+      "witness": {
+        "a": 7,
+        "m": 1,
+        "parameter": 60
+      }
+    },
+    {
+      "parameter_cutoff": 61,
+      "seed_cutoff": 415,
+      "witness": {
+        "a": 5,
+        "m": 13,
+        "parameter": 87
+      }
+    },
+    {
+      "parameter_cutoff": 100,
+      "seed_cutoff": 447,
+      "witness": {
+        "a": 6,
+        "m": 7,
+        "parameter": 141
+      }
+    },
+    {
+      "parameter_cutoff": 1000,
+      "seed_cutoff": 1791,
+      "witness": {
+        "a": 8,
+        "m": 7,
+        "parameter": 1275
+      }
+    },
+    {
+      "parameter_cutoff": 18446744073709551615,
+      "seed_cutoff": 30786325577727,
+      "witness": {
+        "a": 42,
+        "m": 7,
+        "parameter": 21275914553349625401
+      }
+    }
+  ]
+}

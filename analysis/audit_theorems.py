@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.BoundedTransfer', 'Collatz.reachesOne_below_of_odd_run_requests', 'Only transfer instances actually arising from odd runs below N are needed for convergence below N'),
     ('Collatz.BoundedTransfer', 'Collatz.odd_run_size_bound', 'Dyadic size of a seed bounds the ternary size of its initial odd run'),
     ('Collatz.BoundedTransfer', 'Collatz.odd_run_transfer_size', 'Exact size identity for the transfer argument in the single-even odd-run branch'),
     ('Collatz.BoundedTransfer', 'Collatz.reachesOne_below_pow_two', 'Explicit finite transfer cutoff implies convergence for all positive seeds below 2^b'),
