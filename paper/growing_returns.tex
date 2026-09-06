@@ -1,0 +1,68 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\newtheorem{theorem}{Theorem}
+\title{Arbitrarily Long Finite Strings of Growing Returns}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every prescribed number of visits, we construct a positive natural
+Collatz seed whose next consecutive returns to two modulo nine all grow.
+Each return takes four steps with parity word $1101$. This rules out a
+uniform fixed-return-count descent argument. The seed depends on the
+requested length; no infinite escaping orbit is constructed.
+\end{abstract}
+Use the shortcut map $T(n)=n/2$ for even $n$ and $(3n+1)/2$ for odd $n$.
+\begin{theorem}
+For every $R\geq0$ there is a positive $n\equiv2\pmod9$ such that its
+first $R$ positive-time returns to that progression occur at times
+$4,8,\ldots,4R$, and every return is larger than the preceding one.
+There are exactly $3R$ odd steps through time $4R$.
+\end{theorem}
+\begin{proof}
+If $n=16q+11$, exact cylinder transport gives the four iterates
+\[
+24q+17,\quad36q+26,\quad18q+13,\quad27q+20.
+\]
+The four steps have parity word $1101$, and $16T^4(n)=27n+23$.
+If also $n\equiv2\pmod9$, then $q\equiv0\pmod9$; the residues are
+$8,8,4,2$. Thus this is a first return and strictly increases $n$.
+
+If $16^{R+1}$ divides $11n+23$, reduction modulo sixteen forces
+$n\equiv11\pmod{16}$. The four-step identity gives
+\[
+16\bigl(11T^4(n)+23\bigr)=27(11n+23),
+\]
+so $16^R$ divides $11T^4(n)+23$. Induction therefore realizes $R$
+successive blocks whenever $16^R\mid11n+23$ and $n\equiv2\pmod9$.
+
+Define $n_0=2$ and $n_{R+1}=144n_R+299$. Induction proves
+\[
+11n_R+23=45\cdot144^R=16^R\cdot45\cdot9^R,
+\qquad n_R\equiv2\pmod9.
+\]
+These positive seeds meet the required conditions. Adding the odd counts
+of the blocks proves the final count $3R$.
+\end{proof}
+
+\paragraph{Consequence for the proof program.}
+The coefficient through $R$ returns is $(27/16)^R$, not a contraction.
+Thus no fixed number of returns guarantees descent uniformly over all
+positive seeds in this progression. This is compatible with the earlier
+sixteen-step bound for a \emph{contracting} first return: none of these
+returns contract. It is also compatible with eventual contraction at a
+seed-dependent time. The quantifiers are $\forall R\,\exists n_R$, not
+$\exists n\,\forall R$; this construction does not prove divergence.
+
+\raggedright
+\paragraph{Formal verification.}
+\texttt{Collatz.GrowingReturns.arbitrarily\_many\_growing\_returns}
+includes the positive seed, final residue, total odd count, strict growth
+at every return, and all intermediate residues. Its proof uses exact
+arithmetic and cylinder transport, with no finite scan or external axiom.
+The explicit recurrence is \texttt{growingReturnSeed}. No mathematical
+priority claim is made. The remaining program requires a seed-dependent
+arithmetic argument; fixed powers of this return map cannot supply one.
+\end{document}

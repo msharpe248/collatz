@@ -1,0 +1,47 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,microtype}
+\title{Guide: Why a Fixed Number of Returns Is Insufficient}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\raggedright
+\section*{What Lean proves}
+Choose any finite number of returns to the progression two modulo nine.
+There is a positive integer whose next that many consecutive returns all
+increase. They are actual consecutive visits, not a selected subsequence.
+Each return takes four ordinary shortcut Collatz steps.
+
+\section*{The construction}
+Use the seeds defined by $n_0=2$ and $n_{R+1}=144n_R+299$.
+The seed $n_R$ follows the odd, odd, even, odd pattern for $R$ blocks.
+Each block returns to the progression and has coefficient $27/16>1$.
+The intervening remainders are eight, eight, and four, so there are no
+hidden visits between the displayed returns.
+
+The proof tracks divisibility of $11n+23$ by a power of sixteen. Every
+four-step block consumes one power. The recurrence supplies as many
+powers as the requested finite experiment needs.
+
+\section*{What this rules out}
+We cannot prove universal descent by taking one fixed power of the return
+map: every proposed fixed number of returns has an integer counterexample.
+A proof still might establish descent after a number of returns depending
+on the starting seed. That remains open.
+
+The result does not construct an infinite growing orbit. A larger requested
+length uses a different, larger seed. Exchanging those two quantifiers
+would be an invalid inference.
+
+\section*{How this fits the earlier results}
+The earlier sixteen-step theorem applies when a first return contracts.
+Here the chosen returns expand, so the theorems do not conflict. Likewise,
+the equivalence between sampled contraction and nondivergence does not
+promise a uniform stopping bound. No proof or disproof of Collatz is claimed.
+
+\section*{Verification}
+From \texttt{lean/}, run \texttt{lake build Collatz.GrowingReturns}.
+The theorem is included in the selected axiom audit. The accompanying
+paper gives the exact construction and the quantifiers that limit its scope.
+\end{document}

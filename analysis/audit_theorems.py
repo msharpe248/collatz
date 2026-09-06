@@ -17,6 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ("Collatz.GrowingReturns", "Collatz.arbitrarily_many_growing_returns", "Every prescribed finite number of consecutive residue-two returns can all grow; seed depends on requested length"),
     ("Collatz.SampledContraction", "Collatz.SampledNeverContracts.deficit", "No contraction at residue-two visits bounds every inverse coefficient by sixty-four"),
     ("Collatz.SampledContraction", "Collatz.SampledNeverContracts.unbounded", "Failure of sampled contraction forces escape for positive seeds"),
     ("Collatz.SampledContraction", "Collatz.unbounded_has_sampled_noncontracting_tail", "Every unbounded positive orbit has a residue-two tail with no contraction at subsequent residue-two visits"),

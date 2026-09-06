@@ -8,6 +8,7 @@ belong to an excluded family.
 
 | Direction | Checked result | Scope |
 |---|---|---|
+| Growing consecutive returns | `arbitrarily_many_growing_returns` | For each finite R, a positive seed has R consecutive growing four-step returns to two modulo nine; different seed for each R, no infinite escape |
 | Sampled nondivergence equivalence | `all_bounded_iff_sampled_contraction` | Nondivergence is equivalent to universal contraction at residue-two visits; exact coverage by sampled-noncontracting tails, not full NeverContracts |
 | Contracting residue returns | `even_steps_between_two_mod_nine`, `contracting_two_mod_nine_segment_descends` | At most six even steps between visits; contracting first returns have sharp length bound sixteen and strictly descend for every seed above two; eventual contraction remains open |
 | Forward residue coverage | `exists_two_mod_nine`, `arbitrarily_late_two_mod_nine` | Every positive orbit visits two modulo nine arbitrarily late; formalization of Monks et al., no noncontraction property at the selected visit |
@@ -59,7 +60,7 @@ kernel-replayed during this pass.
 
 The reciprocal characterization is in [RECIPROCAL.md](RECIPROCAL.md), with
 its [paper](../paper/reciprocal.pdf) and [guide](../paper/reciprocal_guide.pdf).
-The selected theorem audit now covers 158 declarations using only standard
+The selected theorem audit now covers 159 declarations using only standard
 foundational axioms.
 The subsequent correction-growth result is in
 [CORRECTION_GROWTH.md](CORRECTION_GROWTH.md), with its
@@ -701,5 +702,38 @@ Paper and guide: `paper/sampled_contraction.*` and
 premise, or mathematical priority claim is used.
 
 Verification: selected build passes (7830 jobs), and all 158 audited
+declarations use standard foundations only. Both one-page PDFs were
+rendered and visually checked.
+
+
+## Fixed powers of the return map cannot force descent (2026-09-05)
+
+`GrowingReturns.lean` proves an explicit universal finite construction.
+If n=16q+11, its next four iterates are 24q+17,36q+26,18q+13,27q+20.
+The parity is 1101 and the coefficient is 27/16. If n is also two modulo
+nine, q is zero modulo nine; intermediate residues are 8,8,4 and the
+endpoint is two. This is an actual strictly growing first return.
+
+The identity 16*(11*T^4(n)+23)=27*(11*n+23) consumes one power of sixteen
+in the divisibility condition. The explicit recurrence n_0=2,
+n_(R+1)=144*n_R+299 satisfies 11*n_R+23=45*144^R and n_R=2 mod9.
+Thus every finite R is realized by R successive growing first returns.
+The public theorem includes positivity, all intermediate residues, the
+final residue, strict growth at each return, and total odd count 3R.
+The earlier exploratory replay at R=1,2,4,...,128 agreed; the final proof
+is induction over all R, not an extrapolation from those calculations.
+
+This disproves the proposed uniform fixed-power contraction/descent
+shortcut. The quantifiers are forall R exists n_R, not exists n forall R.
+It supplies no infinite unbounded positive seed and does not refute
+seed-dependent eventual contraction. Repeatedly enlarging a uniform
+return budget therefore cannot close the current proof program.
+The next argument must use arithmetic information about the individual
+seed or a nonuniform termination measure. The Collatz goal remains open.
+
+Paper and guide: `paper/growing_returns.*` and
+`paper/growing_returns_guide.*`. No mathematical priority claim.
+
+Verification: the selected build passes (7831 jobs); all 159 audited
 declarations use standard foundations only. Both one-page PDFs were
 rendered and visually checked.
