@@ -1,0 +1,81 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype,hyperref}
+\newtheorem{theorem}{Theorem}
+\begin{document}
+\begin{center}
+{\Large Precision Checks for Proposed Collatz Residue Maps}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+Let $T$ denote the shortcut Collatz map, and let
+$S(n)=(3n+1)/2^{v_2(3n+1)}$ on positive odd integers.
+We record elementary, kernel-checked tests relevant to reusing a recent
+one-bit mixing reduction [1]. They concern specific residue statements,
+not every argument in that work or the possibility of a corrected reduction.
+
+\paragraph{Statement being checked.}
+Section 5.2 of [1] presents a gap-step transition as a permutation modulo 32.
+Theorem 4.2 uses compressed images of burst residues modulo $2^K$ and gives
+a signed count difference $(-1)^K$. These statements require distinguishing
+integer representatives from well-defined functions on residue classes.
+
+\begin{theorem}[Lost precision in a gap step]
+There is no function $f:\mathbb N\to\mathbb N$ such that
+$T(n)\bmod32=f(n\bmod32)$ for every $n\equiv3\pmod4$.
+Indeed, for every natural $q$,
+\[
+ T(3+32q)=5+48q.
+\]
+\end{theorem}
+\begin{proof}
+The input is odd, so $2T(3+32q)=3(3+32q)+1$.
+In particular, 3 and 35 have the same input residue but their outputs
+are 5 and 53, with residues 5 and 21 modulo 32.
+A function of the input residue alone cannot give both values.
+\end{proof}
+
+\begin{theorem}[Compressed images need additional information]
+The burst inputs 29 and 61 have the same residue modulo 32, but
+\[
+ S(29)=11\equiv3\pmod8,\qquad
+ S(61)=23\equiv7\pmod8.
+\]
+\end{theorem}
+\begin{proof}
+Both inputs are 1 modulo 4. Their $3n+1$ values are
+$88=8\cdot11$ and $184=8\cdot23$, with odd quotients as displayed.
+\end{proof}
+
+\paragraph{Canonical representatives do not repair orbit transitions.}
+If the counts at depth five instead use the representatives
+$0\leq n<32$, the gap-producing burst inputs are 9, 25, and 29.
+Their compressed images are 7, 19, and 11. Hence
+$C_3(5)=2$, $C_7(5)=1$, and $C_3(5)-C_7(5)=1$, whereas the printed
+signed formula gives $(-1)^5=-1$. The absolute difference is still one;
+this check does not refute that absolute-count statement.
+Selecting representatives also does not justify applying their transition
+table to arbitrary orbit values in the same classes.
+
+\paragraph{Repair and scope.}
+The gap formula shows exactly which information was discarded: the parity
+of $q$ determines whether the output residue is 5 or 21. Retaining the
+input modulo 64 resolves this example. Compressed steps require precision
+appropriate to the number of divisions by two; a residue table needs an
+explicit proof that its recorded inputs determine its outputs.
+Neither these repairs nor balanced representative counts prove pointwise
+orbit mixing. We therefore do not import the audited statements as a
+coverage theorem for the current Lean proof program.
+
+\paragraph{Verification.}
+\begingroup\raggedright
+Five declarations in \texttt{Collatz.ResidueMapAudit} prove the two numerical
+witnesses, impossibility of the gap residue function, the quotient formula,
+and the canonical depth-five counts. They use ordinary Lean proofs and
+normalization, without a new mathematical axiom. Collatz remains unproved.\par\endgroup
+
+\smallskip\begingroup\raggedright\noindent
+[1] Edward Y. Chang, \emph{A structural reduction of the Collatz conjecture
+to one-bit orbit mixing}, arXiv:2603.25753v1, Sections 4.2 and 5.2.
+\href{https://arxiv.org/html/2603.25753v1}{Versioned primary source},
+accessed September 5, 2026. No mathematical priority claim is made.\par\endgroup
+\end{document}

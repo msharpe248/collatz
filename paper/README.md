@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Precision audit of proposed Collatz residue transitions | [residue_precision_audit.pdf](residue_precision_audit.pdf) | [residue_precision_audit_guide.pdf](residue_precision_audit_guide.pdf) |
 | Auxiliary smaller-transfer bridges | [affine_bridges.pdf](affine_bridges.pdf) | [affine_bridges_guide.pdf](affine_bridges_guide.pdf) |
 | Direct merging and contracting parameter returns for affine transfer | [affine_pair_returns.pdf](affine_pair_returns.pdf) | [affine_pair_returns_guide.pdf](affine_pair_returns_guide.pdf) |
 | Exact affine-transfer reformulations of nondivergence and full Collatz | [affine_transfer.pdf](affine_transfer.pdf) | [affine_transfer_guide.pdf](affine_transfer_guide.pdf) |

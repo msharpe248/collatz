@@ -1,0 +1,63 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{amsmath,microtype,hyperref}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\begin{center}
+{\Large Guide: Checking What a Residue Table Really Predicts}\par\medskip
+Collatz proof project\quad---\quad September 5, 2026
+\end{center}
+\guideheading{Why this matters for the proof}
+A table that predicts the next residue could help organize a global Collatz
+argument. But its input must retain enough information to determine its
+output. Division by two can make the next output depend on a bit that the
+input table discarded. We checked this issue before adopting a proposed
+one-bit mixing route from the literature.
+
+\guideheading{A concrete failure}
+The numbers 3 and 35 have the same remainder modulo 32: both leave 3.
+Both are eligible for the odd shortcut step, which multiplies by three,
+adds one, and divides by two. The results are
+\[
+ 3\longmapsto5,\qquad 35\longmapsto53.
+\]
+Their output remainders modulo 32 are different: 5 and 21. A single
+transition attached to input remainder 3 cannot describe both.
+Lean proves that no function of this input remainder alone works for all
+such gap steps.
+
+\guideheading{The missing information is identifiable}
+For every natural $q$, Lean checks
+\[
+ T(3+32q)=5+48q.
+\]
+The parity of $q$ selects the output remainder. Recording the input modulo
+64 would retain that bit. This is a precision requirement, not evidence
+that modular methods in general cannot work.
+
+\guideheading{Compressing several divisions needs care too}
+A compressed odd step divides out every factor of two after applying
+$3n+1$. Inputs 29 and 61 agree modulo 32, yet their compressed outputs are
+11 and 23. Those outputs disagree even modulo eight. A table using the
+smaller representative 29 cannot automatically stand in for 61.
+
+\guideheading{What the count check says}
+Among the canonical burst inputs below 32, two compressed images are
+3 modulo eight and one is 7 modulo eight. Lean verifies those counts.
+Their signed difference is positive one. This disagrees with the signed
+formula at depth five in the reviewed source, while agreeing with an
+absolute difference of one. The technical note identifies the exact
+version and statements being checked.
+
+\guideheading{What we can conclude}
+These checks prevent a particular loss of information from entering the
+formal proof. They do not evaluate every claim in the source, exclude a
+corrected argument, or establish Collatz. A repaired residue description
+would still need a proof about the behavior of every relevant orbit.
+
+\guideheading{Verification files}
+Build \texttt{Collatz.ResidueMapAudit} from the repository's \texttt{lean/}
+directory. The accompanying technical note provides the exact equations,
+source reference, and limits of the conclusion. The project axiom audit
+includes all five declarations.
+\end{document}

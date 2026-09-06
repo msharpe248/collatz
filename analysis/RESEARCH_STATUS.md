@@ -12,6 +12,12 @@ and the Rhin estimate is a cited axiom. No such premise was imported.
 The newer Niu note was withdrawn for duplication. This review adds no
 new theorem. Subsequent work is recorded below and in the current theorem audit.
 
+Recent additions: the auxiliary bridge is formalized in `AffineBridge` (commit
+947cc1c). Subsequent source-witness, exponent-return, and cycle-bridge experiments
+remain conditional and do not close coverage. `RESIDUE_PRECISION_REVIEW.md` now
+records five kernel-checked precision/count findings for a proposed literature
+input; the selected declaration audit contains 214 entries.
+
 ## Completed in this research pass
 
 | Direction | Checked result | Scope |

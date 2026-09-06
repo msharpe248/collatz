@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.ResidueMapAudit', 'Collatz.ResidueMapAudit.gap_precision_witness', 'Inputs 3 and 35 share a mod-32 gap residue but their shortcut images differ modulo 32'),
+    ('Collatz.ResidueMapAudit', 'Collatz.ResidueMapAudit.no_gap_map_mod32', 'No function of the input mod-32 residue alone represents all gap outputs modulo 32'),
+    ('Collatz.ResidueMapAudit', 'Collatz.ResidueMapAudit.gap_lift_formula', 'Exact quotient-sensitive gap formula T(3+32q)=5+48q'),
+    ('Collatz.ResidueMapAudit', 'Collatz.ResidueMapAudit.burst_precision_witness', 'Inputs 29 and 61 share a mod-32 burst residue but compressed outputs differ modulo eight'),
+    ('Collatz.ResidueMapAudit', 'Collatz.ResidueMapAudit.canonical_burst_counts_32', 'Canonical depth-five burst counts are two images three modulo eight and one image seven modulo eight'),
     ('Collatz.AffineBridge', 'Collatz.AffineTransfer.of_bridge', 'An auxiliary smaller-transfer instance supplies a convergent orbit meeting the target; recursive premise explicit'),
     ('Collatz.AffineBridge', 'Collatz.affine_bridge_28', 'Exact bridge identities and strict parameter decrease from 28+4096Q to 21+3072Q'),
     ('Collatz.AffineBridge', 'Collatz.AffineTransfer.bridge_28', 'Conditional transfer through an auxiliary orbit on an entire arithmetic progression'),
