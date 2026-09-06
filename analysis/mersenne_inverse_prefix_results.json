@@ -1,0 +1,72 @@
+{
+  "scope": "prefix formulas tested k=0..100; finite one-extra-bridge probes",
+  "kernel_certified": false,
+  "probes": [
+    {
+      "exponent": 4,
+      "kind": "certificate",
+      "depth": 40,
+      "extra_bridges": 1
+    },
+    {
+      "exponent": 10,
+      "kind": "depth_limit",
+      "depth": 300,
+      "extra_bridges": 0
+    },
+    {
+      "exponent": 16,
+      "kind": "certificate",
+      "depth": 52,
+      "extra_bridges": 0
+    },
+    {
+      "exponent": 22,
+      "kind": "certificate",
+      "depth": 83,
+      "extra_bridges": 1
+    },
+    {
+      "exponent": 28,
+      "kind": "depth_limit",
+      "depth": 300,
+      "extra_bridges": 0
+    },
+    {
+      "exponent": 34,
+      "kind": "certificate",
+      "depth": 174,
+      "extra_bridges": 1
+    },
+    {
+      "exponent": 40,
+      "kind": "certificate",
+      "depth": 114,
+      "extra_bridges": 1
+    },
+    {
+      "exponent": 46,
+      "kind": "certificate",
+      "depth": 136,
+      "extra_bridges": 1
+    },
+    {
+      "exponent": 52,
+      "kind": "certificate",
+      "depth": 72,
+      "extra_bridges": 0
+    },
+    {
+      "exponent": 58,
+      "kind": "certificate",
+      "depth": 107,
+      "extra_bridges": 1
+    },
+    {
+      "exponent": 64,
+      "kind": "certificate",
+      "depth": 148,
+      "extra_bridges": 0
+    }
+  ]
+}

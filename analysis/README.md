@@ -7,6 +7,7 @@ reproducible byte-for-byte.
 
 | script | what it does | paper section |
 |---|---|---|
+| `mersenne_inverse_prefix.py` | exact prefix formulas explain a growing delay before the three-step inverse template can certify Mersenne parameters; not Lean-certified | `MERSENNE_INVERSE_PREFIX.md` |
 | `two_early_bridges.py` | an additional transfer bridge resolves the parameter-15 inverse template on an entire progression | `../paper/two_early_bridges.tex` |
 | `three_step_inverse_search.py` | longer early inverse template in u=6 mod 9 and terminal limitations on selected Mersenne cases | `THREE_STEP_INVERSE_CHECK.md` |
 | `early_inverse_bridge_search.py` | exact early inverse induction rules in the parameter class two modulo three | `../paper/early_inverse_bridge.tex` |
