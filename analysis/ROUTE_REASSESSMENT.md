@@ -218,3 +218,27 @@ Next action: examine the unresolved seeds and compress successful
 certificates into seed-dependent arithmetic rules, keeping coefficient
 transport and positivity explicit. Merely increasing a fixed search
 length cannot be treated as a universal proof.
+
+
+## Arithmetic rule lifting and kernel validation (2026-09-05)
+
+The previous 3,768 dominating certificates now normalize to 360 distinct
+arithmetic progressions. All 360 finite rules pass Lean kernel validation;
+the generic `MergeRule.sound` theorem proves each progression for every
+natural quotient. The output is in `MergeRuleTable.lean`, with reproducible
+JSON and source generation in `analysis/merge_progressions.py`.
+
+For base counts j,k use quotient steps a=3^max(k-j,0), b=3^max(j-k,0).
+The increments 2^t*a and 2^s*b preserve the endpoint and are ordered by
+the coefficient-domination inequality. Backward normalization is stopped
+before positivity or strict seed ordering fails, and Lean independently
+checks the resulting base certificate. This improves the scope of the
+verified examples but does not prove that the rule union covers all
+hypothetical least noncontracting seeds.
+
+The source census remains Python evidence. The validity of every retained
+rule and its all-quotient extension are kernel certified. Regeneration
+checks all 2,336 unresolved source seeds against the retained union; none
+is falsely reclassified as covered. Further work must find an applicability
+argument using rules that may depend on the seed, rather than treating a
+finite list as a full proof.

@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.MergeProgression', 'Collatz.MergeRule.sound', 'A valid finite merge rule gives smaller noncontracting replacements for all natural quotients'),
+    ('Collatz.MergeRuleTable', 'Collatz.MergeRuleTable.rules_valid', 'Kernel validation of every one of the 360 listed merge rules; no completeness claim'),
+    ('Collatz.MergeRuleTable', 'Collatz.MergeRuleTable.certified_rule_sound', 'Every listed rule certifies its entire conditional noncontraction descent progression'),
     ('Collatz.DominatingMerge', 'Collatz.neverContracts_of_dominating_merge', 'Unequal-length merging preserves full noncontraction under prefix noncontraction and coefficient domination'),
     ('Collatz.DominatingMerge', 'Collatz.dominating_merge_111_family', 'Every Q gives exact one-step/twelve-step merging of 111+4374Q and smaller 103+4096Q with a noncontracting replacement prefix'),
     ('Collatz.DominatingMerge', 'Collatz.NeverContracts.smaller_merge_111', 'Conditional full noncontraction transfers to a smaller merging seed on the parameterized progression; no such seed asserted'),

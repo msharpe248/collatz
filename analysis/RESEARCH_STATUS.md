@@ -873,3 +873,44 @@ are also not excluded. Collatz remains open.
 Verification: selected build passes (7833 jobs); all 171 audited
 declarations use standard foundations only. Both new tests pass. The
 one-page technical paper and one-page guide were visually checked.
+
+
+## 360 merge progressions checked by the Lean kernel (2026-09-05)
+
+`lean/Collatz/MergeProgression.lean` defines finite `MergeRule` data and
+its exact `Valid` obligations: positive strict seed ordering, actual
+endpoint equality, noncontracting replacement prefixes, coefficient
+domination, ternary balance, and ordered seed increments. `MergeRule.sound`
+proves conditional noncontraction descent for every natural quotient.
+The original and replacement seeds have forms n+2^t*a*Q and x+2^s*b*Q.
+The balance 3^j*a=3^k*b preserves the shared endpoint; 2^s*b<=2^t*a
+preserves strict seed ordering. No positivity or parity assumption is
+hidden in a relaxed correction interval.
+
+`analysis/merge_progressions.py` normalizes the 3,768 successful dominating
+certificates into 360 distinct progressions. Its containment filter
+removes no additional distinct rule in this run. The generated
+`lean/Collatz/MergeRuleTable.lean` uses ordinary `decide` to kernel-check
+every rule. `rules_valid` and `certified_rule_sound` establish validity
+and conditional descent for any listed rule at every natural quotient.
+The Python search's completeness remains separate and is not kernel
+certified. The list does not supply universal coverage of NC seeds.
+
+Tests check anchor normalization, progression containment including lower
+bounds, and exact correspondence between JSON data and generated Lean
+source. The previous small-depth exhaustive comparison still passes.
+Regeneration checks that all source certificates are covered and that
+none of the 2,336 previously unresolved seeds gains an in-budget rule
+from normalization. No all-depth or full-Collatz conclusion follows.
+
+The existing dominating-merges paper and guide now include the generic
+lifting theorem and kernel-certified list. The next research step must
+address applicability outside this finite rule collection; a universal
+existence premise has not been established.
+
+Verification: selected build passes (7835 jobs), and all 174 audited
+declarations use standard foundations only. Three progression tests and
+two variable-length tests pass. Collatz remains open.
+
+The revised two-page technical paper and one-page guide were rendered
+and visually checked.

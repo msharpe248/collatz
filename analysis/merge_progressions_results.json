@@ -1,0 +1,3610 @@
+{
+  "depth": 18,
+  "source_certificates": 3768,
+  "distinct_progressions": 360,
+  "retained_progressions": 360,
+  "kernel_validation_module": "Collatz.MergeRuleTable",
+  "scope": "conditional infinite progressions; no universal coverage",
+  "rules": [
+    {
+      "seed": 2,
+      "predecessor": 1,
+      "seed_step": 3,
+      "predecessor_step": 2,
+      "forward_time": 0,
+      "inverse_time": 1,
+      "forward_odds": 0,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 4,
+      "predecessor": 3,
+      "seed_step": 9,
+      "predecessor_step": 8,
+      "forward_time": 0,
+      "inverse_time": 3,
+      "forward_odds": 0,
+      "inverse_odds": 2
+    },
+    {
+      "seed": 10,
+      "predecessor": 7,
+      "seed_step": 81,
+      "predecessor_step": 64,
+      "forward_time": 0,
+      "inverse_time": 6,
+      "forward_odds": 0,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 287,
+      "predecessor": 273,
+      "seed_step": 512,
+      "predecessor_step": 486,
+      "forward_time": 9,
+      "inverse_time": 1,
+      "forward_odds": 6,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 367,
+      "predecessor": 349,
+      "seed_step": 512,
+      "predecessor_step": 486,
+      "forward_time": 9,
+      "inverse_time": 1,
+      "forward_odds": 6,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 411,
+      "predecessor": 391,
+      "seed_step": 512,
+      "predecessor_step": 486,
+      "forward_time": 9,
+      "inverse_time": 1,
+      "forward_odds": 6,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 487,
+      "predecessor": 463,
+      "seed_step": 512,
+      "predecessor_step": 486,
+      "forward_time": 9,
+      "inverse_time": 1,
+      "forward_odds": 6,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 433,
+      "predecessor": 303,
+      "seed_step": 729,
+      "predecessor_step": 512,
+      "forward_time": 0,
+      "inverse_time": 9,
+      "forward_odds": 0,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 604,
+      "predecessor": 423,
+      "seed_step": 729,
+      "predecessor_step": 512,
+      "forward_time": 0,
+      "inverse_time": 9,
+      "forward_odds": 0,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 539,
+      "predecessor": 455,
+      "seed_step": 1024,
+      "predecessor_step": 864,
+      "forward_time": 10,
+      "inverse_time": 5,
+      "forward_odds": 7,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 615,
+      "predecessor": 519,
+      "seed_step": 1024,
+      "predecessor_step": 864,
+      "forward_time": 10,
+      "inverse_time": 5,
+      "forward_odds": 7,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 1275,
+      "predecessor": 1007,
+      "seed_step": 1296,
+      "predecessor_step": 1024,
+      "forward_time": 4,
+      "inverse_time": 10,
+      "forward_odds": 3,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 273,
+      "predecessor": 191,
+      "seed_step": 1458,
+      "predecessor_step": 1024,
+      "forward_time": 1,
+      "inverse_time": 10,
+      "forward_odds": 1,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 1321,
+      "predecessor": 927,
+      "seed_step": 1458,
+      "predecessor_step": 1024,
+      "forward_time": 1,
+      "inverse_time": 10,
+      "forward_odds": 1,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 155,
+      "predecessor": 111,
+      "seed_step": 2048,
+      "predecessor_step": 1458,
+      "forward_time": 11,
+      "inverse_time": 1,
+      "forward_odds": 7,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 231,
+      "predecessor": 165,
+      "seed_step": 2048,
+      "predecessor_step": 1458,
+      "forward_time": 11,
+      "inverse_time": 1,
+      "forward_odds": 7,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 283,
+      "predecessor": 239,
+      "seed_step": 2048,
+      "predecessor_step": 1728,
+      "forward_time": 11,
+      "inverse_time": 6,
+      "forward_odds": 8,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 359,
+      "predecessor": 303,
+      "seed_step": 2048,
+      "predecessor_step": 1728,
+      "forward_time": 11,
+      "inverse_time": 6,
+      "forward_odds": 8,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 543,
+      "predecessor": 387,
+      "seed_step": 2048,
+      "predecessor_step": 1458,
+      "forward_time": 11,
+      "inverse_time": 1,
+      "forward_odds": 7,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 1071,
+      "predecessor": 763,
+      "seed_step": 2048,
+      "predecessor_step": 1458,
+      "forward_time": 11,
+      "inverse_time": 1,
+      "forward_odds": 7,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 1627,
+      "predecessor": 1159,
+      "seed_step": 2048,
+      "predecessor_step": 1458,
+      "forward_time": 11,
+      "inverse_time": 1,
+      "forward_odds": 7,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 1647,
+      "predecessor": 1173,
+      "seed_step": 2048,
+      "predecessor_step": 1458,
+      "forward_time": 11,
+      "inverse_time": 1,
+      "forward_odds": 7,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 1703,
+      "predecessor": 1213,
+      "seed_step": 2048,
+      "predecessor_step": 1458,
+      "forward_time": 11,
+      "inverse_time": 1,
+      "forward_odds": 7,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 1787,
+      "predecessor": 1273,
+      "seed_step": 2048,
+      "predecessor_step": 1458,
+      "forward_time": 11,
+      "inverse_time": 1,
+      "forward_odds": 7,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 1863,
+      "predecessor": 1327,
+      "seed_step": 2048,
+      "predecessor_step": 1458,
+      "forward_time": 11,
+      "inverse_time": 1,
+      "forward_odds": 7,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 205,
+      "predecessor": 191,
+      "seed_step": 2187,
+      "predecessor_step": 2048,
+      "forward_time": 0,
+      "inverse_time": 11,
+      "forward_odds": 0,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 325,
+      "predecessor": 303,
+      "seed_step": 2187,
+      "predecessor_step": 2048,
+      "forward_time": 0,
+      "inverse_time": 11,
+      "forward_odds": 0,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 919,
+      "predecessor": 859,
+      "seed_step": 2187,
+      "predecessor_step": 2048,
+      "forward_time": 0,
+      "inverse_time": 11,
+      "forward_odds": 0,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 991,
+      "predecessor": 927,
+      "seed_step": 2187,
+      "predecessor_step": 2048,
+      "forward_time": 0,
+      "inverse_time": 11,
+      "forward_odds": 0,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 1000,
+      "predecessor": 935,
+      "seed_step": 2187,
+      "predecessor_step": 2048,
+      "forward_time": 0,
+      "inverse_time": 11,
+      "forward_odds": 0,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 1171,
+      "predecessor": 1095,
+      "seed_step": 2187,
+      "predecessor_step": 2048,
+      "forward_time": 0,
+      "inverse_time": 11,
+      "forward_odds": 0,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 2170,
+      "predecessor": 2031,
+      "seed_step": 2187,
+      "predecessor_step": 2048,
+      "forward_time": 0,
+      "inverse_time": 11,
+      "forward_odds": 0,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 2247,
+      "predecessor": 1775,
+      "seed_step": 2592,
+      "predecessor_step": 2048,
+      "forward_time": 5,
+      "inverse_time": 11,
+      "forward_odds": 4,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 795,
+      "predecessor": 671,
+      "seed_step": 4096,
+      "predecessor_step": 3456,
+      "forward_time": 12,
+      "inverse_time": 7,
+      "forward_odds": 9,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 1191,
+      "predecessor": 1131,
+      "seed_step": 4096,
+      "predecessor_step": 3888,
+      "forward_time": 12,
+      "inverse_time": 4,
+      "forward_odds": 8,
+      "inverse_odds": 3
+    },
+    {
+      "seed": 1275,
+      "predecessor": 1211,
+      "seed_step": 4096,
+      "predecessor_step": 3888,
+      "forward_time": 12,
+      "inverse_time": 4,
+      "forward_odds": 8,
+      "inverse_odds": 3
+    },
+    {
+      "seed": 2607,
+      "predecessor": 2475,
+      "seed_step": 4096,
+      "predecessor_step": 3888,
+      "forward_time": 12,
+      "inverse_time": 4,
+      "forward_odds": 8,
+      "inverse_odds": 3
+    },
+    {
+      "seed": 2919,
+      "predecessor": 2463,
+      "seed_step": 4096,
+      "predecessor_step": 3456,
+      "forward_time": 12,
+      "inverse_time": 7,
+      "forward_odds": 9,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 3163,
+      "predecessor": 3003,
+      "seed_step": 4096,
+      "predecessor_step": 3888,
+      "forward_time": 12,
+      "inverse_time": 4,
+      "forward_odds": 8,
+      "inverse_odds": 3
+    },
+    {
+      "seed": 3399,
+      "predecessor": 3227,
+      "seed_step": 4096,
+      "predecessor_step": 3888,
+      "forward_time": 12,
+      "inverse_time": 4,
+      "forward_odds": 8,
+      "inverse_odds": 3
+    },
+    {
+      "seed": 111,
+      "predecessor": 103,
+      "seed_step": 4374,
+      "predecessor_step": 4096,
+      "forward_time": 1,
+      "inverse_time": 12,
+      "forward_odds": 1,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 1213,
+      "predecessor": 1135,
+      "seed_step": 4374,
+      "predecessor_step": 4096,
+      "forward_time": 1,
+      "inverse_time": 12,
+      "forward_odds": 1,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 1623,
+      "predecessor": 1519,
+      "seed_step": 4374,
+      "predecessor_step": 4096,
+      "forward_time": 1,
+      "inverse_time": 12,
+      "forward_odds": 1,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 1807,
+      "predecessor": 1691,
+      "seed_step": 4374,
+      "predecessor_step": 4096,
+      "forward_time": 1,
+      "inverse_time": 12,
+      "forward_odds": 1,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 1845,
+      "predecessor": 1727,
+      "seed_step": 4374,
+      "predecessor_step": 4096,
+      "forward_time": 1,
+      "inverse_time": 12,
+      "forward_odds": 1,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 2217,
+      "predecessor": 2075,
+      "seed_step": 4374,
+      "predecessor_step": 4096,
+      "forward_time": 1,
+      "inverse_time": 12,
+      "forward_odds": 1,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 2221,
+      "predecessor": 2079,
+      "seed_step": 4374,
+      "predecessor_step": 4096,
+      "forward_time": 1,
+      "inverse_time": 12,
+      "forward_odds": 1,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 2631,
+      "predecessor": 2463,
+      "seed_step": 4374,
+      "predecessor_step": 4096,
+      "forward_time": 1,
+      "inverse_time": 12,
+      "forward_odds": 1,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 4075,
+      "predecessor": 3815,
+      "seed_step": 4374,
+      "predecessor_step": 4096,
+      "forward_time": 1,
+      "inverse_time": 12,
+      "forward_odds": 1,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 303,
+      "predecessor": 239,
+      "seed_step": 5184,
+      "predecessor_step": 4096,
+      "forward_time": 6,
+      "inverse_time": 12,
+      "forward_odds": 5,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 2299,
+      "predecessor": 2183,
+      "seed_step": 8192,
+      "predecessor_step": 7776,
+      "forward_time": 13,
+      "inverse_time": 5,
+      "forward_odds": 9,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 3867,
+      "predecessor": 3263,
+      "seed_step": 8192,
+      "predecessor_step": 6912,
+      "forward_time": 13,
+      "inverse_time": 8,
+      "forward_odds": 10,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 4187,
+      "predecessor": 3975,
+      "seed_step": 8192,
+      "predecessor_step": 7776,
+      "forward_time": 13,
+      "inverse_time": 5,
+      "forward_odds": 9,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 4423,
+      "predecessor": 4199,
+      "seed_step": 8192,
+      "predecessor_step": 7776,
+      "forward_time": 13,
+      "inverse_time": 5,
+      "forward_odds": 9,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 5991,
+      "predecessor": 5055,
+      "seed_step": 8192,
+      "predecessor_step": 6912,
+      "forward_time": 13,
+      "inverse_time": 8,
+      "forward_odds": 10,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 6311,
+      "predecessor": 5991,
+      "seed_step": 8192,
+      "predecessor_step": 7776,
+      "forward_time": 13,
+      "inverse_time": 5,
+      "forward_odds": 9,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 7727,
+      "predecessor": 7335,
+      "seed_step": 8192,
+      "predecessor_step": 7776,
+      "forward_time": 13,
+      "inverse_time": 5,
+      "forward_odds": 9,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 9375,
+      "predecessor": 7407,
+      "seed_step": 10368,
+      "predecessor_step": 8192,
+      "forward_time": 7,
+      "inverse_time": 13,
+      "forward_odds": 6,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 8907,
+      "predecessor": 6255,
+      "seed_step": 11664,
+      "predecessor_step": 8192,
+      "forward_time": 4,
+      "inverse_time": 13,
+      "forward_odds": 3,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 10251,
+      "predecessor": 7199,
+      "seed_step": 11664,
+      "predecessor_step": 8192,
+      "forward_time": 4,
+      "inverse_time": 13,
+      "forward_odds": 3,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 251,
+      "predecessor": 239,
+      "seed_step": 16384,
+      "predecessor_step": 15552,
+      "forward_time": 14,
+      "inverse_time": 6,
+      "forward_odds": 10,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 415,
+      "predecessor": 333,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 839,
+      "predecessor": 673,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 1351,
+      "predecessor": 1083,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 2139,
+      "predecessor": 2031,
+      "seed_step": 16384,
+      "predecessor_step": 15552,
+      "forward_time": 14,
+      "inverse_time": 6,
+      "forward_odds": 10,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 2727,
+      "predecessor": 2185,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 2815,
+      "predecessor": 2255,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 3239,
+      "predecessor": 2595,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 4031,
+      "predecessor": 3229,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 4123,
+      "predecessor": 3303,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 4143,
+      "predecessor": 3319,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 4543,
+      "predecessor": 3639,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 4655,
+      "predecessor": 3729,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 6271,
+      "predecessor": 5023,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 6783,
+      "predecessor": 5433,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 6907,
+      "predecessor": 5533,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 7419,
+      "predecessor": 5943,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 7919,
+      "predecessor": 6343,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 8039,
+      "predecessor": 6783,
+      "seed_step": 16384,
+      "predecessor_step": 13824,
+      "forward_time": 14,
+      "inverse_time": 9,
+      "forward_odds": 11,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 8263,
+      "predecessor": 6619,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 8431,
+      "predecessor": 6753,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 8795,
+      "predecessor": 7045,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 8863,
+      "predecessor": 7099,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 9307,
+      "predecessor": 7455,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 9375,
+      "predecessor": 7509,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 9447,
+      "predecessor": 7567,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 10151,
+      "predecessor": 8131,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 10567,
+      "predecessor": 10031,
+      "seed_step": 16384,
+      "predecessor_step": 15552,
+      "forward_time": 14,
+      "inverse_time": 6,
+      "forward_odds": 10,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 10863,
+      "predecessor": 8701,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 11375,
+      "predecessor": 9111,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 11455,
+      "predecessor": 9175,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 11567,
+      "predecessor": 9265,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 11807,
+      "predecessor": 9457,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 11967,
+      "predecessor": 9585,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 12319,
+      "predecessor": 9867,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 12455,
+      "predecessor": 11823,
+      "seed_step": 16384,
+      "predecessor_step": 15552,
+      "forward_time": 14,
+      "inverse_time": 6,
+      "forward_odds": 10,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 13871,
+      "predecessor": 13167,
+      "seed_step": 16384,
+      "predecessor_step": 15552,
+      "forward_time": 14,
+      "inverse_time": 6,
+      "forward_odds": 10,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 14107,
+      "predecessor": 11903,
+      "seed_step": 16384,
+      "predecessor_step": 13824,
+      "forward_time": 14,
+      "inverse_time": 9,
+      "forward_odds": 11,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 14331,
+      "predecessor": 11479,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 14439,
+      "predecessor": 11565,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 15343,
+      "predecessor": 12289,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 15515,
+      "predecessor": 12427,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 15855,
+      "predecessor": 12699,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 16027,
+      "predecessor": 12837,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 16219,
+      "predecessor": 12991,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 16287,
+      "predecessor": 13045,
+      "seed_step": 16384,
+      "predecessor_step": 13122,
+      "forward_time": 14,
+      "inverse_time": 1,
+      "forward_odds": 9,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 1384,
+      "predecessor": 1151,
+      "seed_step": 19683,
+      "predecessor_step": 16384,
+      "forward_time": 0,
+      "inverse_time": 14,
+      "forward_odds": 0,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 1663,
+      "predecessor": 1383,
+      "seed_step": 19683,
+      "predecessor_step": 16384,
+      "forward_time": 0,
+      "inverse_time": 14,
+      "forward_odds": 0,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 2134,
+      "predecessor": 1775,
+      "seed_step": 19683,
+      "predecessor_step": 16384,
+      "forward_time": 0,
+      "inverse_time": 14,
+      "forward_odds": 0,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 2548,
+      "predecessor": 2119,
+      "seed_step": 19683,
+      "predecessor_step": 16384,
+      "forward_time": 0,
+      "inverse_time": 14,
+      "forward_odds": 0,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 6805,
+      "predecessor": 5663,
+      "seed_step": 19683,
+      "predecessor_step": 16384,
+      "forward_time": 0,
+      "inverse_time": 14,
+      "forward_odds": 0,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 8650,
+      "predecessor": 7199,
+      "seed_step": 19683,
+      "predecessor_step": 16384,
+      "forward_time": 0,
+      "inverse_time": 14,
+      "forward_odds": 0,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 11053,
+      "predecessor": 9199,
+      "seed_step": 19683,
+      "predecessor_step": 16384,
+      "forward_time": 0,
+      "inverse_time": 14,
+      "forward_odds": 0,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 13312,
+      "predecessor": 11079,
+      "seed_step": 19683,
+      "predecessor_step": 16384,
+      "forward_time": 0,
+      "inverse_time": 14,
+      "forward_odds": 0,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 15580,
+      "predecessor": 12967,
+      "seed_step": 19683,
+      "predecessor_step": 16384,
+      "forward_time": 0,
+      "inverse_time": 14,
+      "forward_odds": 0,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 11967,
+      "predecessor": 9455,
+      "seed_step": 20736,
+      "predecessor_step": 16384,
+      "forward_time": 8,
+      "inverse_time": 14,
+      "forward_odds": 7,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 3975,
+      "predecessor": 2791,
+      "seed_step": 23328,
+      "predecessor_step": 16384,
+      "forward_time": 5,
+      "inverse_time": 14,
+      "forward_odds": 4,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 5991,
+      "predecessor": 4207,
+      "seed_step": 23328,
+      "predecessor_step": 16384,
+      "forward_time": 5,
+      "inverse_time": 14,
+      "forward_odds": 4,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 7335,
+      "predecessor": 5151,
+      "seed_step": 23328,
+      "predecessor_step": 16384,
+      "forward_time": 5,
+      "inverse_time": 14,
+      "forward_odds": 4,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 167,
+      "predecessor": 159,
+      "seed_step": 32768,
+      "predecessor_step": 31104,
+      "forward_time": 15,
+      "inverse_time": 7,
+      "forward_odds": 11,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 4347,
+      "predecessor": 4127,
+      "seed_step": 32768,
+      "predecessor_step": 31104,
+      "forward_time": 15,
+      "inverse_time": 7,
+      "forward_odds": 11,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 6235,
+      "predecessor": 5919,
+      "seed_step": 32768,
+      "predecessor_step": 31104,
+      "forward_time": 15,
+      "inverse_time": 7,
+      "forward_odds": 11,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 7471,
+      "predecessor": 5319,
+      "seed_step": 32768,
+      "predecessor_step": 23328,
+      "forward_time": 15,
+      "inverse_time": 5,
+      "forward_odds": 10,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 11247,
+      "predecessor": 8007,
+      "seed_step": 32768,
+      "predecessor_step": 23328,
+      "forward_time": 15,
+      "inverse_time": 5,
+      "forward_odds": 10,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 12191,
+      "predecessor": 8679,
+      "seed_step": 32768,
+      "predecessor_step": 23328,
+      "forward_time": 15,
+      "inverse_time": 5,
+      "forward_odds": 10,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 12799,
+      "predecessor": 10251,
+      "seed_step": 32768,
+      "predecessor_step": 26244,
+      "forward_time": 15,
+      "inverse_time": 2,
+      "forward_odds": 10,
+      "inverse_odds": 2
+    },
+    {
+      "seed": 17967,
+      "predecessor": 17055,
+      "seed_step": 32768,
+      "predecessor_step": 31104,
+      "forward_time": 15,
+      "inverse_time": 7,
+      "forward_odds": 11,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 20327,
+      "predecessor": 17151,
+      "seed_step": 32768,
+      "predecessor_step": 27648,
+      "forward_time": 15,
+      "inverse_time": 10,
+      "forward_odds": 12,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 20551,
+      "predecessor": 14631,
+      "seed_step": 32768,
+      "predecessor_step": 23328,
+      "forward_time": 15,
+      "inverse_time": 5,
+      "forward_odds": 10,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 22439,
+      "predecessor": 15975,
+      "seed_step": 32768,
+      "predecessor_step": 23328,
+      "forward_time": 15,
+      "inverse_time": 5,
+      "forward_odds": 10,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 23743,
+      "predecessor": 16903,
+      "seed_step": 32768,
+      "predecessor_step": 23328,
+      "forward_time": 15,
+      "inverse_time": 5,
+      "forward_odds": 10,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 26395,
+      "predecessor": 22271,
+      "seed_step": 32768,
+      "predecessor_step": 27648,
+      "forward_time": 15,
+      "inverse_time": 10,
+      "forward_odds": 12,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 26619,
+      "predecessor": 18951,
+      "seed_step": 32768,
+      "predecessor_step": 23328,
+      "forward_time": 15,
+      "inverse_time": 5,
+      "forward_odds": 10,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 28507,
+      "predecessor": 20295,
+      "seed_step": 32768,
+      "predecessor_step": 23328,
+      "forward_time": 15,
+      "inverse_time": 5,
+      "forward_odds": 10,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 31047,
+      "predecessor": 29471,
+      "seed_step": 32768,
+      "predecessor_step": 31104,
+      "forward_time": 15,
+      "inverse_time": 7,
+      "forward_odds": 11,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 5019,
+      "predecessor": 4699,
+      "seed_step": 34992,
+      "predecessor_step": 32768,
+      "forward_time": 4,
+      "inverse_time": 15,
+      "forward_odds": 3,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 7227,
+      "predecessor": 6767,
+      "seed_step": 34992,
+      "predecessor_step": 32768,
+      "forward_time": 4,
+      "inverse_time": 15,
+      "forward_odds": 3,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 17547,
+      "predecessor": 16431,
+      "seed_step": 34992,
+      "predecessor_step": 32768,
+      "forward_time": 4,
+      "inverse_time": 15,
+      "forward_odds": 3,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 19819,
+      "predecessor": 18559,
+      "seed_step": 34992,
+      "predecessor_step": 32768,
+      "forward_time": 4,
+      "inverse_time": 15,
+      "forward_odds": 3,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 22587,
+      "predecessor": 21151,
+      "seed_step": 34992,
+      "predecessor_step": 32768,
+      "forward_time": 4,
+      "inverse_time": 15,
+      "forward_odds": 3,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 31515,
+      "predecessor": 29511,
+      "seed_step": 34992,
+      "predecessor_step": 32768,
+      "forward_time": 4,
+      "inverse_time": 15,
+      "forward_odds": 3,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 33531,
+      "predecessor": 31399,
+      "seed_step": 34992,
+      "predecessor_step": 32768,
+      "forward_time": 4,
+      "inverse_time": 15,
+      "forward_odds": 3,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 3229,
+      "predecessor": 2687,
+      "seed_step": 39366,
+      "predecessor_step": 32768,
+      "forward_time": 1,
+      "inverse_time": 15,
+      "forward_odds": 1,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 3729,
+      "predecessor": 3103,
+      "seed_step": 39366,
+      "predecessor_step": 32768,
+      "forward_time": 1,
+      "inverse_time": 15,
+      "forward_odds": 1,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 7977,
+      "predecessor": 6639,
+      "seed_step": 39366,
+      "predecessor_step": 32768,
+      "forward_time": 1,
+      "inverse_time": 15,
+      "forward_odds": 1,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 14205,
+      "predecessor": 11823,
+      "seed_step": 39366,
+      "predecessor_step": 32768,
+      "forward_time": 1,
+      "inverse_time": 15,
+      "forward_odds": 1,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 16387,
+      "predecessor": 13639,
+      "seed_step": 39366,
+      "predecessor_step": 32768,
+      "forward_time": 1,
+      "inverse_time": 15,
+      "forward_odds": 1,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 16425,
+      "predecessor": 13671,
+      "seed_step": 39366,
+      "predecessor_step": 32768,
+      "forward_time": 1,
+      "inverse_time": 15,
+      "forward_odds": 1,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 18145,
+      "predecessor": 15103,
+      "seed_step": 39366,
+      "predecessor_step": 32768,
+      "forward_time": 1,
+      "inverse_time": 15,
+      "forward_odds": 1,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 25959,
+      "predecessor": 21607,
+      "seed_step": 39366,
+      "predecessor_step": 32768,
+      "forward_time": 1,
+      "inverse_time": 15,
+      "forward_odds": 1,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 32187,
+      "predecessor": 26791,
+      "seed_step": 39366,
+      "predecessor_step": 32768,
+      "forward_time": 1,
+      "inverse_time": 15,
+      "forward_odds": 1,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 35829,
+      "predecessor": 29823,
+      "seed_step": 39366,
+      "predecessor_step": 32768,
+      "forward_time": 1,
+      "inverse_time": 15,
+      "forward_odds": 1,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 6783,
+      "predecessor": 5359,
+      "seed_step": 41472,
+      "predecessor_step": 32768,
+      "forward_time": 9,
+      "inverse_time": 15,
+      "forward_odds": 8,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 11823,
+      "predecessor": 8303,
+      "seed_step": 46656,
+      "predecessor_step": 32768,
+      "forward_time": 6,
+      "inverse_time": 15,
+      "forward_odds": 5,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 13167,
+      "predecessor": 9247,
+      "seed_step": 46656,
+      "predecessor_step": 32768,
+      "forward_time": 6,
+      "inverse_time": 15,
+      "forward_odds": 5,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 33135,
+      "predecessor": 23271,
+      "seed_step": 46656,
+      "predecessor_step": 32768,
+      "forward_time": 6,
+      "inverse_time": 15,
+      "forward_odds": 5,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 2043,
+      "predecessor": 1455,
+      "seed_step": 65536,
+      "predecessor_step": 46656,
+      "forward_time": 16,
+      "inverse_time": 6,
+      "forward_odds": 11,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 3931,
+      "predecessor": 2799,
+      "seed_step": 65536,
+      "predecessor_step": 46656,
+      "forward_time": 16,
+      "inverse_time": 6,
+      "forward_odds": 11,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 20383,
+      "predecessor": 14511,
+      "seed_step": 65536,
+      "predecessor_step": 46656,
+      "forward_time": 16,
+      "inverse_time": 6,
+      "forward_odds": 11,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 22855,
+      "predecessor": 21695,
+      "seed_step": 65536,
+      "predecessor_step": 62208,
+      "forward_time": 16,
+      "inverse_time": 8,
+      "forward_odds": 12,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 24743,
+      "predecessor": 23487,
+      "seed_step": 65536,
+      "predecessor_step": 62208,
+      "forward_time": 16,
+      "inverse_time": 8,
+      "forward_odds": 12,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 28743,
+      "predecessor": 20463,
+      "seed_step": 65536,
+      "predecessor_step": 46656,
+      "forward_time": 16,
+      "inverse_time": 6,
+      "forward_odds": 11,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 30631,
+      "predecessor": 21807,
+      "seed_step": 65536,
+      "predecessor_step": 46656,
+      "forward_time": 16,
+      "inverse_time": 6,
+      "forward_odds": 11,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 34587,
+      "predecessor": 29183,
+      "seed_step": 65536,
+      "predecessor_step": 55296,
+      "forward_time": 16,
+      "inverse_time": 11,
+      "forward_odds": 13,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 42543,
+      "predecessor": 40383,
+      "seed_step": 65536,
+      "predecessor_step": 62208,
+      "forward_time": 16,
+      "inverse_time": 8,
+      "forward_odds": 12,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 48431,
+      "predecessor": 34479,
+      "seed_step": 65536,
+      "predecessor_step": 46656,
+      "forward_time": 16,
+      "inverse_time": 6,
+      "forward_odds": 11,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 52207,
+      "predecessor": 37167,
+      "seed_step": 65536,
+      "predecessor_step": 46656,
+      "forward_time": 16,
+      "inverse_time": 6,
+      "forward_odds": 11,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 61287,
+      "predecessor": 51711,
+      "seed_step": 65536,
+      "predecessor_step": 55296,
+      "forward_time": 16,
+      "inverse_time": 11,
+      "forward_odds": 13,
+      "inverse_odds": 10
+    },
+    {
+      "seed": 61691,
+      "predecessor": 58559,
+      "seed_step": 65536,
+      "predecessor_step": 62208,
+      "forward_time": 16,
+      "inverse_time": 8,
+      "forward_odds": 12,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 63579,
+      "predecessor": 60351,
+      "seed_step": 65536,
+      "predecessor_step": 62208,
+      "forward_time": 16,
+      "inverse_time": 8,
+      "forward_odds": 12,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 64703,
+      "predecessor": 46063,
+      "seed_step": 65536,
+      "predecessor_step": 46656,
+      "forward_time": 16,
+      "inverse_time": 6,
+      "forward_odds": 11,
+      "inverse_odds": 5
+    },
+    {
+      "seed": 8679,
+      "predecessor": 8127,
+      "seed_step": 69984,
+      "predecessor_step": 65536,
+      "forward_time": 5,
+      "inverse_time": 16,
+      "forward_odds": 4,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 15975,
+      "predecessor": 14959,
+      "seed_step": 69984,
+      "predecessor_step": 65536,
+      "forward_time": 5,
+      "inverse_time": 16,
+      "forward_odds": 4,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 42279,
+      "predecessor": 39591,
+      "seed_step": 69984,
+      "predecessor_step": 65536,
+      "forward_time": 5,
+      "inverse_time": 16,
+      "forward_odds": 4,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 51975,
+      "predecessor": 48671,
+      "seed_step": 69984,
+      "predecessor_step": 65536,
+      "forward_time": 5,
+      "inverse_time": 16,
+      "forward_odds": 4,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 61287,
+      "predecessor": 57391,
+      "seed_step": 69984,
+      "predecessor_step": 65536,
+      "forward_time": 5,
+      "inverse_time": 16,
+      "forward_odds": 4,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 65319,
+      "predecessor": 61167,
+      "seed_step": 69984,
+      "predecessor_step": 65536,
+      "forward_time": 5,
+      "inverse_time": 16,
+      "forward_odds": 4,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 66951,
+      "predecessor": 62695,
+      "seed_step": 69984,
+      "predecessor_step": 65536,
+      "forward_time": 5,
+      "inverse_time": 16,
+      "forward_odds": 4,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 62739,
+      "predecessor": 52223,
+      "seed_step": 78732,
+      "predecessor_step": 65536,
+      "forward_time": 2,
+      "inverse_time": 16,
+      "forward_odds": 2,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 17151,
+      "predecessor": 13551,
+      "seed_step": 82944,
+      "predecessor_step": 65536,
+      "forward_time": 10,
+      "inverse_time": 16,
+      "forward_odds": 9,
+      "inverse_odds": 13
+    },
+    {
+      "seed": 159,
+      "predecessor": 111,
+      "seed_step": 93312,
+      "predecessor_step": 65536,
+      "forward_time": 7,
+      "inverse_time": 16,
+      "forward_odds": 6,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 68127,
+      "predecessor": 47847,
+      "seed_step": 93312,
+      "predecessor_step": 65536,
+      "forward_time": 7,
+      "inverse_time": 16,
+      "forward_odds": 6,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 511,
+      "predecessor": 461,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 1951,
+      "predecessor": 1759,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 3263,
+      "predecessor": 2941,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 3999,
+      "predecessor": 2847,
+      "seed_step": 131072,
+      "predecessor_step": 93312,
+      "forward_time": 17,
+      "inverse_time": 7,
+      "forward_odds": 12,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 4735,
+      "predecessor": 4267,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 5223,
+      "predecessor": 4707,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 6055,
+      "predecessor": 5457,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 8519,
+      "predecessor": 7677,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 9343,
+      "predecessor": 8419,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 11423,
+      "predecessor": 10293,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 12199,
+      "predecessor": 10993,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 12479,
+      "predecessor": 11245,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 12539,
+      "predecessor": 11903,
+      "seed_step": 131072,
+      "predecessor_step": 124416,
+      "forward_time": 17,
+      "inverse_time": 9,
+      "forward_odds": 13,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 13127,
+      "predecessor": 11829,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 13727,
+      "predecessor": 12369,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 14247,
+      "predecessor": 10143,
+      "seed_step": 131072,
+      "predecessor_step": 93312,
+      "forward_time": 17,
+      "inverse_time": 7,
+      "forward_odds": 12,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 15807,
+      "predecessor": 14243,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 16031,
+      "predecessor": 14445,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 17343,
+      "predecessor": 15627,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 18203,
+      "predecessor": 15359,
+      "seed_step": 131072,
+      "predecessor_step": 110592,
+      "forward_time": 17,
+      "inverse_time": 12,
+      "forward_odds": 14,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 18879,
+      "predecessor": 17011,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 19271,
+      "predecessor": 17365,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 21183,
+      "predecessor": 19087,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 23023,
+      "predecessor": 20745,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 24255,
+      "predecessor": 21855,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 25447,
+      "predecessor": 22929,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 27631,
+      "predecessor": 24897,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 27751,
+      "predecessor": 25005,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 30055,
+      "predecessor": 27081,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 30335,
+      "predecessor": 27333,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 30399,
+      "predecessor": 27391,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 31871,
+      "predecessor": 28717,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 32047,
+      "predecessor": 22815,
+      "seed_step": 131072,
+      "predecessor_step": 93312,
+      "forward_time": 17,
+      "inverse_time": 7,
+      "forward_odds": 12,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 33775,
+      "predecessor": 30433,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 33895,
+      "predecessor": 30541,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 34943,
+      "predecessor": 31485,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 35823,
+      "predecessor": 25503,
+      "seed_step": 131072,
+      "predecessor_step": 93312,
+      "forward_time": 17,
+      "inverse_time": 7,
+      "forward_odds": 12,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 37023,
+      "predecessor": 33359,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 38559,
+      "predecessor": 34743,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 40095,
+      "predecessor": 36127,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 41087,
+      "predecessor": 37021,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 41799,
+      "predecessor": 37663,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 42399,
+      "predecessor": 38203,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 44263,
+      "predecessor": 39883,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 44479,
+      "predecessor": 40077,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 44703,
+      "predecessor": 40279,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 46015,
+      "predecessor": 41461,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 49087,
+      "predecessor": 44229,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 51035,
+      "predecessor": 45985,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 51311,
+      "predecessor": 46233,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 51615,
+      "predecessor": 46507,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 52927,
+      "predecessor": 47689,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 53083,
+      "predecessor": 37791,
+      "seed_step": 131072,
+      "predecessor_step": 93312,
+      "forward_time": 17,
+      "inverse_time": 7,
+      "forward_odds": 12,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 55231,
+      "predecessor": 49765,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 55919,
+      "predecessor": 50385,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 56039,
+      "predecessor": 50493,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 58927,
+      "predecessor": 55935,
+      "seed_step": 131072,
+      "predecessor_step": 124416,
+      "forward_time": 17,
+      "inverse_time": 9,
+      "forward_odds": 13,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 62183,
+      "predecessor": 56029,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 62791,
+      "predecessor": 56577,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 63615,
+      "predecessor": 57319,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 65695,
+      "predecessor": 59193,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 66587,
+      "predecessor": 59997,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 66651,
+      "predecessor": 60055,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 66791,
+      "predecessor": 60181,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 67231,
+      "predecessor": 60577,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 68891,
+      "predecessor": 62073,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 69703,
+      "predecessor": 62805,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 70303,
+      "predecessor": 63345,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 70687,
+      "predecessor": 63691,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 72731,
+      "predecessor": 65533,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 73563,
+      "predecessor": 66283,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 73839,
+      "predecessor": 66531,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 74143,
+      "predecessor": 66805,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 75943,
+      "predecessor": 68427,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 76447,
+      "predecessor": 68881,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 77895,
+      "predecessor": 55455,
+      "seed_step": 131072,
+      "predecessor_step": 93312,
+      "forward_time": 17,
+      "inverse_time": 7,
+      "forward_odds": 12,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 79615,
+      "predecessor": 71735,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 79963,
+      "predecessor": 75903,
+      "seed_step": 131072,
+      "predecessor_step": 124416,
+      "forward_time": 17,
+      "inverse_time": 9,
+      "forward_odds": 13,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 79983,
+      "predecessor": 72067,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 80551,
+      "predecessor": 72579,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 82779,
+      "predecessor": 74587,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 84591,
+      "predecessor": 76219,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 84607,
+      "predecessor": 76233,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 84711,
+      "predecessor": 76327,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 86695,
+      "predecessor": 78115,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 89883,
+      "predecessor": 80987,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 91419,
+      "predecessor": 82371,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 92955,
+      "predecessor": 83755,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 93927,
+      "predecessor": 84631,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 95259,
+      "predecessor": 85831,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 97563,
+      "predecessor": 87907,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 98331,
+      "predecessor": 88599,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 99055,
+      "predecessor": 89251,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 102431,
+      "predecessor": 92293,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 104475,
+      "predecessor": 94135,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 104495,
+      "predecessor": 94153,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 104775,
+      "predecessor": 99455,
+      "seed_step": 131072,
+      "predecessor_step": 124416,
+      "forward_time": 17,
+      "inverse_time": 9,
+      "forward_odds": 13,
+      "inverse_odds": 8
+    },
+    {
+      "seed": 105583,
+      "predecessor": 95133,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 108271,
+      "predecessor": 97555,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 110439,
+      "predecessor": 93183,
+      "seed_step": 131072,
+      "predecessor_step": 110592,
+      "forward_time": 17,
+      "inverse_time": 12,
+      "forward_odds": 14,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 111727,
+      "predecessor": 100669,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 114683,
+      "predecessor": 103333,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 116455,
+      "predecessor": 104929,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 116731,
+      "predecessor": 83103,
+      "seed_step": 131072,
+      "predecessor_step": 93312,
+      "forward_time": 17,
+      "inverse_time": 7,
+      "forward_odds": 12,
+      "inverse_odds": 6
+    },
+    {
+      "seed": 126619,
+      "predecessor": 114087,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 127003,
+      "predecessor": 114433,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 127023,
+      "predecessor": 114451,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 129727,
+      "predecessor": 116887,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 130215,
+      "predecessor": 117327,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 130299,
+      "predecessor": 117403,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 130799,
+      "predecessor": 117853,
+      "seed_step": 131072,
+      "predecessor_step": 118098,
+      "forward_time": 17,
+      "inverse_time": 1,
+      "forward_odds": 11,
+      "inverse_odds": 1
+    },
+    {
+      "seed": 61167,
+      "predecessor": 57279,
+      "seed_step": 139968,
+      "predecessor_step": 131072,
+      "forward_time": 6,
+      "inverse_time": 17,
+      "forward_odds": 5,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 64239,
+      "predecessor": 60155,
+      "seed_step": 139968,
+      "predecessor_step": 131072,
+      "forward_time": 6,
+      "inverse_time": 17,
+      "forward_odds": 5,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 83823,
+      "predecessor": 78495,
+      "seed_step": 139968,
+      "predecessor_step": 131072,
+      "forward_time": 6,
+      "inverse_time": 17,
+      "forward_odds": 5,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 90927,
+      "predecessor": 85147,
+      "seed_step": 139968,
+      "predecessor_step": 131072,
+      "forward_time": 6,
+      "inverse_time": 17,
+      "forward_odds": 5,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 94767,
+      "predecessor": 88743,
+      "seed_step": 139968,
+      "predecessor_step": 131072,
+      "forward_time": 6,
+      "inverse_time": 17,
+      "forward_odds": 5,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 113775,
+      "predecessor": 106543,
+      "seed_step": 139968,
+      "predecessor_step": 131072,
+      "forward_time": 6,
+      "inverse_time": 17,
+      "forward_odds": 5,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 117807,
+      "predecessor": 110319,
+      "seed_step": 139968,
+      "predecessor_step": 131072,
+      "forward_time": 6,
+      "inverse_time": 17,
+      "forward_odds": 5,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 136239,
+      "predecessor": 127579,
+      "seed_step": 139968,
+      "predecessor_step": 131072,
+      "forward_time": 6,
+      "inverse_time": 17,
+      "forward_odds": 5,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 162303,
+      "predecessor": 128239,
+      "seed_step": 165888,
+      "predecessor_step": 131072,
+      "forward_time": 11,
+      "inverse_time": 17,
+      "forward_odds": 10,
+      "inverse_odds": 14
+    },
+    {
+      "seed": 18208,
+      "predecessor": 13471,
+      "seed_step": 177147,
+      "predecessor_step": 131072,
+      "forward_time": 0,
+      "inverse_time": 17,
+      "forward_odds": 0,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 47899,
+      "predecessor": 35439,
+      "seed_step": 177147,
+      "predecessor_step": 131072,
+      "forward_time": 0,
+      "inverse_time": 17,
+      "forward_odds": 0,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 71620,
+      "predecessor": 52991,
+      "seed_step": 177147,
+      "predecessor_step": 131072,
+      "forward_time": 0,
+      "inverse_time": 17,
+      "forward_odds": 0,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 133531,
+      "predecessor": 98799,
+      "seed_step": 177147,
+      "predecessor_step": 131072,
+      "forward_time": 0,
+      "inverse_time": 17,
+      "forward_odds": 0,
+      "inverse_odds": 11
+    },
+    {
+      "seed": 23487,
+      "predecessor": 16495,
+      "seed_step": 186624,
+      "predecessor_step": 131072,
+      "forward_time": 8,
+      "inverse_time": 17,
+      "forward_odds": 7,
+      "inverse_odds": 13
+    },
+    {
+      "seed": 164799,
+      "predecessor": 115743,
+      "seed_step": 186624,
+      "predecessor_step": 131072,
+      "forward_time": 8,
+      "inverse_time": 17,
+      "forward_odds": 7,
+      "inverse_odds": 13
+    },
+    {
+      "seed": 927,
+      "predecessor": 743,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 8319,
+      "predecessor": 6663,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 8359,
+      "predecessor": 7935,
+      "seed_step": 262144,
+      "predecessor_step": 248832,
+      "forward_time": 18,
+      "inverse_time": 10,
+      "forward_odds": 14,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 12135,
+      "predecessor": 10239,
+      "seed_step": 262144,
+      "predecessor_step": 221184,
+      "forward_time": 18,
+      "inverse_time": 13,
+      "forward_odds": 15,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 15391,
+      "predecessor": 12327,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 18267,
+      "predecessor": 14631,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 29295,
+      "predecessor": 23463,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 29415,
+      "predecessor": 23559,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 39963,
+      "predecessor": 32007,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 43759,
+      "predecessor": 35047,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 50671,
+      "predecessor": 40583,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 71727,
+      "predecessor": 57447,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 72007,
+      "predecessor": 68351,
+      "seed_step": 262144,
+      "predecessor_step": 248832,
+      "forward_time": 18,
+      "inverse_time": 10,
+      "forward_odds": 14,
+      "inverse_odds": 9
+    },
+    {
+      "seed": 79039,
+      "predecessor": 63303,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 81915,
+      "predecessor": 65607,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 85851,
+      "predecessor": 61119,
+      "seed_step": 262144,
+      "predecessor_step": 186624,
+      "forward_time": 18,
+      "inverse_time": 8,
+      "forward_odds": 13,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 107647,
+      "predecessor": 86215,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 121791,
+      "predecessor": 97543,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 128703,
+      "predecessor": 103079,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 133279,
+      "predecessor": 120087,
+      "seed_step": 262144,
+      "predecessor_step": 236196,
+      "forward_time": 18,
+      "inverse_time": 2,
+      "forward_odds": 12,
+      "inverse_odds": 2
+    },
+    {
+      "seed": 142567,
+      "predecessor": 114183,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 143007,
+      "predecessor": 114535,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 149499,
+      "predecessor": 106431,
+      "seed_step": 262144,
+      "predecessor_step": 186624,
+      "forward_time": 18,
+      "inverse_time": 8,
+      "forward_odds": 13,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 149919,
+      "predecessor": 120071,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 167839,
+      "predecessor": 119487,
+      "seed_step": 262144,
+      "predecessor_step": 186624,
+      "forward_time": 18,
+      "inverse_time": 8,
+      "forward_odds": 13,
+      "inverse_odds": 7
+    },
+    {
+      "seed": 178207,
+      "predecessor": 142727,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 178287,
+      "predecessor": 142791,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 181083,
+      "predecessor": 145031,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 186139,
+      "predecessor": 167715,
+      "seed_step": 262144,
+      "predecessor_step": 236196,
+      "forward_time": 18,
+      "inverse_time": 2,
+      "forward_odds": 12,
+      "inverse_odds": 2
+    },
+    {
+      "seed": 192231,
+      "predecessor": 153959,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 195867,
+      "predecessor": 156871,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 202779,
+      "predecessor": 162407,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 206575,
+      "predecessor": 165447,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 228031,
+      "predecessor": 182631,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 231067,
+      "predecessor": 185063,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 241575,
+      "predecessor": 193479,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 241855,
+      "predecessor": 193703,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 244731,
+      "predecessor": 196007,
+      "seed_step": 262144,
+      "predecessor_step": 209952,
+      "forward_time": 18,
+      "inverse_time": 5,
+      "forward_odds": 12,
+      "inverse_odds": 4
+    },
+    {
+      "seed": 81055,
+      "predecessor": 75903,
+      "seed_step": 279936,
+      "predecessor_step": 262144,
+      "forward_time": 7,
+      "inverse_time": 18,
+      "forward_odds": 6,
+      "inverse_odds": 13
+    },
+    {
+      "seed": 99231,
+      "predecessor": 92923,
+      "seed_step": 279936,
+      "predecessor_step": 262144,
+      "forward_time": 7,
+      "inverse_time": 18,
+      "forward_odds": 6,
+      "inverse_odds": 13
+    },
+    {
+      "seed": 103455,
+      "predecessor": 96879,
+      "seed_step": 279936,
+      "predecessor_step": 262144,
+      "forward_time": 7,
+      "inverse_time": 18,
+      "forward_odds": 6,
+      "inverse_odds": 13
+    },
+    {
+      "seed": 118815,
+      "predecessor": 111263,
+      "seed_step": 279936,
+      "predecessor_step": 262144,
+      "forward_time": 7,
+      "inverse_time": 18,
+      "forward_odds": 6,
+      "inverse_odds": 13
+    },
+    {
+      "seed": 209439,
+      "predecessor": 196127,
+      "seed_step": 279936,
+      "predecessor_step": 262144,
+      "forward_time": 7,
+      "inverse_time": 18,
+      "forward_odds": 6,
+      "inverse_odds": 13
+    },
+    {
+      "seed": 224415,
+      "predecessor": 210151,
+      "seed_step": 279936,
+      "predecessor_step": 262144,
+      "forward_time": 7,
+      "inverse_time": 18,
+      "forward_odds": 6,
+      "inverse_odds": 13
+    },
+    {
+      "seed": 24219,
+      "predecessor": 20159,
+      "seed_step": 314928,
+      "predecessor_step": 262144,
+      "forward_time": 4,
+      "inverse_time": 18,
+      "forward_odds": 3,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 177435,
+      "predecessor": 147695,
+      "seed_step": 314928,
+      "predecessor_step": 262144,
+      "forward_time": 4,
+      "inverse_time": 18,
+      "forward_odds": 3,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 203775,
+      "predecessor": 161007,
+      "seed_step": 331776,
+      "predecessor_step": 262144,
+      "forward_time": 12,
+      "inverse_time": 18,
+      "forward_odds": 11,
+      "inverse_odds": 15
+    },
+    {
+      "seed": 25063,
+      "predecessor": 18543,
+      "seed_step": 354294,
+      "predecessor_step": 262144,
+      "forward_time": 1,
+      "inverse_time": 18,
+      "forward_odds": 1,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 43119,
+      "predecessor": 31903,
+      "seed_step": 354294,
+      "predecessor_step": 262144,
+      "forward_time": 1,
+      "inverse_time": 18,
+      "forward_odds": 1,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 165103,
+      "predecessor": 122159,
+      "seed_step": 354294,
+      "predecessor_step": 262144,
+      "forward_time": 1,
+      "inverse_time": 18,
+      "forward_odds": 1,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 166767,
+      "predecessor": 123391,
+      "seed_step": 354294,
+      "predecessor_step": 262144,
+      "forward_time": 1,
+      "inverse_time": 18,
+      "forward_odds": 1,
+      "inverse_odds": 12
+    },
+    {
+      "seed": 163455,
+      "predecessor": 114799,
+      "seed_step": 373248,
+      "predecessor_step": 262144,
+      "forward_time": 9,
+      "inverse_time": 18,
+      "forward_odds": 8,
+      "inverse_odds": 14
+    }
+  ]
+}

@@ -90,4 +90,84 @@ The census is not kernel certified. A proof must still force a suitable
 smaller predecessor for every hypothetical least noncontracting seed;
 the present certificates cover only particular cases. Nontrivial cycles
 also remain outside the conclusion.
+
+\newpage
+\section*{Kernel-certified arithmetic progressions}
+The individual merging examples can be turned into rules that apply to
+arbitrarily large seeds. This extension certifies their validity, not
+universal applicability.
+
+\begin{theorem}[Progression lifting]
+Let $n,x,t,s,a,b$ be natural numbers satisfying $0<x<n$,
+$T^s(x)=T^t(n)$, $C_i(x)\geq1$ for $0\leq i\leq s$, and
+$C_s(x)\geq C_t(n)$. Write $j=j_t(n)$ and $k=j_s(x)$, and assume
+\[
+3^ja=3^kb,\qquad 2^sb\leq2^ta.
+\]
+For every $Q\geq0$, put $N_Q=n+2^taQ$ and $X_Q=x+2^sbQ$.
+Then $0<X_Q<N_Q$. If $N_Q$ is noncontracting, so is $X_Q$.
+\end{theorem}
+\begin{proof}
+Binary-cylinder transport gives
+\[
+T^t(N_Q)=T^t(n)+3^jaQ,
+\qquad T^s(X_Q)=T^s(x)+3^kbQ.
+\]
+The balance condition makes these endpoints equal. Prefix parities and
+odd counts through $t$ and $s$ are unchanged, so the noncontracting-prefix
+and coefficient-domination checks remain valid. The first theorem
+therefore transfers full noncontraction. Finally, $x<n$ and $2^sb\leq2^ta$
+give strict ordering for every nonnegative quotient, while $x>0$ gives
+positivity.
+\end{proof}
+
+\paragraph{Choosing the steps.}
+A reduced choice is
+\[
+a=3^{\max(k-j,0)},\qquad b=3^{\max(j-k,0)}.
+\]
+It satisfies the balance equation. Coefficient domination gives the
+required ordering of the two seed increments. The generator shifts a
+certificate backward along this progression only while both seeds stay
+positive and the replacement remains strictly smaller. The shifted
+certificate is checked again, including every replacement-prefix parity.
+These normalization operations are not assumed correct by Lean: the
+resulting finite data must independently satisfy its validator.
+
+\paragraph{What the kernel checks.}
+\texttt{MergeRule.Valid} records positive seed ordering, the exact common
+endpoint, every replacement-prefix coefficient inequality, coefficient
+domination, ternary balance, and ordered seed increments.
+\texttt{MergeRule.sound} proves the theorem above for any valid rule.
+The generated \texttt{MergeRuleTable.rules} contains 360 rules. Its
+\texttt{rules\_valid} theorem checks them with ordinary kernel reduction
+using \texttt{decide}; no external verifier result or added axiom supplies
+validity. \texttt{certified\_rule\_sound} applies the generic theorem to
+any listed rule and any natural quotient.
+
+\paragraph{Scope of the finite generation.}
+The 3,768 successful dominating certificates from the preceding search
+normalize to 360 distinct progressions. The inclusion filter removes
+no further distinct progression in this run. The listed rules include
+the earlier $111+4374Q$ family and simple inverse families such as
+$2+3Q$ merging with $1+2Q$. The finite Python search and its completeness
+remain separate from the kernel-certified validity of the resulting list.
+
+Every listed progression is excluded for a least positive noncontracting
+seed: its certified replacement would be smaller and noncontracting.
+No theorem says that this finite union contains every such hypothetical
+seed. In particular, the earlier unresolved seeds do not acquire an
+in-budget certificate from this normalization. The missing existence
+argument may need a seed-dependent, unbounded family of rules. The
+nontrivial-cycle problem is also unchanged.
+
+\paragraph{Reproduction.}
+\begingroup\raggedright
+Run \texttt{python3 analysis/merge\_progressions.py --write-lean} from the
+root, then \texttt{lake build Collatz.MergeRuleTable} from \texttt{lean/}.
+The generator's JSON and the Lean source are both stored in the repository.
+Tests check normalization, progression inclusion with lower bounds, and
+exact agreement between the generated source and the saved rule data.
+The theorem audit covers the generic soundness theorem and both public
+table theorems. No mathematical priority claim is made.\par\endgroup
 \end{document}

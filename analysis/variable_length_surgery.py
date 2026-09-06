@@ -11,7 +11,7 @@ from variable_count_surgery import canonical_levels
 from word_surgery import orbit
 
 
-def scan(depth=18):
+def scan(depth=18, include_certificates=False):
     indices = [(0, {(0, 0): 0}, {(0, 0): 0})]
     rows = [(0, 0, 0, True)]
     for s, rows in canonical_levels(depth):
@@ -25,7 +25,7 @@ def scan(depth=18):
     counts = dict(noncontracting_prefixes=0, equal_count_covered=0,
                   variable_length_additions=0, additions_preserving_noncontraction=0,
                   positive_forward_time_certificates=0, no_bounded_certificate=0)
-    examples, missing = [], []
+    examples, missing, certificates, all_missing = [], [], [], []
     for n, j, e, nc in sorted(rows):
         if not nc or n == 0:
             continue
@@ -73,6 +73,8 @@ def scan(depth=18):
             assert all(orbit(n, i)[0] >= n for i in range(t+1))
             if strong:
                 counts['additions_preserving_noncontraction'] += 1
+                if include_certificates:
+                    certificates.append(strong)
                 counts['positive_forward_time_certificates'] += t > 0
                 assert all(2**i <= 3**orbit(x, i)[1] for i in range(s+1))
                 assert 2**s*3**c['forward_odds'] <= 2**t*3**c['inverse_odds']
@@ -80,12 +82,18 @@ def scan(depth=18):
                 examples.append(c)
         else:
             counts['no_bounded_certificate'] += 1
+            if include_certificates:
+                all_missing.append(n)
             if len(missing) < 20:
                 missing.append(n)
-    return dict(depth=depth, seed_interval=[1, 2**depth-1],
+    result = dict(depth=depth, seed_interval=[1, 2**depth-1],
                 scope='finite seeds and bounded lengths; not universal coverage',
                 kernel_certified=False, counts=counts,
                 examples=examples, smallest_uncovered=missing)
+    if include_certificates:
+        result['certificates'] = certificates
+        result['uncertified_seeds'] = all_missing
+    return result
 
 
 if __name__ == '__main__':

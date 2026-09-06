@@ -1,67 +1,69 @@
 \documentclass[10pt]{article}
 \usepackage[margin=0.8in]{geometry}
 \usepackage{amsmath,microtype}
+\newcommand{\guideheading}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
 \begin{document}
 \begin{center}
-{\LARGE Guide: Merging Paths of Different Lengths}\par\medskip
+{\LARGE Guide: Certified Merge Progressions}\par\medskip
 Collatz proof project\quad---\quad September 5, 2026
 \end{center}
 \raggedright
-\section*{What changed}
-Earlier replacements required the two paths to take the same number of
-steps. Allowing different lengths finds additional smaller starting seeds
-that reach the same endpoint. Lean now checks when such a replacement
-preserves noncontraction for the entire future orbit.
+\guideheading{What is now verified}
+Lean checks 360 arithmetic rules. Each gives a smaller positive seed
+that meets the original orbit and inherits full noncontraction if the
+original has it. Every rule applies to all nonnegative quotients, so it
+covers an infinite progression, not just a tested example.
 
-\section*{What noncontraction means}
+\guideheading{What noncontraction means}
 After $t$ shortcut steps with $j$ odd steps, the multiplicative coefficient
-is $3^j/2^t$. A seed is called noncontracting when that coefficient is at
-least one for every prefix. This is stronger than merely seeing a finite
-initial run without descent. No infinite noncontracting seed is constructed.
+is $3^j/2^t$. A seed is noncontracting when that coefficient is at least
+one for every prefix. No infinite noncontracting seed has been constructed.
+The aim is to rule out a least positive noncontracting seed by finding
+a smaller one whenever the original has that property.
 
-\section*{The two checks needed for transport}
-The smaller seed's path must have coefficient at least one at every step
-before the meeting. At the meeting, its coefficient must be at least as
-large as the original path's coefficient. Afterward the two paths follow
-the same values, so they receive the same further multiplicative factors.
-Those two checks preserve full noncontraction if the original seed has it.
+\guideheading{Why the transfer works}
+Before the meeting, the replacement's coefficient must stay at least one.
+At the meeting, it must be at least as large as the original path's
+coefficient. Afterward the paths follow the same values and gain the same
+further factors. Those two checks preserve full noncontraction. Shifting the original seed does not automatically preserve
+noncontraction; the coefficient comparison is essential.
 
-This matters because shifting a noncontracting seed forward does not
-automatically give another noncontracting seed. The comparison at the
-meeting accounts for the coefficient already accumulated before that shift.
-
-\section*{A concrete infinite family}
+\guideheading{An example that works for arbitrarily large seeds}
 For any whole number $Q\geq0$, take
 \[
 N=111+4374Q,\qquad M=103+4096Q.
 \]
-The larger seed reaches $167+6561Q$ in one step. The smaller seed reaches
-the same value in twelve steps with eight odd steps. Its prefix passes
-both transport checks. For $Q=0$, this is the meeting of 111 and 103 at 167.
-The difference $N-M=8+278Q$ is always positive.
+The larger seed reaches $167+6561Q$ in one step; the smaller reaches it
+in twelve steps with eight odd steps. The difference $N-M=8+278Q$ stays
+positive. Thus a least positive noncontracting seed cannot belong to this
+progression. This does not, by itself, prove that every member converges.
 
-Thus, if $N$ were noncontracting, the smaller $M$ would be noncontracting
-too. A least positive noncontracting seed cannot be in this progression.
-This does not show that every member converges, or cover all possible
-least seeds. The meeting occurs before any forward descent of $N$.
+\guideheading{How a finite certificate gives an infinite rule}
+Adding a multiple of $2^t$ to a seed preserves its first $t$ parities.
+The endpoint changes by a corresponding multiple of $3^j$. The rule
+chooses increments for the two seeds so these endpoint changes agree,
+while the replacement's increment is no larger. Parity validity, merging,
+and strict seed ordering then persist for every nonnegative quotient.
 
-\section*{What the search establishes}
-Among 7,495 seeds below $2^{18}$ with noncontracting prefixes through time
-18, the previous equal-time/equal-count test covers 1,391 as smaller
-merges. Searching different lengths through 18 adds 3,768, all with
-certificates satisfying the new transport theorem. There are still 2,336
-unresolved seeds within this search, including 27 and 703.
+The kernel checks the actual endpoints, prefix inequalities, coefficient
+comparison, and balanced increments for every listed rule. A general
+Lean theorem handles every quotient. Python generates the data; it does
+not supply a trusted proof.
 
-These counts concern finitely many starting seeds and bounded path
-lengths. They are exact Python results, not kernel-certified global
-coverage. An unresolved seed can have a useful longer replacement;
-it is not a counterexample to Collatz.
+\guideheading{What remains open}
+The 3,768 successful dominating certificates from the depth-18 search
+reduce to 360 distinct progressions. Their validity is kernel certified;
+the search's completeness is not. The earlier bounded search still leaves 2,336
+seeds unresolved, including 27 and 703; they are not counterexamples.
 
-\section*{Reproduce and continue}
-From \texttt{lean/}, run \texttt{lake build Collatz.DominatingMerge}.
-The search is \texttt{analysis/variable\_length\_surgery.py}, with a
-matching test file and saved results. The next challenge is to find
-arithmetic conditions that guarantee a suitable replacement beyond these
-bounded searches. Neither a proof of nondivergence nor a full Collatz
-proof has been obtained.
+Most importantly, no theorem says that a suitable rule exists for every
+hypothetical least noncontracting seed. Proving that coverage, potentially
+with lengths depending on the seed, remains the central gap. Nontrivial
+cycles are also not excluded here.
+
+\guideheading{Reproduce}
+Run \texttt{python3 analysis/merge\_progressions.py --write-lean} from the
+root and \texttt{lake build Collatz.MergeRuleTable} from \texttt{lean/}.
+The saved JSON, generated Lean table, and tests make the rules reviewable.
+The Collatz conjecture remains unproved.
 \end{document}
