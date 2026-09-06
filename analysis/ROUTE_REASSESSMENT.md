@@ -138,3 +138,32 @@ Can a smaller merging predecessor be forced using several different
 forward endpoints together, even when no single endpoint admits a useful
 fixed-budget inverse argument? This is the next candidate to test, not an
 assumption to insert into Lean.
+
+
+## Word-replacement test completed (2026-09-05)
+
+`Collatz.WordSurgery` now proves the exact equal-length/equal-count
+replacement criterion, the correction-shift certificate, and the classical
+Garner stems 1^a00 / 01^(a-1)01. These stems are established literature,
+not a new discovery: Elia and Tucker, Section 3,
+https://arxiv.org/abs/1511.09141 (full paper consulted). Their work also
+warns that Garner's proposed stem classification is not exhaustive.
+
+The exhaustive depth-18 census finds 193,309 covered binary cylinders out
+of 262,144, including 1,391 of the 7,495 whose every prefix coefficient
+is noncontracting. Every reported canonical merging pair is replayed
+independently; equal counts transport it to all lifts. These are Python
+counts, not a kernel-certified census or asymptotic estimate.
+
+Lean proves an all-time boundary: no x with 0<x<27 can merge with 27 at
+an equal time and equal odd count. A finite kernel check through time 70
+plus exact odd-count inequalities on the 1,2 cycle proves the all-time
+statement. Thus the unrestricted universal version of this method is
+false. Since 27 converges, this does not refute coverage conditional on
+least-unboundedness. The smaller-merge contradiction to least-unboundedness
+is separately formalized and needs no noncontraction of the replacement.
+
+Next experiment: allow the replacement odd count to vary, with exact
+attainability and seed positivity retained. Cylinder transport with equal
+slopes no longer applies unchanged: ternary congruences must also track
+the cylinder quotient. No universal existence premise has been inserted.

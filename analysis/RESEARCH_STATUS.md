@@ -775,3 +775,35 @@ introduced into the proof project.
 Verification: all 160 selected declarations pass the standard-foundations
 audit, the selected build passes, and the exact reassessment checks pass.
 The revised one-page paper and one-page guide were visually checked.
+
+
+## Exact word replacement and its coverage boundary (2026-09-05)
+
+`lean/Collatz/WordSurgery.lean` proves five selected declarations:
+- `WordAffine.replacement_iff`: an exact affine identity characterizes
+  actual equal-length/equal-count merging words.
+- `WordAffine.replacement_of_correction_shift`: an attainable correction
+  increase by 3^j times delta yields the seed n-delta; positivity requires
+  delta<n and strict descent requires delta>0.
+- `WordAffine.garner_stem_merge`: the classical infinite stem family,
+  attributed to Garner via Elia and Tucker; no novelty or coverage claim.
+- `no_equal_count_smaller_merge_27`: for every time t and 0<x<27, endpoint
+  equality and odd-count equality cannot both hold. The proof combines
+  a finite kernel check through time 70 with an all-time cycle argument.
+- `smaller_merge_excludes_least_unbounded`: any smaller positive merging
+  predecessor contradicts least-unboundedness, without replacement-path
+  noncontraction. Existence of that predecessor remains unproved.
+
+`analysis/word_surgery.py` exhausts all words through depth 18. At depth
+18 it covers 193,309 of 262,144 binary cylinders, including 1,391 of 7,495
+noncontracting-prefix words. Every canonical certificate is replayed.
+Three tests pass, including an independent brute-force comparison of the
+census through depth 9. The counts are finite Python evidence only.
+The boundary seed 27 converges: it refutes unconditional universal
+same-length/same-count replacement, not conditional least-unbounded
+coverage. Variable odd counts and lengths remain possible next steps.
+
+Verification: selected build passes (7832 jobs); all 165 selected
+declarations use standard foundations only. The technical paper and
+plain-language guide are `paper/word_surgery.*` and
+`paper/word_surgery_guide.*`. Collatz remains open.

@@ -1,0 +1,87 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,microtype}
+\usepackage[hidelinks]{hyperref}
+\newtheorem{theorem}{Theorem}
+\title{Exact Word Replacement and Its Coverage Boundary}
+\author{Collatz proof project}
+\date{September 5, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We formalize an exact merging criterion for finite parity words, including
+the classical Garner stem family. We also prove that the convergent seed
+27 has no smaller positive merging predecessor with both equal time and
+equal odd count, at any time. The results validate a local replacement
+method but refute its unrestricted universal coverage. They do not settle
+coverage for a hypothetical least unbounded seed or prove Collatz.
+\end{abstract}
+Use $T(n)=n/2$ for even $n$, and $(3n+1)/2$ for odd $n$.
+For a word $w$, let $|w|$ be its length, $j(w)$ its number of ones, and
+$D(\varnothing)=0$, $D(bw)=b3^{j(w)}+2D(w)$, where $b\in\{0,1\}$.
+When $n$ realizes $w$, the exact identity is
+$2^{|w|}T^{|w|}(n)=3^{j(w)}n+D(w)$.
+
+\begin{theorem}[Exact replacement]
+Suppose $n$ realizes $u$, $|u|=|v|=t$, and $j(u)=j(v)=j$.
+A natural $x$ realizes $v$ and satisfies $T^t(x)=T^t(n)$ if and only if
+\[
+3^jx+D(v)=3^jn+D(u).
+\]
+In particular, if $D(v)=D(u)+3^j\delta$ and $0<\delta<n$, then
+$x=n-\delta$ is a smaller positive merging predecessor.
+\end{theorem}
+\begin{proof}
+Necessity follows from the two affine identities. Conversely, the displayed
+equality makes $3^jx+D(v)$ divisible by $2^t$. The repository's
+\texttt{realizes\_iff\_dvd} theorem proves every prescribed parity from this
+divisibility. The affine identity then determines the endpoint uniquely.
+\end{proof}
+
+\begin{theorem}[Classical Garner stems]
+For $a\geq1$, set $u=1^a00$ and $v=01^{a-1}01$. Every $n>1$ realizing
+$u$ merges with $n-1$, realizing $v$, after $a+2$ steps.
+\end{theorem}
+\begin{proof}
+Both words have length $a+2$ and odd count $a$.
+Their corrections are $D(u)=3^a-2^a$ and $D(v)=2\cdot3^a-2^a$.
+Apply the first theorem with $\delta=1$.
+\end{proof}
+This family is classical, not a novelty claim; see Elia and Tucker,
+Section 3\footnote{\url{https://arxiv.org/abs/1511.09141}}.
+For example, 15 and 14 reach 20 after six steps with four odd steps each;
+all prefix coefficients of the six-step word from 15 are at least one.
+
+\begin{theorem}[All-time coverage boundary]
+For every $0<x<27$ and every $t\geq0$,
+\[
+\neg\bigl(T^t(x)=T^t(27)\ \text{and}\ j_t(x)=j_t(27)\bigr).
+\]
+\end{theorem}
+\begin{proof}
+Lean's kernel checks all $x=1,\ldots,26$ and $t=0,\ldots,70$.
+At time 70, it also checks $T^{70}(27)=1$, $j_{70}(27)=41$, while
+$T^{70}(x)\in\{1,2\}$ and $j_{70}(x)\leq35$ for all those $x$.
+Induction on $k$ proves $j_k(2)\leq j_k(1)\leq j_k(2)+1$.
+The odd-count cocycle therefore gives
+$j_{70+k}(x)\leq35+j_k(1)<41+j_k(1)=j_{70+k}(27)$.
+\end{proof}
+
+\paragraph{Finite evidence and remaining obligation.}
+An exhaustive Python census at depth 18 certifies replacements for
+193,309 of 262,144 binary cylinders, including 1,391 of the 7,495 whose
+every prefix coefficient is at least one. Each reported canonical merge
+is independently replayed; equal counts extend it to the whole cylinder.
+These counts are experimental, not kernel-certified coverage.
+A smaller positive merging predecessor contradicts least-unboundedness;
+that implication is formalized without imposing noncontraction on its path.
+The missing theorem is existence for every hypothetical least unbounded
+seed. The counterexample 27 is convergent and does not refute that
+conditional statement. Variable lengths or odd counts remain possible.
+
+\paragraph{Verification.}
+The five public declarations in \texttt{Collatz.WordSurgery} are included
+in the axiom audit. The census and independent small-depth tests are
+\texttt{analysis/word\_surgery.py} and \texttt{test\_word\_surgery.py}.
+No unproved Collatz premise is discharged by the finite computation.
+\end{document}

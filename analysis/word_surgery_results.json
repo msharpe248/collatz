@@ -1,0 +1,139 @@
+{
+  "scope": "finite exhaustive cylinder census; not convergence",
+  "census": [
+    {
+      "depth": 1,
+      "words": 2,
+      "covered": 0,
+      "noncontracting_prefixes": 1,
+      "covered_noncontracting_prefixes": 0
+    },
+    {
+      "depth": 2,
+      "words": 4,
+      "covered": 0,
+      "noncontracting_prefixes": 1,
+      "covered_noncontracting_prefixes": 0
+    },
+    {
+      "depth": 3,
+      "words": 8,
+      "covered": 1,
+      "noncontracting_prefixes": 2,
+      "covered_noncontracting_prefixes": 0
+    },
+    {
+      "depth": 4,
+      "words": 16,
+      "covered": 4,
+      "noncontracting_prefixes": 3,
+      "covered_noncontracting_prefixes": 0
+    },
+    {
+      "depth": 5,
+      "words": 32,
+      "covered": 11,
+      "noncontracting_prefixes": 4,
+      "covered_noncontracting_prefixes": 0
+    },
+    {
+      "depth": 6,
+      "words": 64,
+      "covered": 26,
+      "noncontracting_prefixes": 8,
+      "covered_noncontracting_prefixes": 1
+    },
+    {
+      "depth": 7,
+      "words": 128,
+      "covered": 59,
+      "noncontracting_prefixes": 13,
+      "covered_noncontracting_prefixes": 2
+    },
+    {
+      "depth": 8,
+      "words": 256,
+      "covered": 129,
+      "noncontracting_prefixes": 19,
+      "covered_noncontracting_prefixes": 3
+    },
+    {
+      "depth": 9,
+      "words": 512,
+      "covered": 277,
+      "noncontracting_prefixes": 38,
+      "covered_noncontracting_prefixes": 7
+    },
+    {
+      "depth": 10,
+      "words": 1024,
+      "covered": 586,
+      "noncontracting_prefixes": 64,
+      "covered_noncontracting_prefixes": 12
+    },
+    {
+      "depth": 11,
+      "words": 2048,
+      "covered": 1229,
+      "noncontracting_prefixes": 128,
+      "covered_noncontracting_prefixes": 25
+    },
+    {
+      "depth": 12,
+      "words": 4096,
+      "covered": 2561,
+      "noncontracting_prefixes": 226,
+      "covered_noncontracting_prefixes": 44
+    },
+    {
+      "depth": 13,
+      "words": 8192,
+      "covered": 5309,
+      "noncontracting_prefixes": 367,
+      "covered_noncontracting_prefixes": 70
+    },
+    {
+      "depth": 14,
+      "words": 16384,
+      "covered": 10959,
+      "noncontracting_prefixes": 734,
+      "covered_noncontracting_prefixes": 141
+    },
+    {
+      "depth": 15,
+      "words": 32768,
+      "covered": 22550,
+      "noncontracting_prefixes": 1295,
+      "covered_noncontracting_prefixes": 246
+    },
+    {
+      "depth": 16,
+      "words": 65536,
+      "covered": 46261,
+      "noncontracting_prefixes": 2114,
+      "covered_noncontracting_prefixes": 394
+    },
+    {
+      "depth": 17,
+      "words": 131072,
+      "covered": 94669,
+      "noncontracting_prefixes": 4228,
+      "covered_noncontracting_prefixes": 789
+    },
+    {
+      "depth": 18,
+      "words": 262144,
+      "covered": 193309,
+      "noncontracting_prefixes": 7495,
+      "covered_noncontracting_prefixes": 1391
+    }
+  ],
+  "boundary_check": {
+    "seed": 27,
+    "finite_time_bound": 70,
+    "smaller_seeds_checked": 26,
+    "endpoint": 1,
+    "odd_count": 41,
+    "smaller_odd_count_upper_bound": 35
+  }
+}

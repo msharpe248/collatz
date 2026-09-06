@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 LEAN = ROOT / "lean"
 STANDARD = {"propext", "Classical.choice", "Quot.sound"}
 TARGETS = [
+    ('Collatz.WordSurgery', 'Collatz.WordAffine.replacement_iff', 'Exact affine criterion proves actual equal-length equal-count merging word realization'),
+    ('Collatz.WordSurgery', 'Collatz.WordAffine.replacement_of_correction_shift', 'Attainable correction increase by a ternary multiple certifies a smaller merging predecessor with explicit seed bound'),
+    ('Collatz.WordSurgery', 'Collatz.WordAffine.garner_stem_merge', 'Classical Garner stem family formalized for every positive odd-run length; no global coverage claim'),
+    ('Collatz.WordSurgery', 'Collatz.no_equal_count_smaller_merge_27', 'At every time, seed 27 has no smaller positive equal-time equal-odd-count merging predecessor'),
+    ('Collatz.WordSurgery', 'Collatz.smaller_merge_excludes_least_unbounded', 'A smaller positive merging predecessor contradicts least-unboundedness without replacement noncontraction'),
     ("Collatz.GrowingReturns", "Collatz.unbounded_reserve_reset", "A fixed growing-branch switch has incoming valuation five and arbitrarily large outgoing valuation; exact parameterized congruence certificate"),
     ("Collatz.GrowingReturns", "Collatz.arbitrarily_many_growing_returns", "Every prescribed finite number of consecutive residue-two returns can all grow; seed depends on requested length"),
     ("Collatz.SampledContraction", "Collatz.SampledNeverContracts.deficit", "No contraction at residue-two visits bounds every inverse coefficient by sixty-four"),

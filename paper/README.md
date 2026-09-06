@@ -8,6 +8,7 @@ arguments; do not turn an experimental candidate into a theorem in the prose.
 
 | Topic | Paper | Guide |
 |---|---|---|
+| Exact word replacement, classical Garner stems, and an all-time coverage boundary | [word_surgery.pdf](word_surgery.pdf) | [word_surgery_guide.pdf](word_surgery_guide.pdf) |
 | Arbitrarily long finite strings of growing consecutive returns | [growing_returns.pdf](growing_returns.pdf) | [growing_returns_guide.pdf](growing_returns_guide.pdf) |
 | Sampled coefficient contraction is equivalent to nondivergence | [sampled_contraction.pdf](sampled_contraction.pdf) | [sampled_contraction_guide.pdf](sampled_contraction_guide.pdf) |
 | Forward coverage modulo nine and sharp contracting-return bounds | [residue_coverage.pdf](residue_coverage.pdf) | [residue_coverage_guide.pdf](residue_coverage_guide.pdf) |
